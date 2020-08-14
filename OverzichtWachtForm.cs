@@ -583,7 +583,7 @@ namespace Bezetting2
                 listBox21.Items.Add(temp21[i]);
             }
             SaveData();
-            //UpdateAfwijking();
+            ViewUpdate();
         }
         private bool CheckRechten()
         {
@@ -665,7 +665,6 @@ namespace Bezetting2
             }
             catch { }
         }
-
         private void listBox1_MouseLeave(object sender, EventArgs e)
         {
             sourse = (ListBox)sender;
