@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{94C39942-B335-4869-9432-66335BD5C265}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Bezetting2</RootNamespace>
+    <AssemblyName>Bezetting2</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bezetting2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="About.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="About.Designer.cs">
+      <DependentUpon>About.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\InstellingenProg.cs" />
+    <Compile Include="Data\LooptExtraDienst.cs" />
+    <Compile Include="Data\AanvraagRuilExtra.cs" />
+    <Compile Include="Data\SnipperAanvraag.cs" />
+    <Compile Include="Data\veranderingen.cs" />
+    <Compile Include="Data\werkdag.cs" />
+    <Compile Include="EditPersoneel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditPersoneel.Designer.cs">
+      <DependentUpon>EditPersoneel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InlogGebeuren\RechtenInstellenForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InlogGebeuren\RechtenInstellenForm.Designer.cs">
+      <DependentUpon>RechtenInstellenForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\AfwijkingInvoerReeksForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\AfwijkingInvoerReeksForm.Designer.cs">
+      <DependentUpon>AfwijkingInvoerReeksForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\DagAfwijkingInvoerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\DagAfwijkingInvoerForm.Designer.cs">
+      <DependentUpon>DagAfwijkingInvoerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HistoryForm.Designer.cs">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ModuleDatum.cs" />
+    <Compile Include="InlogGebeuren\InlogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InlogGebeuren\InlogForm.Designer.cs">
+      <DependentUpon>InlogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\InstellingenProgrammaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\InstellingenProgrammaForm.Designer.cs">
+      <DependentUpon>InstellingenProgrammaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\InvoerLoopExtraDienst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\InvoerLoopExtraDienst.Designer.cs">
+      <DependentUpon>InvoerLoopExtraDienst.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\NieuwLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\NieuwLabel.Designer.cs">
+      <DependentUpon>NieuwLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\QuickInvoerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\QuickInvoerForm.Designer.cs">
+      <DependentUpon>QuickInvoerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\RuilExtraForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\RuilExtraForm.Designer.cs">
+      <DependentUpon>RuilExtraForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\SnipperAanvraagForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\SnipperAanvraagForm.Designer.cs">
+      <DependentUpon>SnipperAanvraagForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Invoer\ZetKleurLijnen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\ZetKleurLijnen.Designer.cs">
+      <DependentUpon>ZetKleurLijnen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainFormBezetting2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainFormBezetting2.Designer.cs">
+      <DependentUpon>MainFormBezetting2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\personeel.cs" />
+    <Compile Include="Data\ProgData.cs" />
+    <Compile Include="OverzichtWachtForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OverzichtWachtForm.Designer.cs">
+      <DependentUpon>OverzichtWachtForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VerhuisForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VerhuisForm.Designer.cs">
+      <DependentUpon>VerhuisForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="About.resx">
+      <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditPersoneel.resx">
+      <DependentUpon>EditPersoneel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InlogGebeuren\RechtenInstellenForm.resx">
+      <DependentUpon>RechtenInstellenForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\AfwijkingInvoerReeksForm.resx">
+      <DependentUpon>AfwijkingInvoerReeksForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\DagAfwijkingInvoerForm.resx">
+      <DependentUpon>DagAfwijkingInvoerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HistoryForm.resx">
+      <DependentUpon>HistoryForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InlogGebeuren\InlogForm.resx">
+      <DependentUpon>InlogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\InstellingenProgrammaForm.resx">
+      <DependentUpon>InstellingenProgrammaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\InvoerLoopExtraDienst.resx">
+      <DependentUpon>InvoerLoopExtraDienst.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\NieuwLabel.resx">
+      <DependentUpon>NieuwLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\QuickInvoerForm.resx">
+      <DependentUpon>QuickInvoerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\RuilExtraForm.resx">
+      <DependentUpon>RuilExtraForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\SnipperAanvraagForm.resx">
+      <DependentUpon>SnipperAanvraagForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\ZetKleurLijnen.resx">
+      <DependentUpon>ZetKleurLijnen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainFormBezetting2.resx">
+      <DependentUpon>MainFormBezetting2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OverzichtWachtForm.resx">
+      <DependentUpon>OverzichtWachtForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="VerhuisForm.resx">
+      <DependentUpon>VerhuisForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bezetting2.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
