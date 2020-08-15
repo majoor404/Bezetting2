@@ -17,10 +17,16 @@ namespace Bezetting2
         public List<invoerveld> opbouw = new List<invoerveld>();
         public class invoerveld
         {
+//            public invoerveld() { }
+            public invoerveld (Label lb, ListBox ln ,ListBox la)
+                { _Label = lb;
+                _ListNaam = ln;
+                _ListAfw = la;
+                }
             public Label _Label { get; set; }
             public ListBox _ListNaam { get; set; }
             public ListBox _ListAfw { get; set; }
-        }
+        } // hulp class om snel broer listbox te vinden van afwijking van naam
         DateTime dat;
         public OverzichtWachtForm()
         {
@@ -94,27 +100,28 @@ namespace Bezetting2
             }
 
             opbouw.Clear();
-            opbouw.Add( new invoerveld { _Label = label1, _ListNaam = listBox1 , _ListAfw = listBoxAfw});
-            opbouw.Add(new invoerveld { _Label = label2, _ListNaam = listBox2 , _ListAfw = listBox22});
-            opbouw.Add(new invoerveld { _Label = label3, _ListNaam = listBox3 , _ListAfw = listBox23});
-            opbouw.Add(new invoerveld { _Label = label4, _ListNaam = listBox4 , _ListAfw = listBox24});
-            opbouw.Add(new invoerveld { _Label = label5, _ListNaam = listBox5 , _ListAfw = listBox25});
-            opbouw.Add(new invoerveld { _Label = label6, _ListNaam = listBox6 , _ListAfw = listBox26});
-            opbouw.Add(new invoerveld { _Label = label7, _ListNaam = listBox7 , _ListAfw = listBox27});
-            opbouw.Add(new invoerveld { _Label = label8, _ListNaam = listBox8 , _ListAfw = listBox28});
-            opbouw.Add(new invoerveld { _Label = label9, _ListNaam = listBox9 , _ListAfw = listBox29});
-            opbouw.Add(new invoerveld { _Label = label10, _ListNaam = listBox10 , _ListAfw = listBox30});
-            opbouw.Add(new invoerveld { _Label = label11, _ListNaam = listBox11 , _ListAfw = listBox31});
-            opbouw.Add(new invoerveld { _Label = label12, _ListNaam = listBox12 , _ListAfw = listBox32});
-            opbouw.Add(new invoerveld { _Label = label13, _ListNaam = listBox13 , _ListAfw = listBox33});
-            opbouw.Add(new invoerveld { _Label = label14, _ListNaam = listBox14 , _ListAfw = listBox34});
-            opbouw.Add(new invoerveld { _Label = label15, _ListNaam = listBox15 , _ListAfw = listBox35});
-            opbouw.Add(new invoerveld { _Label = label16, _ListNaam = listBox16 , _ListAfw = listBox36});
-            opbouw.Add(new invoerveld { _Label = label17, _ListNaam = listBox17 , _ListAfw = listBox37});
-            opbouw.Add(new invoerveld { _Label = label18, _ListNaam = listBox18 , _ListAfw = listBox38});
-            opbouw.Add(new invoerveld { _Label = label19, _ListNaam = listBox19 , _ListAfw = listBox39});
-            opbouw.Add(new invoerveld { _Label = label20, _ListNaam = listBox20 , _ListAfw = listBox40});
-            opbouw.Add(new invoerveld { _Label = label21, _ListNaam = listBox21 , _ListAfw = listBox41});
+            
+            opbouw.Add( new invoerveld(label1, listBox1 ,listBoxAfw));
+            opbouw.Add(new invoerveld(label2, listBox2 , listBox22));
+            opbouw.Add(new invoerveld(label3, listBox3 , listBox23));
+            opbouw.Add(new invoerveld(label4, listBox4 ,  listBox24));
+            opbouw.Add(new invoerveld(label5, listBox5 , listBox25));
+            opbouw.Add(new invoerveld(label6, listBox6 , listBox26));
+            opbouw.Add(new invoerveld(label7, listBox7 , listBox27));
+            opbouw.Add(new invoerveld(label8, listBox8 , listBox28));
+            opbouw.Add(new invoerveld(label9, listBox9 , listBox29));
+            opbouw.Add(new invoerveld(label10, listBox10 , listBox30));
+            opbouw.Add(new invoerveld(label11, listBox11 , listBox31));
+            opbouw.Add(new invoerveld(label12, listBox12 , listBox32));
+            opbouw.Add(new invoerveld(label13, listBox13 , listBox33));
+            opbouw.Add(new invoerveld(label14, listBox14 , listBox34));
+            opbouw.Add(new invoerveld(label15, listBox15 , listBox35));
+            opbouw.Add(new invoerveld(label16, listBox16 , listBox36));
+            opbouw.Add(new invoerveld(label17, listBox17 , listBox37));
+            opbouw.Add(new invoerveld(label18, listBox18 , listBox38));
+            opbouw.Add(new invoerveld(label19, listBox19 , listBox39));
+            opbouw.Add(new invoerveld(label20, listBox20 , listBox40));
+            opbouw.Add(new invoerveld(label21, listBox21 , listBox41));
 
             LaadDataFormulier();
 
@@ -670,6 +677,12 @@ namespace Bezetting2
             sourse = (ListBox)sender;
             if (sourse.SelectedIndex > -1)
                 sourse.SelectedIndex = -1;
+        }
+
+        private void buttonNu_Click(object sender, EventArgs e)
+        {
+            SaveData();
+            OverzichtWachtForm_Shown(this, null);
         }
     }
 }

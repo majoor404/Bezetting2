@@ -19,7 +19,7 @@ namespace Bezetting2.InlogGebeuren
 
         private void trackBarRechten_ValueChanged(object sender, EventArgs e)
         {
-            int recht = (int)trackBarRechten.Value;
+            int recht = GetRecht();
             if (checkBoxAllePloegen.Checked)
                 recht += 50;
             labelRechtenNivo.Text = recht.ToString();
@@ -27,7 +27,7 @@ namespace Bezetting2.InlogGebeuren
 
         private void checkBoxAllePloegen_CheckedChanged(object sender, EventArgs e)
         {
-            int recht = (int)trackBarRechten.Value;
+            int recht = GetRecht();
             if (checkBoxAllePloegen.Checked)
                 recht += 50;
             labelRechtenNivo.Text = recht.ToString();
@@ -38,10 +38,20 @@ namespace Bezetting2.InlogGebeuren
             // reset wachtwoord (maak gelijk aan personeel nummer
             personeel persoon = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
             // encrypt pass
-            persoon._passwoord = ProgData.Scramble(labelPersoneelNummer.Text);
+            persoon._passwoord = ProgData.Scramble("verander_nu");
             ProgData.Save_Namen_lijst();
-            MessageBox.Show("Wachtwoord is gereset naar personeel nummer");
+            MessageBox.Show("Wachtwoord is gereset");
+        }
 
+        private int GetRecht()
+        {
+            if (radioButton50.Checked)
+                return 50;
+            if (radioButton25.Checked)
+                return 25;
+            if (radioButton0.Checked)
+                return 0;
+            return 0;
         }
     }
 }

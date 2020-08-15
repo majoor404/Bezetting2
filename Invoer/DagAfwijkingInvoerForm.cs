@@ -65,29 +65,39 @@ namespace Bezetting2
 
         private void buttonVoerIn_Click(object sender, EventArgs e)
         {
-            ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text);
-
-            string eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
-
-            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" )
+            if (textBoxAfwijking.Text != "")
             {
 
-                // als ED-O of ED-M of ED-N aanpassing op andere kleur, of VD of RD
-                // bepaal de kleur die dan loopt.
+                ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text);
 
-                // get huidige kleur op
-                string dienst = textBoxAfwijking.Text.Substring(3, 1);
-                string gaat_lopen_op_kleur = ProgData.MDatum.GetKleurDieWerkt(_verzoekdag, dienst);
-                string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
-                ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
+                string eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
 
-                LooptExtraDienst lop = new LooptExtraDienst();
-                lop._datum = _verzoekdag;
-                lop._naam = labelNaam.Text;
+                if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                {
 
-                ProgData.LooptExtra_lijst.Add(lop);
-                ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
+                    // als ED-O of ED-M of ED-N aanpassing op andere kleur, of VD of RD
+                    // bepaal de kleur die dan loopt.
+
+                    // get huidige kleur op
+                    string dienst = textBoxAfwijking.Text.Substring(3, 1);
+                    string gaat_lopen_op_kleur = ProgData.MDatum.GetKleurDieWerkt(_verzoekdag, dienst);
+                    string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
+                    ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
+
+                    LooptExtraDienst lop = new LooptExtraDienst();
+                    lop._datum = _verzoekdag;
+                    lop._naam = labelNaam.Text;
+
+                    ProgData.LooptExtra_lijst.Add(lop);
+                    ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
+                }
             }
+            else
+            {
+                MessageBox.Show("Vul afwijking in of kies uit lijst." +
+                    "\nOf kies knop cancel afwijking als u huidige wilt verwijderen.");
+            }
+            
         }
 
         private void buttonHistory_Click(object sender, EventArgs e)

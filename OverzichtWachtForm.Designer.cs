@@ -117,6 +117,7 @@
             this.listBox39 = new System.Windows.Forms.ListBox();
             this.listBox40 = new System.Windows.Forms.ListBox();
             this.listBox41 = new System.Windows.Forms.ListBox();
+            this.buttonNu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -1301,11 +1302,23 @@
             this.listBox41.Tag = "41";
             this.listBox41.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
+            // buttonNu
+            // 
+            this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNu.Location = new System.Drawing.Point(514, 25);
+            this.buttonNu.Name = "buttonNu";
+            this.buttonNu.Size = new System.Drawing.Size(157, 30);
+            this.buttonNu.TabIndex = 90;
+            this.buttonNu.Text = "Huidige Datum";
+            this.buttonNu.UseVisualStyleBackColor = true;
+            this.buttonNu.Click += new System.EventHandler(this.buttonNu_Click);
+            // 
             // OverzichtWachtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1141, 623);
+            this.Controls.Add(this.buttonNu);
             this.Controls.Add(this.listBox41);
             this.Controls.Add(this.listBox40);
             this.Controls.Add(this.listBox39);
@@ -1496,5 +1509,6 @@
         private System.Windows.Forms.ListBox listBox39;
         private System.Windows.Forms.ListBox listBox40;
         private System.Windows.Forms.ListBox listBox41;
+        private System.Windows.Forms.Button buttonNu;
     }
 }

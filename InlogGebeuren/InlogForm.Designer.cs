@@ -62,6 +62,7 @@
             this.textBoxNum.Name = "textBoxNum";
             this.textBoxNum.Size = new System.Drawing.Size(215, 20);
             this.textBoxNum.TabIndex = 3;
+            this.textBoxNum.TextChanged += new System.EventHandler(this.textBoxNum_TextChanged);
             // 
             // textBoxPass
             // 

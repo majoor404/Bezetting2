@@ -27,7 +27,6 @@ namespace Bezetting2
             textBoxChangePasswoord.Text = "";
 
             textBoxPass.Focus();
-
         }
 
         private void buttonOke_Click(object sender, EventArgs e)
@@ -91,9 +90,38 @@ namespace Bezetting2
         {
             personeel persoon = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == textBoxNum.Text);
             // encrypt pass
-            persoon._passwoord = ProgData.Scramble(textBoxChangePasswoord.Text);
-            ProgData.Save_Namen_lijst();
-            MessageBox.Show("Wachtwoord is aangepast");
+            if (textBoxChangePasswoord.Text == textBoxNum.Text)
+            {
+                MessageBox.Show("personeel nummer mag niet passwoord zijn");
+            }
+            else
+            {
+                persoon._passwoord = ProgData.Scramble(textBoxChangePasswoord.Text);
+                ProgData.Save_Namen_lijst();
+                MessageBox.Show("Wachtwoord is aangepast");
+
+                textBoxNum.Enabled = true;
+                textBoxPass.Enabled = true;
+                buttonOke.Enabled = true;
+            }
+        }
+
+        private void textBoxNum_TextChanged(object sender, EventArgs e)
+        {
+            // na reset passwoord is het "verander_nu", pas meteen aan.
+            try
+            {
+                personeel persoon = ProgData.personeel_lijst.First(b => b._persnummer.ToString() == textBoxNum.Text);
+                if (ProgData.Unscramble(persoon._passwoord) == "verander_nu")
+                {
+                    MessageBox.Show("Geef nieuwe passwoord op, verboden is uw gebruikers naam/personeel nummer!");
+                    textBoxNum.Enabled = false;
+                    textBoxPass.Enabled = false;
+                    buttonOke.Enabled = false;
+                    buttonVerander.Enabled = true;
+                }
+            }
+            catch { }
         }
     }
 }
