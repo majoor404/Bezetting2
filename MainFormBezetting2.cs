@@ -419,8 +419,8 @@ namespace Bezetting2
                 // hier alleen kijken
                 // open oude ploeg bezetting
                 // open wijzegingen en laat deze zien
-
-                if (!File.Exists(ProgData._Ploeg_Namen_Locatie))
+                string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
+                if (!File.Exists(Locatie))
                 {
                     MessageBox.Show("bezetting deze maand bestaat niet, kan dus niks laten zien");
                     ProgData.kleur_personeel_lijst.Clear();
@@ -455,7 +455,7 @@ namespace Bezetting2
                     }
 
                     // Vul bezetting op scherm
-                    if (File.Exists(ProgData._Ploeg_Bezetting_Locatie))
+                    if (File.Exists(ProgData.Ploeg_Bezetting_Locatie()))
                     {
                         ProgData.LoadPloegBezettingLijst();
                         foreach (werkdag a in ProgData.Bezetting_Ploeg_Lijst)
@@ -541,7 +541,7 @@ namespace Bezetting2
 
                 // maak bezettingafwijking.bin voor kleur als die niet bestaat
                 // is lijst met werkdagen
-                if (!File.Exists(ProgData._Ploeg_Bezetting_Locatie))
+                if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie()))
                 {
                     ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
                 }
@@ -575,7 +575,7 @@ namespace Bezetting2
                 }
 
                 // Vul bezetting op scherm
-                if (File.Exists(ProgData._Ploeg_Bezetting_Locatie))
+                if (File.Exists(ProgData.Ploeg_Bezetting_Locatie()))
                 {
                     ProgData.LoadPloegBezettingLijst();
                     foreach (werkdag a in ProgData.Bezetting_Ploeg_Lijst)
@@ -1001,11 +1001,12 @@ namespace Bezetting2
         private void repareerPloegAfwijkingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // test of blauw_bezetting.bin bestaat
-            MessageBox.Show($"Ploeg bezetting {0} bestaat niet\nOf is corrupt, Kijken wat ik kan doen", ProgData._Ploeg_Bezetting_Locatie);
-            if (File.Exists(ProgData._Ploeg_Veranderingen_Locatie))
+            MessageBox.Show($"Ploeg bezetting {0} bestaat niet\nOf is corrupt, Kijken wat ik kan doen", ProgData.Ploeg_Bezetting_Locatie());
+            //string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_afwijkingen.bin");
+            if (File.Exists(ProgData.Ploeg_Veranderingen_Locatie()))
             {
                 MessageBox.Show($"Ploeg veranderingen bestaat wel, repareren!");
-                File.Delete(ProgData._Ploeg_Bezetting_Locatie);
+                File.Delete(ProgData.Ploeg_Bezetting_Locatie());
                 ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.sgekozenmaand(), ProgData.GekozenKleur);
                 ProgData.LoadVeranderingenPloegLijst();
                 ProgData.LoadPloegBezettingLijst();

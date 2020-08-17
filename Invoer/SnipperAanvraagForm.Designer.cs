@@ -182,7 +182,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(185, 24);
             this.comboBox1.TabIndex = 11;
-            this.comboBox1.Text = "VK";
             // 
             // buttonVraagAan
             // 

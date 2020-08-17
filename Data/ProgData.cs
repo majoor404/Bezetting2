@@ -26,12 +26,8 @@ namespace Bezetting2
         public static ToolStripStatusLabel _inlognaam;
         public static ToolStripStatusLabel _toegangnivo;
 
-        //public static List<string> ProgrammaData = new List<string>();
-
         public static List<string> Lijnen = new List<string>();
-        public static string _Lijnen_Locatie;
 
-        public static string _Ploeg_Namen_Locatie;
         public static List<personeel> personeel_lijst = new List<personeel>();
         public static List<personeel> kleur_personeel_lijst = new List<personeel>();
 
@@ -41,10 +37,8 @@ namespace Bezetting2
         public static List<string> werkgroep_personeel = new List<string>();
         public static ModuleDatum MDatum = new ModuleDatum();
 
-        public static string _Ploeg_Veranderingen_Locatie;
         public static List<veranderingen> Veranderingen_Lijst = new List<veranderingen>();
 
-        public static string _Ploeg_Bezetting_Locatie;
         public static List<werkdag> Bezetting_Ploeg_Lijst = new List<werkdag>();
 
         public static string _RuilExtra_Locatie;
@@ -56,16 +50,7 @@ namespace Bezetting2
         public static string Huidige_Gebruiker_Werkt_Op_Kleur;
 
         public static int ihuidigemaand;
-        private static int _igekozenmaand; // Backing field
-        public static int igekozenmaand
-        {
-            get { return _igekozenmaand; }  // Getter
-            set
-            {
-                _igekozenmaand = value;   // Setter
-                ZetJuisteDirectory();
-            }
-        }
+        public static int igekozenmaand; 
 
         public static int ihuidigjaar;
         private static int _igekozenjaar; // Backing field
@@ -76,7 +61,6 @@ namespace Bezetting2
             {
                 _igekozenjaar = value;   // Setter
                 Main.numericUpDownJaar.Value = value;
-                ZetJuisteDirectory();
             }
         }
 
@@ -91,35 +75,8 @@ namespace Bezetting2
             return t.ToString("MMMM");
         }
 
-        public static string shuidigemaand()
-        {
-            return DateTime.Now.ToString("MMMM");
-        }
-
-        private static string _GekozenKleur; // Backing field
-        public static string GekozenKleur
-        {
-            get
-            {
-                return _GekozenKleur;
-            }
-            set
-            {
-                _GekozenKleur = value;
-
-                ZetJuisteDirectory();
-            }
-        }
-
-        private static void ZetJuisteDirectory()
-        {
-            string dir_naam = GetDir(); // sgekozenjaar() + "\\" + igekozenmaand.ToString(); // maand als nummer
-            _Ploeg_Namen_Locatie = Path.GetFullPath(dir_naam + "\\" + _GekozenKleur + "_namen.bin");
-            _Ploeg_Veranderingen_Locatie = Path.GetFullPath(dir_naam + "\\" + _GekozenKleur + "_afwijkingen.bin");
-            _Ploeg_Bezetting_Locatie = Path.GetFullPath(dir_naam + "\\" + _GekozenKleur + "_bezetting.bin");
-            _Lijnen_Locatie = Path.GetFullPath(dir_naam + "\\lijnen.ini");
-        }
-
+        public static string GekozenKleur; // Backing field
+        
         public static string GetDir()
         {
             return sgekozenjaar() + "\\" + igekozenmaand.ToString(); // maand als nummer
@@ -176,16 +133,13 @@ namespace Bezetting2
                 return nummer;
             }
         }
-
-
-
-
         public static void LoadPloegNamenLijst()
         {
             kleur_personeel_lijst.Clear();
             try
             {
-                using (Stream stream = File.Open(_Ploeg_Namen_Locatie, FileMode.Open))
+                //string _Ploeg_Namen_Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
+                using (Stream stream = File.Open(Ploeg_Namen_Locatie(), FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
@@ -200,11 +154,12 @@ namespace Bezetting2
         }
         public static void SavePloegNamenLijst()
         {
-            if (_GekozenKleur != "")
+            if (GekozenKleur != "")
             {
                 try
                 {
-                    using (Stream stream = File.Open(_Ploeg_Namen_Locatie, FileMode.Create))
+                    //string Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
+                    using (Stream stream = File.Open(Ploeg_Namen_Locatie(), FileMode.Create))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
                         bin.Serialize(stream, kleur_personeel_lijst);
@@ -241,7 +196,7 @@ namespace Bezetting2
             MaakWerkPlekkenLijst();
 
             // bij een ploegnamen lijst hoort een bezetting lijst
-            if (!File.Exists(_Ploeg_Bezetting_Locatie))
+            if (!File.Exists(Ploeg_Bezetting_Locatie()))
             {
                 MaakLegeBezetting(sgekozenjaar(), igekozenmaand.ToString(), GekozenKleur); // in deze roetine wordt het ook opgeslagen
             }
@@ -271,11 +226,11 @@ namespace Bezetting2
         }
         public static void SavePloegBezetting()
         {
-            if (_GekozenKleur != "")
+            if (GekozenKleur != "")
             {
                 try
                 {
-                    using (Stream stream = File.Open(_Ploeg_Bezetting_Locatie, FileMode.Create))
+                    using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(), FileMode.Create))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
                         bin.Serialize(stream, Bezetting_Ploeg_Lijst);
@@ -292,7 +247,7 @@ namespace Bezetting2
             Bezetting_Ploeg_Lijst.Clear();
             try
             {
-                using (Stream stream = File.Open(_Ploeg_Bezetting_Locatie, FileMode.Open))
+                using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(), FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     try
@@ -316,7 +271,7 @@ namespace Bezetting2
             Veranderingen_Lijst.Clear();
             try
             {
-                using (Stream stream = File.Open(_Ploeg_Veranderingen_Locatie, FileMode.Open))
+                using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(), FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
@@ -325,7 +280,7 @@ namespace Bezetting2
             }
             catch (IOException)
             {
-                if (File.Exists(_Ploeg_Veranderingen_Locatie))
+                if (File.Exists(Ploeg_Veranderingen_Locatie()))
                     MessageBox.Show("LoadVeranderingenPloegLijst() error");
                 //MessageBox.Show("LoadVeranderingenPloegLijst() error");
                 // als hij nog niet bestaat krijg jke elke keer melding, dat hoefd niet
@@ -334,11 +289,11 @@ namespace Bezetting2
         }
         public static void SaveVeranderingenPloegLijst()
         {
-            if (_GekozenKleur != "")
+            if (GekozenKleur != "")
             {
                 try
                 {
-                    using (Stream stream = File.Open(_Ploeg_Veranderingen_Locatie, FileMode.Create))
+                    using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(), FileMode.Create))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
                         bin.Serialize(stream, Veranderingen_Lijst);
@@ -410,31 +365,7 @@ namespace Bezetting2
             }
         }
 
-        //public static void LeesProgrammaData()
-        //{
-        //    ProgrammaData.Clear();
-        //    try
-        //    {
-        //        ProgrammaData = File.ReadAllLines("Programdata.ini").ToList();
-        //    }
-        //    catch (IOException)
-        //    {
-        //        MessageBox.Show("LeesProgrammaData() error");
-        //    }
-        //}
-        //public static void SaveProgrammaData()
-        //{
-        //    try
-        //    {
-        //        File.WriteAllLines("Programdata.ini", ProgrammaData);
-        //    }
-        //    catch (IOException)
-        //    {
-        //        MessageBox.Show("SaveProgrammaData() error");
-        //    }
-        //}
-
-        public static int WaarInTijd()
+         public static int WaarInTijd()
         {
             // er zijn nu 3 mogelijkheden, welke afhankelijk ik andere keuze's maak
             // 1 ) gevraagde maand is in verleden van huidige maand
@@ -556,8 +487,7 @@ namespace Bezetting2
             Lijnen.Clear();
             try
             {
-                Lijnen = File.ReadAllLines(_Lijnen_Locatie).ToList();
-
+                Lijnen = File.ReadAllLines(Lijnen_Locatie()).ToList();
             }
             catch (IOException)
             {
@@ -570,7 +500,7 @@ namespace Bezetting2
         {
             try
             {
-                File.WriteAllLines(_Lijnen_Locatie, Lijnen);
+                File.WriteAllLines(Lijnen_Locatie(), Lijnen);
             }
             catch (IOException)
             {
@@ -696,6 +626,24 @@ namespace Bezetting2
             return jaar + "\\" + maand;
         }
 
+        public static string Ploeg_Bezetting_Locatie()
+        {
+            return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_bezetting.bin");
+        }
 
+        public static string Ploeg_Namen_Locatie() 
+        {
+            return Path.GetFullPath( $"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_namen.bin");
+        }
+
+        public static string Ploeg_Veranderingen_Locatie()
+        {
+            return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_afwijkingen.bin");
+        }
+
+        public static string Lijnen_Locatie()
+        {
+            return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\lijnen.ini");
+        }
     }
 }

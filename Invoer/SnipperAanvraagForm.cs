@@ -18,6 +18,9 @@ namespace Bezetting2.Invoer
             laadGevraagdeSnipper();
             buttonKeurGoed.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
             dateTimePicker1_ValueChanged(this, null);
+            comboBox1.Text = "";
+            textBoxRede.Text = "";
+            dateTimePicker1.Value = DateTime.Now;
         }
 
         private void buttonVraagAan_Click(object sender, EventArgs e)
@@ -30,8 +33,7 @@ namespace Bezetting2.Invoer
             }
             else
             {
-
-                snip._datum = dateTimePicker1.Value;
+                snip._datum = dateTimePicker1.Value.Date;
                 snip._dienst = labelDienst.Text;
                 snip._hoe = comboBox1.Text;
                 snip._naam = labelNaamFull.Text;
@@ -39,8 +41,25 @@ namespace Bezetting2.Invoer
                 snip._kleur = comboBoxKleur.Text;
 
                 ProgData.LoadSnipperLijst(snip._datum.Year.ToString() + "\\" + snip._datum.Month.ToString());
-                ProgData.Snipper_Lijst.Add(snip);
-                ProgData.SaveSnipperLijst(snip._datum.Year.ToString() + "\\" + snip._datum.Month.ToString());
+                bool staat_die_al_in_lijst = false;
+                foreach (SnipperAanvraag a in ProgData.Snipper_Lijst)
+                {
+                    if (a._datum.Date == snip._datum.Date
+                       && a._naam == snip._naam &&
+                       a._rede_coordinator != "Zelf Gecanceld")
+                        staat_die_al_in_lijst = true;
+                }
+                
+                if (!staat_die_al_in_lijst && comboBox1.Text != "")
+                {
+                    ProgData.Snipper_Lijst.Add(snip);
+
+                    ProgData.SaveSnipperLijst(snip._datum.Year.ToString() + "\\" + snip._datum.Month.ToString());
+                }
+                else
+                {
+                    MessageBox.Show("staat al in de lijst of niet volledig ingevuld");
+                }
                 SnipperAanvraagForm_Shown(this, null);
             }
         }

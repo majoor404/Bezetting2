@@ -26,7 +26,8 @@ namespace Bezetting2.Invoer
             }
             if (!Directory.Exists(ProgData.GetDir()))
                 Directory.CreateDirectory(ProgData.GetDir());
-            if (!File.Exists(ProgData._Ploeg_Namen_Locatie))
+            string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
+            if (!File.Exists(Locatie))
             {
                 ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
                 ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
@@ -41,7 +42,8 @@ namespace Bezetting2.Invoer
             }
             if (!Directory.Exists(ProgData.GetDir()))
                 Directory.CreateDirectory(ProgData.GetDir());
-            if (!File.Exists(ProgData._Ploeg_Namen_Locatie))
+            Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
+            if (!File.Exists(Locatie))
             {
                 ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
                 ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
