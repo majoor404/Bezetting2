@@ -1,9 +1,12 @@
 ﻿using Bezetting2.Data;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Bezetting2
@@ -644,6 +647,29 @@ namespace Bezetting2
         public static string Lijnen_Locatie()
         {
             return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\lijnen.ini");
+        }
+
+        public static string GetLocatieOverzichtPlaatje(DateTime datum)
+        {
+            // datum bv 18-8-2020
+            return Path.GetFullPath($"{datum.Year.ToString()}\\{datum.Month.ToString()}\\{datum.Day.ToString()}_overzicht_{GekozenKleur}.jpg");
+        }
+
+        public static void CaptureMainScreen()
+        {
+            if (RechtenHuidigeGebruiker > 1 && GekozenKleur != "")
+            {
+                Rectangle bounds = ProgData.Main.Bounds;
+                using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+                {
+                    using (Graphics g = Graphics.FromImage(bitmap))
+                    {
+                        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                    }
+                    string opslag = Path.GetFullPath($"{sgekozenjaar()}\\{igekozenmaand.ToString()}\\maand_overzicht_{GekozenKleur}.jpg");
+                    bitmap.Save(opslag, ImageFormat.Jpeg);
+                }
+            }
         }
     }
 }

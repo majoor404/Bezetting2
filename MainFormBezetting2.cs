@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -164,6 +165,7 @@ namespace Bezetting2
 
         private void comboBoxKleurKeuze_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ProgData.CaptureMainScreen();
             ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
             VulViewScherm();
         }
@@ -273,6 +275,7 @@ namespace Bezetting2
 
         private void ButtonJan_Click(object sender, EventArgs e)
         {
+            ProgData.CaptureMainScreen();
             Button myButton = (Button)sender;
             ProgData.igekozenmaand = int.Parse(myButton.Tag.ToString());
 
@@ -282,6 +285,7 @@ namespace Bezetting2
 
         private void numericUpDownJaar_ValueChanged(object sender, EventArgs e)
         {
+            ProgData.CaptureMainScreen();
             ProgData.igekozenjaar = (int)numericUpDownJaar.Value;
             VulViewScherm();
         }
@@ -647,7 +651,6 @@ namespace Bezetting2
                             View.Items[View.Items.Count - 1].SubItems[dagy].Text = inhoud.ToString();
                         }
                     }
-
                 }
             }
 
@@ -903,8 +906,9 @@ namespace Bezetting2
                 }
             }
             catch { }
+            
+           
         }
-
         private string GetRedenAfwijking(string naam, int dag)
         {
             if (ProgData.Veranderingen_Lijst.Count < 1)
@@ -929,7 +933,6 @@ namespace Bezetting2
             kleurLijnen.ShowDialog();
             VulViewScherm();
         }
-
         private void ZetLijnen()
         {
             // lijn 1
@@ -981,7 +984,6 @@ namespace Bezetting2
                 panel4.Size = new Size((stop - start + 1) * kolom_breed, 3);
             }
         }
-
         private void LijnenWeg()
         {
             label1.Visible = false;
@@ -997,7 +999,6 @@ namespace Bezetting2
             panel7.Visible = false;
             panel8.Visible = false;
         }
-
         private void repareerPloegAfwijkingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // test of blauw_bezetting.bin bestaat
@@ -1019,7 +1020,6 @@ namespace Bezetting2
                 VulViewScherm();
             }
         }
-
         private void timerKill_Tick(object sender, EventArgs e)
         {
             if (File.Exists("kill.ini"))
@@ -1036,7 +1036,6 @@ namespace Bezetting2
                 }
             }
         }
-
         private void ruilOverwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RuilExtraForm rf = new RuilExtraForm();
@@ -1060,7 +1059,6 @@ namespace Bezetting2
             rf.buttonVraagAan.Enabled = ProgData.RechtenHuidigeGebruiker > 0;
             rf.ShowDialog();
         }
-
         private void snipperDagAanvraagToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SnipperAanvraagForm snip = new SnipperAanvraagForm();
@@ -1068,7 +1066,6 @@ namespace Bezetting2
             snip.labelNaamFull.Text = ProgData.Huidige_Gebruiker_Naam();
             snip.ShowDialog();
         }
-
         private void panel8_DoubleClick(object sender, EventArgs e)
         {
             // juiste inlog
@@ -1077,11 +1074,14 @@ namespace Bezetting2
             comboBoxKleurKeuze.SelectedItem = "Blauw";
             ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = "Blauw";
         }
-
         private void instellingenProgrammaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             instellingen_programma.ShowDialog();
             MainFormBezetting2_Shown(this, null);
+        }
+        private void MainFormBezetting2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            ProgData.CaptureMainScreen();
         }
     }
 }

@@ -3,8 +3,8 @@ using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace Bezetting2
@@ -17,12 +17,13 @@ namespace Bezetting2
         public List<invoerveld> opbouw = new List<invoerveld>();
         public class invoerveld
         {
-//            public invoerveld() { }
-            public invoerveld (Label lb, ListBox ln ,ListBox la)
-                { _Label = lb;
+            //            public invoerveld() { }
+            public invoerveld(Label lb, ListBox ln, ListBox la)
+            {
+                _Label = lb;
                 _ListNaam = ln;
                 _ListAfw = la;
-                }
+            }
             public Label _Label { get; set; }
             public ListBox _ListNaam { get; set; }
             public ListBox _ListAfw { get; set; }
@@ -56,14 +57,14 @@ namespace Bezetting2
                 //}
                 //else
                 //{
-                    sourse = (ListBox)sender;
-                    int index = sourse.IndexFromPoint(e.X, e.Y);
-                    sourse_index = index;
-                    if (index > -1)
-                    {
-                        string s = sourse.Items[index].ToString();
-                        DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
-                    }
+                sourse = (ListBox)sender;
+                int index = sourse.IndexFromPoint(e.X, e.Y);
+                sourse_index = index;
+                if (index > -1)
+                {
+                    string s = sourse.Items[index].ToString();
+                    DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
+                }
                 //}
             }
         }
@@ -75,7 +76,7 @@ namespace Bezetting2
                 if (tb != sourse)
                 {
                     tb.Items.Add(e.Data.GetData(DataFormats.Text).ToString());
-                    
+
                     // remove van oude locatie
                     if (sourse_index > -1)
                         sourse.Items.RemoveAt(sourse_index);
@@ -100,28 +101,28 @@ namespace Bezetting2
             }
 
             opbouw.Clear();
-            
-            opbouw.Add( new invoerveld(label1, listBox1 ,listBoxAfw));
-            opbouw.Add(new invoerveld(label2, listBox2 , listBox22));
-            opbouw.Add(new invoerveld(label3, listBox3 , listBox23));
-            opbouw.Add(new invoerveld(label4, listBox4 ,  listBox24));
-            opbouw.Add(new invoerveld(label5, listBox5 , listBox25));
-            opbouw.Add(new invoerveld(label6, listBox6 , listBox26));
-            opbouw.Add(new invoerveld(label7, listBox7 , listBox27));
-            opbouw.Add(new invoerveld(label8, listBox8 , listBox28));
-            opbouw.Add(new invoerveld(label9, listBox9 , listBox29));
-            opbouw.Add(new invoerveld(label10, listBox10 , listBox30));
-            opbouw.Add(new invoerveld(label11, listBox11 , listBox31));
-            opbouw.Add(new invoerveld(label12, listBox12 , listBox32));
-            opbouw.Add(new invoerveld(label13, listBox13 , listBox33));
-            opbouw.Add(new invoerveld(label14, listBox14 , listBox34));
-            opbouw.Add(new invoerveld(label15, listBox15 , listBox35));
-            opbouw.Add(new invoerveld(label16, listBox16 , listBox36));
-            opbouw.Add(new invoerveld(label17, listBox17 , listBox37));
-            opbouw.Add(new invoerveld(label18, listBox18 , listBox38));
-            opbouw.Add(new invoerveld(label19, listBox19 , listBox39));
-            opbouw.Add(new invoerveld(label20, listBox20 , listBox40));
-            opbouw.Add(new invoerveld(label21, listBox21 , listBox41));
+
+            opbouw.Add(new invoerveld(label1, listBox1, listBoxAfw));
+            opbouw.Add(new invoerveld(label2, listBox2, listBox22));
+            opbouw.Add(new invoerveld(label3, listBox3, listBox23));
+            opbouw.Add(new invoerveld(label4, listBox4, listBox24));
+            opbouw.Add(new invoerveld(label5, listBox5, listBox25));
+            opbouw.Add(new invoerveld(label6, listBox6, listBox26));
+            opbouw.Add(new invoerveld(label7, listBox7, listBox27));
+            opbouw.Add(new invoerveld(label8, listBox8, listBox28));
+            opbouw.Add(new invoerveld(label9, listBox9, listBox29));
+            opbouw.Add(new invoerveld(label10, listBox10, listBox30));
+            opbouw.Add(new invoerveld(label11, listBox11, listBox31));
+            opbouw.Add(new invoerveld(label12, listBox12, listBox32));
+            opbouw.Add(new invoerveld(label13, listBox13, listBox33));
+            opbouw.Add(new invoerveld(label14, listBox14, listBox34));
+            opbouw.Add(new invoerveld(label15, listBox15, listBox35));
+            opbouw.Add(new invoerveld(label16, listBox16, listBox36));
+            opbouw.Add(new invoerveld(label17, listBox17, listBox37));
+            opbouw.Add(new invoerveld(label18, listBox18, listBox38));
+            opbouw.Add(new invoerveld(label19, listBox19, listBox39));
+            opbouw.Add(new invoerveld(label20, listBox20, listBox40));
+            opbouw.Add(new invoerveld(label21, listBox21, listBox41));
 
             LaadDataFormulier();
 
@@ -241,7 +242,7 @@ namespace Bezetting2
 
             InstellingenProg.SaveProgrammaData();
         }
-        private void UpdateAfwijkingListBox(ListBox box) 
+        private void UpdateAfwijkingListBox(ListBox box)
         {
             invoerveld veld = opbouw.First(a => (a._ListNaam == box));
             broer = veld._ListAfw;
@@ -290,36 +291,41 @@ namespace Bezetting2
         }
         private void SaveData()
         {
-            ProgData.LoadPloegBezettingLijst();
-            foreach (ListBox box in this.Controls.OfType<ListBox>())
+            if (CheckRechten())
             {
-                if ((box.Tag != null))
+                ProgData.LoadPloegBezettingLijst();
+                foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
-                    int tag = int.Parse(box.Tag.ToString());
-                    // staat er een naam in listbox ?
-                    if (tag < 22 && box.Items.Count > 0)
+                    if ((box.Tag != null))
                     {
-                        for (int i = 0; i < box.Items.Count; i++)
+                        int tag = int.Parse(box.Tag.ToString());
+                        // staat er een naam in listbox ?
+                        if (tag < 22 && box.Items.Count > 0)
                         {
-                            // pak naam
-                            string naam = box.Items[i].ToString();
-                            // haal juiste werkdag bij persoon 
-                            werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
-                            if (box.Tag.ToString() == "1")
+                            for (int i = 0; i < box.Items.Count; i++)
                             {
-                                ver._werkplek = "";
-                            }
-                            else
-                            {
-                                // save werkplek
-                                invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                ver._werkplek = veld._Label.Text;
+                                // pak naam
+                                string naam = box.Items[i].ToString();
+                                // haal juiste werkdag bij persoon 
+                                werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
+                                if (box.Tag.ToString() == "1")
+                                {
+                                    ver._werkplek = "";
+                                }
+                                else
+                                {
+                                    // save werkplek
+                                    invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                                    ver._werkplek = veld._Label.Text;
+                                }
                             }
                         }
                     }
                 }
+                ProgData.SavePloegBezetting();
+
+                CaptureMyScreen();
             }
-            ProgData.SavePloegBezetting();
         }
         private void ViewUpdate()
         {
@@ -369,14 +375,14 @@ namespace Bezetting2
                         UpdateAfwijkingListBox(veld._ListNaam);
                     }
                 }
-                
+
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
                     // als op werkplek geen personeel, dan invisible afwijking 
                     int tag = int.Parse(box.Tag.ToString());
-                    if(tag < 22)
+                    if (tag < 22)
                     {
-                        if(box.Items.Count == 0)
+                        if (box.Items.Count == 0)
                         {
                             invoerveld veld = opbouw.First(a => (a._ListNaam == box));
                             veld._ListAfw.Visible = false;
@@ -678,11 +684,22 @@ namespace Bezetting2
             if (sourse.SelectedIndex > -1)
                 sourse.SelectedIndex = -1;
         }
-
         private void buttonNu_Click(object sender, EventArgs e)
         {
             SaveData();
             OverzichtWachtForm_Shown(this, null);
+        }
+        private void CaptureMyScreen()
+        {
+            Rectangle bounds = this.Bounds;
+            using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                }
+                bitmap.Save(ProgData.GetLocatieOverzichtPlaatje(dat), ImageFormat.Jpeg);
+            }
         }
     }
 }
