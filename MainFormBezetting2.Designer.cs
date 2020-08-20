@@ -42,6 +42,7 @@
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.importNamenOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.repareerPloegAfwijkingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenProgrammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,6 +157,7 @@
             this.kleurLijnenToolStripMenuItem,
             this.toolStripMenuItem2,
             this.importNamenOudeVersieToolStripMenuItem,
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem,
             this.repareerPloegAfwijkingToolStripMenuItem,
             this.instellingenProgrammaToolStripMenuItem});
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
@@ -190,6 +192,14 @@
             this.importNamenOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
             this.importNamenOudeVersieToolStripMenuItem.Text = "Import Namen oude Versie";
             this.importNamenOudeVersieToolStripMenuItem.Click += new System.EventHandler(this.importNamenOudeVersieToolStripMenuItem_Click);
+            // 
+            // importOudeVeranderDataOudeVersieToolStripMenuItem
+            // 
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Enabled = false;
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Name = "importOudeVeranderDataOudeVersieToolStripMenuItem";
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Text = "Import Verander data oude Versie";
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Click += new System.EventHandler(this.importOudeVeranderDataOudeVersieToolStripMenuItem_Click);
             // 
             // repareerPloegAfwijkingToolStripMenuItem
             // 
@@ -620,6 +630,7 @@
             this.panel7.Size = new System.Drawing.Size(100, 6);
             this.panel7.TabIndex = 24;
             this.panel7.Visible = false;
+            this.panel7.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panel7_MouseDoubleClick);
             // 
             // label4
             // 
@@ -759,6 +770,7 @@
         private System.Windows.Forms.ToolStripMenuItem ruilOverwerkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snipperDagAanvraagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instellingenProgrammaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importOudeVeranderDataOudeVersieToolStripMenuItem;
     }
 }
 

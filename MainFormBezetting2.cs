@@ -155,6 +155,7 @@ namespace Bezetting2
             kleurLijnenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 45;
             repareerPloegAfwijkingToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             instellingenProgrammaToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
+            importOudeVeranderDataOudeVersieToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
         }
 
         private void uitloggenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1082,6 +1083,64 @@ namespace Bezetting2
         private void MainFormBezetting2_FormClosing(object sender, FormClosingEventArgs e)
         {
             ProgData.CaptureMainScreen();
+        }
+
+        private void importOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog.FileName = "verander.csv";
+
+            MessageBox.Show("voeg oude veranderingen in nieuwe programma");
+
+            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
+
+            if (result == DialogResult.OK) // Test result.
+            {
+                TextBox temp = new TextBox();
+                temp.Text = File.ReadAllText(openFileDialog.FileName);
+                
+                for (int i = 0; i < temp.Lines.Count() - 1; i++)
+                {
+                    //toolStripStatusLabelInfo.Text = $"{i.ToString()} / { temp.Lines.Count().ToString()}";
+                    string regel = temp.Lines[i];
+                    string[] words;
+                    try
+                    {
+                        words = regel.Split(';');
+                        if (words[0].Length == 6)
+                        {
+                            string[] datum = words[1].Split('-');
+                            ProgData.igekozenmaand = int.Parse(datum[1]);
+                            ProgData.igekozenjaar = int.Parse(datum[2]);
+                            if (ProgData.Bestaat_Gebruiker(words[0]))
+                            {
+                                try
+                                {
+                                    string kleur = ProgData.Get_Gebruiker_Kleur(words[0]);
+                                    if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit")
+                                    {
+                                        ProgData.GekozenKleur = kleur;
+                                        ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Naam(words[0]), datum[0], words[2], words[3], "Vanuit oude bezeting ingevoerd");
+                                    }
+                                }
+                                catch { }
+                            }
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("omzetten verander.csv gaat fout, verkeerde opbouw ?");
+                    }
+                }
+            }
+        }
+
+        private void panel7_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            // juiste inlog
+            ProgData.Huidige_Gebruiker_Personeel_nummer = "Admin";
+            ProgData.RechtenHuidigeGebruiker = 101;
+            comboBoxKleurKeuze.SelectedItem = "Blauw";
+            ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = "Blauw";
         }
     }
 }
