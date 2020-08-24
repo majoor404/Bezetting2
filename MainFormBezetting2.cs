@@ -1100,7 +1100,10 @@ namespace Bezetting2
                 
                 for (int i = 0; i < temp.Lines.Count() - 1; i++)
                 {
-                    //toolStripStatusLabelInfo.Text = $"{i.ToString()} / { temp.Lines.Count().ToString()}";
+                    labelDebug.Visible = true;
+                    labelDebug.Text = $"{i.ToString()} / { temp.Lines.Count().ToString()}";
+                    labelDebug.Refresh();
+                    
                     string regel = temp.Lines[i];
                     string[] words;
                     try
@@ -1119,6 +1122,7 @@ namespace Bezetting2
                                     if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit")
                                     {
                                         ProgData.GekozenKleur = kleur;
+                                        ProgData.CheckFiles();
                                         ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Naam(words[0]), datum[0], words[2], words[3], "Vanuit oude bezeting ingevoerd");
                                     }
                                 }
@@ -1128,10 +1132,15 @@ namespace Bezetting2
                     }
                     catch
                     {
-                        MessageBox.Show("omzetten verander.csv gaat fout, verkeerde opbouw ?");
+                        MessageBox.Show($"omzetten verander.csv gaat fout, verkeerde opbouw ?\nRegel was {regel}");
                     }
                 }
             }
+            MessageBox.Show("Klaar met invoer");
+            labelDebug.Visible = false;
+            ProgData.GekozenKleur = "Blauw";
+            buttonNu_Click(this, null);
+
         }
 
         private void panel7_MouseDoubleClick(object sender, MouseEventArgs e)

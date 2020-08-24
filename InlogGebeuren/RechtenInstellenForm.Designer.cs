@@ -128,6 +128,7 @@
             this.radioButton50.TabStop = true;
             this.radioButton50.Text = "Personeel toevoegen, verwijderen eigen wacht (50)";
             this.radioButton50.UseVisualStyleBackColor = true;
+            this.radioButton50.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
             // 
             // radioButton25
             // 
@@ -139,6 +140,7 @@
             this.radioButton25.TabStop = true;
             this.radioButton25.Text = "Maak bezetting eigen wacht (25)";
             this.radioButton25.UseVisualStyleBackColor = true;
+            this.radioButton25.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
             // 
             // radioButton0
             // 
@@ -150,6 +152,7 @@
             this.radioButton0.TabStop = true;
             this.radioButton0.Text = "Geen rechten, alleen kijken (0)";
             this.radioButton0.UseVisualStyleBackColor = true;
+            this.radioButton0.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
             // 
             // RechtenInstellenForm
             // 

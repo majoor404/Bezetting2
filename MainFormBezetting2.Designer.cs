@@ -85,6 +85,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
+            this.labelDebug = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -658,11 +659,22 @@
             this.timerKill.Interval = 30000;
             this.timerKill.Tick += new System.EventHandler(this.timerKill_Tick);
             // 
+            // labelDebug
+            // 
+            this.labelDebug.AutoSize = true;
+            this.labelDebug.Location = new System.Drawing.Point(687, 11);
+            this.labelDebug.Name = "labelDebug";
+            this.labelDebug.Size = new System.Drawing.Size(60, 13);
+            this.labelDebug.TabIndex = 29;
+            this.labelDebug.Text = "Debug Info";
+            this.labelDebug.Visible = false;
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.labelDebug);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel7);
@@ -771,6 +783,7 @@
         private System.Windows.Forms.ToolStripMenuItem snipperDagAanvraagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instellingenProgrammaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importOudeVeranderDataOudeVersieToolStripMenuItem;
+        private System.Windows.Forms.Label labelDebug;
     }
 }
 

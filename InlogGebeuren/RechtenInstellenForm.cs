@@ -17,14 +17,6 @@ namespace Bezetting2.InlogGebeuren
             InitializeComponent();
         }
 
-        private void trackBarRechten_ValueChanged(object sender, EventArgs e)
-        {
-            int recht = GetRecht();
-            if (checkBoxAllePloegen.Checked)
-                recht += 50;
-            labelRechtenNivo.Text = recht.ToString();
-        }
-
         private void checkBoxAllePloegen_CheckedChanged(object sender, EventArgs e)
         {
             int recht = GetRecht();
@@ -52,6 +44,14 @@ namespace Bezetting2.InlogGebeuren
             if (radioButton0.Checked)
                 return 0;
             return 0;
+        }
+
+        private void radioButton0_CheckedChanged(object sender, EventArgs e)
+        {
+            int recht = GetRecht();
+            if (checkBoxAllePloegen.Checked)
+                recht += 50;
+            labelRechtenNivo.Text = recht.ToString();
         }
     }
 }

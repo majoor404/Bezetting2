@@ -7,6 +7,7 @@ using System.IO;
 
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Bezetting2
@@ -33,6 +34,8 @@ namespace Bezetting2
 
         public static List<personeel> personeel_lijst = new List<personeel>();
         public static List<personeel> kleur_personeel_lijst = new List<personeel>();
+        
+       // List<personeel>[] PloegMensen = new List<personeel>[5];   TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         public static string _LooptExtra_Locatie;
         public static List<LooptExtraDienst> LooptExtra_lijst = new List<LooptExtraDienst>();
@@ -71,20 +74,16 @@ namespace Bezetting2
         {
             return _igekozenjaar.ToString();
         }
-
         public static string sgekozenmaand()
         {
             DateTime t = new DateTime(_igekozenjaar, igekozenmaand, 1);
             return t.ToString("MMMM");
         }
-
         public static string GekozenKleur; // Backing field
-
         public static string GetDir()
         {
             return sgekozenjaar() + "\\" + igekozenmaand.ToString(); // maand als nummer
         }
-
         public static int RechtenHuidigeGebruiker
         {
             get
@@ -109,7 +108,6 @@ namespace Bezetting2
                 _inlognaam.Text = value;
             }
         }
-
         public static string Huidige_Gebruiker_Naam()
         {
             try
@@ -123,8 +121,6 @@ namespace Bezetting2
                 return "";
             }
         }
-
-
         public static void LoadPloegNamenLijst()
         {
             kleur_personeel_lijst.Clear();
@@ -193,7 +189,6 @@ namespace Bezetting2
                 MaakLegeBezetting(sgekozenjaar(), igekozenmaand.ToString(), GekozenKleur); // in deze roetine wordt het ook opgeslagen
             }
         }
-
         public static void MaakLegeBezetting(string jaar, string maand, string kleur)
         {
             Bezetting_Ploeg_Lijst.Clear();
@@ -231,18 +226,16 @@ namespace Bezetting2
                 }
                 catch
                 {
-                    MessageBox.Show("SavePloegBezetting() error");
+                    MessageBox.Show($"SavePloegBezetting() error\n{Ploeg_Bezetting_Locatie()}");
                 }
             }
-        }
 
+        }
         public static void LoadPloegBezettingLijst()
         {
             Bezetting_Ploeg_Lijst.Clear();
             try
             {
-                CheckFiles();
-
                 using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(), FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
@@ -258,13 +251,12 @@ namespace Bezetting2
             }
             catch
             {
-                MessageBox.Show("LoadPloegBezettingLijst() error");
+                MessageBox.Show($"LoadPloegBezettingLijst() error\n{Ploeg_Bezetting_Locatie()}");
             }
 
-            if (Bezetting_Ploeg_Lijst.Count == 0)
-                MessageBox.Show("bezetting ploeg lijst is leeg ?");
+            //if (Bezetting_Ploeg_Lijst.Count == 0)
+            //    MessageBox.Show("bezetting ploeg lijst is leeg ?");
         }
-
         public static void LoadVeranderingenPloegLijst()
         {
             Veranderingen_Lijst.Clear();
@@ -277,10 +269,10 @@ namespace Bezetting2
                     Veranderingen_Lijst = (List<veranderingen>)bin.Deserialize(stream);
                 }
             }
-            catch (IOException)
+            catch
             {
-                if (File.Exists(Ploeg_Veranderingen_Locatie()))
-                    MessageBox.Show("LoadVeranderingenPloegLijst() error");
+                //if (File.Exists(Ploeg_Veranderingen_Locatie()))
+                  //  MessageBox.Show("LoadVeranderingenPloegLijst() error");
                 //MessageBox.Show("LoadVeranderingenPloegLijst() error");
                 // als hij nog niet bestaat krijg jke elke keer melding, dat hoefd niet
                 // wordt vanzelf aangemaakt.
@@ -300,12 +292,11 @@ namespace Bezetting2
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("SaveVeranderingenPloegLijst() error");
+                    MessageBox.Show($"SaveVeranderingenPloegLijst() error\n{Ploeg_Veranderingen_Locatie()}");
                 }
+ 
             }
         }
-
-
         public static void Save_Namen_lijst()
         {
             try
@@ -346,24 +337,24 @@ namespace Bezetting2
             {
                 MessageBox.Show("Save_Namen_lijst() error");
             }
+ 
         }
         public static void Lees_Namen_lijst()
         {
-            personeel_lijst.Clear();
-            try
-            {
-                using (Stream stream = File.Open("personeel.bin", FileMode.Open))
+                personeel_lijst.Clear();
+                try
                 {
-                    BinaryFormatter bin = new BinaryFormatter();
-                    personeel_lijst = (List<personeel>)bin.Deserialize(stream);
+                    using (Stream stream = File.Open("personeel.bin", FileMode.Open))
+                    {
+                        BinaryFormatter bin = new BinaryFormatter();
+                        personeel_lijst = (List<personeel>)bin.Deserialize(stream);
+                    }
                 }
-            }
-            catch (IOException)
-            {
-                MessageBox.Show("Lees_Namen_lijst() error");
-            }
+                catch (IOException)
+                {
+                    MessageBox.Show("Lees_Namen_lijst() error");
+                }
         }
-
         public static int WaarInTijd()
         {
             // er zijn nu 3 mogelijkheden, welke afhankelijk ik andere keuze's maak
@@ -378,7 +369,6 @@ namespace Bezetting2
                 return 3;
             return 2;
         }
-
         static void MaakWerkPlekkenLijst()
         {
             werkgroep_personeel.Clear();
@@ -388,7 +378,6 @@ namespace Bezetting2
                     werkgroep_personeel.Add(a._werkgroep);
             }
         }
-
         /// <summary>
         /// Regel de afwijkingen van rooster
         /// </summary>
@@ -421,10 +410,9 @@ namespace Bezetting2
             }
             catch
             {
-                MessageBox.Show($"Kan naam {naam} niet vinden in ploeg voor wijzeging. Kleur :  {GekozenKleur} Dag : {dagnr} Maand : {igekozenmaand}");
+                MessageBox.Show($"Kan naam {naam} niet vinden in ploeg voor wijzeging. Kleur :  {GekozenKleur} Dag : {dagnr} Maand : {igekozenmaand} Jaar : {igekozenjaar}");
             }
         }
-
         static public void RegelAfwijkingOpDatumEnKleur(DateTime datum, string kleur, string naam, string dagnr, string afwijking, string rede, string invoerdoor)
         {
             // zet datum goed en kleur goed
@@ -448,7 +436,6 @@ namespace Bezetting2
             if (igekozenjaar != bewaar_jaar)
                 igekozenjaar = bewaar_jaar;
         }
-
         static public String Scramble(string woord)
         {
             // string test = unscramble("twtvfw8;");
@@ -464,7 +451,6 @@ namespace Bezetting2
             }
             return ret;
         }
-
         static public string Unscramble(string woord)
         {
             string ret = "";
@@ -481,7 +467,6 @@ namespace Bezetting2
             }
             return ret;
         }
-
         static public bool LeesLijnen()
         {
             Lijnen.Clear();
@@ -495,7 +480,6 @@ namespace Bezetting2
             }
             return true;
         }
-
         static public void SaveLijnen()
         {
             try
@@ -507,7 +491,6 @@ namespace Bezetting2
                 MessageBox.Show("SaveLijnen Error()");
             }
         }
-
         public static void LoadExtraRuilLijst(string dir)
         {
             RuilExtra_Lijst.Clear();
@@ -523,7 +506,6 @@ namespace Bezetting2
             }
             catch { }
         }
-
         public static void SaveExtraRuilLijst(string dir)
         {
             _RuilExtra_Locatie = Path.GetFullPath(dir + "\\ruilextra.bin");
@@ -540,7 +522,6 @@ namespace Bezetting2
                 MessageBox.Show("SaveExtraRuilLijst() error");
             }
         }
-
         public static void LoadSnipperLijst(string dir)
         {
             Snipper_Lijst.Clear();
@@ -556,7 +537,6 @@ namespace Bezetting2
             }
             catch { }
         }
-
         public static void SaveSnipperLijst(string dir)
         {
             _Snipper_Locatie = Path.GetFullPath(dir + "\\snipper.bin");
@@ -573,7 +553,6 @@ namespace Bezetting2
                 MessageBox.Show("SaveSnipperLijst() error");
             }
         }
-
         public static void LoadLooptExtraLijst(string dir, string kleur)
         {
             LooptExtra_lijst.Clear();
@@ -589,7 +568,6 @@ namespace Bezetting2
             }
             catch { }
         }
-
         public static void SaveLooptExtraLijst(string dir, string kleur)
         {
             _LooptExtra_Locatie = Path.GetFullPath(dir + "\\" + kleur + "_extra.bin");
@@ -606,7 +584,6 @@ namespace Bezetting2
                 MessageBox.Show("SaveLooptExtraLijst() error");
             }
         }
-
         public static string GetDirectoryBezettingMaand(DateTime datum)
         {
             string dat = datum.ToString("dd/MM/yyyy");
@@ -625,33 +602,27 @@ namespace Bezetting2
                 maand = maand.Substring(1, 1);
             return jaar + "\\" + maand;
         }
-
         public static string Ploeg_Bezetting_Locatie()
         {
             return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_bezetting.bin");
         }
-
         public static string Ploeg_Namen_Locatie()
         {
             return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_namen.bin");
         }
-
         public static string Ploeg_Veranderingen_Locatie()
         {
             return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_afwijkingen.bin");
         }
-
         public static string Lijnen_Locatie()
         {
             return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\lijnen.ini");
         }
-
         public static string GetLocatieOverzichtPlaatje(DateTime datum)
         {
             // datum bv 18-8-2020
             return Path.GetFullPath($"{datum.Year.ToString()}\\{datum.Month.ToString()}\\{datum.Day.ToString()}_overzicht_{GekozenKleur}.jpg");
         }
-
         public static void CaptureMainScreen()
         {
             if (ChangeData && GekozenKleur != "")
@@ -669,7 +640,6 @@ namespace Bezetting2
                 }
             }
         }
-
         public static bool Bestaat_Gebruiker(string nummer)
         {
             try
@@ -683,7 +653,6 @@ namespace Bezetting2
                 return false;
             }
         }
-
         public static string Get_Gebruiker_Kleur(string nummer)
         {
             try
@@ -697,7 +666,6 @@ namespace Bezetting2
                 return "";
             }
         }
-
         public static string Get_Gebruiker_Naam(string nummer)
         {
             try
@@ -711,7 +679,6 @@ namespace Bezetting2
                 return nummer;
             }
         }
-
         public static void CheckFiles()
         {
             // check of juiste directory bestaat en gevuld is met juiste file's
@@ -722,7 +689,29 @@ namespace Bezetting2
             if (!File.Exists(Ploeg_Namen_Locatie()))
             {
                 Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}"));
+                string kleur = GekozenKleur;
+
+                GekozenKleur = "Blauw";
+                //MessageBox.Show($"Maak directory {_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}, met kleur {GekozenKleur}");
                 MaakPloegNamenLijst(GekozenKleur);
+                SavePloegNamenLijst();
+                GekozenKleur = "Wit";
+                //MessageBox.Show($"Maak directory {_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}, met kleur {GekozenKleur}");
+                MaakPloegNamenLijst(GekozenKleur);
+                SavePloegNamenLijst();
+                GekozenKleur = "Rood";
+                //MessageBox.Show($"Maak directory {_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}, met kleur {GekozenKleur}");
+                MaakPloegNamenLijst(GekozenKleur);
+                SavePloegNamenLijst();
+                GekozenKleur = "Geel";
+                //MessageBox.Show($"Maak directory {_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}, met kleur {GekozenKleur}");
+                MaakPloegNamenLijst(GekozenKleur);
+                SavePloegNamenLijst();
+                GekozenKleur = "Groen";
+                //MessageBox.Show($"Maak directory {_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}, met kleur {GekozenKleur}");
+                MaakPloegNamenLijst(GekozenKleur);
+                SavePloegNamenLijst();
+                GekozenKleur = kleur;
             }
         }
     }
