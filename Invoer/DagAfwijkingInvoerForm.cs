@@ -18,7 +18,7 @@ namespace Bezetting2
         private void FormDagAfwijkingInvoer_Shown(object sender, EventArgs e)
         {
  
-            ProgData.LoadVeranderingenPloegLijst();
+            ProgData.LoadVeranderingenPloeg();
             listBoxItems.Enabled = true;
             textBoxAfwijking.Enabled = true;
             buttonHistory.Enabled = true;
@@ -68,7 +68,7 @@ namespace Bezetting2
             if (textBoxAfwijking.Text != "")
             {
 
-                ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text , ProgData.GekozenKleur);
 
                 string eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
 
@@ -131,7 +131,7 @@ namespace Bezetting2
                 }
                 catch { }
             }
-            ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, "", "Verwijderd", this.Text);
+            ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, "", "Verwijderd", this.Text , ProgData.GekozenKleur);
         }
 
         private void textBoxAfwijking_TextChanged(object sender, EventArgs e)

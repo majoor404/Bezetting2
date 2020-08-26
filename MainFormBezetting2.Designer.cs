@@ -783,7 +783,7 @@
         private System.Windows.Forms.ToolStripMenuItem snipperDagAanvraagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instellingenProgrammaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importOudeVeranderDataOudeVersieToolStripMenuItem;
-        private System.Windows.Forms.Label labelDebug;
+        public System.Windows.Forms.Label labelDebug;
     }
 }
 

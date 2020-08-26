@@ -293,7 +293,7 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                ProgData.LoadPloegBezettingLijst();
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
                     if ((box.Tag != null))
@@ -322,7 +322,7 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting();
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur);
 
                 CaptureMyScreen();
             }
@@ -330,7 +330,7 @@ namespace Bezetting2
         private void ViewUpdate()
         {
 
-            ProgData.LoadPloegBezettingLijst();
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
 
             labelDatum.Text = dat.ToShortDateString();
 

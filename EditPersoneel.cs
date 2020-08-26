@@ -208,7 +208,7 @@ namespace Bezetting2
                 {
                     for (int i = eerste_dag_weg; i < aantal_dagen_deze_maand + 1; i++)
                     {
-                        ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing");
+                        ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing" , ProgData.GekozenKleur);
                     }
                 }
 
@@ -222,7 +222,7 @@ namespace Bezetting2
                 // moet nieuwe collega toevoegen aan bezetting
 
                 int aantal_dagen_dezemaand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
-                ProgData.LoadPloegBezettingLijst(); // want nieuwe kleur gekozen
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur); // want nieuwe kleur gekozen
                 // maak ruimte voor nieuwe collega in werkdag tabel
                 for (int i = 1; i < aantal_dagen_dezemaand + 1; i++)
                 {
@@ -235,13 +235,13 @@ namespace Bezetting2
                     dag._dagnummer = i;
                     ProgData.Bezetting_Ploeg_Lijst.Add(dag);
                 }
-                ProgData.SavePloegBezetting();
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur);
 
                 
                 for (int i = 1; i < eerste_dag_weg; i++)
                 {
                     DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
-                    ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing");
+                    ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing" );
                 }
                 
                 LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;

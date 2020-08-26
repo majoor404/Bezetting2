@@ -2,6 +2,7 @@
 using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -293,6 +294,8 @@ namespace Bezetting2
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
+            ProgData.ReloadSpeed1 = "";
+            ProgData.ReloadSpeed2 = "";
             VulViewScherm();
         }
 
@@ -460,9 +463,9 @@ namespace Bezetting2
                     }
 
                     // Vul bezetting op scherm
-                    if (File.Exists(ProgData.Ploeg_Bezetting_Locatie()))
+                    if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                     {
-                        ProgData.LoadPloegBezettingLijst();
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
                         foreach (werkdag a in ProgData.Bezetting_Ploeg_Lijst)
                         {
                             if (a._afwijkingdienst != "")
@@ -546,7 +549,7 @@ namespace Bezetting2
 
                 // maak bezettingafwijking.bin voor kleur als die niet bestaat
                 // is lijst met werkdagen
-                if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie()))
+                if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                 {
                     ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
                 }
@@ -580,9 +583,9 @@ namespace Bezetting2
                 }
 
                 // Vul bezetting op scherm
-                if (File.Exists(ProgData.Ploeg_Bezetting_Locatie()))
+                if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.LoadPloegBezettingLijst();
+                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
                     foreach (werkdag a in ProgData.Bezetting_Ploeg_Lijst)
                     {
                         if (a._afwijkingdienst != "")
@@ -796,12 +799,12 @@ namespace Bezetting2
                                         }
                                         else
                                         {
-                                            ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer);
+                                            ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer , ProgData.GekozenKleur);
                                         }
                                     }
                                     else
                                     {
-                                        ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer);
+                                        ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer , ProgData.GekozenKleur);
                                     }
                                     VulViewScherm();
                                 }
@@ -913,7 +916,7 @@ namespace Bezetting2
         private string GetRedenAfwijking(string naam, int dag)
         {
             if (ProgData.Veranderingen_Lijst.Count < 1)
-                ProgData.LoadVeranderingenPloegLijst();
+                ProgData.LoadVeranderingenPloeg();
             string sdag = dag.ToString();
             try
             {
@@ -1003,21 +1006,21 @@ namespace Bezetting2
         private void repareerPloegAfwijkingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // test of blauw_bezetting.bin bestaat
-            MessageBox.Show($"Ploeg bezetting {0} bestaat niet\nOf is corrupt, Kijken wat ik kan doen", ProgData.Ploeg_Bezetting_Locatie());
+            MessageBox.Show($"Ploeg bezetting {0} bestaat niet\nOf is corrupt, Kijken wat ik kan doen", ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
             //string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_afwijkingen.bin");
             if (File.Exists(ProgData.Ploeg_Veranderingen_Locatie()))
             {
                 MessageBox.Show($"Ploeg veranderingen bestaat wel, repareren!");
-                File.Delete(ProgData.Ploeg_Bezetting_Locatie());
+                File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
                 ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.sgekozenmaand(), ProgData.GekozenKleur);
-                ProgData.LoadVeranderingenPloegLijst();
-                ProgData.LoadPloegBezettingLijst();
+                ProgData.LoadVeranderingenPloeg();
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
                 foreach (veranderingen verander in ProgData.Veranderingen_Lijst)
                 {
                     werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == verander._naam) && (a._dagnummer.ToString() == verander._datumafwijking));
                     ver._afwijkingdienst = verander._afwijking;
                 }
-                ProgData.SavePloegBezetting();
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur);
                 VulViewScherm();
             }
         }
@@ -1087,60 +1090,21 @@ namespace Bezetting2
 
         private void importOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog.FileName = "verander.csv";
 
-            MessageBox.Show("voeg oude veranderingen in nieuwe programma");
-
-            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
-
-            if (result == DialogResult.OK) // Test result.
+            if (!File.Exists("Wijz.Bez"))
             {
-                TextBox temp = new TextBox();
-                temp.Text = File.ReadAllText(openFileDialog.FileName);
-                
-                for (int i = 0; i < temp.Lines.Count() - 1; i++)
-                {
-                    labelDebug.Visible = true;
-                    labelDebug.Text = $"{i.ToString()} / { temp.Lines.Count().ToString()}";
-                    labelDebug.Refresh();
-                    
-                    string regel = temp.Lines[i];
-                    string[] words;
-                    try
-                    {
-                        words = regel.Split(';');
-                        if (words[0].Length == 6)
-                        {
-                            string[] datum = words[1].Split('-');
-                            ProgData.igekozenmaand = int.Parse(datum[1]);
-                            ProgData.igekozenjaar = int.Parse(datum[2]);
-                            if (ProgData.Bestaat_Gebruiker(words[0]))
-                            {
-                                try
-                                {
-                                    string kleur = ProgData.Get_Gebruiker_Kleur(words[0]);
-                                    if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit")
-                                    {
-                                        ProgData.GekozenKleur = kleur;
-                                        ProgData.CheckFiles();
-                                        ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Naam(words[0]), datum[0], words[2], words[3], "Vanuit oude bezeting ingevoerd");
-                                    }
-                                }
-                                catch { }
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        MessageBox.Show($"omzetten verander.csv gaat fout, verkeerde opbouw ?\nRegel was {regel}");
-                    }
-                }
+                MessageBox.Show("Zet in zelfde directory Wijz.Bez er bij");
             }
-            MessageBox.Show("Klaar met invoer");
-            labelDebug.Visible = false;
-            ProgData.GekozenKleur = "Blauw";
-            buttonNu_Click(this, null);
-
+            else
+            {
+                MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!");
+                ProgData.Lees_Namen_lijst();
+                OpenDataBase();
+                MessageBox.Show("Klaar met invoer");
+                labelDebug.Visible = false;
+                ProgData.GekozenKleur = "Blauw";
+                buttonNu_Click(this, null);
+            }
         }
 
         private void panel7_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1150,6 +1114,63 @@ namespace Bezetting2
             ProgData.RechtenHuidigeGebruiker = 101;
             comboBoxKleurKeuze.SelectedItem = "Blauw";
             ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = "Blauw";
+        }
+
+        private void OpenDataBase()
+        {
+            using (OleDbConnection connection =
+                new OleDbConnection("Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"Wijz.Bez\"; Jet OLEDB:Database Password = fcl721"))
+            {
+
+                object[] meta = new object[12];
+                bool read;
+                int teller = 0;
+
+                OleDbCommand command = new OleDbCommand("select * from Wijzeging", connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+                if (reader.Read() == true)
+                {
+                    labelDebug.Visible = true;
+                    DateTime nu = DateTime.Now;
+                    do
+                    {
+                        int NumberOfColums = reader.GetValues(meta);
+
+                        labelDebug.Text = $"{teller++.ToString()}";
+                        labelDebug.Refresh();
+
+                        //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
+                        //Console.Write("{0} ", meta[6].ToString()); // datum invoer
+                        //Console.Write("{0} ", meta[7].ToString()); // datum afwijking
+                        //Console.Write("{0} ", meta[5].ToString()); // afwijking
+                        //Console.Write("{0} ", meta[9].ToString()); // personeel nummer invoerder
+                        //Console.Write("{0} ", meta[11].ToString()); // rede
+
+                        string[] datum = meta[7].ToString().Split('-');
+                        datum[2] = datum[2].Substring(0, 4);
+
+                        DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
+
+                        if ((gekozen > nu ) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
+                        {
+                            try
+                            {
+                                string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
+                                if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit")
+                                {
+                                    ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, ProgData.Get_Gebruiker_Naam(meta[2].ToString()), datum[0], meta[5].ToString(), meta[11].ToString(), "Import " + meta[9].ToString());
+                                }
+                            }
+                            catch { }
+                        }
+                        read = reader.Read();
+                    } while (read == true);
+                }
+                reader.Close();
+            }
         }
     }
 }

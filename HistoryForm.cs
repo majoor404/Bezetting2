@@ -13,7 +13,7 @@ namespace Bezetting2
 
         private void Show_Dialog_Zonder_Filter()
         {
-            ProgData.LoadVeranderingenPloegLijst();
+            ProgData.LoadVeranderingenPloeg();
             comboBoxIngevoerdDoor.Items.Clear();
             listViewHis.Items.Clear();
             string[] regel = new string[6];
@@ -61,7 +61,7 @@ namespace Bezetting2
         {
             if (checkBoxFilter.Checked)
             {
-                ProgData.LoadVeranderingenPloegLijst();
+                ProgData.LoadVeranderingenPloeg();
                 comboBoxIngevoerdDoor.Items.Clear();
                 listViewHis.Items.Clear();
                 string[] regel = new string[6];
