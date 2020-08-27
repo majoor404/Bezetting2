@@ -1099,7 +1099,7 @@ namespace Bezetting2
             {
                 MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!");
                 ProgData.Lees_Namen_lijst();
-                OpenDataBase();
+                OpenDataBase_en_Voer_oude_data_in();
                 MessageBox.Show("Klaar met invoer");
                 labelDebug.Visible = false;
                 ProgData.GekozenKleur = "Blauw";
@@ -1116,7 +1116,7 @@ namespace Bezetting2
             ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = "Blauw";
         }
 
-        private void OpenDataBase()
+        private void OpenDataBase_en_Voer_oude_data_in()
         {
             using (OleDbConnection connection =
                 new OleDbConnection("Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"Wijz.Bez\"; Jet OLEDB:Database Password = fcl721"))
@@ -1159,6 +1159,17 @@ namespace Bezetting2
                             try
                             {
                                 string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
+
+                                // in oude programma is afwijking soms gelijk aan orginele dienst
+                                // die hoef ik in te voeren
+                                if(meta[5].ToString() == "O" || meta[5].ToString() == "M" || meta[5].ToString() == "N")
+                                {
+                                    if (ProgData.MDatum.GetDienst("5PL", gekozen, kleur) == meta[5].ToString())
+                                    {
+                                        kleur = "niet invoeren";
+                                    }
+                                }
+
                                 if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit")
                                 {
                                     ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, ProgData.Get_Gebruiker_Naam(meta[2].ToString()), datum[0], meta[5].ToString(), meta[11].ToString(), "Import " + meta[9].ToString());
