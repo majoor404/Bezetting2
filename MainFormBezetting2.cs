@@ -30,10 +30,7 @@ namespace Bezetting2
         private Color _MinimaalPersonen = Color.LightPink;
 
         InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
-
-       // [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-       // private static extern bool LockWindowUpdate(IntPtr hWndLock);
-
+       
         public MainFormBezetting2()
         {
             InitializeComponent();
@@ -1222,7 +1219,6 @@ namespace Bezetting2
 
                 if (reader.Read() == true)
                 {
-                    labelDebug.Visible = true;
                     DateTime nu = DateTime.Now;
                     do
                     {
