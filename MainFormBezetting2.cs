@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -19,6 +20,7 @@ namespace Bezetting2
         public const int y_as_eerste_lijn = 150;
         public const int y_as_add_lijn = 4;
         private bool kill = false;
+        private bool WindowUpdateViewScreen = true;
 
         private Color _Weekend = Color.LightSkyBlue;
         private Color _Feestdag = Color.LightSalmon;
@@ -29,6 +31,9 @@ namespace Bezetting2
 
         InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
 
+       // [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+       // private static extern bool LockWindowUpdate(IntPtr hWndLock);
+
         public MainFormBezetting2()
         {
             InitializeComponent();
@@ -37,6 +42,7 @@ namespace Bezetting2
 
             ProgData.RechtenHuidigeGebruiker = 0; // alleen lezen
             ProgData.Huidige_Gebruiker_Personeel_nummer = "Niemand Ingelogd";
+            WindowUpdateViewScreen = true;
 
             InstellingenProg.LeesProgrammaData();
         }
@@ -83,7 +89,7 @@ namespace Bezetting2
         private void importNamenOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProgData.personeel_lijst.Clear();
-            openFileDialog.FileName = "personeel.csv";
+            openFileDialog.Filter = "(*.Bez)|*.Bez";
 
             MessageBox.Show("Let op, alle oude personeel gaat weg, delete \ndaarna ook met de hand kleur bez en kleur mensen");
 
@@ -91,6 +97,8 @@ namespace Bezetting2
 
             if (result == DialogResult.OK) // Test result.
             {
+                OpenDataBase_en_Voer_Oude_Namen_In(openFileDialog.FileName);
+                /*
                 TextBox temp = new TextBox();
                 temp.Text = File.ReadAllText(openFileDialog.FileName);
                 for (int i = 0; i < temp.Lines.Count() - 1; i++)
@@ -122,6 +130,11 @@ namespace Bezetting2
                         p._vuilwerk = words[16];
                         p._passwoord = "";
                         p._rechten = 0;
+                        p._reserve1 = "";
+                        p._reserve2 = "";
+                        p._reserve3 = "";
+                        p._reserve4 = "";
+                        p._reserve5 = "";
                         ProgData.personeel_lijst.Add(p);
                     }
                     catch
@@ -130,6 +143,7 @@ namespace Bezetting2
                     }
                 }
                 ProgData.Save_Namen_lijst();
+                */
             }
         }
 
@@ -174,105 +188,108 @@ namespace Bezetting2
 
         public void VulViewScherm()
         {
-            View.Columns.Clear();
-            View.Items.Clear();
-
-            int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
-
-            View.Columns.Add("", 140, HorizontalAlignment.Left); // namen
-
-            //DateTime nu = DateTime.Now;
-
-            for (int i = 1; i <= aantal_dagen; i++)
+            if (WindowUpdateViewScreen)
             {
-                View.Columns.Add("", kolom_breed, HorizontalAlignment.Center);
-            }
+                View.Columns.Clear();
+                View.Items.Clear();
 
-            // haal rooster
-            string[] dagnr = new string[aantal_dagen + 1];
-            string[] rooster = new string[aantal_dagen + 1];
-            string[] dag = new string[aantal_dagen + 1];
-            string[] weeknr = new string[aantal_dagen + 1];
-            string[] lijn_regel = new string[aantal_dagen + 1];
-            rooster[0] = "";
-            dag[0] = "";
-            weeknr[0] = "";
-            dagnr[0] = "";
-            CultureInfo cul = CultureInfo.CurrentCulture;
-            DateTime datum = new DateTime();
-            for (int i = 1; i < aantal_dagen + 1; i++)
-            {
-                dagnr[i] = i.ToString();
-                datum = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
-                rooster[i] = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, datum, ProgData.GekozenKleur);
-                dag[i] = ProgData.MDatum.GetDag(datum);
-                weeknr[i] = "";
-                if (dag[i] == "W")
+                int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+
+                View.Columns.Add("", 140, HorizontalAlignment.Left); // namen
+
+                //DateTime nu = DateTime.Now;
+
+                for (int i = 1; i <= aantal_dagen; i++)
                 {
-                    weeknr[i - 1] = "WK";
-                    int weekNum = cul.Calendar.GetWeekOfYear(datum, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
-                    weeknr[i] = weekNum.ToString();
+                    View.Columns.Add("", kolom_breed, HorizontalAlignment.Center);
                 }
-                lijn_regel[i] = "";
-            }
 
-            ListViewItem item_weeknr = new ListViewItem(weeknr);
-            View.Items.Add(item_weeknr);
-            ListViewItem item_dag = new ListViewItem(dag);
-            View.Items.Add(item_dag);
-            ListViewItem item_dagnr = new ListViewItem(dagnr);
-            View.Items.Add(item_dagnr);
-            ListViewItem item_rooster = new ListViewItem(rooster);
-            View.Items.Add(item_rooster);
-            ListViewItem item_lijnregel = new ListViewItem(lijn_regel);
-            View.Items.Add(item_lijnregel);
-
-            // vul namen en opgeslagen data als die bestond
-            HaalBezetting();
-
-            // kleur weekenden
-            //int col = 20;
-            //int row = 1;
-            int aantal_rows = ProgData.kleur_personeel_lijst.Count();
-            string dag_string;
-            for (int col = 1; col < aantal_dagen; col++)
-            {
-                // lees dag
-                dag_string = View.Items[1].SubItems[col].Text;
-                if (dag_string == "Z") // zaterdag of zondag
+                // haal rooster
+                string[] dagnr = new string[aantal_dagen + 1];
+                string[] rooster = new string[aantal_dagen + 1];
+                string[] dag = new string[aantal_dagen + 1];
+                string[] weeknr = new string[aantal_dagen + 1];
+                string[] lijn_regel = new string[aantal_dagen + 1];
+                rooster[0] = "";
+                dag[0] = "";
+                weeknr[0] = "";
+                dagnr[0] = "";
+                CultureInfo cul = CultureInfo.CurrentCulture;
+                DateTime datum = new DateTime();
+                for (int i = 1; i < aantal_dagen + 1; i++)
                 {
-                    //for (int row = 0; row < aantal_rows + 4 + ProgData.werkgroep_personeel.Count; row++)
-                    for (int row = 0; row < View.Items.Count - 1; row++)
+                    dagnr[i] = i.ToString();
+                    datum = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
+                    rooster[i] = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, datum, ProgData.GekozenKleur);
+                    dag[i] = ProgData.MDatum.GetDag(datum);
+                    weeknr[i] = "";
+                    if (dag[i] == "W")
                     {
-                        //this is very Important
-                        View.Items[row].UseItemStyleForSubItems = false;
-                        // Now you can Change the Particular Cell Property of Style
-                        View.Items[row].SubItems[col].BackColor = _Weekend;
+                        weeknr[i - 1] = "WK";
+                        int weekNum = cul.Calendar.GetWeekOfYear(datum, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+                        weeknr[i] = weekNum.ToString();
+                    }
+                    lijn_regel[i] = "";
+                }
+
+                ListViewItem item_weeknr = new ListViewItem(weeknr);
+                View.Items.Add(item_weeknr);
+                ListViewItem item_dag = new ListViewItem(dag);
+                View.Items.Add(item_dag);
+                ListViewItem item_dagnr = new ListViewItem(dagnr);
+                View.Items.Add(item_dagnr);
+                ListViewItem item_rooster = new ListViewItem(rooster);
+                View.Items.Add(item_rooster);
+                ListViewItem item_lijnregel = new ListViewItem(lijn_regel);
+                View.Items.Add(item_lijnregel);
+
+                // vul namen en opgeslagen data als die bestond
+                HaalBezetting();
+
+                // kleur weekenden
+                //int col = 20;
+                //int row = 1;
+                int aantal_rows = ProgData.kleur_personeel_lijst.Count();
+                string dag_string;
+                for (int col = 1; col < aantal_dagen; col++)
+                {
+                    // lees dag
+                    dag_string = View.Items[1].SubItems[col].Text;
+                    if (dag_string == "Z") // zaterdag of zondag
+                    {
+                        //for (int row = 0; row < aantal_rows + 4 + ProgData.werkgroep_personeel.Count; row++)
+                        for (int row = 0; row < View.Items.Count - 1; row++)
+                        {
+                            //this is very Important
+                            View.Items[row].UseItemStyleForSubItems = false;
+                            // Now you can Change the Particular Cell Property of Style
+                            View.Items[row].SubItems[col].BackColor = _Weekend;
+                        }
                     }
                 }
-            }
-            KleurFeestdagen();
+                KleurFeestdagen();
 
-            // kleur huidige dag
-            if (ProgData.igekozenmaand == DateTime.Now.Month && ProgData.igekozenjaar == DateTime.Now.Year)
-            {
-                for (int i = 0; i < View.Items.Count - 1; i++)
+                // kleur huidige dag
+                if (ProgData.igekozenmaand == DateTime.Now.Month && ProgData.igekozenjaar == DateTime.Now.Year)
                 {
-                    View.Items[i].UseItemStyleForSubItems = false;
-                    // Now you can Change the Particular Cell Property of Style
-                    View.Items[i].SubItems[DateTime.Now.Day].BackColor = _Huidigedag;
+                    for (int i = 0; i < View.Items.Count - 1; i++)
+                    {
+                        View.Items[i].UseItemStyleForSubItems = false;
+                        // Now you can Change the Particular Cell Property of Style
+                        View.Items[i].SubItems[DateTime.Now.Day].BackColor = _Huidigedag;
 
+                    }
                 }
+
+                // maand in beeld
+                View.Items[2].UseItemStyleForSubItems = false;
+                View.Items[2].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
+                View.Items[2].SubItems[0].Text = ProgData.sgekozenmaand().ToUpper();
+
+                LijnenWeg();
+                if (ProgData.LeesLijnen())
+                    ZetLijnen();
             }
-
-            // maand in beeld
-            View.Items[2].UseItemStyleForSubItems = false;
-            View.Items[2].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
-            View.Items[2].SubItems[0].Text = ProgData.sgekozenmaand().ToUpper();
-
-            LijnenWeg();
-            if (ProgData.LeesLijnen())
-                ZetLijnen();
         }
 
         private void ButtonJan_Click(object sender, EventArgs e)
@@ -294,6 +311,7 @@ namespace Bezetting2
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
+            WindowUpdateViewScreen = true;
             ProgData.ReloadSpeed1 = "";
             ProgData.ReloadSpeed2 = "";
             VulViewScherm();
@@ -1090,20 +1108,19 @@ namespace Bezetting2
 
         private void importOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            if (!File.Exists("Wijz.Bez"))
+            openFileDialog.FileName = "";
+            openFileDialog.Filter = "(*.Bez)|*.Bez";
+            MessageBox.Show("Open oude data bez file.");
+            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
             {
-                MessageBox.Show("Zet in zelfde directory Wijz.Bez er bij");
-            }
-            else
-            {
-                MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!");
-                ProgData.Lees_Namen_lijst();
-                OpenDataBase_en_Voer_oude_data_in();
-                MessageBox.Show("Klaar met invoer");
-                labelDebug.Visible = false;
-                ProgData.GekozenKleur = "Blauw";
-                buttonNu_Click(this, null);
+                    MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!");
+                    ProgData.Lees_Namen_lijst();
+                    OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
+                    MessageBox.Show("Klaar met invoer");
+                    labelDebug.Visible = false;
+                    ProgData.GekozenKleur = "Blauw";
+                    buttonNu_Click(this, null);
             }
         }
 
@@ -1116,32 +1133,35 @@ namespace Bezetting2
             ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = "Blauw";
         }
 
-        private void OpenDataBase_en_Voer_oude_data_in()
+        private void OpenDataBase_en_Voer_oude_data_in_Bezetting(string file)
         {
             using (OleDbConnection connection =
-                new OleDbConnection("Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"Wijz.Bez\"; Jet OLEDB:Database Password = fcl721"))
+                new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
             {
 
                 object[] meta = new object[12];
                 bool read;
                 int teller = 0;
+                
 
                 OleDbCommand command = new OleDbCommand("select * from Wijzeging", connection);
 
                 connection.Open();
                 OleDbDataReader reader = command.ExecuteReader();
-
+                WindowUpdateViewScreen = false;
                 if (reader.Read() == true)
                 {
                     labelDebug.Visible = true;
                     DateTime nu = DateTime.Now;
                     do
                     {
+                        Application.DoEvents();
                         int NumberOfColums = reader.GetValues(meta);
 
                         labelDebug.Text = $"{teller++.ToString()}";
                         labelDebug.Refresh();
 
+                        
                         //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
                         //Console.Write("{0} ", meta[6].ToString()); // datum invoer
                         //Console.Write("{0} ", meta[7].ToString()); // datum afwijking
@@ -1169,11 +1189,12 @@ namespace Bezetting2
                                         kleur = "niet invoeren";
                                     }
                                 }
-
+                                
                                 if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit")
                                 {
-                                    ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, ProgData.Get_Gebruiker_Naam(meta[2].ToString()), datum[0], meta[5].ToString(), meta[11].ToString(), "Import " + meta[9].ToString());
+                                    ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, ProgData.Get_Gebruiker_Naam(meta[2].ToString()), datum[0], meta[5].ToString(), meta[11].ToString(), "Import " + ProgData.Get_Gebruiker_Naam(meta[9].ToString()));
                                 }
+                                
                             }
                             catch { }
                         }
@@ -1182,6 +1203,76 @@ namespace Bezetting2
                 }
                 reader.Close();
             }
+            WindowUpdateViewScreen = true;
+        }
+
+        private void OpenDataBase_en_Voer_Oude_Namen_In(string file)
+        {
+            using (OleDbConnection connection =
+                            new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
+            {
+
+                object[] meta = new object[20];
+                bool read;
+
+                OleDbCommand command = new OleDbCommand("select * from Adresen", connection);
+
+                connection.Open();
+                OleDbDataReader reader = command.ExecuteReader();
+
+                if (reader.Read() == true)
+                {
+                    labelDebug.Visible = true;
+                    DateTime nu = DateTime.Now;
+                    do
+                    {
+                        Application.DoEvents();
+                        int NumberOfColums = reader.GetValues(meta);
+
+                        //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
+                        //Console.Write("{0} ", meta[6].ToString()); // datum invoer
+                        //Console.Write("{0} ", meta[7].ToString()); // datum afwijking
+                        //Console.Write("{0} ", meta[5].ToString()); // afwijking
+                        //Console.Write("{0} ", meta[9].ToString()); // personeel nummer invoerder
+                        //Console.Write("{0} ", meta[11].ToString()); // rede
+
+                            try                           
+                            {
+                            personeel p = new personeel();
+                            p._persnummer = int.Parse(meta[0].ToString());
+                            p._achternaam = meta[1].ToString();
+                            p._voornaam = meta[2].ToString();
+                            p._adres = meta[3].ToString();
+                            p._postcode = meta[4].ToString();
+                            p._woonplaats = meta[5].ToString();
+                            p._telthuis = meta[6].ToString();
+                            p._tel06prive = meta[7].ToString();
+                            p._telwerk = meta[8].ToString();
+                            p._emailwerk = meta[9].ToString();
+                            p._emailthuis = meta[10].ToString();
+                            p._adrescodewerk = meta[11].ToString();
+                            p._funtie = meta[12].ToString();
+                            p._kleur = meta[13].ToString();
+                            p._nieuwkleur = "";
+                            p._verhuisdatum = DateTime.Now;
+                            p._tel06werk = meta[14].ToString();
+                            p._werkgroep = meta[15].ToString();
+                            p._vuilwerk = meta[16].ToString();
+                            p._passwoord = "";
+                            p._rechten = 0;
+                            p._reserve1 = "";
+                            p._reserve2 = "";
+                            p._reserve3 = "";
+                            p._reserve4 = "";
+                            p._reserve5 = "";
+                            ProgData.personeel_lijst.Add(p);
+                        }catch { }
+                        read = reader.Read();
+                    } while (read == true);
+                }
+                reader.Close();
+            }
+            ProgData.Save_Namen_lijst();
         }
     }
 }

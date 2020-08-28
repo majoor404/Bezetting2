@@ -26,5 +26,11 @@ namespace Bezetting2
         public string _vuilwerk { get; set; }
         public string _passwoord { get; set; }
         public int _rechten { get; set; }
+        public string _reserve1 { get; set; }
+        public string _reserve2 { get; set; }
+        public string _reserve3 { get; set; }
+        public string _reserve4 { get; set; }
+        public string _reserve5 { get; set; }
+
     }
 }
