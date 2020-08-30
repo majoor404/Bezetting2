@@ -69,8 +69,10 @@ namespace Bezetting2
             {
 
                 ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text , ProgData.GekozenKleur);
-
-                string eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
+                string eerste_2 = "";
+                
+                if (textBoxAfwijking.Text.Length > 2)
+                    eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
 
                 if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
                 {

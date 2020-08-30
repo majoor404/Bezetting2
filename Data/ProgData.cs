@@ -367,8 +367,11 @@ namespace Bezetting2
             // 1 ) gevraagde maand is in verleden van huidige maand
             // 2 ) gevraagde maand is huidige maand
             // 3 ) gevraagde maand is in toekomst
-            DateTime gevraagd = new DateTime(igekozenjaar, igekozenmaand, DateTime.Now.Day, 0, 0, 0, 0, 0);
-            DateTime nu = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0, 0, 0);
+
+            // hier gaat het fout soms, stel nu 31-8-2020 dan wordt gevraagd als + 1 maand 31-9-2020, en dat bestaat niet
+            //DateTime gevraagd = new DateTime(igekozenjaar, igekozenmaand, DateTime.Now.Day, 0, 0, 0, 0, 0);
+            DateTime gevraagd = new DateTime(igekozenjaar, igekozenmaand, 1, 0, 0, 0, 0, 0);
+            DateTime nu = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0, 0, 0);
             if (gevraagd < nu)
                 return 1;
             if (gevraagd > nu)

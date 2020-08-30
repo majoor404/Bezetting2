@@ -195,7 +195,7 @@ namespace Bezetting2
                 persoon_gekozen._nieuwkleur = verhuis.comboBoxNieuwRooster.Text;
 
                 int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
-                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenmaand, ProgData.igekozenmaand);
+                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenmaand, ProgData.igekozenjaar);
 
                 LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
 
@@ -236,14 +236,17 @@ namespace Bezetting2
                     ProgData.Bezetting_Ploeg_Lijst.Add(dag);
                 }
                 ProgData.SavePloegBezetting(ProgData.GekozenKleur);
-
                 
                 for (int i = 1; i < eerste_dag_weg; i++)
                 {
                     DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
                     ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing" );
                 }
-                
+
+                // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
+                // meegeven eerste dag.
+                verhuis_oude_afwijkingen(textBoxPersNum.Text, eerste_dag_weg, ProgData.igekozenmaand, ProgData.igekozenjaar);
+
                 LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
                 if (LabelRoosterNieuw.Text != "")
                 {
@@ -358,6 +361,12 @@ namespace Bezetting2
             textBoxWerkplek.Text = "";
             LabelRoosterNieuw.Text = "";
             MessageBox.Show("Na invoeren naam enz, druk op voeg toe.\nDoe daarna kleur verhuizing naar juiste kleur/plek.");
+        }
+
+        // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
+        private void verhuis_oude_afwijkingen(string personeel_nummer, int eerste_dag, int maand, int jaar)
+        {
+                       
         }
     }
 }
