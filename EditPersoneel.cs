@@ -146,10 +146,12 @@ namespace Bezetting2
                     if (LabelRoosterNieuw.Text != "")
                     {
                         labelNieuwRoosterDatum.Text = a._verhuisdatum.ToString("d");
+                        button1.Enabled = false;
                     }
                     else
                     {
                         labelNieuwRoosterDatum.Text = "";
+                        button1.Enabled = true;
                     }
                     rechten = a._rechten;
                 }
@@ -177,7 +179,7 @@ namespace Bezetting2
         }
 
         // verhuis bericht naar andere kleur
-        private void button1_Click(object sender, EventArgs e)
+        private void VerhuisKnop_Click(object sender, EventArgs e)
         {
             VerhuisForm verhuis = new VerhuisForm();
             verhuis.labelNaam.Text = textBoxAchterNaam.Text;
@@ -195,7 +197,6 @@ namespace Bezetting2
                 persoon_gekozen._nieuwkleur = verhuis.comboBoxNieuwRooster.Text;
 
                 int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
-                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenmaand, ProgData.igekozenjaar);
 
                 LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
 
@@ -203,6 +204,11 @@ namespace Bezetting2
                 
                 // zet path goed van kleur ploeg
                 ProgData.GekozenKleur = persoon_gekozen._kleur;
+                // zet maand en jaar goed van verhuis datum
+                ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
+                ProgData.igekozenjaar = persoon_gekozen._verhuisdatum.Year;
+
+                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
 
                 if (ProgData.GekozenKleur != "Nieuw") // als nieuw persoon, dan hoef je niet X te zetten bij weg gaan ploeg
                 {
@@ -251,10 +257,12 @@ namespace Bezetting2
                 if (LabelRoosterNieuw.Text != "")
                 {
                     labelNieuwRoosterDatum.Text = persoon_gekozen._verhuisdatum.ToString("d");
+                    button1.Enabled = false;
                 }
                 else
                 {
                     labelNieuwRoosterDatum.Text = "";
+                    button1.Enabled = true;
                 }
                 ProgData.Save_Namen_lijst();
                 ProgData.GekozenKleur = GekozenKleurInBeeld;
@@ -272,6 +280,7 @@ namespace Bezetting2
             LabelRoosterNieuw.Text = "";
             ProgData.Save_Namen_lijst();
             MessageBox.Show("Kruisjes in bezetting met de hand weghalen!");
+            EditPersoneel_Shown(this, null);
         }
 
         private void buttonRechten_Click(object sender, EventArgs e)
@@ -366,7 +375,7 @@ namespace Bezetting2
         // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
         private void verhuis_oude_afwijkingen(string personeel_nummer, int eerste_dag, int maand, int jaar)
         {
-                       
+            MessageBox.Show("ingevulde vrije dagen van deze persoon worden niet meegenomen!");
         }
     }
 }

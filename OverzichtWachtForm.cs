@@ -271,6 +271,9 @@ namespace Bezetting2
                 dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
             }
 
+            ProgData.igekozenjaar = dat.Year;
+            ProgData.igekozenmaand = dat.Month;
+
             ViewUpdate();
         }
         private void buttonNext_Click(object sender, EventArgs e)
@@ -283,6 +286,10 @@ namespace Bezetting2
                 dat = dat.AddDays(1);
                 dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
             }
+
+            ProgData.igekozenjaar = dat.Year;
+            ProgData.igekozenmaand = dat.Month;
+
             ViewUpdate();
         }
         private void OverzichtWachtForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -332,7 +339,7 @@ namespace Bezetting2
 
             ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
 
-            labelDatum.Text = dat.ToShortDateString();
+            labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
             //labelKleur.Text = ProgData.GekozenKleur;
 

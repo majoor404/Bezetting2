@@ -166,6 +166,7 @@ namespace Bezetting2
         }
         public static void MaakPloegNamenLijst(string kleur)
         {
+            DateTime dezemaand = new DateTime(igekozenjaar, igekozenmaand, 1, 0, 0, 0, 0, 0);
             kleur_personeel_lijst.Clear();
 
             // query om juiste mensen te vinden
@@ -175,7 +176,24 @@ namespace Bezetting2
 
             foreach (personeel a in ploeg_gekozen)
             {
-                kleur_personeel_lijst.Add(a);
+                if(a._nieuwkleur != "")
+                {
+                    DateTime verhuismaand = new DateTime(a._verhuisdatum.Year, a._verhuisdatum.Month, 1, 0, 0, 0, 0, 0);
+                    if(a._kleur == kleur)
+                    {
+                        if (verhuismaand >= dezemaand)
+                            kleur_personeel_lijst.Add(a);
+                    }
+                    else
+                    {
+                        if (verhuismaand <= dezemaand)
+                            kleur_personeel_lijst.Add(a);
+                    }
+                }
+                else 
+                { 
+                    kleur_personeel_lijst.Add(a);
+                }
             }
 
             //kleur_personeel.Sort();
@@ -368,7 +386,7 @@ namespace Bezetting2
             // 2 ) gevraagde maand is huidige maand
             // 3 ) gevraagde maand is in toekomst
 
-            // hier gaat het fout soms, stel nu 31-8-2020 dan wordt gevraagd als + 1 maand 31-9-2020, en dat bestaat niet
+            // hier ging het fout soms, stel nu 31-8-2020 dan wordt gevraagd als + 1 maand 31-9-2020, en dat bestaat niet
             //DateTime gevraagd = new DateTime(igekozenjaar, igekozenmaand, DateTime.Now.Day, 0, 0, 0, 0, 0);
             DateTime gevraagd = new DateTime(igekozenjaar, igekozenmaand, 1, 0, 0, 0, 0, 0);
             DateTime nu = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 0, 0, 0);

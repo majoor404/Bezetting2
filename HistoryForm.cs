@@ -32,7 +32,7 @@ namespace Bezetting2
             }
 
             checkBoxFilter.Checked = false;
-            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenmaand, ProgData.igekozenmaand);
+            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
             comboBoxDag.Items.Clear();
             for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
             {

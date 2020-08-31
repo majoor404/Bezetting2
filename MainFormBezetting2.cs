@@ -817,6 +817,7 @@ namespace Bezetting2
             ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
             wacht.labelKleur.Text = ProgData.GekozenKleur;
             wacht.ShowDialog();
+            buttonNu_Click(this, null);
         }
 
         private void View_MouseMove(object sender, MouseEventArgs e)
