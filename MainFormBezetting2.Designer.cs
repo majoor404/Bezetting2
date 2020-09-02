@@ -37,6 +37,10 @@
             this.wachtOverzichtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ruilOverwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snipperDagAanvraagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vuilwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tellingWaarGewerktToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.namenAdressenEMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -99,6 +103,7 @@
             this.wachtOverzichtToolStripMenuItem,
             this.ruilOverwerkToolStripMenuItem,
             this.snipperDagAanvraagToolStripMenuItem,
+            this.excelToolStripMenuItem,
             this.beheerToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -150,6 +155,39 @@
             this.snipperDagAanvraagToolStripMenuItem.Size = new System.Drawing.Size(148, 21);
             this.snipperDagAanvraagToolStripMenuItem.Text = "SnipperDag Aanvraag";
             this.snipperDagAanvraagToolStripMenuItem.Click += new System.EventHandler(this.snipperDagAanvraagToolStripMenuItem_Click);
+            // 
+            // excelToolStripMenuItem
+            // 
+            this.excelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.vuilwerkToolStripMenuItem,
+            this.tellingWaarGewerktToolStripMenuItem,
+            this.namenAdressenEMailToolStripMenuItem});
+            this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
+            this.excelToolStripMenuItem.Text = "Excel";
+            // 
+            // vuilwerkToolStripMenuItem
+            // 
+            this.vuilwerkToolStripMenuItem.Enabled = false;
+            this.vuilwerkToolStripMenuItem.Name = "vuilwerkToolStripMenuItem";
+            this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.vuilwerkToolStripMenuItem.Text = "Vuilwerk";
+            // 
+            // tellingWaarGewerktToolStripMenuItem
+            // 
+            this.tellingWaarGewerktToolStripMenuItem.Enabled = false;
+            this.tellingWaarGewerktToolStripMenuItem.Name = "tellingWaarGewerktToolStripMenuItem";
+            this.tellingWaarGewerktToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.tellingWaarGewerktToolStripMenuItem.Text = "Telling waar gewerkt";
+            this.tellingWaarGewerktToolStripMenuItem.Click += new System.EventHandler(this.tellingWaarGewerktToolStripMenuItem_Click);
+            // 
+            // namenAdressenEMailToolStripMenuItem
+            // 
+            this.namenAdressenEMailToolStripMenuItem.Enabled = false;
+            this.namenAdressenEMailToolStripMenuItem.Name = "namenAdressenEMailToolStripMenuItem";
+            this.namenAdressenEMailToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.namenAdressenEMailToolStripMenuItem.Text = "Namen Adressen E-Mail";
+            this.namenAdressenEMailToolStripMenuItem.Click += new System.EventHandler(this.namenAdressenEMailToolStripMenuItem_Click);
             // 
             // beheerToolStripMenuItem
             // 
@@ -784,6 +822,10 @@
         private System.Windows.Forms.ToolStripMenuItem instellingenProgrammaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importOudeVeranderDataOudeVersieToolStripMenuItem;
         public System.Windows.Forms.Label labelDebug;
+        private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vuilwerkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tellingWaarGewerktToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem namenAdressenEMailToolStripMenuItem;
     }
 }
 
