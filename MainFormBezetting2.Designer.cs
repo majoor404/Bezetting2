@@ -90,6 +90,8 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.closeExitStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -116,7 +118,9 @@
             // 
             this.inloggenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inloggenToolStripMenuItem1,
-            this.uitloggenToolStripMenuItem});
+            this.uitloggenToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.closeExitStopToolStripMenuItem});
             this.inloggenToolStripMenuItem.Name = "inloggenToolStripMenuItem";
             this.inloggenToolStripMenuItem.Size = new System.Drawing.Size(96, 21);
             this.inloggenToolStripMenuItem.Text = "In/Uit loggen";
@@ -124,14 +128,14 @@
             // inloggenToolStripMenuItem1
             // 
             this.inloggenToolStripMenuItem1.Name = "inloggenToolStripMenuItem1";
-            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.inloggenToolStripMenuItem1.Text = "Inloggen";
             this.inloggenToolStripMenuItem1.Click += new System.EventHandler(this.inloggenToolStripMenuItem1_Click);
             // 
             // uitloggenToolStripMenuItem
             // 
             this.uitloggenToolStripMenuItem.Name = "uitloggenToolStripMenuItem";
-            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.uitloggenToolStripMenuItem.Text = "Uitloggen";
             this.uitloggenToolStripMenuItem.Click += new System.EventHandler(this.uitloggenToolStripMenuItem_Click);
             // 
@@ -707,6 +711,18 @@
             this.labelDebug.Text = "Debug Info";
             this.labelDebug.Visible = false;
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // closeExitStopToolStripMenuItem
+            // 
+            this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
+            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeExitStopToolStripMenuItem.Text = "Close Exit Stop ;-)";
+            this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.closeExitStopToolStripMenuItem_Click);
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -826,6 +842,8 @@
         private System.Windows.Forms.ToolStripMenuItem vuilwerkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tellingWaarGewerktToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem namenAdressenEMailToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem closeExitStopToolStripMenuItem;
     }
 }
 

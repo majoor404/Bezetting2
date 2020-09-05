@@ -29,6 +29,24 @@ namespace Bezetting2
         private Color _Werkplek = Color.LightGray;
         private Color _MinimaalPersonen = Color.LightPink;
 
+        public List<TelPlekGewerkt> Tel = new List<TelPlekGewerkt>();
+        public List<string> TelNamen = new List<string>();
+        public List<string> TelWerkPlek = new List<string>();
+
+        public class TelPlekGewerkt
+        {
+
+            public TelPlekGewerkt(string naam, string plek)
+            {
+                _NaamTelPlek = naam;
+                _PlekTelPlek = plek;
+                _AantalTelPlek = 1;
+            }
+            public string _NaamTelPlek { get; set; }
+            public string _PlekTelPlek { get; set; }
+            public int _AantalTelPlek { get; set; }
+        }
+
         InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
 
         public MainFormBezetting2()
@@ -252,7 +270,7 @@ namespace Bezetting2
         private void ButtonJan_Click(object sender, EventArgs e)
         {
             ProgData.CaptureMainScreen();
-            Button myButton = (Button)sender;
+            System.Windows.Forms.Button myButton = (System.Windows.Forms.Button)sender;
             ProgData.igekozenmaand = int.Parse(myButton.Tag.ToString());
 
             KleurMaandButton();
@@ -301,7 +319,7 @@ namespace Bezetting2
         public void KleurMaandButton()
         {
             int _taghuidig = ProgData.igekozenmaand;  //int.Parse(GevraagdeMaand.Tag.ToString());
-            foreach (Button button in this.Controls.OfType<Button>())
+            foreach (System.Windows.Forms.Button button in this.Controls.OfType<System.Windows.Forms.Button>())
             {
                 if (button.Tag != null)
                 {
@@ -746,7 +764,7 @@ namespace Bezetting2
                             {
                                 // quick menu
                                 QuickInvoerForm quick = new QuickInvoerForm();
-                                quick.Location = new Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
+                                quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
                                 quick.ShowDialog();
                                 if (quick.listBox1.SelectedIndex > -1)
                                 {
@@ -925,7 +943,7 @@ namespace Bezetting2
                 panel1.Visible = true;
                 int start = int.Parse(ProgData.Lijnen[8]);
                 int stop = int.Parse(ProgData.Lijnen[12]);
-                panel1.Location = new Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn);
+                panel1.Location = new System.Drawing.Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn);
                 panel1.Size = new Size((stop - start + 1) * kolom_breed, 3);
             }
             // lijn 2
@@ -937,7 +955,7 @@ namespace Bezetting2
                 panel2.Visible = true;
                 int start = int.Parse(ProgData.Lijnen[9]);
                 int stop = int.Parse(ProgData.Lijnen[13]);
-                panel2.Location = new Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn + (1 * y_as_add_lijn));
+                panel2.Location = new System.Drawing.Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn + (1 * y_as_add_lijn));
                 panel2.Size = new Size((stop - start + 1) * kolom_breed, 3);
             }
             // lijn 3
@@ -949,7 +967,7 @@ namespace Bezetting2
                 panel3.Visible = true;
                 int start = int.Parse(ProgData.Lijnen[10]);
                 int stop = int.Parse(ProgData.Lijnen[14]);
-                panel3.Location = new Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn + (2 * y_as_add_lijn));
+                panel3.Location = new System.Drawing.Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn + (2 * y_as_add_lijn));
                 panel3.Size = new Size((stop - start + 1) * kolom_breed, 3);
             }
             // lijn 4
@@ -961,7 +979,7 @@ namespace Bezetting2
                 panel4.Visible = true;
                 int start = int.Parse(ProgData.Lijnen[11]);
                 int stop = int.Parse(ProgData.Lijnen[15]);
-                panel4.Location = new Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn + (3 * y_as_add_lijn));
+                panel4.Location = new System.Drawing.Point(View.Location.X + 143 + ((start - 1) * kolom_breed), y_as_eerste_lijn + (3 * y_as_add_lijn));
                 panel4.Size = new Size((stop - start + 1) * kolom_breed, 3);
             }
         }
@@ -1114,7 +1132,7 @@ namespace Bezetting2
                     DateTime nu = DateTime.Now;
                     do
                     {
-                        Application.DoEvents();
+                        System.Windows.Forms.Application.DoEvents();
                         int NumberOfColums = reader.GetValues(meta);
 
                         labelDebug.Text = $"{teller++.ToString()}";
@@ -1186,7 +1204,7 @@ namespace Bezetting2
                     DateTime nu = DateTime.Now;
                     do
                     {
-                        Application.DoEvents();
+                        System.Windows.Forms.Application.DoEvents();
                         int NumberOfColums = reader.GetValues(meta);
 
                         //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
@@ -1238,76 +1256,56 @@ namespace Bezetting2
 
         private void tellingWaarGewerktToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Excel.Application oXL;
-            Excel._Workbook oWB;
-            Excel._Worksheet oSheet;
-            Excel.Range oRng;
-
             try
             {
-                //Start Excel and get Application object.
-                oXL = new Excel.Application();
-                oXL.Visible = true;
+                TelNamen.Clear();
+                TelWerkPlek.Clear();
+                Tel.Clear();
+                // bewaar huidige maand en kleur
+                int bewaar_maand = ProgData.igekozenmaand;
 
-                //Get a new workbook.
-                oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+                for (int i = 1; i < 13; i++)    // maanden
+                {
+                    ProgData.igekozenmaand = i;
+                    if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
+                    {
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
+                        ProgData.LoadPloegNamenLijst();
 
-                //Add table headers going cell by cell.
-                oSheet.Cells[1, 1] = "First Name";
-                oSheet.Cells[1, 2] = "Last Name";
-                oSheet.Cells[1, 3] = "Full Name";
-                oSheet.Cells[1, 4] = "Salary";
+                        foreach (personeel a in ProgData.kleur_personeel_lijst)
+                        {
+                            if (!TelNamen.Contains(a._achternaam))
+                                TelNamen.Add(a._achternaam);
+                        }
 
-                //Format A1:D1 as bold, vertical alignment = center.
-                oSheet.get_Range("A1", "D1").Font.Bold = true;
-                oSheet.get_Range("A1", "D1").VerticalAlignment =
-                Excel.XlVAlign.xlVAlignCenter;
+                        foreach (werkdag a in ProgData.Bezetting_Ploeg_Lijst)
+                        {
+                            if (!TelWerkPlek.Contains(a._werkplek) && a._werkplek != "")
+                                TelWerkPlek.Add(a._werkplek);
 
-                // Create an array to multiple values at once.
-                string[,] saNames = new string[5, 2];
-
-                saNames[0, 0] = "John";
-                saNames[0, 1] = "Smith";
-                saNames[1, 0] = "Tom";
-                saNames[1, 1] = "Brown";
-                saNames[2, 0] = "Sue";
-                saNames[2, 1] = "Thomas";
-                saNames[3, 0] = "Jane";
-                saNames[3, 1] = "Jones";
-                saNames[4, 0] = "Adam";
-                saNames[4, 1] = "Johnson";
-
-                //Fill A2:B6 with an array of values (First and Last Names).
-                oSheet.get_Range("A2", "B6").Value2 = saNames;
-
-                //Fill C2:C6 with a relative formula (=A2 & " " & B2).
-                oRng = oSheet.get_Range("C2", "C6");
-                oRng.Formula = "=A2 & \" \" & B2";
-
-                //Fill D2:D6 with a formula(=RAND()*100000) and apply format.
-                oRng = oSheet.get_Range("D2", "D6");
-                oRng.Formula = "=RAND()*100000";
-                oRng.NumberFormat = "$0.00";
-
-                //AutoFit columns A:D.
-                oRng = oSheet.get_Range("A1", "D1");
-                oRng.EntireColumn.AutoFit();
-                
-                //Make sure Excel is visible and give the user control
-                //of Microsoft Excel's lifetime.
-                oXL.Visible = true;
-                oXL.UserControl = true;
+                            if (a._werkplek != "")
+                            {
+                                TelPlekGewerkt tel = new TelPlekGewerkt(a._naam, a._werkplek);
+                                try
+                                {
+                                    TelPlekGewerkt gevonden = Tel.First(b => b._NaamTelPlek == a._naam && b._PlekTelPlek == a._werkplek);
+                                    gevonden._AantalTelPlek++;
+                                }
+                                catch
+                                {
+                                    Tel.Add(tel);
+                                }
+                            }
+                        }
+                    }
+                }                
+                ZetGevondenDataTellingInExcel();
+                ProgData.igekozenmaand = bewaar_maand;
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
+                ProgData.LoadPloegNamenLijst();
             }
-            catch (Exception theException)
+            catch
             {
-                String errorMessage;
-                errorMessage = "Error: ";
-                errorMessage = String.Concat(errorMessage, theException.Message);
-                errorMessage = String.Concat(errorMessage, " Line: ");
-                errorMessage = String.Concat(errorMessage, theException.Source);
-
-                MessageBox.Show(errorMessage, "Error");
             }
         }
 
@@ -1375,6 +1373,78 @@ namespace Bezetting2
                 MessageBox.Show(errorMessage, "Error");
             }
 
+        }
+
+        private void closeExitStopToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void ZetGevondenDataTellingInExcel()
+        {
+            Excel.Application oXL;
+            Excel._Workbook oWB;
+            Excel._Worksheet oSheet;
+            Excel.Range oRng;
+
+            try
+            {
+                //Start Excel and get Application object.
+                oXL = new Excel.Application();
+                oXL.Visible = true;
+
+                //Get a new workbook.
+                oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+
+                // Add table headers going cell by cell.
+                oSheet.Cells[1, 1] = "Waar gewerkt in Jaar : ";
+                oSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                oSheet.Cells[2, 1] = "Ploegkleur : ";
+                oSheet.Cells[2, 2] = ProgData.GekozenKleur;
+
+                for (int i = 0; i < TelWerkPlek.Count; i++)
+                {
+                    oSheet.Cells[3, i+2] = TelWerkPlek[i];
+                }
+
+                oSheet.get_Range("A1", "Z2").Font.Bold = true;
+
+                for (int i = 0; i < TelNamen.Count; i++)
+                {
+                    oSheet.Cells[i+4, 1] = TelNamen[i];
+                }
+
+                for (int i = 0; i < Tel.Count; i++)
+                {
+                    //var test = Tel[i]._PlekTelPlek;
+                    //var test2 = TelWerkPlek.IndexOf(test);      // y coord
+                    //var test4 = Tel[i]._NaamTelPlek;
+                    //var test5 = TelNamen.IndexOf(test4);      // x coord
+                    //var test3 = Tel[i]._AantalTelPlek;      // inhoud
+                    oSheet.Cells[TelNamen.IndexOf(Tel[i]._NaamTelPlek) + 4, 
+                        TelWerkPlek.IndexOf(Tel[i]._PlekTelPlek) + 2] = Tel[i]._AantalTelPlek;
+                }
+
+                //AutoFit columns A:D.
+                oRng = oSheet.get_Range("A1", "Z3");
+                oRng.EntireColumn.AutoFit();
+
+                //Make sure Excel is visible and give the user control
+                //of Microsoft Excel's lifetime.
+                oXL.Visible = true;
+                oXL.UserControl = true;
+            }
+            catch (Exception theException)
+            {
+                String errorMessage;
+                errorMessage = "Error: ";
+                errorMessage = String.Concat(errorMessage, theException.Message);
+                errorMessage = String.Concat(errorMessage, " Line: ");
+                errorMessage = String.Concat(errorMessage, theException.Source);
+
+                MessageBox.Show(errorMessage, "Error");
+            }
         }
     }
 }
