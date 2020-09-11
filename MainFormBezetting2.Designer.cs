@@ -34,6 +34,8 @@
             this.inloggenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inloggenToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.uitloggenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.closeExitStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wachtOverzichtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ruilOverwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snipperDagAanvraagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,8 +92,6 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.closeExitStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -139,6 +139,18 @@
             this.uitloggenToolStripMenuItem.Text = "Uitloggen";
             this.uitloggenToolStripMenuItem.Click += new System.EventHandler(this.uitloggenToolStripMenuItem_Click);
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            // 
+            // closeExitStopToolStripMenuItem
+            // 
+            this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
+            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeExitStopToolStripMenuItem.Text = "Close / Exit";
+            this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.closeExitStopToolStripMenuItem_Click);
+            // 
             // wachtOverzichtToolStripMenuItem
             // 
             this.wachtOverzichtToolStripMenuItem.Name = "wachtOverzichtToolStripMenuItem";
@@ -176,6 +188,7 @@
             this.vuilwerkToolStripMenuItem.Name = "vuilwerkToolStripMenuItem";
             this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.vuilwerkToolStripMenuItem.Text = "Vuilwerk";
+            this.vuilwerkToolStripMenuItem.Click += new System.EventHandler(this.vuilwerkToolStripMenuItem_Click);
             // 
             // tellingWaarGewerktToolStripMenuItem
             // 
@@ -710,18 +723,6 @@
             this.labelDebug.TabIndex = 29;
             this.labelDebug.Text = "Debug Info";
             this.labelDebug.Visible = false;
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
-            // 
-            // closeExitStopToolStripMenuItem
-            // 
-            this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
-            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.closeExitStopToolStripMenuItem.Text = "Close Exit Stop ;-)";
-            this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.closeExitStopToolStripMenuItem_Click);
             // 
             // MainFormBezetting2
             // 

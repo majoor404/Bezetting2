@@ -57,6 +57,7 @@ namespace Bezetting2
             textBoxWerkplek.Text = "";
             LabelRoosterNieuw.Text = "";
             labelNieuwRoosterDatum.Text = "";
+            vuilwerk.Checked = false;
 
             // als rechten 50, dan alleen eigen kleur
             if (ProgData.RechtenHuidigeGebruiker < 51)
@@ -108,13 +109,16 @@ namespace Bezetting2
             textBoxFuntie.Text = "";
             textBoxWerkplek.Text = "";
             LabelRoosterNieuw.Text = "";
+            vuilwerk.Checked = false;
         }
 
         private void ViewNamen_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string filter = comboBoxFilter.Text;
             selpersnummer = 0;
             try
             {
+                var test = ViewNamen.SelectedItems[0].SubItems[0].Text;
                 selpersnummer = int.Parse(ViewNamen.SelectedItems[0].SubItems[0].Text);
             }
             catch
@@ -141,6 +145,7 @@ namespace Bezetting2
                     textBoxKleur.Text = a._kleur;
                     textBoxFuntie.Text = a._funtie;
                     textBoxWerkplek.Text = a._werkgroep;
+                    vuilwerk.Checked = bool.Parse(a._vuilwerk);
 
                     LabelRoosterNieuw.Text = a._nieuwkleur;
                     if (LabelRoosterNieuw.Text != "")
@@ -327,6 +332,8 @@ namespace Bezetting2
             a._tel06werk = textBoxTelMobWerk.Text;
             a._adrescodewerk = textBoxAdresCodeWerk.Text;
             a._telwerk = textBoxTelWerk.Text;
+            a._vuilwerk = vuilwerk.Checked.ToString();
+
             if (textBoxKleur.Text == "")
             {
                 a._kleur = "Nieuw";
@@ -369,6 +376,7 @@ namespace Bezetting2
             textBoxFuntie.Text = "";
             textBoxWerkplek.Text = "";
             LabelRoosterNieuw.Text = "";
+            vuilwerk.Checked = false;
             MessageBox.Show("Na invoeren naam enz, druk op voeg toe.\nDoe daarna kleur verhuizing naar juiste kleur/plek.");
         }
 

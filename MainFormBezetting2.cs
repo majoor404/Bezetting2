@@ -32,6 +32,7 @@ namespace Bezetting2
         public List<TelPlekGewerkt> Tel = new List<TelPlekGewerkt>();
         public List<string> TelNamen = new List<string>();
         public List<string> TelWerkPlek = new List<string>();
+        public List<TelVuilwerk> TelVuil = new List<TelVuilwerk>();
 
         public class TelPlekGewerkt
         {
@@ -45,6 +46,18 @@ namespace Bezetting2
             public string _NaamTelPlek { get; set; }
             public string _PlekTelPlek { get; set; }
             public int _AantalTelPlek { get; set; }
+        }
+
+        public class TelVuilwerk
+        {
+
+            public TelVuilwerk(string naam, string dag)
+            {
+                _NaamTelVuil = naam;
+                _DagTelVuil = dag;
+            }
+            public string _NaamTelVuil { get; set; }
+            public string _DagTelVuil { get; set; }
         }
 
         InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
@@ -1299,7 +1312,7 @@ namespace Bezetting2
                         }
                     }
                 }                
-                ZetGevondenDataTellingInExcel();
+                ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
                 ProgData.LoadPloegNamenLijst();
@@ -1380,7 +1393,7 @@ namespace Bezetting2
             Close();
         }
 
-        private void ZetGevondenDataTellingInExcel()
+        private void ZetGevondenDataTellingWaarGewerktInExcel()
         {
             Excel.Application oXL;
             Excel._Workbook oWB;
@@ -1446,6 +1459,119 @@ namespace Bezetting2
                 MessageBox.Show(errorMessage, "Error");
             }
         }
+
+        private void vuilwerkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // eerst maar lijst maken wie vuilwerk verdiend.
+            TelVuil.Clear();
+            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+
+            foreach (personeel a in ProgData.kleur_personeel_lijst)
+            {
+                if((a._vuilwerk == "True"))
+                {
+                    for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
+                    {
+                        if (a._achternaam == View.Items[i].Text) // gevonden naam
+                        {
+                            for (int d = 1; d < aantal_dagen_deze_maand+1; d++)
+                            {
+                                bool rechtop = false;
+
+                                var afwijking = View.Items[i].SubItems[d].Text;
+                                var dienst = View.Items[3].SubItems[d].Text;
+
+                                if (afwijking == "") rechtop = true;
+                                if (afwijking == "*") rechtop = true;
+
+                                if (rechtop && dienst != "")
+                                {
+                                    TelVuilwerk afw = new TelVuilwerk(a._achternaam, d.ToString());
+                                    TelVuil.Add(afw);   // recht op vuilwerk
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            ZetGevondenDataTellingVuilWerktInExcel();
+        }
+
+        private void ZetGevondenDataTellingVuilWerktInExcel()
+        {
+            Excel.Application xlApp;
+            Excel._Workbook xlWorkBook;
+            Excel._Worksheet xlWorkSheet;
+           // Excel.Range oRng;
+
+            try
+            {
+                //Start Excel and get Application object.
+                xlApp = new Excel.Application();
+                xlApp.Visible = true;
+
+                //Get a new workbook.
+                var file = Path.GetFullPath("Vuilwerk.xls");
+                xlWorkBook = xlApp.Workbooks.Open(file, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
+                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+
+                Excel.Worksheet excelSheet = xlWorkBook.ActiveSheet;
+                Excel.Range rng = (Excel.Range)xlWorkSheet.Cells["A11", "AG37"];
+
+
+                rng.Clear();
+
+                // Add table headers going cell by cell.
+                //oSheet.Cells[1, 1] = "Waar gewerkt in Jaar : ";
+                //oSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                //oSheet.Cells[2, 1] = "Ploegkleur : ";
+                //oSheet.Cells[2, 2] = ProgData.GekozenKleur;
+
+                //for (int i = 0; i < TelWerkPlek.Count; i++)
+                //{
+                //    oSheet.Cells[3, i + 2] = TelWerkPlek[i];
+                //}
+
+                //oSheet.get_Range("A1", "Z2").Font.Bold = true;
+
+                //for (int i = 0; i < TelNamen.Count; i++)
+                //{
+                //    oSheet.Cells[i + 4, 1] = TelNamen[i];
+                //}
+
+                //for (int i = 0; i < Tel.Count; i++)
+                //{
+                //    //var test = Tel[i]._PlekTelPlek;
+                //    //var test2 = TelWerkPlek.IndexOf(test);      // y coord
+                //    //var test4 = Tel[i]._NaamTelPlek;
+                //    //var test5 = TelNamen.IndexOf(test4);      // x coord
+                //    //var test3 = Tel[i]._AantalTelPlek;      // inhoud
+                //    oSheet.Cells[TelNamen.IndexOf(Tel[i]._NaamTelPlek) + 4,
+                //        TelWerkPlek.IndexOf(Tel[i]._PlekTelPlek) + 2] = Tel[i]._AantalTelPlek;
+                //}
+
+                ////AutoFit columns A:D.
+                //oRng = oSheet.get_Range("A1", "Z3");
+                //oRng.EntireColumn.AutoFit();
+
+                //Make sure Excel is visible and give the user control
+                //of Microsoft Excel's lifetime.
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception theException)
+            {
+                String errorMessage;
+                errorMessage = "Error: ";
+                errorMessage = String.Concat(errorMessage, theException.Message);
+                errorMessage = String.Concat(errorMessage, " Line: ");
+                errorMessage = String.Concat(errorMessage, theException.Source);
+
+                MessageBox.Show(errorMessage, "Error");
+            }
+        }
+
     }
 }
 

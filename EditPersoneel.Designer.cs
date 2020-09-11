@@ -79,7 +79,11 @@
             this.buttonRechten = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonNieuw = new System.Windows.Forms.Button();
+            this.vuilwerk = new System.Windows.Forms.CheckBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBoxNieuwRooster.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -403,7 +407,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(693, 534);
+            this.buttonClose.Location = new System.Drawing.Point(693, 558);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(261, 26);
             this.buttonClose.TabIndex = 38;
@@ -421,9 +425,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(694, 449);
+            this.button1.Location = new System.Drawing.Point(6, 24);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 26);
+            this.button1.Size = new System.Drawing.Size(114, 26);
             this.button1.TabIndex = 40;
             this.button1.Text = "Verhuis van Rooster";
             this.button1.UseVisualStyleBackColor = true;
@@ -431,9 +435,9 @@
             // 
             // buttonVoegToe
             // 
-            this.buttonVoegToe.Location = new System.Drawing.Point(830, 412);
+            this.buttonVoegToe.Location = new System.Drawing.Point(136, 19);
             this.buttonVoegToe.Name = "buttonVoegToe";
-            this.buttonVoegToe.Size = new System.Drawing.Size(120, 26);
+            this.buttonVoegToe.Size = new System.Drawing.Size(113, 26);
             this.buttonVoegToe.TabIndex = 41;
             this.buttonVoegToe.Text = "Voeg Toe Nieuw Lid";
             this.buttonVoegToe.UseVisualStyleBackColor = true;
@@ -442,7 +446,7 @@
             // LabelRoosterNieuw
             // 
             this.LabelRoosterNieuw.AutoSize = true;
-            this.LabelRoosterNieuw.Location = new System.Drawing.Point(6, 16);
+            this.LabelRoosterNieuw.Location = new System.Drawing.Point(16, 71);
             this.LabelRoosterNieuw.Name = "LabelRoosterNieuw";
             this.LabelRoosterNieuw.Size = new System.Drawing.Size(44, 13);
             this.LabelRoosterNieuw.TabIndex = 43;
@@ -452,9 +456,11 @@
             // 
             this.groupBoxNieuwRooster.Controls.Add(this.labelNieuwRoosterDatum);
             this.groupBoxNieuwRooster.Controls.Add(this.LabelRoosterNieuw);
-            this.groupBoxNieuwRooster.Location = new System.Drawing.Point(693, 484);
+            this.groupBoxNieuwRooster.Controls.Add(this.button1);
+            this.groupBoxNieuwRooster.Controls.Add(this.buttonCancelVerhuis);
+            this.groupBoxNieuwRooster.Location = new System.Drawing.Point(694, 453);
             this.groupBoxNieuwRooster.Name = "groupBoxNieuwRooster";
-            this.groupBoxNieuwRooster.Size = new System.Drawing.Size(261, 41);
+            this.groupBoxNieuwRooster.Size = new System.Drawing.Size(256, 99);
             this.groupBoxNieuwRooster.TabIndex = 44;
             this.groupBoxNieuwRooster.TabStop = false;
             this.groupBoxNieuwRooster.Text = "Nieuw Rooster";
@@ -462,7 +468,7 @@
             // labelNieuwRoosterDatum
             // 
             this.labelNieuwRoosterDatum.AutoSize = true;
-            this.labelNieuwRoosterDatum.Location = new System.Drawing.Point(116, 16);
+            this.labelNieuwRoosterDatum.Location = new System.Drawing.Point(126, 71);
             this.labelNieuwRoosterDatum.Name = "labelNieuwRoosterDatum";
             this.labelNieuwRoosterDatum.Size = new System.Drawing.Size(55, 13);
             this.labelNieuwRoosterDatum.TabIndex = 44;
@@ -470,9 +476,9 @@
             // 
             // buttonCancelVerhuis
             // 
-            this.buttonCancelVerhuis.Location = new System.Drawing.Point(830, 448);
+            this.buttonCancelVerhuis.Location = new System.Drawing.Point(136, 24);
             this.buttonCancelVerhuis.Name = "buttonCancelVerhuis";
-            this.buttonCancelVerhuis.Size = new System.Drawing.Size(120, 26);
+            this.buttonCancelVerhuis.Size = new System.Drawing.Size(113, 26);
             this.buttonCancelVerhuis.TabIndex = 45;
             this.buttonCancelVerhuis.Text = "Cancel Verhuis";
             this.buttonCancelVerhuis.UseVisualStyleBackColor = true;
@@ -480,9 +486,9 @@
             // 
             // buttonRechten
             // 
-            this.buttonRechten.Location = new System.Drawing.Point(694, 378);
+            this.buttonRechten.Location = new System.Drawing.Point(123, 567);
             this.buttonRechten.Name = "buttonRechten";
-            this.buttonRechten.Size = new System.Drawing.Size(256, 26);
+            this.buttonRechten.Size = new System.Drawing.Size(201, 26);
             this.buttonRechten.TabIndex = 37;
             this.buttonRechten.Text = "Rechten van persoon";
             this.buttonRechten.UseVisualStyleBackColor = true;
@@ -500,25 +506,54 @@
             // 
             // buttonNieuw
             // 
-            this.buttonNieuw.Location = new System.Drawing.Point(694, 413);
+            this.buttonNieuw.Location = new System.Drawing.Point(6, 19);
             this.buttonNieuw.Name = "buttonNieuw";
-            this.buttonNieuw.Size = new System.Drawing.Size(120, 26);
+            this.buttonNieuw.Size = new System.Drawing.Size(114, 26);
             this.buttonNieuw.TabIndex = 47;
             this.buttonNieuw.Text = "Nieuw Persoon";
             this.buttonNieuw.UseVisualStyleBackColor = true;
             this.buttonNieuw.Click += new System.EventHandler(this.buttonNieuw_Click);
             // 
+            // vuilwerk
+            // 
+            this.vuilwerk.AutoSize = true;
+            this.vuilwerk.Location = new System.Drawing.Point(456, 574);
+            this.vuilwerk.Name = "vuilwerk";
+            this.vuilwerk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.vuilwerk.Size = new System.Drawing.Size(15, 14);
+            this.vuilwerk.TabIndex = 48;
+            this.vuilwerk.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(345, 574);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 13);
+            this.label10.TabIndex = 49;
+            this.label10.Text = "Vuilwerk";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.buttonNieuw);
+            this.groupBox1.Controls.Add(this.buttonVoegToe);
+            this.groupBox1.Location = new System.Drawing.Point(694, 391);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(256, 56);
+            this.groupBox1.TabIndex = 50;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Nieuw";
+            // 
             // EditPersoneel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 576);
-            this.Controls.Add(this.buttonNieuw);
+            this.ClientSize = new System.Drawing.Size(962, 607);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.vuilwerk);
             this.Controls.Add(this.buttonDelete);
-            this.Controls.Add(this.buttonCancelVerhuis);
             this.Controls.Add(this.groupBoxNieuwRooster);
-            this.Controls.Add(this.buttonVoegToe);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.textBoxKleur);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonRechten);
@@ -563,6 +598,7 @@
             this.Shown += new System.EventHandler(this.EditPersoneel_Shown);
             this.groupBoxNieuwRooster.ResumeLayout(false);
             this.groupBoxNieuwRooster.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -620,5 +656,8 @@
         private System.Windows.Forms.ColumnHeader Rechten;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonNieuw;
+        private System.Windows.Forms.CheckBox vuilwerk;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
