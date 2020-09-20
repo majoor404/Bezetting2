@@ -1501,8 +1501,7 @@ namespace Bezetting2
         {
             Excel.Application xlApp;
             Excel._Workbook xlWorkBook;
-            Excel._Worksheet xlWorkSheet;
-           // Excel.Range oRng;
+            Excel.Range oRng;
 
             try
             {
@@ -1512,48 +1511,51 @@ namespace Bezetting2
 
                 //Get a new workbook.
                 var file = Path.GetFullPath("Vuilwerk.xls");
-                xlWorkBook = xlApp.Workbooks.Open(file, 0, true, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, false, 0, true, 1, 0);
-                xlWorkSheet = (Excel.Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
+                /*
+                 public Microsoft.Office.Interop.Excel.Workbook Open
+                (string Filename, 
+                object UpdateLinks, 
+                object ReadOnly, 
+                object Format, 
+                object Password, 
+                object WriteResPassword, 
+                object IgnoreReadOnlyRecommended, 
+                object Origin, 
+                object Delimiter, 
+                object Editable,
+                object Notify, 
+                object Converter, 
+                object AddToMru, 
+                object Local, 
+                object CorruptLoad); 
+                */
+
+                xlWorkBook = xlApp.Workbooks.Open(file, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, true, 0, true, 1, 0);
 
                 Excel.Worksheet excelSheet = xlWorkBook.ActiveSheet;
-                Excel.Range rng = (Excel.Range)xlWorkSheet.Cells["A11", "AG37"];
+                
+                // schoonvegen
+                oRng = excelSheet.Range[excelSheet.Cells[11, 1], excelSheet.Cells[37, 33]];
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[11, 35], excelSheet.Cells[37, 36]];
+                oRng.ClearContents();
+                oRng.Value = null;
+
+                // invullen
+                foreach(TelVuilwerk afw in TelVuil)
+                {
+                    // dag en naam nu van gene welke vuilwerk verdiend
+                    // ergens dus opgeslagen hoeveel uren van elke vuilwerk code en bedrag
+                    // AantalCodes
+                    // Code[]
+                    // Bedrag[]
 
 
-                rng.Clear();
 
-                // Add table headers going cell by cell.
-                //oSheet.Cells[1, 1] = "Waar gewerkt in Jaar : ";
-                //oSheet.Cells[1, 2] = ProgData.sgekozenjaar();
-                //oSheet.Cells[2, 1] = "Ploegkleur : ";
-                //oSheet.Cells[2, 2] = ProgData.GekozenKleur;
+                }
 
-                //for (int i = 0; i < TelWerkPlek.Count; i++)
-                //{
-                //    oSheet.Cells[3, i + 2] = TelWerkPlek[i];
-                //}
-
-                //oSheet.get_Range("A1", "Z2").Font.Bold = true;
-
-                //for (int i = 0; i < TelNamen.Count; i++)
-                //{
-                //    oSheet.Cells[i + 4, 1] = TelNamen[i];
-                //}
-
-                //for (int i = 0; i < Tel.Count; i++)
-                //{
-                //    //var test = Tel[i]._PlekTelPlek;
-                //    //var test2 = TelWerkPlek.IndexOf(test);      // y coord
-                //    //var test4 = Tel[i]._NaamTelPlek;
-                //    //var test5 = TelNamen.IndexOf(test4);      // x coord
-                //    //var test3 = Tel[i]._AantalTelPlek;      // inhoud
-                //    oSheet.Cells[TelNamen.IndexOf(Tel[i]._NaamTelPlek) + 4,
-                //        TelWerkPlek.IndexOf(Tel[i]._PlekTelPlek) + 2] = Tel[i]._AantalTelPlek;
-                //}
-
-                ////AutoFit columns A:D.
-                //oRng = oSheet.get_Range("A1", "Z3");
-                //oRng.EntireColumn.AutoFit();
 
                 //Make sure Excel is visible and give the user control
                 //of Microsoft Excel's lifetime.
