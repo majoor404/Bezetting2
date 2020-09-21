@@ -710,6 +710,20 @@ namespace Bezetting2
                 return nummer;
             }
         }
+
+        public static string Get_Gebruiker_Nummer(string naam)
+        {
+            try
+            {
+                //int personeel_nr = int.Parse(nummer);
+                personeel persoon = personeel_lijst.First(a => a._achternaam == naam);
+                return persoon._persnummer.ToString();
+            }
+            catch
+            {
+                return "";
+            }
+        }
         public static void CheckFiles(string kleur)
         {
             // check of juiste directory bestaat en gevuld is met juiste file's

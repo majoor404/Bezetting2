@@ -33,6 +33,7 @@ namespace Bezetting2
         public List<string> TelNamen = new List<string>();
         public List<string> TelWerkPlek = new List<string>();
         public List<TelVuilwerk> TelVuil = new List<TelVuilwerk>();
+        public List<string> VuilwerkData = new List<string>();
 
         public class TelPlekGewerkt
         {
@@ -1462,39 +1463,49 @@ namespace Bezetting2
 
         private void vuilwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // eerst maar lijst maken wie vuilwerk verdiend.
-            TelVuil.Clear();
-            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
-
-            foreach (personeel a in ProgData.kleur_personeel_lijst)
+            if (File.Exists("vuilwerk.ini"))
             {
-                if((a._vuilwerk == "True"))
+                VuilwerkData.Clear();
+                VuilwerkData = File.ReadAllLines("vuilwerk.ini").ToList();
+
+                // eerst maar lijst maken wie vuilwerk verdiend.
+                TelVuil.Clear();
+                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+
+                foreach (personeel a in ProgData.kleur_personeel_lijst)
                 {
-                    for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
+                    if ((a._vuilwerk == "True"))
                     {
-                        if (a._achternaam == View.Items[i].Text) // gevonden naam
+                        for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
                         {
-                            for (int d = 1; d < aantal_dagen_deze_maand+1; d++)
+                            if (a._achternaam == View.Items[i].Text) // gevonden naam
                             {
-                                bool rechtop = false;
-
-                                var afwijking = View.Items[i].SubItems[d].Text;
-                                var dienst = View.Items[3].SubItems[d].Text;
-
-                                if (afwijking == "") rechtop = true;
-                                if (afwijking == "*") rechtop = true;
-
-                                if (rechtop && dienst != "")
+                                for (int d = 1; d < aantal_dagen_deze_maand + 1; d++)
                                 {
-                                    TelVuilwerk afw = new TelVuilwerk(a._achternaam, d.ToString());
-                                    TelVuil.Add(afw);   // recht op vuilwerk
+                                    bool rechtop = false;
+
+                                    var afwijking = View.Items[i].SubItems[d].Text;
+                                    var dienst = View.Items[3].SubItems[d].Text;
+
+                                    if (afwijking == "") rechtop = true;
+                                    if (afwijking == "*") rechtop = true;
+
+                                    if (rechtop && dienst != "")
+                                    {
+                                        TelVuilwerk afw = new TelVuilwerk(a._achternaam, d.ToString());
+                                        TelVuil.Add(afw);   // recht op vuilwerk
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                ZetGevondenDataTellingVuilWerktInExcel();
             }
-            ZetGevondenDataTellingVuilWerktInExcel();
+            else // geen vuilwerk.ini
+            {
+                MessageBox.Show("Geen vuilwerk.ini gevonden!");
+            }
         }
 
         private void ZetGevondenDataTellingVuilWerktInExcel()
@@ -1543,17 +1554,35 @@ namespace Bezetting2
                 oRng.ClearContents();
                 oRng.Value = null;
 
+                int row = 11;
+                
                 // invullen
-                foreach(TelVuilwerk afw in TelVuil)
+                foreach (TelVuilwerk afw in TelVuil)
                 {
-                    // dag en naam nu van gene welke vuilwerk verdiend
-                    // ergens dus opgeslagen hoeveel uren van elke vuilwerk code en bedrag
-                    // AantalCodes
-                    // Code[]
-                    // Bedrag[]
+                    string cellValue = (string)(excelSheet.Cells[row, 2] as Excel.Range).Value;
 
+                    if (cellValue == null)
+                    {
+                        excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Nummer(afw._NaamTelVuil);
+                        excelSheet.Cells[row, 2] = afw._NaamTelVuil;
+                        cellValue = afw._NaamTelVuil;
 
+                        excelSheet.Cells[row, 35] = VuilwerkData[1];
+                        excelSheet.Cells[row, 36] = VuilwerkData[2];
+                    }
 
+                    if (cellValue != afw._NaamTelVuil)  // nieuwe naam
+                    {
+                        row++;
+                        excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Nummer(afw._NaamTelVuil);
+                        excelSheet.Cells[row, 2] = afw._NaamTelVuil;
+                        cellValue = afw._NaamTelVuil;
+                        excelSheet.Cells[row, 35] = VuilwerkData[1];
+                        excelSheet.Cells[row, 36] = VuilwerkData[2];
+                    }
+
+                    int dag = int.Parse(afw._DagTelVuil);
+                    excelSheet.Cells[row, dag + 2] = VuilwerkData[0];
                 }
 
 
