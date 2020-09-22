@@ -1555,6 +1555,7 @@ namespace Bezetting2
                 oRng.Value = null;
 
                 int row = 11;
+                int vuilwerkindex = 0;
                 
                 // invullen
                 foreach (TelVuilwerk afw in TelVuil)
@@ -1567,24 +1568,40 @@ namespace Bezetting2
                         excelSheet.Cells[row, 2] = afw._NaamTelVuil;
                         cellValue = afw._NaamTelVuil;
 
-                        excelSheet.Cells[row, 35] = VuilwerkData[1];
-                        excelSheet.Cells[row, 36] = VuilwerkData[2];
+                        excelSheet.Cells[row, 35] = VuilwerkData[vuilwerkindex + 1];
+                        excelSheet.Cells[row, 36] = VuilwerkData[vuilwerkindex + 2];
                     }
 
                     if (cellValue != afw._NaamTelVuil)  // nieuwe naam
                     {
+                        // als medere vuilwerk premies, copy regel en vul andere codes in
+                        if(vuilwerkindex + 3 < VuilwerkData.Count)
+                        {
+                            vuilwerkindex = + 3;
+                            Excel.Range from = excelSheet.Range[excelSheet.Cells[row, 3], excelSheet.Cells[row, 33]];
+                            Excel.Range to = excelSheet.Range[excelSheet.Cells[row+1, 3], excelSheet.Cells[row+1, 33]];
+                            from.Copy(to);
+                            row++;
+                            excelSheet.Cells[row, 35] = VuilwerkData[vuilwerkindex + 1];
+                            excelSheet.Cells[row, 36] = VuilwerkData[vuilwerkindex + 2];
+                        }
                         row++;
+
+                        // nieuwe naam
+                        vuilwerkindex = 0;
                         excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Nummer(afw._NaamTelVuil);
                         excelSheet.Cells[row, 2] = afw._NaamTelVuil;
                         cellValue = afw._NaamTelVuil;
-                        excelSheet.Cells[row, 35] = VuilwerkData[1];
-                        excelSheet.Cells[row, 36] = VuilwerkData[2];
+                        excelSheet.Cells[row, 35] = VuilwerkData[vuilwerkindex + 1];
+                        excelSheet.Cells[row, 36] = VuilwerkData[vuilwerkindex + 2];
                     }
 
                     int dag = int.Parse(afw._DagTelVuil);
-                    excelSheet.Cells[row, dag + 2] = VuilwerkData[0];
+                    excelSheet.Cells[row, dag + 2] = VuilwerkData[vuilwerkindex];
                 }
 
+                excelSheet.Cells[1, 2] = ProgData.sgekozenmaand();
+                excelSheet.Cells[6, 2] = ProgData.GekozenKleur;
 
                 //Make sure Excel is visible and give the user control
                 //of Microsoft Excel's lifetime.
