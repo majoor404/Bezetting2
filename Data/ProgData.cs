@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-
+using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
@@ -59,7 +59,12 @@ namespace Bezetting2
         public static int igekozenmaand;
 
         public static int ihuidigjaar;
-        private static int _igekozenjaar; // Backing field
+        private static int _igekozenjaar; // Backing 
+
+        //public static class ZipFile;
+        public static string backup_zipnaam;
+        public static int backup_time;
+
         public static int igekozenjaar
         {
             get { return _igekozenjaar; }  // Getter
@@ -123,6 +128,7 @@ namespace Bezetting2
         }
         public static void LoadPloegNamenLijst()
         {
+            Main.labelDebug.Text = "Load Ploeg Namen Lijst";
             // om tijd te winnen alleen laden als er andere ploeg gevraagt wordt
             if (ReloadSpeed2 != GekozenKleur)
             {
@@ -147,6 +153,7 @@ namespace Bezetting2
         }
         public static void SavePloegNamenLijst()
         {
+            Main.labelDebug.Text = "Save Ploeg Namen Lijst";
             if (GekozenKleur != "")
             {
                 try
@@ -236,6 +243,7 @@ namespace Bezetting2
         }
         public static void SavePloegBezetting(string kleur)
         {
+            Main.labelDebug.Text = "Save Ploeg Bezetting";
             if (kleur != "")
             {
                 try
@@ -256,6 +264,7 @@ namespace Bezetting2
         }
         public static void LoadPloegBezetting(string kleur)
         {
+                Main.labelDebug.Text = "Load Ploeg Bezetting";
                 Bezetting_Ploeg_Lijst.Clear();
                 try
                 {
@@ -283,6 +292,7 @@ namespace Bezetting2
         }
         public static void LoadVeranderingenPloeg()
         {
+            Main.labelDebug.Text = "Load Ploeg Veranderingen";
             Veranderingen_Lijst.Clear();
             try
             {
@@ -291,6 +301,7 @@ namespace Bezetting2
                     BinaryFormatter bin = new BinaryFormatter();
 
                     Veranderingen_Lijst = (List<veranderingen>)bin.Deserialize(stream);
+                    Main.labelDebug.Text = "";
                 }
             }
             catch
@@ -304,6 +315,7 @@ namespace Bezetting2
         }
         public static void SaveVeranderingenPloeg()
         {
+            Main.labelDebug.Text = "Save veranderingen Ploeg";
             if (GekozenKleur != "")
             {
                 try
@@ -312,6 +324,7 @@ namespace Bezetting2
                     {
                         BinaryFormatter bin = new BinaryFormatter();
                         bin.Serialize(stream, Veranderingen_Lijst);
+                        Main.labelDebug.Text = "";
                     }
                 }
                 catch (IOException)
@@ -323,6 +336,7 @@ namespace Bezetting2
         }
         public static void Save_Namen_lijst()
         {
+            Main.labelDebug.Text = "Save Namen Lijst";
             try
             {
                 if (File.Exists("personeel.bin"))
@@ -347,7 +361,7 @@ namespace Bezetting2
                         files.ForEach(f => f.Delete());
 
                     }
-
+                    Main.labelDebug.Text = "";
                 }
 
 
@@ -365,7 +379,8 @@ namespace Bezetting2
         }
         public static void Lees_Namen_lijst()
         {
-                personeel_lijst.Clear();
+            Main.labelDebug.Text = "Load Namen Lijst";
+            personeel_lijst.Clear();
                 try
                 {
                     using (Stream stream = File.Open("personeel.bin", FileMode.Open))
@@ -741,6 +756,12 @@ namespace Bezetting2
                 LoadPloegBezetting(kleur);
                 GekozenKleur = kleur;
             }
+        }
+
+        public static void Backup()
+        {
+            string startPath = GetDirectoryBezettingMaand(DateTime.Now);
+            ZipFile.CreateFromDirectory(startPath, backup_zipnaam);
         }
     }
 }

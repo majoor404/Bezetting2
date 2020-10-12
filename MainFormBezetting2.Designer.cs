@@ -128,26 +128,26 @@
             // inloggenToolStripMenuItem1
             // 
             this.inloggenToolStripMenuItem1.Name = "inloggenToolStripMenuItem1";
-            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.inloggenToolStripMenuItem1.Text = "Inloggen";
             this.inloggenToolStripMenuItem1.Click += new System.EventHandler(this.inloggenToolStripMenuItem1_Click);
             // 
             // uitloggenToolStripMenuItem
             // 
             this.uitloggenToolStripMenuItem.Name = "uitloggenToolStripMenuItem";
-            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.uitloggenToolStripMenuItem.Text = "Uitloggen";
             this.uitloggenToolStripMenuItem.Click += new System.EventHandler(this.uitloggenToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 6);
             // 
             // closeExitStopToolStripMenuItem
             // 
             this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
-            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.closeExitStopToolStripMenuItem.Text = "Close / Exit";
             this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.closeExitStopToolStripMenuItem_Click);
             // 
@@ -686,7 +686,6 @@
             this.panel7.Size = new System.Drawing.Size(100, 6);
             this.panel7.TabIndex = 24;
             this.panel7.Visible = false;
-            this.panel7.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.panel7_MouseDoubleClick);
             // 
             // label4
             // 
@@ -717,12 +716,11 @@
             // labelDebug
             // 
             this.labelDebug.AutoSize = true;
-            this.labelDebug.Location = new System.Drawing.Point(687, 11);
+            this.labelDebug.Location = new System.Drawing.Point(1598, 12);
             this.labelDebug.Name = "labelDebug";
             this.labelDebug.Size = new System.Drawing.Size(60, 13);
             this.labelDebug.TabIndex = 29;
             this.labelDebug.Text = "Debug Info";
-            this.labelDebug.Visible = false;
             // 
             // MainFormBezetting2
             // 

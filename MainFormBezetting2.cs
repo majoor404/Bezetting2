@@ -22,6 +22,8 @@ namespace Bezetting2
         private bool kill = false;
         private bool WindowUpdateViewScreen = true;
 
+        
+
         private Color _Weekend = Color.LightSkyBlue;
         private Color _Feestdag = Color.LightSalmon;
         private Color _Huidigedag = Color.Lavender;
@@ -93,6 +95,11 @@ namespace Bezetting2
 
             ProgData.igekozenjaar = nu.Year;
             ProgData.ihuidigjaar = nu.Year;
+
+            ProgData.backup_zipnaam = "Backup\\" + nu.ToShortDateString() + ".zip";
+
+            Random rnd = new Random();
+            ProgData.backup_time = rnd.Next(60); 
 
             KleurMaandButton();
 
@@ -275,9 +282,16 @@ namespace Bezetting2
                 View.Items[2].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
                 View.Items[2].SubItems[0].Text = ProgData.sgekozenmaand().ToUpper();
 
+                // Jaar in beeld
+                View.Items[3].UseItemStyleForSubItems = false;
+                View.Items[3].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
+                View.Items[3].SubItems[0].Text = ProgData.sgekozenjaar().ToUpper();
+
                 LijnenWeg();
                 if (ProgData.LeesLijnen())
                     ZetLijnen();
+
+                labelDebug.Text = "";
             }
         }
 
@@ -665,7 +679,7 @@ namespace Bezetting2
                     }
                 }
             }
-
+            labelDebug.Text = "";
         }
 
         private void CheckEnDealVerhuizing()
@@ -1048,6 +1062,18 @@ namespace Bezetting2
                     MessageBox.Show("programma wordt gesloten over 30 sec, er is een update, moment");
                 }
             }
+            
+            if(ProgData.backup_time == DateTime.Now.Minute)
+            {
+                if(!File.Exists(ProgData.backup_zipnaam))
+                {
+                    timerKill.Enabled = false;
+                    MessageBox.Show("U bent een geluksvogel, u mag vandaag backup maken ;-)");
+                    ProgData.Backup();
+                    timerKill.Enabled = true;
+                }
+            }
+
         }
         private void ruilOverwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1109,19 +1135,9 @@ namespace Bezetting2
                 ProgData.Lees_Namen_lijst();
                 OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
                 MessageBox.Show("Klaar met invoer");
-                labelDebug.Visible = false;
                 ProgData.GekozenKleur = "Blauw";
                 buttonNu_Click(this, null);
             }
-        }
-
-        private void panel7_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            // juiste inlog
-            ProgData.Huidige_Gebruiker_Personeel_nummer = "Admin";
-            ProgData.RechtenHuidigeGebruiker = 101;
-            comboBoxKleurKeuze.SelectedItem = "Blauw";
-            ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = "Blauw";
         }
 
         private void OpenDataBase_en_Voer_oude_data_in_Bezetting(string file)
@@ -1142,7 +1158,6 @@ namespace Bezetting2
                 WindowUpdateViewScreen = false;
                 if (reader.Read() == true)
                 {
-                    labelDebug.Visible = true;
                     DateTime nu = DateTime.Now;
                     do
                     {
@@ -1312,7 +1327,7 @@ namespace Bezetting2
                             }
                         }
                     }
-                }                
+                }
                 ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
@@ -1419,14 +1434,14 @@ namespace Bezetting2
 
                 for (int i = 0; i < TelWerkPlek.Count; i++)
                 {
-                    oSheet.Cells[3, i+2] = TelWerkPlek[i];
+                    oSheet.Cells[3, i + 2] = TelWerkPlek[i];
                 }
 
                 oSheet.get_Range("A1", "Z2").Font.Bold = true;
 
                 for (int i = 0; i < TelNamen.Count; i++)
                 {
-                    oSheet.Cells[i+4, 1] = TelNamen[i];
+                    oSheet.Cells[i + 4, 1] = TelNamen[i];
                 }
 
                 for (int i = 0; i < Tel.Count; i++)
@@ -1436,7 +1451,7 @@ namespace Bezetting2
                     //var test4 = Tel[i]._NaamTelPlek;
                     //var test5 = TelNamen.IndexOf(test4);      // x coord
                     //var test3 = Tel[i]._AantalTelPlek;      // inhoud
-                    oSheet.Cells[TelNamen.IndexOf(Tel[i]._NaamTelPlek) + 4, 
+                    oSheet.Cells[TelNamen.IndexOf(Tel[i]._NaamTelPlek) + 4,
                         TelWerkPlek.IndexOf(Tel[i]._PlekTelPlek) + 2] = Tel[i]._AantalTelPlek;
                 }
 
@@ -1484,8 +1499,8 @@ namespace Bezetting2
                                 {
                                     bool rechtop = false;
 
-                                    var afwijking = View.Items[i].SubItems[d].Text;
-                                    var dienst = View.Items[3].SubItems[d].Text;
+                                    string afwijking = View.Items[i].SubItems[d].Text;
+                                    string dienst = View.Items[3].SubItems[d].Text;
 
                                     if (afwijking == "") rechtop = true;
                                     if (afwijking == "*") rechtop = true;
@@ -1521,7 +1536,7 @@ namespace Bezetting2
                 xlApp.Visible = true;
 
                 //Get a new workbook.
-                var file = Path.GetFullPath("Vuilwerk.xls");
+                string file = Path.GetFullPath("vuilwerk.xls");
 
                 /*
                  public Microsoft.Office.Interop.Excel.Workbook Open
@@ -1545,7 +1560,7 @@ namespace Bezetting2
                 xlWorkBook = xlApp.Workbooks.Open(file, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, true, 0, true, 1, 0);
 
                 Excel.Worksheet excelSheet = xlWorkBook.ActiveSheet;
-                
+
                 // schoonvegen
                 oRng = excelSheet.Range[excelSheet.Cells[11, 1], excelSheet.Cells[37, 33]];
                 oRng.ClearContents();
@@ -1555,49 +1570,48 @@ namespace Bezetting2
                 oRng.Value = null;
 
                 int row = 11;
-                int vuilwerkindex = 0;
-                
+                int aantalvuilwerkcodes = VuilwerkData.Count / 3;
+
                 // invullen
                 foreach (TelVuilwerk afw in TelVuil)
                 {
                     string cellValue = (string)(excelSheet.Cells[row, 2] as Excel.Range).Value;
 
+                    // voor eerste persoon
                     if (cellValue == null)
                     {
                         excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Nummer(afw._NaamTelVuil);
                         excelSheet.Cells[row, 2] = afw._NaamTelVuil;
                         cellValue = afw._NaamTelVuil;
 
-                        excelSheet.Cells[row, 35] = VuilwerkData[vuilwerkindex + 1];
-                        excelSheet.Cells[row, 36] = VuilwerkData[vuilwerkindex + 2];
+                        for (int i = 0; i < aantalvuilwerkcodes; i++)
+                        {
+                            excelSheet.Cells[row + i, 35] = VuilwerkData[ 1 + (i*3)];
+                            excelSheet.Cells[row + i, 36] = VuilwerkData[ 2 + (i*3)];
+                        }
+
                     }
 
                     if (cellValue != afw._NaamTelVuil)  // nieuwe naam
                     {
-                        // als medere vuilwerk premies, copy regel en vul andere codes in
-                        if(vuilwerkindex + 3 < VuilwerkData.Count)
-                        {
-                            vuilwerkindex = + 3;
-                            Excel.Range from = excelSheet.Range[excelSheet.Cells[row, 3], excelSheet.Cells[row, 33]];
-                            Excel.Range to = excelSheet.Range[excelSheet.Cells[row+1, 3], excelSheet.Cells[row+1, 33]];
-                            from.Copy(to);
-                            row++;
-                            excelSheet.Cells[row, 35] = VuilwerkData[vuilwerkindex + 1];
-                            excelSheet.Cells[row, 36] = VuilwerkData[vuilwerkindex + 2];
-                        }
-                        row++;
+                        row += aantalvuilwerkcodes;
 
                         // nieuwe naam
-                        vuilwerkindex = 0;
                         excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Nummer(afw._NaamTelVuil);
                         excelSheet.Cells[row, 2] = afw._NaamTelVuil;
                         cellValue = afw._NaamTelVuil;
-                        excelSheet.Cells[row, 35] = VuilwerkData[vuilwerkindex + 1];
-                        excelSheet.Cells[row, 36] = VuilwerkData[vuilwerkindex + 2];
+                        for (int i = 0; i < aantalvuilwerkcodes; i++)
+                        {
+                            excelSheet.Cells[row + i, 35] = VuilwerkData[1 + (i * 3)];
+                            excelSheet.Cells[row + i, 36] = VuilwerkData[2 + (i * 3)];
+                        }
                     }
 
                     int dag = int.Parse(afw._DagTelVuil);
-                    excelSheet.Cells[row, dag + 2] = VuilwerkData[vuilwerkindex];
+                    for (int i = 0; i < aantalvuilwerkcodes; i++)
+                    {
+                        excelSheet.Cells[row + i, dag + 2] = VuilwerkData[i * 3];
+                    }
                 }
 
                 excelSheet.Cells[1, 2] = ProgData.sgekozenmaand();
@@ -1619,7 +1633,6 @@ namespace Bezetting2
                 MessageBox.Show(errorMessage, "Error");
             }
         }
-
     }
 }
 
