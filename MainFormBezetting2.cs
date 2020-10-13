@@ -1063,14 +1063,15 @@ namespace Bezetting2
                 }
             }
             
-            if(ProgData.backup_time == DateTime.Now.Minute)
+            if(DateTime.Now.Hour == 12 && ProgData.backup_time == DateTime.Now.Minute)
             {
                 if(!File.Exists(ProgData.backup_zipnaam))
                 {
                     timerKill.Enabled = false;
-                    MessageBox.Show("U bent een geluksvogel, u mag vandaag backup maken ;-)");
+                    labelDebug.Text = "Dagelijkse Backup, moment.....";
                     ProgData.Backup();
                     timerKill.Enabled = true;
+                    labelDebug.Text = "Dagelijkse Backup gelukt";
                 }
             }
 

@@ -347,10 +347,10 @@ namespace Bezetting2
                         if (!Directory.Exists("Backup"))
                             Directory.CreateDirectory("Backup");
 
-                        Random rnd = new Random();
-                        int s = rnd.Next(9999);
 
-                        string nieuw_naam = "Backup\\personeel" + s.ToString() + ".bin";
+                        string s = DateTime.Now.ToString("MM-dd-yyyy HH-mm");
+                        /**/
+                        string nieuw_naam = Directory.GetCurrentDirectory() + @"\Backup\personeel" + s + ".bin";
                         File.Copy("personeel.bin", nieuw_naam, true);  // overwrite oude file
 
 
