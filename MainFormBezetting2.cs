@@ -1133,11 +1133,13 @@ namespace Bezetting2
             if (result == DialogResult.OK) // Test result.
             {
                 MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!");
+                ProgData.Disable_error_Meldingen = true;
                 ProgData.Lees_Namen_lijst();
                 OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
                 MessageBox.Show("Klaar met invoer");
                 ProgData.GekozenKleur = "Blauw";
                 buttonNu_Click(this, null);
+                ProgData.Disable_error_Meldingen = false;
             }
         }
 

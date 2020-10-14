@@ -23,6 +23,7 @@ namespace Bezetting2
             Rood
         }
         private static bool ChangeData = false;
+        public static bool Disable_error_Meldingen = false;
         public static MainFormBezetting2 Main;
 
         public static string GekozenRooster = "5pl";  // later aanpassen als kantoor dienst of zo
@@ -167,7 +168,8 @@ namespace Bezetting2
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("SavePloegNamenLijst() error");
+                    if (!Disable_error_Meldingen)
+                        MessageBox.Show("SavePloegNamenLijst() error");
                 }
             }
         }
@@ -257,7 +259,8 @@ namespace Bezetting2
                 }
                 catch
                 {
-                    MessageBox.Show($"SavePloegBezetting() error\n{Ploeg_Bezetting_Locatie(kleur)}");
+                    if(!Disable_error_Meldingen)
+                        MessageBox.Show($"SavePloegBezetting() error\n{Ploeg_Bezetting_Locatie(kleur)}");
                 }
             }
 
@@ -283,7 +286,8 @@ namespace Bezetting2
                 }
                 catch
                 {
-                    MessageBox.Show($"LoadPloegBezettingLijst() error\n{Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)}");
+                    if (!Disable_error_Meldingen)
+                        MessageBox.Show($"LoadPloegBezettingLijst() error\n{Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)}");
                 }
 
 
@@ -329,7 +333,8 @@ namespace Bezetting2
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show($"SaveVeranderingenPloegLijst() error\n{Ploeg_Veranderingen_Locatie()}");
+                    if (!Disable_error_Meldingen)
+                        MessageBox.Show($"SaveVeranderingenPloegLijst() error\n{Ploeg_Veranderingen_Locatie()}");
                 }
  
             }
@@ -373,7 +378,8 @@ namespace Bezetting2
             }
             catch
             {
-                MessageBox.Show("Save_Namen_lijst() error");
+                if (!Disable_error_Meldingen)
+                    MessageBox.Show("Save_Namen_lijst() error");
             }
  
         }
@@ -391,7 +397,8 @@ namespace Bezetting2
                 }
                 catch (IOException)
                 {
-                    MessageBox.Show("Lees_Namen_lijst() error");
+                    if (!Disable_error_Meldingen)
+                        MessageBox.Show("Lees_Namen_lijst() error");
                 }
         }
         public static int WaarInTijd()
@@ -452,7 +459,8 @@ namespace Bezetting2
             }
             catch
             {
-                MessageBox.Show($"Kan naam {naam} niet vinden in ploeg voor wijzeging. Kleur :  {kleur} Dag : {dagnr} Maand : {igekozenmaand} Jaar : {igekozenjaar}");
+                if (!Disable_error_Meldingen)
+                    MessageBox.Show($"Kan naam {naam} niet vinden in ploeg voor wijzeging. Kleur :  {kleur} Dag : {dagnr} Maand : {igekozenmaand} Jaar : {igekozenjaar}");
             }
         }
         static public void RegelAfwijkingOpDatumEnKleur(DateTime datum, string kleur, string naam, string dagnr, string afwijking, string rede, string invoerdoor)
