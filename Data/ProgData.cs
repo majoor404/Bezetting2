@@ -130,27 +130,25 @@ namespace Bezetting2
         public static void LoadPloegNamenLijst()
         {
             Main.labelDebug.Text = "Load Ploeg Namen Lijst";
-            // om tijd te winnen alleen laden als er andere ploeg gevraagt wordt
-            if (ReloadSpeed2 != GekozenKleur)
+            kleur_personeel_lijst.Clear();
+            try
             {
-                kleur_personeel_lijst.Clear();
-                try
+                //string _Ploeg_Namen_Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
+                using (Stream stream = File.Open(Ploeg_Namen_Locatie(), FileMode.Open))
                 {
-                    //string _Ploeg_Namen_Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
-                    using (Stream stream = File.Open(Ploeg_Namen_Locatie(), FileMode.Open))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
+                    BinaryFormatter bin = new BinaryFormatter();
 
-                        kleur_personeel_lijst = (List<personeel>)bin.Deserialize(stream);
-                    }
+                    kleur_personeel_lijst = (List<personeel>)bin.Deserialize(stream);
                 }
-                catch (IOException)
-                {
-                }
-                // haal werkgroepen op
-                MaakWerkPlekkenLijst();
             }
-            ReloadSpeed2 = GekozenKleur;
+            catch (IOException)
+            {
+                Main.labelDebug.Text = "catch LoadPloegNamenLijst() error, try again";
+                Thread.Sleep(300);
+                LoadPloegNamenLijst();
+            }
+            // haal werkgroepen op
+            MaakWerkPlekkenLijst();
         }
         public static void SavePloegNamenLijst()
         {
@@ -185,10 +183,10 @@ namespace Bezetting2
 
             foreach (personeel a in ploeg_gekozen)
             {
-                if(a._nieuwkleur != "")
+                if (a._nieuwkleur != "")
                 {
                     DateTime verhuismaand = new DateTime(a._verhuisdatum.Year, a._verhuisdatum.Month, 1, 0, 0, 0, 0, 0);
-                    if(a._kleur == kleur)
+                    if (a._kleur == kleur)
                     {
                         if (verhuismaand >= dezemaand)
                             kleur_personeel_lijst.Add(a);
@@ -199,8 +197,8 @@ namespace Bezetting2
                             kleur_personeel_lijst.Add(a);
                     }
                 }
-                else 
-                { 
+                else
+                {
                     kleur_personeel_lijst.Add(a);
                 }
             }
@@ -259,7 +257,7 @@ namespace Bezetting2
                 }
                 catch
                 {
-                    if(!Disable_error_Meldingen)
+                    if (!Disable_error_Meldingen)
                         MessageBox.Show($"SavePloegBezetting() error\n{Ploeg_Bezetting_Locatie(kleur)}");
                 }
             }
@@ -267,32 +265,35 @@ namespace Bezetting2
         }
         public static void LoadPloegBezetting(string kleur)
         {
-                Main.labelDebug.Text = "Load Ploeg Bezetting";
-                Bezetting_Ploeg_Lijst.Clear();
-                try
+            Main.labelDebug.Text = "Load Ploeg Bezetting";
+            Bezetting_Ploeg_Lijst.Clear();
+            try
+            {
+                using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(kleur), FileMode.Open))
                 {
-                    using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(kleur), FileMode.Open))
+                    BinaryFormatter bin = new BinaryFormatter();
+                    try
                     {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        try
-                        {
-                            Bezetting_Ploeg_Lijst = (List<werkdag>)bin.Deserialize(stream);
-                        }
-                        catch
-                        {
-                            MessageBox.Show("Deserialize(stream) error, gebruik repareer tool als Admin");
-                        }
+                        Bezetting_Ploeg_Lijst = (List<werkdag>)bin.Deserialize(stream);
+                        stream.Dispose();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Deserialize(stream) error, gebruik repareer tool als Admin");
                     }
                 }
-                catch
-                {
-                    if (!Disable_error_Meldingen)
-                        MessageBox.Show($"LoadPloegBezettingLijst() error\n{Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)}");
-                }
-
-
-            //if (Bezetting_Ploeg_Lijst.Count == 0)
-            //    MessageBox.Show("bezetting ploeg lijst is leeg ?");
+            }
+            catch (IOException)
+            {
+                Main.labelDebug.Text = " LoadPloegBezettingLijst() error, try again";
+                Thread.Sleep(300);
+                LoadPloegBezetting(kleur);
+            }
+            catch
+            {
+                if (!Disable_error_Meldingen)
+                    MessageBox.Show($"LoadPloegBezettingLijst() error\n{Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)}");
+            }
         }
         public static void LoadVeranderingenPloeg()
         {
@@ -311,7 +312,7 @@ namespace Bezetting2
             catch
             {
                 //if (File.Exists(Ploeg_Veranderingen_Locatie()))
-                  //  MessageBox.Show("LoadVeranderingenPloegLijst() error");
+                //  MessageBox.Show("LoadVeranderingenPloegLijst() error");
                 //MessageBox.Show("LoadVeranderingenPloegLijst() error");
                 // als hij nog niet bestaat krijg jke elke keer melding, dat hoefd niet
                 // wordt vanzelf aangemaakt.
@@ -336,7 +337,7 @@ namespace Bezetting2
                     if (!Disable_error_Meldingen)
                         MessageBox.Show($"SaveVeranderingenPloegLijst() error\n{Ploeg_Veranderingen_Locatie()}");
                 }
- 
+
             }
         }
         public static void Save_Namen_lijst()
@@ -381,25 +382,25 @@ namespace Bezetting2
                 if (!Disable_error_Meldingen)
                     MessageBox.Show("Save_Namen_lijst() error");
             }
- 
+
         }
         public static void Lees_Namen_lijst()
         {
             Main.labelDebug.Text = "Load Namen Lijst";
             personeel_lijst.Clear();
-                try
+            try
+            {
+                using (Stream stream = File.Open("personeel.bin", FileMode.Open))
                 {
-                    using (Stream stream = File.Open("personeel.bin", FileMode.Open))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        personeel_lijst = (List<personeel>)bin.Deserialize(stream);
-                    }
+                    BinaryFormatter bin = new BinaryFormatter();
+                    personeel_lijst = (List<personeel>)bin.Deserialize(stream);
                 }
-                catch (IOException)
-                {
-                    if (!Disable_error_Meldingen)
-                        MessageBox.Show("Lees_Namen_lijst() error");
-                }
+            }
+            catch (IOException)
+            {
+                if (!Disable_error_Meldingen)
+                    MessageBox.Show("Lees_Namen_lijst() error");
+            }
         }
         public static int WaarInTijd()
         {
@@ -435,7 +436,7 @@ namespace Bezetting2
         /// <param name="afwijking">de afwijking</param>
         /// <param name="rede">de rede</param>
         /// <param name="invoerdoor">ingevoerd door</param>
-        static public void RegelAfwijking(string naam, string dagnr, string afwijking, string rede, string invoerdoor , string kleur)
+        static public void RegelAfwijking(string naam, string dagnr, string afwijking, string rede, string invoerdoor, string kleur)
         {
             LoadPloegBezetting(kleur);
             try
@@ -481,7 +482,7 @@ namespace Bezetting2
             ProgData.CheckFiles(kleur);
 
             // roep afwijking roetine aan
-            RegelAfwijking(naam, dagnr, afwijking, rede, invoerdoor , kleur);
+            RegelAfwijking(naam, dagnr, afwijking, rede, invoerdoor, kleur);
             // datum terug en kleur goed
             if (GekozenKleur != bewaar_kleur)
                 GekozenKleur = bewaar_kleur;
@@ -757,7 +758,7 @@ namespace Bezetting2
             if (!File.Exists(Ploeg_Bezetting_Locatie(kleur)))
             {
                 Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}"));
-                
+
                 MaakPloegNamenLijst(kleur);
                 SavePloegNamenLijst();
 

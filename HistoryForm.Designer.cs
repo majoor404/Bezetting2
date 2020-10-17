@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.listViewHis = new System.Windows.Forms.ListView();
             this.Naam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Afwijking = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -36,20 +35,10 @@
             this.IngevoerdDoor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OpDatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Rede = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.checkBoxFilter = new System.Windows.Forms.CheckBox();
             this.comboBoxDag = new System.Windows.Forms.ComboBox();
             this.comboBoxIngevoerdDoor = new System.Windows.Forms.ComboBox();
+            this.buttonFilter = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(664, 544);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 24);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listViewHis
             // 
@@ -62,9 +51,9 @@
             this.Rede});
             this.listViewHis.FullRowSelect = true;
             this.listViewHis.HideSelection = false;
-            this.listViewHis.Location = new System.Drawing.Point(13, 13);
+            this.listViewHis.Location = new System.Drawing.Point(13, 41);
             this.listViewHis.Name = "listViewHis";
-            this.listViewHis.Size = new System.Drawing.Size(782, 515);
+            this.listViewHis.Size = new System.Drawing.Size(782, 487);
             this.listViewHis.TabIndex = 1;
             this.listViewHis.UseCompatibleStateImageBehavior = false;
             this.listViewHis.View = System.Windows.Forms.View.Details;
@@ -99,21 +88,10 @@
             this.Rede.Text = "Rede";
             this.Rede.Width = 213;
             // 
-            // checkBoxFilter
-            // 
-            this.checkBoxFilter.AutoSize = true;
-            this.checkBoxFilter.Location = new System.Drawing.Point(15, 546);
-            this.checkBoxFilter.Name = "checkBoxFilter";
-            this.checkBoxFilter.Size = new System.Drawing.Size(48, 17);
-            this.checkBoxFilter.TabIndex = 2;
-            this.checkBoxFilter.Text = "Filter";
-            this.checkBoxFilter.UseVisualStyleBackColor = true;
-            this.checkBoxFilter.CheckedChanged += new System.EventHandler(this.checkBoxFilter_CheckedChanged);
-            // 
             // comboBoxDag
             // 
             this.comboBoxDag.FormattingEnabled = true;
-            this.comboBoxDag.Location = new System.Drawing.Point(256, 542);
+            this.comboBoxDag.Location = new System.Drawing.Point(270, 14);
             this.comboBoxDag.Name = "comboBoxDag";
             this.comboBoxDag.Size = new System.Drawing.Size(78, 21);
             this.comboBoxDag.TabIndex = 3;
@@ -121,33 +99,41 @@
             // comboBoxIngevoerdDoor
             // 
             this.comboBoxIngevoerdDoor.FormattingEnabled = true;
-            this.comboBoxIngevoerdDoor.Location = new System.Drawing.Point(351, 542);
+            this.comboBoxIngevoerdDoor.Location = new System.Drawing.Point(354, 14);
             this.comboBoxIngevoerdDoor.Name = "comboBoxIngevoerdDoor";
-            this.comboBoxIngevoerdDoor.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxIngevoerdDoor.Size = new System.Drawing.Size(143, 21);
             this.comboBoxIngevoerdDoor.TabIndex = 4;
+            // 
+            // buttonFilter
+            // 
+            this.buttonFilter.Location = new System.Drawing.Point(503, 12);
+            this.buttonFilter.Name = "buttonFilter";
+            this.buttonFilter.Size = new System.Drawing.Size(103, 23);
+            this.buttonFilter.TabIndex = 6;
+            this.buttonFilter.Text = "Zet Filter";
+            this.buttonFilter.UseVisualStyleBackColor = true;
+            this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
             // 
             // HistoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 581);
+            this.ClientSize = new System.Drawing.Size(802, 539);
+            this.Controls.Add(this.buttonFilter);
             this.Controls.Add(this.comboBoxIngevoerdDoor);
             this.Controls.Add(this.comboBoxDag);
-            this.Controls.Add(this.checkBoxFilter);
             this.Controls.Add(this.listViewHis);
-            this.Controls.Add(this.button1);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HistoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "History";
             this.Shown += new System.EventHandler(this.History_Shown);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listViewHis;
         private System.Windows.Forms.ColumnHeader Naam;
         private System.Windows.Forms.ColumnHeader Afwijking;
@@ -156,7 +142,7 @@
         private System.Windows.Forms.ColumnHeader OpDatum;
         private System.Windows.Forms.ColumnHeader Rede;
         private System.Windows.Forms.ComboBox comboBoxIngevoerdDoor;
-        public System.Windows.Forms.CheckBox checkBoxFilter;
         public System.Windows.Forms.ComboBox comboBoxDag;
+        private System.Windows.Forms.Button buttonFilter;
     }
 }

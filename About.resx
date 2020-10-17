@@ -128,4 +128,12 @@ Eea is een Work in Progress ;-)
 
 ronald.majoor@tatasteeleurope.com - r.majoor@gmail.com</value>
   </data>
+  <data name="textBox2.Text" xml:space="preserve">
+    <value>13-10-20 R.Docter diverse aanpassingen
+14-10-20 eerste versie test 
+15-10-20 M.Kieft bug load personeel vanuit verleden
+17-10-20 Geel Minimize knopje history venster
+17-10-20 Geel grijze balk van werkplek over gehele breedte
+17-10-20 Geel history filter verbeterd.</value>
+  </data>
 </root>

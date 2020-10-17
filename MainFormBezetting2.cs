@@ -259,7 +259,8 @@ namespace Bezetting2
                             //this is very Important
                             View.Items[row].UseItemStyleForSubItems = false;
                             // Now you can Change the Particular Cell Property of Style
-                            View.Items[row].SubItems[col].BackColor = _Weekend;
+                            if(View.Items[row].SubItems[col].BackColor != _Werkplek)
+                                View.Items[row].SubItems[col].BackColor = _Weekend;
                         }
                     }
                 }
@@ -272,8 +273,8 @@ namespace Bezetting2
                     {
                         View.Items[i].UseItemStyleForSubItems = false;
                         // Now you can Change the Particular Cell Property of Style
-                        View.Items[i].SubItems[DateTime.Now.Day].BackColor = _Huidigedag;
-
+                        if (View.Items[i].SubItems[DateTime.Now.Day].BackColor != _Werkplek)
+                            View.Items[i].SubItems[DateTime.Now.Day].BackColor = _Huidigedag;
                     }
                 }
 
@@ -315,8 +316,8 @@ namespace Bezetting2
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             WindowUpdateViewScreen = true;
-            ProgData.ReloadSpeed1 = "";
-            ProgData.ReloadSpeed2 = "";
+            //ProgData.ReloadSpeed1 = "";
+            //ProgData.ReloadSpeed2 = "";
             VulViewScherm();
         }
 
@@ -418,7 +419,8 @@ namespace Bezetting2
                         //this is very Important
                         View.Items[row].UseItemStyleForSubItems = false;
                         // Now you can Change the Particular Cell Property of Style
-                        View.Items[row].SubItems[col].BackColor = _Feestdag;
+                        if (View.Items[row].SubItems[col].BackColor != _Werkplek)
+                            View.Items[row].SubItems[col].BackColor = _Feestdag;
                     }
                 }
 
@@ -469,7 +471,10 @@ namespace Bezetting2
                         ListViewItem item = new ListViewItem(werkplek);
                         View.Items.Add(item);
                         View.Items[View.Items.Count - 1].UseItemStyleForSubItems = false;
-                        View.Items[View.Items.Count - 1].SubItems[0].BackColor = _Werkplek;
+                        for (int grijzebalk_werkplek = 0; grijzebalk_werkplek < 33; grijzebalk_werkplek++)
+                        {
+                            View.Items[View.Items.Count - 1].SubItems[grijzebalk_werkplek].BackColor = _Werkplek;
+                        }
                         // zet in View
                         foreach (personeel a in ProgData.kleur_personeel_lijst)
                         {
@@ -590,7 +595,12 @@ namespace Bezetting2
                     ListViewItem item = new ListViewItem(werkplek);
                     View.Items.Add(item);
                     View.Items[View.Items.Count - 1].UseItemStyleForSubItems = false;
-                    View.Items[View.Items.Count - 1].SubItems[0].BackColor = _Werkplek;
+                    for (int grijzebalk_werkplek = 0; grijzebalk_werkplek < 33; grijzebalk_werkplek++)
+                    {
+                        View.Items[View.Items.Count - 1].SubItems[grijzebalk_werkplek].BackColor = _Werkplek;
+                    }
+                    
+                    
                     // zet in View
                     foreach (personeel a in ProgData.kleur_personeel_lijst)
                     {
@@ -775,7 +785,6 @@ namespace Bezetting2
                         if (col > 0 && row < 4)
                         {
                             HistoryForm his = new HistoryForm();
-                            his.checkBoxFilter.Checked = true;
                             his.comboBoxDag.Text = col.ToString();
                             his.ShowDialog();
                         }

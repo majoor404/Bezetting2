@@ -1001,7 +1001,7 @@
             // 
             this.labelKleur.AutoSize = true;
             this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelKleur.Location = new System.Drawing.Point(175, 35);
+            this.labelKleur.Location = new System.Drawing.Point(232, 35);
             this.labelKleur.Name = "labelKleur";
             this.labelKleur.Size = new System.Drawing.Size(52, 20);
             this.labelKleur.TabIndex = 64;
@@ -1020,7 +1020,7 @@
             // buttonPrev
             // 
             this.buttonPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPrev.Location = new System.Drawing.Point(283, 25);
+            this.buttonPrev.Location = new System.Drawing.Point(493, 30);
             this.buttonPrev.Name = "buttonPrev";
             this.buttonPrev.Size = new System.Drawing.Size(100, 30);
             this.buttonPrev.TabIndex = 66;
@@ -1031,7 +1031,7 @@
             // buttonNext
             // 
             this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNext.Location = new System.Drawing.Point(398, 25);
+            this.buttonNext.Location = new System.Drawing.Point(608, 30);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(100, 30);
             this.buttonNext.TabIndex = 67;
@@ -1305,7 +1305,7 @@
             // buttonNu
             // 
             this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNu.Location = new System.Drawing.Point(514, 25);
+            this.buttonNu.Location = new System.Drawing.Point(724, 30);
             this.buttonNu.Name = "buttonNu";
             this.buttonNu.Size = new System.Drawing.Size(157, 30);
             this.buttonNu.TabIndex = 90;

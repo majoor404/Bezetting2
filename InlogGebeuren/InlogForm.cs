@@ -23,6 +23,9 @@ namespace Bezetting2
             if (textBoxNum.Text.Length == 7 && textBoxNum.Text[0] == 'a')
                 textBoxNum.Text = textBoxNum.Text.Substring(1);
 
+            if (textBoxNum.Text.Length == 7 && textBoxNum.Text[0] == 'A')
+                textBoxNum.Text = textBoxNum.Text.Substring(1);
+
             textBoxPass.Text = "";
             textBoxChangePasswoord.Text = "";
 
@@ -98,7 +101,7 @@ namespace Bezetting2
             {
                 persoon._passwoord = ProgData.Scramble(textBoxChangePasswoord.Text);
                 ProgData.Save_Namen_lijst();
-                MessageBox.Show("Wachtwoord is aangepast");
+                MessageBox.Show("Wachtwoord is aangepast, log nu nogmaals in met dit wachtwoord.");
 
                 textBoxNum.Enabled = true;
                 textBoxPass.Enabled = true;
