@@ -43,6 +43,8 @@
             this.vuilwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tellingWaarGewerktToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.namenAdressenEMailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.afwijkingTovRoosterPloegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +94,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
+            this.nietMeeTelLijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -177,7 +180,9 @@
             this.excelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.vuilwerkToolStripMenuItem,
             this.tellingWaarGewerktToolStripMenuItem,
-            this.namenAdressenEMailToolStripMenuItem});
+            this.namenAdressenEMailToolStripMenuItem,
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem,
+            this.afwijkingTovRoosterPloegToolStripMenuItem});
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
             this.excelToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
             this.excelToolStripMenuItem.Text = "Excel";
@@ -186,7 +191,7 @@
             // 
             this.vuilwerkToolStripMenuItem.Enabled = false;
             this.vuilwerkToolStripMenuItem.Name = "vuilwerkToolStripMenuItem";
-            this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
             this.vuilwerkToolStripMenuItem.Text = "Vuilwerk";
             this.vuilwerkToolStripMenuItem.Click += new System.EventHandler(this.vuilwerkToolStripMenuItem_Click);
             // 
@@ -194,7 +199,7 @@
             // 
             this.tellingWaarGewerktToolStripMenuItem.Enabled = false;
             this.tellingWaarGewerktToolStripMenuItem.Name = "tellingWaarGewerktToolStripMenuItem";
-            this.tellingWaarGewerktToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.tellingWaarGewerktToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
             this.tellingWaarGewerktToolStripMenuItem.Text = "Telling waar gewerkt";
             this.tellingWaarGewerktToolStripMenuItem.Click += new System.EventHandler(this.tellingWaarGewerktToolStripMenuItem_Click);
             // 
@@ -202,9 +207,24 @@
             // 
             this.namenAdressenEMailToolStripMenuItem.Enabled = false;
             this.namenAdressenEMailToolStripMenuItem.Name = "namenAdressenEMailToolStripMenuItem";
-            this.namenAdressenEMailToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.namenAdressenEMailToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
             this.namenAdressenEMailToolStripMenuItem.Text = "Namen Adressen E-Mail";
             this.namenAdressenEMailToolStripMenuItem.Click += new System.EventHandler(this.namenAdressenEMailToolStripMenuItem_Click);
+            // 
+            // afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem
+            // 
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Enabled = false;
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Name = "afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem";
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Text = "Afwijkingen tov Rooster ingelogd Persoon";
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Click += new System.EventHandler(this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click);
+            // 
+            // afwijkingTovRoosterPloegToolStripMenuItem
+            // 
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Enabled = false;
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Name = "afwijkingTovRoosterPloegToolStripMenuItem";
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg";
             // 
             // beheerToolStripMenuItem
             // 
@@ -215,7 +235,8 @@
             this.importNamenOudeVersieToolStripMenuItem,
             this.importOudeVeranderDataOudeVersieToolStripMenuItem,
             this.repareerPloegAfwijkingToolStripMenuItem,
-            this.instellingenProgrammaToolStripMenuItem});
+            this.instellingenProgrammaToolStripMenuItem,
+            this.nietMeeTelLijstToolStripMenuItem});
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
             this.beheerToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
             this.beheerToolStripMenuItem.Text = "Beheer";
@@ -530,7 +551,7 @@
             this.View.FullRowSelect = true;
             this.View.GridLines = true;
             this.View.HideSelection = false;
-            this.View.Location = new System.Drawing.Point(130, 45);
+            this.View.Location = new System.Drawing.Point(130, 28);
             this.View.MultiSelect = false;
             this.View.Name = "View";
             this.View.Size = new System.Drawing.Size(1692, 874);
@@ -725,6 +746,14 @@
             this.labelDebug.TabIndex = 29;
             this.labelDebug.Text = "Debug Info";
             // 
+            // nietMeeTelLijstToolStripMenuItem
+            // 
+            this.nietMeeTelLijstToolStripMenuItem.Enabled = false;
+            this.nietMeeTelLijstToolStripMenuItem.Name = "nietMeeTelLijstToolStripMenuItem";
+            this.nietMeeTelLijstToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
+            this.nietMeeTelLijstToolStripMenuItem.Text = "Niet Mee Tel Lijst";
+            this.nietMeeTelLijstToolStripMenuItem.Click += new System.EventHandler(this.nietMeeTelLijstToolStripMenuItem_Click);
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -846,6 +875,9 @@
         private System.Windows.Forms.ToolStripMenuItem namenAdressenEMailToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem closeExitStopToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem afwijkingTovRoosterPloegToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nietMeeTelLijstToolStripMenuItem;
     }
 }
 

@@ -3,6 +3,7 @@ using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -84,8 +85,8 @@ namespace Bezetting2
             if (File.Exists("kill.ini"))
                 Close();
 
-            ruilOverwerkToolStripMenuItem.Enabled = InstellingenProg._GebruikExtraRuil;
-            snipperDagAanvraagToolStripMenuItem.Enabled = InstellingenProg._GebruikSnipper;
+            ruilOverwerkToolStripMenuItem.Visible = InstellingenProg._GebruikExtraRuil;
+            snipperDagAanvraagToolStripMenuItem.Visible = InstellingenProg._GebruikSnipper;
 
             ProgData.Main = this;
             DateTime nu = DateTime.Now;
@@ -163,10 +164,13 @@ namespace Bezetting2
             repareerPloegAfwijkingToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             instellingenProgrammaToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             importOudeVeranderDataOudeVersieToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
+            nietMeeTelLijstToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
 
             vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             namenAdressenEMailToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
+            afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 0;
+            afwijkingTovRoosterPloegToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
         }
 
         private void uitloggenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -515,6 +519,11 @@ namespace Bezetting2
                     View.Items.Add(item_max);
                     int dag;
                     int aantal_mensen = ProgData.kleur_personeel_lijst.Count;
+
+                    List<string> TelNietMeeNamen = new List<string>();
+                    string locatie = @"telnietmee.ini";
+                    TelNietMeeNamen = File.ReadAllLines(locatie).ToList();
+
                     for (dag = 1; dag < aantal_dagen_deze_maand + 1; dag++) // aantal dagen
                     {
                         string wacht = View.Items[3].SubItems[dag].Text;
@@ -523,7 +532,7 @@ namespace Bezetting2
                         {
                             if (View.Items[i].SubItems[dag].Text != "")
                                 aantal_mensen--;
-                            if (View.Items[i].SubItems[dag].Text == wacht + "+")
+                            if (TelNietMeeNamen.Contains(View.Items[i].SubItems[dag].Text))
                                 aantal_mensen++;
                         }
                         if (View.Items[3].SubItems[dag].Text != "")
@@ -642,6 +651,10 @@ namespace Bezetting2
                 int dag;
                 int aantal_mensen = ProgData.kleur_personeel_lijst.Count;
 
+                List<string> TelNietMeeNamen = new List<string>();
+                string locatie = @"telnietmee.ini";
+                TelNietMeeNamen = File.ReadAllLines(locatie).ToList();
+
                 for (dag = 1; dag < aantal_dagen_deze_maand + 1; dag++) // aantal dagen
                 {
                     aantal_mensen = ProgData.kleur_personeel_lijst.Count;
@@ -650,7 +663,7 @@ namespace Bezetting2
                     {
                         if (View.Items[i].SubItems[dag].Text != "")
                             aantal_mensen--;
-                        if (View.Items[i].SubItems[dag].Text == wacht + "+")
+                        if(TelNietMeeNamen.Contains(View.Items[i].SubItems[dag].Text))
                             aantal_mensen++;
                     }
                     if (View.Items[3].SubItems[dag].Text != "")
@@ -1644,6 +1657,16 @@ namespace Bezetting2
 
                 MessageBox.Show(errorMessage, "Error");
             }
+        }
+
+        private void nietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("telnietmee.ini");
+        }
+
+        private void afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
