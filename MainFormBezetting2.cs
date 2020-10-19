@@ -1,6 +1,7 @@
 ﻿using Bezetting2.Data;
 using Bezetting2.Invoer;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Diagnostics;
@@ -1666,7 +1667,138 @@ namespace Bezetting2
 
         private void afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string[] deze_maand_overzicht = new string[33];
+            DateTime dag_gekozen;
+            var Telling = new List<int>();
+            var Afwijkingen = new List<string>();
 
+            List<string> TelNietMeeNamen = new List<string>();
+            string locatie = @"telnietmee.ini";
+            TelNietMeeNamen = File.ReadAllLines(locatie).ToList();
+
+            Excel.Application oXL;
+            Excel._Workbook oWB;
+            Excel._Worksheet oSheet;
+            Excel.Range oRng;
+
+            for (int i = 1; i < 13; i++)    // maanden
+            {
+                ProgData.igekozenmaand = i;
+
+                string kleur = ProgData.Get_Gebruiker_Kleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
+                string naam = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
+
+                //eerst vanuit ploegbezetting een string list maken met afwijkingen en normaal schema van persoon
+                if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(kleur)))
+                {
+                    ProgData.LoadPloegBezetting(kleur);
+                    foreach (werkdag dag in ProgData.Bezetting_Ploeg_Lijst)
+                    {
+                        if (dag._naam == naam)
+                        {
+                            dag_gekozen = new DateTime(ProgData.ihuidigjaar, ProgData.igekozenmaand, dag._dagnummer);
+
+                            // get en zet eerst orginele dienst
+                            string wacht = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, dag_gekozen, kleur);
+                            if (wacht != "")
+                            {
+                                deze_maand_overzicht[dag._dagnummer] = "W"; // Werkdag
+                            }
+                            else
+                            {
+                                deze_maand_overzicht[dag._dagnummer] = "V"; // Rooster vrij
+                            }
+                            // daarna overschrijven als die afwijkt van ""
+                            if (dag._afwijkingdienst != "")
+                            {
+                                deze_maand_overzicht[dag._dagnummer] = dag._afwijkingdienst;
+                            }
+                            
+                            if (TelNietMeeNamen.Contains(deze_maand_overzicht[dag._dagnummer]))
+                            {
+                                deze_maand_overzicht[dag._dagnummer] = "W"; // Werkdag
+                            }
+                        }
+                    }
+                }
+                // lijst strings nu klaar, nu tellen.
+                for (int q = 1; q < deze_maand_overzicht.Length; q++)
+                {
+                    if (deze_maand_overzicht[q] != null)
+                    {
+                        if (!Afwijkingen.Contains(deze_maand_overzicht[q]))
+                        {
+                            Afwijkingen.Add(deze_maand_overzicht[q]);
+                            Telling.Add(0);
+                        }
+
+                        int index = Afwijkingen.FindIndex(a => a.Contains(deze_maand_overzicht[q]));
+                        Telling[index]++;
+                    }
+                }
+            }
+
+
+
+            try
+            {
+                //Start Excel and get Application object.
+                oXL = new Excel.Application();
+                oXL.Visible = true;
+
+                //Get a new workbook.
+                oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+
+                // Add table headers going cell by cell.
+                oSheet.Cells[1, 1] = "Afwijkingen tov rooster in Jaar : ";
+                oSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                oSheet.Cells[2, 1] = "Ploegkleur : ";
+                oSheet.Cells[2, 2] = ProgData.GekozenKleur;
+                oSheet.Cells[3, 1] = "Naam : ";
+                oSheet.Cells[3, 2] = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
+
+                oSheet.get_Range("A1", "B4").Font.Bold = true;
+
+                for (int i = 0; i < Afwijkingen.Count; i++)
+                {
+                    switch (Afwijkingen[i])
+                    {
+                        case "V":
+                            oSheet.Cells[i + 3 , 4] = "Vrij volgens rooster  ";
+                            oSheet.Cells[i + 3 , 5] = Telling[i];
+                            break;
+                        case "W":
+                            oSheet.Cells[i + 3, 4] = "Volledig gewerkte dagen zonder afwijking  ";
+                            oSheet.Cells[i + 3, 5] = Telling[i];
+                            break;
+                        default:
+                            oSheet.Cells[i + 3, 4] = Afwijkingen[i];
+                            oSheet.Cells[i + 3, 5] = Telling[i];
+                            break;
+                    }
+                }
+                
+                //AutoFit columns A:D.
+                oRng = oSheet.get_Range("A1", "Z15");
+                oRng.EntireColumn.AutoFit();
+                
+                
+                //Make sure Excel is visible and give the user control
+                //of Microsoft Excel's lifetime.
+                oXL.Visible = true;
+                oXL.UserControl = true;
+            }
+            catch (Exception theException)
+            {
+                String errorMessage;
+                errorMessage = "Error: ";
+                errorMessage = String.Concat(errorMessage, theException.Message);
+                errorMessage = String.Concat(errorMessage, " Line: ");
+                errorMessage = String.Concat(errorMessage, theException.Source);
+
+                MessageBox.Show(errorMessage, "Error");
+            }
         }
     }
 }

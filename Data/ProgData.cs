@@ -22,6 +22,7 @@ namespace Bezetting2
             Groen,
             Rood
         }
+
         private static bool ChangeData = false;
         public static bool Disable_error_Meldingen = false;
         public static MainFormBezetting2 Main;
