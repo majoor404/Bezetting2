@@ -10,6 +10,31 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
 
+
+/*****************************************************************************
+ 
+SavePloegBezetting(string kleur)
+LoadPloegBezetting(string kleur)
+ListWerkdagPloeg
+Ploeg_Bezetting_Locatie(kleur)	\\{kleur}_bezetting.bin"
+
+LoadPloegNamenLijst()
+SavePloegNamenLijst()
+ListPersoneelKleur
+Ploeg_Namen_Locatie();		\\{GekozenKleur}_namen.bin"
+
+LoadVeranderingenPloeg()
+SaveVeranderingenPloeg()
+ListVeranderingen
+Ploeg_Veranderingen_Locatie()	\\{GekozenKleur}_afwijkingen.bin"
+
+Save_Namen_lijst()
+Lees_Namen_lijst()
+ListPersoneel
+				"personeel.bin"
+
+ * ****************************************************************************/
+
 namespace Bezetting2
 {
     public class ProgData
@@ -262,6 +287,7 @@ namespace Bezetting2
                 }
             }
             SavePloegBezetting(kleur);
+            SaveVeranderingenPloeg();
         }
         public static void SavePloegBezetting(string kleur)
         {
@@ -423,6 +449,7 @@ namespace Bezetting2
                 if (!Disable_error_Meldingen)
                     MessageBox.Show("Lees_Namen_lijst() error");
             }
+            Main.labelDebug.Text = "";
         }
         public static int WaarInTijd()
         {
@@ -702,20 +729,24 @@ namespace Bezetting2
         }
         public static void CaptureMainScreen()
         {
-            if (ChangeData && GekozenKleur != "")
+            try
             {
-                ChangeData = false;
-                Rectangle bounds = ProgData.Main.Bounds;
-                using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
+                if (ChangeData && GekozenKleur != "")
                 {
-                    using (Graphics g = Graphics.FromImage(bitmap))
+                    ChangeData = false;
+                    Rectangle bounds = ProgData.Main.Bounds;
+                    using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
                     {
-                        g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                        using (Graphics g = Graphics.FromImage(bitmap))
+                        {
+                            g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
+                        }
+                        string opslag = Path.GetFullPath($"{sgekozenjaar()}\\{igekozenmaand.ToString()}\\maand_overzicht_{GekozenKleur}.jpg");
+                        bitmap.Save(opslag, ImageFormat.Jpeg);
                     }
-                    string opslag = Path.GetFullPath($"{sgekozenjaar()}\\{igekozenmaand.ToString()}\\maand_overzicht_{GekozenKleur}.jpg");
-                    bitmap.Save(opslag, ImageFormat.Jpeg);
                 }
             }
+            catch { }
         }
         public static bool Bestaat_Gebruiker(string nummer)
         {

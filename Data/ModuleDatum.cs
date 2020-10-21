@@ -18,7 +18,7 @@ namespace Bezetting2
         public string GetDienstLong(string rooster, DateTime datum, string ploeg)
         {
             if (rooster == "dd")
-                return GetDag(datum);
+                return "Dagdienst";
 
             int index = RekenTabelIndex(rooster, datum, ploeg);
 
@@ -34,10 +34,7 @@ namespace Bezetting2
         {
             if (rooster == "dd")
             {
-                string retu = "-";
-                string dag = GetDag(datum);
-                if (dag == "Z") retu = "Vrij";
-                return retu;
+                return GetDag(datum) == "Z" ? "" : "-";
             }
 
             int index = RekenTabelIndex(rooster, datum, ploeg);

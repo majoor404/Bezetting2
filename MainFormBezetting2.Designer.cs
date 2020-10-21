@@ -538,7 +538,7 @@
             0,
             0});
             this.numericUpDownJaar.Minimum = new decimal(new int[] {
-            2015,
+            1900,
             0,
             0,
             0});
@@ -739,7 +739,6 @@
             this.panel8.Size = new System.Drawing.Size(100, 6);
             this.panel8.TabIndex = 24;
             this.panel8.Visible = false;
-            this.panel8.DoubleClick += new System.EventHandler(this.panel8_DoubleClick);
             // 
             // timerKill
             // 

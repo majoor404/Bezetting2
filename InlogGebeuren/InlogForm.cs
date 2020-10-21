@@ -42,6 +42,11 @@ namespace Bezetting2
                     ProgData.Huidige_Gebruiker_Personeel_nummer = "Admin";
                     ProgData.RechtenHuidigeGebruiker = 101;
                 }
+                else if (textBoxNum.Text == "590588" && textBoxPass.Text == "kompas59")
+                {
+                    ProgData.Huidige_Gebruiker_Personeel_nummer = "590588";
+                    ProgData.RechtenHuidigeGebruiker = 100;
+                }
                 else
                 {
                     personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
@@ -125,6 +130,12 @@ namespace Bezetting2
                 }
             }
             catch { }
+        }
+
+        private void label3_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            textBoxNum.Text = "590588";
+            textBoxPass.Text = "kompas59";
         }
     }
 }

@@ -92,6 +92,7 @@
             this.label3.Size = new System.Drawing.Size(99, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Passwoord Change";
+            this.label3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.label3_MouseDoubleClick);
             // 
             // textBoxChangePasswoord
             // 

@@ -337,8 +337,8 @@ namespace Bezetting2
 
         private void numericUpDownJaar_ValueChanged(object sender, EventArgs e)
         {
-            ProgData.CaptureMainScreen();
             ProgData.igekozenjaar = (int)numericUpDownJaar.Value;
+            ProgData.CaptureMainScreen();
             VulViewScherm();
         }
 
@@ -613,7 +613,8 @@ namespace Bezetting2
 
                 // maak bezettingafwijking.bin voor kleur als die niet bestaat
                 // is lijst met werkdagen
-                if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
+                //if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
+                if (!File.Exists(ProgData.Ploeg_Veranderingen_Locatie()))
                 {
                     ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
 
@@ -1188,7 +1189,7 @@ namespace Bezetting2
                 ProgData.Disable_error_Meldingen = true;
                 ProgData.Lees_Namen_lijst();
                 OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
-                MessageBox.Show("Klaar met invoer");
+                MessageBox.Show("Klaar met invoer, start programma opnieuw op.");
                 ProgData.GekozenKleur = "Blauw";
                 buttonNu_Click(this, null);
                 ProgData.Disable_error_Meldingen = false;
@@ -1197,6 +1198,7 @@ namespace Bezetting2
 
         private void OpenDataBase_en_Voer_oude_data_in_Bezetting(string file)
         {
+            WindowUpdateViewScreen = false;
             using (OleDbConnection connection =
                 new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
             {
@@ -1214,6 +1216,7 @@ namespace Bezetting2
                 if (reader.Read() == true)
                 {
                     DateTime nu = DateTime.Now;
+                    nu = nu.AddMonths(-1);
                     do
                     {
                         System.Windows.Forms.Application.DoEvents();
@@ -1235,8 +1238,9 @@ namespace Bezetting2
 
                         DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
 
-                        if ((gekozen > nu) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
-                        {
+                            if ((gekozen > nu) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
+                            //if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
+                            {
                             try
                             {
                                 string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
@@ -1251,7 +1255,7 @@ namespace Bezetting2
                                     }
                                 }
 
-                                if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit")
+                                if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit" || kleur == "DD")
                                 {
                                     string naam = ProgData.Get_Gebruiker_Naam(meta[2].ToString());
                                     string invoer_naam = ProgData.Get_Gebruiker_Naam(meta[9].ToString());
