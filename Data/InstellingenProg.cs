@@ -33,6 +33,22 @@ namespace Bezetting2.Data
             set { ProgrammaData[43] = value.ToString(); }
         }
 
+        public static string _Rooster
+        {
+            get
+            {
+                try
+                {
+                    return ProgrammaData[44];
+                }
+                catch
+                {
+                    return "5pl";
+                };
+            }
+            set { ProgrammaData[44] = value.ToString(); }
+        }
+
 
         public static List<string> ProgrammaData = new List<string>();
     

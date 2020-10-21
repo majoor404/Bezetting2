@@ -33,6 +33,8 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.textBoxMinAantalPersonen = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxRooster = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkBoxGebruikRuilExtra
@@ -85,11 +87,34 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Minimaal aaantal Personen";
             // 
+            // comboBoxRooster
+            // 
+            this.comboBoxRooster.FormattingEnabled = true;
+            this.comboBoxRooster.Items.AddRange(new object[] {
+            "5pl",
+            "dd"});
+            this.comboBoxRooster.Location = new System.Drawing.Point(12, 114);
+            this.comboBoxRooster.Name = "comboBoxRooster";
+            this.comboBoxRooster.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxRooster.TabIndex = 5;
+            this.comboBoxRooster.SelectedIndexChanged += new System.EventHandler(this.comboBoxRooster_SelectedIndexChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(150, 117);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 13);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Rooster";
+            // 
             // InstellingenProgrammaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(353, 387);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.comboBoxRooster);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxMinAantalPersonen);
             this.Controls.Add(this.buttonSave);
@@ -111,5 +136,7 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.TextBox textBoxMinAantalPersonen;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxRooster;
+        private System.Windows.Forms.Label label2;
     }
 }

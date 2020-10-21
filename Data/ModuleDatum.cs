@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bezetting2
 {
@@ -21,6 +17,9 @@ namespace Bezetting2
 
         public string GetDienstLong(string rooster, DateTime datum, string ploeg)
         {
+            if (rooster == "dd")
+                return GetDag(datum);
+
             int index = RekenTabelIndex(rooster, datum, ploeg);
 
             string ret = "";
@@ -33,11 +32,18 @@ namespace Bezetting2
 
         public string GetDienst(string rooster, DateTime datum, string ploeg)
         {
+            if (rooster == "dd")
+            {
+                string retu = "-";
+                string dag = GetDag(datum);
+                if (dag == "Z") retu = "Vrij";
+                return retu;
+            }
 
             int index = RekenTabelIndex(rooster, datum, ploeg);
 
             string ret = "";
-            
+
             ret = rooster_volgorde[index];
 
             return ret;
@@ -138,18 +144,18 @@ namespace Bezetting2
         }
 
         // bepaal welke kleur er werkt op datum en dienst
-        public string GetKleurDieWerkt(DateTime datum,string dienst)
+        public string GetKleurDieWerkt(DateTime datum, string dienst)
         {
-            string dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, datum, "Blauw");
+            string dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), datum, "Blauw");
             if (dienst == dienst_)
                 return "Blauw";
-            dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, datum, "Geel");
+            dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), datum, "Geel");
             if (dienst == dienst_)
                 return "Geel";
-            dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, datum, "Wit");
+            dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), datum, "Wit");
             if (dienst == dienst_)
                 return "Wit";
-            dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, datum, "Groen");
+            dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), datum, "Groen");
             if (dienst == dienst_)
                 return "Groen";
             return "Rood";

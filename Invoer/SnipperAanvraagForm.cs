@@ -42,7 +42,7 @@ namespace Bezetting2.Invoer
 
                 ProgData.LoadSnipperLijst(snip._datum.Year.ToString() + "\\" + snip._datum.Month.ToString());
                 bool staat_die_al_in_lijst = false;
-                foreach (SnipperAanvraag a in ProgData.Snipper_Lijst)
+                foreach (SnipperAanvraag a in ProgData.ListSnipperAanvraag)
                 {
                     if (a._datum.Date == snip._datum.Date
                        && a._naam == snip._naam &&
@@ -52,7 +52,7 @@ namespace Bezetting2.Invoer
                 
                 if (!staat_die_al_in_lijst && comboBox1.Text != "")
                 {
-                    ProgData.Snipper_Lijst.Add(snip);
+                    ProgData.ListSnipperAanvraag.Add(snip);
 
                     ProgData.SaveSnipperLijst(snip._datum.Year.ToString() + "\\" + snip._datum.Month.ToString());
                 }
@@ -83,7 +83,7 @@ namespace Bezetting2.Invoer
         void laadGevraagdeSnipperMaand(string[] info, DateTime nu)
         {
             ProgData.LoadSnipperLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
-            foreach (SnipperAanvraag a in ProgData.Snipper_Lijst)
+            foreach (SnipperAanvraag a in ProgData.ListSnipperAanvraag)
             {
                 info[0] = a._datum.ToString("dd/MM/yyyy");
                 info[1] = a._naam;
@@ -121,7 +121,7 @@ namespace Bezetting2.Invoer
                     string datum = listViewSnipper.Items[index].SubItems[0].Text;
                     try
                     {
-                        SnipperAanvraag ver = ProgData.Snipper_Lijst.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
+                        SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
                         ver._Coorcinator = labelNaamFull.Text;
                         ver._rede_coordinator = "Goed Gekeurd";
                         ProgData.SaveSnipperLijst(dir);
@@ -163,7 +163,7 @@ namespace Bezetting2.Invoer
                         // eigen verzoek cancel
                         try
                         {
-                            SnipperAanvraag ver = ProgData.Snipper_Lijst.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
+                            SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
                             if (ver._rede_coordinator != "")
                             {
                                 ver._Coorcinator = labelNaamFull.Text;
@@ -190,7 +190,7 @@ namespace Bezetting2.Invoer
                         // 
                         try
                         {
-                            SnipperAanvraag ver = ProgData.Snipper_Lijst.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
+                            SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
                             ver._Coorcinator = labelNaamFull.Text;
                             ver._rede_coordinator = "Afgekeurt";
                             ProgData.SaveSnipperLijst(dir);
@@ -206,7 +206,7 @@ namespace Bezetting2.Invoer
         
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dateTimePicker1.Value, comboBoxKleur.Text);
+            labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dateTimePicker1.Value, comboBoxKleur.Text);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Bezetting2.Invoer
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             // bepaal afhankelijk van datum en ploeg kleur dienst
-            comboBoxDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, monthCalendar1.SelectionStart, comboBoxPloeg.Text);
+            comboBoxDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), monthCalendar1.SelectionStart, comboBoxPloeg.Text);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace Bezetting2.Invoer
                 re._vanploeg = vanploeg;
 
                 ProgData.LoadExtraRuilLijst(re._datum.Year.ToString() + "\\" + re._datum.Month.ToString());
-                ProgData.RuilExtra_Lijst.Add(re);
+                ProgData.ListAanvraagRuilExtra.Add(re);
                 ProgData.SaveExtraRuilLijst(re._datum.Year.ToString() + "\\" + re._datum.Month.ToString());
                 RuilExtraForm_Shown(this, null);
             }
@@ -121,7 +121,7 @@ namespace Bezetting2.Invoer
         void laadGevraagdeDienstenMaand(string[] info, DateTime nu)
         {
             ProgData.LoadExtraRuilLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
-            foreach (AanvraagRuilExtra a in ProgData.RuilExtra_Lijst)
+            foreach (AanvraagRuilExtra a in ProgData.ListAanvraagRuilExtra)
             {
                 info[0] = a._naamAanvraagDoor;
                 info[1] = a._naamAanvraagVoor;
@@ -214,7 +214,7 @@ namespace Bezetting2.Invoer
 
                         try
                         {
-                            AanvraagRuilExtra ver = ProgData.RuilExtra_Lijst.First(a => (a._naamAanvraagVoor == invl.labelNaam.Text) && (a._datum.ToString("dd/MM/yyyy") == dat));
+                            AanvraagRuilExtra ver = ProgData.ListAanvraagRuilExtra.First(a => (a._naamAanvraagVoor == invl.labelNaam.Text) && (a._datum.ToString("dd/MM/yyyy") == dat));
                             ver._persoonLoopt = invl.textBoxLoopt.Text;
                             ProgData.SaveExtraRuilLijst(dir);
                         }

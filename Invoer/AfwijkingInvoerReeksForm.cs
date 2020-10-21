@@ -77,7 +77,7 @@ namespace Bezetting2.Invoer
                     while (aantal > 0)
                     {
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
-                        werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                        werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         if (ver._standaarddienst != "") // dus werkdag
                         {
                             ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
@@ -121,7 +121,7 @@ namespace Bezetting2.Invoer
                 // ploeg invullen
                 if (comboBox1.SelectedIndex == 2)
                 {
-                    foreach (personeel per in ProgData.kleur_personeel_lijst)
+                    foreach (personeel per in ProgData.ListPersoneelKleur)
                     {
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, per._achternaam, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
                     }
@@ -135,7 +135,7 @@ namespace Bezetting2.Invoer
                     bool Schrijf_GP = true;
 
                     ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
-                    werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                    werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
                     while (aantal > 0)
                     {
@@ -148,7 +148,7 @@ namespace Bezetting2.Invoer
                             if (start.Month != maand)           // als nieuwe maand deze laden, anders gaat het fout bij "ver = ProgData.Bezetting_Ploeg_Lijst.First"
                                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
 
-                            ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                            ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         }
 
                         if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
@@ -159,7 +159,7 @@ namespace Bezetting2.Invoer
                         if (start.Month != maand)
                             ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
 
-                        ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                        ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
                         if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
                         aantal--;
@@ -168,7 +168,7 @@ namespace Bezetting2.Invoer
                         ProgData.igekozenjaar = start.Year;
                         if (start.Month != maand)
                             ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
-                        ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                        ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
                         while (ver._standaarddienst == "")
                         {
@@ -177,14 +177,14 @@ namespace Bezetting2.Invoer
                             ProgData.igekozenjaar = start.Year;
                             if (start.Month != maand)
                                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
-                            ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                            ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         }
 
                         ProgData.igekozenmaand = start.Month;
                         ProgData.igekozenjaar = start.Year;
                         if (start.Month != maand)
                             ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
-                        ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                        ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         Schrijf_GP = !Schrijf_GP;
                     }
                     AantalDagen.Enabled = true;

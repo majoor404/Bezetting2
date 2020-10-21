@@ -18,9 +18,10 @@ namespace Bezetting2
             comboBoxIngevoerdDoor.Items.Add("");
             listViewHis.Items.Clear();
             string[] regel = new string[6];
-            foreach (veranderingen a in ProgData.Veranderingen_Lijst)
+            foreach (veranderingen a in ProgData.ListVeranderingen)
             {
-                if (comboBoxDag.Text == a._datumafwijking || comboBoxIngevoerdDoor.Text == a._invoerdoor)
+                if (comboBoxDag.Text == a._datumafwijking || comboBoxIngevoerdDoor.Text == a._invoerdoor ||
+                    comboBoxDag.Text == "")
                 {
                     regel[1] = a._afwijking;
                     regel[2] = a._datumafwijking;
@@ -50,7 +51,7 @@ namespace Bezetting2
             ProgData.LoadVeranderingenPloeg();
             listViewHis.Items.Clear();
             string[] regel = new string[6];
-            foreach (veranderingen a in ProgData.Veranderingen_Lijst)
+            foreach (veranderingen a in ProgData.ListVeranderingen)
             {
                 if (comboBoxDag.Text == a._datumafwijking || 
                     comboBoxIngevoerdDoor.Text == a._invoerdoor ||

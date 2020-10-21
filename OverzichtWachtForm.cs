@@ -253,7 +253,7 @@ namespace Bezetting2
             {
                 // voor elke persoon in lijst
                 string naam = box.Items[i].ToString();
-                werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
+                werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
                 broer.Items.Add(ver._afwijkingdienst);
                 if (ver._afwijkingdienst != "")
                     afwijking = true;
@@ -264,11 +264,11 @@ namespace Bezetting2
         {
             SaveData();
             dat = dat.AddDays(-1);
-            string dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
+            string dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (dienst == "")
             {
                 dat = dat.AddDays(-1);
-                dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
+                dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
             ProgData.igekozenjaar = dat.Year;
@@ -280,11 +280,11 @@ namespace Bezetting2
         {
             SaveData();
             dat = dat.AddDays(1);
-            string dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
+            string dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (dienst == "")
             {
                 dat = dat.AddDays(1);
-                dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
+                dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
             ProgData.igekozenjaar = dat.Year;
@@ -314,7 +314,7 @@ namespace Bezetting2
                                 // pak naam
                                 string naam = box.Items[i].ToString();
                                 // haal juiste werkdag bij persoon 
-                                werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
+                                werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
                                 if (box.Tag.ToString() == "1")
                                 {
                                     ver._werkplek = "";
@@ -343,18 +343,18 @@ namespace Bezetting2
 
             //labelKleur.Text = ProgData.GekozenKleur;
 
-            labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
+            labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
             if (labelDienst.Text == "")
             {
                 // kan geen next roetine gebruiken ivm save data daar terwijl deze leeg is.
                 dat = dat.AddDays(1);
-                labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
+                labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
                 while (labelDienst.Text == "")
                 {
                     dat = dat.AddDays(1);
-                    labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster, dat, ProgData.GekozenKleur);
+                    labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
                 }
             }
 
@@ -365,10 +365,10 @@ namespace Bezetting2
 
             try
             {
-                foreach (personeel man in ProgData.kleur_personeel_lijst)
+                foreach (personeel man in ProgData.ListPersoneelKleur)
                 {
 
-                    werkdag ver = ProgData.Bezetting_Ploeg_Lijst.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
+                    werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
                     if (ver._werkplek == "")
                     {
                         listBox1.Items.Add(man._achternaam);

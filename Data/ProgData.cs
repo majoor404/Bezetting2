@@ -27,33 +27,33 @@ namespace Bezetting2
         public static bool Disable_error_Meldingen = false;
         public static MainFormBezetting2 Main;
 
-        public static string GekozenRooster = "5pl";  // later aanpassen als kantoor dienst of zo
+        
 
         public static ToolStripStatusLabel _inlognaam;
         public static ToolStripStatusLabel _toegangnivo;
 
         public static List<string> Lijnen = new List<string>();
 
-        public static List<personeel> personeel_lijst = new List<personeel>();
-        public static List<personeel> kleur_personeel_lijst = new List<personeel>();
+        public static List<personeel> ListPersoneel = new List<personeel>();
+        public static List<personeel> ListPersoneelKleur = new List<personeel>();
         public static string ReloadSpeed1 = "";
         public static string ReloadSpeed2 = "";
 
         public static string _LooptExtra_Locatie;
-        public static List<LooptExtraDienst> LooptExtra_lijst = new List<LooptExtraDienst>();
+        public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
 
-        public static List<string> werkgroep_personeel = new List<string>();
+        public static List<string> ListWerkgroepPersoneel = new List<string>();
         public static ModuleDatum MDatum = new ModuleDatum();
 
-        public static List<veranderingen> Veranderingen_Lijst = new List<veranderingen>();
+        public static List<veranderingen> ListVeranderingen = new List<veranderingen>();
 
-        public static List<werkdag> Bezetting_Ploeg_Lijst = new List<werkdag>();
+        public static List<werkdag> ListWerkdagPloeg = new List<werkdag>();
 
         public static string _RuilExtra_Locatie;
-        public static List<AanvraagRuilExtra> RuilExtra_Lijst = new List<AanvraagRuilExtra>();
+        public static List<AanvraagRuilExtra> ListAanvraagRuilExtra = new List<AanvraagRuilExtra>();
 
         public static string _Snipper_Locatie;
-        public static List<SnipperAanvraag> Snipper_Lijst = new List<SnipperAanvraag>();
+        public static List<SnipperAanvraag> ListSnipperAanvraag = new List<SnipperAanvraag>();
 
         public static string Huidige_Gebruiker_Werkt_Op_Kleur;
 
@@ -76,6 +76,11 @@ namespace Bezetting2
                 Main.numericUpDownJaar.Value = value;
             }
         }
+
+        public static string GekozenRooster(){
+            return InstellingenProg._Rooster;
+        }
+
         public static string sgekozenjaar()
         {
             return _igekozenjaar.ToString();
@@ -120,7 +125,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(_inlognaam.Text);
-                personeel persoon = personeel_lijst.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ListPersoneel.First(a => a._persnummer == personeel_nr);
                 return persoon._achternaam;
             }
             catch
@@ -131,7 +136,7 @@ namespace Bezetting2
         public static void LoadPloegNamenLijst()
         {
             Main.labelDebug.Text = "Load Ploeg Namen Lijst";
-            kleur_personeel_lijst.Clear();
+            ListPersoneelKleur.Clear();
             try
             {
                 //string _Ploeg_Namen_Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
@@ -139,7 +144,7 @@ namespace Bezetting2
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
-                    kleur_personeel_lijst = (List<personeel>)bin.Deserialize(stream);
+                    ListPersoneelKleur = (List<personeel>)bin.Deserialize(stream);
                 }
             }
             catch (IOException)
@@ -162,7 +167,7 @@ namespace Bezetting2
                     using (Stream stream = File.Open(Locatie, FileMode.Create))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, kleur_personeel_lijst);
+                        bin.Serialize(stream, ListPersoneelKleur);
                     }
                 }
                 catch (IOException)
@@ -174,39 +179,55 @@ namespace Bezetting2
         }
         public static void MaakPloegNamenLijst(string kleur)
         {
-            DateTime dezemaand = new DateTime(igekozenjaar, igekozenmaand, 1, 0, 0, 0, 0, 0);
-            kleur_personeel_lijst.Clear();
+            //DateTime dezemaand = new DateTime(igekozenjaar, igekozenmaand, 1, 0, 0, 0, 0, 0);
+            ListPersoneelKleur.Clear();
 
             // query om juiste mensen te vinden
-            IEnumerable<personeel> ploeg_gekozen = from a in personeel_lijst
+            IEnumerable<personeel> ploeg_gekozen = from a in ListPersoneel
                                                    where (a._kleur == kleur) || (a._nieuwkleur == kleur)
                                                    select a;
 
             foreach (personeel a in ploeg_gekozen)
             {
-                if (a._nieuwkleur != "")
+                if (a._nieuwkleur != "" && kleur != a._nieuwkleur)
                 {
-                    DateTime verhuismaand = new DateTime(a._verhuisdatum.Year, a._verhuisdatum.Month, 1, 0, 0, 0, 0, 0);
-                    if (a._kleur == kleur)
+                    //als nieuwkleur aanwezig, kijk of hij in die bezetting_Ploeg_lijst voorkomt,
+                    //regel dat anders, als file niet bestaat, gaat dat vanzelf 
+                    if (File.Exists(Ploeg_Bezetting_Locatie(a._nieuwkleur)))
                     {
-                        if (verhuismaand >= dezemaand)
-                            kleur_personeel_lijst.Add(a);
+                        LoadPloegBezetting(a._nieuwkleur);
+                        // check of naam er in zit
+                        try
+                        {
+                            werkdag ver = ListWerkdagPloeg.First(x => (x._naam == a._achternaam));
+                        }
+                        catch
+                        {
+                            // deze persoon bestaat niet in bezetting, dus toevoegen
+                            // elke dag in deze maand
+                            int aantal_dagen_deze_maand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
+                            for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                            {
+                                DateTime dat = new DateTime(igekozenjaar, igekozenmaand, i);
+                                werkdag dag = new werkdag();
+                                dag._naam = a._achternaam;
+                                dag._standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._nieuwkleur);
+                                dag._werkplek = "";
+                                dag._afwijkingdienst = "";
+                                dag._dagnummer = i;
+                                ListWerkdagPloeg.Add(dag);
+                            }
+                            SavePloegBezetting(a._nieuwkleur);
+                        }
                     }
-                    else
-                    {
-                        if (verhuismaand <= dezemaand)
-                            kleur_personeel_lijst.Add(a);
-                    }
+                    
                 }
-                else
-                {
-                    kleur_personeel_lijst.Add(a);
-                }
+                    ListPersoneelKleur.Add(a);
             }
 
             //kleur_personeel.Sort();
             // sorteer kleur_personeel
-            kleur_personeel_lijst.Sort(delegate (personeel x, personeel y)
+            ListPersoneelKleur.Sort(delegate (personeel x, personeel y)
             {
                 return x._achternaam.CompareTo(y._achternaam);
             });
@@ -222,22 +243,22 @@ namespace Bezetting2
         }
         public static void MaakLegeBezetting(string jaar, string maand, string kleur)
         {
-            Bezetting_Ploeg_Lijst.Clear();
+            ListWerkdagPloeg.Clear();
             // elke dag in deze maand
             int aantal_dagen_deze_maand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
             // elke persoon
-            foreach (personeel a in kleur_personeel_lijst)
+            foreach (personeel a in ListPersoneelKleur)
             {
                 for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
                 {
                     DateTime dat = new DateTime(igekozenjaar, igekozenmaand, i);
                     werkdag dag = new werkdag();
                     dag._naam = a._achternaam;
-                    dag._standaarddienst = MDatum.GetDienst(GekozenRooster, dat, a._kleur);
+                    dag._standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._kleur);
                     dag._werkplek = "";
                     dag._afwijkingdienst = "";
                     dag._dagnummer = i;
-                    Bezetting_Ploeg_Lijst.Add(dag);
+                    ListWerkdagPloeg.Add(dag);
                 }
             }
             SavePloegBezetting(kleur);
@@ -253,7 +274,7 @@ namespace Bezetting2
                     using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, Bezetting_Ploeg_Lijst);
+                        bin.Serialize(stream, ListWerkdagPloeg);
                     }
                 }
                 catch
@@ -267,7 +288,7 @@ namespace Bezetting2
         public static void LoadPloegBezetting(string kleur)
         {
             Main.labelDebug.Text = "Load Ploeg Bezetting";
-            Bezetting_Ploeg_Lijst.Clear();
+            ListWerkdagPloeg.Clear();
             try
             {
                 using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(kleur), FileMode.Open))
@@ -275,7 +296,7 @@ namespace Bezetting2
                     BinaryFormatter bin = new BinaryFormatter();
                     try
                     {
-                        Bezetting_Ploeg_Lijst = (List<werkdag>)bin.Deserialize(stream);
+                        ListWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
                         stream.Dispose();
                     }
                     catch
@@ -299,14 +320,14 @@ namespace Bezetting2
         public static void LoadVeranderingenPloeg()
         {
             Main.labelDebug.Text = "Load Ploeg Veranderingen";
-            Veranderingen_Lijst.Clear();
+            ListVeranderingen.Clear();
             try
             {
                 using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(), FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
-                    Veranderingen_Lijst = (List<veranderingen>)bin.Deserialize(stream);
+                    ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
                     Main.labelDebug.Text = "";
                 }
             }
@@ -329,7 +350,7 @@ namespace Bezetting2
                     using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(), FileMode.Create))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, Veranderingen_Lijst);
+                        bin.Serialize(stream, ListVeranderingen);
                         Main.labelDebug.Text = "";
                     }
                 }
@@ -375,7 +396,7 @@ namespace Bezetting2
                 using (Stream stream = File.Open("personeel.bin", FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
-                    bin.Serialize(stream, personeel_lijst);
+                    bin.Serialize(stream, ListPersoneel);
                 }
             }
             catch
@@ -388,13 +409,13 @@ namespace Bezetting2
         public static void Lees_Namen_lijst()
         {
             Main.labelDebug.Text = "Load Namen Lijst";
-            personeel_lijst.Clear();
+            ListPersoneel.Clear();
             try
             {
                 using (Stream stream = File.Open("personeel.bin", FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
-                    personeel_lijst = (List<personeel>)bin.Deserialize(stream);
+                    ListPersoneel = (List<personeel>)bin.Deserialize(stream);
                 }
             }
             catch (IOException)
@@ -422,11 +443,11 @@ namespace Bezetting2
         }
         static void MaakWerkPlekkenLijst()
         {
-            werkgroep_personeel.Clear();
-            foreach (personeel a in kleur_personeel_lijst)
+            ListWerkgroepPersoneel.Clear();
+            foreach (personeel a in ListPersoneelKleur)
             {
-                if (!werkgroep_personeel.Contains(a._werkgroep))
-                    werkgroep_personeel.Add(a._werkgroep);
+                if (!ListWerkgroepPersoneel.Contains(a._werkgroep))
+                    ListWerkgroepPersoneel.Add(a._werkgroep);
             }
         }
         /// <summary>
@@ -442,7 +463,7 @@ namespace Bezetting2
             LoadPloegBezetting(kleur);
             try
             {
-                werkdag ver = Bezetting_Ploeg_Lijst.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dagnr));
+                werkdag ver = ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dagnr));
                 ver._afwijkingdienst = afwijking;
                 SavePloegBezetting(kleur);
 
@@ -455,7 +476,7 @@ namespace Bezetting2
                 verander._datuminvoer = DateTime.Now.ToShortDateString();
                 verander._rede = rede; // de rede
                 verander._invoerdoor = invoerdoor;
-                Veranderingen_Lijst.Add(verander);
+                ListVeranderingen.Add(verander);
                 SaveVeranderingenPloeg();
                 ChangeData = true;
             }
@@ -549,7 +570,7 @@ namespace Bezetting2
         }
         public static void LoadExtraRuilLijst(string dir)
         {
-            RuilExtra_Lijst.Clear();
+            ListAanvraagRuilExtra.Clear();
             _RuilExtra_Locatie = Path.GetFullPath(dir + "\\ruilextra.bin");
             try
             {
@@ -557,7 +578,7 @@ namespace Bezetting2
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
-                    RuilExtra_Lijst = (List<AanvraagRuilExtra>)bin.Deserialize(stream);
+                    ListAanvraagRuilExtra = (List<AanvraagRuilExtra>)bin.Deserialize(stream);
                 }
             }
             catch { }
@@ -570,7 +591,7 @@ namespace Bezetting2
                 using (Stream st = File.Open(_RuilExtra_Locatie, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
-                    bin.Serialize(st, RuilExtra_Lijst);
+                    bin.Serialize(st, ListAanvraagRuilExtra);
                 }
             }
             catch
@@ -580,7 +601,7 @@ namespace Bezetting2
         }
         public static void LoadSnipperLijst(string dir)
         {
-            Snipper_Lijst.Clear();
+            ListSnipperAanvraag.Clear();
             _Snipper_Locatie = Path.GetFullPath(dir + "\\snipper.bin");
             try
             {
@@ -588,7 +609,7 @@ namespace Bezetting2
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
-                    Snipper_Lijst = (List<SnipperAanvraag>)bin.Deserialize(stream);
+                    ListSnipperAanvraag = (List<SnipperAanvraag>)bin.Deserialize(stream);
                 }
             }
             catch { }
@@ -601,7 +622,7 @@ namespace Bezetting2
                 using (Stream st = File.Open(_Snipper_Locatie, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
-                    bin.Serialize(st, Snipper_Lijst);
+                    bin.Serialize(st, ListSnipperAanvraag);
                 }
             }
             catch
@@ -611,7 +632,7 @@ namespace Bezetting2
         }
         public static void LoadLooptExtraLijst(string dir, string kleur)
         {
-            LooptExtra_lijst.Clear();
+            ListLooptExtra.Clear();
             _LooptExtra_Locatie = Path.GetFullPath(dir + "\\" + kleur + "_extra.bin");
             try
             {
@@ -619,7 +640,7 @@ namespace Bezetting2
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
-                    LooptExtra_lijst = (List<LooptExtraDienst>)bin.Deserialize(stream);
+                    ListLooptExtra = (List<LooptExtraDienst>)bin.Deserialize(stream);
                 }
             }
             catch { }
@@ -632,7 +653,7 @@ namespace Bezetting2
                 using (Stream st = File.Open(_LooptExtra_Locatie, FileMode.Create))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
-                    bin.Serialize(st, LooptExtra_lijst);
+                    bin.Serialize(st, ListLooptExtra);
                 }
             }
             catch
@@ -701,7 +722,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(nummer);
-                personeel persoon = personeel_lijst.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ListPersoneel.First(a => a._persnummer == personeel_nr);
                 return true;
             }
             catch
@@ -714,7 +735,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(nummer);
-                personeel persoon = personeel_lijst.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ListPersoneel.First(a => a._persnummer == personeel_nr);
                 return persoon._kleur;
             }
             catch
@@ -727,7 +748,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(nummer);
-                personeel persoon = personeel_lijst.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ListPersoneel.First(a => a._persnummer == personeel_nr);
                 return persoon._achternaam;
             }
             catch
@@ -741,7 +762,7 @@ namespace Bezetting2
             try
             {
                 //int personeel_nr = int.Parse(nummer);
-                personeel persoon = personeel_lijst.First(a => a._achternaam == naam);
+                personeel persoon = ListPersoneel.First(a => a._achternaam == naam);
                 return persoon._persnummer.ToString();
             }
             catch

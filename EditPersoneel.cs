@@ -24,7 +24,7 @@ namespace Bezetting2
             comboBoxFilter.Items.Clear();
             string[] arr = new string[5];
             ListViewItem itm;
-            foreach (personeel a in ProgData.personeel_lijst)
+            foreach (personeel a in ProgData.ListPersoneel)
             {
                 arr[0] = a._persnummer.ToString();
                 arr[1] = a._achternaam;
@@ -79,7 +79,7 @@ namespace Bezetting2
             ViewNamen.Items.Clear();
             string[] arr = new string[5];
             ListViewItem itm;
-            foreach (personeel a in ProgData.personeel_lijst)
+            foreach (personeel a in ProgData.ListPersoneel)
             {
                 if (a._kleur == comboBoxFilter.Text || comboBoxFilter.Text == "")
                 {
@@ -125,7 +125,7 @@ namespace Bezetting2
             {
                 EditPersoneel_Shown(this, null);
             }
-            foreach (personeel a in ProgData.personeel_lijst)
+            foreach (personeel a in ProgData.ListPersoneel)
             {
                 if (a._persnummer == selpersnummer)
                 {
@@ -172,8 +172,8 @@ namespace Bezetting2
         {
             try
             {
-                personeel persoon_gekozen = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
-                ProgData.personeel_lijst.Remove(persoon_gekozen);
+                personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                ProgData.ListPersoneel.Remove(persoon_gekozen);
                 buttonVoegToe_Click(this, null);
                 EditPersoneel_Shown(this, null);
             }
@@ -194,7 +194,7 @@ namespace Bezetting2
 
             try
             {
-                personeel persoon_gekozen = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
 
                 // zat op deze kleur, maar gaat naar nieuwe
                 // dus zet kruisjes dat hij niet meer aanwezig is.
@@ -240,11 +240,11 @@ namespace Bezetting2
                     DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
                     werkdag dag = new werkdag();
                     dag._naam = persoon_gekozen._achternaam;
-                    dag._standaarddienst = ProgData.MDatum.GetDienst(ProgData.GekozenRooster, dat, persoon_gekozen._nieuwkleur);
+                    dag._standaarddienst = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dat, persoon_gekozen._nieuwkleur);
                     dag._werkplek = "";
                     dag._afwijkingdienst = "";
                     dag._dagnummer = i;
-                    ProgData.Bezetting_Ploeg_Lijst.Add(dag);
+                    ProgData.ListWerkdagPloeg.Add(dag);
                 }
                 ProgData.SavePloegBezetting(ProgData.GekozenKleur);
                 
@@ -277,7 +277,7 @@ namespace Bezetting2
 
         private void buttonCancelVerhuis_Click(object sender, EventArgs e)
         {
-            personeel persoon_gekozen = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+            personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
             DateTime dum = new DateTime(9999, 1, 1);
             persoon_gekozen._verhuisdatum = dum;
             persoon_gekozen._nieuwkleur = "";
@@ -297,7 +297,7 @@ namespace Bezetting2
             DialogResult dialog = recht.ShowDialog();
             if (dialog == DialogResult.OK)
             {
-                personeel persoon = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
                 persoon._rechten = int.Parse(recht.labelRechtenNivo.Text);
                 ProgData.Save_Namen_lijst();
             }
@@ -309,8 +309,8 @@ namespace Bezetting2
             DialogResult dialogResult = MessageBox.Show("Delete deze naam ?", "Delete", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                personeel persoon = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
-                ProgData.personeel_lijst.Remove(persoon);
+                personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                ProgData.ListPersoneel.Remove(persoon);
                 ProgData.Save_Namen_lijst();
                 EditPersoneel_Shown(this, null);
             }
@@ -352,7 +352,7 @@ namespace Bezetting2
             a._funtie = textBoxFuntie.Text;
             a._werkgroep = textBoxWerkplek.Text;
             a._rechten = 0;
-            ProgData.personeel_lijst.Add(a);
+            ProgData.ListPersoneel.Add(a);
             ProgData.Save_Namen_lijst();
             EditPersoneel_Shown(this, null);
         }

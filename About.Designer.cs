@@ -56,7 +56,6 @@
             this.textBox1.Size = new System.Drawing.Size(558, 148);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = resources.GetString("textBox1.Text");
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -94,7 +93,6 @@
             this.textBox2.Size = new System.Drawing.Size(558, 309);
             this.textBox2.TabIndex = 5;
             this.textBox2.Text = resources.GetString("textBox2.Text");
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // About
             // 

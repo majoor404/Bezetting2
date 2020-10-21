@@ -129,13 +129,23 @@ Eea is een Work in Progress ;-)
 ronald.majoor@tatasteeleurope.com - r.majoor@gmail.com</value>
   </data>
   <data name="textBox2.Text" xml:space="preserve">
-    <value>13-10-20 R.Docter diverse aanpassingen
-14-10-20 eerste versie test 
-15-10-20 M.Kieft bug load personeel vanuit verleden
-17-10-20 Geel Minimize knopje history venster
-17-10-20 Geel Grijze balk van werkplek over gehele breedte
+    <value>13-10-20 R.Docter diverse aanpassingen.
+14-10-20 eerste versie test.
+15-10-20 M.Kieft bug load personeel vanuit verleden.
+17-10-20 Geel Minimize knopje history venster.
+17-10-20 Geel Grijze balk van werkplek over gehele breedte.
 17-10-20 Geel History filter verbeterd.
 18-10-20 Majoor Extra diensten en aanvraag niet visible als niet gebruik.
-18-10-20 Majoor Tel niet mee in telling toegevoegd.</value>
+18-10-20 Majoor Tel niet mee in telling toegevoegd.
+19-10-20 M.Kieft Afwijkingen van ingelogd persoon telling gemaakt.
+21-10-20 Vonhoff bug bij verhuizing niet kunnen invullen.
+
+Nog Bugs/Todo
+Meerdere items wissen (blanken)
+afwijkingen persoon en ploeg in excel (kieft)  toekomst/verleden
+kleur keuze excel namen lijst (van haaften)
+DD joop boots
+
+</value>
   </data>
 </root>

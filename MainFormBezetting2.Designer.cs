@@ -53,6 +53,7 @@
             this.importOudeVeranderDataOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.repareerPloegAfwijkingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenProgrammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nietMeeTelLijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -94,7 +95,6 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
-            this.nietMeeTelLijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -225,6 +225,7 @@
             this.afwijkingTovRoosterPloegToolStripMenuItem.Name = "afwijkingTovRoosterPloegToolStripMenuItem";
             this.afwijkingTovRoosterPloegToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
             this.afwijkingTovRoosterPloegToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg";
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Click += new System.EventHandler(this.afwijkingTovRoosterPloegToolStripMenuItem_Click);
             // 
             // beheerToolStripMenuItem
             // 
@@ -294,6 +295,14 @@
             this.instellingenProgrammaToolStripMenuItem.Text = "Instellingen Programma";
             this.instellingenProgrammaToolStripMenuItem.Click += new System.EventHandler(this.instellingenProgrammaToolStripMenuItem_Click);
             // 
+            // nietMeeTelLijstToolStripMenuItem
+            // 
+            this.nietMeeTelLijstToolStripMenuItem.Enabled = false;
+            this.nietMeeTelLijstToolStripMenuItem.Name = "nietMeeTelLijstToolStripMenuItem";
+            this.nietMeeTelLijstToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
+            this.nietMeeTelLijstToolStripMenuItem.Text = "Niet Mee Tel Lijst";
+            this.nietMeeTelLijstToolStripMenuItem.Click += new System.EventHandler(this.nietMeeTelLijstToolStripMenuItem_Click);
+            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -355,7 +364,8 @@
             "Rood",
             "Wit",
             "Geel",
-            "Groen"});
+            "Groen",
+            "DD"});
             this.comboBoxKleurKeuze.Location = new System.Drawing.Point(12, 45);
             this.comboBoxKleurKeuze.Name = "comboBoxKleurKeuze";
             this.comboBoxKleurKeuze.Size = new System.Drawing.Size(103, 24);
@@ -745,14 +755,6 @@
             this.labelDebug.Size = new System.Drawing.Size(60, 13);
             this.labelDebug.TabIndex = 29;
             this.labelDebug.Text = "Debug Info";
-            // 
-            // nietMeeTelLijstToolStripMenuItem
-            // 
-            this.nietMeeTelLijstToolStripMenuItem.Enabled = false;
-            this.nietMeeTelLijstToolStripMenuItem.Name = "nietMeeTelLijstToolStripMenuItem";
-            this.nietMeeTelLijstToolStripMenuItem.Size = new System.Drawing.Size(328, 22);
-            this.nietMeeTelLijstToolStripMenuItem.Text = "Niet Mee Tel Lijst";
-            this.nietMeeTelLijstToolStripMenuItem.Click += new System.EventHandler(this.nietMeeTelLijstToolStripMenuItem_Click);
             // 
             // MainFormBezetting2
             // 

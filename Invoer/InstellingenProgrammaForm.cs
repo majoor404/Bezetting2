@@ -23,6 +23,7 @@ namespace Bezetting2.Invoer
             checkBoxGebruikRuilExtra.Checked = InstellingenProg._GebruikExtraRuil;
             checkBoxGebruikSnipper.Checked = InstellingenProg._GebruikSnipper;
             textBoxMinAantalPersonen.Text = InstellingenProg._MinimaalAantalPersonen.ToString();
+            comboBoxRooster.Text = InstellingenProg._Rooster;
         }
 
         private void checkBoxGebruikRuilExtra_CheckedChanged(object sender, EventArgs e)
@@ -39,6 +40,11 @@ namespace Bezetting2.Invoer
         {
             InstellingenProg._MinimaalAantalPersonen = int.Parse(textBoxMinAantalPersonen.Text);
             InstellingenProg.SaveProgrammaData();
+        }
+
+        private void comboBoxRooster_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            InstellingenProg._Rooster = comboBoxRooster.Text;
         }
     }
 }

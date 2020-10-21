@@ -44,7 +44,7 @@ namespace Bezetting2
                 }
                 else
                 {
-                    personeel persoon = ProgData.personeel_lijst.First(b => b._persnummer.ToString() == textBoxNum.Text);
+                    personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
                     if (ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
                     {
                         {
@@ -77,7 +77,7 @@ namespace Bezetting2
             //check passwoord
             try
             {
-                personeel persoon = ProgData.personeel_lijst.First(b => b._persnummer.ToString() == textBoxNum.Text);
+                personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
                 if (ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
                 {
                     // juiste inlog
@@ -91,7 +91,7 @@ namespace Bezetting2
         }
         private void buttonVerander_Click(object sender, EventArgs e)
         {
-            personeel persoon = ProgData.personeel_lijst.First(a => a._persnummer.ToString() == textBoxNum.Text);
+            personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxNum.Text);
             // encrypt pass
             if (textBoxChangePasswoord.Text == textBoxNum.Text)
             {
@@ -114,7 +114,7 @@ namespace Bezetting2
             // na reset passwoord is het "verander_nu", pas meteen aan.
             try
             {
-                personeel persoon = ProgData.personeel_lijst.First(b => b._persnummer.ToString() == textBoxNum.Text);
+                personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
                 if (ProgData.Unscramble(persoon._passwoord) == "verander_nu")
                 {
                     MessageBox.Show("Geef nieuwe passwoord op, verboden is uw gebruikers naam/personeel nummer!");

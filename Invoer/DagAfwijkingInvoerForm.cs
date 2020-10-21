@@ -26,7 +26,7 @@ namespace Bezetting2
             buttonReeks.Enabled = true;
             try
             {
-                veranderingen ver = ProgData.Veranderingen_Lijst.Last(a => (a._naam == labelNaam.Text) && (a._datumafwijking == labelDatum.Text));
+                veranderingen ver = ProgData.ListVeranderingen.Last(a => (a._naam == labelNaam.Text) && (a._datumafwijking == labelDatum.Text));
                 if (ver._afwijking != "")
                 {
                     textBoxAfwijking.Text = ver._afwijking;
@@ -90,7 +90,7 @@ namespace Bezetting2
                     lop._datum = _verzoekdag;
                     lop._naam = labelNaam.Text;
 
-                    ProgData.LooptExtra_lijst.Add(lop);
+                    ProgData.ListLooptExtra.Add(lop);
                     ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
                 }
             }
@@ -127,8 +127,8 @@ namespace Bezetting2
                 ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
                 try
                 {
-                    LooptExtraDienst lp = ProgData.LooptExtra_lijst.First(a => (a._naam == labelNaam.Text) && (a._datum == _verzoekdag));
-                    ProgData.LooptExtra_lijst.Remove(lp);
+                    LooptExtraDienst lp = ProgData.ListLooptExtra.First(a => (a._naam == labelNaam.Text) && (a._datum == _verzoekdag));
+                    ProgData.ListLooptExtra.Remove(lp);
                     ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
                 }
                 catch { }
