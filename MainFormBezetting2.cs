@@ -45,7 +45,7 @@ namespace Bezetting2
 
         public class ClassTelAfwijkingen
         {
-            public ClassTelAfwijkingen(string afwijking,int aantal,bool toekomst)
+            public ClassTelAfwijkingen(string afwijking, int aantal, bool toekomst)
             {
                 _Afwijking = afwijking;
                 _Aantal = aantal;
@@ -1238,9 +1238,9 @@ namespace Bezetting2
 
                         DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
 
-                            if ((gekozen > nu) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
-                            //if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
-                            {
+                        if ((gekozen > nu) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
+                        //if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
+                        {
                             try
                             {
                                 string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
@@ -1708,9 +1708,8 @@ namespace Bezetting2
             string locatie = @"telnietmee.ini";
             ListTelNietMeeNamen = File.ReadAllLines(locatie).ToList();
 
-            Excel.Application oXL;
-            Excel._Workbook oWB;
-            Excel._Worksheet oSheet;
+            Excel.Application xlApp;
+            Excel._Workbook xlWorkBook;
             Excel.Range oRng;
 
             for (int i = 1; i < 13; i++)    // maanden
@@ -1724,93 +1723,114 @@ namespace Bezetting2
             try
             {
                 //Start Excel and get Application object.
-                oXL = new Excel.Application();
-                oXL.Visible = true;
+                xlApp = new Excel.Application();
+                xlApp.Visible = true;
 
                 //Get a new workbook.
-                oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
-                oSheet = (Excel._Worksheet)oWB.ActiveSheet;
+                string file = Path.GetFullPath("OverzichtPersoon.xls");
 
-                // Add table headers going cell by cell.
-                oSheet.Cells[1, 1] = "Afwijkingen tov rooster in Jaar : ";
-                oSheet.Cells[1, 2] = ProgData.sgekozenjaar();
-                oSheet.Cells[2, 1] = "Ploegkleur : ";
-                oSheet.Cells[2, 2] = ProgData.GekozenKleur;
-                oSheet.Cells[3, 1] = "Naam : ";
-                oSheet.Cells[3, 2] = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
+                xlWorkBook = xlApp.Workbooks.Open(file, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, true, 0, true, 1, 0);
 
-                oSheet.get_Range("A1", "B4").Font.Bold = true;
+                Excel.Worksheet excelSheet = xlWorkBook.ActiveSheet;
 
-                int row = 6;
-                oSheet.Cells[1, 5] = "Aantal            ";
-                oSheet.Cells[1, 6] = "Aantal in toekomst";
+                // schoonvegen
+
+                // eerste getal is regel
+                // tweede kolom
+
+                oRng = excelSheet.Range[excelSheet.Cells[1, 2], excelSheet.Cells[3, 2]];
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[3, 5], excelSheet.Cells[34, 6]];
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[20, 4], excelSheet.Cells[34, 4]];
+                oRng.ClearContents();
+                oRng.Value = null;
+
+                excelSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                excelSheet.Cells[2, 2] = ProgData.Get_Gebruiker_Kleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
+                excelSheet.Cells[3, 2] = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
+
+
+                int row = 20;
+                int vaste_regel;
 
                 foreach (ClassTelAfwijkingen afwijkingen in ListClassTelAfwijkingen)
                 {
                     switch (afwijkingen._Afwijking)
                     {
-                        case "V":
-                            oSheet.Cells[2, 4] = "Vrij volgens rooster  ";
-                            if (afwijkingen._Toekomst)
-                            {
-                                oSheet.Cells[2, 5] = afwijkingen._Aantal;
-                            }
-                            else
-                            {
-                                oSheet.Cells[2, 6] = afwijkingen._Aantal;
-                            }
+                        case "VK":
+                            vaste_regel = 3;
                             break;
-                        case "W":
-                            oSheet.Cells[3, 4] = "Volledig gewerkte dagen zonder afwijking  ";
-                            if (afwijkingen._Toekomst)
-                            {
-                                oSheet.Cells[3, 5] = afwijkingen._Aantal;
-                            }
-                            else
-                            {
-                                oSheet.Cells[3, 6] = afwijkingen._Aantal;
-                            }
+                        case "8OI":
+                            vaste_regel = 4;
                             break;
                         case "A":
-                            oSheet.Cells[4, 4] = "A";
-                            if (afwijkingen._Toekomst)
-                            {
-                                oSheet.Cells[4, 5] = afwijkingen._Aantal;
-                            }
-                            else
-                            {
-                                oSheet.Cells[4, 6] = afwijkingen._Aantal;
-                            }
+                            vaste_regel = 5;
                             break;
-                        case "VAK":
-                            oSheet.Cells[5, 4] = "VAK";
-                            if (afwijkingen._Toekomst)
-                            {
-                                oSheet.Cells[5, 5] = afwijkingen._Aantal;
-                            }
-                            else
-                            {
-                                oSheet.Cells[5, 6] = afwijkingen._Aantal;
-                            }
+                        case "Z":
+                            vaste_regel = 6;
+                            break;
+                        case "VF":
+                            vaste_regel = 7;
+                            break;
+                        case "GP":
+                            vaste_regel = 8;
+                            break;
+                        case "OPLO":
+                            vaste_regel = 9;
+                            break;
+                        case "OPL":
+                            vaste_regel = 10;
+                            break;
+                        case "K":
+                            vaste_regel = 11;
+                            break;
+                        case "ADV":
+                            vaste_regel = 12;
+                            break;
+                        case "BV":
+                            vaste_regel = 13;
+                            break;
+                        case "V":
+                            vaste_regel = 14;
+                            break;
+                        case "W":
+                            vaste_regel = 15;
+                            break;
+                        case "1/2 VK":
+                            vaste_regel = 16;
+                            break;
+                        case "*":
+                            vaste_regel = 17;
                             break;
                         default:
-                            oSheet.Cells[row, 4] = afwijkingen._Afwijking;
-                            oSheet.Cells[row, 5] = afwijkingen._Aantal;
-                            oSheet.Cells[row, 6] = afwijkingen._Toekomst;
-                            row++;
+                            vaste_regel = 0;
                             break;
+                    }
+
+                    if (vaste_regel == 0)
+                    {
+                        vaste_regel = row;
+                        excelSheet.Cells[vaste_regel, 4] = afwijkingen._Afwijking;
+                        row++;
+                    }
+
+                    if (afwijkingen._Toekomst)
+                    {
+                        excelSheet.Cells[vaste_regel, 6] = afwijkingen._Aantal;
+                    }
+                    else
+                    {
+                        excelSheet.Cells[vaste_regel, 5] = afwijkingen._Aantal;
                     }
                 }
 
-                //AutoFit columns A:D.
-                oRng = oSheet.get_Range("A1", "Z15");
-                oRng.EntireColumn.AutoFit();
-
-
                 //Make sure Excel is visible and give the user control
                 //of Microsoft Excel's lifetime.
-                oXL.Visible = true;
-                oXL.UserControl = true;
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
             }
             catch (Exception theException)
             {
@@ -1826,7 +1846,7 @@ namespace Bezetting2
 
         private void afwijkingTovRoosterPloegToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void GetAfwijkingenPersoonInEenMaand(string persnum, int jaar, int maand)
@@ -1890,9 +1910,9 @@ namespace Bezetting2
                             ListClassTelAfwijkingen.Add(new ClassTelAfwijkingen(deze_maand_overzicht_persoon[q], 1, toekomst));
                         }
                     }
-                    catch{}
-                    
-                        
+                    catch { }
+
+
                     //if (!ListAfwijkingen.Contains(deze_maand_overzicht_persoon[q]))
                     //{
                     //    ListAfwijkingen.Add(deze_maand_overzicht_persoon[q]);
