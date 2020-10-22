@@ -71,6 +71,9 @@
     <Compile Include="EditPersoneel.Designer.cs">
       <DependentUpon>EditPersoneel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Excel Menu Items\Excel.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="InlogGebeuren\RechtenInstellenForm.cs">
       <SubType>Form</SubType>
     </Compile>
