@@ -49,7 +49,7 @@ namespace Bezetting2.Invoer
                        a._rede_coordinator != "Zelf Gecanceld")
                         staat_die_al_in_lijst = true;
                 }
-                
+
                 if (!staat_die_al_in_lijst && comboBox1.Text != "")
                 {
                     ProgData.ListSnipperAanvraag.Add(snip);
@@ -79,8 +79,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-
-        void laadGevraagdeSnipperMaand(string[] info, DateTime nu)
+        private void laadGevraagdeSnipperMaand(string[] info, DateTime nu)
         {
             ProgData.LoadSnipperLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
             foreach (SnipperAanvraag a in ProgData.ListSnipperAanvraag)
@@ -103,12 +102,11 @@ namespace Bezetting2.Invoer
         {
             if (listViewSnipper.SelectedItems.Count > 0)
             {
-
                 int index = listViewSnipper.Items.IndexOf(listViewSnipper.SelectedItems[0]);
                 if (index > -1)
                 {
                     string dat = listViewSnipper.Items[index].SubItems[0].Text;
-                    
+
                     //string jaar = dat.Substring(6, 4);
                     //string maand = dat.Substring(3, 2);
                     //if (maand.Substring(0, 1) == "0")
@@ -187,7 +185,7 @@ namespace Bezetting2.Invoer
                         // afgekeurd
                         string naam = listViewSnipper.Items[index].SubItems[1].Text;
                         string datum = listViewSnipper.Items[index].SubItems[0].Text;
-                        // 
+                        //
                         try
                         {
                             SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
@@ -203,7 +201,7 @@ namespace Bezetting2.Invoer
                 }
             }
         }
-        
+
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dateTimePicker1.Value, comboBoxKleur.Text);

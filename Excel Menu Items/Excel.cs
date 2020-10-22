@@ -1,14 +1,10 @@
 ﻿using Bezetting2.Data;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Office.Interop;
-using System.Diagnostics;
 
 namespace Bezetting2
 {
@@ -60,7 +56,7 @@ namespace Bezetting2
                 oRng = excelSheet.Range[excelSheet.Cells[3, 5], excelSheet.Cells[34, 6]];
                 oRng.ClearContents();
                 oRng.Value = null;
-                oRng = excelSheet.Range[excelSheet.Cells[20, 4], excelSheet.Cells[34, 4]];
+                oRng = excelSheet.Range[excelSheet.Cells[21, 4], excelSheet.Cells[34, 4]];
                 oRng.ClearContents();
                 oRng.Value = null;
 
@@ -68,8 +64,7 @@ namespace Bezetting2
                 excelSheet.Cells[2, 2] = ProgData.Get_Gebruiker_Kleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
                 excelSheet.Cells[3, 2] = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
 
-
-                int row = 20;
+                int row = 21;
                 int vaste_regel;
 
                 foreach (ClassTelAfwijkingen afwijkingen in ListClassTelAfwijkingen)
@@ -79,48 +74,75 @@ namespace Bezetting2
                         case "VK":
                             vaste_regel = 3;
                             break;
+
                         case "8OI":
                             vaste_regel = 4;
                             break;
+
                         case "A":
                             vaste_regel = 5;
                             break;
+
                         case "Z":
                             vaste_regel = 6;
                             break;
+
                         case "VF":
                             vaste_regel = 7;
                             break;
+
                         case "GP":
                             vaste_regel = 8;
                             break;
+
                         case "OPLO":
                             vaste_regel = 9;
                             break;
+
                         case "OPL":
                             vaste_regel = 10;
                             break;
+
                         case "K":
                             vaste_regel = 11;
                             break;
+
                         case "ADV":
                             vaste_regel = 12;
                             break;
+
                         case "BV":
                             vaste_regel = 13;
                             break;
+
                         case "V":
                             vaste_regel = 14;
                             break;
+
                         case "W":
                             vaste_regel = 15;
                             break;
+
                         case "1/2 VK":
                             vaste_regel = 16;
                             break;
+
                         case "*":
                             vaste_regel = 17;
                             break;
+
+                        case "ED":
+                            vaste_regel = 18;
+                            break;
+
+                        case "RD":
+                            vaste_regel = 19;
+                            break;
+
+                        case "VD":
+                            vaste_regel = 20;
+                            break;
+
                         default:
                             vaste_regel = 0;
                             break;
@@ -185,10 +207,34 @@ namespace Bezetting2
                         {
                             deze_maand_overzicht_persoon[dag._dagnummer] = "V"; // Rooster vrij
                         }
+                        
                         // daarna overschrijven als die afwijkt van ""
                         if (dag._afwijkingdienst != "")
                         {
-                            deze_maand_overzicht_persoon[dag._dagnummer] = dag._afwijkingdienst;
+                            string dum = dag._afwijkingdienst;
+                            if (dum.Length > 3 && dum.Substring(0, 3) == "ED-")
+                            {
+                                dum = "ED";                              
+                            }
+                            if (dum.Length > 3 && dum.Substring(0, 3) == "RD-")
+                            {
+                                dum = "RD";
+                            }
+                            if (dum.Length > 3 && dum.Substring(0, 3) == "VD-")
+                            {
+                                dum = "VD";
+                            }
+                            if (InstellingenProg._TelVakAlsVK && dum == "VAK")
+                            {
+                                dum = "VK";
+                            }
+
+                            if (InstellingenProg._TelAalsVK && dum == "A")
+                            {
+                                dum = "VK";
+                            }
+
+                            deze_maand_overzicht_persoon[dag._dagnummer] = dum;
                         }
 
                         if (ListTelNietMeeNamen.Contains(deze_maand_overzicht_persoon[dag._dagnummer]))
@@ -223,7 +269,6 @@ namespace Bezetting2
                     }
                     catch { }
 
-
                     //if (!ListAfwijkingen.Contains(deze_maand_overzicht_persoon[q]))
                     //{
                     //    ListAfwijkingen.Add(deze_maand_overzicht_persoon[q]);
@@ -235,6 +280,7 @@ namespace Bezetting2
                 }
             }
         }
+
         private void ZetGevondenDataTellingVuilWerktInExcel()
         {
             Microsoft.Office.Interop.Excel.Application xlApp;
@@ -252,21 +298,21 @@ namespace Bezetting2
 
                 /*
                  public Microsoft.Office.Interop.Excel.Workbook Open
-                (string Filename, 
-                object UpdateLinks, 
-                object ReadOnly, 
-                object Format, 
-                object Password, 
-                object WriteResPassword, 
-                object IgnoreReadOnlyRecommended, 
-                object Origin, 
-                object Delimiter, 
+                (string Filename,
+                object UpdateLinks,
+                object ReadOnly,
+                object Format,
+                object Password,
+                object WriteResPassword,
+                object IgnoreReadOnlyRecommended,
+                object Origin,
+                object Delimiter,
                 object Editable,
-                object Notify, 
-                object Converter, 
-                object AddToMru, 
-                object Local, 
-                object CorruptLoad); 
+                object Notify,
+                object Converter,
+                object AddToMru,
+                object Local,
+                object CorruptLoad);
                 */
 
                 xlWorkBook = xlApp.Workbooks.Open(file, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, true, 0, true, 1, 0);
@@ -301,7 +347,6 @@ namespace Bezetting2
                             excelSheet.Cells[row + i, 35] = ListVuilwerkData[1 + (i * 3)];
                             excelSheet.Cells[row + i, 36] = ListVuilwerkData[2 + (i * 3)];
                         }
-
                     }
 
                     if (cellValue != afw._NaamTelVuil)  // nieuwe naam
@@ -345,6 +390,7 @@ namespace Bezetting2
                 MessageBox.Show(errorMessage, "Error");
             }
         }
+
         private void ZetGevondenDataTellingWaarGewerktInExcel()
         {
             Microsoft.Office.Interop.Excel.Application oXL;
@@ -411,6 +457,7 @@ namespace Bezetting2
                 MessageBox.Show(errorMessage, "Error");
             }
         }
+
         private void vuilwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists("vuilwerk.ini"))
@@ -457,6 +504,7 @@ namespace Bezetting2
                 MessageBox.Show("Geen vuilwerk.ini gevonden!");
             }
         }
+
         private void tellingWaarGewerktToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -511,18 +559,14 @@ namespace Bezetting2
             {
             }
         }
-  
-        private void namenAdressenEMailToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-        }
 
         private void nietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("telnietmee.ini");
         }
+
         private void afwijkingTovRoosterPloegToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         public void ToExcelNamenEnAdressen(string kleur)
@@ -549,7 +593,6 @@ namespace Bezetting2
                 oSheet.Cells[1, 4] = "Postcode";
                 oSheet.Cells[1, 5] = "Plaats";
                 oSheet.Cells[1, 6] = "E-mail";
-
 
                 //Format A1:D1 as bold, vertical alignment = center.
                 oSheet.get_Range("A1", "F1").Font.Bold = true;
@@ -611,10 +654,10 @@ namespace Bezetting2
         {
             ToExcelNamenEnAdressen("Rood");
         }
+
         private void allemaalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Allemaal");
         }
-
     }
 }

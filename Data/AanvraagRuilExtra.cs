@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Bezetting2.Data
 {
@@ -16,8 +12,7 @@ namespace Bezetting2.Data
         public string _dienst { get; set; }
         public string _werkplek { get; set; }
         public string _persoonLoopt { get; set; }
-        public  bool _extra { get; set; }  // false dan ruil
+        public bool _extra { get; set; }  // false dan ruil
         public int _vanploeg { get; set; }
-
     }
 }

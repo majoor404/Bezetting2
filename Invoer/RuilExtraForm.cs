@@ -99,7 +99,6 @@ namespace Bezetting2.Invoer
                 ProgData.SaveExtraRuilLijst(re._datum.Year.ToString() + "\\" + re._datum.Month.ToString());
                 RuilExtraForm_Shown(this, null);
             }
-
         }
 
         private void laadGevraagdeDiensten()
@@ -117,8 +116,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-
-        void laadGevraagdeDienstenMaand(string[] info, DateTime nu)
+        private void laadGevraagdeDienstenMaand(string[] info, DateTime nu)
         {
             ProgData.LoadExtraRuilLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
             foreach (AanvraagRuilExtra a in ProgData.ListAanvraagRuilExtra)
@@ -190,7 +188,6 @@ namespace Bezetting2.Invoer
             // vul dienst op
             if (listViewExtra.SelectedItems.Count > 0)
             {
-
                 int index = listViewExtra.Items.IndexOf(listViewExtra.SelectedItems[0]);
                 if (index > -1)
                 {
@@ -222,7 +219,7 @@ namespace Bezetting2.Invoer
                         {
                             MessageBox.Show("kon extra/ruil invulling niet opslaan");
                         }
-                        
+
                         RuilExtraForm_Shown(this, null);
                     }
                 }

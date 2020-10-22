@@ -206,7 +206,7 @@ namespace Bezetting2
                 LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
 
                 string GekozenKleurInBeeld = ProgData.GekozenKleur;
-                
+
                 // zet path goed van kleur ploeg
                 ProgData.GekozenKleur = persoon_gekozen._kleur;
                 // zet maand en jaar goed van verhuis datum
@@ -219,13 +219,13 @@ namespace Bezetting2
                 {
                     for (int i = eerste_dag_weg; i < aantal_dagen_deze_maand + 1; i++)
                     {
-                        ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing" , ProgData.GekozenKleur);
+                        ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
                     }
                 }
 
                 // komt van andere kleur
                 //GekozenKleurInBeeld = ProgData.GekozenKleur;
-                
+
                 ProgData.GekozenKleur = persoon_gekozen._nieuwkleur;
                 ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
                 ProgData.SavePloegNamenLijst();     // save ploegbezetting (de mensen)
@@ -247,11 +247,11 @@ namespace Bezetting2
                     ProgData.ListWerkdagPloeg.Add(dag);
                 }
                 ProgData.SavePloegBezetting(ProgData.GekozenKleur);
-                
+
                 for (int i = 1; i < eerste_dag_weg; i++)
                 {
                     DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
-                    ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing" );
+                    ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing");
                 }
 
                 // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
@@ -342,13 +342,13 @@ namespace Bezetting2
             {
                 a._kleur = textBoxKleur.Text;
             }
-            
+
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
                 // direct edit ploeg rooster als admin
                 a._kleur = textBoxKleur.Text;
             }
-            
+
             a._funtie = textBoxFuntie.Text;
             a._werkgroep = textBoxWerkplek.Text;
             a._rechten = 0;

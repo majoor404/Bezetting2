@@ -11,10 +11,11 @@ namespace Bezetting2
 {
     public partial class OverzichtWachtForm : Form
     {
-        ListBox sourse;
-        ListBox broer;
-        int sourse_index;
+        private ListBox sourse;
+        private ListBox broer;
+        private int sourse_index;
         public List<invoerveld> opbouw = new List<invoerveld>();
+
         public class invoerveld
         {
             //            public invoerveld() { }
@@ -24,15 +25,19 @@ namespace Bezetting2
                 _ListNaam = ln;
                 _ListAfw = la;
             }
+
             public Label _Label { get; set; }
             public ListBox _ListNaam { get; set; }
             public ListBox _ListAfw { get; set; }
         } // hulp class om snel broer listbox te vinden van afwijking van naam
-        DateTime dat;
+
+        private DateTime dat;
+
         public OverzichtWachtForm()
         {
             InitializeComponent();
         }
+
         private void listBox2_DragEnter(object sender, DragEventArgs e)
         {
             if (CheckRechten())
@@ -43,6 +48,7 @@ namespace Bezetting2
                     e.Effect = DragDropEffects.None;
             }
         }
+
         private void listBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (CheckRechten())
@@ -68,6 +74,7 @@ namespace Bezetting2
                 //}
             }
         }
+
         private void listBox2_DragDrop(object sender, DragEventArgs e)
         {
             if (CheckRechten())
@@ -87,6 +94,7 @@ namespace Bezetting2
                 }
             }
         }
+
         private void OverzichtWachtForm_Shown(object sender, EventArgs e)
         {
             // als ToegangNivo hoog genoeg, vrijgave edit
@@ -133,8 +141,8 @@ namespace Bezetting2
             //ProgData.GekozenKleur = ProgData.Main.comboBoxKleurKeuze.Text;
 
             ViewUpdate();
-
         }
+
         // geklikt op label, als in edit mode vraag nieuwe tekst
         private void label2_Click(object sender, EventArgs e)
         {
@@ -174,6 +182,7 @@ namespace Bezetting2
                 InstellingenProg.SaveProgrammaData();
             }
         }
+
         // listbox not visible als uitgevinkt
         private void checkBox11_CheckedChanged(object sender, EventArgs e)
         {
@@ -242,6 +251,7 @@ namespace Bezetting2
 
             InstellingenProg.SaveProgrammaData();
         }
+
         private void UpdateAfwijkingListBox(ListBox box)
         {
             invoerveld veld = opbouw.First(a => (a._ListNaam == box));
@@ -260,6 +270,7 @@ namespace Bezetting2
             }
             broer.Visible = afwijking;
         }
+
         private void buttonPrev_Click(object sender, EventArgs e)
         {
             SaveData();
@@ -276,6 +287,7 @@ namespace Bezetting2
 
             ViewUpdate();
         }
+
         private void buttonNext_Click(object sender, EventArgs e)
         {
             SaveData();
@@ -292,10 +304,12 @@ namespace Bezetting2
 
             ViewUpdate();
         }
+
         private void OverzichtWachtForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveData();
         }
+
         private void SaveData()
         {
             if (CheckRechten())
@@ -313,7 +327,7 @@ namespace Bezetting2
                             {
                                 // pak naam
                                 string naam = box.Items[i].ToString();
-                                // haal juiste werkdag bij persoon 
+                                // haal juiste werkdag bij persoon
                                 werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
                                 if (box.Tag.ToString() == "1")
                                 {
@@ -334,9 +348,9 @@ namespace Bezetting2
                 CaptureMyScreen();
             }
         }
+
         private void ViewUpdate()
         {
-
             ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
@@ -367,7 +381,6 @@ namespace Bezetting2
             {
                 foreach (personeel man in ProgData.ListPersoneelKleur)
                 {
-
                     werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
                     if (ver._werkplek == "")
                     {
@@ -385,7 +398,7 @@ namespace Bezetting2
 
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
-                    // als op werkplek geen personeel, dan invisible afwijking 
+                    // als op werkplek geen personeel, dan invisible afwijking
                     int tag = int.Parse(box.Tag.ToString());
                     if (tag < 22)
                     {
@@ -396,13 +409,12 @@ namespace Bezetting2
                         }
                     }
                 }
-
             }
             catch { }
         }
+
         private void buttonCopy_Click(object sender, EventArgs e)
         {
-
             List<string> temp1 = new List<string>();
             List<string> temp2 = new List<string>();
             List<string> temp3 = new List<string>();
@@ -424,7 +436,6 @@ namespace Bezetting2
             List<string> temp19 = new List<string>();
             List<string> temp20 = new List<string>();
             List<string> temp21 = new List<string>();
-
 
             for (int i = 0; i < listBox1.Items.Count; i++)
             {
@@ -605,6 +616,7 @@ namespace Bezetting2
             SaveData();
             ViewUpdate();
         }
+
         private bool CheckRechten()
         {
             bool ret = false;
@@ -614,6 +626,7 @@ namespace Bezetting2
 
             return ret;
         }
+
         private void LaadDataFormulier()
         {
             // zet juiste vakjes aan
@@ -685,17 +698,20 @@ namespace Bezetting2
             }
             catch { }
         }
+
         private void listBox1_MouseLeave(object sender, EventArgs e)
         {
             sourse = (ListBox)sender;
             if (sourse.SelectedIndex > -1)
                 sourse.SelectedIndex = -1;
         }
+
         private void buttonNu_Click(object sender, EventArgs e)
         {
             SaveData();
             OverzichtWachtForm_Shown(this, null);
         }
+
         private void CaptureMyScreen()
         {
             Rectangle bounds = this.Bounds;

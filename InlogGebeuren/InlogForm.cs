@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -59,9 +58,8 @@ namespace Bezetting2
                             ProgData.GekozenKleur = persoon._kleur;
                             ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
                         }
-
                     }
-                    if ( textBoxNum.Text == textBoxPass.Text)
+                    if (textBoxNum.Text == textBoxPass.Text)
                     {
                         {
                             // juiste inlog
@@ -92,8 +90,8 @@ namespace Bezetting2
                 }
             }
             catch { }
-
         }
+
         private void buttonVerander_Click(object sender, EventArgs e)
         {
             personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxNum.Text);

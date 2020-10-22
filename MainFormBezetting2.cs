@@ -9,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
-
 namespace Bezetting2
 {
     public partial class MainFormBezetting2 : Form
@@ -19,8 +18,6 @@ namespace Bezetting2
         public const int y_as_add_lijn = 4;
         private bool kill = false;
         private bool WindowUpdateViewScreen = true;
-
-
 
         private Color _Weekend = Color.LightSkyBlue;
         private Color _Feestdag = Color.LightSalmon;
@@ -34,11 +31,11 @@ namespace Bezetting2
         public List<string> ListTelWerkPlek = new List<string>();
         public List<ClassTelVuilwerk> ListClassTelVuilwerk = new List<ClassTelVuilwerk>();
         public List<string> ListVuilwerkData = new List<string>();
-        string[] deze_maand_overzicht_persoon = new string[33];
-        DateTime dag_gekozen;
+        private string[] deze_maand_overzicht_persoon = new string[33];
+        private DateTime dag_gekozen;
         public List<ClassTelAfwijkingen> ListClassTelAfwijkingen = new List<ClassTelAfwijkingen>();
 
-        List<string> ListTelNietMeeNamen = new List<string>();
+        private List<string> ListTelNietMeeNamen = new List<string>();
 
         public class ClassTelAfwijkingen
         {
@@ -48,20 +45,21 @@ namespace Bezetting2
                 _Aantal = aantal;
                 _Toekomst = toekomst;
             }
+
             public string _Afwijking { get; set; }
             public int _Aantal { get; set; }
             public bool _Toekomst { get; set; }
-
         }
+
         public class ClassTelPlekGewerkt
         {
-
             public ClassTelPlekGewerkt(string naam, string plek)
             {
                 _NaamTelPlek = naam;
                 _PlekTelPlek = plek;
                 _AantalTelPlek = 1;
             }
+
             public string _NaamTelPlek { get; set; }
             public string _PlekTelPlek { get; set; }
             public int _AantalTelPlek { get; set; }
@@ -69,17 +67,17 @@ namespace Bezetting2
 
         public class ClassTelVuilwerk
         {
-
             public ClassTelVuilwerk(string naam, string dag)
             {
                 _NaamTelVuil = naam;
                 _DagTelVuil = dag;
             }
+
             public string _NaamTelVuil { get; set; }
             public string _DagTelVuil { get; set; }
         }
 
-        InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
+        private InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
 
         public MainFormBezetting2()
         {
@@ -403,7 +401,7 @@ namespace Bezetting2
             // kleur feestdagen
 
             // 1 Jan nieuwjaarsdag
-            // 27 april Koningsdag 
+            // 27 april Koningsdag
             // Kerstdag 25 en 26 december
             // bevrijdingsdag 5 mei (eens in 5 jaar)
 
@@ -449,7 +447,6 @@ namespace Bezetting2
                             View.Items[row].SubItems[col].BackColor = _Feestdag;
                     }
                 }
-
             }
         }
 
@@ -595,7 +592,6 @@ namespace Bezetting2
                                 View.Items[View.Items.Count - 1].SubItems[dagy].Text = inhoud.ToString();
                             }
                         }
-
                     }
                 }
             }
@@ -614,7 +610,6 @@ namespace Bezetting2
                 if (!File.Exists(ProgData.Ploeg_Veranderingen_Locatie()))
                 {
                     ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
-
                 }
 
                 CheckEnDealVerhuizing();
@@ -755,7 +750,7 @@ namespace Bezetting2
                 overgang = overgang.AddMonths(1);
                 DateTime eerste_maand = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1, 0, 0, 1);
 
-                if (overgang <= eerste_maand) // roetine CheckEnDealVerhuizing wordt alleen aangeroepen 
+                if (overgang <= eerste_maand) // roetine CheckEnDealVerhuizing wordt alleen aangeroepen
                                               // bij waarintijd = 2
                 {
                     string bewaar = ProgData.GekozenKleur;
@@ -832,7 +827,6 @@ namespace Bezetting2
 
                         if (col != 0 && View.Items[row].SubItems[0].BackColor != _Werkplek)
                         {
-
                             string gekozen_naam = info.Item.SubItems[0].Text;
                             string gekozen_datum = col.ToString();
 
@@ -897,7 +891,6 @@ namespace Bezetting2
                         }
                     }
                     catch { }
-
                 }
             }
         }
@@ -983,9 +976,8 @@ namespace Bezetting2
                 }
             }
             catch { }
-
-
         }
+
         private string GetRedenAfwijking(string naam, int dag)
         {
             if (ProgData.ListVeranderingen.Count < 1)
@@ -1010,6 +1002,7 @@ namespace Bezetting2
             kleurLijnen.ShowDialog();
             VulViewScherm();
         }
+
         private void ZetLijnen()
         {
             // lijn 1
@@ -1061,6 +1054,7 @@ namespace Bezetting2
                 panel4.Size = new Size((stop - start + 1) * kolom_breed, 3);
             }
         }
+
         private void LijnenWeg()
         {
             label1.Visible = false;
@@ -1076,6 +1070,7 @@ namespace Bezetting2
             panel7.Visible = false;
             panel8.Visible = false;
         }
+
         private void repareerPloegAfwijkingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // test of blauw_bezetting.bin bestaat
@@ -1097,6 +1092,7 @@ namespace Bezetting2
                 VulViewScherm();
             }
         }
+
         private void timerKill_Tick(object sender, EventArgs e)
         {
             if (File.Exists("kill.ini"))
@@ -1124,8 +1120,8 @@ namespace Bezetting2
                     labelDebug.Text = "Dagelijkse Backup gelukt";
                 }
             }
-
         }
+
         private void ruilOverwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RuilExtraForm rf = new RuilExtraForm();
@@ -1163,6 +1159,7 @@ namespace Bezetting2
             instellingen_programma.ShowDialog();
             MainFormBezetting2_Shown(this, null);
         }
+
         private void MainFormBezetting2_FormClosing(object sender, FormClosingEventArgs e)
         {
             ProgData.CaptureMainScreen();
@@ -1193,11 +1190,9 @@ namespace Bezetting2
             using (OleDbConnection connection =
                 new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
             {
-
                 object[] meta = new object[12];
                 bool read;
                 int teller = 0;
-
 
                 OleDbCommand command = new OleDbCommand("select * from Wijzeging", connection);
 
@@ -1215,7 +1210,6 @@ namespace Bezetting2
 
                         labelDebug.Text = $"{teller++.ToString()}";
                         labelDebug.Refresh();
-
 
                         //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
                         //Console.Write("{0} ", meta[6].ToString()); // datum invoer
@@ -1252,7 +1246,6 @@ namespace Bezetting2
                                     string invoer_naam = ProgData.Get_Gebruiker_Naam(meta[9].ToString());
                                     ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, naam, datum[0], meta[5].ToString(), meta[11].ToString(), "Import " + invoer_naam);
                                 }
-
                             }
                             catch { }
                         }
@@ -1269,7 +1262,6 @@ namespace Bezetting2
             using (OleDbConnection connection =
                             new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
             {
-
                 object[] meta = new object[20];
                 bool read;
 
@@ -1337,9 +1329,5 @@ namespace Bezetting2
         {
             Close();
         }
-
- 
     }
 }
-
-

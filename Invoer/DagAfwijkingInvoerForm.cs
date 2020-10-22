@@ -9,7 +9,7 @@ namespace Bezetting2
     public partial class DagAfwijkingInvoerForm : Form
     {
         public DateTime _verzoekdag; // gebruik voor ed-o ed-m ed-n , gevuld door MainformBezetting bij aanroep
-        
+
         public DagAfwijkingInvoerForm()
         {
             InitializeComponent();
@@ -17,7 +17,6 @@ namespace Bezetting2
 
         private void FormDagAfwijkingInvoer_Shown(object sender, EventArgs e)
         {
- 
             ProgData.LoadVeranderingenPloeg();
             listBoxItems.Enabled = true;
             textBoxAfwijking.Enabled = true;
@@ -39,10 +38,10 @@ namespace Bezetting2
                 }
             }
             catch { }
-            
+
             textBoxAfwijking.Focus();
 
-            if(textBoxAfwijking.Text.Length > 2)
+            if (textBoxAfwijking.Text.Length > 2)
             {
                 string eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
 
@@ -67,16 +66,14 @@ namespace Bezetting2
         {
             if (textBoxAfwijking.Text != "")
             {
-
-                ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text , ProgData.GekozenKleur);
+                ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
                 string eerste_2 = "";
-                
+
                 if (textBoxAfwijking.Text.Length > 2)
                     eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
 
                 if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
                 {
-
                     // als ED-O of ED-M of ED-N aanpassing op andere kleur, of VD of RD
                     // bepaal de kleur die dan loopt.
 
@@ -99,7 +96,6 @@ namespace Bezetting2
                 MessageBox.Show("Vul afwijking in of kies uit lijst." +
                     "\nOf kies knop cancel afwijking als u huidige wilt verwijderen.");
             }
-            
         }
 
         private void buttonHistory_Click(object sender, EventArgs e)
@@ -133,7 +129,7 @@ namespace Bezetting2
                 }
                 catch { }
             }
-            ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, "", "Verwijderd", this.Text , ProgData.GekozenKleur);
+            ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, "", "Verwijderd", this.Text, ProgData.GekozenKleur);
         }
 
         private void textBoxAfwijking_TextChanged(object sender, EventArgs e)

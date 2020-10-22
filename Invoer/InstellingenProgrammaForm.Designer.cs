@@ -35,6 +35,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxRooster = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxTelVakAlsVK = new System.Windows.Forms.CheckBox();
+            this.checkBoxTelAalsVK = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBoxGebruikRuilExtra
@@ -108,11 +110,35 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Rooster";
             // 
+            // checkBoxTelVakAlsVK
+            // 
+            this.checkBoxTelVakAlsVK.AutoSize = true;
+            this.checkBoxTelVakAlsVK.Location = new System.Drawing.Point(12, 152);
+            this.checkBoxTelVakAlsVK.Name = "checkBoxTelVakAlsVK";
+            this.checkBoxTelVakAlsVK.Size = new System.Drawing.Size(215, 17);
+            this.checkBoxTelVakAlsVK.TabIndex = 7;
+            this.checkBoxTelVakAlsVK.Text = "Tel \"VAK\" (vakantie) als VK in overzicht";
+            this.checkBoxTelVakAlsVK.UseVisualStyleBackColor = true;
+            this.checkBoxTelVakAlsVK.CheckedChanged += new System.EventHandler(this.checkBoxTelVakAlsVK_CheckedChanged);
+            // 
+            // checkBoxTelAalsVK
+            // 
+            this.checkBoxTelAalsVK.AutoSize = true;
+            this.checkBoxTelAalsVK.Location = new System.Drawing.Point(12, 175);
+            this.checkBoxTelAalsVK.Name = "checkBoxTelAalsVK";
+            this.checkBoxTelAalsVK.Size = new System.Drawing.Size(151, 17);
+            this.checkBoxTelAalsVK.TabIndex = 8;
+            this.checkBoxTelAalsVK.Text = "Tel \"A\" als VK in overzicht";
+            this.checkBoxTelAalsVK.UseVisualStyleBackColor = true;
+            this.checkBoxTelAalsVK.CheckedChanged += new System.EventHandler(this.checkBoxTelAalsVK_CheckedChanged);
+            // 
             // InstellingenProgrammaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(353, 387);
+            this.Controls.Add(this.checkBoxTelAalsVK);
+            this.Controls.Add(this.checkBoxTelVakAlsVK);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxRooster);
             this.Controls.Add(this.label1);
@@ -138,5 +164,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxRooster;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBoxTelVakAlsVK;
+        private System.Windows.Forms.CheckBox checkBoxTelAalsVK;
     }
 }

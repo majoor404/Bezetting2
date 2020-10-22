@@ -31,6 +31,5 @@ namespace Bezetting2
         public string _reserve3 { get; set; }
         public string _reserve4 { get; set; }
         public string _reserve5 { get; set; }
-
     }
 }

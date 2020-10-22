@@ -16,20 +16,23 @@ namespace Bezetting2.Data
 
         public static bool _GebruikSnipper
         {
-            get { return bool.Parse(ProgrammaData[42]); } 
+            get { return bool.Parse(ProgrammaData[42]); }
             set { ProgrammaData[42] = value.ToString(); }
         }
 
         public static int _MinimaalAantalPersonen
         {
-            get {
-                try {
+            get
+            {
+                try
+                {
                     return int.Parse(ProgrammaData[43]);
                 }
-                catch { 
-                    return 0; 
+                catch
+                {
+                    return 0;
                 };
-                }
+            }
             set { ProgrammaData[43] = value.ToString(); }
         }
 
@@ -49,9 +52,20 @@ namespace Bezetting2.Data
             set { ProgrammaData[44] = value.ToString(); }
         }
 
+        public static bool _TelVakAlsVK
+        {
+            get { return bool.Parse(ProgrammaData[45]); }
+            set { ProgrammaData[45] = value.ToString(); }
+        }
 
+        public static bool _TelAalsVK
+        {
+            get { return bool.Parse(ProgrammaData[46]); }
+            set { ProgrammaData[46] = value.ToString(); }
+        }
+        
         public static List<string> ProgrammaData = new List<string>();
-    
+
         public static void LeesProgrammaData()
         {
             ProgrammaData.Clear();
@@ -78,6 +92,7 @@ namespace Bezetting2.Data
                 MessageBox.Show("LeesProgrammaData() error");
             }
         }
+
         public static void SaveProgrammaData()
         {
             try
