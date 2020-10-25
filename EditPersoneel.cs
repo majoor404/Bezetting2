@@ -228,12 +228,12 @@ namespace Bezetting2
 
                 ProgData.GekozenKleur = persoon_gekozen._nieuwkleur;
                 ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                ProgData.SavePloegNamenLijst();     // save ploegbezetting (de mensen)
+                ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
 
                 // moet nieuwe collega toevoegen aan bezetting
 
                 int aantal_dagen_dezemaand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur); // want nieuwe kleur gekozen
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30); // want nieuwe kleur gekozen
                 // maak ruimte voor nieuwe collega in werkdag tabel
                 for (int i = 1; i < aantal_dagen_dezemaand + 1; i++)
                 {

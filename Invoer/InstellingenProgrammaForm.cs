@@ -18,7 +18,7 @@ namespace Bezetting2.Invoer
             textBoxMinAantalPersonen.Text = InstellingenProg._MinimaalAantalPersonen.ToString();
             comboBoxRooster.Text = InstellingenProg._Rooster;
             checkBoxTelVakAlsVK.Checked = InstellingenProg._TelVakAlsVK;
-            checkBoxTelAalsVK.Checked = InstellingenProg._TelAalsVK;
+            
         }
 
         private void checkBoxGebruikRuilExtra_CheckedChanged(object sender, EventArgs e)
@@ -48,12 +48,7 @@ namespace Bezetting2.Invoer
         {
             InstellingenProg._TelVakAlsVK = checkBoxTelVakAlsVK.Checked;
         }
-
-      
         
-        private void checkBoxTelAalsVK_CheckedChanged(object sender, EventArgs e)
-        {
-            InstellingenProg._TelAalsVK = checkBoxTelAalsVK.Checked;
-        }
+       
     }
 }

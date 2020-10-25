@@ -1,5 +1,6 @@
 ﻿using Bezetting2.Data;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -17,8 +18,8 @@ namespace Bezetting2
 
             ListClassTelAfwijkingen.Clear();
 
-            string locatie = @"telnietmee.ini";
-            ListTelNietMeeNamen = File.ReadAllLines(locatie).ToList();
+            //string locatie = @"telnietmee.ini";
+            //ListTelNietMeeNamen = File.ReadAllLines(locatie).ToList();
 
             Microsoft.Office.Interop.Excel.Application xlApp;
             Microsoft.Office.Interop.Excel._Workbook xlWorkBook;
@@ -79,68 +80,64 @@ namespace Bezetting2
                             vaste_regel = 4;
                             break;
 
-                        case "A":
+                        case "Z":
                             vaste_regel = 5;
                             break;
 
-                        case "Z":
+                        case "VF":
                             vaste_regel = 6;
                             break;
 
-                        case "VF":
+                        case "GP":
                             vaste_regel = 7;
                             break;
 
-                        case "GP":
+                        case "OPLO":
                             vaste_regel = 8;
                             break;
 
-                        case "OPLO":
+                        case "OPL":
                             vaste_regel = 9;
                             break;
 
-                        case "OPL":
+                        case "K":
                             vaste_regel = 10;
                             break;
 
-                        case "K":
+                        case "ADV":
                             vaste_regel = 11;
                             break;
 
-                        case "ADV":
+                        case "BV":
                             vaste_regel = 12;
                             break;
 
-                        case "BV":
+                        case "V":
                             vaste_regel = 13;
                             break;
 
-                        case "V":
+                        case "W":
                             vaste_regel = 14;
                             break;
 
-                        case "W":
+                        case "1/2 VK":
                             vaste_regel = 15;
                             break;
 
-                        case "1/2 VK":
+                        case "*":
                             vaste_regel = 16;
                             break;
 
-                        case "*":
+                        case "ED":
                             vaste_regel = 17;
                             break;
 
-                        case "ED":
+                        case "RD":
                             vaste_regel = 18;
                             break;
 
-                        case "RD":
-                            vaste_regel = 19;
-                            break;
-
                         case "VD":
-                            vaste_regel = 20;
+                            vaste_regel = 19;
                             break;
 
                         default:
@@ -184,70 +181,75 @@ namespace Bezetting2
 
         private void GetAfwijkingenPersoonInEenMaand(string persnum, int jaar, int maand)
         {
-            string kleur = ProgData.Get_Gebruiker_Kleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
-            string naam = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
+            string kleur = ProgData.Get_Gebruiker_Kleur(persnum);
+            string naam = ProgData.Get_Gebruiker_Naam(persnum);
+            int AantaldagenDezeMaand = DateTime.DaysInMonth(jaar, maand);
+            string[] deze_maand_overzicht_persoon = new string[33];
 
             //eerst vanuit ploegbezetting een string list maken met afwijkingen en normaal schema van persoon
             if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(kleur)))
             {
-                ProgData.LoadPloegBezetting(kleur);
+                ProgData.LoadPloegBezetting(kleur,30);
                 foreach (werkdag dag in ProgData.ListWerkdagPloeg)
                 {
                     if (dag._naam == naam)
                     {
-                        dag_gekozen = new DateTime(ProgData.ihuidigjaar, ProgData.igekozenmaand, dag._dagnummer);
+                        if (dag._dagnummer < AantaldagenDezeMaand + 1)
+                        {
+                            dag_gekozen = new DateTime(jaar, maand, dag._dagnummer);
 
-                        // get en zet eerst orginele dienst
-                        string wacht = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
-                        if (wacht != "")
-                        {
-                            deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
-                        }
-                        else
-                        {
-                            deze_maand_overzicht_persoon[dag._dagnummer] = "V"; // Rooster vrij
-                        }
-                        
-                        // daarna overschrijven als die afwijkt van ""
-                        if (dag._afwijkingdienst != "")
-                        {
-                            string dum = dag._afwijkingdienst;
-                            if (dum.Length > 3 && dum.Substring(0, 3) == "ED-")
+                            // get en zet eerst orginele dienst
+                            string wacht = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
+                            if (wacht != "")
                             {
-                                dum = "ED";                              
+                                deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
                             }
-                            if (dum.Length > 3 && dum.Substring(0, 3) == "RD-")
+                            else
                             {
-                                dum = "RD";
-                            }
-                            if (dum.Length > 3 && dum.Substring(0, 3) == "VD-")
-                            {
-                                dum = "VD";
-                            }
-                            if (InstellingenProg._TelVakAlsVK && dum == "VAK")
-                            {
-                                dum = "VK";
+                                deze_maand_overzicht_persoon[dag._dagnummer] = "V"; // Rooster vrij
                             }
 
-                            if (InstellingenProg._TelAalsVK && dum == "A")
+                            // daarna overschrijven als die afwijkt van ""
+                            if (dag._afwijkingdienst != "")
                             {
-                                dum = "VK";
+                                string dum = dag._afwijkingdienst.ToUpper();
+                                if (dum.Length > 3 && dum.Substring(0, 3) == "ED-")
+                                {
+                                    dum = "ED";
+                                }
+                                if (dum.Length > 3 && dum.Substring(0, 3) == "RD-")
+                                {
+                                    dum = "RD";
+                                }
+                                if (dum.Length > 3 && dum.Substring(0, 3) == "VD-")
+                                {
+                                    dum = "VD";
+                                }
+                                if (InstellingenProg._TelVakAlsVK && dum == "VAK")
+                                {
+                                    dum = "VK";
+                                }
+
+                                if (dum == "A")
+                                {
+                                    dum = "VK";
+                                }
+
+                                deze_maand_overzicht_persoon[dag._dagnummer] = dum;
                             }
 
-                            deze_maand_overzicht_persoon[dag._dagnummer] = dum;
-                        }
-
-                        if (ListTelNietMeeNamen.Contains(deze_maand_overzicht_persoon[dag._dagnummer]))
-                        {
-                            deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
+                            if (ListTelNietMeeNamen.Contains(deze_maand_overzicht_persoon[dag._dagnummer]))
+                            {
+                                deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
+                            }
                         }
                     }
                 }
             }
 
             // lijst strings nu klaar, nu tellen.
-            int dagen = DateTime.DaysInMonth(jaar, maand);
-            for (int q = 1; q < dagen + 1; q++)
+            //int dagen = DateTime.DaysInMonth(jaar, maand);
+            for (int q = 1; q < AantaldagenDezeMaand + 1; q++)
             {
                 if (deze_maand_overzicht_persoon[q] != null)
                 {
@@ -520,8 +522,8 @@ namespace Bezetting2
                     ProgData.igekozenmaand = i;
                     if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                     {
-                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
-                        ProgData.LoadPloegNamenLijst();
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
+                        ProgData.LoadPloegNamenLijst(30);
 
                         foreach (personeel a in ProgData.ListPersoneelKleur)
                         {
@@ -552,8 +554,8 @@ namespace Bezetting2
                 }
                 ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
-                ProgData.LoadPloegNamenLijst();
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
+                ProgData.LoadPloegNamenLijst(30);
             }
             catch
             {
@@ -563,10 +565,6 @@ namespace Bezetting2
         private void nietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("telnietmee.ini");
-        }
-
-        private void afwijkingTovRoosterPloegToolStripMenuItem_Click(object sender, EventArgs e)
-        {
         }
 
         public void ToExcelNamenEnAdressen(string kleur)
@@ -658,6 +656,208 @@ namespace Bezetting2
         private void allemaalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Allemaal");
+        }
+
+        private void afwijkingTovRoosterPloegToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application xlApp;
+            Microsoft.Office.Interop.Excel._Workbook xlWorkBook;
+            Microsoft.Office.Interop.Excel.Range oRng;
+
+            List<int> Namen = new List<int>();
+            int bewaar_maand = ProgData.igekozenmaand;
+            // haal eerst de namen die dit jaar op kleur x gelopen hebben
+            for (int i = 1; i < 13; i++)
+            {
+                ProgData.igekozenmaand = i;
+                if (File.Exists(ProgData.Ploeg_Namen_Locatie()))
+                {
+                    ProgData.LoadPloegNamenLijst(30);
+                    if (ProgData.ListPersoneelKleur.Count > 0)
+                    {
+                        foreach (personeel a in ProgData.ListPersoneelKleur)
+                        {
+                            if (!Namen.Contains(a._persnummer))
+                                Namen.Add(a._persnummer);
+                        }
+                    }
+                }
+            }
+
+            
+
+            try
+            {
+                //Start Excel and get Application object.
+                xlApp = new Microsoft.Office.Interop.Excel.Application();
+                xlApp.Visible = true;
+
+                //Get a new workbook.
+                string file = Path.GetFullPath("OverzichtPloeg.xls");
+
+                xlWorkBook = xlApp.Workbooks.Open(file, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, true, 0, true, 1, 0);
+
+                Microsoft.Office.Interop.Excel.Worksheet excelSheet = xlWorkBook.ActiveSheet;
+
+                // schoonvegen
+
+                // eerste getal is regel
+                // tweede kolom
+
+                oRng = excelSheet.Range[excelSheet.Cells[1, 2], excelSheet.Cells[3, 2]]; // B1 B3
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[4, 1], excelSheet.Cells[50, 1]]; // A4 A50
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[4, 4], excelSheet.Cells[50, 5]]; // D4 E50
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[4, 8], excelSheet.Cells[50, 9]]; // H4 I50
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[4, 12], excelSheet.Cells[50, 13]]; // L4 M50
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[4, 16], excelSheet.Cells[50, 17]]; // P4 Q50
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[4, 20], excelSheet.Cells[50, 21]]; // T4 U50
+                oRng.ClearContents();
+                oRng.Value = null;
+                oRng = excelSheet.Range[excelSheet.Cells[4, 24], excelSheet.Cells[50, 25]]; // X4 Y50
+                oRng.ClearContents();
+                oRng.Value = null;
+
+
+                int row = 4;
+                foreach (int naam in Namen) 
+                {
+                    ListClassTelAfwijkingen.Clear();
+                    
+                    for (int i = 1; i < 13; i++)
+                    {
+                        ProgData.igekozenmaand = i;
+                        GetAfwijkingenPersoonInEenMaand(naam.ToString(), ProgData.igekozenjaar, i);
+                        // data nu in ListClassTelAfwijkingen
+                    }
+                    
+                    if (ListClassTelAfwijkingen.Count > 0)
+                    {
+                        int[] tel_op = new int[12];
+                        foreach (ClassTelAfwijkingen afw in ListClassTelAfwijkingen)
+                        {
+                            switch (afw._Afwijking)
+                            {
+                                case "VK":
+                                case "A":
+                                case "8OI":
+                                    if (afw._Toekomst)
+                                    {
+                                        tel_op[1] = tel_op[1] + afw._Aantal;
+                                    }
+                                    else
+                                    {
+                                        tel_op[0] = tel_op[0] + afw._Aantal;
+                                    }
+                                    break;
+                                case "OPL":
+                                case "OPLO":
+                                    if (afw._Toekomst)
+                                    {
+                                        tel_op[3] = tel_op[3] + afw._Aantal;
+                                    }
+                                    else
+                                    {
+                                        tel_op[2] = tel_op[2] + afw._Aantal;
+                                    }
+                                    break;
+                                case "Z":
+                                    if (afw._Toekomst)
+                                    {
+                                        tel_op[5] = tel_op[5] + afw._Aantal;
+                                    }
+                                    else
+                                    {
+                                        tel_op[4] = tel_op[4] + afw._Aantal;
+                                    }
+                                    break;
+                                case "ED":
+                                case "RD":
+                                case "VD":
+                                case "K":
+                                    if (afw._Toekomst)
+                                    {
+                                        tel_op[7] = tel_op[7] + afw._Aantal;
+                                    }
+                                    else
+                                    {
+                                        tel_op[6] = tel_op[6] + afw._Aantal;
+                                    }
+                                    break;
+                                case "GP":
+                                    if (afw._Toekomst)
+                                    {
+                                        tel_op[9] = tel_op[9] + afw._Aantal;
+                                    }
+                                    else
+                                    {
+                                        tel_op[8] = tel_op[8] + afw._Aantal;
+                                    }
+                                    break;
+                                case "BV":
+                                case "VF":
+                                    if (afw._Toekomst)
+                                    {
+                                        tel_op[11] = tel_op[11] + afw._Aantal;
+                                    }
+                                    else
+                                    {
+                                        tel_op[10] = tel_op[10] + afw._Aantal;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        excelSheet.Cells[row, 4] = tel_op[0];
+                        excelSheet.Cells[row, 5] = tel_op[1];
+                        excelSheet.Cells[row, 8] = tel_op[2];
+                        excelSheet.Cells[row, 9] = tel_op[3];
+                        excelSheet.Cells[row, 12] = tel_op[4];
+                        excelSheet.Cells[row, 13] = tel_op[5];
+                        excelSheet.Cells[row, 16] = tel_op[6];
+                        excelSheet.Cells[row, 17] = tel_op[7];
+                        excelSheet.Cells[row, 20] = tel_op[8];
+                        excelSheet.Cells[row, 21] = tel_op[9];
+                        excelSheet.Cells[row, 24] = tel_op[10];
+                        excelSheet.Cells[row, 25] = tel_op[11];
+
+
+                        excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Naam(naam.ToString());
+                        
+                    }
+                    row++;
+                    
+                }
+                excelSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                excelSheet.Cells[2, 2] = ProgData.GekozenKleur;
+                //Make sure Excel is visible and give the user control
+                //of Microsoft Excel's lifetime.
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception theException)
+            {
+                String errorMessage;
+                errorMessage = "Error: ";
+                errorMessage = String.Concat(errorMessage, theException.Message);
+                errorMessage = String.Concat(errorMessage, " Line: ");
+                errorMessage = String.Concat(errorMessage, theException.Source);
+
+                MessageBox.Show(errorMessage, "Error");
+            }
+            ProgData.igekozenmaand = bewaar_maand;
         }
     }
 }

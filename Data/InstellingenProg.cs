@@ -57,12 +57,6 @@ namespace Bezetting2.Data
             get { return bool.Parse(ProgrammaData[45]); }
             set { ProgrammaData[45] = value.ToString(); }
         }
-
-        public static bool _TelAalsVK
-        {
-            get { return bool.Parse(ProgrammaData[46]); }
-            set { ProgrammaData[46] = value.ToString(); }
-        }
         
         public static List<string> ProgrammaData = new List<string>();
 

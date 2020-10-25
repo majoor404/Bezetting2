@@ -162,8 +162,12 @@ namespace Bezetting2
             }
         }
 
-        public static void LoadPloegNamenLijst()
+        public static void LoadPloegNamenLijst(int try_again)
         {
+            if(try_again < 0)
+            {
+                MessageBox.Show("LoadPloegNamenLijst() lukt niet!, te vaak geprobeerd.");
+            }
             Main.labelDebug.Text = "Load Ploeg Namen Lijst";
             ListPersoneelKleur.Clear();
             try
@@ -180,14 +184,19 @@ namespace Bezetting2
             {
                 Main.labelDebug.Text = "catch LoadPloegNamenLijst() error, try again";
                 Thread.Sleep(300);
-                LoadPloegNamenLijst();
+                LoadPloegNamenLijst(try_again--);
             }
             // haal werkgroepen op
             MaakWerkPlekkenLijst();
+            Main.labelDebug.Text = "";
         }
 
-        public static void SavePloegNamenLijst()
+        public static void SavePloegNamenLijst(int try_again)
         {
+            if(try_again < 0 && !Disable_error_Meldingen)
+            {
+                MessageBox.Show("SavePloegNamenLijst() error na 30 keer, " + Ploeg_Namen_Locatie());
+            }
             Main.labelDebug.Text = "Save Ploeg Namen Lijst";
             if (GekozenKleur != "")
             {
@@ -202,8 +211,9 @@ namespace Bezetting2
                 }
                 catch (IOException)
                 {
-                    if (!Disable_error_Meldingen)
-                        MessageBox.Show("SavePloegNamenLijst() error");
+                        Thread.Sleep(300);
+                        SavePloegNamenLijst(try_again--);
+                        MessageBox.Show("SavePloegNamenLijst() error, " + Ploeg_Namen_Locatie());
                 }
             }
         }
@@ -226,7 +236,7 @@ namespace Bezetting2
                     //regel dat anders, als file niet bestaat, gaat dat vanzelf
                     if (File.Exists(Ploeg_Bezetting_Locatie(a._nieuwkleur)))
                     {
-                        LoadPloegBezetting(a._nieuwkleur);
+                        LoadPloegBezetting(a._nieuwkleur,30);
                         // check of naam er in zit
                         try
                         {
@@ -318,8 +328,13 @@ namespace Bezetting2
             }
         }
 
-        public static void LoadPloegBezetting(string kleur)
+        public static void LoadPloegBezetting(string kleur,int try_again)
         {
+            if (try_again < 0)
+            {
+                MessageBox.Show("Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?");
+            }
+            
             Main.labelDebug.Text = "Load Ploeg Bezetting";
             ListWerkdagPloeg.Clear();
             try
@@ -342,7 +357,7 @@ namespace Bezetting2
             {
                 Main.labelDebug.Text = " LoadPloegBezettingLijst() error, try again";
                 Thread.Sleep(300);
-                LoadPloegBezetting(kleur);
+                LoadPloegBezetting(kleur,try_again--);
             }
             catch
             {
@@ -495,7 +510,7 @@ namespace Bezetting2
         /// <param name="invoerdoor">ingevoerd door</param>
         static public void RegelAfwijking(string naam, string dagnr, string afwijking, string rede, string invoerdoor, string kleur)
         {
-            LoadPloegBezetting(kleur);
+            LoadPloegBezetting(kleur,30);
             try
             {
                 werkdag ver = ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dagnr));
@@ -844,9 +859,9 @@ namespace Bezetting2
                 Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}"));
 
                 MaakPloegNamenLijst(kleur);
-                SavePloegNamenLijst();
+                SavePloegNamenLijst(30);
 
-                LoadPloegBezetting(kleur);
+                LoadPloegBezetting(kleur,30);
                 GekozenKleur = kleur;
             }
         }

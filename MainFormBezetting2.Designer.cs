@@ -226,42 +226,42 @@
             // blauwToolStripMenuItem
             // 
             this.blauwToolStripMenuItem.Name = "blauwToolStripMenuItem";
-            this.blauwToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.blauwToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.blauwToolStripMenuItem.Text = "Blauw";
             this.blauwToolStripMenuItem.Click += new System.EventHandler(this.blauwToolStripMenuItem_Click);
             // 
             // geelToolStripMenuItem
             // 
             this.geelToolStripMenuItem.Name = "geelToolStripMenuItem";
-            this.geelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.geelToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.geelToolStripMenuItem.Text = "Geel";
             // 
             // groenToolStripMenuItem
             // 
             this.groenToolStripMenuItem.Name = "groenToolStripMenuItem";
-            this.groenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.groenToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.groenToolStripMenuItem.Text = "Groen";
             this.groenToolStripMenuItem.Click += new System.EventHandler(this.groenToolStripMenuItem_Click);
             // 
             // witToolStripMenuItem
             // 
             this.witToolStripMenuItem.Name = "witToolStripMenuItem";
-            this.witToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.witToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.witToolStripMenuItem.Text = "Wit";
             this.witToolStripMenuItem.Click += new System.EventHandler(this.witToolStripMenuItem_Click);
             // 
             // roodToolStripMenuItem
             // 
             this.roodToolStripMenuItem.Name = "roodToolStripMenuItem";
-            this.roodToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.roodToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.roodToolStripMenuItem.Text = "Rood";
             this.roodToolStripMenuItem.Click += new System.EventHandler(this.roodToolStripMenuItem_Click);
             // 
             // allemaalToolStripMenuItem
             // 
             this.allemaalToolStripMenuItem.Name = "allemaalToolStripMenuItem";
-            this.allemaalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.allemaalToolStripMenuItem.Text = "Allemaal";
+            this.allemaalToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.allemaalToolStripMenuItem.Text = "Alle Kleuren / Dagdienst";
             this.allemaalToolStripMenuItem.Click += new System.EventHandler(this.allemaalToolStripMenuItem_Click);
             // 
             // afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem

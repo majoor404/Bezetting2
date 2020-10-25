@@ -66,6 +66,7 @@ namespace Bezetting2
         {
             if (textBoxAfwijking.Text != "")
             {
+                textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
                 ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
                 string eerste_2 = "";
 

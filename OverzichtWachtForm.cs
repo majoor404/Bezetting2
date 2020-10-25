@@ -314,7 +314,7 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
                     if ((box.Tag != null))
@@ -351,7 +351,7 @@ namespace Bezetting2
 
         private void ViewUpdate()
         {
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 

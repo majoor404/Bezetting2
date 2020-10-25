@@ -31,7 +31,7 @@ namespace Bezetting2
         public List<string> ListTelWerkPlek = new List<string>();
         public List<ClassTelVuilwerk> ListClassTelVuilwerk = new List<ClassTelVuilwerk>();
         public List<string> ListVuilwerkData = new List<string>();
-        private string[] deze_maand_overzicht_persoon = new string[33];
+        //private string[] deze_maand_overzicht_persoon = new string[33];
         private DateTime dag_gekozen;
         public List<ClassTelAfwijkingen> ListClassTelAfwijkingen = new List<ClassTelAfwijkingen>();
 
@@ -134,6 +134,7 @@ namespace Bezetting2
             else
             {
                 comboBoxKleurKeuze.Text = "DD";
+                comboBoxKleurKeuze.Enabled = false;
             }
 
             //comboBoxKleurKeuze.Text = "Blauw"; // roept ook VulViewScherm(); aan.
@@ -483,7 +484,7 @@ namespace Bezetting2
                 else
                 {
                     // 1) Haal Ploeg Bezetting
-                    ProgData.LoadPloegNamenLijst();
+                    ProgData.LoadPloegNamenLijst(30);
 
                     // 2) Zet ploeg en werkplek op scherm
                     for (int i = 0; i < ProgData.ListWerkgroepPersoneel.Count; i++)
@@ -514,7 +515,7 @@ namespace Bezetting2
                     // Vul bezetting op scherm
                     if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                     {
-                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                         foreach (werkdag a in ProgData.ListWerkdagPloeg)
                         {
                             if (a._afwijkingdienst != "")
@@ -602,7 +603,7 @@ namespace Bezetting2
 
                 ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
                 ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                ProgData.SavePloegNamenLijst();     // save ploegbezetting (de mensen)
+                ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
 
                 // maak bezettingafwijking.bin voor kleur als die niet bestaat
                 // is lijst met werkdagen
@@ -615,7 +616,7 @@ namespace Bezetting2
                 CheckEnDealVerhuizing();
 
                 // 1) Haal Ploeg Bezetting
-                ProgData.LoadPloegNamenLijst();
+                ProgData.LoadPloegNamenLijst(30);
 
                 // 2) Zet ploeg en werkplek op scherm
                 for (int i = 0; i < ProgData.ListWerkgroepPersoneel.Count; i++)
@@ -643,11 +644,11 @@ namespace Bezetting2
                         }
                     }
                 }
-
+                
                 // Vul bezetting op scherm
                 if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
+                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                     foreach (werkdag a in ProgData.ListWerkdagPloeg)
                     {
                         if (a._afwijkingdienst != "")
@@ -657,6 +658,7 @@ namespace Bezetting2
                                 if (a._naam == View.Items[i].Text) // gevonden naam
                                 {
                                     View.Items[i].SubItems[a._dagnummer].Text = a._afwijkingdienst;
+                
                                 }
                             }
                         }
@@ -764,7 +766,7 @@ namespace Bezetting2
                     ProgData.Save_Namen_lijst();
                     ProgData.GekozenKleur = a._kleur;
                     ProgData.MaakPloegNamenLijst(a._kleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                    ProgData.SavePloegNamenLijst();         // save ploegbezetting (de mensen)
+                    ProgData.SavePloegNamenLijst(30);         // save ploegbezetting (de mensen)
                     ProgData.GekozenKleur = bewaar;
                 }
             }
@@ -942,7 +944,7 @@ namespace Bezetting2
                         }
                         else
                         {
-                            toolStripStatusLabelInfo.Text = "extra dienst 54321"; // nog te doen
+                            toolStripStatusLabelInfo.Text = "extra dienst nog te doen"; // nog te doen
                         }
                     }
                     if (col > 0 && row > 3 && row < View.Items.Count - 1)
@@ -1082,7 +1084,7 @@ namespace Bezetting2
                 File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
                 ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.sgekozenmaand(), ProgData.GekozenKleur);
                 ProgData.LoadVeranderingenPloeg();
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                 foreach (veranderingen verander in ProgData.ListVeranderingen)
                 {
                     werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == verander._naam) && (a._dagnummer.ToString() == verander._datumafwijking));
@@ -1329,5 +1331,6 @@ namespace Bezetting2
         {
             Close();
         }
+        
     }
 }
