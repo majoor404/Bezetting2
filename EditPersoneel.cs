@@ -112,6 +112,7 @@ namespace Bezetting2
             vuilwerk.Checked = false;
         }
 
+        // geklikt op naam in overzicht
         private void ViewNamen_SelectedIndexChanged(object sender, EventArgs e)
         {
             string filter = comboBoxFilter.Text;
@@ -294,6 +295,15 @@ namespace Bezetting2
             recht.labelNaam.Text = textBoxAchterNaam.Text;
             recht.labelPersoneelNummer.Text = textBoxPersNum.Text;
             recht.labelRechtenNivo.Text = rechten.ToString();
+            if (rechten > 51)
+                recht.checkBoxAllePloegen.Checked = true;
+            if (rechten == 0)
+                recht.radioButton0.Checked = true;
+            if (rechten > 24)
+                recht.radioButton25.Checked = true;
+            if(rechten> 49)
+                recht.radioButton50.Checked = true;
+
             DialogResult dialog = recht.ShowDialog();
             if (dialog == DialogResult.OK)
             {

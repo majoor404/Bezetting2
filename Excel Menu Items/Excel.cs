@@ -752,6 +752,7 @@ namespace Bezetting2
                                 case "VK":
                                 case "A":
                                 case "8OI":
+                                case "VRIJ":
                                     if (afw._Toekomst)
                                     {
                                         tel_op[1] = tel_op[1] + afw._Aantal;

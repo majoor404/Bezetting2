@@ -871,5 +871,27 @@ namespace Bezetting2
             string startPath = GetDirectoryBezettingMaand(DateTime.Now);
             ZipFile.CreateFromDirectory(startPath, backup_zipnaam);
         }
+
+        public static void NachtErVoorVrij(string gekozen_naam,string dagnr)
+        {
+            // kijk of afwijking op vrije dag was, en dag ervoor Nacht, dan 
+            if (GekozenRooster() != "DD")
+            {
+                DateTime dag_er_voor = new DateTime(igekozenjaar, igekozenmaand, int.Parse(dagnr));
+                dag_er_voor = dag_er_voor.AddDays(-1);
+                if (MDatum.GetDienst(GekozenRooster(), dag_er_voor, GekozenKleur) == "N")
+                {
+                    DialogResult dialogResult = MessageBox.Show("Nacht er voor VRIJ zetten?", "Vraagje", MessageBoxButtons.YesNo);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        // zet maand/jaar goed
+
+                        ProgData.RegelAfwijking(gekozen_naam, dag_er_voor.Day.ToString(), "VRIJ", "IVM WERKDAG MORGEN", "Rooster Regel", ProgData.GekozenKleur);
+
+                        // zet maand/jaar terug
+                    }
+                }
+            }
+        }
     }
 }

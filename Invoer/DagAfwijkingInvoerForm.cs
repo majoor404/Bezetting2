@@ -68,6 +68,7 @@ namespace Bezetting2
             {
                 textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
                 ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
+                ProgData.NachtErVoorVrij(labelNaam.Text,labelDatum.Text);
                 string eerste_2 = "";
 
                 if (textBoxAfwijking.Text.Length > 2)

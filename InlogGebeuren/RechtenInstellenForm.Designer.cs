@@ -188,8 +188,8 @@
         public System.Windows.Forms.CheckBox checkBoxAllePloegen;
         public System.Windows.Forms.Label labelRechtenNivo;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.RadioButton radioButton50;
-        private System.Windows.Forms.RadioButton radioButton25;
-        private System.Windows.Forms.RadioButton radioButton0;
+        public System.Windows.Forms.RadioButton radioButton50;
+        public System.Windows.Forms.RadioButton radioButton25;
+        public System.Windows.Forms.RadioButton radioButton0;
     }
 }

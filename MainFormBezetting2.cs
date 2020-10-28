@@ -31,7 +31,6 @@ namespace Bezetting2
         public List<string> ListTelWerkPlek = new List<string>();
         public List<ClassTelVuilwerk> ListClassTelVuilwerk = new List<ClassTelVuilwerk>();
         public List<string> ListVuilwerkData = new List<string>();
-        //private string[] deze_maand_overzicht_persoon = new string[33];
         private DateTime dag_gekozen;
         public List<ClassTelAfwijkingen> ListClassTelAfwijkingen = new List<ClassTelAfwijkingen>();
 
@@ -868,11 +867,13 @@ namespace Bezetting2
                                         else
                                         {
                                             ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                            
                                         }
                                     }
                                     else
                                     {
                                         ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                        ProgData.NachtErVoorVrij(gekozen_naam,gekozen_datum);
                                     }
                                     VulViewScherm();
                                 }
@@ -1203,8 +1204,8 @@ namespace Bezetting2
                 WindowUpdateViewScreen = false;
                 if (reader.Read() == true)
                 {
-                    DateTime nu = DateTime.Now;
-                    nu = nu.AddMonths(-1);
+                    DateTime inladen_vanaf_datum = new DateTime(ProgData.ihuidigjaar - 1, 1, 1);
+
                     do
                     {
                         System.Windows.Forms.Application.DoEvents();
@@ -1225,7 +1226,7 @@ namespace Bezetting2
 
                         DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
 
-                        if ((gekozen > nu) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
+                        if ((gekozen > inladen_vanaf_datum) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
                         //if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
                         {
                             try
@@ -1331,6 +1332,8 @@ namespace Bezetting2
         {
             Close();
         }
+
+        
         
     }
 }
