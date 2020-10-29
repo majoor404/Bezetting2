@@ -884,11 +884,23 @@ namespace Bezetting2
                     DialogResult dialogResult = MessageBox.Show("Nacht er voor VRIJ zetten?", "Vraagje", MessageBoxButtons.YesNo);
                     if (dialogResult == DialogResult.Yes)
                     {
+                        bool terug = false;
                         // zet maand/jaar goed
+                        if (dagnr == "1" && igekozenmaand > 2)
+                        {
+                            igekozenmaand--;
+                            terug = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Kan VRIJ niet invullen, even met de hand aanpassen!");
+                        }
 
                         ProgData.RegelAfwijking(gekozen_naam, dag_er_voor.Day.ToString(), "VRIJ", "IVM WERKDAG MORGEN", "Rooster Regel", ProgData.GekozenKleur);
 
                         // zet maand/jaar terug
+                        if (terug)
+                            igekozenmaand++;
                     }
                 }
             }

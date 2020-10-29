@@ -23,6 +23,10 @@ namespace Bezetting2
         {
             DateTime buildDate = new FileInfo(Assembly.GetExecutingAssembly().Location).LastWriteTime;
             label1.Text = buildDate.ToString();
+
+            textBox2.Clear();
+            string[] lines = File.ReadAllLines("versie.ini");
+            textBox2.Text = String.Join(Environment.NewLine, lines);
         }
     }
 }

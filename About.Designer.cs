@@ -92,7 +92,7 @@
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox2.Size = new System.Drawing.Size(558, 309);
             this.textBox2.TabIndex = 5;
-            this.textBox2.Text = resources.GetString("textBox2.Text");
+            this.textBox2.Text = "Wordt gevuld door versie.ini";
             // 
             // About
             // 

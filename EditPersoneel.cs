@@ -74,6 +74,7 @@ namespace Bezetting2
             }
         }
 
+        // filter aangepast
         private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             ViewNamen.Items.Clear();
@@ -119,12 +120,15 @@ namespace Bezetting2
             selpersnummer = 0;
             try
             {
+                // ik kom hier elke keer 2 maal bij klikken
+                // als er al 1 gesellcteerd is en ik klik een andere
+                // zie je eerst geen item geklikt, dan de volgende.
+                // dus niks in catch invullen
                 var test = ViewNamen.SelectedItems[0].SubItems[0].Text;
                 selpersnummer = int.Parse(ViewNamen.SelectedItems[0].SubItems[0].Text);
             }
             catch
             {
-                EditPersoneel_Shown(this, null);
             }
             foreach (personeel a in ProgData.ListPersoneel)
             {

@@ -801,10 +801,22 @@ namespace Bezetting2
         private void View_MouseClick(object sender, MouseEventArgs e)
         {
             //Point point = new Point(e.X, e.Y);
+            ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
+            int row = info.Item.Index;
+            int col = info.Item.SubItems.IndexOf(info.SubItem);
 
             if (ProgData.WaarInTijd() == 1)
             {
-                MessageBox.Show("In verleden kunt u alleen kijken, niet meer aanpassen!");
+                if (col > 0 && row < 4)
+                {
+                    HistoryForm his = new HistoryForm();
+                    his.comboBoxDag.Text = col.ToString();
+                    his.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("In verleden kunt u alleen kijken, niet meer aanpassen!");
+                }
             }
             else
             {
@@ -813,9 +825,6 @@ namespace Bezetting2
                 {
                     try
                     {
-                        ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
-                        int row = info.Item.Index;
-                        int col = info.Item.SubItems.IndexOf(info.SubItem);
                         string value = info.Item.SubItems[col].Text;
                         //MessageBox.Show(string.Format("R{0}:C{1} val '{2}'", row, col, value));
 
@@ -894,6 +903,11 @@ namespace Bezetting2
                         }
                     }
                     catch { }
+                }
+                // geen rechten/ingelogt
+                else
+                {
+                    MessageBox.Show("Even inloggen!");
                 }
             }
         }
