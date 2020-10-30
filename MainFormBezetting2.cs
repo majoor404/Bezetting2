@@ -1105,7 +1105,7 @@ namespace Bezetting2
                     werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == verander._naam) && (a._dagnummer.ToString() == verander._datumafwijking));
                     ver._afwijkingdienst = verander._afwijking;
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur);
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur,30);
                 VulViewScherm();
             }
         }
@@ -1184,6 +1184,7 @@ namespace Bezetting2
 
         private void importOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Copy ook de namen uit oude bezetting, ivm ploeg verhuizing gebeuren");
             openFileDialog.FileName = "";
             //openFileDialog.Filter = "(*.Bez)|*.Bez";
             MessageBox.Show("Open oude data bez file. (Wijz...Bez)");
@@ -1216,13 +1217,14 @@ namespace Bezetting2
                 connection.Open();
                 OleDbDataReader reader = command.ExecuteReader();
                 WindowUpdateViewScreen = false;
+                DateTime inladen_vanaf_datum = DateTime.Now;
+                //inladen_vanaf_datum = inladen_vanaf_datum.AddMonths(-3);
+
                 if (reader.Read() == true)
                 {
-                    DateTime inladen_vanaf_datum = new DateTime(ProgData.ihuidigjaar - 1, 1, 1);
-
                     do
                     {
-                        System.Windows.Forms.Application.DoEvents();
+                        Application.DoEvents();
                         int NumberOfColums = reader.GetValues(meta);
 
                         labelDebug.Text = $"{teller++.ToString()}";
@@ -1239,7 +1241,7 @@ namespace Bezetting2
                         datum[2] = datum[2].Substring(0, 4);
 
                         DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
-
+                        
                         if ((gekozen > inladen_vanaf_datum) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
                         //if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
                         {
@@ -1261,7 +1263,7 @@ namespace Bezetting2
                                 {
                                     string naam = ProgData.Get_Gebruiker_Naam(meta[2].ToString());
                                     string invoer_naam = ProgData.Get_Gebruiker_Naam(meta[9].ToString());
-                                    ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, naam, datum[0], meta[5].ToString(), meta[11].ToString(), "Import " + invoer_naam);
+                                    ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, naam, datum[0], meta[5].ToString().ToUpper(), meta[11].ToString(), "Import " + invoer_naam);
                                 }
                             }
                             catch { }
@@ -1346,8 +1348,6 @@ namespace Bezetting2
         {
             Close();
         }
-
-        
         
     }
 }

@@ -343,8 +343,7 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur);
-
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur,30);
                 CaptureMyScreen();
             }
         }

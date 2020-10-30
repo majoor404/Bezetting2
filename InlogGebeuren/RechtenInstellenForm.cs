@@ -26,7 +26,6 @@ namespace Bezetting2.InlogGebeuren
             // encrypt pass
             persoon._passwoord = ProgData.Scramble("verander_nu");
             ProgData.Save_Namen_lijst();
-            MessageBox.Show("Wachtwoord is gereset");
         }
 
         private int GetRecht()

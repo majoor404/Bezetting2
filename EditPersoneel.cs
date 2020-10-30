@@ -251,7 +251,7 @@ namespace Bezetting2
                     dag._dagnummer = i;
                     ProgData.ListWerkdagPloeg.Add(dag);
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur);
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur,30);
 
                 for (int i = 1; i < eerste_dag_weg; i++)
                 {
@@ -315,7 +315,6 @@ namespace Bezetting2
                 persoon._rechten = int.Parse(recht.labelRechtenNivo.Text);
                 ProgData.Save_Namen_lijst();
             }
-            EditPersoneel_Shown(this, null);
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
