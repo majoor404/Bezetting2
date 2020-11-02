@@ -189,6 +189,23 @@ namespace Bezetting2.Invoer
                     }
                     AantalDagen.Enabled = true;
                 }
+                // aantal X om de Y dagen
+                if (comboBox1.SelectedIndex == 4)
+                {
+                    // eerste datum is labelDatum
+                    int X = (int)AantalDagen.Value;
+                    int Y = (int)numericUpDownOmDeAantalDagen.Value;
+
+                    while (X > 0)
+                    {
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+                        ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                        X--;
+                        start = start.AddDays(Y);
+                        ProgData.igekozenmaand = start.Month;
+                        ProgData.igekozenjaar = start.Year;
+                    }
+                }
                 ProgData.igekozenmaand = maand;
                 ProgData.igekozenjaar = jaar;
 
@@ -204,6 +221,7 @@ namespace Bezetting2.Invoer
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            panelSpeciaal.Visible = false;
             if (comboBox1.SelectedIndex < 2)
             {
                 AantalDagen.Enabled = true;
@@ -220,6 +238,12 @@ namespace Bezetting2.Invoer
                 textBoxRede.Text = "Generatie Pack";
                 AantalDagen.Value = 24;
             }
+            if (comboBox1.SelectedIndex == 4)
+            {
+                panelSpeciaal.Visible = true;
+                numericUpDownOmDeAantalDagen.Value = 1;
+            }
         }
+
     }
 }

@@ -42,7 +42,15 @@
             this.buttonVoerUit = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.panelSpeciaal = new System.Windows.Forms.Panel();
+            this.numericUpDownOmDeAantalDagen = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.AantalDagen)).BeginInit();
+            this.panelSpeciaal.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOmDeAantalDagen)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -126,14 +134,14 @@
             // 
             // textBoxRede
             // 
-            this.textBoxRede.Location = new System.Drawing.Point(12, 311);
+            this.textBoxRede.Location = new System.Drawing.Point(282, 288);
             this.textBoxRede.Name = "textBoxRede";
-            this.textBoxRede.Size = new System.Drawing.Size(250, 20);
+            this.textBoxRede.Size = new System.Drawing.Size(267, 20);
             this.textBoxRede.TabIndex = 23;
             // 
             // textBoxAfwijking
             // 
-            this.textBoxAfwijking.Location = new System.Drawing.Point(12, 260);
+            this.textBoxAfwijking.Location = new System.Drawing.Point(12, 288);
             this.textBoxAfwijking.Name = "textBoxAfwijking";
             this.textBoxAfwijking.Size = new System.Drawing.Size(250, 20);
             this.textBoxAfwijking.TabIndex = 22;
@@ -141,7 +149,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 295);
+            this.label2.Location = new System.Drawing.Point(279, 263);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(136, 13);
             this.label2.TabIndex = 25;
@@ -149,7 +157,7 @@
             // 
             // AantalDagen
             // 
-            this.AantalDagen.Location = new System.Drawing.Point(282, 88);
+            this.AantalDagen.Location = new System.Drawing.Point(346, 88);
             this.AantalDagen.Maximum = new decimal(new int[] {
             30,
             0,
@@ -161,7 +169,7 @@
             0,
             0});
             this.AantalDagen.Name = "AantalDagen";
-            this.AantalDagen.Size = new System.Drawing.Size(267, 20);
+            this.AantalDagen.Size = new System.Drawing.Size(190, 20);
             this.AantalDagen.TabIndex = 27;
             this.AantalDagen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.AantalDagen.Value = new decimal(new int[] {
@@ -173,7 +181,7 @@
             // buttonVoerUit
             // 
             this.buttonVoerUit.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonVoerUit.Location = new System.Drawing.Point(282, 337);
+            this.buttonVoerUit.Location = new System.Drawing.Point(282, 327);
             this.buttonVoerUit.Name = "buttonVoerUit";
             this.buttonVoerUit.Size = new System.Drawing.Size(267, 23);
             this.buttonVoerUit.TabIndex = 30;
@@ -184,7 +192,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(12, 337);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 327);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(250, 23);
             this.buttonCancel.TabIndex = 31;
@@ -198,20 +206,85 @@
             "Aantal copyeren volgens rooster dagen",
             "Aantal copyeren volgens kalender dagen",
             "Voor in voor hele ploeg",
-            "GP invoer (2 op 2 af)"});
-            this.comboBox1.Location = new System.Drawing.Point(282, 61);
+            "GP invoer (2 op 2 af)",
+            "Speciaal (X Aantal om de Y dagen)"});
+            this.comboBox1.Location = new System.Drawing.Point(297, 61);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(267, 21);
+            this.comboBox1.Size = new System.Drawing.Size(239, 21);
             this.comboBox1.TabIndex = 32;
             this.comboBox1.Text = "Aantal copyeren volgens rooster dagen";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // panelSpeciaal
+            // 
+            this.panelSpeciaal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSpeciaal.Controls.Add(this.label7);
+            this.panelSpeciaal.Controls.Add(this.numericUpDownOmDeAantalDagen);
+            this.panelSpeciaal.Controls.Add(this.label5);
+            this.panelSpeciaal.Location = new System.Drawing.Point(282, 119);
+            this.panelSpeciaal.Name = "panelSpeciaal";
+            this.panelSpeciaal.Size = new System.Drawing.Size(267, 128);
+            this.panelSpeciaal.TabIndex = 33;
+            this.panelSpeciaal.Visible = false;
+            // 
+            // numericUpDownOmDeAantalDagen
+            // 
+            this.numericUpDownOmDeAantalDagen.Location = new System.Drawing.Point(133, 11);
+            this.numericUpDownOmDeAantalDagen.Name = "numericUpDownOmDeAantalDagen";
+            this.numericUpDownOmDeAantalDagen.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownOmDeAantalDagen.TabIndex = 1;
+            this.numericUpDownOmDeAantalDagen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownOmDeAantalDagen.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 13);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(103, 13);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Om de aantal dagen";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(294, 90);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 13);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "Aantal : ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 263);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 13);
+            this.label6.TabIndex = 35;
+            this.label6.Text = "Afwijking";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(16, 43);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(245, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Uitvoeren aantal met interval van om aantal dagen";
             // 
             // AfwijkingInvoerReeksForm
             // 
             this.AcceptButton = this.buttonCancel;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 372);
+            this.ClientSize = new System.Drawing.Size(561, 365);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.panelSpeciaal);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonVoerUit);
@@ -231,6 +304,9 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Afwijking Invoer Reeks";
             ((System.ComponentModel.ISupportInitialize)(this.AantalDagen)).EndInit();
+            this.panelSpeciaal.ResumeLayout(false);
+            this.panelSpeciaal.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOmDeAantalDagen)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,5 +328,11 @@
         private System.Windows.Forms.Button buttonVoerUit;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Panel panelSpeciaal;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDownOmDeAantalDagen;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }

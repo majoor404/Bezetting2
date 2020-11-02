@@ -1126,7 +1126,7 @@ namespace Bezetting2
                 }
             }
 
-            if (DateTime.Now.Hour == 12 && ProgData.backup_time == DateTime.Now.Minute)
+            if (ProgData.backup_time == DateTime.Now.Minute)
             {
                 if (!File.Exists(ProgData.backup_zipnaam))
                 {
