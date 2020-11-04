@@ -11,11 +11,13 @@ namespace Bezetting2.Invoer
         public AfwijkingInvoerReeksForm()
         {
             InitializeComponent();
+            labelAftellen.Visible = false;
         }
 
         private void buttonVoerUit_Click(object sender, EventArgs e)
         {
             bool okido = true;
+            labelAftellen.Visible = true;
             if (textBoxAfwijking.Text == "")
             {
                 okido = false;
@@ -28,45 +30,46 @@ namespace Bezetting2.Invoer
             if (okido)
             {
 
-                // maak 2 maanden extra alvast
+                //// maak 2 maanden extra alvast
                 int maand = ProgData.igekozenmaand;
                 int jaar = ProgData.igekozenjaar;
-                ProgData.igekozenmaand++;
-                if (ProgData.igekozenmaand > 12)
-                {
-                    ProgData.igekozenmaand = 1;
-                    ProgData.igekozenjaar++;
-                }
-                if (!Directory.Exists(ProgData.GetDir()))
-                    Directory.CreateDirectory(ProgData.GetDir());
-                string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
-                if (!File.Exists(Locatie))
-                {
-                    ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
-                    ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                    ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
-                    ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
-                }
-                ProgData.igekozenmaand++;
-                if (ProgData.igekozenmaand > 12)
-                {
-                    ProgData.igekozenmaand = 1;
-                    ProgData.igekozenjaar++;
-                }
-                if (!Directory.Exists(ProgData.GetDir()))
-                    Directory.CreateDirectory(ProgData.GetDir());
-                Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
-                if (!File.Exists(Locatie))
-                {
-                    ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
-                    ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                    ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
-                    ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
-                }
+                //ProgData.igekozenmaand++;
+                //if (ProgData.igekozenmaand > 12)
+                //{
+                //    ProgData.igekozenmaand = 1;
+                //    ProgData.igekozenjaar++;
+                //}
+                //if (!Directory.Exists(ProgData.GetDir()))
+                //    Directory.CreateDirectory(ProgData.GetDir());
+                //string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
+                //if (!File.Exists(Locatie))
+                //{
+                //    ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
+                //    ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
+                //    ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
+                //    ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
+                //}
+                //ProgData.igekozenmaand++;
+                //if (ProgData.igekozenmaand > 12)
+                //{
+                //    ProgData.igekozenmaand = 1;
+                //    ProgData.igekozenjaar++;
+                //}
+                //if (!Directory.Exists(ProgData.GetDir()))
+                //    Directory.CreateDirectory(ProgData.GetDir());
+                //Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
+                //if (!File.Exists(Locatie))
+                //{
+                //    ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
+                //    ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
+                //    ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
+                //    ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
+                //}
+
+
                 ProgData.igekozenmaand = maand;
                 ProgData.igekozenjaar = jaar;
-
-                DateTime start = new DateTime(jaar, maand, int.Parse(labelDatum.Text));
+                DateTime start = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));
                 // afhankelijk van keuze 
                 if (comboBox1.SelectedIndex == 0)
                 {
@@ -76,6 +79,9 @@ namespace Bezetting2.Invoer
                     int aantal = (int)AantalDagen.Value;
                     while (aantal > 0)
                     {
+                        Text = aantal.ToString();
+                        labelAftellen.Refresh();
+
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                         werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         if (ver._standaarddienst != "") // dus werkdag
@@ -104,10 +110,12 @@ namespace Bezetting2.Invoer
                     ProgData.igekozenjaar = start.Year;
 
                     ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
-                    ProgData.LoadVeranderingenPloeg();
+                    ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
                     // volgens kalender
                     for (int i = 0; i < AantalDagen.Value; i++)
                     {
+                        labelAftellen.Text = i.ToString();
+                        labelAftellen.Refresh();
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
                         start = start.AddDays(1);
                     }
@@ -139,6 +147,8 @@ namespace Bezetting2.Invoer
 
                     while (aantal > 0)
                     {
+                        labelAftellen.Text = aantal.ToString();
+                        labelAftellen.Refresh();
                         while (ver._standaarddienst == "")
                         {
                             start = start.AddDays(1);
@@ -198,6 +208,12 @@ namespace Bezetting2.Invoer
 
                     while (X > 0)
                     {
+                        labelAftellen.Text = X.ToString();
+                        labelAftellen.Refresh();
+
+                        // gaat fout als ploegbezetting niet bestaat!!
+                        ProgData.CheckFiles(ProgData.GekozenKleur);
+
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
                         X--;

@@ -13,25 +13,12 @@ namespace Bezetting2
 
         private void History_Shown(object sender, EventArgs e)
         {
-            ProgData.LoadVeranderingenPloeg();
+            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
             comboBoxIngevoerdDoor.Items.Clear();
             comboBoxIngevoerdDoor.Items.Add("");
-            listViewHis.Items.Clear();
-            string[] regel = new string[6];
+
             foreach (veranderingen a in ProgData.ListVeranderingen)
             {
-                if (comboBoxDag.Text == a._datumafwijking || comboBoxIngevoerdDoor.Text == a._invoerdoor ||
-                    comboBoxDag.Text == "")
-                {
-                    regel[1] = a._afwijking;
-                    regel[2] = a._datumafwijking;
-                    regel[4] = a._datuminvoer;
-                    regel[3] = ProgData.Get_Gebruiker_Naam(a._invoerdoor);
-                    regel[0] = a._naam;
-                    regel[5] = a._rede;
-                    ListViewItem listItem = new ListViewItem(regel);
-                    listViewHis.Items.Add(listItem);
-                }
                 if (!comboBoxIngevoerdDoor.Items.Contains(ProgData.Get_Gebruiker_Naam(a._invoerdoor)))
                     comboBoxIngevoerdDoor.Items.Add(ProgData.Get_Gebruiker_Naam(a._invoerdoor));
             }
@@ -44,11 +31,12 @@ namespace Bezetting2
             {
                 comboBoxDag.Items.Add(i.ToString());
             }
+            buttonFilter_Click(this, null);
         }
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
-            ProgData.LoadVeranderingenPloeg();
+            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
             listViewHis.Items.Clear();
             string[] regel = new string[6];
             foreach (veranderingen a in ProgData.ListVeranderingen)

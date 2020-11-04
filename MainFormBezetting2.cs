@@ -607,7 +607,7 @@ namespace Bezetting2
                 // maak bezettingafwijking.bin voor kleur als die niet bestaat
                 // is lijst met werkdagen
                 //if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
-                if (!File.Exists(ProgData.Ploeg_Veranderingen_Locatie()))
+                if (!File.Exists(ProgData.Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)))
                 {
                     ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
                 }
@@ -998,7 +998,7 @@ namespace Bezetting2
         private string GetRedenAfwijking(string naam, int dag)
         {
             if (ProgData.ListVeranderingen.Count < 1)
-                ProgData.LoadVeranderingenPloeg();
+                ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
             string sdag = dag.ToString();
             try
             {
@@ -1093,12 +1093,12 @@ namespace Bezetting2
             // test of blauw_bezetting.bin bestaat
             MessageBox.Show($"Ploeg bezetting {0} bestaat niet\nOf is corrupt, Kijken wat ik kan doen", ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
             //string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_afwijkingen.bin");
-            if (File.Exists(ProgData.Ploeg_Veranderingen_Locatie()))
+            if (File.Exists(ProgData.Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)))
             {
                 MessageBox.Show($"Ploeg veranderingen bestaat wel, repareren!");
                 File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
                 ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.sgekozenmaand(), ProgData.GekozenKleur);
-                ProgData.LoadVeranderingenPloeg();
+                ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                 foreach (veranderingen verander in ProgData.ListVeranderingen)
                 {

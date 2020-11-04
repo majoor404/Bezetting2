@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Bezetting2
@@ -48,17 +49,8 @@ namespace Bezetting2
                 }
                 else
                 {
+                    bool juist = false;
                     personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
-                    if (ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
-                    {
-                        {
-                            // juiste inlog
-                            ProgData.Huidige_Gebruiker_Personeel_nummer = persoon._persnummer.ToString();
-                            ProgData.RechtenHuidigeGebruiker = persoon._rechten;
-                            ProgData.GekozenKleur = persoon._kleur;
-                            ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
-                        }
-                    }
                     if (textBoxNum.Text == textBoxPass.Text)
                     {
                         {
@@ -67,8 +59,25 @@ namespace Bezetting2
                             ProgData.RechtenHuidigeGebruiker = 1; // ingelogd maar kan verder niks
                             ProgData.GekozenKleur = persoon._kleur;
                             ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
+                            juist = true;
                         }
                     }
+                    if (ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
+                    {
+                        {
+                            // juiste inlog
+                            ProgData.Huidige_Gebruiker_Personeel_nummer = persoon._persnummer.ToString();
+                            ProgData.RechtenHuidigeGebruiker = persoon._rechten;
+                            ProgData.GekozenKleur = persoon._kleur;
+                            ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
+                            juist = true;
+                        }
+                    }
+                    if (!juist)
+                    {
+                        MessageBox.Show("Wachtwoord fout, niet herkend!");
+                    }
+                   
                 }
             }
             catch { }

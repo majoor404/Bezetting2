@@ -302,6 +302,9 @@ namespace Bezetting2
                 }
             }
             SavePloegBezetting(kleur,30);
+
+            // bij nieuwe bezetting hoort ook een nieuwe verander lijst
+            ListVeranderingen.Clear();
             SaveVeranderingenPloeg(30);
         }
 
@@ -370,13 +373,13 @@ namespace Bezetting2
             }
         }
 
-        public static void LoadVeranderingenPloeg()
+        public static void LoadVeranderingenPloeg(string kleur)
         {
             Main.labelDebug.Text = "Load Ploeg Veranderingen";
             ListVeranderingen.Clear();
             try
             {
-                using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(), FileMode.Open))
+                using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(kleur), FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
 
@@ -398,7 +401,7 @@ namespace Bezetting2
         {
             if (try_again < 0 && !Disable_error_Meldingen)
             {
-                MessageBox.Show($"SaveVeranderingenPloeg() error na 30 keer, \n{Ploeg_Veranderingen_Locatie()}");
+                MessageBox.Show($"SaveVeranderingenPloeg() error na 30 keer, \n{Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)}");
             }
 
 
@@ -407,7 +410,7 @@ namespace Bezetting2
             {
                 try
                 {
-                    using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(), FileMode.Create))
+                    using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur), FileMode.Create))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
                         bin.Serialize(stream, ListVeranderingen);
@@ -528,8 +531,7 @@ namespace Bezetting2
                 ver._afwijkingdienst = afwijking;
                 SavePloegBezetting(kleur,30);
 
-                // vul historie/afwijkingen aan
-                LoadVeranderingenPloeg();
+                LoadVeranderingenPloeg(kleur);
                 veranderingen verander = new veranderingen();
                 verander._naam = naam;
                 verander._afwijking = afwijking;
@@ -539,7 +541,8 @@ namespace Bezetting2
                 verander._invoerdoor = invoerdoor;
                 ListVeranderingen.Add(verander);
                 SaveVeranderingenPloeg(30);
-                ChangeData = true;
+                
+                ChangeData = true; // voor screen shot
             }
             catch
             {
@@ -764,9 +767,9 @@ namespace Bezetting2
             return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_namen.bin");
         }
 
-        public static string Ploeg_Veranderingen_Locatie()
+        public static string Ploeg_Veranderingen_Locatie(string kleur)
         {
-            return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{GekozenKleur}_afwijkingen.bin");
+            return Path.GetFullPath($"{_igekozenjaar.ToString()}\\{igekozenmaand.ToString()}\\{kleur}_afwijkingen.bin");
         }
 
         public static string Lijnen_Locatie()
