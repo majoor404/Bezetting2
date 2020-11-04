@@ -80,7 +80,10 @@ namespace Bezetting2
                    
                 }
             }
-            catch { }
+            catch 
+            {
+                MessageBox.Show("Gebruiker niet in bezetting lijst!");
+            }
         }
 
         private void textBoxPass_TextChanged(object sender, EventArgs e)

@@ -386,16 +386,21 @@
             // 
             // ToegangNivo
             // 
+            this.ToegangNivo.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.ToegangNivo.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.ToegangNivo.Name = "ToegangNivo";
-            this.ToegangNivo.Size = new System.Drawing.Size(15, 21);
+            this.ToegangNivo.Size = new System.Drawing.Size(19, 21);
             this.ToegangNivo.Text = "0";
             this.ToegangNivo.TextChanged += new System.EventHandler(this.ToegangNivo_TextChanged);
             // 
             // toolStripStatusLabelInfo
             // 
+            this.toolStripStatusLabelInfo.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
+            this.toolStripStatusLabelInfo.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.toolStripStatusLabelInfo.Name = "toolStripStatusLabelInfo";
-            this.toolStripStatusLabelInfo.Size = new System.Drawing.Size(50, 21);
+            this.toolStripStatusLabelInfo.Size = new System.Drawing.Size(54, 21);
             this.toolStripStatusLabelInfo.Text = "majoor";
+            this.toolStripStatusLabelInfo.Click += new System.EventHandler(this.toolStripStatusLabelInfo_Click);
             // 
             // toolStripStatusRedeAfwijking
             // 
@@ -404,6 +409,7 @@
             this.toolStripStatusRedeAfwijking.Name = "toolStripStatusRedeAfwijking";
             this.toolStripStatusRedeAfwijking.Size = new System.Drawing.Size(36, 21);
             this.toolStripStatusRedeAfwijking.Text = "BBQ";
+            this.toolStripStatusRedeAfwijking.Click += new System.EventHandler(this.toolStripStatusRedeAfwijking_Click);
             // 
             // comboBoxKleurKeuze
             // 
@@ -617,6 +623,7 @@
             this.View.Location = new System.Drawing.Point(130, 28);
             this.View.MultiSelect = false;
             this.View.Name = "View";
+            this.View.ShowItemToolTips = true;
             this.View.Size = new System.Drawing.Size(1692, 874);
             this.View.TabIndex = 16;
             this.View.UseCompatibleStateImageBehavior = false;

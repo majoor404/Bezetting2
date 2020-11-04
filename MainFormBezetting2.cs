@@ -19,6 +19,9 @@ namespace Bezetting2
         private bool kill = false;
         private bool WindowUpdateViewScreen = true;
 
+        private ToolTip mTooltip = new ToolTip();
+        private Point mLastPos = new Point(-1, -1);
+
         private Color _Weekend = Color.LightSkyBlue;
         private Color _Feestdag = Color.LightSalmon;
         private Color _Huidigedag = Color.Lavender;
@@ -530,6 +533,8 @@ namespace Bezetting2
                         }
                     }
 
+                    ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
+
                     // aantal bezetting regel
                     int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
                     string[] maxlijst = new string[aantal_dagen_deze_maand + 1];
@@ -657,12 +662,13 @@ namespace Bezetting2
                                 if (a._naam == View.Items[i].Text) // gevonden naam
                                 {
                                     View.Items[i].SubItems[a._dagnummer].Text = a._afwijkingdienst;
-                
                                 }
                             }
                         }
                     }
                 }
+
+                ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
 
                 // aantal bezetting regel
                 int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
@@ -966,6 +972,8 @@ namespace Bezetting2
                     {
                         toolStripStatusLabelInfo.Text = info.Item.Text + " " + info.SubItem.Text;
                         toolStripStatusRedeAfwijking.Text = GetRedenAfwijking(info.Item.Text, col);
+                        if(toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
+                            mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X+15, e.Y+15, 1000);
                     }
                     if (col > 0 && row < 5) // feestdag info ?
                     {
@@ -988,9 +996,13 @@ namespace Bezetting2
                             if (maand == hemelsvaart.Month && col == hemelsvaart.Day) toolStripStatusRedeAfwijking.Text = "Hemelsvaart dag";
                             if (maand == pinksteren.Month && col == pinksteren.Day) toolStripStatusRedeAfwijking.Text = "Eerste Pinsterdag";
                             if (maand == pinksteren2.Month && col == pinksteren2.Day) toolStripStatusRedeAfwijking.Text = "Tweede Pinsterdag";
+
+                            if (toolStripStatusRedeAfwijking.Text != "" && mLastPos != e.Location)
+                                mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
                         }
                     }
                 }
+                mLastPos = e.Location;
             }
             catch { }
         }
@@ -1348,6 +1360,15 @@ namespace Bezetting2
         {
             Close();
         }
-        
+
+        private void toolStripStatusRedeAfwijking_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripStatusLabelInfo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
