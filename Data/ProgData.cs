@@ -886,7 +886,7 @@ namespace Bezetting2
             ZipFile.CreateFromDirectory(startPath, backup_zipnaam);
         }
 
-        public static void NachtErVoorVrij(string gekozen_naam, string dagnr)
+        public static void NachtErVoorVrij(string gekozen_naam, string dagnr, string afwijking)
         {
             // kijk of afwijking op vrije dag was, en dag ervoor Nacht, dan 
             if (GekozenRooster() != "DD")
@@ -895,18 +895,26 @@ namespace Bezetting2
                 dag_er_voor = dag_er_voor.AddDays(-1);
                 if (MDatum.GetDienst(GekozenRooster(), dag_er_voor, GekozenKleur) == "N")
                 {
-                    DialogResult dialogResult = MessageBox.Show("Nacht er voor VRIJ zetten?", "Vraagje", MessageBoxButtons.YesNo);
-                    if (dialogResult == DialogResult.Yes)
+                    if (afwijking == "VK" || afwijking == "8OI" || afwijking == "A" ||
+                        afwijking == "VRIJ" || afwijking == "VAK" || afwijking == "VF")
                     {
-                        igekozenmaand = dag_er_voor.Month;
-                        igekozenjaar = dag_er_voor.Year;
 
-                        ProgData.RegelAfwijking(gekozen_naam, dag_er_voor.Day.ToString(), "VRIJ", "IVM WERKDAG MORGEN", "Rooster Regel", ProgData.GekozenKleur);
+                    }
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Nacht er voor VRIJ zetten?", "Vraagje", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            igekozenmaand = dag_er_voor.Month;
+                            igekozenjaar = dag_er_voor.Year;
 
-                        dag_er_voor = dag_er_voor.AddDays(1);
-                        igekozenmaand = dag_er_voor.Month;
-                        igekozenjaar = dag_er_voor.Year;
+                            ProgData.RegelAfwijking(gekozen_naam, dag_er_voor.Day.ToString(), "VRIJ", "IVM WERKDAG MORGEN", "Rooster Regel", ProgData.GekozenKleur);
 
+                            dag_er_voor = dag_er_voor.AddDays(1);
+                            igekozenmaand = dag_er_voor.Month;
+                            igekozenjaar = dag_er_voor.Year;
+
+                        }
                     }
                 }
             }

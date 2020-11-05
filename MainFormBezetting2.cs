@@ -888,7 +888,7 @@ namespace Bezetting2
                                     else
                                     {
                                         ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                        ProgData.NachtErVoorVrij(gekozen_naam,gekozen_datum);
+                                        ProgData.NachtErVoorVrij(gekozen_naam,gekozen_datum, afwijking);
                                     }
                                     VulViewScherm();
                                 }
