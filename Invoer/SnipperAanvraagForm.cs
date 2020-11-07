@@ -190,7 +190,7 @@ namespace Bezetting2.Invoer
                         {
                             SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
                             ver._Coorcinator = labelNaamFull.Text;
-                            ver._rede_coordinator = "Afgekeurt";
+                            ver._rede_coordinator = "Afgekeurd";
                             ProgData.SaveSnipperLijst(dir);
                         }
                         catch

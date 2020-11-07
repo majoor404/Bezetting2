@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Bezetting2.Invoer
@@ -12,6 +13,7 @@ namespace Bezetting2.Invoer
         {
             InitializeComponent();
             labelAftellen.Visible = false;
+            comboBox1.SelectedIndex = 0;
         }
 
         private void buttonVoerUit_Click(object sender, EventArgs e)
@@ -29,46 +31,8 @@ namespace Bezetting2.Invoer
 
             if (okido)
             {
-
-                //// maak 2 maanden extra alvast
                 int maand = ProgData.igekozenmaand;
                 int jaar = ProgData.igekozenjaar;
-                //ProgData.igekozenmaand++;
-                //if (ProgData.igekozenmaand > 12)
-                //{
-                //    ProgData.igekozenmaand = 1;
-                //    ProgData.igekozenjaar++;
-                //}
-                //if (!Directory.Exists(ProgData.GetDir()))
-                //    Directory.CreateDirectory(ProgData.GetDir());
-                //string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
-                //if (!File.Exists(Locatie))
-                //{
-                //    ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
-                //    ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                //    ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
-                //    ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
-                //}
-                //ProgData.igekozenmaand++;
-                //if (ProgData.igekozenmaand > 12)
-                //{
-                //    ProgData.igekozenmaand = 1;
-                //    ProgData.igekozenjaar++;
-                //}
-                //if (!Directory.Exists(ProgData.GetDir()))
-                //    Directory.CreateDirectory(ProgData.GetDir());
-                //Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
-                //if (!File.Exists(Locatie))
-                //{
-                //    ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
-                //    ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                //    ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
-                //    ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
-                //}
-
-
-                ProgData.igekozenmaand = maand;
-                ProgData.igekozenjaar = jaar;
                 DateTime start = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));
                 // afhankelijk van keuze 
                 if (comboBox1.SelectedIndex == 0)
@@ -87,6 +51,7 @@ namespace Bezetting2.Invoer
                         if (ver._standaarddienst != "") // dus werkdag
                         {
                             ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                            Thread.Sleep(300);
                             aantal--;
                         }
                         start = start.AddDays(1);
@@ -117,6 +82,7 @@ namespace Bezetting2.Invoer
                         labelAftellen.Text = i.ToString();
                         labelAftellen.Refresh();
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                        Thread.Sleep(300);
                         start = start.AddDays(1);
                     }
 
@@ -132,6 +98,7 @@ namespace Bezetting2.Invoer
                     foreach (personeel per in ProgData.ListPersoneelKleur)
                     {
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, per._achternaam, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                        Thread.Sleep(300);
                     }
                 }
                 // GP 2 op 2 af
@@ -162,6 +129,7 @@ namespace Bezetting2.Invoer
                         }
 
                         if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                        Thread.Sleep(300);
                         aantal--;
                         start = start.AddDays(1);
                         ProgData.igekozenmaand = start.Month;
@@ -172,6 +140,7 @@ namespace Bezetting2.Invoer
                         ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
                         if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                        Thread.Sleep(300);
                         aantal--;
                         start = start.AddDays(1);
                         ProgData.igekozenmaand = start.Month;
@@ -212,10 +181,12 @@ namespace Bezetting2.Invoer
                         labelAftellen.Refresh();
 
                         // gaat fout als ploegbezetting niet bestaat!!
-                        ProgData.CheckFiles(ProgData.GekozenKleur);
+                        //ProgData.CheckFiles(ProgData.GekozenKleur);
+                        // nu check in loadploegbezetting gedaan
 
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
+                        Thread.Sleep(300);
                         X--;
                         start = start.AddDays(Y);
                         ProgData.igekozenmaand = start.Month;

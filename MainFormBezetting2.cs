@@ -28,6 +28,7 @@ namespace Bezetting2
         private Color _MaandButton = Color.LightSkyBlue;
         private Color _Werkplek = Color.LightGray;
         private Color _MinimaalPersonen = Color.LightPink;
+        private Color _HoverNaam = Color.LightGreen;
 
         public List<ClassTelPlekGewerkt> ListClassTelPlekGewerkt = new List<ClassTelPlekGewerkt>();
         public List<string> ListTelNamen = new List<string>();
@@ -517,7 +518,7 @@ namespace Bezetting2
                     // Vul bezetting op scherm
                     if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                     {
-                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
                         foreach (werkdag a in ProgData.ListWerkdagPloeg)
                         {
                             if (a._afwijkingdienst != "")
@@ -648,11 +649,11 @@ namespace Bezetting2
                         }
                     }
                 }
-                
+
                 // Vul bezetting op scherm
                 if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
+                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
                     foreach (werkdag a in ProgData.ListWerkdagPloeg)
                     {
                         if (a._afwijkingdienst != "")
@@ -882,13 +883,13 @@ namespace Bezetting2
                                         else
                                         {
                                             ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                            
+
                                         }
                                     }
                                     else
                                     {
                                         ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                        ProgData.NachtErVoorVrij(gekozen_naam,gekozen_datum, afwijking);
+                                        ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
                                     }
                                     VulViewScherm();
                                 }
@@ -953,28 +954,45 @@ namespace Bezetting2
                     int row = info.Item.Index;
                     int col = info.Item.SubItems.IndexOf(info.SubItem);
                     // extra dienst
-                    if (row == View.Items.Count - 1)
+                    string aant = View.Items[View.Items.Count - 1].Text;
+                    if (row == View.Items.Count - 1 && aant == "Extra dienst")
                     {
                         if (info.SubItem.Text == "1") // 1 extra dienst
                         {
                             foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
                             {
                                 if (col == ex._datum.Day)
+                                {
                                     toolStripStatusLabelInfo.Text = ex._naam;
+                                    if (toolStripStatusLabelInfo.Text != "" && mLastPos != e.Location)
+                                        mTooltip.Show(toolStripStatusLabelInfo.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                                }
                             }
                         }
                         else
                         {
                             toolStripStatusLabelInfo.Text = "extra dienst nog te doen"; // nog te doen
+                            //if (toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
+                            //    mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
                         }
                     }
+                    // rede afwijking
                     if (col > 0 && row > 3 && row < View.Items.Count - 1)
                     {
                         toolStripStatusLabelInfo.Text = info.Item.Text + " " + info.SubItem.Text;
                         toolStripStatusRedeAfwijking.Text = GetRedenAfwijking(info.Item.Text, col);
-                        if(toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
-                            mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X+15, e.Y+15, 1000);
+                        if (toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
+                            mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
                     }
+                    // personeel nummer bij naam
+                    if (col == 0 && row > 3 && row < View.Items.Count - 1)
+                    {
+                        string naam = View.Items[row].Text;
+                        string persnummer = ProgData.Get_Gebruiker_Nummer(naam);
+                        if (persnummer != "" && mLastPos != e.Location)
+                            mTooltip.Show(persnummer, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                    }
+                    // feestdag
                     if (col > 0 && row < 5) // feestdag info ?
                     {
                         if (View.Items[row].SubItems[col].BackColor == _Feestdag)
@@ -1111,13 +1129,13 @@ namespace Bezetting2
                 File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
                 ProgData.MaakLegeBezetting(ProgData.sgekozenjaar(), ProgData.sgekozenmaand(), ProgData.GekozenKleur);
                 ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
                 foreach (veranderingen verander in ProgData.ListVeranderingen)
                 {
                     werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == verander._naam) && (a._dagnummer.ToString() == verander._datumafwijking));
                     ver._afwijkingdienst = verander._afwijking;
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur,30);
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
                 VulViewScherm();
             }
         }
@@ -1253,7 +1271,7 @@ namespace Bezetting2
                         datum[2] = datum[2].Substring(0, 4);
 
                         DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
-                        
+
                         if ((gekozen > inladen_vanaf_datum) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
                         //if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
                         {
@@ -1369,6 +1387,11 @@ namespace Bezetting2
         private void toolStripStatusLabelInfo_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1SelLine_CheckedChanged(object sender, EventArgs e)
+        {
+            View.HoverSelection = checkBox1SelLine.Checked;
         }
     }
 }

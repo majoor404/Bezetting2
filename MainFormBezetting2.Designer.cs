@@ -101,6 +101,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
+            this.checkBox1SelLine = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -727,7 +728,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 626);
+            this.label1.Location = new System.Drawing.Point(12, 650);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 24;
@@ -737,7 +738,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Red;
-            this.panel5.Location = new System.Drawing.Point(14, 642);
+            this.panel5.Location = new System.Drawing.Point(15, 666);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(100, 6);
             this.panel5.TabIndex = 25;
@@ -746,7 +747,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 655);
+            this.label2.Location = new System.Drawing.Point(12, 679);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 26;
@@ -756,7 +757,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Green;
-            this.panel6.Location = new System.Drawing.Point(14, 671);
+            this.panel6.Location = new System.Drawing.Point(15, 695);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(100, 6);
             this.panel6.TabIndex = 24;
@@ -765,7 +766,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 685);
+            this.label3.Location = new System.Drawing.Point(12, 709);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 27;
@@ -775,7 +776,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Fuchsia;
-            this.panel7.Location = new System.Drawing.Point(15, 700);
+            this.panel7.Location = new System.Drawing.Point(16, 724);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(100, 6);
             this.panel7.TabIndex = 24;
@@ -784,7 +785,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 713);
+            this.label4.Location = new System.Drawing.Point(12, 737);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 28;
@@ -794,7 +795,7 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.Blue;
-            this.panel8.Location = new System.Drawing.Point(14, 729);
+            this.panel8.Location = new System.Drawing.Point(15, 753);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(100, 6);
             this.panel8.TabIndex = 24;
@@ -815,12 +816,24 @@
             this.labelDebug.TabIndex = 29;
             this.labelDebug.Text = "Debug Info";
             // 
+            // checkBox1SelLine
+            // 
+            this.checkBox1SelLine.AutoSize = true;
+            this.checkBox1SelLine.Location = new System.Drawing.Point(15, 625);
+            this.checkBox1SelLine.Name = "checkBox1SelLine";
+            this.checkBox1SelLine.Size = new System.Drawing.Size(97, 17);
+            this.checkBox1SelLine.TabIndex = 30;
+            this.checkBox1SelLine.Text = "Selecteer regel";
+            this.checkBox1SelLine.UseVisualStyleBackColor = true;
+            this.checkBox1SelLine.CheckedChanged += new System.EventHandler(this.checkBox1SelLine_CheckedChanged);
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.checkBox1SelLine);
             this.Controls.Add(this.labelDebug);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.label4);
@@ -946,6 +959,7 @@
         private System.Windows.Forms.ToolStripMenuItem witToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allemaalToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBox1SelLine;
     }
 }
 

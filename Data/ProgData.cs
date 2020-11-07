@@ -337,6 +337,8 @@ namespace Bezetting2
 
         public static void LoadPloegBezetting(string kleur, int try_again)
         {
+            CheckFiles(kleur);
+
             if (try_again < 0)
             {
                 MessageBox.Show("Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?");

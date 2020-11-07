@@ -147,9 +147,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(14, 133);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 16);
+            this.label5.Size = new System.Drawing.Size(58, 16);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Rede  :";
+            this.label5.Text = "Reden  :";
             // 
             // textBoxRede
             // 
@@ -315,7 +315,7 @@
             this.Controls.Add(this.labelNaam);
             this.Name = "SnipperAanvraagForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Snipper Aanvraag Form";
+            this.Text = "Aanvraag Verlof";
             this.Shown += new System.EventHandler(this.SnipperAanvraagForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();

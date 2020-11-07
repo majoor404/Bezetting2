@@ -36,7 +36,6 @@
             this.OpDatum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Rede = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.comboBoxDag = new System.Windows.Forms.ComboBox();
-            this.comboBoxIngevoerdDoor = new System.Windows.Forms.ComboBox();
             this.buttonFilter = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -95,14 +94,7 @@
             this.comboBoxDag.Name = "comboBoxDag";
             this.comboBoxDag.Size = new System.Drawing.Size(78, 21);
             this.comboBoxDag.TabIndex = 3;
-            // 
-            // comboBoxIngevoerdDoor
-            // 
-            this.comboBoxIngevoerdDoor.FormattingEnabled = true;
-            this.comboBoxIngevoerdDoor.Location = new System.Drawing.Point(354, 14);
-            this.comboBoxIngevoerdDoor.Name = "comboBoxIngevoerdDoor";
-            this.comboBoxIngevoerdDoor.Size = new System.Drawing.Size(143, 21);
-            this.comboBoxIngevoerdDoor.TabIndex = 4;
+            this.comboBoxDag.TextChanged += new System.EventHandler(this.comboBoxDag_TextChanged);
             // 
             // buttonFilter
             // 
@@ -112,6 +104,7 @@
             this.buttonFilter.TabIndex = 6;
             this.buttonFilter.Text = "Zet Filter";
             this.buttonFilter.UseVisualStyleBackColor = true;
+            this.buttonFilter.Visible = false;
             this.buttonFilter.Click += new System.EventHandler(this.buttonFilter_Click);
             // 
             // HistoryForm
@@ -120,7 +113,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(802, 539);
             this.Controls.Add(this.buttonFilter);
-            this.Controls.Add(this.comboBoxIngevoerdDoor);
             this.Controls.Add(this.comboBoxDag);
             this.Controls.Add(this.listViewHis);
             this.MaximizeBox = false;
@@ -141,7 +133,6 @@
         private System.Windows.Forms.ColumnHeader IngevoerdDoor;
         private System.Windows.Forms.ColumnHeader OpDatum;
         private System.Windows.Forms.ColumnHeader Rede;
-        private System.Windows.Forms.ComboBox comboBoxIngevoerdDoor;
         public System.Windows.Forms.ComboBox comboBoxDag;
         private System.Windows.Forms.Button buttonFilter;
     }

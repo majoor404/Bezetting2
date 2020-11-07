@@ -391,7 +391,7 @@
             this.buttonVulDienst.Name = "buttonVulDienst";
             this.buttonVulDienst.Size = new System.Drawing.Size(171, 29);
             this.buttonVulDienst.TabIndex = 11;
-            this.buttonVulDienst.Text = "Vul Dienst op";
+            this.buttonVulDienst.Text = "Dienst invullen";
             this.buttonVulDienst.UseVisualStyleBackColor = true;
             this.buttonVulDienst.Click += new System.EventHandler(this.button2_Click);
             // 

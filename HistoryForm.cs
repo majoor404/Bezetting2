@@ -14,14 +14,6 @@ namespace Bezetting2
         private void History_Shown(object sender, EventArgs e)
         {
             ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
-            comboBoxIngevoerdDoor.Items.Clear();
-            comboBoxIngevoerdDoor.Items.Add("");
-
-            foreach (veranderingen a in ProgData.ListVeranderingen)
-            {
-                if (!comboBoxIngevoerdDoor.Items.Contains(ProgData.Get_Gebruiker_Naam(a._invoerdoor)))
-                    comboBoxIngevoerdDoor.Items.Add(ProgData.Get_Gebruiker_Naam(a._invoerdoor));
-            }
 
             int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
             comboBoxDag.Items.Clear();
@@ -41,9 +33,7 @@ namespace Bezetting2
             string[] regel = new string[6];
             foreach (veranderingen a in ProgData.ListVeranderingen)
             {
-                if (comboBoxDag.Text == a._datumafwijking || 
-                    comboBoxIngevoerdDoor.Text == a._invoerdoor ||
-                    comboBoxDag.Text == "")
+                if (comboBoxDag.Text == a._datumafwijking || comboBoxDag.Text == "")
                 {
                     regel[1] = a._afwijking;
                     regel[2] = a._datumafwijking;
@@ -55,6 +45,11 @@ namespace Bezetting2
                     listViewHis.Items.Add(listItem);
                 }
             }
+        }
+
+        private void comboBoxDag_TextChanged(object sender, EventArgs e)
+        {
+            buttonFilter_Click(this, null);
         }
     }
 }

@@ -1317,7 +1317,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1141, 623);
+            this.ClientSize = new System.Drawing.Size(1149, 625);
             this.Controls.Add(this.buttonNu);
             this.Controls.Add(this.listBox41);
             this.Controls.Add(this.listBox40);
@@ -1408,6 +1408,9 @@
             this.Controls.Add(this.listBox3);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "OverzichtWachtForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Overzicht Wacht";

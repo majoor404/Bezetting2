@@ -321,6 +321,9 @@
             this.Controls.Add(this.labelPersoneelnr);
             this.Controls.Add(this.labelDatum);
             this.Controls.Add(this.labelNaam);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AfwijkingInvoerReeksForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
