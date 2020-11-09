@@ -443,7 +443,7 @@ namespace Bezetting2
                                 werkdag_extra_man._dagnummer = dat.Day;
                                 werkdag_extra_man._naam = naam._naam;
                                 werkdag_extra_man._werkplek = "";
-                                werkdag_extra_man._afwijkingdienst = "ED";
+                                werkdag_extra_man._afwijkingdienst = naam._metcode;
                                 ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
                                 ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
                             }

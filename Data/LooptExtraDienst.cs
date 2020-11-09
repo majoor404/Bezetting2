@@ -7,5 +7,6 @@ namespace Bezetting2.Data
     {
         public DateTime _datum { get; set; }
         public string _naam { get; set; }
+        public string _metcode { get; set; }
     }
 }

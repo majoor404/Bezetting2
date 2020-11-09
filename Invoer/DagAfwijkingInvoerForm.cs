@@ -88,6 +88,7 @@ namespace Bezetting2
                     LooptExtraDienst lop = new LooptExtraDienst();
                     lop._datum = _verzoekdag;
                     lop._naam = labelNaam.Text;
+                    lop._metcode = textBoxAfwijking.Text;
 
                     ProgData.ListLooptExtra.Add(lop);
                     ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
