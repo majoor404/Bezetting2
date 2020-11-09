@@ -314,7 +314,40 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+
+                // extra diensten regelen.
+                // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
+                //string dir = ProgData.GetDirectoryBezettingMaand(dat);
+                //ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
+                //if (ProgData.ListLooptExtra.Count > 0)
+                //{
+                //    foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
+                //    {
+                //        if (naam._datum.ToShortDateString() == dat.ToShortDateString())
+                //        {
+                //            personeel extra_man = new personeel();
+                //            extra_man._achternaam = naam._naam;
+                //            ProgData.ListPersoneelKleur.Add(extra_man);
+
+                //            //try
+                //            //{
+                //            //    werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
+                //            //}
+                //            //catch
+                //            //{
+                //            //    werkdag werkdag_extra_man = new werkdag();
+                //            //    werkdag_extra_man._dagnummer = dat.Day;
+                //            //    werkdag_extra_man._naam = naam._naam;
+                //            //    werkdag_extra_man._werkplek = "";
+                //            //    werkdag_extra_man._afwijkingdienst = "ED";
+                //            //    ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
+                //            //}
+                //        }
+                //    }
+                //}
+
+
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
                     if ((box.Tag != null))
@@ -343,14 +376,14 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur,30);
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
                 CaptureMyScreen();
             }
         }
 
         private void ViewUpdate()
         {
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
@@ -369,6 +402,7 @@ namespace Bezetting2
                     dat = dat.AddDays(1);
                     labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
                 }
+                labelDatum.Text = dat.ToLongDateString();
             }
 
             foreach (ListBox box in this.Controls.OfType<ListBox>())
@@ -378,6 +412,45 @@ namespace Bezetting2
 
             try
             {
+                // extra diensten regelen.
+                // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
+                string dir = ProgData.GetDirectoryBezettingMaand(dat);
+                ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
+                if (ProgData.ListLooptExtra.Count > 0)
+                {
+                    foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
+                    {
+                        if (naam._datum.ToShortDateString() == dat.ToShortDateString())
+                        {
+                            try
+                            {
+                                personeel perso = ProgData.ListPersoneelKleur.First(aa => (aa._achternaam == naam._naam));
+                            }
+                            catch
+                            {
+                                personeel extra_man = new personeel();
+                                extra_man._achternaam = naam._naam;
+                                ProgData.ListPersoneelKleur.Add(extra_man);
+                            }
+
+                            try
+                            {
+                                werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
+                            }
+                            catch
+                            {
+                                werkdag werkdag_extra_man = new werkdag();
+                                werkdag_extra_man._dagnummer = dat.Day;
+                                werkdag_extra_man._naam = naam._naam;
+                                werkdag_extra_man._werkplek = "";
+                                werkdag_extra_man._afwijkingdienst = "ED";
+                                ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
+                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                            }
+                        }
+                    }
+                }
+
                 foreach (personeel man in ProgData.ListPersoneelKleur)
                 {
                     werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
@@ -390,7 +463,6 @@ namespace Bezetting2
                     {
                         invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
                         veld._ListNaam.Items.Add(man._achternaam);
-
                         UpdateAfwijkingListBox(veld._ListNaam);
                     }
                 }
@@ -722,6 +794,11 @@ namespace Bezetting2
                 }
                 bitmap.Save(ProgData.GetLocatieOverzichtPlaatje(dat), ImageFormat.Jpeg);
             }
+        }
+
+        private void listBox2_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
         }
     }
 }

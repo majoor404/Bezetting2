@@ -898,7 +898,8 @@ namespace Bezetting2
                 if (MDatum.GetDienst(GekozenRooster(), dag_er_voor, GekozenKleur) == "N")
                 {
                     if (afwijking == "VK" || afwijking == "8OI" || afwijking == "A" ||
-                        afwijking == "VRIJ" || afwijking == "VAK" || afwijking == "VF")
+                        afwijking == "VRIJ" || afwijking == "VAK" || afwijking == "VF" 
+                        || afwijking == "ED-N")
                     {
 
                     }
