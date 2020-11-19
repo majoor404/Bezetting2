@@ -58,8 +58,8 @@ namespace Bezetting2
 
         public static List<personeel> ListPersoneel = new List<personeel>();
         public static List<personeel> ListPersoneelKleur = new List<personeel>();
-        public static string ReloadSpeed1 = "";
-        public static string ReloadSpeed2 = "";
+        //public static string ReloadSpeed1 = "";
+        //public static string ReloadSpeed2 = "";
 
         public static string _LooptExtra_Locatie;
         public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
@@ -946,5 +946,89 @@ namespace Bezetting2
                 SavePloegBezetting(GekozenKleur,30);
             }
         }
+
+        /*
+        private static void Load(string kleur,string maand, string jaar, int try_again)
+        {
+
+            if (!File.Exists(Ploeg_Bezetting_Locatie(kleur)))
+            {
+                Directory.CreateDirectory(Path.GetFullPath($"{jaar}\\{maand}"));
+
+                MaakPloegNamenLijst(kleur); // maakt ploeg bezetting en werkdag bezetting
+                SavePloegNamenLijst(30);
+
+                LoadPloegBezetting(kleur, 30);
+                GekozenKleur = kleur;
+            }
+
+            if (try_again < 0)
+            {
+                MessageBox.Show("kan niet laden, netwerk probleem ?");
+            }
+
+            Main.labelDebug.Text = "Load Ploeg Bezetting";
+            ListWerkdagPloeg.Clear();
+            try
+            {
+                using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(kleur), FileMode.Open))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    try
+                    {
+                        ListWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
+                        stream.Dispose();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Deserialize(stream) error, gebruik repareer tool als Admin");
+                    }
+                }
+            }
+            catch (IOException)
+            {
+                Thread.Sleep(300);
+                Load(kleur, maand, jaar, try_again--);
+            }
+
+            Main.labelDebug.Text = "Load Ploeg Namen Lijst";
+            ListPersoneelKleur.Clear();
+            try
+            {
+                using (Stream stream = File.Open(Ploeg_Namen_Locatie(), FileMode.Open))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    ListPersoneelKleur = (List<personeel>)bin.Deserialize(stream);
+                }
+            }
+            catch (IOException)
+            {
+                Thread.Sleep(300);
+                Load(kleur, maand, jaar, try_again--);
+            }
+            
+            ListWerkgroepPersoneel.Clear();
+            foreach (personeel a in ListPersoneelKleur)
+            {
+                if (!ListWerkgroepPersoneel.Contains(a._werkgroep))
+                    ListWerkgroepPersoneel.Add(a._werkgroep);
+            }
+
+            Main.labelDebug.Text = "Load Ploeg Veranderingen";
+            ListVeranderingen.Clear();
+            try
+            {
+                using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(kleur), FileMode.Open))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
+                }
+            }
+            catch
+            {
+            }
+            Main.labelDebug.Text = "";
+        }
+        */
     }
 }

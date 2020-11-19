@@ -123,6 +123,7 @@
             // listBox1
             // 
             this.listBox1.AllowDrop = true;
+            this.listBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
@@ -131,6 +132,7 @@
             this.listBox1.Size = new System.Drawing.Size(163, 516);
             this.listBox1.TabIndex = 0;
             this.listBox1.Tag = "1";
+            this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -139,7 +141,9 @@
             // listBox2
             // 
             this.listBox2.AllowDrop = true;
+            this.listBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBox2.ForeColor = System.Drawing.SystemColors.WindowText;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 16;
             this.listBox2.Location = new System.Drawing.Point(11, 89);
@@ -147,6 +151,7 @@
             this.listBox2.Size = new System.Drawing.Size(150, 68);
             this.listBox2.TabIndex = 1;
             this.listBox2.Tag = "2";
+            this.listBox2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox2.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox2.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -155,6 +160,7 @@
             // listBox3
             // 
             this.listBox3.AllowDrop = true;
+            this.listBox3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 16;
@@ -163,6 +169,7 @@
             this.listBox3.Size = new System.Drawing.Size(150, 68);
             this.listBox3.TabIndex = 2;
             this.listBox3.Tag = "3";
+            this.listBox3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox3.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -171,6 +178,7 @@
             // listBox4
             // 
             this.listBox4.AllowDrop = true;
+            this.listBox4.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox4.FormattingEnabled = true;
             this.listBox4.ItemHeight = 16;
@@ -179,6 +187,7 @@
             this.listBox4.Size = new System.Drawing.Size(150, 68);
             this.listBox4.TabIndex = 3;
             this.listBox4.Tag = "4";
+            this.listBox4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox4.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox4.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -187,6 +196,7 @@
             // listBox5
             // 
             this.listBox5.AllowDrop = true;
+            this.listBox5.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox5.FormattingEnabled = true;
             this.listBox5.ItemHeight = 16;
@@ -195,6 +205,7 @@
             this.listBox5.Size = new System.Drawing.Size(150, 68);
             this.listBox5.TabIndex = 4;
             this.listBox5.Tag = "5";
+            this.listBox5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox5.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox5.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -203,6 +214,7 @@
             // listBox6
             // 
             this.listBox6.AllowDrop = true;
+            this.listBox6.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox6.FormattingEnabled = true;
             this.listBox6.ItemHeight = 16;
@@ -211,6 +223,7 @@
             this.listBox6.Size = new System.Drawing.Size(150, 68);
             this.listBox6.TabIndex = 5;
             this.listBox6.Tag = "6";
+            this.listBox6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox6.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox6.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -219,6 +232,7 @@
             // listBox7
             // 
             this.listBox7.AllowDrop = true;
+            this.listBox7.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox7.FormattingEnabled = true;
             this.listBox7.ItemHeight = 16;
@@ -227,6 +241,7 @@
             this.listBox7.Size = new System.Drawing.Size(150, 68);
             this.listBox7.TabIndex = 6;
             this.listBox7.Tag = "7";
+            this.listBox7.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox7.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox7.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -235,6 +250,7 @@
             // listBox8
             // 
             this.listBox8.AllowDrop = true;
+            this.listBox8.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox8.FormattingEnabled = true;
             this.listBox8.ItemHeight = 16;
@@ -243,6 +259,7 @@
             this.listBox8.Size = new System.Drawing.Size(150, 68);
             this.listBox8.TabIndex = 7;
             this.listBox8.Tag = "8";
+            this.listBox8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox8.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox8.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -251,6 +268,7 @@
             // listBox9
             // 
             this.listBox9.AllowDrop = true;
+            this.listBox9.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox9.FormattingEnabled = true;
             this.listBox9.ItemHeight = 16;
@@ -259,6 +277,7 @@
             this.listBox9.Size = new System.Drawing.Size(150, 68);
             this.listBox9.TabIndex = 8;
             this.listBox9.Tag = "9";
+            this.listBox9.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox9.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox9.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -267,6 +286,7 @@
             // listBox10
             // 
             this.listBox10.AllowDrop = true;
+            this.listBox10.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox10.FormattingEnabled = true;
             this.listBox10.ItemHeight = 16;
@@ -275,6 +295,7 @@
             this.listBox10.Size = new System.Drawing.Size(150, 68);
             this.listBox10.TabIndex = 9;
             this.listBox10.Tag = "10";
+            this.listBox10.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox10.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox10.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -283,6 +304,7 @@
             // listBox11
             // 
             this.listBox11.AllowDrop = true;
+            this.listBox11.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox11.FormattingEnabled = true;
             this.listBox11.ItemHeight = 16;
@@ -291,6 +313,7 @@
             this.listBox11.Size = new System.Drawing.Size(150, 68);
             this.listBox11.TabIndex = 10;
             this.listBox11.Tag = "11";
+            this.listBox11.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox11.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox11.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -299,6 +322,7 @@
             // listBox12
             // 
             this.listBox12.AllowDrop = true;
+            this.listBox12.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox12.FormattingEnabled = true;
             this.listBox12.ItemHeight = 16;
@@ -307,6 +331,7 @@
             this.listBox12.Size = new System.Drawing.Size(150, 68);
             this.listBox12.TabIndex = 11;
             this.listBox12.Tag = "12";
+            this.listBox12.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox12.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox12.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -315,6 +340,7 @@
             // listBox13
             // 
             this.listBox13.AllowDrop = true;
+            this.listBox13.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox13.FormattingEnabled = true;
             this.listBox13.ItemHeight = 16;
@@ -323,6 +349,7 @@
             this.listBox13.Size = new System.Drawing.Size(150, 68);
             this.listBox13.TabIndex = 12;
             this.listBox13.Tag = "13";
+            this.listBox13.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox13.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox13.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -331,6 +358,7 @@
             // listBox14
             // 
             this.listBox14.AllowDrop = true;
+            this.listBox14.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox14.FormattingEnabled = true;
             this.listBox14.ItemHeight = 16;
@@ -339,6 +367,7 @@
             this.listBox14.Size = new System.Drawing.Size(150, 100);
             this.listBox14.TabIndex = 13;
             this.listBox14.Tag = "14";
+            this.listBox14.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox14.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox14.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -347,6 +376,7 @@
             // listBox15
             // 
             this.listBox15.AllowDrop = true;
+            this.listBox15.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox15.FormattingEnabled = true;
             this.listBox15.ItemHeight = 16;
@@ -355,6 +385,7 @@
             this.listBox15.Size = new System.Drawing.Size(150, 100);
             this.listBox15.TabIndex = 14;
             this.listBox15.Tag = "15";
+            this.listBox15.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox15.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox15.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -363,6 +394,7 @@
             // listBox16
             // 
             this.listBox16.AllowDrop = true;
+            this.listBox16.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox16.FormattingEnabled = true;
             this.listBox16.ItemHeight = 16;
@@ -371,6 +403,7 @@
             this.listBox16.Size = new System.Drawing.Size(150, 100);
             this.listBox16.TabIndex = 15;
             this.listBox16.Tag = "16";
+            this.listBox16.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox16.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox16.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox16.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -379,6 +412,7 @@
             // listBox17
             // 
             this.listBox17.AllowDrop = true;
+            this.listBox17.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox17.FormattingEnabled = true;
             this.listBox17.ItemHeight = 16;
@@ -387,6 +421,7 @@
             this.listBox17.Size = new System.Drawing.Size(150, 100);
             this.listBox17.TabIndex = 16;
             this.listBox17.Tag = "17";
+            this.listBox17.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox17.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox17.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -626,6 +661,7 @@
             // listBox18
             // 
             this.listBox18.AllowDrop = true;
+            this.listBox18.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox18.FormattingEnabled = true;
             this.listBox18.ItemHeight = 16;
@@ -634,6 +670,7 @@
             this.listBox18.Size = new System.Drawing.Size(150, 116);
             this.listBox18.TabIndex = 37;
             this.listBox18.Tag = "18";
+            this.listBox18.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox18.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox18.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -642,6 +679,7 @@
             // listBox19
             // 
             this.listBox19.AllowDrop = true;
+            this.listBox19.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox19.FormattingEnabled = true;
             this.listBox19.ItemHeight = 16;
@@ -650,6 +688,7 @@
             this.listBox19.Size = new System.Drawing.Size(150, 116);
             this.listBox19.TabIndex = 36;
             this.listBox19.Tag = "19";
+            this.listBox19.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox19.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox19.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -658,6 +697,7 @@
             // listBox20
             // 
             this.listBox20.AllowDrop = true;
+            this.listBox20.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox20.FormattingEnabled = true;
             this.listBox20.ItemHeight = 16;
@@ -666,6 +706,7 @@
             this.listBox20.Size = new System.Drawing.Size(150, 116);
             this.listBox20.TabIndex = 35;
             this.listBox20.Tag = "20";
+            this.listBox20.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox20.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox20.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -674,6 +715,7 @@
             // listBox21
             // 
             this.listBox21.AllowDrop = true;
+            this.listBox21.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox21.FormattingEnabled = true;
             this.listBox21.ItemHeight = 16;
@@ -682,6 +724,7 @@
             this.listBox21.Size = new System.Drawing.Size(150, 116);
             this.listBox21.TabIndex = 34;
             this.listBox21.Tag = "21";
+            this.listBox21.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox21.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
             this.listBox21.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
             this.listBox21.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
@@ -1052,6 +1095,7 @@
             // 
             // listBoxAfw
             // 
+            this.listBoxAfw.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBoxAfw.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxAfw.FormattingEnabled = true;
             this.listBoxAfw.ItemHeight = 16;
@@ -1060,10 +1104,12 @@
             this.listBoxAfw.Size = new System.Drawing.Size(60, 516);
             this.listBoxAfw.TabIndex = 69;
             this.listBoxAfw.Tag = "50";
+            this.listBoxAfw.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBoxAfw.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox22
             // 
+            this.listBox22.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox22.FormattingEnabled = true;
             this.listBox22.ItemHeight = 16;
@@ -1072,10 +1118,12 @@
             this.listBox22.Size = new System.Drawing.Size(59, 68);
             this.listBox22.TabIndex = 70;
             this.listBox22.Tag = "22";
+            this.listBox22.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox22.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox23
             // 
+            this.listBox23.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox23.FormattingEnabled = true;
             this.listBox23.ItemHeight = 16;
@@ -1084,10 +1132,12 @@
             this.listBox23.Size = new System.Drawing.Size(60, 68);
             this.listBox23.TabIndex = 71;
             this.listBox23.Tag = "23";
+            this.listBox23.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox23.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox24
             // 
+            this.listBox24.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox24.FormattingEnabled = true;
             this.listBox24.ItemHeight = 16;
@@ -1096,10 +1146,12 @@
             this.listBox24.Size = new System.Drawing.Size(60, 68);
             this.listBox24.TabIndex = 72;
             this.listBox24.Tag = "24";
+            this.listBox24.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox24.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox25
             // 
+            this.listBox25.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox25.FormattingEnabled = true;
             this.listBox25.ItemHeight = 16;
@@ -1108,10 +1160,12 @@
             this.listBox25.Size = new System.Drawing.Size(60, 68);
             this.listBox25.TabIndex = 73;
             this.listBox25.Tag = "25";
+            this.listBox25.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox25.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox26
             // 
+            this.listBox26.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox26.FormattingEnabled = true;
             this.listBox26.ItemHeight = 16;
@@ -1120,10 +1174,12 @@
             this.listBox26.Size = new System.Drawing.Size(59, 68);
             this.listBox26.TabIndex = 74;
             this.listBox26.Tag = "26";
+            this.listBox26.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox26.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox27
             // 
+            this.listBox27.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox27.FormattingEnabled = true;
             this.listBox27.ItemHeight = 16;
@@ -1132,10 +1188,12 @@
             this.listBox27.Size = new System.Drawing.Size(60, 68);
             this.listBox27.TabIndex = 75;
             this.listBox27.Tag = "27";
+            this.listBox27.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox27.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox28
             // 
+            this.listBox28.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox28.FormattingEnabled = true;
             this.listBox28.ItemHeight = 16;
@@ -1144,10 +1202,12 @@
             this.listBox28.Size = new System.Drawing.Size(60, 68);
             this.listBox28.TabIndex = 76;
             this.listBox28.Tag = "28";
+            this.listBox28.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox28.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox29
             // 
+            this.listBox29.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox29.FormattingEnabled = true;
             this.listBox29.ItemHeight = 16;
@@ -1156,10 +1216,12 @@
             this.listBox29.Size = new System.Drawing.Size(60, 68);
             this.listBox29.TabIndex = 77;
             this.listBox29.Tag = "29";
+            this.listBox29.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox29.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox30
             // 
+            this.listBox30.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox30.FormattingEnabled = true;
             this.listBox30.ItemHeight = 16;
@@ -1168,10 +1230,12 @@
             this.listBox30.Size = new System.Drawing.Size(59, 68);
             this.listBox30.TabIndex = 78;
             this.listBox30.Tag = "30";
+            this.listBox30.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox30.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox31
             // 
+            this.listBox31.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox31.FormattingEnabled = true;
             this.listBox31.ItemHeight = 16;
@@ -1180,10 +1244,12 @@
             this.listBox31.Size = new System.Drawing.Size(60, 68);
             this.listBox31.TabIndex = 79;
             this.listBox31.Tag = "31";
+            this.listBox31.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox31.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox32
             // 
+            this.listBox32.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox32.FormattingEnabled = true;
             this.listBox32.ItemHeight = 16;
@@ -1192,10 +1258,12 @@
             this.listBox32.Size = new System.Drawing.Size(60, 68);
             this.listBox32.TabIndex = 80;
             this.listBox32.Tag = "32";
+            this.listBox32.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox32.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox33
             // 
+            this.listBox33.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox33.FormattingEnabled = true;
             this.listBox33.ItemHeight = 16;
@@ -1204,10 +1272,12 @@
             this.listBox33.Size = new System.Drawing.Size(60, 68);
             this.listBox33.TabIndex = 81;
             this.listBox33.Tag = "33";
+            this.listBox33.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox33.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox34
             // 
+            this.listBox34.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox34.FormattingEnabled = true;
             this.listBox34.ItemHeight = 16;
@@ -1216,10 +1286,12 @@
             this.listBox34.Size = new System.Drawing.Size(59, 100);
             this.listBox34.TabIndex = 82;
             this.listBox34.Tag = "34";
+            this.listBox34.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox34.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox35
             // 
+            this.listBox35.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox35.FormattingEnabled = true;
             this.listBox35.ItemHeight = 16;
@@ -1228,10 +1300,12 @@
             this.listBox35.Size = new System.Drawing.Size(60, 100);
             this.listBox35.TabIndex = 83;
             this.listBox35.Tag = "35";
+            this.listBox35.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox35.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox36
             // 
+            this.listBox36.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox36.FormattingEnabled = true;
             this.listBox36.ItemHeight = 16;
@@ -1240,10 +1314,12 @@
             this.listBox36.Size = new System.Drawing.Size(60, 100);
             this.listBox36.TabIndex = 84;
             this.listBox36.Tag = "36";
+            this.listBox36.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox36.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox37
             // 
+            this.listBox37.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox37.FormattingEnabled = true;
             this.listBox37.ItemHeight = 16;
@@ -1252,10 +1328,12 @@
             this.listBox37.Size = new System.Drawing.Size(60, 100);
             this.listBox37.TabIndex = 85;
             this.listBox37.Tag = "37";
+            this.listBox37.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox37.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox38
             // 
+            this.listBox38.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox38.FormattingEnabled = true;
             this.listBox38.ItemHeight = 16;
@@ -1264,10 +1342,12 @@
             this.listBox38.Size = new System.Drawing.Size(59, 116);
             this.listBox38.TabIndex = 86;
             this.listBox38.Tag = "38";
+            this.listBox38.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox38.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox39
             // 
+            this.listBox39.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox39.FormattingEnabled = true;
             this.listBox39.ItemHeight = 16;
@@ -1276,10 +1356,12 @@
             this.listBox39.Size = new System.Drawing.Size(60, 116);
             this.listBox39.TabIndex = 87;
             this.listBox39.Tag = "39";
+            this.listBox39.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox39.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox40
             // 
+            this.listBox40.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox40.FormattingEnabled = true;
             this.listBox40.ItemHeight = 16;
@@ -1288,10 +1370,12 @@
             this.listBox40.Size = new System.Drawing.Size(60, 116);
             this.listBox40.TabIndex = 88;
             this.listBox40.Tag = "40";
+            this.listBox40.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox40.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // listBox41
             // 
+            this.listBox41.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.listBox41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox41.FormattingEnabled = true;
             this.listBox41.ItemHeight = 16;
@@ -1300,6 +1384,7 @@
             this.listBox41.Size = new System.Drawing.Size(60, 116);
             this.listBox41.TabIndex = 89;
             this.listBox41.Tag = "41";
+            this.listBox41.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
             this.listBox41.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
             // 
             // buttonNu

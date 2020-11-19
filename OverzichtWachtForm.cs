@@ -18,7 +18,7 @@ namespace Bezetting2
 
         public class invoerveld
         {
-            //            public invoerveld() { }
+            //  public invoerveld() { }
             public invoerveld(Label lb, ListBox ln, ListBox la)
             {
                 _Label = lb;
@@ -798,7 +798,43 @@ namespace Bezetting2
 
         private void listBox2_DrawItem(object sender, DrawItemEventArgs e)
         {
+            if (e.Index > -1)
+            {
+                ListBox Sender = (ListBox)sender;
+                string afw = Sender.Items[e.Index].ToString();
 
+                switch (afw)
+                {
+                    case "Z":
+                    case "VK":
+                    case "8OI":
+                    case "VRIJ":
+                    case "VAK":
+                    case "VF":
+                        e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
+                        break;
+                    case "ED-O":
+                    case "ED-M":
+                    case "ED-N":
+                    case "VD-O":
+                    case "VD-M":
+                    case "VD-N":
+                    case "RD-O":
+                    case "RD-M":
+                    case "RD-N":
+                        e.Graphics.FillRectangle(Brushes.LightSalmon, e.Bounds);
+                        break;
+
+                    default:
+                        e.DrawBackground();
+                        break;
+                }
+
+                using (Brush textBrush = new SolidBrush(e.ForeColor))
+                {
+                    e.Graphics.DrawString(Sender.Items[e.Index].ToString(), e.Font, textBrush, e.Bounds.Location);
+                }
+            }
         }
     }
 }

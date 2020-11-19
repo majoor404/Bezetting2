@@ -972,8 +972,8 @@ namespace Bezetting2
                         else
                         {
                             toolStripStatusLabelInfo.Text = "extra dienst nog te doen"; // nog te doen
-                            //if (toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
-                            //    mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                                                                                        //if (toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
+                                                                                        //    mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
                         }
                     }
                     // rede afwijking
