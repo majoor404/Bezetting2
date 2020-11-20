@@ -802,29 +802,25 @@ namespace Bezetting2
             {
                 ListBox Sender = (ListBox)sender;
                 string afw = Sender.Items[e.Index].ToString();
+                if (afw.Length > 3) afw = afw.Substring(0, 3);
 
                 switch (afw)
                 {
                     case "Z":
                     case "VK":
                     case "8OI":
-                    case "VRIJ":
+                    case "VRI":
                     case "VAK":
                     case "VF":
+                    case "OPL":
+                    case "OI8":
                         e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
                         break;
-                    case "ED-O":
-                    case "ED-M":
-                    case "ED-N":
-                    case "VD-O":
-                    case "VD-M":
-                    case "VD-N":
-                    case "RD-O":
-                    case "RD-M":
-                    case "RD-N":
+                    case "ED-":
+                    case "VD-":
+                    case "RD-":
                         e.Graphics.FillRectangle(Brushes.LightSalmon, e.Bounds);
                         break;
-
                     default:
                         e.DrawBackground();
                         break;
