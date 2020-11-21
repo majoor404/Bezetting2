@@ -4,7 +4,7 @@ namespace Bezetting2
 {
     public class ModuleDatum
     {
-        // rooster op 1-1-2015
+        // rooster op 1-1-2015 kleur rood
         private string[] rooster_volgorde
             = {"N", "N", "", "", "", "O", "O", "M", "M", "", "N",
             "N", "", "", "", "O", "O", "M", "M", "" ,"N", "N",
