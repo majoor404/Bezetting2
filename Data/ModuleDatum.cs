@@ -151,6 +151,7 @@ namespace Bezetting2
         }
 
         // bepaal welke kleur er werkt op datum en dienst
+
         public string GetKleurDieWerkt(DateTime datum, string dienst)
         {
             string dienst_ = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), datum, "Blauw");
