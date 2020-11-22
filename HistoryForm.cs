@@ -33,7 +33,7 @@ namespace Bezetting2
             string[] regel = new string[6];
             foreach (veranderingen a in ProgData.ListVeranderingen)
             {
-                if (comboBoxDag.Text == a._datumafwijking || comboBoxDag.Text == "")
+                if (comboBoxDag.Text == a._datumafwijking || string.IsNullOrEmpty(comboBoxDag.Text))
                 {
                     regel[1] = a._afwijking;
                     regel[2] = a._datumafwijking;

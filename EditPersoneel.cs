@@ -82,7 +82,7 @@ namespace Bezetting2
             ListViewItem itm;
             foreach (personeel a in ProgData.ListPersoneel)
             {
-                if (a._kleur == comboBoxFilter.Text || comboBoxFilter.Text == "")
+                if (a._kleur == comboBoxFilter.Text || string.IsNullOrEmpty(comboBoxFilter.Text))
                 {
                     arr[0] = a._persnummer.ToString();
                     arr[1] = a._achternaam;
@@ -153,7 +153,7 @@ namespace Bezetting2
                     vuilwerk.Checked = bool.Parse(a._vuilwerk);
 
                     LabelRoosterNieuw.Text = a._nieuwkleur;
-                    if (LabelRoosterNieuw.Text != "")
+                    if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
                     {
                         labelNieuwRoosterDatum.Text = a._verhuisdatum.ToString("d");
                         button1.Enabled = false;
@@ -266,7 +266,7 @@ namespace Bezetting2
                 Verhuis_oude_afwijkingen(textBoxPersNum.Text, eerste_dag_weg, ProgData.igekozenmaand, ProgData.Igekozenjaar);
 
                 LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
-                if (LabelRoosterNieuw.Text != "")
+                if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
                 {
                     labelNieuwRoosterDatum.Text = persoon_gekozen._verhuisdatum.ToString("d");
                     button1.Enabled = false;
@@ -351,7 +351,7 @@ namespace Bezetting2
                 _vuilwerk = vuilwerk.Checked.ToString()
             };
 
-            if (textBoxKleur.Text == "")
+            if (string.IsNullOrEmpty(textBoxKleur.Text))
             {
                 a._kleur = "Nieuw";
             }

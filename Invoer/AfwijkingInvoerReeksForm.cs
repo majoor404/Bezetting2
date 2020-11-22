@@ -20,7 +20,7 @@ namespace Bezetting2.Invoer
         {
             bool okido = true;
             labelAftellen.Visible = true;
-            if (textBoxAfwijking.Text == "")
+            if (string.IsNullOrEmpty(textBoxAfwijking.Text))
             {
                 okido = false;
                 string boodschap = "Afwijking leeg, wissen ?";
@@ -48,7 +48,7 @@ namespace Bezetting2.Invoer
 
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                         werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
-                        if (ver._standaarddienst != "") // dus werkdag
+                        if (!string.IsNullOrEmpty(ver._standaarddienst)) // dus werkdag
                         {
                             ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, this.Text);
                             Thread.Sleep(300);
@@ -116,7 +116,7 @@ namespace Bezetting2.Invoer
                     {
                         labelAftellen.Text = aantal.ToString();
                         labelAftellen.Refresh();
-                        while (ver._standaarddienst == "")
+                        while (string.IsNullOrEmpty(ver._standaarddienst))
                         {
                             start = start.AddDays(1);
 
@@ -149,7 +149,7 @@ namespace Bezetting2.Invoer
                             ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                         ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
-                        while (ver._standaarddienst == "")
+                        while (string.IsNullOrEmpty(ver._standaarddienst))
                         {
                             start = start.AddDays(1);
                             ProgData.igekozenmaand = start.Month;

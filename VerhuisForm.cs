@@ -12,7 +12,7 @@ namespace Bezetting2
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            if (comboBoxNieuwRooster.Text != "")
+            if (!string.IsNullOrEmpty(comboBoxNieuwRooster.Text))
                 Close();
         }
     }

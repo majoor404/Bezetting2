@@ -203,7 +203,7 @@ namespace Bezetting2
 
                             // get en zet eerst orginele dienst
                             string wacht = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
-                            if (wacht != "")
+                            if (!string.IsNullOrEmpty(wacht))
                             {
                                 deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
                             }
@@ -213,7 +213,7 @@ namespace Bezetting2
                             }
 
                             // daarna overschrijven als die afwijkt van ""
-                            if (dag._afwijkingdienst != "")
+                            if (!string.IsNullOrEmpty(dag._afwijkingdienst))
                             {
                                 string dum = dag._afwijkingdienst.ToUpper();
                                 if (dum.Length > 3 && dum.Substring(0, 3) == "ED-")
@@ -493,10 +493,10 @@ namespace Bezetting2
                                     string afwijking = View.Items[i].SubItems[d].Text;
                                     string dienst = View.Items[3].SubItems[d].Text;
 
-                                    if (afwijking == "") rechtop = true;
+                                    if (string.IsNullOrEmpty(afwijking)) rechtop = true;
                                     if (afwijking == "*") rechtop = true;
 
-                                    if (rechtop && dienst != "")
+                                    if (rechtop && !string.IsNullOrEmpty(dienst))
                                     {
                                         ClassTelVuilwerk afw = new ClassTelVuilwerk(a._achternaam, d.ToString());
                                         ListClassTelVuilwerk.Add(afw);   // recht op vuilwerk
@@ -540,10 +540,10 @@ namespace Bezetting2
 
                         foreach (werkdag a in ProgData.ListWerkdagPloeg)
                         {
-                            if (!ListTelWerkPlek.Contains(a._werkplek) && a._werkplek != "")
+                            if (!ListTelWerkPlek.Contains(a._werkplek) && !string.IsNullOrEmpty(a._werkplek))
                                 ListTelWerkPlek.Add(a._werkplek);
 
-                            if (a._werkplek != "")
+                            if (!string.IsNullOrEmpty(a._werkplek))
                             {
                                 ClassTelPlekGewerkt tel = new ClassTelPlekGewerkt(a._naam, a._werkplek);
                                 try

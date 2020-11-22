@@ -198,7 +198,7 @@ namespace Bezetting2
 				MessageBox.Show("SavePloegNamenLijst() error na 30 keer, " + Ploeg_Namen_Locatie());
 			}
 			Main.labelDebug.Text = "Save Ploeg Namen Lijst";
-			if (GekozenKleur != "")
+			if (!string.IsNullOrEmpty(GekozenKleur))
 			{
 				try
 				{
@@ -229,7 +229,7 @@ namespace Bezetting2
 
 			foreach (personeel a in ploeg_gekozen)
 			{
-				if (a._nieuwkleur != "" && kleur != a._nieuwkleur)
+				if (!string.IsNullOrEmpty(a._nieuwkleur) && kleur != a._nieuwkleur)
 				{
 					//als nieuwkleur aanwezig, kijk of hij in die bezetting_Ploeg_lijst voorkomt,
 					//regel dat anders, als file niet bestaat, gaat dat vanzelf
@@ -320,7 +320,7 @@ namespace Bezetting2
 			}
 
 			Main.labelDebug.Text = "Save Ploeg Bezetting";
-			if (kleur != "")
+			if (!string.IsNullOrEmpty(kleur))
 			{
 				try
 				{
@@ -412,7 +412,7 @@ namespace Bezetting2
 
 
 			Main.labelDebug.Text = "Save veranderingen Ploeg";
-			if (GekozenKleur != "")
+			if (!string.IsNullOrEmpty(GekozenKleur))
 			{
 				try
 				{
@@ -797,7 +797,7 @@ namespace Bezetting2
 		{
 			try
 			{
-				if (ChangeData && GekozenKleur != "")
+				if (ChangeData && !string.IsNullOrEmpty(GekozenKleur))
 				{
 					ChangeData = false;
 					Rectangle bounds = ProgData.Main.Bounds;

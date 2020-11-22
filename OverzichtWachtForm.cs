@@ -145,7 +145,7 @@ namespace Bezetting2
                 n.labelOudeLabel.Text = s.Text;
                 n.ShowDialog();
                 s.Text = n.textBox1.Text;
-                if (s.Text == "")
+                if (string.IsNullOrEmpty(s.Text))
                     s.Text = "-";
 
                 InstellingenProg.ProgrammaData[00] = label1.Text;
@@ -256,7 +256,7 @@ namespace Bezetting2
                 string naam = box.Items[i].ToString();
                 werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
                 broer.Items.Add(ver._afwijkingdienst);
-                if (ver._afwijkingdienst != "")
+                if (!string.IsNullOrEmpty(ver._afwijkingdienst))
                     afwijking = true;
             }
             broer.Visible = afwijking;
@@ -267,7 +267,7 @@ namespace Bezetting2
             SaveData();
             dat = dat.AddDays(-1);
             string dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
-            while (dienst == "")
+            while (string.IsNullOrEmpty(dienst))
             {
                 dat = dat.AddDays(-1);
                 dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
@@ -284,7 +284,7 @@ namespace Bezetting2
             SaveData();
             dat = dat.AddDays(1);
             string dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
-            while (dienst == "")
+            while (string.IsNullOrEmpty(dienst))
             {
                 dat = dat.AddDays(1);
                 dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
@@ -383,12 +383,12 @@ namespace Bezetting2
             labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
-            if (labelDienst.Text == "")
+            if (string.IsNullOrEmpty(labelDienst.Text))
             {
                 // kan geen next roetine gebruiken ivm save data daar terwijl deze leeg is.
                 dat = dat.AddDays(1);
                 labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
-                while (labelDienst.Text == "")
+                while (string.IsNullOrEmpty(labelDienst.Text))
                 {
                     dat = dat.AddDays(1);
                     labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
@@ -449,7 +449,7 @@ namespace Bezetting2
                 foreach (personeel man in ProgData.ListPersoneelKleur)
                 {
                     werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
-                    if (ver._werkplek == "")
+                    if (string.IsNullOrEmpty(ver._werkplek))
                     {
                         listBox1.Items.Add(man._achternaam);
                         UpdateAfwijkingListBox(listBox1);
@@ -798,7 +798,7 @@ namespace Bezetting2
                 ListBox Sender = (ListBox)sender;
                 string afw = Sender.Items[e.Index].ToString();
                 if (afw.Length > 3) afw = afw.Substring(0, 3);
-                if (afw.Length > 3 && afw.Substring(0, 2) == "EV")
+                if (afw.Length > 2 && afw.Substring(0, 2) == "EV")
                     afw = "EV";
 
                 switch (afw)

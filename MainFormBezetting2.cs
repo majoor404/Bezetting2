@@ -524,7 +524,7 @@ namespace Bezetting2
 						ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
 						foreach (werkdag a in ProgData.ListWerkdagPloeg)
 						{
-							if (a._afwijkingdienst != "")
+							if (!string.IsNullOrEmpty(a._afwijkingdienst))
 							{
 								for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
 								{
@@ -562,12 +562,12 @@ namespace Bezetting2
 						aantal_mensen = ProgData.ListPersoneelKleur.Count;
 						for (int i = 4; i < View.Items.Count; i++) // alle namen/rows
 						{
-							if (View.Items[i].SubItems[dag].Text != "")
+							if (!string.IsNullOrEmpty(View.Items[i].SubItems[dag].Text))
 								aantal_mensen--;
 							if (TelNietMeeNamen.Contains(View.Items[i].SubItems[dag].Text))
 								aantal_mensen++;
 						}
-						if (View.Items[3].SubItems[dag].Text != "")
+						if (!string.IsNullOrEmpty(View.Items[3].SubItems[dag].Text))
 							View.Items[View.Items.Count - 1].SubItems[dag].Text = aantal_mensen.ToString();
 						if (aantal_mensen < InstellingenProg._MinimaalAantalPersonen)
 						{
@@ -590,7 +590,7 @@ namespace Bezetting2
 						foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
 						{
 							int dagy = ex._datum.Day;
-							if (View.Items[View.Items.Count - 1].SubItems[dagy].Text == "")
+							if (string.IsNullOrEmpty(View.Items[View.Items.Count - 1].SubItems[dagy].Text))
 							{
 								View.Items[View.Items.Count - 1].SubItems[dagy].Text = "1";
 							}
@@ -659,7 +659,7 @@ namespace Bezetting2
 					ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
 					foreach (werkdag a in ProgData.ListWerkdagPloeg)
 					{
-						if (a._afwijkingdienst != "")
+						if (!string.IsNullOrEmpty(a._afwijkingdienst))
 						{
 							for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
 							{
@@ -700,12 +700,12 @@ namespace Bezetting2
 					//string wacht = View.Items[3].SubItems[dag].Text;
 					for (int i = 4; i < View.Items.Count; i++) // alle namen/rows
 					{
-						if (View.Items[i].SubItems[dag].Text != "")
+						if (!string.IsNullOrEmpty(View.Items[i].SubItems[dag].Text))
 							aantal_mensen--;
 						if (TelNietMeeNamen.Contains(View.Items[i].SubItems[dag].Text))
 							aantal_mensen++;
 					}
-					if (View.Items[3].SubItems[dag].Text != "")
+					if (!string.IsNullOrEmpty(View.Items[3].SubItems[dag].Text))
 						View.Items[View.Items.Count - 1].SubItems[dag].Text = aantal_mensen.ToString();
 					if (aantal_mensen < InstellingenProg._MinimaalAantalPersonen)
 					{
@@ -728,7 +728,7 @@ namespace Bezetting2
 					foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
 					{
 						int dagy = ex._datum.Day;
-						if (View.Items[View.Items.Count - 1].SubItems[dagy].Text == "")
+						if (string.IsNullOrEmpty(View.Items[View.Items.Count - 1].SubItems[dagy].Text))
 						{
 							View.Items[View.Items.Count - 1].SubItems[dagy].Text = "1";
 						}
@@ -750,7 +750,7 @@ namespace Bezetting2
 													// check of er vorige maand mensen zijn verhuisd
 
 			IEnumerable<personeel> persoon = from a in ProgData.ListPersoneel
-											 where (a._nieuwkleur != "")
+											 where (!string.IsNullOrEmpty(a._nieuwkleur))
 											 select a;
 
 			foreach (personeel a in persoon)
@@ -767,7 +767,7 @@ namespace Bezetting2
 					string bewaar = ProgData.GekozenKleur;
 					if (a._nieuwkleur == null) // geen idee waar dit soms gebeurt
 						a._nieuwkleur = "";
-					if (a._nieuwkleur != "")
+					if (!string.IsNullOrEmpty(a._nieuwkleur))
 						a._kleur = a._nieuwkleur;
 					a._nieuwkleur = "";
 					if (a._nieuwkleur == null) // geen idee waar dit soms gebeurt
@@ -878,6 +878,16 @@ namespace Bezetting2
 											break;
 										case "Copy":
 											quick.listBox1.Items[2] = info.SubItem.Text;
+											// extra,ruil of vd niet op deze manier
+											if (info.SubItem.Text.Length > 3)
+                                            {
+												string test = info.SubItem.Text.Substring(0, 2);
+												if (test == "ED" || test == "RD" || test == "VD")
+                                                {
+													quick.listBox1.Items[2] = "*****";
+													MessageBox.Show("Extra of verschoven diensten kunt u niet zo invoeren");
+												}
+											}
 											break;
 										case "*****":
 											break;
@@ -944,7 +954,7 @@ namespace Bezetting2
 				toolStripStatusLabelInfo.Text = "";
 				toolStripStatusRedeAfwijking.Text = "";
 
-				if ((item != null) && (info?.SubItem?.Text != ""))
+				if ((item != null) && (!string.IsNullOrEmpty(info?.SubItem?.Text)))
 				{
 					int row = info.Item.Index;
 					int col = info.Item.SubItems.IndexOf(info.SubItem);
@@ -959,7 +969,7 @@ namespace Bezetting2
 								if (col == ex._datum.Day)
 								{
 									toolStripStatusLabelInfo.Text = ex._naam;
-									if (toolStripStatusLabelInfo.Text != "" && mLastPos != e.Location)
+									if (!string.IsNullOrEmpty(toolStripStatusLabelInfo.Text) && mLastPos != e.Location)
 										mTooltip.Show(toolStripStatusLabelInfo.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
 								}
 							}
@@ -976,7 +986,7 @@ namespace Bezetting2
 					{
 						toolStripStatusLabelInfo.Text = info.Item.Text + " " + info.SubItem.Text;
 						toolStripStatusRedeAfwijking.Text = GetRedenAfwijking(info.Item.Text, col);
-						if (toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
+						if (!string.IsNullOrEmpty(toolStripStatusRedeAfwijking.Text) && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
 							mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
 					}
 					// personeel nummer bij naam
@@ -984,7 +994,7 @@ namespace Bezetting2
 					{
 						string naam = View.Items[row].Text;
 						string persnummer = ProgData.Get_Gebruiker_Nummer(naam);
-						if (persnummer != "" && mLastPos != e.Location)
+						if (!string.IsNullOrEmpty(persnummer) && mLastPos != e.Location)
 							mTooltip.Show(persnummer, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
 					}
 					// feestdag
@@ -1010,7 +1020,7 @@ namespace Bezetting2
 							if (maand == pinksteren.Month && col == pinksteren.Day) toolStripStatusRedeAfwijking.Text = "Eerste Pinsterdag";
 							if (maand == pinksteren2.Month && col == pinksteren2.Day) toolStripStatusRedeAfwijking.Text = "Tweede Pinsterdag";
 
-							if (toolStripStatusRedeAfwijking.Text != "" && mLastPos != e.Location)
+							if (!string.IsNullOrEmpty(toolStripStatusRedeAfwijking.Text) && mLastPos != e.Location)
 								mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
 						}
 					}

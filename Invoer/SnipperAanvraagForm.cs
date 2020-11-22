@@ -27,7 +27,7 @@ namespace Bezetting2.Invoer
         {
             SnipperAanvraag snip = new SnipperAanvraag();
 
-            if (labelDienst.Text == "")
+            if (string.IsNullOrEmpty(labelDienst.Text))
             {
                 MessageBox.Show("Deze dag bent u al vrij!");
             }
@@ -50,7 +50,7 @@ namespace Bezetting2.Invoer
                         staat_die_al_in_lijst = true;
                 }
 
-                if (!staat_die_al_in_lijst && comboBox1.Text != "")
+                if (!staat_die_al_in_lijst && !string.IsNullOrEmpty(comboBox1.Text))
                 {
                     ProgData.ListSnipperAanvraag.Add(snip);
 
@@ -162,7 +162,7 @@ namespace Bezetting2.Invoer
                         try
                         {
                             SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
-                            if (ver._rede_coordinator != "")
+                            if (!string.IsNullOrEmpty(ver._rede_coordinator))
                             {
                                 ver._Coorcinator = labelNaamFull.Text;
                                 ver._rede_coordinator = "Zelf Gecanceld";

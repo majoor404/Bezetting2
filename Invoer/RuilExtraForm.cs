@@ -56,22 +56,22 @@ namespace Bezetting2.Invoer
             if (checkBoxRO.Checked)
                 vanploeg += 16;
             // vraag aan
-            if (comboBoxPloeg.Text == "")
+            if (string.IsNullOrEmpty(comboBoxPloeg.Text))
             {
                 MessageBox.Show("Geen ploeg gekozen");
                 ok = false;
             }
-            if (comboBoxDienst.Text == "")
+            if (string.IsNullOrEmpty(comboBoxDienst.Text))
             {
                 MessageBox.Show("Geen Dienst gekozen");
                 ok = false;
             }
-            if (comboBoxWerkplek.Text == "")
+            if (string.IsNullOrEmpty(comboBoxWerkplek.Text))
             {
                 MessageBox.Show("Geen ploeg gekozen");
                 ok = false;
             }
-            if (textBoxAanvraagVoor.Text == "")
+            if (string.IsNullOrEmpty(textBoxAanvraagVoor.Text))
             {
                 MessageBox.Show("Geen aanvraag voor gekozen");
                 ok = false;

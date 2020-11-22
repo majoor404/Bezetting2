@@ -26,7 +26,7 @@ namespace Bezetting2
 			try
 			{
 				veranderingen ver = ProgData.ListVeranderingen.Last(a => (a._naam == labelNaam.Text) && (a._datumafwijking == labelDatum.Text));
-				if (ver._afwijking != "")
+				if (!string.IsNullOrEmpty(ver._afwijking))
 				{
 					textBoxAfwijking.Text = ver._afwijking;
 					textBoxRede.Text = ver._rede;
@@ -64,7 +64,7 @@ namespace Bezetting2
 
 		private void ButtonVoerIn_Click(object sender, EventArgs e)
 		{
-			if (textBoxAfwijking.Text != "")
+			if (!string.IsNullOrEmpty(textBoxAfwijking.Text))
 			{
 				textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
 				ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
