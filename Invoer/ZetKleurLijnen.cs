@@ -61,7 +61,7 @@ namespace Bezetting2.Invoer
         }
 
         // close en save
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             // save data
             ProgData.Lijnen.Clear();

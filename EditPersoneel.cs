@@ -116,7 +116,7 @@ namespace Bezetting2
         // geklikt op naam in overzicht
         private void ViewNamen_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string filter = comboBoxFilter.Text;
+            //_ = comboBoxFilter.Text;
             selpersnummer = 0;
             try
             {

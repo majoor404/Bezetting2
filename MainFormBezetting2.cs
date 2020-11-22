@@ -19,16 +19,16 @@ namespace Bezetting2
 		private bool kill = false;
 		private bool WindowUpdateViewScreen = true;
 
-		private ToolTip mTooltip = new ToolTip();
+		private readonly ToolTip mTooltip = new ToolTip();
 		private Point mLastPos = new Point(-1, -1);
 
-		private Color _Weekend = Color.LightSkyBlue;
-		private Color _Feestdag = Color.LightSalmon;
-		private Color _Huidigedag = Color.Lavender;
-		private Color _MaandButton = Color.LightSkyBlue;
-		private Color _Werkplek = Color.LightGray;
-		private Color _MinimaalPersonen = Color.LightPink;
-		private Color _HoverNaam = Color.LightGreen;
+        private readonly Color Weekend_ = Color.LightSkyBlue;
+		private readonly Color Feestdag_ = Color.LightSalmon;
+		private readonly Color Huidigedag_ = Color.Lavender;
+		private readonly Color MaandButton_ = Color.LightSkyBlue;
+		private readonly Color Werkplek_ = Color.LightGray;
+		private readonly Color MinimaalPersonen_ = Color.LightPink;
+		private readonly Color HoverNaam_ = Color.LightGreen;
 
 		public List<ClassTelPlekGewerkt> ListClassTelPlekGewerkt = new List<ClassTelPlekGewerkt>();
 		public List<string> ListTelNamen = new List<string>();
@@ -38,7 +38,10 @@ namespace Bezetting2
 		private DateTime dag_gekozen;
 		public List<ClassTelAfwijkingen> ListClassTelAfwijkingen = new List<ClassTelAfwijkingen>();
 
-		private List<string> ListTelNietMeeNamen = new List<string>();
+		private readonly List<string> ListTelNietMeeNamen = new List<string>();
+
+        // quick menu
+        readonly QuickInvoerForm quick = new QuickInvoerForm();
 
 		public class ClassTelAfwijkingen
 		{
@@ -80,7 +83,7 @@ namespace Bezetting2
 			public string _DagTelVuil { get; set; }
 		}
 
-		private InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
+		private readonly InstellingenProgrammaForm instellingen_programma = new InstellingenProgrammaForm();
 
 		public MainFormBezetting2()
 		{
@@ -273,7 +276,7 @@ namespace Bezetting2
 				// kleur weekenden
 				//int col = 20;
 				//int row = 1;
-				int aantal_rows = ProgData.ListPersoneelKleur.Count();
+				//int aantal_rows = ProgData.ListPersoneelKleur.Count();
 				string dag_string;
 				for (int col = 1; col < aantal_dagen + 1; col++)
 				{
@@ -287,8 +290,8 @@ namespace Bezetting2
 							//this is very Important
 							View.Items[row].UseItemStyleForSubItems = false;
 							// Now you can Change the Particular Cell Property of Style
-							if (View.Items[row].SubItems[col].BackColor != _Werkplek)
-								View.Items[row].SubItems[col].BackColor = _Weekend;
+							if (View.Items[row].SubItems[col].BackColor != Werkplek_)
+								View.Items[row].SubItems[col].BackColor = Weekend_;
 						}
 					}
 				}
@@ -301,8 +304,8 @@ namespace Bezetting2
 					{
 						View.Items[i].UseItemStyleForSubItems = false;
 						// Now you can Change the Particular Cell Property of Style
-						if (View.Items[i].SubItems[DateTime.Now.Day].BackColor != _Werkplek)
-							View.Items[i].SubItems[DateTime.Now.Day].BackColor = _Huidigedag;
+						if (View.Items[i].SubItems[DateTime.Now.Day].BackColor != Werkplek_)
+							View.Items[i].SubItems[DateTime.Now.Day].BackColor = Huidigedag_;
 					}
 				}
 
@@ -388,7 +391,7 @@ namespace Bezetting2
 					}
 					if (_taghuidig == _tag)
 					{
-						button.BackColor = _MaandButton;
+						button.BackColor = MaandButton_;
 					}
 				}
 			}
@@ -447,8 +450,8 @@ namespace Bezetting2
 						//this is very Important
 						View.Items[row].UseItemStyleForSubItems = false;
 						// Now you can Change the Particular Cell Property of Style
-						if (View.Items[row].SubItems[col].BackColor != _Werkplek)
-							View.Items[row].SubItems[col].BackColor = _Feestdag;
+						if (View.Items[row].SubItems[col].BackColor != Werkplek_)
+							View.Items[row].SubItems[col].BackColor = Feestdag_;
 					}
 				}
 			}
@@ -500,7 +503,7 @@ namespace Bezetting2
 						View.Items[View.Items.Count - 1].UseItemStyleForSubItems = false;
 						for (int grijzebalk_werkplek = 0; grijzebalk_werkplek < 33; grijzebalk_werkplek++)
 						{
-							View.Items[View.Items.Count - 1].SubItems[grijzebalk_werkplek].BackColor = _Werkplek;
+							View.Items[View.Items.Count - 1].SubItems[grijzebalk_werkplek].BackColor = Werkplek_;
 						}
 						// zet in View
 						foreach (personeel a in ProgData.ListPersoneelKleur)
@@ -543,7 +546,7 @@ namespace Bezetting2
 					ListViewItem item_max = new ListViewItem(maxlijst);
 					View.Items.Add(item_max);
 					int dag;
-					int aantal_mensen = ProgData.ListPersoneelKleur.Count;
+					int aantal_mensen;// = ProgData.ListPersoneelKleur.Count;
 
 					List<string> TelNietMeeNamen = new List<string>();
 					string locatie = @"telnietmee.ini";
@@ -569,7 +572,7 @@ namespace Bezetting2
 						if (aantal_mensen < InstellingenProg._MinimaalAantalPersonen)
 						{
 							View.Items[View.Items.Count - 1].UseItemStyleForSubItems = false;
-							View.Items[View.Items.Count - 1].SubItems[dag].BackColor = _MinimaalPersonen;
+							View.Items[View.Items.Count - 1].SubItems[dag].BackColor = MinimaalPersonen_;
 						}
 					}
 
@@ -615,7 +618,7 @@ namespace Bezetting2
 				//if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
 				if (!File.Exists(ProgData.Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)))
 				{
-					ProgData.MaakLegeBezetting(ProgData.Sgekozenjaar(), ProgData.igekozenmaand.ToString(), ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
+					ProgData.MaakLegeBezetting(/*ProgData.Sgekozenjaar(), ProgData.igekozenmaand.ToString(),*/ ProgData.GekozenKleur); // in deze roetine wordt het ook opgeslagen
 				}
 
 				CheckEnDealVerhuizing();
@@ -634,7 +637,7 @@ namespace Bezetting2
 					View.Items[View.Items.Count - 1].UseItemStyleForSubItems = false;
 					for (int grijzebalk_werkplek = 0; grijzebalk_werkplek < 33; grijzebalk_werkplek++)
 					{
-						View.Items[View.Items.Count - 1].SubItems[grijzebalk_werkplek].BackColor = _Werkplek;
+						View.Items[View.Items.Count - 1].SubItems[grijzebalk_werkplek].BackColor = Werkplek_;
 					}
 
 					// zet in View
@@ -678,7 +681,7 @@ namespace Bezetting2
 				ListViewItem item_max = new ListViewItem(maxlijst);
 				View.Items.Add(item_max);
 				int dag;
-				int aantal_mensen = ProgData.ListPersoneelKleur.Count;
+				int aantal_mensen;// = ProgData.ListPersoneelKleur.Count;
 
 				List<string> TelNietMeeNamen = new List<string>();
 				string locatie = @"telnietmee.ini";
@@ -707,7 +710,7 @@ namespace Bezetting2
 					if (aantal_mensen < InstellingenProg._MinimaalAantalPersonen)
 					{
 						View.Items[View.Items.Count - 1].UseItemStyleForSubItems = false;
-						View.Items[View.Items.Count - 1].SubItems[dag].BackColor = _MinimaalPersonen;
+						View.Items[View.Items.Count - 1].SubItems[dag].BackColor = MinimaalPersonen_;
 					}
 				}
 
@@ -842,7 +845,7 @@ namespace Bezetting2
 							his.ShowDialog();
 						}
 
-						if (col != 0 && View.Items[row].SubItems[0].BackColor != _Werkplek)
+						if (col != 0 && View.Items[row].SubItems[0].BackColor != Werkplek_)
 						{
 							string gekozen_naam = info.Item.SubItems[0].Text;
 							string gekozen_datum = col.ToString();
@@ -851,48 +854,38 @@ namespace Bezetting2
 
 							if (e.Button == MouseButtons.Right)
 							{
-                                // quick menu
-                                QuickInvoerForm quick = new QuickInvoerForm
-                                {
-                                    Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60)
-                                };
+								
+								quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
                                 quick.ShowDialog();
 								if (quick.listBox1.SelectedIndex > -1)
 								{
 									string afwijking = quick.listBox1.SelectedItem.ToString();
-									if (afwijking == "Wis")
-									{
-										string eerste_2 = "";
-										if (value.Length > 2)
-											eerste_2 = value.Substring(0, 2);
+                                    switch (afwijking)
+                                    {
+										case "Wis":
+											string eerste_2 = "";
+											if (value.Length > 2)
+												eerste_2 = value.Substring(0, 2);
 
-										if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
-										{
-											MessageBox.Show("Wis een extra/ruil/verschoven dienst aan met linker muisknop");
-											//// als ED-O of ED-M of ED-N aanpassing op andere kleur
-											//// bepaal de kleur die dan loopt.
-
-											//// get huidige kleur op
-											//string dienst = value.Substring(3, 1);
-											//DateTime _verzoekdag = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
-											//string gaat_lopen_op_kleur = ProgData.MDatum.GetKleurDieWerkt(_verzoekdag, dienst);
-											//string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
-											//ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
-											//LooptExtraDienst lp = ProgData.LooptExtra_lijst.First(a => (a._naam == gekozen_naam) && (a._datum == _verzoekdag));
-											//ProgData.LooptExtra_lijst.Remove(lp);
-											//ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
-										}
-										else
-										{
-											ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-
-										}
-									}
-									else
-									{
-										ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-										ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
-									}
+											if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+											{
+												MessageBox.Show("Wis een extra/ruil/verschoven dienst aan met linker muisknop");
+											}
+											else
+											{
+												ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+											}
+											break;
+										case "Copy":
+											quick.listBox1.Items[2] = info.SubItem.Text;
+											break;
+										case "*****":
+											break;
+										default:
+											ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+											ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
+											break;
+                                    }
 									VulViewScherm();
 								}
 							}
@@ -997,7 +990,7 @@ namespace Bezetting2
 					// feestdag
 					if (col > 0 && row < 5) // feestdag info ?
 					{
-						if (View.Items[row].SubItems[col].BackColor == _Feestdag)
+						if (View.Items[row].SubItems[col].BackColor == Feestdag_)
 						{
 							int maand = ProgData.igekozenmaand;
 							DateTime pasen = EasterSunday((int)numericUpDownJaar.Value);
@@ -1129,8 +1122,8 @@ namespace Bezetting2
 			{
 				MessageBox.Show($"Ploeg veranderingen bestaat wel, repareren!");
 				File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
-				ProgData.MaakLegeBezetting(ProgData.Sgekozenjaar(), ProgData.Sgekozenmaand(), ProgData.GekozenKleur);
-				ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
+				ProgData.MaakLegeBezetting(/*ProgData.Sgekozenjaar(), ProgData.Sgekozenmaand(),*/ ProgData.GekozenKleur);
+                ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
 				ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
 				foreach (veranderingen verander in ProgData.ListVeranderingen)
 				{

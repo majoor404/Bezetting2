@@ -279,11 +279,11 @@ namespace Bezetting2
 			// bij een ploegnamen lijst hoort een bezetting lijst
 			if (!File.Exists(Ploeg_Bezetting_Locatie(kleur)))
 			{
-				MaakLegeBezetting(Sgekozenjaar(), igekozenmaand.ToString(), GekozenKleur); // in deze roetine wordt het ook opgeslagen
+				MaakLegeBezetting(/*Sgekozenjaar(), igekozenmaand.ToString(),*/ GekozenKleur); // in deze roetine wordt het ook opgeslagen
 			}
 		}
 
-		public static void MaakLegeBezetting(string jaar, string maand, string kleur)
+		public static void MaakLegeBezetting(/*string jaar, string maand,*/ string kleur)
 		{
 			ListWerkdagPloeg.Clear();
 			// elke dag in deze maand

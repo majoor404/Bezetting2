@@ -17,7 +17,7 @@ namespace Bezetting2.Invoer
             InitializeComponent();
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Close();
         }
