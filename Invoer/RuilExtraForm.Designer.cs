@@ -79,7 +79,7 @@
             this.monthCalendar1.Location = new System.Drawing.Point(96, 142);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 1;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar1_DateChanged);
             // 
             // comboBoxPloeg
             // 
@@ -94,7 +94,7 @@
             this.comboBoxPloeg.Name = "comboBoxPloeg";
             this.comboBoxPloeg.Size = new System.Drawing.Size(171, 24);
             this.comboBoxPloeg.TabIndex = 2;
-            this.comboBoxPloeg.SelectedIndexChanged += new System.EventHandler(this.comboBoxPloeg_SelectedIndexChanged);
+            this.comboBoxPloeg.SelectedIndexChanged += new System.EventHandler(this.ComboBoxPloeg_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -286,7 +286,7 @@
             this.buttonVraagAan.TabIndex = 10;
             this.buttonVraagAan.Text = "Vraag Aan";
             this.buttonVraagAan.UseVisualStyleBackColor = true;
-            this.buttonVraagAan.Click += new System.EventHandler(this.button1_Click);
+            this.buttonVraagAan.Click += new System.EventHandler(this.Button1_Click);
             // 
             // labelNaam
             // 
@@ -393,7 +393,7 @@
             this.buttonVulDienst.TabIndex = 11;
             this.buttonVulDienst.Text = "Dienst invullen";
             this.buttonVulDienst.UseVisualStyleBackColor = true;
-            this.buttonVulDienst.Click += new System.EventHandler(this.button2_Click);
+            this.buttonVulDienst.Click += new System.EventHandler(this.Button2_Click);
             // 
             // RuilExtraForm
             // 

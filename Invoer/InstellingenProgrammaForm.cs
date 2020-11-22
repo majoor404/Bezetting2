@@ -1,5 +1,6 @@
 ﻿using Bezetting2.Data;
 using System;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace Bezetting2.Invoer
@@ -15,36 +16,36 @@ namespace Bezetting2.Invoer
         {
             checkBoxGebruikRuilExtra.Checked = InstellingenProg._GebruikExtraRuil;
             checkBoxGebruikSnipper.Checked = InstellingenProg._GebruikSnipper;
-            textBoxMinAantalPersonen.Text = InstellingenProg._MinimaalAantalPersonen.ToString();
+            textBoxMinAantalPersonen.Text = InstellingenProg._MinimaalAantalPersonen.ToString(CultureInfo.CurrentCulture);
             comboBoxRooster.Text = InstellingenProg._Rooster;
             checkBoxTelVakAlsVK.Checked = InstellingenProg._TelVakAlsVK;
             
         }
 
-        private void checkBoxGebruikRuilExtra_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxGebruikRuilExtra_CheckedChanged(object sender, EventArgs e)
         {
             InstellingenProg._GebruikExtraRuil = checkBoxGebruikRuilExtra.Checked;
         }
 
 
 
-        private void checkBoxGebruikSnipper_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxGebruikSnipper_CheckedChanged(object sender, EventArgs e)
         {
             InstellingenProg._GebruikSnipper = checkBoxGebruikSnipper.Checked;
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             InstellingenProg._MinimaalAantalPersonen = int.Parse(textBoxMinAantalPersonen.Text);
             InstellingenProg.SaveProgrammaData();
         }
 
-        private void comboBoxRooster_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxRooster_SelectedIndexChanged(object sender, EventArgs e)
         {
             InstellingenProg._Rooster = comboBoxRooster.Text;
         }
 
-        private void checkBoxTelVakAlsVK_CheckedChanged(object sender, EventArgs e)
+        private void CheckBoxTelVakAlsVK_CheckedChanged(object sender, EventArgs e)
         {
             InstellingenProg._TelVakAlsVK = checkBoxTelVakAlsVK.Checked;
         }

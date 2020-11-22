@@ -75,7 +75,7 @@ namespace Bezetting2
         }
 
         // filter aangepast
-        private void comboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             ViewNamen.Items.Clear();
             string[] arr = new string[5];
@@ -168,18 +168,18 @@ namespace Bezetting2
             }
         }
 
-        private void buttonClose_Click(object sender, EventArgs e)
+        private void ButtonClose_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void buttonSave_Click(object sender, EventArgs e)
+        private void ButtonSave_Click(object sender, EventArgs e)
         {
             try
             {
                 personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
                 ProgData.ListPersoneel.Remove(persoon_gekozen);
-                buttonVoegToe_Click(this, null);
+                ButtonVoegToe_Click(this, null);
                 EditPersoneel_Shown(this, null);
             }
             catch
@@ -216,9 +216,9 @@ namespace Bezetting2
                 ProgData.GekozenKleur = persoon_gekozen._kleur;
                 // zet maand en jaar goed van verhuis datum
                 ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
-                ProgData.igekozenjaar = persoon_gekozen._verhuisdatum.Year;
+                ProgData.Igekozenjaar = persoon_gekozen._verhuisdatum.Year;
 
-                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
 
                 if (ProgData.GekozenKleur != "Nieuw") // als nieuw persoon, dan hoef je niet X te zetten bij weg gaan ploeg
                 {
@@ -237,31 +237,33 @@ namespace Bezetting2
 
                 // moet nieuwe collega toevoegen aan bezetting
 
-                int aantal_dagen_dezemaand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+                int aantal_dagen_dezemaand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30); // want nieuwe kleur gekozen
                 // maak ruimte voor nieuwe collega in werkdag tabel
                 for (int i = 1; i < aantal_dagen_dezemaand + 1; i++)
                 {
-                    DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
-                    werkdag dag = new werkdag();
-                    dag._naam = persoon_gekozen._achternaam;
-                    dag._standaarddienst = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dat, persoon_gekozen._nieuwkleur);
-                    dag._werkplek = "";
-                    dag._afwijkingdienst = "";
-                    dag._dagnummer = i;
+                    DateTime dat = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, i);
+                    werkdag dag = new werkdag
+                    {
+                        _naam = persoon_gekozen._achternaam,
+                        _standaarddienst = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dat, persoon_gekozen._nieuwkleur),
+                        _werkplek = "",
+                        _afwijkingdienst = "",
+                        _dagnummer = i
+                    };
                     ProgData.ListWerkdagPloeg.Add(dag);
                 }
                 ProgData.SavePloegBezetting(ProgData.GekozenKleur,30);
 
                 for (int i = 1; i < eerste_dag_weg; i++)
                 {
-                    DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
+                    DateTime dat = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, i);
                     ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing");
                 }
 
                 // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
                 // meegeven eerste dag.
-                verhuis_oude_afwijkingen(textBoxPersNum.Text, eerste_dag_weg, ProgData.igekozenmaand, ProgData.igekozenjaar);
+                Verhuis_oude_afwijkingen(textBoxPersNum.Text, eerste_dag_weg, ProgData.igekozenmaand, ProgData.Igekozenjaar);
 
                 LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
                 if (LabelRoosterNieuw.Text != "")
@@ -280,7 +282,7 @@ namespace Bezetting2
             catch { }
         }
 
-        private void buttonCancelVerhuis_Click(object sender, EventArgs e)
+        private void ButtonCancelVerhuis_Click(object sender, EventArgs e)
         {
             personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
             DateTime dum = new DateTime(9999, 1, 1);
@@ -293,7 +295,7 @@ namespace Bezetting2
             EditPersoneel_Shown(this, null);
         }
 
-        private void buttonRechten_Click(object sender, EventArgs e)
+        private void ButtonRechten_Click(object sender, EventArgs e)
         {
             RechtenInstellenForm recht = new RechtenInstellenForm();
             recht.labelNaam.Text = textBoxAchterNaam.Text;
@@ -317,7 +319,7 @@ namespace Bezetting2
             }
         }
 
-        private void buttonDelete_Click(object sender, EventArgs e)
+        private void ButtonDelete_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Delete deze naam ?", "Delete", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
@@ -329,23 +331,25 @@ namespace Bezetting2
             }
         }
 
-        private void buttonVoegToe_Click(object sender, EventArgs e)
+        private void ButtonVoegToe_Click(object sender, EventArgs e)
         {
-            personeel a = new personeel();
-            a._persnummer = int.Parse(textBoxPersNum.Text);
-            a._achternaam = textBoxAchterNaam.Text;
-            a._voornaam = textBoxVoorNaam.Text;
-            a._adres = textBoxAdres.Text;
-            a._postcode = textBoxPostcode.Text;
-            a._woonplaats = textBoxWoonplaats.Text;
-            a._emailthuis = textBoxEmailThuis.Text;
-            a._emailwerk = textBoxEmailWerk.Text;
-            a._telthuis = textBoxTelThuis.Text;
-            a._tel06prive = textBoxTelMobPrive.Text;
-            a._tel06werk = textBoxTelMobWerk.Text;
-            a._adrescodewerk = textBoxAdresCodeWerk.Text;
-            a._telwerk = textBoxTelWerk.Text;
-            a._vuilwerk = vuilwerk.Checked.ToString();
+            personeel a = new personeel
+            {
+                _persnummer = int.Parse(textBoxPersNum.Text),
+                _achternaam = textBoxAchterNaam.Text,
+                _voornaam = textBoxVoorNaam.Text,
+                _adres = textBoxAdres.Text,
+                _postcode = textBoxPostcode.Text,
+                _woonplaats = textBoxWoonplaats.Text,
+                _emailthuis = textBoxEmailThuis.Text,
+                _emailwerk = textBoxEmailWerk.Text,
+                _telthuis = textBoxTelThuis.Text,
+                _tel06prive = textBoxTelMobPrive.Text,
+                _tel06werk = textBoxTelMobWerk.Text,
+                _adrescodewerk = textBoxAdresCodeWerk.Text,
+                _telwerk = textBoxTelWerk.Text,
+                _vuilwerk = vuilwerk.Checked.ToString()
+            };
 
             if (textBoxKleur.Text == "")
             {
@@ -370,7 +374,7 @@ namespace Bezetting2
             EditPersoneel_Shown(this, null);
         }
 
-        private void buttonNieuw_Click(object sender, EventArgs e)
+        private void ButtonNieuw_Click(object sender, EventArgs e)
         {
             textBoxPersNum.Text = "";
             textBoxAchterNaam.Text = "";
@@ -394,7 +398,7 @@ namespace Bezetting2
         }
 
         // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
-        private void verhuis_oude_afwijkingen(string personeel_nummer, int eerste_dag, int maand, int jaar)
+        private void Verhuis_oude_afwijkingen(string personeel_nummer, int eerste_dag, int maand, int jaar)
         {
             MessageBox.Show("ingevulde vrije dagen van deze persoon worden niet meegenomen!");
         }

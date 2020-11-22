@@ -14,12 +14,12 @@ namespace Bezetting2
         private ListBox sourse;
         private ListBox broer;
         private int sourse_index;
-        public List<invoerveld> opbouw = new List<invoerveld>();
+        public List<Invoerveld> opbouw = new List<Invoerveld>();
 
-        public class invoerveld
+        public class Invoerveld
         {
             //  public invoerveld() { }
-            public invoerveld(Label lb, ListBox ln, ListBox la)
+            public Invoerveld(Label lb, ListBox ln, ListBox la)
             {
                 _Label = lb;
                 _ListNaam = ln;
@@ -38,7 +38,7 @@ namespace Bezetting2
             InitializeComponent();
         }
 
-        private void listBox2_DragEnter(object sender, DragEventArgs e)
+        private void ListBox2_DragEnter(object sender, DragEventArgs e)
         {
             if (CheckRechten())
             {
@@ -49,33 +49,24 @@ namespace Bezetting2
             }
         }
 
-        private void listBox1_MouseDown(object sender, MouseEventArgs e)
+        private void ListBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (CheckRechten())
             {
-                //if (e.Button == MouseButtons.Right)
-                //{
-                //    sourse = (ListBox)sender;
-                //    Point start = sourse.PointToScreen(new Point(e.X, e.Y));
-                //    QuickInvoerForm quick = new QuickInvoerForm();
-                //    quick.Location = new System.Drawing.Point(start.X,start.Y);
-                //    quick.ShowDialog();
-                //}
-                //else
-                //{
                 sourse = (ListBox)sender;
                 int index = sourse.IndexFromPoint(e.X, e.Y);
                 sourse_index = index;
                 if (index > -1)
                 {
                     string s = sourse.Items[index].ToString();
-                    DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
+                    //DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
+                    _ = DoDragDrop(s, DragDropEffects.Move);
                 }
                 //}
             }
         }
 
-        private void listBox2_DragDrop(object sender, DragEventArgs e)
+        private void ListBox2_DragDrop(object sender, DragEventArgs e)
         {
             if (CheckRechten())
             {
@@ -110,27 +101,27 @@ namespace Bezetting2
 
             opbouw.Clear();
 
-            opbouw.Add(new invoerveld(label1, listBox1, listBoxAfw));
-            opbouw.Add(new invoerveld(label2, listBox2, listBox22));
-            opbouw.Add(new invoerveld(label3, listBox3, listBox23));
-            opbouw.Add(new invoerveld(label4, listBox4, listBox24));
-            opbouw.Add(new invoerveld(label5, listBox5, listBox25));
-            opbouw.Add(new invoerveld(label6, listBox6, listBox26));
-            opbouw.Add(new invoerveld(label7, listBox7, listBox27));
-            opbouw.Add(new invoerveld(label8, listBox8, listBox28));
-            opbouw.Add(new invoerveld(label9, listBox9, listBox29));
-            opbouw.Add(new invoerveld(label10, listBox10, listBox30));
-            opbouw.Add(new invoerveld(label11, listBox11, listBox31));
-            opbouw.Add(new invoerveld(label12, listBox12, listBox32));
-            opbouw.Add(new invoerveld(label13, listBox13, listBox33));
-            opbouw.Add(new invoerveld(label14, listBox14, listBox34));
-            opbouw.Add(new invoerveld(label15, listBox15, listBox35));
-            opbouw.Add(new invoerveld(label16, listBox16, listBox36));
-            opbouw.Add(new invoerveld(label17, listBox17, listBox37));
-            opbouw.Add(new invoerveld(label18, listBox18, listBox38));
-            opbouw.Add(new invoerveld(label19, listBox19, listBox39));
-            opbouw.Add(new invoerveld(label20, listBox20, listBox40));
-            opbouw.Add(new invoerveld(label21, listBox21, listBox41));
+            opbouw.Add(new Invoerveld(label1, listBox1, listBoxAfw));
+            opbouw.Add(new Invoerveld(label2, listBox2, listBox22));
+            opbouw.Add(new Invoerveld(label3, listBox3, listBox23));
+            opbouw.Add(new Invoerveld(label4, listBox4, listBox24));
+            opbouw.Add(new Invoerveld(label5, listBox5, listBox25));
+            opbouw.Add(new Invoerveld(label6, listBox6, listBox26));
+            opbouw.Add(new Invoerveld(label7, listBox7, listBox27));
+            opbouw.Add(new Invoerveld(label8, listBox8, listBox28));
+            opbouw.Add(new Invoerveld(label9, listBox9, listBox29));
+            opbouw.Add(new Invoerveld(label10, listBox10, listBox30));
+            opbouw.Add(new Invoerveld(label11, listBox11, listBox31));
+            opbouw.Add(new Invoerveld(label12, listBox12, listBox32));
+            opbouw.Add(new Invoerveld(label13, listBox13, listBox33));
+            opbouw.Add(new Invoerveld(label14, listBox14, listBox34));
+            opbouw.Add(new Invoerveld(label15, listBox15, listBox35));
+            opbouw.Add(new Invoerveld(label16, listBox16, listBox36));
+            opbouw.Add(new Invoerveld(label17, listBox17, listBox37));
+            opbouw.Add(new Invoerveld(label18, listBox18, listBox38));
+            opbouw.Add(new Invoerveld(label19, listBox19, listBox39));
+            opbouw.Add(new Invoerveld(label20, listBox20, listBox40));
+            opbouw.Add(new Invoerveld(label21, listBox21, listBox41));
 
             LaadDataFormulier();
 
@@ -144,7 +135,7 @@ namespace Bezetting2
         }
 
         // geklikt op label, als in edit mode vraag nieuwe tekst
-        private void label2_Click(object sender, EventArgs e)
+        private void Label2_Click(object sender, EventArgs e)
         {
             // geklikt op label, als in edit mode vraag nieuwe tekst
             if (ProgData.RechtenHuidigeGebruiker > 80)
@@ -184,7 +175,7 @@ namespace Bezetting2
         }
 
         // listbox not visible als uitgevinkt
-        private void checkBox11_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox11_CheckedChanged(object sender, EventArgs e)
         {
             listBox2.Visible = checkBox1.Checked;
             listBox3.Visible = checkBox2.Checked;
@@ -254,7 +245,7 @@ namespace Bezetting2
 
         private void UpdateAfwijkingListBox(ListBox box)
         {
-            invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+            Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
             broer = veld._ListAfw;
             broer.Items.Clear();
 
@@ -271,7 +262,7 @@ namespace Bezetting2
             broer.Visible = afwijking;
         }
 
-        private void buttonPrev_Click(object sender, EventArgs e)
+        private void ButtonPrev_Click(object sender, EventArgs e)
         {
             SaveData();
             dat = dat.AddDays(-1);
@@ -282,13 +273,13 @@ namespace Bezetting2
                 dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
-            ProgData.igekozenjaar = dat.Year;
+            ProgData.Igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
 
             ViewUpdate();
         }
 
-        private void buttonNext_Click(object sender, EventArgs e)
+        private void ButtonNext_Click(object sender, EventArgs e)
         {
             SaveData();
             dat = dat.AddDays(1);
@@ -299,7 +290,7 @@ namespace Bezetting2
                 dienst = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
-            ProgData.igekozenjaar = dat.Year;
+            ProgData.Igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
 
             ViewUpdate();
@@ -369,7 +360,7 @@ namespace Bezetting2
                                 else
                                 {
                                     // save werkplek
-                                    invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                                    Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
                                     ver._werkplek = veld._Label.Text;
                                 }
                             }
@@ -428,8 +419,10 @@ namespace Bezetting2
                             }
                             catch
                             {
-                                personeel extra_man = new personeel();
-                                extra_man._achternaam = naam._naam;
+                                personeel extra_man = new personeel
+                                {
+                                    _achternaam = naam._naam
+                                };
                                 ProgData.ListPersoneelKleur.Add(extra_man);
                             }
 
@@ -439,11 +432,13 @@ namespace Bezetting2
                             }
                             catch
                             {
-                                werkdag werkdag_extra_man = new werkdag();
-                                werkdag_extra_man._dagnummer = dat.Day;
-                                werkdag_extra_man._naam = naam._naam;
-                                werkdag_extra_man._werkplek = "";
-                                werkdag_extra_man._afwijkingdienst = naam._metcode;
+                                werkdag werkdag_extra_man = new werkdag
+                                {
+                                    _dagnummer = dat.Day,
+                                    _naam = naam._naam,
+                                    _werkplek = "",
+                                    _afwijkingdienst = naam._metcode
+                                };
                                 ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
                                 ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
                             }
@@ -461,7 +456,7 @@ namespace Bezetting2
                     }
                     else
                     {
-                        invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
+                        Invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
                         veld._ListNaam.Items.Add(man._achternaam);
                         UpdateAfwijkingListBox(veld._ListNaam);
                     }
@@ -475,7 +470,7 @@ namespace Bezetting2
                     {
                         if (box.Items.Count == 0)
                         {
-                            invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                            Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
                             veld._ListAfw.Visible = false;
                         }
                     }
@@ -484,7 +479,7 @@ namespace Bezetting2
             catch { }
         }
 
-        private void buttonCopy_Click(object sender, EventArgs e)
+        private void ButtonCopy_Click(object sender, EventArgs e)
         {
             List<string> temp1 = new List<string>();
             List<string> temp2 = new List<string>();
@@ -594,7 +589,7 @@ namespace Bezetting2
             }
 
             // ga naar volgende dag
-            buttonNext_Click(this, null);
+            ButtonNext_Click(this, null);
             foreach (ListBox box in this.Controls.OfType<ListBox>())
             {
                 box.Items.Clear();
@@ -688,7 +683,7 @@ namespace Bezetting2
             ViewUpdate();
         }
 
-        private bool CheckRechten()
+        private static bool CheckRechten()
         {
             bool ret = false;
             if (ProgData.RechtenHuidigeGebruiker > 25) ret = true;
@@ -770,14 +765,14 @@ namespace Bezetting2
             catch { }
         }
 
-        private void listBox1_MouseLeave(object sender, EventArgs e)
+        private void ListBox1_MouseLeave(object sender, EventArgs e)
         {
             sourse = (ListBox)sender;
             if (sourse.SelectedIndex > -1)
                 sourse.SelectedIndex = -1;
         }
 
-        private void buttonNu_Click(object sender, EventArgs e)
+        private void ButtonNu_Click(object sender, EventArgs e)
         {
             SaveData();
             OverzichtWachtForm_Shown(this, null);
@@ -796,13 +791,15 @@ namespace Bezetting2
             }
         }
 
-        private void listBox2_DrawItem(object sender, DrawItemEventArgs e)
+        private void ListBox2_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index > -1)
             {
                 ListBox Sender = (ListBox)sender;
                 string afw = Sender.Items[e.Index].ToString();
                 if (afw.Length > 3) afw = afw.Substring(0, 3);
+                if (afw.Length > 3 && afw.Substring(0, 2) == "EV")
+                    afw = "EV";
 
                 switch (afw)
                 {
@@ -814,6 +811,7 @@ namespace Bezetting2
                     case "VF":
                     case "OPL":
                     case "OI8":
+                    case "EV":
                         e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
                         break;
                     case "ED-":

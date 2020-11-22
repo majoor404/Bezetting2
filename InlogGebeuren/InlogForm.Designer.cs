@@ -62,7 +62,7 @@
             this.textBoxNum.Name = "textBoxNum";
             this.textBoxNum.Size = new System.Drawing.Size(215, 20);
             this.textBoxNum.TabIndex = 3;
-            this.textBoxNum.TextChanged += new System.EventHandler(this.textBoxNum_TextChanged);
+            this.textBoxNum.TextChanged += new System.EventHandler(this.TextBoxNum_TextChanged);
             // 
             // textBoxPass
             // 
@@ -71,7 +71,7 @@
             this.textBoxPass.PasswordChar = '*';
             this.textBoxPass.Size = new System.Drawing.Size(215, 20);
             this.textBoxPass.TabIndex = 4;
-            this.textBoxPass.TextChanged += new System.EventHandler(this.textBoxPass_TextChanged);
+            this.textBoxPass.TextChanged += new System.EventHandler(this.TextBoxPass_TextChanged);
             // 
             // buttonOke
             // 
@@ -82,7 +82,7 @@
             this.buttonOke.TabIndex = 5;
             this.buttonOke.Text = "Enter";
             this.buttonOke.UseVisualStyleBackColor = true;
-            this.buttonOke.Click += new System.EventHandler(this.buttonOke_Click);
+            this.buttonOke.Click += new System.EventHandler(this.ButtonOke_Click);
             // 
             // label3
             // 
@@ -92,7 +92,7 @@
             this.label3.Size = new System.Drawing.Size(99, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "Passwoord Change";
-            this.label3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.label3_MouseDoubleClick);
+            this.label3.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Label3_MouseDoubleClick);
             // 
             // textBoxChangePasswoord
             // 
@@ -112,7 +112,7 @@
             this.buttonVerander.TabIndex = 8;
             this.buttonVerander.Text = "Change";
             this.buttonVerander.UseVisualStyleBackColor = true;
-            this.buttonVerander.Click += new System.EventHandler(this.buttonVerander_Click);
+            this.buttonVerander.Click += new System.EventHandler(this.ButtonVerander_Click);
             // 
             // InlogForm
             // 

@@ -132,11 +132,11 @@
             this.listBox1.Size = new System.Drawing.Size(163, 516);
             this.listBox1.TabIndex = 0;
             this.listBox1.Tag = "1";
-            this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox1.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox1.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox2
             // 
@@ -151,11 +151,11 @@
             this.listBox2.Size = new System.Drawing.Size(150, 68);
             this.listBox2.TabIndex = 1;
             this.listBox2.Tag = "2";
-            this.listBox2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox2.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox2.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox2.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox2.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox2.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox3
             // 
@@ -169,11 +169,11 @@
             this.listBox3.Size = new System.Drawing.Size(150, 68);
             this.listBox3.TabIndex = 2;
             this.listBox3.Tag = "3";
-            this.listBox3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox3.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox3.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox3.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox3.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox4
             // 
@@ -187,11 +187,11 @@
             this.listBox4.Size = new System.Drawing.Size(150, 68);
             this.listBox4.TabIndex = 3;
             this.listBox4.Tag = "4";
-            this.listBox4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox4.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox4.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox4.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox4.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox4.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox4.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox5
             // 
@@ -205,11 +205,11 @@
             this.listBox5.Size = new System.Drawing.Size(150, 68);
             this.listBox5.TabIndex = 4;
             this.listBox5.Tag = "5";
-            this.listBox5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox5.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox5.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox5.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox5.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox5.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox5.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox6
             // 
@@ -223,11 +223,11 @@
             this.listBox6.Size = new System.Drawing.Size(150, 68);
             this.listBox6.TabIndex = 5;
             this.listBox6.Tag = "6";
-            this.listBox6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox6.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox6.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox6.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox6.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox6.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox6.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox7
             // 
@@ -241,11 +241,11 @@
             this.listBox7.Size = new System.Drawing.Size(150, 68);
             this.listBox7.TabIndex = 6;
             this.listBox7.Tag = "7";
-            this.listBox7.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox7.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox7.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox7.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox7.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox7.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox7.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox7.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox8
             // 
@@ -259,11 +259,11 @@
             this.listBox8.Size = new System.Drawing.Size(150, 68);
             this.listBox8.TabIndex = 7;
             this.listBox8.Tag = "8";
-            this.listBox8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox8.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox8.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox8.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox8.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox8.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox8.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox9
             // 
@@ -277,11 +277,11 @@
             this.listBox9.Size = new System.Drawing.Size(150, 68);
             this.listBox9.TabIndex = 8;
             this.listBox9.Tag = "9";
-            this.listBox9.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox9.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox9.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox9.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox9.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox9.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox9.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox9.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox10
             // 
@@ -295,11 +295,11 @@
             this.listBox10.Size = new System.Drawing.Size(150, 68);
             this.listBox10.TabIndex = 9;
             this.listBox10.Tag = "10";
-            this.listBox10.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox10.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox10.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox10.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox10.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox10.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox10.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox10.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox11
             // 
@@ -313,11 +313,11 @@
             this.listBox11.Size = new System.Drawing.Size(150, 68);
             this.listBox11.TabIndex = 10;
             this.listBox11.Tag = "11";
-            this.listBox11.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox11.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox11.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox11.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox11.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox11.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox11.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox11.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox12
             // 
@@ -331,11 +331,11 @@
             this.listBox12.Size = new System.Drawing.Size(150, 68);
             this.listBox12.TabIndex = 11;
             this.listBox12.Tag = "12";
-            this.listBox12.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox12.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox12.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox12.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox12.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox12.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox12.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox12.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox13
             // 
@@ -349,11 +349,11 @@
             this.listBox13.Size = new System.Drawing.Size(150, 68);
             this.listBox13.TabIndex = 12;
             this.listBox13.Tag = "13";
-            this.listBox13.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox13.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox13.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox13.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox13.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox13.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox13.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox13.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox14
             // 
@@ -367,11 +367,11 @@
             this.listBox14.Size = new System.Drawing.Size(150, 100);
             this.listBox14.TabIndex = 13;
             this.listBox14.Tag = "14";
-            this.listBox14.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox14.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox14.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox14.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox14.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox14.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox14.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox14.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox15
             // 
@@ -385,11 +385,11 @@
             this.listBox15.Size = new System.Drawing.Size(150, 100);
             this.listBox15.TabIndex = 14;
             this.listBox15.Tag = "15";
-            this.listBox15.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox15.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox15.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox15.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox15.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox15.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox15.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox15.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox16
             // 
@@ -403,11 +403,11 @@
             this.listBox16.Size = new System.Drawing.Size(150, 100);
             this.listBox16.TabIndex = 15;
             this.listBox16.Tag = "16";
-            this.listBox16.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox16.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox16.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox16.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox16.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox16.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox16.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox16.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox16.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox16.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox17
             // 
@@ -421,11 +421,11 @@
             this.listBox17.Size = new System.Drawing.Size(150, 100);
             this.listBox17.TabIndex = 16;
             this.listBox17.Tag = "17";
-            this.listBox17.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox17.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox17.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox17.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox17.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox17.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox17.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox17.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // label1
             // 
@@ -436,7 +436,7 @@
             this.label1.Size = new System.Drawing.Size(45, 16);
             this.label1.TabIndex = 17;
             this.label1.Text = "label1";
-            this.label1.Click += new System.EventHandler(this.label2_Click);
+            this.label1.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label2
             // 
@@ -447,7 +447,7 @@
             this.label2.Size = new System.Drawing.Size(45, 16);
             this.label2.TabIndex = 18;
             this.label2.Text = "label2";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
+            this.label2.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label3
             // 
@@ -458,7 +458,7 @@
             this.label3.Size = new System.Drawing.Size(45, 16);
             this.label3.TabIndex = 19;
             this.label3.Text = "label3";
-            this.label3.Click += new System.EventHandler(this.label2_Click);
+            this.label3.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label4
             // 
@@ -469,7 +469,7 @@
             this.label4.Size = new System.Drawing.Size(45, 16);
             this.label4.TabIndex = 20;
             this.label4.Text = "label4";
-            this.label4.Click += new System.EventHandler(this.label2_Click);
+            this.label4.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label5
             // 
@@ -480,7 +480,7 @@
             this.label5.Size = new System.Drawing.Size(45, 16);
             this.label5.TabIndex = 21;
             this.label5.Text = "label5";
-            this.label5.Click += new System.EventHandler(this.label2_Click);
+            this.label5.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label6
             // 
@@ -491,7 +491,7 @@
             this.label6.Size = new System.Drawing.Size(45, 16);
             this.label6.TabIndex = 22;
             this.label6.Text = "label6";
-            this.label6.Click += new System.EventHandler(this.label2_Click);
+            this.label6.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label7
             // 
@@ -502,7 +502,7 @@
             this.label7.Size = new System.Drawing.Size(45, 16);
             this.label7.TabIndex = 23;
             this.label7.Text = "label7";
-            this.label7.Click += new System.EventHandler(this.label2_Click);
+            this.label7.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label8
             // 
@@ -513,7 +513,7 @@
             this.label8.Size = new System.Drawing.Size(45, 16);
             this.label8.TabIndex = 24;
             this.label8.Text = "label8";
-            this.label8.Click += new System.EventHandler(this.label2_Click);
+            this.label8.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label9
             // 
@@ -524,7 +524,7 @@
             this.label9.Size = new System.Drawing.Size(45, 16);
             this.label9.TabIndex = 25;
             this.label9.Text = "label9";
-            this.label9.Click += new System.EventHandler(this.label2_Click);
+            this.label9.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label10
             // 
@@ -535,7 +535,7 @@
             this.label10.Size = new System.Drawing.Size(52, 16);
             this.label10.TabIndex = 26;
             this.label10.Text = "label10";
-            this.label10.Click += new System.EventHandler(this.label2_Click);
+            this.label10.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label11
             // 
@@ -546,7 +546,7 @@
             this.label11.Size = new System.Drawing.Size(52, 16);
             this.label11.TabIndex = 27;
             this.label11.Text = "label11";
-            this.label11.Click += new System.EventHandler(this.label2_Click);
+            this.label11.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label12
             // 
@@ -557,7 +557,7 @@
             this.label12.Size = new System.Drawing.Size(52, 16);
             this.label12.TabIndex = 28;
             this.label12.Text = "label12";
-            this.label12.Click += new System.EventHandler(this.label2_Click);
+            this.label12.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label13
             // 
@@ -568,7 +568,7 @@
             this.label13.Size = new System.Drawing.Size(52, 16);
             this.label13.TabIndex = 29;
             this.label13.Text = "label13";
-            this.label13.Click += new System.EventHandler(this.label2_Click);
+            this.label13.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label14
             // 
@@ -579,7 +579,7 @@
             this.label14.Size = new System.Drawing.Size(52, 16);
             this.label14.TabIndex = 30;
             this.label14.Text = "label14";
-            this.label14.Click += new System.EventHandler(this.label2_Click);
+            this.label14.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label15
             // 
@@ -590,7 +590,7 @@
             this.label15.Size = new System.Drawing.Size(52, 16);
             this.label15.TabIndex = 31;
             this.label15.Text = "label15";
-            this.label15.Click += new System.EventHandler(this.label2_Click);
+            this.label15.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label16
             // 
@@ -601,7 +601,7 @@
             this.label16.Size = new System.Drawing.Size(52, 16);
             this.label16.TabIndex = 32;
             this.label16.Text = "label16";
-            this.label16.Click += new System.EventHandler(this.label2_Click);
+            this.label16.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label17
             // 
@@ -612,7 +612,7 @@
             this.label17.Size = new System.Drawing.Size(52, 16);
             this.label17.TabIndex = 33;
             this.label17.Text = "label17";
-            this.label17.Click += new System.EventHandler(this.label2_Click);
+            this.label17.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label18
             // 
@@ -623,7 +623,7 @@
             this.label18.Size = new System.Drawing.Size(52, 16);
             this.label18.TabIndex = 41;
             this.label18.Text = "label18";
-            this.label18.Click += new System.EventHandler(this.label2_Click);
+            this.label18.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label19
             // 
@@ -634,7 +634,7 @@
             this.label19.Size = new System.Drawing.Size(52, 16);
             this.label19.TabIndex = 40;
             this.label19.Text = "label19";
-            this.label19.Click += new System.EventHandler(this.label2_Click);
+            this.label19.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label20
             // 
@@ -645,7 +645,7 @@
             this.label20.Size = new System.Drawing.Size(52, 16);
             this.label20.TabIndex = 39;
             this.label20.Text = "label20";
-            this.label20.Click += new System.EventHandler(this.label2_Click);
+            this.label20.Click += new System.EventHandler(this.Label2_Click);
             // 
             // label21
             // 
@@ -656,7 +656,7 @@
             this.label21.Size = new System.Drawing.Size(52, 16);
             this.label21.TabIndex = 38;
             this.label21.Text = "label21";
-            this.label21.Click += new System.EventHandler(this.label2_Click);
+            this.label21.Click += new System.EventHandler(this.Label2_Click);
             // 
             // listBox18
             // 
@@ -670,11 +670,11 @@
             this.listBox18.Size = new System.Drawing.Size(150, 116);
             this.listBox18.TabIndex = 37;
             this.listBox18.Tag = "18";
-            this.listBox18.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox18.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox18.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox18.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox18.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox18.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox18.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox18.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox19
             // 
@@ -688,11 +688,11 @@
             this.listBox19.Size = new System.Drawing.Size(150, 116);
             this.listBox19.TabIndex = 36;
             this.listBox19.Tag = "19";
-            this.listBox19.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox19.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox19.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox19.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox19.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox19.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox19.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox19.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox20
             // 
@@ -706,11 +706,11 @@
             this.listBox20.Size = new System.Drawing.Size(150, 116);
             this.listBox20.TabIndex = 35;
             this.listBox20.Tag = "20";
-            this.listBox20.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox20.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox20.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox20.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox20.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox20.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox20.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox20.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox21
             // 
@@ -724,11 +724,11 @@
             this.listBox21.Size = new System.Drawing.Size(150, 116);
             this.listBox21.TabIndex = 34;
             this.listBox21.Tag = "21";
-            this.listBox21.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox21.DragDrop += new System.Windows.Forms.DragEventHandler(this.listBox2_DragDrop);
-            this.listBox21.DragEnter += new System.Windows.Forms.DragEventHandler(this.listBox2_DragEnter);
-            this.listBox21.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseDown);
-            this.listBox21.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox21.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox21.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox21.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox21.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox21.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // checkBox1
             // 
@@ -743,7 +743,7 @@
             this.checkBox1.Text = "Visible";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Visible = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox2
             // 
@@ -758,7 +758,7 @@
             this.checkBox2.Text = "Visible";
             this.checkBox2.UseVisualStyleBackColor = true;
             this.checkBox2.Visible = false;
-            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox3
             // 
@@ -773,7 +773,7 @@
             this.checkBox3.Text = "Visible";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.Visible = false;
-            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox4
             // 
@@ -788,7 +788,7 @@
             this.checkBox4.Text = "Visible";
             this.checkBox4.UseVisualStyleBackColor = true;
             this.checkBox4.Visible = false;
-            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox5
             // 
@@ -803,7 +803,7 @@
             this.checkBox5.Text = "Visible";
             this.checkBox5.UseVisualStyleBackColor = true;
             this.checkBox5.Visible = false;
-            this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox5.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox6
             // 
@@ -818,7 +818,7 @@
             this.checkBox6.Text = "Visible";
             this.checkBox6.UseVisualStyleBackColor = true;
             this.checkBox6.Visible = false;
-            this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox6.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox7
             // 
@@ -833,7 +833,7 @@
             this.checkBox7.Text = "Visible";
             this.checkBox7.UseVisualStyleBackColor = true;
             this.checkBox7.Visible = false;
-            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox8
             // 
@@ -848,7 +848,7 @@
             this.checkBox8.Text = "Visible";
             this.checkBox8.UseVisualStyleBackColor = true;
             this.checkBox8.Visible = false;
-            this.checkBox8.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox8.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox9
             // 
@@ -863,7 +863,7 @@
             this.checkBox9.Text = "Visible";
             this.checkBox9.UseVisualStyleBackColor = true;
             this.checkBox9.Visible = false;
-            this.checkBox9.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox9.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox10
             // 
@@ -878,7 +878,7 @@
             this.checkBox10.Text = "Visible";
             this.checkBox10.UseVisualStyleBackColor = true;
             this.checkBox10.Visible = false;
-            this.checkBox10.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox10.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox11
             // 
@@ -893,7 +893,7 @@
             this.checkBox11.Text = "Visible";
             this.checkBox11.UseVisualStyleBackColor = true;
             this.checkBox11.Visible = false;
-            this.checkBox11.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox11.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox12
             // 
@@ -908,7 +908,7 @@
             this.checkBox12.Text = "Visible";
             this.checkBox12.UseVisualStyleBackColor = true;
             this.checkBox12.Visible = false;
-            this.checkBox12.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox12.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox13
             // 
@@ -923,7 +923,7 @@
             this.checkBox13.Text = "Visible";
             this.checkBox13.UseVisualStyleBackColor = true;
             this.checkBox13.Visible = false;
-            this.checkBox13.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox13.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox14
             // 
@@ -938,7 +938,7 @@
             this.checkBox14.Text = "Visible";
             this.checkBox14.UseVisualStyleBackColor = true;
             this.checkBox14.Visible = false;
-            this.checkBox14.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox14.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox15
             // 
@@ -953,7 +953,7 @@
             this.checkBox15.Text = "Visible";
             this.checkBox15.UseVisualStyleBackColor = true;
             this.checkBox15.Visible = false;
-            this.checkBox15.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox15.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox16
             // 
@@ -968,7 +968,7 @@
             this.checkBox16.Text = "Visible";
             this.checkBox16.UseVisualStyleBackColor = true;
             this.checkBox16.Visible = false;
-            this.checkBox16.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox16.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox17
             // 
@@ -983,7 +983,7 @@
             this.checkBox17.Text = "Visible";
             this.checkBox17.UseVisualStyleBackColor = true;
             this.checkBox17.Visible = false;
-            this.checkBox17.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox17.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox18
             // 
@@ -998,7 +998,7 @@
             this.checkBox18.Text = "Visible";
             this.checkBox18.UseVisualStyleBackColor = true;
             this.checkBox18.Visible = false;
-            this.checkBox18.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox18.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox19
             // 
@@ -1013,7 +1013,7 @@
             this.checkBox19.Text = "Visible";
             this.checkBox19.UseVisualStyleBackColor = true;
             this.checkBox19.Visible = false;
-            this.checkBox19.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox19.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // checkBox20
             // 
@@ -1028,7 +1028,7 @@
             this.checkBox20.Text = "Visible";
             this.checkBox20.UseVisualStyleBackColor = true;
             this.checkBox20.Visible = false;
-            this.checkBox20.CheckedChanged += new System.EventHandler(this.checkBox11_CheckedChanged);
+            this.checkBox20.CheckedChanged += new System.EventHandler(this.CheckBox11_CheckedChanged);
             // 
             // labelDatum
             // 
@@ -1069,7 +1069,7 @@
             this.buttonPrev.TabIndex = 66;
             this.buttonPrev.Text = "Vorige";
             this.buttonPrev.UseVisualStyleBackColor = true;
-            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
+            this.buttonPrev.Click += new System.EventHandler(this.ButtonPrev_Click);
             // 
             // buttonNext
             // 
@@ -1080,7 +1080,7 @@
             this.buttonNext.TabIndex = 67;
             this.buttonNext.Text = "Volgende";
             this.buttonNext.UseVisualStyleBackColor = true;
-            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
+            this.buttonNext.Click += new System.EventHandler(this.ButtonNext_Click);
             // 
             // buttonCopy
             // 
@@ -1091,7 +1091,7 @@
             this.buttonCopy.TabIndex = 68;
             this.buttonCopy.Text = "Copy Bezetting 1 Wacht";
             this.buttonCopy.UseVisualStyleBackColor = true;
-            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
+            this.buttonCopy.Click += new System.EventHandler(this.ButtonCopy_Click);
             // 
             // listBoxAfw
             // 
@@ -1104,8 +1104,8 @@
             this.listBoxAfw.Size = new System.Drawing.Size(60, 516);
             this.listBoxAfw.TabIndex = 69;
             this.listBoxAfw.Tag = "50";
-            this.listBoxAfw.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBoxAfw.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBoxAfw.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBoxAfw.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox22
             // 
@@ -1118,8 +1118,8 @@
             this.listBox22.Size = new System.Drawing.Size(59, 68);
             this.listBox22.TabIndex = 70;
             this.listBox22.Tag = "22";
-            this.listBox22.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox22.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox22.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox22.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox23
             // 
@@ -1132,8 +1132,8 @@
             this.listBox23.Size = new System.Drawing.Size(60, 68);
             this.listBox23.TabIndex = 71;
             this.listBox23.Tag = "23";
-            this.listBox23.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox23.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox23.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox23.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox24
             // 
@@ -1146,8 +1146,8 @@
             this.listBox24.Size = new System.Drawing.Size(60, 68);
             this.listBox24.TabIndex = 72;
             this.listBox24.Tag = "24";
-            this.listBox24.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox24.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox24.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox24.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox25
             // 
@@ -1160,8 +1160,8 @@
             this.listBox25.Size = new System.Drawing.Size(60, 68);
             this.listBox25.TabIndex = 73;
             this.listBox25.Tag = "25";
-            this.listBox25.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox25.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox25.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox25.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox26
             // 
@@ -1174,8 +1174,8 @@
             this.listBox26.Size = new System.Drawing.Size(59, 68);
             this.listBox26.TabIndex = 74;
             this.listBox26.Tag = "26";
-            this.listBox26.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox26.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox26.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox26.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox27
             // 
@@ -1188,8 +1188,8 @@
             this.listBox27.Size = new System.Drawing.Size(60, 68);
             this.listBox27.TabIndex = 75;
             this.listBox27.Tag = "27";
-            this.listBox27.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox27.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox27.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox27.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox28
             // 
@@ -1202,8 +1202,8 @@
             this.listBox28.Size = new System.Drawing.Size(60, 68);
             this.listBox28.TabIndex = 76;
             this.listBox28.Tag = "28";
-            this.listBox28.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox28.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox28.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox28.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox29
             // 
@@ -1216,8 +1216,8 @@
             this.listBox29.Size = new System.Drawing.Size(60, 68);
             this.listBox29.TabIndex = 77;
             this.listBox29.Tag = "29";
-            this.listBox29.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox29.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox29.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox29.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox30
             // 
@@ -1230,8 +1230,8 @@
             this.listBox30.Size = new System.Drawing.Size(59, 68);
             this.listBox30.TabIndex = 78;
             this.listBox30.Tag = "30";
-            this.listBox30.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox30.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox30.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox30.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox31
             // 
@@ -1244,8 +1244,8 @@
             this.listBox31.Size = new System.Drawing.Size(60, 68);
             this.listBox31.TabIndex = 79;
             this.listBox31.Tag = "31";
-            this.listBox31.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox31.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox31.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox31.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox32
             // 
@@ -1258,8 +1258,8 @@
             this.listBox32.Size = new System.Drawing.Size(60, 68);
             this.listBox32.TabIndex = 80;
             this.listBox32.Tag = "32";
-            this.listBox32.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox32.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox32.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox32.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox33
             // 
@@ -1272,8 +1272,8 @@
             this.listBox33.Size = new System.Drawing.Size(60, 68);
             this.listBox33.TabIndex = 81;
             this.listBox33.Tag = "33";
-            this.listBox33.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox33.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox33.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox33.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox34
             // 
@@ -1286,8 +1286,8 @@
             this.listBox34.Size = new System.Drawing.Size(59, 100);
             this.listBox34.TabIndex = 82;
             this.listBox34.Tag = "34";
-            this.listBox34.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox34.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox34.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox34.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox35
             // 
@@ -1300,8 +1300,8 @@
             this.listBox35.Size = new System.Drawing.Size(60, 100);
             this.listBox35.TabIndex = 83;
             this.listBox35.Tag = "35";
-            this.listBox35.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox35.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox35.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox35.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox36
             // 
@@ -1314,8 +1314,8 @@
             this.listBox36.Size = new System.Drawing.Size(60, 100);
             this.listBox36.TabIndex = 84;
             this.listBox36.Tag = "36";
-            this.listBox36.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox36.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox36.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox36.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox37
             // 
@@ -1328,8 +1328,8 @@
             this.listBox37.Size = new System.Drawing.Size(60, 100);
             this.listBox37.TabIndex = 85;
             this.listBox37.Tag = "37";
-            this.listBox37.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox37.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox37.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox37.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox38
             // 
@@ -1342,8 +1342,8 @@
             this.listBox38.Size = new System.Drawing.Size(59, 116);
             this.listBox38.TabIndex = 86;
             this.listBox38.Tag = "38";
-            this.listBox38.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox38.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox38.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox38.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox39
             // 
@@ -1356,8 +1356,8 @@
             this.listBox39.Size = new System.Drawing.Size(60, 116);
             this.listBox39.TabIndex = 87;
             this.listBox39.Tag = "39";
-            this.listBox39.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox39.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox39.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox39.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox40
             // 
@@ -1370,8 +1370,8 @@
             this.listBox40.Size = new System.Drawing.Size(60, 116);
             this.listBox40.TabIndex = 88;
             this.listBox40.Tag = "40";
-            this.listBox40.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox40.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox40.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox40.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // listBox41
             // 
@@ -1384,8 +1384,8 @@
             this.listBox41.Size = new System.Drawing.Size(60, 116);
             this.listBox41.TabIndex = 89;
             this.listBox41.Tag = "41";
-            this.listBox41.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox2_DrawItem);
-            this.listBox41.MouseLeave += new System.EventHandler(this.listBox1_MouseLeave);
+            this.listBox41.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox2_DrawItem);
+            this.listBox41.MouseLeave += new System.EventHandler(this.ListBox1_MouseLeave);
             // 
             // buttonNu
             // 
@@ -1396,7 +1396,7 @@
             this.buttonNu.TabIndex = 90;
             this.buttonNu.Text = "Huidige Datum";
             this.buttonNu.UseVisualStyleBackColor = true;
-            this.buttonNu.Click += new System.EventHandler(this.buttonNu_Click);
+            this.buttonNu.Click += new System.EventHandler(this.ButtonNu_Click);
             // 
             // OverzichtWachtForm
             // 

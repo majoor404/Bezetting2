@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -11,10 +12,10 @@ namespace Bezetting2
 {
     public partial class MainFormBezetting2 : Form
     {
-        private void afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AfwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int bewaar_maand = ProgData.igekozenmaand;
-            int bewaar_jaar = ProgData.igekozenjaar;
+            int bewaar_jaar = ProgData.Igekozenjaar;
 
             ListClassTelAfwijkingen.Clear();
 
@@ -31,13 +32,15 @@ namespace Bezetting2
                 GetAfwijkingenPersoonInEenMaand(ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.ihuidigjaar, ProgData.igekozenmaand);
             }
             ProgData.igekozenmaand = bewaar_maand;
-            ProgData.igekozenjaar = bewaar_jaar;
+            ProgData.Igekozenjaar = bewaar_jaar;
 
             try
             {
                 //Start Excel and get Application object.
-                xlApp = new Microsoft.Office.Interop.Excel.Application();
-                xlApp.Visible = true;
+                xlApp = new Microsoft.Office.Interop.Excel.Application
+                {
+                    Visible = true
+                };
 
                 //Get a new workbook.
                 string file = Path.GetFullPath("OverzichtPersoon.xls");
@@ -61,7 +64,7 @@ namespace Bezetting2
                 oRng.ClearContents();
                 oRng.Value = null;
 
-                excelSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                excelSheet.Cells[1, 2] = ProgData.Sgekozenjaar();
                 excelSheet.Cells[2, 2] = ProgData.Get_Gebruiker_Kleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
                 excelSheet.Cells[3, 2] = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
 
@@ -292,8 +295,10 @@ namespace Bezetting2
             try
             {
                 //Start Excel and get Application object.
-                xlApp = new Microsoft.Office.Interop.Excel.Application();
-                xlApp.Visible = true;
+                xlApp = new Microsoft.Office.Interop.Excel.Application
+                {
+                    Visible = true
+                };
 
                 //Get a new workbook.
                 string file = Path.GetFullPath("vuilwerk.xls");
@@ -373,7 +378,7 @@ namespace Bezetting2
                     }
                 }
 
-                excelSheet.Cells[1, 2] = ProgData.sgekozenmaand();
+                excelSheet.Cells[1, 2] = ProgData.Sgekozenmaand();
                 excelSheet.Cells[6, 2] = ProgData.GekozenKleur;
 
                 //Make sure Excel is visible and give the user control
@@ -403,8 +408,10 @@ namespace Bezetting2
             try
             {
                 //Start Excel and get Application object.
-                oXL = new Microsoft.Office.Interop.Excel.Application();
-                oXL.Visible = true;
+                oXL = new Microsoft.Office.Interop.Excel.Application
+                {
+                    Visible = true
+                };
 
                 //Get a new workbook.
                 oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
@@ -412,7 +419,7 @@ namespace Bezetting2
 
                 // Add table headers going cell by cell.
                 oSheet.Cells[1, 1] = "Waar gewerkt in Jaar : ";
-                oSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                oSheet.Cells[1, 2] = ProgData.Sgekozenjaar();
                 oSheet.Cells[2, 1] = "Ploegkleur : ";
                 oSheet.Cells[2, 2] = ProgData.GekozenKleur;
 
@@ -460,7 +467,7 @@ namespace Bezetting2
             }
         }
 
-        private void vuilwerkToolStripMenuItem_Click(object sender, EventArgs e)
+        private void VuilwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (File.Exists("vuilwerk.ini"))
             {
@@ -469,7 +476,7 @@ namespace Bezetting2
 
                 // eerst maar lijst maken wie vuilwerk verdiend.
                 ListClassTelVuilwerk.Clear();
-                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
 
                 foreach (personeel a in ProgData.ListPersoneelKleur)
                 {
@@ -507,7 +514,7 @@ namespace Bezetting2
             }
         }
 
-        private void tellingWaarGewerktToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TellingWaarGewerktToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -562,7 +569,7 @@ namespace Bezetting2
             }
         }
 
-        private void nietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("telnietmee.ini");
         }
@@ -577,8 +584,10 @@ namespace Bezetting2
             try
             {
                 //Start Excel and get Application object.
-                oXL = new Microsoft.Office.Interop.Excel.Application();
-                oXL.Visible = true;
+                oXL = new Microsoft.Office.Interop.Excel.Application
+                {
+                    Visible = true
+                };
 
                 //Get a new workbook.
                 oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
@@ -633,32 +642,32 @@ namespace Bezetting2
             }
         }
 
-        private void blauwToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BlauwToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Blauw");
         }
 
-        private void groenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GroenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Groen");
         }
 
-        private void witToolStripMenuItem_Click(object sender, EventArgs e)
+        private void WitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Wit");
         }
 
-        private void roodToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RoodToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Rood");
         }
 
-        private void allemaalToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AllemaalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Allemaal");
         }
 
-        private void afwijkingTovRoosterPloegToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AfwijkingTovRoosterPloegToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Microsoft.Office.Interop.Excel.Application xlApp;
             Microsoft.Office.Interop.Excel._Workbook xlWorkBook;
@@ -689,8 +698,10 @@ namespace Bezetting2
             try
             {
                 //Start Excel and get Application object.
-                xlApp = new Microsoft.Office.Interop.Excel.Application();
-                xlApp.Visible = true;
+                xlApp = new Microsoft.Office.Interop.Excel.Application
+                {
+                    Visible = true
+                };
 
                 //Get a new workbook.
                 string file = Path.GetFullPath("OverzichtPloeg.xls");
@@ -738,7 +749,7 @@ namespace Bezetting2
                     for (int i = 1; i < 13; i++)
                     {
                         ProgData.igekozenmaand = i;
-                        GetAfwijkingenPersoonInEenMaand(naam.ToString(), ProgData.igekozenjaar, i);
+                        GetAfwijkingenPersoonInEenMaand(naam.ToString(CultureInfo.CurrentCulture), ProgData.Igekozenjaar, i);
                         // data nu in ListClassTelAfwijkingen
                     }
                     
@@ -835,13 +846,13 @@ namespace Bezetting2
                         excelSheet.Cells[row, 25] = tel_op[11];
 
 
-                        excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Naam(naam.ToString());
+                        excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Naam(naam.ToString(CultureInfo.CurrentCulture));
                         
                     }
                     row++;
                     
                 }
-                excelSheet.Cells[1, 2] = ProgData.sgekozenjaar();
+                excelSheet.Cells[1, 2] = ProgData.Sgekozenjaar();
                 excelSheet.Cells[2, 2] = ProgData.GekozenKleur;
                 //Make sure Excel is visible and give the user control
                 //of Microsoft Excel's lifetime.

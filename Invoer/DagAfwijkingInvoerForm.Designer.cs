@@ -56,11 +56,12 @@
             // 
             // textBoxAfwijking
             // 
+            this.textBoxAfwijking.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxAfwijking.Location = new System.Drawing.Point(15, 373);
             this.textBoxAfwijking.Name = "textBoxAfwijking";
             this.textBoxAfwijking.Size = new System.Drawing.Size(250, 20);
             this.textBoxAfwijking.TabIndex = 2;
-            this.textBoxAfwijking.TextChanged += new System.EventHandler(this.textBoxAfwijking_TextChanged);
+            this.textBoxAfwijking.TextChanged += new System.EventHandler(this.TextBoxAfwijking_TextChanged);
             // 
             // label2
             // 
@@ -86,7 +87,7 @@
             this.buttonHistory.TabIndex = 5;
             this.buttonHistory.Text = "History";
             this.buttonHistory.UseVisualStyleBackColor = true;
-            this.buttonHistory.Click += new System.EventHandler(this.buttonHistory_Click);
+            this.buttonHistory.Click += new System.EventHandler(this.ButtonHistory_Click);
             // 
             // buttonVoerIn
             // 
@@ -98,7 +99,7 @@
             this.buttonVoerIn.TabIndex = 6;
             this.buttonVoerIn.Text = "Voer in";
             this.buttonVoerIn.UseVisualStyleBackColor = true;
-            this.buttonVoerIn.Click += new System.EventHandler(this.buttonVoerIn_Click);
+            this.buttonVoerIn.Click += new System.EventHandler(this.ButtonVoerIn_Click);
             // 
             // listBoxItems
             // 
@@ -131,7 +132,7 @@
             this.listBoxItems.Name = "listBoxItems";
             this.listBoxItems.Size = new System.Drawing.Size(250, 277);
             this.listBoxItems.TabIndex = 7;
-            this.listBoxItems.SelectedIndexChanged += new System.EventHandler(this.listBoxItems_SelectedIndexChanged);
+            this.listBoxItems.SelectedIndexChanged += new System.EventHandler(this.ListBoxItems_SelectedIndexChanged);
             // 
             // labelNaam
             // 
@@ -180,7 +181,7 @@
             this.buttonReeks.TabIndex = 12;
             this.buttonReeks.Text = "Voer Reeks in";
             this.buttonReeks.UseVisualStyleBackColor = true;
-            this.buttonReeks.Click += new System.EventHandler(this.buttonReeks_Click);
+            this.buttonReeks.Click += new System.EventHandler(this.ButtonReeks_Click);
             // 
             // buttonCancelInvoer
             // 
@@ -191,7 +192,7 @@
             this.buttonCancelInvoer.TabIndex = 13;
             this.buttonCancelInvoer.Text = "Cancel Invoer (verwijder)";
             this.buttonCancelInvoer.UseVisualStyleBackColor = true;
-            this.buttonCancelInvoer.Click += new System.EventHandler(this.buttonCancelInvoer_Click);
+            this.buttonCancelInvoer.Click += new System.EventHandler(this.ButtonCancelInvoer_Click);
             // 
             // label3
             // 

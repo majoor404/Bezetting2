@@ -16,7 +16,7 @@ namespace Bezetting2.Invoer
             comboBox1.SelectedIndex = 0;
         }
 
-        private void buttonVoerUit_Click(object sender, EventArgs e)
+        private void ButtonVoerUit_Click(object sender, EventArgs e)
         {
             bool okido = true;
             labelAftellen.Visible = true;
@@ -32,8 +32,8 @@ namespace Bezetting2.Invoer
             if (okido)
             {
                 int maand = ProgData.igekozenmaand;
-                int jaar = ProgData.igekozenjaar;
-                DateTime start = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));
+                int jaar = ProgData.Igekozenjaar;
+                DateTime start = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));
                 // afhankelijk van keuze 
                 if (comboBox1.SelectedIndex == 0)
                 {
@@ -56,7 +56,7 @@ namespace Bezetting2.Invoer
                         }
                         start = start.AddDays(1);
                         ProgData.igekozenmaand = start.Month;
-                        ProgData.igekozenjaar = start.Year;
+                        ProgData.Igekozenjaar = start.Year;
                     }
                     //ProgData.Main.VulViewScherm();
                     //ProgData.Main.KleurMaandButton();
@@ -72,7 +72,7 @@ namespace Bezetting2.Invoer
                     // zet nieuwe kleur en datum
                     //ProgData.GekozenKleur = kleur;
                     ProgData.igekozenmaand = start.Month;
-                    ProgData.igekozenjaar = start.Year;
+                    ProgData.Igekozenjaar = start.Year;
 
                     ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                     ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
@@ -121,7 +121,7 @@ namespace Bezetting2.Invoer
                             start = start.AddDays(1);
 
                             ProgData.igekozenmaand = start.Month;
-                            ProgData.igekozenjaar = start.Year;
+                            ProgData.Igekozenjaar = start.Year;
                             if (start.Month != maand)           // als nieuwe maand deze laden, anders gaat het fout bij "ver = ProgData.Bezetting_Ploeg_Lijst.First"
                                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
 
@@ -133,7 +133,7 @@ namespace Bezetting2.Invoer
                         aantal--;
                         start = start.AddDays(1);
                         ProgData.igekozenmaand = start.Month;
-                        ProgData.igekozenjaar = start.Year;
+                        ProgData.Igekozenjaar = start.Year;
                         if (start.Month != maand)
                             ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
 
@@ -144,7 +144,7 @@ namespace Bezetting2.Invoer
                         aantal--;
                         start = start.AddDays(1);
                         ProgData.igekozenmaand = start.Month;
-                        ProgData.igekozenjaar = start.Year;
+                        ProgData.Igekozenjaar = start.Year;
                         if (start.Month != maand)
                             ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                         ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
@@ -153,14 +153,14 @@ namespace Bezetting2.Invoer
                         {
                             start = start.AddDays(1);
                             ProgData.igekozenmaand = start.Month;
-                            ProgData.igekozenjaar = start.Year;
+                            ProgData.Igekozenjaar = start.Year;
                             if (start.Month != maand)
                                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                             ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         }
 
                         ProgData.igekozenmaand = start.Month;
-                        ProgData.igekozenjaar = start.Year;
+                        ProgData.Igekozenjaar = start.Year;
                         if (start.Month != maand)
                             ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
                         ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
@@ -190,23 +190,23 @@ namespace Bezetting2.Invoer
                         X--;
                         start = start.AddDays(Y);
                         ProgData.igekozenmaand = start.Month;
-                        ProgData.igekozenjaar = start.Year;
+                        ProgData.Igekozenjaar = start.Year;
                     }
                 }
                 ProgData.igekozenmaand = maand;
-                ProgData.igekozenjaar = jaar;
+                ProgData.Igekozenjaar = jaar;
 
                 ProgData.Main.VulViewScherm();
                 ProgData.Main.KleurMaandButton();
             }
         }
 
-        private void listBoxItems_SelectedIndexChanged(object sender, EventArgs e)
+        private void ListBoxItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxAfwijking.Text = listBoxItems.SelectedItem.ToString();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             panelSpeciaal.Visible = false;
             if (comboBox1.SelectedIndex < 2)

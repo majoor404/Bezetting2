@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -33,7 +34,7 @@ namespace Bezetting2.Data
                     return 0;
                 };
             }
-            set { ProgrammaData[43] = value.ToString(); }
+            set { ProgrammaData[43] = value.ToString(CultureInfo.CurrentCulture); }
         }
 
         public static string _Rooster

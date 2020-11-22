@@ -12,7 +12,7 @@ namespace Bezetting2.Invoer
 
         private void ZetKleurLijnen_Shown(object sender, System.EventArgs e)
         {
-            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
             numericUpDown2.Maximum = aantal_dagen_deze_maand;
             numericUpDown3.Maximum = aantal_dagen_deze_maand;
             numericUpDown5.Maximum = aantal_dagen_deze_maand;

@@ -14,7 +14,7 @@ namespace Bezetting2.Invoer
 
         private void RuilExtraForm_Shown(object sender, EventArgs e)
         {
-            laadGevraagdeDiensten();
+            LaadGevraagdeDiensten();
 
             // laad werkplekken
             comboBoxWerkplek.Items.Clear();
@@ -34,13 +34,13 @@ namespace Bezetting2.Invoer
             textBoxAanvraagVoor.Focus();
         }
 
-        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        private void MonthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             // bepaal afhankelijk van datum en ploeg kleur dienst
             comboBoxDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), monthCalendar1.SelectionStart, comboBoxPloeg.Text);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             bool ok = true;
 
@@ -84,15 +84,17 @@ namespace Bezetting2.Invoer
 
             if (ok)
             {
-                AanvraagRuilExtra re = new AanvraagRuilExtra();
-                re._naamAanvraagDoor = labelNaam.Text;
-                re._naamAanvraagVoor = textBoxAanvraagVoor.Text;
-                re._extra = radioButton1.Checked;
-                re._datum = monthCalendar1.SelectionStart;
-                re._dienst = comboBoxDienst.Text;
-                re._werkplek = comboBoxWerkplek.Text;
-                re._ploeg = comboBoxPloeg.Text;
-                re._vanploeg = vanploeg;
+                AanvraagRuilExtra re = new AanvraagRuilExtra
+                {
+                    _naamAanvraagDoor = labelNaam.Text,
+                    _naamAanvraagVoor = textBoxAanvraagVoor.Text,
+                    _extra = radioButton1.Checked,
+                    _datum = monthCalendar1.SelectionStart,
+                    _dienst = comboBoxDienst.Text,
+                    _werkplek = comboBoxWerkplek.Text,
+                    _ploeg = comboBoxPloeg.Text,
+                    _vanploeg = vanploeg
+                };
 
                 ProgData.LoadExtraRuilLijst(re._datum.Year.ToString() + "\\" + re._datum.Month.ToString());
                 ProgData.ListAanvraagRuilExtra.Add(re);
@@ -101,7 +103,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-        private void laadGevraagdeDiensten()
+        private void LaadGevraagdeDiensten()
         {
             listViewExtra.Items.Clear();
             string[] info = new string[9];
@@ -111,12 +113,12 @@ namespace Bezetting2.Invoer
 
             for (int i = 0; i < 10; i++)
             {
-                laadGevraagdeDienstenMaand(info, nu);
+                LaadGevraagdeDienstenMaand(info, nu);
                 nu = nu.AddMonths(1); // huidige maand
             }
         }
 
-        private void laadGevraagdeDienstenMaand(string[] info, DateTime nu)
+        private void LaadGevraagdeDienstenMaand(string[] info, DateTime nu)
         {
             ProgData.LoadExtraRuilLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
             foreach (AanvraagRuilExtra a in ProgData.ListAanvraagRuilExtra)
@@ -149,7 +151,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-        private void comboBoxPloeg_SelectedIndexChanged(object sender, EventArgs e)
+        private void ComboBoxPloeg_SelectedIndexChanged(object sender, EventArgs e)
         {
             checkBoxBL.Enabled = true;
             checkBoxWI.Enabled = true;
@@ -183,7 +185,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Button2_Click(object sender, EventArgs e)
         {
             // vul dienst op
             if (listViewExtra.SelectedItems.Count > 0)

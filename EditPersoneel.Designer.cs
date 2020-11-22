@@ -102,7 +102,7 @@
             this.comboBoxFilter.Name = "comboBoxFilter";
             this.comboBoxFilter.Size = new System.Drawing.Size(208, 21);
             this.comboBoxFilter.TabIndex = 2;
-            this.comboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.comboBoxFilter_SelectedIndexChanged);
+            this.comboBoxFilter.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFilter_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -403,7 +403,7 @@
             this.buttonSave.TabIndex = 36;
             this.buttonSave.Text = "Save Persoon";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // buttonClose
             // 
@@ -413,7 +413,7 @@
             this.buttonClose.TabIndex = 38;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
             // textBoxKleur
             // 
@@ -441,7 +441,7 @@
             this.buttonVoegToe.TabIndex = 41;
             this.buttonVoegToe.Text = "Voeg Toe Nieuw Lid";
             this.buttonVoegToe.UseVisualStyleBackColor = true;
-            this.buttonVoegToe.Click += new System.EventHandler(this.buttonVoegToe_Click);
+            this.buttonVoegToe.Click += new System.EventHandler(this.ButtonVoegToe_Click);
             // 
             // LabelRoosterNieuw
             // 
@@ -482,7 +482,7 @@
             this.buttonCancelVerhuis.TabIndex = 45;
             this.buttonCancelVerhuis.Text = "Cancel Verhuis";
             this.buttonCancelVerhuis.UseVisualStyleBackColor = true;
-            this.buttonCancelVerhuis.Click += new System.EventHandler(this.buttonCancelVerhuis_Click);
+            this.buttonCancelVerhuis.Click += new System.EventHandler(this.ButtonCancelVerhuis_Click);
             // 
             // buttonRechten
             // 
@@ -492,7 +492,7 @@
             this.buttonRechten.TabIndex = 37;
             this.buttonRechten.Text = "Rechten van persoon";
             this.buttonRechten.UseVisualStyleBackColor = true;
-            this.buttonRechten.Click += new System.EventHandler(this.buttonRechten_Click);
+            this.buttonRechten.Click += new System.EventHandler(this.ButtonRechten_Click);
             // 
             // buttonDelete
             // 
@@ -502,7 +502,7 @@
             this.buttonDelete.TabIndex = 46;
             this.buttonDelete.Text = "Delete Persoon";
             this.buttonDelete.UseVisualStyleBackColor = true;
-            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.ButtonDelete_Click);
             // 
             // buttonNieuw
             // 
@@ -512,7 +512,7 @@
             this.buttonNieuw.TabIndex = 47;
             this.buttonNieuw.Text = "Nieuw Persoon";
             this.buttonNieuw.UseVisualStyleBackColor = true;
-            this.buttonNieuw.Click += new System.EventHandler(this.buttonNieuw_Click);
+            this.buttonNieuw.Click += new System.EventHandler(this.ButtonNieuw_Click);
             // 
             // vuilwerk
             // 

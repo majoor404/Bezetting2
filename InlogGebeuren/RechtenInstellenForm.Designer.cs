@@ -77,7 +77,7 @@
             this.checkBoxAllePloegen.TabIndex = 5;
             this.checkBoxAllePloegen.Text = "Deze rechten op alle ploegen (rechten + 50)";
             this.checkBoxAllePloegen.UseVisualStyleBackColor = true;
-            this.checkBoxAllePloegen.CheckedChanged += new System.EventHandler(this.checkBoxAllePloegen_CheckedChanged);
+            this.checkBoxAllePloegen.CheckedChanged += new System.EventHandler(this.CheckBoxAllePloegen_CheckedChanged);
             // 
             // labelRechtenNivo
             // 
@@ -116,7 +116,7 @@
             this.button2.TabIndex = 11;
             this.button2.Text = "Reset Wachtwoord";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // radioButton50
             // 
@@ -128,7 +128,7 @@
             this.radioButton50.TabStop = true;
             this.radioButton50.Text = "Personeel toevoegen, verwijderen eigen wacht (50)";
             this.radioButton50.UseVisualStyleBackColor = true;
-            this.radioButton50.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
+            this.radioButton50.CheckedChanged += new System.EventHandler(this.RadioButton0_CheckedChanged);
             // 
             // radioButton25
             // 
@@ -140,7 +140,7 @@
             this.radioButton25.TabStop = true;
             this.radioButton25.Text = "Maak bezetting eigen wacht (25)";
             this.radioButton25.UseVisualStyleBackColor = true;
-            this.radioButton25.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
+            this.radioButton25.CheckedChanged += new System.EventHandler(this.RadioButton0_CheckedChanged);
             // 
             // radioButton0
             // 
@@ -152,7 +152,7 @@
             this.radioButton0.TabStop = true;
             this.radioButton0.Text = "Geen rechten, alleen kijken (0)";
             this.radioButton0.UseVisualStyleBackColor = true;
-            this.radioButton0.CheckedChanged += new System.EventHandler(this.radioButton0_CheckedChanged);
+            this.radioButton0.CheckedChanged += new System.EventHandler(this.RadioButton0_CheckedChanged);
             // 
             // RechtenInstellenForm
             // 

@@ -132,7 +132,7 @@
             this.listBoxItems.Name = "listBoxItems";
             this.listBoxItems.Size = new System.Drawing.Size(250, 186);
             this.listBoxItems.TabIndex = 24;
-            this.listBoxItems.SelectedIndexChanged += new System.EventHandler(this.listBoxItems_SelectedIndexChanged);
+            this.listBoxItems.SelectedIndexChanged += new System.EventHandler(this.ListBoxItems_SelectedIndexChanged);
             // 
             // textBoxRede
             // 
@@ -143,6 +143,7 @@
             // 
             // textBoxAfwijking
             // 
+            this.textBoxAfwijking.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.textBoxAfwijking.Location = new System.Drawing.Point(12, 288);
             this.textBoxAfwijking.Name = "textBoxAfwijking";
             this.textBoxAfwijking.Size = new System.Drawing.Size(250, 20);
@@ -189,7 +190,7 @@
             this.buttonVoerUit.TabIndex = 30;
             this.buttonVoerUit.Text = "Voer Uit";
             this.buttonVoerUit.UseVisualStyleBackColor = true;
-            this.buttonVoerUit.Click += new System.EventHandler(this.buttonVoerUit_Click);
+            this.buttonVoerUit.Click += new System.EventHandler(this.ButtonVoerUit_Click);
             // 
             // buttonCancel
             // 
@@ -215,7 +216,7 @@
             this.comboBox1.Size = new System.Drawing.Size(239, 21);
             this.comboBox1.TabIndex = 32;
             this.comboBox1.Text = "Aantal copyeren volgens rooster dagen";
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
             // panelSpeciaal
             // 

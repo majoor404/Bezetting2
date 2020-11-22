@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -32,7 +33,7 @@ namespace Bezetting2
             textBoxPass.Focus();
         }
 
-        private void buttonOke_Click(object sender, EventArgs e)
+        private void ButtonOke_Click(object sender, EventArgs e)
         {
             //check passwoord
             try
@@ -86,17 +87,17 @@ namespace Bezetting2
             }
         }
 
-        private void textBoxPass_TextChanged(object sender, EventArgs e)
+        private void TextBoxPass_TextChanged(object sender, EventArgs e)
         {
             buttonVerander.Enabled = false;
             //check passwoord
             try
             {
-                personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
+                personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString(CultureInfo.CurrentCulture) == textBoxNum.Text);
                 if (ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
                 {
                     // juiste inlog
-                    ProgData.Huidige_Gebruiker_Personeel_nummer = persoon._persnummer.ToString();
+                    ProgData.Huidige_Gebruiker_Personeel_nummer = persoon._persnummer.ToString(CultureInfo.CurrentCulture);
                     ProgData.RechtenHuidigeGebruiker = persoon._rechten;
                     buttonVerander.Enabled = true;
                 }
@@ -104,7 +105,7 @@ namespace Bezetting2
             catch { }
         }
 
-        private void buttonVerander_Click(object sender, EventArgs e)
+        private void ButtonVerander_Click(object sender, EventArgs e)
         {
             personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxNum.Text);
             // encrypt pass
@@ -124,7 +125,7 @@ namespace Bezetting2
             }
         }
 
-        private void textBoxNum_TextChanged(object sender, EventArgs e)
+        private void TextBoxNum_TextChanged(object sender, EventArgs e)
         {
             // na reset passwoord is het "verander_nu", pas meteen aan.
             try
@@ -142,7 +143,7 @@ namespace Bezetting2
             catch { }
         }
 
-        private void label3_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Label3_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             textBoxNum.Text = "590588";
             textBoxPass.Text = "kompas59";

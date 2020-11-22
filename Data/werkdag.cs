@@ -3,7 +3,7 @@
 namespace Bezetting2.Data
 {
     [Serializable]
-    public class werkdag
+    public class werkdag // naam niet aanpassen ivm deserialize
     {
         public string _naam { get; set; }
         public string _standaarddienst { get; set; }

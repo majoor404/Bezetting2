@@ -15,15 +15,15 @@ namespace Bezetting2.Invoer
         private void SnipperAanvraagForm_Shown(object sender, EventArgs e)
         {
             buttonVraagAan.Enabled = labelNaam.Text != "Niemand Ingelogd";
-            laadGevraagdeSnipper();
+            LaadGevraagdeSnipper();
             buttonKeurGoed.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
-            dateTimePicker1_ValueChanged(this, null);
+            DateTimePicker1_ValueChanged(this, null);
             comboBox1.Text = "";
             textBoxRede.Text = "";
             dateTimePicker1.Value = DateTime.Now;
         }
 
-        private void buttonVraagAan_Click(object sender, EventArgs e)
+        private void ButtonVraagAan_Click(object sender, EventArgs e)
         {
             SnipperAanvraag snip = new SnipperAanvraag();
 
@@ -64,7 +64,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-        private void laadGevraagdeSnipper()
+        private void LaadGevraagdeSnipper()
         {
             listViewSnipper.Items.Clear();
             string[] info = new string[8];
@@ -74,12 +74,12 @@ namespace Bezetting2.Invoer
 
             for (int i = 0; i < 10; i++)
             {
-                laadGevraagdeSnipperMaand(info, nu);
+                LaadGevraagdeSnipperMaand(info, nu);
                 nu = nu.AddMonths(1); // huidige maand
             }
         }
 
-        private void laadGevraagdeSnipperMaand(string[] info, DateTime nu)
+        private void LaadGevraagdeSnipperMaand(string[] info, DateTime nu)
         {
             ProgData.LoadSnipperLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
             foreach (SnipperAanvraag a in ProgData.ListSnipperAanvraag)
@@ -98,7 +98,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-        private void buttonKeurGoed_Click(object sender, EventArgs e)
+        private void ButtonKeurGoed_Click(object sender, EventArgs e)
         {
             if (listViewSnipper.SelectedItems.Count > 0)
             {
@@ -137,7 +137,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void ButtonCancel_Click(object sender, EventArgs e)
         {
             if (listViewSnipper.SelectedItems.Count > 0)
             {
@@ -202,7 +202,7 @@ namespace Bezetting2.Invoer
             }
         }
 
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dateTimePicker1.Value, comboBoxKleur.Text);
         }

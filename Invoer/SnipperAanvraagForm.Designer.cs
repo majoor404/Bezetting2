@@ -83,7 +83,7 @@
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(235, 22);
             this.dateTimePicker1.TabIndex = 2;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.DateTimePicker1_ValueChanged);
             // 
             // comboBoxKleur
             // 
@@ -192,7 +192,7 @@
             this.buttonVraagAan.TabIndex = 12;
             this.buttonVraagAan.Text = "Vraag Aan";
             this.buttonVraagAan.UseVisualStyleBackColor = true;
-            this.buttonVraagAan.Click += new System.EventHandler(this.buttonVraagAan_Click);
+            this.buttonVraagAan.Click += new System.EventHandler(this.ButtonVraagAan_Click);
             // 
             // listViewSnipper
             // 
@@ -278,7 +278,7 @@
             this.buttonKeurGoed.TabIndex = 15;
             this.buttonKeurGoed.Text = "Keur Goed";
             this.buttonKeurGoed.UseVisualStyleBackColor = true;
-            this.buttonKeurGoed.Click += new System.EventHandler(this.buttonKeurGoed_Click);
+            this.buttonKeurGoed.Click += new System.EventHandler(this.ButtonKeurGoed_Click);
             // 
             // buttonCancel
             // 
@@ -289,7 +289,7 @@
             this.buttonCancel.TabIndex = 16;
             this.buttonCancel.Text = "Cancel / Keur Af";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
             // SnipperAanvraagForm
             // 

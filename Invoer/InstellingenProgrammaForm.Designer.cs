@@ -47,7 +47,7 @@
             this.checkBoxGebruikRuilExtra.TabIndex = 0;
             this.checkBoxGebruikRuilExtra.Text = "Gebruik RuilExtra Diensten";
             this.checkBoxGebruikRuilExtra.UseVisualStyleBackColor = true;
-            this.checkBoxGebruikRuilExtra.CheckedChanged += new System.EventHandler(this.checkBoxGebruikRuilExtra_CheckedChanged);
+            this.checkBoxGebruikRuilExtra.CheckedChanged += new System.EventHandler(this.CheckBoxGebruikRuilExtra_CheckedChanged);
             // 
             // checkBoxGebruikSnipper
             // 
@@ -58,7 +58,7 @@
             this.checkBoxGebruikSnipper.TabIndex = 1;
             this.checkBoxGebruikSnipper.Text = "Gebruik Snipper Dagen Aanvraag";
             this.checkBoxGebruikSnipper.UseVisualStyleBackColor = true;
-            this.checkBoxGebruikSnipper.CheckedChanged += new System.EventHandler(this.checkBoxGebruikSnipper_CheckedChanged);
+            this.checkBoxGebruikSnipper.CheckedChanged += new System.EventHandler(this.CheckBoxGebruikSnipper_CheckedChanged);
             // 
             // buttonSave
             // 
@@ -69,7 +69,7 @@
             this.buttonSave.TabIndex = 2;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.buttonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
             // textBoxMinAantalPersonen
             // 
@@ -98,7 +98,7 @@
             this.comboBoxRooster.Name = "comboBoxRooster";
             this.comboBoxRooster.Size = new System.Drawing.Size(121, 21);
             this.comboBoxRooster.TabIndex = 5;
-            this.comboBoxRooster.SelectedIndexChanged += new System.EventHandler(this.comboBoxRooster_SelectedIndexChanged);
+            this.comboBoxRooster.SelectedIndexChanged += new System.EventHandler(this.ComboBoxRooster_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -118,7 +118,7 @@
             this.checkBoxTelVakAlsVK.TabIndex = 7;
             this.checkBoxTelVakAlsVK.Text = "Tel \"VAK\" (vakantie) als VK in overzicht";
             this.checkBoxTelVakAlsVK.UseVisualStyleBackColor = true;
-            this.checkBoxTelVakAlsVK.CheckedChanged += new System.EventHandler(this.checkBoxTelVakAlsVK_CheckedChanged);
+            this.checkBoxTelVakAlsVK.CheckedChanged += new System.EventHandler(this.CheckBoxTelVakAlsVK_CheckedChanged);
             // 
             // InstellingenProgrammaForm
             // 

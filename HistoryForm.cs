@@ -15,7 +15,7 @@ namespace Bezetting2
         {
             ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
 
-            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
             comboBoxDag.Items.Clear();
             comboBoxDag.Items.Add("");
 

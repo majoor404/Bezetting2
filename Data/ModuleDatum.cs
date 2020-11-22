@@ -5,12 +5,12 @@ namespace Bezetting2
     public class ModuleDatum
     {
         // rooster op 1-1-2015 kleur rood
-        private string[] rooster_volgorde
+        private readonly string[] rooster_volgorde
             = {"N", "N", "", "", "", "O", "O", "M", "M", "", "N",
             "N", "", "", "", "O", "O", "M", "M", "" ,"N", "N",
             "", "", "", "O", "O", "M", "M", ""};
 
-        private string[] rooster_volgorde_long
+        private readonly string[] rooster_volgorde_long
             = {"Eerste Nacht", "Tweede Nacht", "", "", "", "Eerste Ochtend", "Tweede Ochtend", "Eerste Middag", "Tweede Middag", "", "Eerste Nacht",
             "Tweede Nacht", "", "", "", "Eerste Ochtend", "Tweede Ochtend", "Eerste Middag", "Tweede Middag", "" ,"Eerste Nacht", "Tweede Nacht",
             "", "", "", "Eerste Ochtend", "Tweede Ochtend", "Eerste Middag", "Tweede Middag", ""};
@@ -21,11 +21,7 @@ namespace Bezetting2
                 return "Dagdienst";
 
             int index = RekenTabelIndex(rooster, datum, ploeg);
-
-            string ret = "";
-
-            ret = rooster_volgorde_long[index];
-
+            string ret = rooster_volgorde_long[index];
             return ret;
         }
 
@@ -37,11 +33,7 @@ namespace Bezetting2
             }
 
             int index = RekenTabelIndex(rooster, datum, ploeg);
-
-            string ret = "";
-
-            ret = rooster_volgorde[index];
-
+            string ret = rooster_volgorde[index];
             return ret;
         }
 
@@ -58,7 +50,7 @@ namespace Bezetting2
 
             int schuif_tabel_leapyear = 0;
             int schuif_tabel_standaard = 0;
-            int schuif_tabel_ploegkleur = 0;
+            int schuif_tabel_ploegkleur; // = 0;
 
             switch (ploeg)
             {
@@ -100,7 +92,7 @@ namespace Bezetting2
                     schuif_tabel_leapyear--; // behalve bij schrikkeljaar
             }
 
-            dag = dag % 10;
+            dag %= 10;
 
             dag += schuif_tabel_leapyear + schuif_tabel_standaard + schuif_tabel_ploegkleur;
             if (dag > 10)
@@ -111,7 +103,7 @@ namespace Bezetting2
 
         public string GetDag(DateTime datum)
         {
-            string dag = "";
+            string dag;
             switch (datum.DayOfWeek)
             {
                 case DayOfWeek.Sunday:
