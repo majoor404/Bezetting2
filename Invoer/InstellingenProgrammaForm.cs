@@ -19,7 +19,7 @@ namespace Bezetting2.Invoer
             textBoxMinAantalPersonen.Text = InstellingenProg._MinimaalAantalPersonen.ToString(CultureInfo.CurrentCulture);
             comboBoxRooster.Text = InstellingenProg._Rooster;
             checkBoxTelVakAlsVK.Checked = InstellingenProg._TelVakAlsVK;
-            
+            checkBoxWachtoverzichtAls2Dagen.Checked = InstellingenProg._Wachtoverzicht2Dagen;
         }
 
         private void CheckBoxGebruikRuilExtra_CheckedChanged(object sender, EventArgs e)
@@ -49,7 +49,10 @@ namespace Bezetting2.Invoer
         {
             InstellingenProg._TelVakAlsVK = checkBoxTelVakAlsVK.Checked;
         }
-        
-       
+
+        private void checkBoxWachtoverzichtAls2Dagen_CheckedChanged(object sender, EventArgs e)
+        {
+            InstellingenProg._Wachtoverzicht2Dagen = checkBoxWachtoverzichtAls2Dagen.Checked;
+        }
     }
 }

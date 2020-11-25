@@ -150,7 +150,8 @@ namespace Bezetting2
 			afwReeks.labelDatum.Text = labelDatum.Text;
 			afwReeks.labelMaand.Text = labelMaand.Text;
 			afwReeks.labelPersoneelnr.Text = labelPersoneelnr.Text;
-			afwReeks.Text = this.Text;
+			afwReeks.textBoxAfwijking.Text = textBoxAfwijking.Text;
+			afwReeks.Text = Text;
 			afwReeks.ShowDialog();
 			Close();
 		}

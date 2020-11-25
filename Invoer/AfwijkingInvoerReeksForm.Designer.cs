@@ -348,7 +348,6 @@
         public System.Windows.Forms.Label labelNaam;
         private System.Windows.Forms.ListBox listBoxItems;
         private System.Windows.Forms.TextBox textBoxRede;
-        private System.Windows.Forms.TextBox textBoxAfwijking;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown AantalDagen;
         private System.Windows.Forms.Button buttonVoerUit;
@@ -362,5 +361,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label labelAftellen;
+        public System.Windows.Forms.TextBox textBoxAfwijking;
     }
 }

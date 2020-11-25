@@ -36,6 +36,7 @@
             this.comboBoxRooster = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxTelVakAlsVK = new System.Windows.Forms.CheckBox();
+            this.checkBoxWachtoverzichtAls2Dagen = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBoxGebruikRuilExtra
@@ -120,11 +121,23 @@
             this.checkBoxTelVakAlsVK.UseVisualStyleBackColor = true;
             this.checkBoxTelVakAlsVK.CheckedChanged += new System.EventHandler(this.CheckBoxTelVakAlsVK_CheckedChanged);
             // 
+            // checkBoxWachtoverzichtAls2Dagen
+            // 
+            this.checkBoxWachtoverzichtAls2Dagen.AutoSize = true;
+            this.checkBoxWachtoverzichtAls2Dagen.Location = new System.Drawing.Point(12, 175);
+            this.checkBoxWachtoverzichtAls2Dagen.Name = "checkBoxWachtoverzichtAls2Dagen";
+            this.checkBoxWachtoverzichtAls2Dagen.Size = new System.Drawing.Size(184, 17);
+            this.checkBoxWachtoverzichtAls2Dagen.TabIndex = 8;
+            this.checkBoxWachtoverzichtAls2Dagen.Text = "Wacht Overzicht 2 dagen tegelijk";
+            this.checkBoxWachtoverzichtAls2Dagen.UseVisualStyleBackColor = true;
+            this.checkBoxWachtoverzichtAls2Dagen.CheckedChanged += new System.EventHandler(this.checkBoxWachtoverzichtAls2Dagen_CheckedChanged);
+            // 
             // InstellingenProgrammaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(353, 387);
+            this.Controls.Add(this.checkBoxWachtoverzichtAls2Dagen);
             this.Controls.Add(this.checkBoxTelVakAlsVK);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboBoxRooster);
@@ -152,5 +165,6 @@
         private System.Windows.Forms.ComboBox comboBoxRooster;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxTelVakAlsVK;
+        private System.Windows.Forms.CheckBox checkBoxWachtoverzichtAls2Dagen;
     }
 }

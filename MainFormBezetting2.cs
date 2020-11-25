@@ -937,11 +937,21 @@ namespace Bezetting2
 
 		private void WachtOverzichtToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			OverzichtWachtForm wacht = new OverzichtWachtForm();
-			ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
-			wacht.labelKleur.Text = ProgData.GekozenKleur;
-			wacht.ShowDialog();
-			ButtonNu_Click(this, null);
+			if (InstellingenProg._Wachtoverzicht2Dagen)
+			{
+				OverzichtWachtForm2Dagen owacht2 = new OverzichtWachtForm2Dagen();
+				owacht2.ShowDialog();
+
+				ButtonNu_Click(this, null);
+			}
+			else
+			{
+				OverzichtWachtForm wacht = new OverzichtWachtForm();
+				ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
+				wacht.labelKleur.Text = ProgData.GekozenKleur;
+				wacht.ShowDialog();
+				ButtonNu_Click(this, null);
+			}
 		}
 
 		private void View_MouseMove(object sender, MouseEventArgs e)
@@ -1386,19 +1396,9 @@ namespace Bezetting2
 			Close();
 		}
 
-		private void ToolStripStatusRedeAfwijking_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void ToolStripStatusLabelInfo_Click(object sender, EventArgs e)
-		{
-
-		}
-
 		private void CheckBox1SelLine_CheckedChanged(object sender, EventArgs e)
 		{
 			View.HoverSelection = checkBox1SelLine.Checked;
 		}
-	}
+    }
 }

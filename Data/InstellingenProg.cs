@@ -58,7 +58,13 @@ namespace Bezetting2.Data
             get { return bool.Parse(ProgrammaData[45]); }
             set { ProgrammaData[45] = value.ToString(); }
         }
-        
+
+        public static bool _Wachtoverzicht2Dagen
+        {
+            get { return bool.Parse(ProgrammaData[46]); }
+            set { ProgrammaData[46] = value.ToString(); }
+        }
+
         public static List<string> ProgrammaData = new List<string>();
 
         public static void LeesProgrammaData()
@@ -74,13 +80,11 @@ namespace Bezetting2.Data
                     {
                         ProgrammaData.Add(true.ToString());
                     }
+                    ProgrammaData[46] = "False"; // als niet bestaat standaard 1 wachtopverzicht.
                     // maak lege aan
                     SaveProgrammaData();
                 }
                 ProgrammaData = File.ReadAllLines("Programdata.ini").ToList();
-                // tot ProgrammaData[40] is data wachoverzicht
-                //_GebruikExtraRuil = bool.Parse(ProgrammaData[41]);
-                //_GebruikSnipper = bool.Parse(ProgrammaData[42]);
             }
             catch (IOException)
             {
@@ -102,5 +106,10 @@ namespace Bezetting2.Data
                 MessageBox.Show("SaveProgrammaData() error");
             }
         }
+
+
+
+
+
     }
 }

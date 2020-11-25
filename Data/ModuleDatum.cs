@@ -37,7 +37,7 @@ namespace Bezetting2
             return ret;
         }
 
-        private int RekenTabelIndex(string rooster, DateTime datum, string ploeg)
+        private static int RekenTabelIndex(string rooster, DateTime datum, string ploeg)
         {
             // elke 10 dagen komt rooster terug.
             // zonder leapyear zou je dus %10 kunnen gebruiken van aantal dagen verschil

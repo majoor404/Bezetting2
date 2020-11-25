@@ -62,7 +62,6 @@ namespace Bezetting2
                     //DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
                     _ = DoDragDrop(s, DragDropEffects.Move);
                 }
-                //}
             }
         }
 
@@ -306,38 +305,6 @@ namespace Bezetting2
             if (CheckRechten())
             {
                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
-
-                // extra diensten regelen.
-                // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
-                //string dir = ProgData.GetDirectoryBezettingMaand(dat);
-                //ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
-                //if (ProgData.ListLooptExtra.Count > 0)
-                //{
-                //    foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
-                //    {
-                //        if (naam._datum.ToShortDateString() == dat.ToShortDateString())
-                //        {
-                //            personeel extra_man = new personeel();
-                //            extra_man._achternaam = naam._naam;
-                //            ProgData.ListPersoneelKleur.Add(extra_man);
-
-                //            //try
-                //            //{
-                //            //    werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
-                //            //}
-                //            //catch
-                //            //{
-                //            //    werkdag werkdag_extra_man = new werkdag();
-                //            //    werkdag_extra_man._dagnummer = dat.Day;
-                //            //    werkdag_extra_man._naam = naam._naam;
-                //            //    werkdag_extra_man._werkplek = "";
-                //            //    werkdag_extra_man._afwijkingdienst = "ED";
-                //            //    ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                //            //}
-                //        }
-                //    }
-                //}
-
 
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {

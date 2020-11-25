@@ -38,7 +38,7 @@ namespace Bezetting2
             //check passwoord
             try
             {
-                if (textBoxNum.Text == "Admin" && textBoxPass.Text == "konijn")
+                if (textBoxNum.Text == "Admin" && textBoxPass.Text == DateTime.Now.ToString("ddMM"))
                 {
                     ProgData.Huidige_Gebruiker_Personeel_nummer = "Admin";
                     ProgData.RechtenHuidigeGebruiker = 101;

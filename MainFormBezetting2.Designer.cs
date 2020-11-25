@@ -401,7 +401,6 @@
             this.toolStripStatusLabelInfo.Name = "toolStripStatusLabelInfo";
             this.toolStripStatusLabelInfo.Size = new System.Drawing.Size(54, 21);
             this.toolStripStatusLabelInfo.Text = "majoor";
-            this.toolStripStatusLabelInfo.Click += new System.EventHandler(this.ToolStripStatusLabelInfo_Click);
             // 
             // toolStripStatusRedeAfwijking
             // 
@@ -410,7 +409,6 @@
             this.toolStripStatusRedeAfwijking.Name = "toolStripStatusRedeAfwijking";
             this.toolStripStatusRedeAfwijking.Size = new System.Drawing.Size(36, 21);
             this.toolStripStatusRedeAfwijking.Text = "BBQ";
-            this.toolStripStatusRedeAfwijking.Click += new System.EventHandler(this.ToolStripStatusRedeAfwijking_Click);
             // 
             // comboBoxKleurKeuze
             // 
