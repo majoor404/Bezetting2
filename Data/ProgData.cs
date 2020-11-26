@@ -803,6 +803,7 @@ namespace Bezetting2
 				if (ChangeData && !string.IsNullOrEmpty(GekozenKleur))
 				{
 					ChangeData = false;
+					
 					Rectangle bounds = ProgData.Main.Bounds;
 					using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
 					{

@@ -209,9 +209,9 @@ namespace Bezetting2
 
 		private void ComboBoxKleurKeuze_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			ProgData.CaptureMainScreen();
 			ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
 			VulViewScherm();
+			ProgData.CaptureMainScreen();
 		}
 
 		public void VulViewScherm()
@@ -330,19 +330,18 @@ namespace Bezetting2
 
 		private void ButtonJan_Click(object sender, EventArgs e)
 		{
-			ProgData.CaptureMainScreen();
 			System.Windows.Forms.Button myButton = (System.Windows.Forms.Button)sender;
 			ProgData.igekozenmaand = int.Parse(myButton.Tag.ToString());
-
 			KleurMaandButton();
 			VulViewScherm();
+			ProgData.CaptureMainScreen();
 		}
 
 		private void NumericUpDownJaar_ValueChanged(object sender, EventArgs e)
 		{
 			ProgData.Igekozenjaar = (int)numericUpDownJaar.Value;
-			ProgData.CaptureMainScreen();
 			VulViewScherm();
+			ProgData.CaptureMainScreen();
 		}
 
 		private void ButtonRefresh_Click(object sender, EventArgs e)
@@ -1225,6 +1224,7 @@ namespace Bezetting2
 
 		private void MainFormBezetting2_FormClosing(object sender, FormClosingEventArgs e)
 		{
+			VulViewScherm();
 			ProgData.CaptureMainScreen();
 		}
 
