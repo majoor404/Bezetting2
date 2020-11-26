@@ -191,6 +191,7 @@ namespace Bezetting2
         // verhuis bericht naar andere kleur
         private void VerhuisKnop_Click(object sender, EventArgs e)
         {
+            MessageBox.Show("Gebruik dit alleen als gebruiker langer als een maand verhuisd, dus eind datum ligt maand verder dan nu!");
             VerhuisForm verhuis = new VerhuisForm();
             verhuis.labelNaam.Text = textBoxAchterNaam.Text;
             verhuis.labelPersoneelNummer.Text = textBoxPersNum.Text;
@@ -205,6 +206,7 @@ namespace Bezetting2
                 // dus zet kruisjes dat hij niet meer aanwezig is.
                 persoon_gekozen._verhuisdatum = verhuis.dateTimeVerhuisDatum.Value;
                 persoon_gekozen._nieuwkleur = verhuis.comboBoxNieuwRooster.Text;
+                ProgData.Save_Namen_lijst();
 
                 int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
 
@@ -228,10 +230,32 @@ namespace Bezetting2
                     }
                 }
 
+                // tevens 12 maanden verder de X
+                for (int maandenverder = 1; maandenverder < 12 ; maandenverder++){
+                
+                    DateTime dummy = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, 1);
+                    dummy = dummy.AddMonths(1);
+                    aantal_dagen_deze_maand = DateTime.DaysInMonth(dummy.Year, dummy.Month);
+                    ProgData.Igekozenjaar = dummy.Year;
+                    ProgData.igekozenmaand = dummy.Month;
+
+                    if (ProgData.GekozenKleur != "Nieuw") // als nieuw persoon, dan hoef je niet X te zetten bij weg gaan ploeg
+                    {
+                        for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                        {
+                            ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
+                        }
+                    }
+                }
+
                 // komt van andere kleur
                 //GekozenKleurInBeeld = ProgData.GekozenKleur;
 
                 ProgData.GekozenKleur = persoon_gekozen._nieuwkleur;
+                // zet maand en jaar goed van verhuis datum
+                ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
+                ProgData.Igekozenjaar = persoon_gekozen._verhuisdatum.Year;
+
                 ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
                 ProgData.SavePloegNamenLijst(30);     // save ploegbezetting (de mensen)
 
@@ -277,7 +301,9 @@ namespace Bezetting2
                     button1.Enabled = true;
                 }
                 ProgData.Save_Namen_lijst();
+                
                 ProgData.GekozenKleur = GekozenKleurInBeeld;
+
             }
             catch { }
         }

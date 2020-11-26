@@ -169,14 +169,14 @@ namespace Bezetting2
 				MessageBox.Show("LoadPloegNamenLijst() lukt niet!, te vaak geprobeerd.");
 			}
 			Main.labelDebug.Text = "Load Ploeg Namen Lijst";
-			ListPersoneelKleur.Clear();
+			
 			try
 			{
 				//string _Ploeg_Namen_Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
 				using (Stream stream = File.Open(Ploeg_Namen_Locatie(), FileMode.Open))
 				{
+					ListPersoneelKleur.Clear();
 					BinaryFormatter bin = new BinaryFormatter();
-
 					ListPersoneelKleur = (List<personeel>)bin.Deserialize(stream);
 				}
 			}
@@ -347,9 +347,8 @@ namespace Bezetting2
 			{
 				MessageBox.Show("Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?");
 			}
-
 			Main.labelDebug.Text = "Load Ploeg Bezetting";
-			ListWerkdagPloeg.Clear();
+			
 			try
 			{
 				using (Stream stream = File.Open(Ploeg_Bezetting_Locatie(kleur), FileMode.Open))
@@ -357,6 +356,7 @@ namespace Bezetting2
 					BinaryFormatter bin = new BinaryFormatter();
 					try
 					{
+						ListWerkdagPloeg.Clear();
 						ListWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
 						stream.Dispose();
 					}
@@ -379,27 +379,30 @@ namespace Bezetting2
 			}
 		}
 
-		public static void LoadVeranderingenPloeg(string kleur)
+		public static void LoadVeranderingenPloeg(string kleur, int try_again)
 		{
-			Main.labelDebug.Text = "Load Ploeg Veranderingen";
-			ListVeranderingen.Clear();
-			try
+			if (try_again < 0)
 			{
-				using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(kleur), FileMode.Open))
-				{
-					BinaryFormatter bin = new BinaryFormatter();
-
-					ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
-					Main.labelDebug.Text = "";
-				}
+				MessageBox.Show("Tevaak is Ploeg Veranderingen laden niet gelukt, netwerk probleem ?, prog maakt nieuwe aan.");
 			}
-			catch
+			else
 			{
-				//if (File.Exists(Ploeg_Veranderingen_Locatie()))
-				//  MessageBox.Show("LoadVeranderingenPloegLijst() error");
-				//MessageBox.Show("LoadVeranderingenPloegLijst() error");
-				// als hij nog niet bestaat krijg jke elke keer melding, dat hoefd niet
-				// wordt vanzelf aangemaakt.
+				Main.labelDebug.Text = "Load Ploeg Veranderingen";
+				try
+				{
+					using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(kleur), FileMode.Open))
+					{
+						BinaryFormatter bin = new BinaryFormatter();
+						ListVeranderingen.Clear();
+						ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
+						Main.labelDebug.Text = "";
+					}
+				}
+				catch
+				{
+					Thread.Sleep(300);
+					LoadVeranderingenPloeg(kleur, try_again--);
+				}
 			}
 		}
 
@@ -474,11 +477,11 @@ namespace Bezetting2
 		public static void Lees_Namen_lijst()
 		{
 			Main.labelDebug.Text = "Load Namen Lijst";
-			ListPersoneel.Clear();
 			try
 			{
 				using (Stream stream = File.Open("personeel.bin", FileMode.Open))
 				{
+					ListPersoneel.Clear();
 					BinaryFormatter bin = new BinaryFormatter();
 					ListPersoneel = (List<personeel>)bin.Deserialize(stream);
 				}
@@ -537,7 +540,7 @@ namespace Bezetting2
 				ver._afwijkingdienst = afwijking;
 				SavePloegBezetting(kleur,30);
 
-				LoadVeranderingenPloeg(kleur);
+				LoadVeranderingenPloeg(kleur,30);
                 veranderingen verander = new veranderingen
                 {
                     _naam = naam,

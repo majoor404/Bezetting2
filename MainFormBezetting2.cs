@@ -179,7 +179,8 @@ namespace Bezetting2
 			ProgData.Lees_Namen_lijst();
 			EditPersoneel edit = new EditPersoneel();
 			edit.ShowDialog();
-			VulViewScherm(); // refresh
+			ButtonNu_Click(this, null); //refresh op huidige datum
+			//VulViewScherm(); // refresh
 		}
 
 		private void ToegangNivo_TextChanged(object sender, EventArgs e)
@@ -537,7 +538,7 @@ namespace Bezetting2
 						}
 					}
 
-					ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
+					ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,30);
 
 					// aantal bezetting regel
 					int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
@@ -672,7 +673,7 @@ namespace Bezetting2
 					}
 				}
 
-				ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
+				ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,30);
 
 				// aantal bezetting regel
 				int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
@@ -1043,7 +1044,7 @@ namespace Bezetting2
 		private string GetRedenAfwijking(string naam, int dag)
 		{
 			if (ProgData.ListVeranderingen.Count < 1)
-				ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
+				ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,30);
 			string sdag = dag.ToString(CultureInfo.CurrentCulture);
 			try
 			{
@@ -1143,7 +1144,7 @@ namespace Bezetting2
 				MessageBox.Show($"Ploeg veranderingen bestaat wel, repareren!");
 				File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
 				ProgData.MaakLegeBezetting(/*ProgData.Sgekozenjaar(), ProgData.Sgekozenmaand(),*/ ProgData.GekozenKleur);
-                ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
+                ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,30);
 				ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
 				foreach (veranderingen verander in ProgData.ListVeranderingen)
 				{

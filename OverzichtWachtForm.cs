@@ -415,18 +415,24 @@ namespace Bezetting2
 
                 foreach (personeel man in ProgData.ListPersoneelKleur)
                 {
-                    werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
-                    if (string.IsNullOrEmpty(ver._werkplek))
+                    try
                     {
-                        listBox1.Items.Add(man._achternaam);
-                        UpdateAfwijkingListBox(listBox1);
+                        // 
+                        werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
+
+                        if (string.IsNullOrEmpty(ver._werkplek))
+                        {
+                            listBox1.Items.Add(man._achternaam);
+                            UpdateAfwijkingListBox(listBox1);
+                        }
+                        else
+                        {
+                            Invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
+                            veld._ListNaam.Items.Add(man._achternaam);
+                            UpdateAfwijkingListBox(veld._ListNaam);
+                        }
                     }
-                    else
-                    {
-                        Invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
-                        veld._ListNaam.Items.Add(man._achternaam);
-                        UpdateAfwijkingListBox(veld._ListNaam);
-                    }
+                    catch { }
                 }
 
                 foreach (ListBox box in this.Controls.OfType<ListBox>())

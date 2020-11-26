@@ -75,7 +75,7 @@ namespace Bezetting2.Invoer
                     ProgData.Igekozenjaar = start.Year;
 
                     ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
-                    ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur);
+                    ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,30);
                     // volgens kalender
                     for (int i = 0; i < AantalDagen.Value; i++)
                     {
