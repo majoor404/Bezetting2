@@ -14,7 +14,7 @@ namespace Bezetting2
 	public partial class MainFormBezetting2 : Form
 	{
 		public const int kolom_breed = 49;
-		public const int y_as_eerste_lijn = 150;
+		public const int y_as_eerste_lijn = 136;
 		public const int y_as_add_lijn = 4;
 		private bool kill = false;
 		private bool WindowUpdateViewScreen = true;
