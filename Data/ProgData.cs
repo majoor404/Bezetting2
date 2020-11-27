@@ -47,7 +47,7 @@ namespace Bezetting2
 			Rood
 		}
 
-		private static bool ChangeData = false;
+		//private static bool ChangeData = false;
 		public static bool Disable_error_Meldingen = false;
 		public static MainFormBezetting2 Main;
 
@@ -552,8 +552,6 @@ namespace Bezetting2
                 };
                 ListVeranderingen.Add(verander);
 				SaveVeranderingenPloeg(30);
-				
-				ChangeData = true; // voor screen shot
 			}
 			catch
 			{
@@ -800,10 +798,8 @@ namespace Bezetting2
 		{
 			try
 			{
-				if (ChangeData && !string.IsNullOrEmpty(GekozenKleur))
+				if (!string.IsNullOrEmpty(GekozenKleur))
 				{
-					ChangeData = false;
-					
 					Rectangle bounds = ProgData.Main.Bounds;
 					using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
 					{

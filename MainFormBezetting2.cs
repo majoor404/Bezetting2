@@ -11,13 +11,14 @@ using System.Windows.Forms;
 
 namespace Bezetting2
 {
-	public partial class MainFormBezetting2 : Form
+    public partial class MainFormBezetting2 : Form
 	{
 		public const int kolom_breed = 49;
 		public const int y_as_eerste_lijn = 136;
 		public const int y_as_add_lijn = 4;
 		private bool kill = false;
 		private bool WindowUpdateViewScreen = true;
+		private bool screenshot = false;
 
 		private readonly ToolTip mTooltip = new ToolTip();
 		private Point mLastPos = new Point(-1, -1);
@@ -211,7 +212,7 @@ namespace Bezetting2
 		{
 			ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
 			VulViewScherm();
-			ProgData.CaptureMainScreen();
+			//ProgData.CaptureMainScreen();
 		}
 
 		public void VulViewScherm()
@@ -325,6 +326,9 @@ namespace Bezetting2
 					ZetLijnen();
 
 				labelDebug.Text = "";
+
+				screenshot = true; // in mouse move komt dan aanroep capture screen
+				//ProgData.CaptureMainScreen();
 			}
 		}
 
@@ -334,14 +338,12 @@ namespace Bezetting2
 			ProgData.igekozenmaand = int.Parse(myButton.Tag.ToString());
 			KleurMaandButton();
 			VulViewScherm();
-			ProgData.CaptureMainScreen();
 		}
 
 		private void NumericUpDownJaar_ValueChanged(object sender, EventArgs e)
 		{
 			ProgData.Igekozenjaar = (int)numericUpDownJaar.Value;
 			VulViewScherm();
-			ProgData.CaptureMainScreen();
 		}
 
 		private void ButtonRefresh_Click(object sender, EventArgs e)
@@ -1036,6 +1038,12 @@ namespace Bezetting2
 					}
 				}
 				mLastPos = e.Location;
+
+				if (screenshot)
+				{
+					ProgData.CaptureMainScreen();
+					screenshot = false;
+				}
 			}
 			catch { }
 		}
@@ -1225,7 +1233,6 @@ namespace Bezetting2
 		private void MainFormBezetting2_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			VulViewScherm();
-			ProgData.CaptureMainScreen();
 		}
 
 		private void ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
