@@ -95,7 +95,7 @@ namespace Bezetting2
                     check.Visible = true;
                 }
 
-                MessageBox.Show("In edit mode, Gebruikers rechten > 100");
+                MessageBox.Show("Edit mode, Gebruikers is Admin");
             }
 
             opbouw.Clear();
