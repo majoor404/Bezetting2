@@ -345,7 +345,7 @@ namespace Bezetting2
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
-            //labelKleur.Text = ProgData.GekozenKleur;
+            labelKleur.Text = ProgData.GekozenKleur;
 
             labelDienst.Text = ProgData.MDatum.GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
 
@@ -785,6 +785,7 @@ namespace Bezetting2
                     case "OPL":
                     case "OI8":
                     case "EV":
+                    case "GP":
                         e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
                         break;
                     case "ED-":

@@ -161,9 +161,11 @@ namespace Bezetting2
             this.listBox79 = new System.Windows.Forms.ListBox();
             this.listBox80 = new System.Windows.Forms.ListBox();
             this.listBox81 = new System.Windows.Forms.ListBox();
-            this.listBox82 = new System.Windows.Forms.ListBox();
+            this.listBoxAfw2 = new System.Windows.Forms.ListBox();
             this.label42 = new System.Windows.Forms.Label();
             this.listBox83 = new System.Windows.Forms.ListBox();
+            this.labelDatum2 = new System.Windows.Forms.Label();
+            this.labelDienst2 = new System.Windows.Forms.Label();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -245,8 +247,10 @@ namespace Bezetting2
             this.PanelDag1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PanelDag1.Location = new System.Drawing.Point(0, 0);
             this.PanelDag1.Name = "PanelDag1";
-            this.PanelDag1.Size = new System.Drawing.Size(1450, 448);
+            this.PanelDag1.Size = new System.Drawing.Size(1450, 428);
             this.PanelDag1.TabIndex = 0;
+            this.PanelDag1.Tag = "0";
+            this.PanelDag1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox41
             // 
@@ -254,12 +258,15 @@ namespace Bezetting2
             this.listBox41.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox41.FormattingEnabled = true;
             this.listBox41.ItemHeight = 16;
-            this.listBox41.Location = new System.Drawing.Point(1062, 335);
+            this.listBox41.Location = new System.Drawing.Point(1062, 318);
             this.listBox41.Name = "listBox41";
             this.listBox41.Size = new System.Drawing.Size(60, 100);
             this.listBox41.TabIndex = 180;
-            this.listBox41.Tag = "41";
+            this.listBox41.Tag = "0";
             this.listBox41.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox41.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox41.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox41.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox40
             // 
@@ -267,12 +274,15 @@ namespace Bezetting2
             this.listBox40.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox40.FormattingEnabled = true;
             this.listBox40.ItemHeight = 16;
-            this.listBox40.Location = new System.Drawing.Point(791, 335);
+            this.listBox40.Location = new System.Drawing.Point(791, 318);
             this.listBox40.Name = "listBox40";
             this.listBox40.Size = new System.Drawing.Size(60, 100);
             this.listBox40.TabIndex = 179;
-            this.listBox40.Tag = "40";
+            this.listBox40.Tag = "0";
             this.listBox40.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox40.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox40.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox40.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox39
             // 
@@ -280,12 +290,15 @@ namespace Bezetting2
             this.listBox39.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox39.FormattingEnabled = true;
             this.listBox39.ItemHeight = 16;
-            this.listBox39.Location = new System.Drawing.Point(514, 334);
+            this.listBox39.Location = new System.Drawing.Point(514, 317);
             this.listBox39.Name = "listBox39";
             this.listBox39.Size = new System.Drawing.Size(60, 100);
             this.listBox39.TabIndex = 178;
-            this.listBox39.Tag = "39";
+            this.listBox39.Tag = "0";
             this.listBox39.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox39.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox39.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox39.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox38
             // 
@@ -293,18 +306,21 @@ namespace Bezetting2
             this.listBox38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox38.FormattingEnabled = true;
             this.listBox38.ItemHeight = 16;
-            this.listBox38.Location = new System.Drawing.Point(225, 335);
+            this.listBox38.Location = new System.Drawing.Point(225, 318);
             this.listBox38.Name = "listBox38";
             this.listBox38.Size = new System.Drawing.Size(59, 100);
             this.listBox38.TabIndex = 177;
-            this.listBox38.Tag = "38";
+            this.listBox38.Tag = "0";
             this.listBox38.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox38.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox38.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox38.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(7, 335);
+            this.label18.Location = new System.Drawing.Point(7, 318);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(41, 13);
             this.label18.TabIndex = 172;
@@ -314,7 +330,7 @@ namespace Bezetting2
             // 
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(301, 335);
+            this.label19.Location = new System.Drawing.Point(290, 319);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 13);
             this.label19.TabIndex = 171;
@@ -324,7 +340,7 @@ namespace Bezetting2
             // 
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(580, 335);
+            this.label20.Location = new System.Drawing.Point(580, 318);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(41, 13);
             this.label20.TabIndex = 170;
@@ -334,7 +350,7 @@ namespace Bezetting2
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(857, 335);
+            this.label21.Location = new System.Drawing.Point(857, 318);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(41, 13);
             this.label21.TabIndex = 169;
@@ -347,12 +363,15 @@ namespace Bezetting2
             this.listBox18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox18.FormattingEnabled = true;
             this.listBox18.ItemHeight = 16;
-            this.listBox18.Location = new System.Drawing.Point(69, 335);
+            this.listBox18.Location = new System.Drawing.Point(69, 318);
             this.listBox18.Name = "listBox18";
             this.listBox18.Size = new System.Drawing.Size(150, 100);
             this.listBox18.TabIndex = 168;
-            this.listBox18.Tag = "18";
+            this.listBox18.Tag = "1";
             this.listBox18.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox18.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox18.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox18.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox19
             // 
@@ -361,12 +380,15 @@ namespace Bezetting2
             this.listBox19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox19.FormattingEnabled = true;
             this.listBox19.ItemHeight = 16;
-            this.listBox19.Location = new System.Drawing.Point(358, 334);
+            this.listBox19.Location = new System.Drawing.Point(358, 317);
             this.listBox19.Name = "listBox19";
             this.listBox19.Size = new System.Drawing.Size(150, 100);
             this.listBox19.TabIndex = 167;
-            this.listBox19.Tag = "19";
+            this.listBox19.Tag = "1";
             this.listBox19.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox19.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox19.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox19.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox20
             // 
@@ -375,12 +397,15 @@ namespace Bezetting2
             this.listBox20.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox20.FormattingEnabled = true;
             this.listBox20.ItemHeight = 16;
-            this.listBox20.Location = new System.Drawing.Point(635, 335);
+            this.listBox20.Location = new System.Drawing.Point(635, 318);
             this.listBox20.Name = "listBox20";
             this.listBox20.Size = new System.Drawing.Size(150, 100);
             this.listBox20.TabIndex = 166;
-            this.listBox20.Tag = "20";
+            this.listBox20.Tag = "1";
             this.listBox20.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox20.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox20.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox20.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox21
             // 
@@ -389,12 +414,15 @@ namespace Bezetting2
             this.listBox21.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox21.FormattingEnabled = true;
             this.listBox21.ItemHeight = 16;
-            this.listBox21.Location = new System.Drawing.Point(906, 335);
+            this.listBox21.Location = new System.Drawing.Point(906, 318);
             this.listBox21.Name = "listBox21";
             this.listBox21.Size = new System.Drawing.Size(150, 100);
             this.listBox21.TabIndex = 165;
-            this.listBox21.Tag = "21";
+            this.listBox21.Tag = "1";
             this.listBox21.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox21.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox21.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox21.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox37
             // 
@@ -402,12 +430,15 @@ namespace Bezetting2
             this.listBox37.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox37.FormattingEnabled = true;
             this.listBox37.ItemHeight = 16;
-            this.listBox37.Location = new System.Drawing.Point(1062, 245);
+            this.listBox37.Location = new System.Drawing.Point(1062, 228);
             this.listBox37.Name = "listBox37";
             this.listBox37.Size = new System.Drawing.Size(60, 84);
             this.listBox37.TabIndex = 164;
-            this.listBox37.Tag = "37";
+            this.listBox37.Tag = "0";
             this.listBox37.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox37.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox37.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox37.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox36
             // 
@@ -415,12 +446,15 @@ namespace Bezetting2
             this.listBox36.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox36.FormattingEnabled = true;
             this.listBox36.ItemHeight = 16;
-            this.listBox36.Location = new System.Drawing.Point(791, 245);
+            this.listBox36.Location = new System.Drawing.Point(791, 228);
             this.listBox36.Name = "listBox36";
             this.listBox36.Size = new System.Drawing.Size(60, 84);
             this.listBox36.TabIndex = 163;
-            this.listBox36.Tag = "36";
+            this.listBox36.Tag = "0";
             this.listBox36.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox36.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox36.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox36.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox35
             // 
@@ -428,12 +462,15 @@ namespace Bezetting2
             this.listBox35.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox35.FormattingEnabled = true;
             this.listBox35.ItemHeight = 16;
-            this.listBox35.Location = new System.Drawing.Point(514, 244);
+            this.listBox35.Location = new System.Drawing.Point(514, 227);
             this.listBox35.Name = "listBox35";
             this.listBox35.Size = new System.Drawing.Size(60, 84);
             this.listBox35.TabIndex = 162;
-            this.listBox35.Tag = "35";
+            this.listBox35.Tag = "0";
             this.listBox35.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox35.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox35.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox35.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox34
             // 
@@ -441,12 +478,15 @@ namespace Bezetting2
             this.listBox34.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox34.FormattingEnabled = true;
             this.listBox34.ItemHeight = 16;
-            this.listBox34.Location = new System.Drawing.Point(225, 245);
+            this.listBox34.Location = new System.Drawing.Point(225, 228);
             this.listBox34.Name = "listBox34";
             this.listBox34.Size = new System.Drawing.Size(59, 84);
             this.listBox34.TabIndex = 161;
-            this.listBox34.Tag = "34";
+            this.listBox34.Tag = "0";
             this.listBox34.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox34.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox34.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox34.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox33
             // 
@@ -454,12 +494,15 @@ namespace Bezetting2
             this.listBox33.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox33.FormattingEnabled = true;
             this.listBox33.ItemHeight = 16;
-            this.listBox33.Location = new System.Drawing.Point(1062, 187);
+            this.listBox33.Location = new System.Drawing.Point(1062, 170);
             this.listBox33.Name = "listBox33";
             this.listBox33.Size = new System.Drawing.Size(60, 52);
             this.listBox33.TabIndex = 160;
-            this.listBox33.Tag = "33";
+            this.listBox33.Tag = "0";
             this.listBox33.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox33.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox33.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox33.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox32
             // 
@@ -467,12 +510,15 @@ namespace Bezetting2
             this.listBox32.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox32.FormattingEnabled = true;
             this.listBox32.ItemHeight = 16;
-            this.listBox32.Location = new System.Drawing.Point(791, 187);
+            this.listBox32.Location = new System.Drawing.Point(791, 170);
             this.listBox32.Name = "listBox32";
             this.listBox32.Size = new System.Drawing.Size(60, 52);
             this.listBox32.TabIndex = 159;
-            this.listBox32.Tag = "32";
+            this.listBox32.Tag = "0";
             this.listBox32.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox32.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox32.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox32.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox31
             // 
@@ -480,12 +526,15 @@ namespace Bezetting2
             this.listBox31.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox31.FormattingEnabled = true;
             this.listBox31.ItemHeight = 16;
-            this.listBox31.Location = new System.Drawing.Point(514, 186);
+            this.listBox31.Location = new System.Drawing.Point(514, 169);
             this.listBox31.Name = "listBox31";
             this.listBox31.Size = new System.Drawing.Size(60, 52);
             this.listBox31.TabIndex = 158;
-            this.listBox31.Tag = "31";
+            this.listBox31.Tag = "0";
             this.listBox31.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox31.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox31.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox31.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox30
             // 
@@ -493,18 +542,21 @@ namespace Bezetting2
             this.listBox30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox30.FormattingEnabled = true;
             this.listBox30.ItemHeight = 16;
-            this.listBox30.Location = new System.Drawing.Point(225, 187);
+            this.listBox30.Location = new System.Drawing.Point(225, 170);
             this.listBox30.Name = "listBox30";
             this.listBox30.Size = new System.Drawing.Size(59, 52);
             this.listBox30.TabIndex = 157;
-            this.listBox30.Tag = "30";
+            this.listBox30.Tag = "0";
             this.listBox30.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox30.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox30.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox30.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label17
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(857, 254);
+            this.label17.Location = new System.Drawing.Point(857, 237);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(41, 13);
             this.label17.TabIndex = 148;
@@ -514,7 +566,7 @@ namespace Bezetting2
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(580, 254);
+            this.label16.Location = new System.Drawing.Point(580, 237);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(41, 13);
             this.label16.TabIndex = 147;
@@ -524,7 +576,7 @@ namespace Bezetting2
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(301, 254);
+            this.label15.Location = new System.Drawing.Point(290, 238);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(41, 13);
             this.label15.TabIndex = 146;
@@ -534,7 +586,7 @@ namespace Bezetting2
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(7, 254);
+            this.label14.Location = new System.Drawing.Point(7, 237);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(41, 13);
             this.label14.TabIndex = 145;
@@ -544,7 +596,7 @@ namespace Bezetting2
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(857, 188);
+            this.label13.Location = new System.Drawing.Point(857, 171);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 13);
             this.label13.TabIndex = 144;
@@ -554,7 +606,7 @@ namespace Bezetting2
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(580, 188);
+            this.label12.Location = new System.Drawing.Point(580, 171);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 13);
             this.label12.TabIndex = 143;
@@ -564,7 +616,7 @@ namespace Bezetting2
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(301, 188);
+            this.label11.Location = new System.Drawing.Point(290, 172);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(41, 13);
             this.label11.TabIndex = 142;
@@ -574,7 +626,7 @@ namespace Bezetting2
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(7, 188);
+            this.label10.Location = new System.Drawing.Point(7, 171);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(41, 13);
             this.label10.TabIndex = 141;
@@ -587,12 +639,15 @@ namespace Bezetting2
             this.listBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox17.FormattingEnabled = true;
             this.listBox17.ItemHeight = 16;
-            this.listBox17.Location = new System.Drawing.Point(906, 245);
+            this.listBox17.Location = new System.Drawing.Point(906, 228);
             this.listBox17.Name = "listBox17";
             this.listBox17.Size = new System.Drawing.Size(150, 84);
             this.listBox17.TabIndex = 140;
-            this.listBox17.Tag = "17";
+            this.listBox17.Tag = "1";
             this.listBox17.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox17.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox17.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox17.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox16
             // 
@@ -601,12 +656,15 @@ namespace Bezetting2
             this.listBox16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox16.FormattingEnabled = true;
             this.listBox16.ItemHeight = 16;
-            this.listBox16.Location = new System.Drawing.Point(635, 245);
+            this.listBox16.Location = new System.Drawing.Point(635, 228);
             this.listBox16.Name = "listBox16";
             this.listBox16.Size = new System.Drawing.Size(150, 84);
             this.listBox16.TabIndex = 139;
-            this.listBox16.Tag = "16";
+            this.listBox16.Tag = "1";
             this.listBox16.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox16.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox16.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox16.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox15
             // 
@@ -615,12 +673,15 @@ namespace Bezetting2
             this.listBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox15.FormattingEnabled = true;
             this.listBox15.ItemHeight = 16;
-            this.listBox15.Location = new System.Drawing.Point(358, 244);
+            this.listBox15.Location = new System.Drawing.Point(358, 227);
             this.listBox15.Name = "listBox15";
             this.listBox15.Size = new System.Drawing.Size(150, 84);
             this.listBox15.TabIndex = 138;
-            this.listBox15.Tag = "15";
+            this.listBox15.Tag = "1";
             this.listBox15.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox15.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox15.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox14
             // 
@@ -629,12 +690,15 @@ namespace Bezetting2
             this.listBox14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox14.FormattingEnabled = true;
             this.listBox14.ItemHeight = 16;
-            this.listBox14.Location = new System.Drawing.Point(69, 245);
+            this.listBox14.Location = new System.Drawing.Point(69, 228);
             this.listBox14.Name = "listBox14";
             this.listBox14.Size = new System.Drawing.Size(150, 84);
             this.listBox14.TabIndex = 137;
-            this.listBox14.Tag = "14";
+            this.listBox14.Tag = "1";
             this.listBox14.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox14.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox14.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox14.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox13
             // 
@@ -643,12 +707,15 @@ namespace Bezetting2
             this.listBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox13.FormattingEnabled = true;
             this.listBox13.ItemHeight = 16;
-            this.listBox13.Location = new System.Drawing.Point(906, 188);
+            this.listBox13.Location = new System.Drawing.Point(906, 171);
             this.listBox13.Name = "listBox13";
             this.listBox13.Size = new System.Drawing.Size(150, 52);
             this.listBox13.TabIndex = 136;
-            this.listBox13.Tag = "13";
+            this.listBox13.Tag = "1";
             this.listBox13.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox13.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox13.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox13.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox12
             // 
@@ -657,12 +724,15 @@ namespace Bezetting2
             this.listBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox12.FormattingEnabled = true;
             this.listBox12.ItemHeight = 16;
-            this.listBox12.Location = new System.Drawing.Point(635, 188);
+            this.listBox12.Location = new System.Drawing.Point(635, 171);
             this.listBox12.Name = "listBox12";
             this.listBox12.Size = new System.Drawing.Size(150, 52);
             this.listBox12.TabIndex = 135;
-            this.listBox12.Tag = "12";
+            this.listBox12.Tag = "1";
             this.listBox12.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox12.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox12.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox12.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox11
             // 
@@ -671,12 +741,15 @@ namespace Bezetting2
             this.listBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox11.FormattingEnabled = true;
             this.listBox11.ItemHeight = 16;
-            this.listBox11.Location = new System.Drawing.Point(358, 187);
+            this.listBox11.Location = new System.Drawing.Point(358, 170);
             this.listBox11.Name = "listBox11";
             this.listBox11.Size = new System.Drawing.Size(150, 52);
             this.listBox11.TabIndex = 134;
-            this.listBox11.Tag = "11";
+            this.listBox11.Tag = "1";
             this.listBox11.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox11.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox11.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox11.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox10
             // 
@@ -685,12 +758,15 @@ namespace Bezetting2
             this.listBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox10.FormattingEnabled = true;
             this.listBox10.ItemHeight = 16;
-            this.listBox10.Location = new System.Drawing.Point(69, 188);
+            this.listBox10.Location = new System.Drawing.Point(69, 171);
             this.listBox10.Name = "listBox10";
             this.listBox10.Size = new System.Drawing.Size(150, 52);
             this.listBox10.TabIndex = 133;
-            this.listBox10.Tag = "10";
+            this.listBox10.Tag = "1";
             this.listBox10.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox10.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox10.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox10.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox29
             // 
@@ -698,12 +774,15 @@ namespace Bezetting2
             this.listBox29.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox29.FormattingEnabled = true;
             this.listBox29.ItemHeight = 16;
-            this.listBox29.Location = new System.Drawing.Point(1062, 129);
+            this.listBox29.Location = new System.Drawing.Point(1062, 112);
             this.listBox29.Name = "listBox29";
             this.listBox29.Size = new System.Drawing.Size(60, 52);
             this.listBox29.TabIndex = 132;
-            this.listBox29.Tag = "29";
+            this.listBox29.Tag = "0";
             this.listBox29.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox29.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox29.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox29.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox28
             // 
@@ -711,12 +790,15 @@ namespace Bezetting2
             this.listBox28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox28.FormattingEnabled = true;
             this.listBox28.ItemHeight = 16;
-            this.listBox28.Location = new System.Drawing.Point(791, 129);
+            this.listBox28.Location = new System.Drawing.Point(791, 112);
             this.listBox28.Name = "listBox28";
             this.listBox28.Size = new System.Drawing.Size(60, 52);
             this.listBox28.TabIndex = 131;
-            this.listBox28.Tag = "28";
+            this.listBox28.Tag = "0";
             this.listBox28.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox28.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox28.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox28.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox27
             // 
@@ -724,12 +806,15 @@ namespace Bezetting2
             this.listBox27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox27.FormattingEnabled = true;
             this.listBox27.ItemHeight = 16;
-            this.listBox27.Location = new System.Drawing.Point(514, 129);
+            this.listBox27.Location = new System.Drawing.Point(514, 112);
             this.listBox27.Name = "listBox27";
             this.listBox27.Size = new System.Drawing.Size(60, 52);
             this.listBox27.TabIndex = 130;
-            this.listBox27.Tag = "27";
+            this.listBox27.Tag = "0";
             this.listBox27.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox27.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox27.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox27.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox26
             // 
@@ -737,18 +822,21 @@ namespace Bezetting2
             this.listBox26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox26.FormattingEnabled = true;
             this.listBox26.ItemHeight = 16;
-            this.listBox26.Location = new System.Drawing.Point(225, 130);
+            this.listBox26.Location = new System.Drawing.Point(225, 113);
             this.listBox26.Name = "listBox26";
             this.listBox26.Size = new System.Drawing.Size(59, 52);
             this.listBox26.TabIndex = 129;
-            this.listBox26.Tag = "26";
+            this.listBox26.Tag = "0";
             this.listBox26.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox26.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox26.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox26.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(857, 130);
+            this.label9.Location = new System.Drawing.Point(857, 113);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(35, 13);
             this.label9.TabIndex = 124;
@@ -758,7 +846,7 @@ namespace Bezetting2
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(580, 130);
+            this.label8.Location = new System.Drawing.Point(580, 113);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(35, 13);
             this.label8.TabIndex = 123;
@@ -768,7 +856,7 @@ namespace Bezetting2
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(301, 130);
+            this.label7.Location = new System.Drawing.Point(290, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(35, 13);
             this.label7.TabIndex = 122;
@@ -778,7 +866,7 @@ namespace Bezetting2
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(7, 130);
+            this.label6.Location = new System.Drawing.Point(7, 113);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 13);
             this.label6.TabIndex = 121;
@@ -791,12 +879,15 @@ namespace Bezetting2
             this.listBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox9.FormattingEnabled = true;
             this.listBox9.ItemHeight = 16;
-            this.listBox9.Location = new System.Drawing.Point(906, 130);
+            this.listBox9.Location = new System.Drawing.Point(906, 113);
             this.listBox9.Name = "listBox9";
             this.listBox9.Size = new System.Drawing.Size(150, 52);
             this.listBox9.TabIndex = 120;
-            this.listBox9.Tag = "9";
+            this.listBox9.Tag = "1";
             this.listBox9.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox9.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox9.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox9.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox8
             // 
@@ -805,12 +896,15 @@ namespace Bezetting2
             this.listBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox8.FormattingEnabled = true;
             this.listBox8.ItemHeight = 16;
-            this.listBox8.Location = new System.Drawing.Point(635, 130);
+            this.listBox8.Location = new System.Drawing.Point(635, 113);
             this.listBox8.Name = "listBox8";
             this.listBox8.Size = new System.Drawing.Size(150, 52);
             this.listBox8.TabIndex = 119;
-            this.listBox8.Tag = "8";
+            this.listBox8.Tag = "1";
             this.listBox8.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox8.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox8.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox8.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox7
             // 
@@ -819,12 +913,15 @@ namespace Bezetting2
             this.listBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox7.FormattingEnabled = true;
             this.listBox7.ItemHeight = 16;
-            this.listBox7.Location = new System.Drawing.Point(358, 129);
+            this.listBox7.Location = new System.Drawing.Point(358, 112);
             this.listBox7.Name = "listBox7";
             this.listBox7.Size = new System.Drawing.Size(150, 52);
             this.listBox7.TabIndex = 118;
-            this.listBox7.Tag = "7";
+            this.listBox7.Tag = "1";
             this.listBox7.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox7.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox7.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox6
             // 
@@ -833,12 +930,15 @@ namespace Bezetting2
             this.listBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox6.FormattingEnabled = true;
             this.listBox6.ItemHeight = 16;
-            this.listBox6.Location = new System.Drawing.Point(69, 130);
+            this.listBox6.Location = new System.Drawing.Point(69, 113);
             this.listBox6.Name = "listBox6";
             this.listBox6.Size = new System.Drawing.Size(150, 52);
             this.listBox6.TabIndex = 117;
-            this.listBox6.Tag = "6";
+            this.listBox6.Tag = "1";
             this.listBox6.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox6.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox6.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox6.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox25
             // 
@@ -846,12 +946,15 @@ namespace Bezetting2
             this.listBox25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox25.FormattingEnabled = true;
             this.listBox25.ItemHeight = 16;
-            this.listBox25.Location = new System.Drawing.Point(1062, 74);
+            this.listBox25.Location = new System.Drawing.Point(1062, 57);
             this.listBox25.Name = "listBox25";
             this.listBox25.Size = new System.Drawing.Size(60, 52);
             this.listBox25.TabIndex = 116;
-            this.listBox25.Tag = "25";
+            this.listBox25.Tag = "0";
             this.listBox25.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox25.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox25.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox25.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox24
             // 
@@ -859,12 +962,15 @@ namespace Bezetting2
             this.listBox24.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox24.FormattingEnabled = true;
             this.listBox24.ItemHeight = 16;
-            this.listBox24.Location = new System.Drawing.Point(791, 71);
+            this.listBox24.Location = new System.Drawing.Point(791, 54);
             this.listBox24.Name = "listBox24";
             this.listBox24.Size = new System.Drawing.Size(60, 52);
             this.listBox24.TabIndex = 115;
-            this.listBox24.Tag = "24";
+            this.listBox24.Tag = "0";
             this.listBox24.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox24.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox24.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox24.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox23
             // 
@@ -872,12 +978,15 @@ namespace Bezetting2
             this.listBox23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox23.FormattingEnabled = true;
             this.listBox23.ItemHeight = 16;
-            this.listBox23.Location = new System.Drawing.Point(514, 72);
+            this.listBox23.Location = new System.Drawing.Point(514, 55);
             this.listBox23.Name = "listBox23";
             this.listBox23.Size = new System.Drawing.Size(60, 52);
             this.listBox23.TabIndex = 114;
-            this.listBox23.Tag = "23";
+            this.listBox23.Tag = "0";
             this.listBox23.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox23.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox23.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox23.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox22
             // 
@@ -885,18 +994,21 @@ namespace Bezetting2
             this.listBox22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox22.FormattingEnabled = true;
             this.listBox22.ItemHeight = 16;
-            this.listBox22.Location = new System.Drawing.Point(225, 72);
+            this.listBox22.Location = new System.Drawing.Point(225, 56);
             this.listBox22.Name = "listBox22";
             this.listBox22.Size = new System.Drawing.Size(59, 52);
             this.listBox22.TabIndex = 113;
-            this.listBox22.Tag = "22";
+            this.listBox22.Tag = "0";
             this.listBox22.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox22.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox22.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox22.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(857, 72);
+            this.label5.Location = new System.Drawing.Point(857, 55);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 108;
@@ -906,7 +1018,7 @@ namespace Bezetting2
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(580, 71);
+            this.label4.Location = new System.Drawing.Point(580, 54);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 107;
@@ -916,7 +1028,7 @@ namespace Bezetting2
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(301, 72);
+            this.label3.Location = new System.Drawing.Point(290, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 106;
@@ -926,7 +1038,7 @@ namespace Bezetting2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(7, 71);
+            this.label2.Location = new System.Drawing.Point(7, 54);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 105;
@@ -939,12 +1051,15 @@ namespace Bezetting2
             this.listBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox5.FormattingEnabled = true;
             this.listBox5.ItemHeight = 16;
-            this.listBox5.Location = new System.Drawing.Point(906, 73);
+            this.listBox5.Location = new System.Drawing.Point(906, 56);
             this.listBox5.Name = "listBox5";
             this.listBox5.Size = new System.Drawing.Size(150, 52);
             this.listBox5.TabIndex = 104;
-            this.listBox5.Tag = "5";
+            this.listBox5.Tag = "1";
             this.listBox5.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox5.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox5.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox4
             // 
@@ -953,12 +1068,15 @@ namespace Bezetting2
             this.listBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox4.FormattingEnabled = true;
             this.listBox4.ItemHeight = 16;
-            this.listBox4.Location = new System.Drawing.Point(635, 72);
+            this.listBox4.Location = new System.Drawing.Point(635, 55);
             this.listBox4.Name = "listBox4";
             this.listBox4.Size = new System.Drawing.Size(150, 52);
             this.listBox4.TabIndex = 103;
-            this.listBox4.Tag = "4";
+            this.listBox4.Tag = "1";
             this.listBox4.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox4.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox4.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox4.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox3
             // 
@@ -967,12 +1085,15 @@ namespace Bezetting2
             this.listBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(358, 73);
+            this.listBox3.Location = new System.Drawing.Point(358, 56);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(150, 52);
             this.listBox3.TabIndex = 102;
-            this.listBox3.Tag = "3";
+            this.listBox3.Tag = "1";
             this.listBox3.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox3.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox3.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox2
             // 
@@ -982,12 +1103,15 @@ namespace Bezetting2
             this.listBox2.ForeColor = System.Drawing.SystemColors.WindowText;
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 16;
-            this.listBox2.Location = new System.Drawing.Point(69, 73);
+            this.listBox2.Location = new System.Drawing.Point(69, 56);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(150, 52);
             this.listBox2.TabIndex = 101;
-            this.listBox2.Tag = "2";
+            this.listBox2.Tag = "1";
             this.listBox2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox2.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBoxAfw
             // 
@@ -995,18 +1119,21 @@ namespace Bezetting2
             this.listBoxAfw.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxAfw.FormattingEnabled = true;
             this.listBoxAfw.ItemHeight = 16;
-            this.listBoxAfw.Location = new System.Drawing.Point(1373, 74);
+            this.listBoxAfw.Location = new System.Drawing.Point(1373, 57);
             this.listBoxAfw.Name = "listBoxAfw";
             this.listBoxAfw.Size = new System.Drawing.Size(60, 356);
             this.listBoxAfw.TabIndex = 100;
-            this.listBoxAfw.Tag = "50";
+            this.listBoxAfw.Tag = "0";
             this.listBoxAfw.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBoxAfw.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBoxAfw.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBoxAfw.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1138, 72);
+            this.label1.Location = new System.Drawing.Point(1138, 55);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 99;
@@ -1019,12 +1146,15 @@ namespace Bezetting2
             this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(1203, 74);
+            this.listBox1.Location = new System.Drawing.Point(1203, 57);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(163, 356);
             this.listBox1.TabIndex = 98;
             this.listBox1.Tag = "1";
             this.listBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // buttonNu
             // 
@@ -1035,6 +1165,7 @@ namespace Bezetting2
             this.buttonNu.TabIndex = 97;
             this.buttonNu.Text = "Huidige Datum";
             this.buttonNu.UseVisualStyleBackColor = true;
+            this.buttonNu.Click += new System.EventHandler(this.buttonNu_Click);
             // 
             // buttonCopy
             // 
@@ -1055,6 +1186,7 @@ namespace Bezetting2
             this.buttonNext.TabIndex = 95;
             this.buttonNext.Text = "Volgende";
             this.buttonNext.UseVisualStyleBackColor = true;
+            this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // buttonPrev
             // 
@@ -1065,12 +1197,13 @@ namespace Bezetting2
             this.buttonPrev.TabIndex = 94;
             this.buttonPrev.Text = "Vorige";
             this.buttonPrev.UseVisualStyleBackColor = true;
+            this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
             // labelDienst
             // 
             this.labelDienst.AutoSize = true;
             this.labelDienst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDienst.Location = new System.Drawing.Point(6, 29);
+            this.labelDienst.Location = new System.Drawing.Point(289, 28);
             this.labelDienst.Name = "labelDienst";
             this.labelDienst.Size = new System.Drawing.Size(121, 20);
             this.labelDienst.TabIndex = 93;
@@ -1080,7 +1213,7 @@ namespace Bezetting2
             // 
             this.labelKleur.AutoSize = true;
             this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelKleur.Location = new System.Drawing.Point(222, 29);
+            this.labelKleur.Location = new System.Drawing.Point(6, 6);
             this.labelKleur.Name = "labelKleur";
             this.labelKleur.Size = new System.Drawing.Size(52, 20);
             this.labelKleur.TabIndex = 92;
@@ -1090,7 +1223,7 @@ namespace Bezetting2
             // 
             this.labelDatum.AutoSize = true;
             this.labelDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDatum.Location = new System.Drawing.Point(6, 9);
+            this.labelDatum.Location = new System.Drawing.Point(6, 28);
             this.labelDatum.Name = "labelDatum";
             this.labelDatum.Size = new System.Drawing.Size(91, 20);
             this.labelDatum.TabIndex = 91;
@@ -1099,6 +1232,8 @@ namespace Bezetting2
             // PanelDag2
             // 
             this.PanelDag2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag2.Controls.Add(this.labelDienst2);
+            this.PanelDag2.Controls.Add(this.labelDatum2);
             this.PanelDag2.Controls.Add(this.listBox42);
             this.PanelDag2.Controls.Add(this.listBox43);
             this.PanelDag2.Controls.Add(this.listBox44);
@@ -1159,14 +1294,18 @@ namespace Bezetting2
             this.PanelDag2.Controls.Add(this.listBox79);
             this.PanelDag2.Controls.Add(this.listBox80);
             this.PanelDag2.Controls.Add(this.listBox81);
-            this.PanelDag2.Controls.Add(this.listBox82);
+            this.PanelDag2.Controls.Add(this.listBoxAfw2);
             this.PanelDag2.Controls.Add(this.label42);
             this.PanelDag2.Controls.Add(this.listBox83);
             this.PanelDag2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PanelDag2.Location = new System.Drawing.Point(0, 448);
+            this.PanelDag2.Location = new System.Drawing.Point(0, 428);
             this.PanelDag2.Name = "PanelDag2";
-            this.PanelDag2.Size = new System.Drawing.Size(1450, 398);
+            this.PanelDag2.Size = new System.Drawing.Size(1450, 418);
             this.PanelDag2.TabIndex = 1;
+            this.PanelDag2.Tag = "0";
+            this.PanelDag2.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.PanelDag2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.PanelDag2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox42
             // 
@@ -1174,12 +1313,15 @@ namespace Bezetting2
             this.listBox42.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox42.FormattingEnabled = true;
             this.listBox42.ItemHeight = 16;
-            this.listBox42.Location = new System.Drawing.Point(1062, 285);
+            this.listBox42.Location = new System.Drawing.Point(1062, 307);
             this.listBox42.Name = "listBox42";
             this.listBox42.Size = new System.Drawing.Size(60, 100);
             this.listBox42.TabIndex = 243;
-            this.listBox42.Tag = "41";
+            this.listBox42.Tag = "0";
             this.listBox42.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox42.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox42.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox42.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox43
             // 
@@ -1187,12 +1329,15 @@ namespace Bezetting2
             this.listBox43.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox43.FormattingEnabled = true;
             this.listBox43.ItemHeight = 16;
-            this.listBox43.Location = new System.Drawing.Point(791, 284);
+            this.listBox43.Location = new System.Drawing.Point(791, 306);
             this.listBox43.Name = "listBox43";
             this.listBox43.Size = new System.Drawing.Size(60, 100);
             this.listBox43.TabIndex = 242;
-            this.listBox43.Tag = "40";
+            this.listBox43.Tag = "0";
             this.listBox43.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox43.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox43.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox43.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox44
             // 
@@ -1200,12 +1345,15 @@ namespace Bezetting2
             this.listBox44.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox44.FormattingEnabled = true;
             this.listBox44.ItemHeight = 16;
-            this.listBox44.Location = new System.Drawing.Point(514, 285);
+            this.listBox44.Location = new System.Drawing.Point(514, 307);
             this.listBox44.Name = "listBox44";
             this.listBox44.Size = new System.Drawing.Size(60, 100);
             this.listBox44.TabIndex = 241;
-            this.listBox44.Tag = "39";
+            this.listBox44.Tag = "0";
             this.listBox44.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox44.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox44.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox44.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox45
             // 
@@ -1213,18 +1361,21 @@ namespace Bezetting2
             this.listBox45.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox45.FormattingEnabled = true;
             this.listBox45.ItemHeight = 16;
-            this.listBox45.Location = new System.Drawing.Point(225, 285);
+            this.listBox45.Location = new System.Drawing.Point(225, 307);
             this.listBox45.Name = "listBox45";
             this.listBox45.Size = new System.Drawing.Size(59, 100);
             this.listBox45.TabIndex = 240;
-            this.listBox45.Tag = "38";
+            this.listBox45.Tag = "0";
             this.listBox45.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox45.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox45.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox45.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(7, 285);
+            this.label22.Location = new System.Drawing.Point(7, 307);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(41, 13);
             this.label22.TabIndex = 239;
@@ -1234,7 +1385,7 @@ namespace Bezetting2
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(301, 285);
+            this.label23.Location = new System.Drawing.Point(294, 307);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(41, 13);
             this.label23.TabIndex = 238;
@@ -1244,7 +1395,7 @@ namespace Bezetting2
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(580, 285);
+            this.label24.Location = new System.Drawing.Point(580, 307);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(41, 13);
             this.label24.TabIndex = 237;
@@ -1254,7 +1405,7 @@ namespace Bezetting2
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(857, 285);
+            this.label25.Location = new System.Drawing.Point(857, 307);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(41, 13);
             this.label25.TabIndex = 236;
@@ -1267,12 +1418,15 @@ namespace Bezetting2
             this.listBox46.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox46.FormattingEnabled = true;
             this.listBox46.ItemHeight = 16;
-            this.listBox46.Location = new System.Drawing.Point(69, 285);
+            this.listBox46.Location = new System.Drawing.Point(69, 307);
             this.listBox46.Name = "listBox46";
             this.listBox46.Size = new System.Drawing.Size(150, 100);
             this.listBox46.TabIndex = 235;
-            this.listBox46.Tag = "18";
+            this.listBox46.Tag = "1";
             this.listBox46.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox46.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox46.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox46.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox47
             // 
@@ -1281,12 +1435,15 @@ namespace Bezetting2
             this.listBox47.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox47.FormattingEnabled = true;
             this.listBox47.ItemHeight = 16;
-            this.listBox47.Location = new System.Drawing.Point(358, 285);
+            this.listBox47.Location = new System.Drawing.Point(358, 307);
             this.listBox47.Name = "listBox47";
             this.listBox47.Size = new System.Drawing.Size(150, 100);
             this.listBox47.TabIndex = 234;
-            this.listBox47.Tag = "19";
+            this.listBox47.Tag = "1";
             this.listBox47.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox47.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox47.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox47.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox48
             // 
@@ -1295,12 +1452,15 @@ namespace Bezetting2
             this.listBox48.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox48.FormattingEnabled = true;
             this.listBox48.ItemHeight = 16;
-            this.listBox48.Location = new System.Drawing.Point(635, 284);
+            this.listBox48.Location = new System.Drawing.Point(635, 306);
             this.listBox48.Name = "listBox48";
             this.listBox48.Size = new System.Drawing.Size(150, 100);
             this.listBox48.TabIndex = 233;
-            this.listBox48.Tag = "20";
+            this.listBox48.Tag = "1";
             this.listBox48.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox48.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox48.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox48.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox49
             // 
@@ -1309,12 +1469,15 @@ namespace Bezetting2
             this.listBox49.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox49.FormattingEnabled = true;
             this.listBox49.ItemHeight = 16;
-            this.listBox49.Location = new System.Drawing.Point(906, 285);
+            this.listBox49.Location = new System.Drawing.Point(906, 307);
             this.listBox49.Name = "listBox49";
             this.listBox49.Size = new System.Drawing.Size(150, 100);
             this.listBox49.TabIndex = 232;
-            this.listBox49.Tag = "21";
+            this.listBox49.Tag = "1";
             this.listBox49.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox49.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox49.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox49.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox50
             // 
@@ -1322,12 +1485,15 @@ namespace Bezetting2
             this.listBox50.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox50.FormattingEnabled = true;
             this.listBox50.ItemHeight = 16;
-            this.listBox50.Location = new System.Drawing.Point(1062, 195);
+            this.listBox50.Location = new System.Drawing.Point(1062, 217);
             this.listBox50.Name = "listBox50";
             this.listBox50.Size = new System.Drawing.Size(60, 84);
             this.listBox50.TabIndex = 231;
-            this.listBox50.Tag = "37";
+            this.listBox50.Tag = "0";
             this.listBox50.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox50.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox50.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox50.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox51
             // 
@@ -1335,12 +1501,15 @@ namespace Bezetting2
             this.listBox51.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox51.FormattingEnabled = true;
             this.listBox51.ItemHeight = 16;
-            this.listBox51.Location = new System.Drawing.Point(791, 194);
+            this.listBox51.Location = new System.Drawing.Point(791, 216);
             this.listBox51.Name = "listBox51";
             this.listBox51.Size = new System.Drawing.Size(60, 84);
             this.listBox51.TabIndex = 230;
-            this.listBox51.Tag = "36";
+            this.listBox51.Tag = "0";
             this.listBox51.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox51.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox51.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox51.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox52
             // 
@@ -1348,12 +1517,15 @@ namespace Bezetting2
             this.listBox52.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox52.FormattingEnabled = true;
             this.listBox52.ItemHeight = 16;
-            this.listBox52.Location = new System.Drawing.Point(514, 195);
+            this.listBox52.Location = new System.Drawing.Point(514, 217);
             this.listBox52.Name = "listBox52";
             this.listBox52.Size = new System.Drawing.Size(60, 84);
             this.listBox52.TabIndex = 229;
-            this.listBox52.Tag = "35";
+            this.listBox52.Tag = "0";
             this.listBox52.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox52.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox52.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox52.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox53
             // 
@@ -1361,12 +1533,15 @@ namespace Bezetting2
             this.listBox53.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox53.FormattingEnabled = true;
             this.listBox53.ItemHeight = 16;
-            this.listBox53.Location = new System.Drawing.Point(225, 195);
+            this.listBox53.Location = new System.Drawing.Point(225, 217);
             this.listBox53.Name = "listBox53";
             this.listBox53.Size = new System.Drawing.Size(59, 84);
             this.listBox53.TabIndex = 228;
-            this.listBox53.Tag = "34";
+            this.listBox53.Tag = "0";
             this.listBox53.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox53.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox53.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox53.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox54
             // 
@@ -1374,12 +1549,15 @@ namespace Bezetting2
             this.listBox54.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox54.FormattingEnabled = true;
             this.listBox54.ItemHeight = 16;
-            this.listBox54.Location = new System.Drawing.Point(1062, 136);
+            this.listBox54.Location = new System.Drawing.Point(1062, 158);
             this.listBox54.Name = "listBox54";
             this.listBox54.Size = new System.Drawing.Size(60, 52);
             this.listBox54.TabIndex = 227;
-            this.listBox54.Tag = "33";
+            this.listBox54.Tag = "0";
             this.listBox54.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox54.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox54.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox54.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox55
             // 
@@ -1387,12 +1565,15 @@ namespace Bezetting2
             this.listBox55.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox55.FormattingEnabled = true;
             this.listBox55.ItemHeight = 16;
-            this.listBox55.Location = new System.Drawing.Point(791, 135);
+            this.listBox55.Location = new System.Drawing.Point(791, 157);
             this.listBox55.Name = "listBox55";
             this.listBox55.Size = new System.Drawing.Size(60, 52);
             this.listBox55.TabIndex = 226;
-            this.listBox55.Tag = "32";
+            this.listBox55.Tag = "0";
             this.listBox55.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox55.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox55.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox55.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox56
             // 
@@ -1400,12 +1581,15 @@ namespace Bezetting2
             this.listBox56.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox56.FormattingEnabled = true;
             this.listBox56.ItemHeight = 16;
-            this.listBox56.Location = new System.Drawing.Point(514, 136);
+            this.listBox56.Location = new System.Drawing.Point(514, 158);
             this.listBox56.Name = "listBox56";
             this.listBox56.Size = new System.Drawing.Size(60, 52);
             this.listBox56.TabIndex = 225;
-            this.listBox56.Tag = "31";
+            this.listBox56.Tag = "0";
             this.listBox56.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox56.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox56.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox56.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox57
             // 
@@ -1413,18 +1597,21 @@ namespace Bezetting2
             this.listBox57.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox57.FormattingEnabled = true;
             this.listBox57.ItemHeight = 16;
-            this.listBox57.Location = new System.Drawing.Point(225, 136);
+            this.listBox57.Location = new System.Drawing.Point(225, 158);
             this.listBox57.Name = "listBox57";
             this.listBox57.Size = new System.Drawing.Size(59, 52);
             this.listBox57.TabIndex = 224;
-            this.listBox57.Tag = "30";
+            this.listBox57.Tag = "0";
             this.listBox57.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox57.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox57.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox57.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label26
             // 
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(857, 195);
+            this.label26.Location = new System.Drawing.Point(857, 217);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(41, 13);
             this.label26.TabIndex = 223;
@@ -1434,7 +1621,7 @@ namespace Bezetting2
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label27.Location = new System.Drawing.Point(580, 195);
+            this.label27.Location = new System.Drawing.Point(580, 217);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(41, 13);
             this.label27.TabIndex = 222;
@@ -1444,7 +1631,7 @@ namespace Bezetting2
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(301, 195);
+            this.label28.Location = new System.Drawing.Point(294, 217);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(41, 13);
             this.label28.TabIndex = 221;
@@ -1454,7 +1641,7 @@ namespace Bezetting2
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(7, 195);
+            this.label29.Location = new System.Drawing.Point(7, 217);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(41, 13);
             this.label29.TabIndex = 220;
@@ -1464,7 +1651,7 @@ namespace Bezetting2
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(857, 137);
+            this.label30.Location = new System.Drawing.Point(857, 159);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(41, 13);
             this.label30.TabIndex = 219;
@@ -1474,7 +1661,7 @@ namespace Bezetting2
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(580, 137);
+            this.label31.Location = new System.Drawing.Point(580, 159);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(41, 13);
             this.label31.TabIndex = 218;
@@ -1484,7 +1671,7 @@ namespace Bezetting2
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(301, 137);
+            this.label32.Location = new System.Drawing.Point(294, 159);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(41, 13);
             this.label32.TabIndex = 217;
@@ -1494,7 +1681,7 @@ namespace Bezetting2
             // 
             this.label33.AutoSize = true;
             this.label33.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(7, 137);
+            this.label33.Location = new System.Drawing.Point(7, 159);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(41, 13);
             this.label33.TabIndex = 216;
@@ -1507,12 +1694,15 @@ namespace Bezetting2
             this.listBox58.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox58.FormattingEnabled = true;
             this.listBox58.ItemHeight = 16;
-            this.listBox58.Location = new System.Drawing.Point(906, 195);
+            this.listBox58.Location = new System.Drawing.Point(906, 217);
             this.listBox58.Name = "listBox58";
             this.listBox58.Size = new System.Drawing.Size(150, 84);
             this.listBox58.TabIndex = 215;
-            this.listBox58.Tag = "17";
+            this.listBox58.Tag = "1";
             this.listBox58.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox58.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox58.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox58.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox59
             // 
@@ -1521,12 +1711,15 @@ namespace Bezetting2
             this.listBox59.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox59.FormattingEnabled = true;
             this.listBox59.ItemHeight = 16;
-            this.listBox59.Location = new System.Drawing.Point(635, 194);
+            this.listBox59.Location = new System.Drawing.Point(635, 216);
             this.listBox59.Name = "listBox59";
             this.listBox59.Size = new System.Drawing.Size(150, 84);
             this.listBox59.TabIndex = 214;
-            this.listBox59.Tag = "16";
+            this.listBox59.Tag = "1";
             this.listBox59.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox59.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox59.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox59.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox60
             // 
@@ -1535,12 +1728,15 @@ namespace Bezetting2
             this.listBox60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox60.FormattingEnabled = true;
             this.listBox60.ItemHeight = 16;
-            this.listBox60.Location = new System.Drawing.Point(358, 195);
+            this.listBox60.Location = new System.Drawing.Point(358, 217);
             this.listBox60.Name = "listBox60";
             this.listBox60.Size = new System.Drawing.Size(150, 84);
             this.listBox60.TabIndex = 213;
-            this.listBox60.Tag = "15";
+            this.listBox60.Tag = "1";
             this.listBox60.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox60.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox60.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox60.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox61
             // 
@@ -1549,12 +1745,15 @@ namespace Bezetting2
             this.listBox61.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox61.FormattingEnabled = true;
             this.listBox61.ItemHeight = 16;
-            this.listBox61.Location = new System.Drawing.Point(69, 195);
+            this.listBox61.Location = new System.Drawing.Point(69, 217);
             this.listBox61.Name = "listBox61";
             this.listBox61.Size = new System.Drawing.Size(150, 84);
             this.listBox61.TabIndex = 212;
-            this.listBox61.Tag = "14";
+            this.listBox61.Tag = "1";
             this.listBox61.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox61.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox61.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox61.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox62
             // 
@@ -1563,12 +1762,15 @@ namespace Bezetting2
             this.listBox62.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox62.FormattingEnabled = true;
             this.listBox62.ItemHeight = 16;
-            this.listBox62.Location = new System.Drawing.Point(906, 137);
+            this.listBox62.Location = new System.Drawing.Point(906, 159);
             this.listBox62.Name = "listBox62";
             this.listBox62.Size = new System.Drawing.Size(150, 52);
             this.listBox62.TabIndex = 211;
-            this.listBox62.Tag = "13";
+            this.listBox62.Tag = "1";
             this.listBox62.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox62.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox62.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox62.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox63
             // 
@@ -1577,12 +1779,15 @@ namespace Bezetting2
             this.listBox63.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox63.FormattingEnabled = true;
             this.listBox63.ItemHeight = 16;
-            this.listBox63.Location = new System.Drawing.Point(635, 136);
+            this.listBox63.Location = new System.Drawing.Point(635, 158);
             this.listBox63.Name = "listBox63";
             this.listBox63.Size = new System.Drawing.Size(150, 52);
             this.listBox63.TabIndex = 210;
-            this.listBox63.Tag = "12";
+            this.listBox63.Tag = "1";
             this.listBox63.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox63.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox63.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox63.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox64
             // 
@@ -1591,12 +1796,15 @@ namespace Bezetting2
             this.listBox64.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox64.FormattingEnabled = true;
             this.listBox64.ItemHeight = 16;
-            this.listBox64.Location = new System.Drawing.Point(358, 137);
+            this.listBox64.Location = new System.Drawing.Point(358, 159);
             this.listBox64.Name = "listBox64";
             this.listBox64.Size = new System.Drawing.Size(150, 52);
             this.listBox64.TabIndex = 209;
-            this.listBox64.Tag = "11";
+            this.listBox64.Tag = "1";
             this.listBox64.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox64.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox64.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox64.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox65
             // 
@@ -1605,12 +1813,15 @@ namespace Bezetting2
             this.listBox65.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox65.FormattingEnabled = true;
             this.listBox65.ItemHeight = 16;
-            this.listBox65.Location = new System.Drawing.Point(69, 137);
+            this.listBox65.Location = new System.Drawing.Point(69, 159);
             this.listBox65.Name = "listBox65";
             this.listBox65.Size = new System.Drawing.Size(150, 52);
             this.listBox65.TabIndex = 208;
-            this.listBox65.Tag = "10";
+            this.listBox65.Tag = "1";
             this.listBox65.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox65.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox65.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox65.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox66
             // 
@@ -1618,12 +1829,15 @@ namespace Bezetting2
             this.listBox66.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox66.FormattingEnabled = true;
             this.listBox66.ItemHeight = 16;
-            this.listBox66.Location = new System.Drawing.Point(1062, 78);
+            this.listBox66.Location = new System.Drawing.Point(1062, 100);
             this.listBox66.Name = "listBox66";
             this.listBox66.Size = new System.Drawing.Size(60, 52);
             this.listBox66.TabIndex = 207;
-            this.listBox66.Tag = "29";
+            this.listBox66.Tag = "0";
             this.listBox66.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox66.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox66.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox66.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox67
             // 
@@ -1631,12 +1845,15 @@ namespace Bezetting2
             this.listBox67.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox67.FormattingEnabled = true;
             this.listBox67.ItemHeight = 16;
-            this.listBox67.Location = new System.Drawing.Point(791, 77);
+            this.listBox67.Location = new System.Drawing.Point(791, 99);
             this.listBox67.Name = "listBox67";
             this.listBox67.Size = new System.Drawing.Size(60, 52);
             this.listBox67.TabIndex = 206;
-            this.listBox67.Tag = "28";
+            this.listBox67.Tag = "0";
             this.listBox67.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox67.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox67.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox67.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox68
             // 
@@ -1644,12 +1861,15 @@ namespace Bezetting2
             this.listBox68.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox68.FormattingEnabled = true;
             this.listBox68.ItemHeight = 16;
-            this.listBox68.Location = new System.Drawing.Point(514, 79);
+            this.listBox68.Location = new System.Drawing.Point(514, 101);
             this.listBox68.Name = "listBox68";
             this.listBox68.Size = new System.Drawing.Size(60, 52);
             this.listBox68.TabIndex = 205;
-            this.listBox68.Tag = "27";
+            this.listBox68.Tag = "0";
             this.listBox68.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox68.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox68.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox68.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox69
             // 
@@ -1657,18 +1877,21 @@ namespace Bezetting2
             this.listBox69.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox69.FormattingEnabled = true;
             this.listBox69.ItemHeight = 16;
-            this.listBox69.Location = new System.Drawing.Point(225, 79);
+            this.listBox69.Location = new System.Drawing.Point(225, 101);
             this.listBox69.Name = "listBox69";
             this.listBox69.Size = new System.Drawing.Size(59, 52);
             this.listBox69.TabIndex = 204;
-            this.listBox69.Tag = "26";
+            this.listBox69.Tag = "0";
             this.listBox69.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox69.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox69.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox69.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label34
             // 
             this.label34.AutoSize = true;
             this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(857, 79);
+            this.label34.Location = new System.Drawing.Point(857, 101);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(41, 13);
             this.label34.TabIndex = 203;
@@ -1678,7 +1901,7 @@ namespace Bezetting2
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label35.Location = new System.Drawing.Point(580, 79);
+            this.label35.Location = new System.Drawing.Point(580, 101);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(41, 13);
             this.label35.TabIndex = 202;
@@ -1688,7 +1911,7 @@ namespace Bezetting2
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label36.Location = new System.Drawing.Point(301, 79);
+            this.label36.Location = new System.Drawing.Point(294, 101);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(41, 13);
             this.label36.TabIndex = 201;
@@ -1698,7 +1921,7 @@ namespace Bezetting2
             // 
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(7, 79);
+            this.label37.Location = new System.Drawing.Point(7, 101);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(41, 13);
             this.label37.TabIndex = 200;
@@ -1711,12 +1934,15 @@ namespace Bezetting2
             this.listBox70.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox70.FormattingEnabled = true;
             this.listBox70.ItemHeight = 16;
-            this.listBox70.Location = new System.Drawing.Point(906, 79);
+            this.listBox70.Location = new System.Drawing.Point(906, 101);
             this.listBox70.Name = "listBox70";
             this.listBox70.Size = new System.Drawing.Size(150, 52);
             this.listBox70.TabIndex = 199;
-            this.listBox70.Tag = "9";
+            this.listBox70.Tag = "1";
             this.listBox70.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox70.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox70.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox70.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox71
             // 
@@ -1725,12 +1951,15 @@ namespace Bezetting2
             this.listBox71.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox71.FormattingEnabled = true;
             this.listBox71.ItemHeight = 16;
-            this.listBox71.Location = new System.Drawing.Point(635, 78);
+            this.listBox71.Location = new System.Drawing.Point(635, 100);
             this.listBox71.Name = "listBox71";
             this.listBox71.Size = new System.Drawing.Size(150, 52);
             this.listBox71.TabIndex = 198;
-            this.listBox71.Tag = "8";
+            this.listBox71.Tag = "1";
             this.listBox71.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox71.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox71.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox71.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox72
             // 
@@ -1739,12 +1968,15 @@ namespace Bezetting2
             this.listBox72.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox72.FormattingEnabled = true;
             this.listBox72.ItemHeight = 16;
-            this.listBox72.Location = new System.Drawing.Point(358, 79);
+            this.listBox72.Location = new System.Drawing.Point(358, 101);
             this.listBox72.Name = "listBox72";
             this.listBox72.Size = new System.Drawing.Size(150, 52);
             this.listBox72.TabIndex = 197;
-            this.listBox72.Tag = "7";
+            this.listBox72.Tag = "1";
             this.listBox72.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox72.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox72.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox72.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox73
             // 
@@ -1753,12 +1985,15 @@ namespace Bezetting2
             this.listBox73.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox73.FormattingEnabled = true;
             this.listBox73.ItemHeight = 16;
-            this.listBox73.Location = new System.Drawing.Point(69, 79);
+            this.listBox73.Location = new System.Drawing.Point(69, 101);
             this.listBox73.Name = "listBox73";
             this.listBox73.Size = new System.Drawing.Size(150, 52);
             this.listBox73.TabIndex = 196;
-            this.listBox73.Tag = "6";
+            this.listBox73.Tag = "1";
             this.listBox73.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox73.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox73.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox73.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox74
             // 
@@ -1766,12 +2001,15 @@ namespace Bezetting2
             this.listBox74.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox74.FormattingEnabled = true;
             this.listBox74.ItemHeight = 16;
-            this.listBox74.Location = new System.Drawing.Point(1062, 23);
+            this.listBox74.Location = new System.Drawing.Point(1062, 45);
             this.listBox74.Name = "listBox74";
             this.listBox74.Size = new System.Drawing.Size(60, 52);
             this.listBox74.TabIndex = 195;
-            this.listBox74.Tag = "25";
+            this.listBox74.Tag = "0";
             this.listBox74.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox74.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox74.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox74.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox75
             // 
@@ -1779,12 +2017,15 @@ namespace Bezetting2
             this.listBox75.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox75.FormattingEnabled = true;
             this.listBox75.ItemHeight = 16;
-            this.listBox75.Location = new System.Drawing.Point(791, 21);
+            this.listBox75.Location = new System.Drawing.Point(791, 43);
             this.listBox75.Name = "listBox75";
             this.listBox75.Size = new System.Drawing.Size(60, 52);
             this.listBox75.TabIndex = 194;
-            this.listBox75.Tag = "24";
+            this.listBox75.Tag = "0";
             this.listBox75.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox75.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox75.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox75.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox76
             // 
@@ -1792,12 +2033,15 @@ namespace Bezetting2
             this.listBox76.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox76.FormattingEnabled = true;
             this.listBox76.ItemHeight = 16;
-            this.listBox76.Location = new System.Drawing.Point(514, 20);
+            this.listBox76.Location = new System.Drawing.Point(514, 42);
             this.listBox76.Name = "listBox76";
             this.listBox76.Size = new System.Drawing.Size(60, 52);
             this.listBox76.TabIndex = 193;
-            this.listBox76.Tag = "23";
+            this.listBox76.Tag = "0";
             this.listBox76.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox76.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox76.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox76.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox77
             // 
@@ -1805,18 +2049,21 @@ namespace Bezetting2
             this.listBox77.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox77.FormattingEnabled = true;
             this.listBox77.ItemHeight = 16;
-            this.listBox77.Location = new System.Drawing.Point(225, 20);
+            this.listBox77.Location = new System.Drawing.Point(225, 42);
             this.listBox77.Name = "listBox77";
             this.listBox77.Size = new System.Drawing.Size(59, 52);
             this.listBox77.TabIndex = 192;
-            this.listBox77.Tag = "22";
+            this.listBox77.Tag = "0";
             this.listBox77.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox77.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox77.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox77.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label38
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(853, 23);
+            this.label38.Location = new System.Drawing.Point(853, 45);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(41, 13);
             this.label38.TabIndex = 191;
@@ -1826,7 +2073,7 @@ namespace Bezetting2
             // 
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(576, 20);
+            this.label39.Location = new System.Drawing.Point(576, 42);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(41, 13);
             this.label39.TabIndex = 190;
@@ -1836,7 +2083,7 @@ namespace Bezetting2
             // 
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(297, 23);
+            this.label40.Location = new System.Drawing.Point(290, 45);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(41, 13);
             this.label40.TabIndex = 189;
@@ -1846,7 +2093,7 @@ namespace Bezetting2
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(7, 23);
+            this.label41.Location = new System.Drawing.Point(7, 45);
             this.label41.Name = "label41";
             this.label41.Size = new System.Drawing.Size(41, 13);
             this.label41.TabIndex = 188;
@@ -1859,12 +2106,15 @@ namespace Bezetting2
             this.listBox78.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox78.FormattingEnabled = true;
             this.listBox78.ItemHeight = 16;
-            this.listBox78.Location = new System.Drawing.Point(906, 22);
+            this.listBox78.Location = new System.Drawing.Point(906, 44);
             this.listBox78.Name = "listBox78";
             this.listBox78.Size = new System.Drawing.Size(150, 52);
             this.listBox78.TabIndex = 187;
-            this.listBox78.Tag = "5";
+            this.listBox78.Tag = "1";
             this.listBox78.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox78.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox78.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox78.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox79
             // 
@@ -1873,12 +2123,15 @@ namespace Bezetting2
             this.listBox79.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox79.FormattingEnabled = true;
             this.listBox79.ItemHeight = 16;
-            this.listBox79.Location = new System.Drawing.Point(635, 22);
+            this.listBox79.Location = new System.Drawing.Point(635, 44);
             this.listBox79.Name = "listBox79";
             this.listBox79.Size = new System.Drawing.Size(150, 52);
             this.listBox79.TabIndex = 186;
-            this.listBox79.Tag = "4";
+            this.listBox79.Tag = "1";
             this.listBox79.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox79.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox79.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox79.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox80
             // 
@@ -1887,12 +2140,15 @@ namespace Bezetting2
             this.listBox80.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBox80.FormattingEnabled = true;
             this.listBox80.ItemHeight = 16;
-            this.listBox80.Location = new System.Drawing.Point(358, 21);
+            this.listBox80.Location = new System.Drawing.Point(358, 43);
             this.listBox80.Name = "listBox80";
             this.listBox80.Size = new System.Drawing.Size(150, 52);
             this.listBox80.TabIndex = 185;
-            this.listBox80.Tag = "3";
+            this.listBox80.Tag = "1";
             this.listBox80.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox80.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox80.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox80.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // listBox81
             // 
@@ -1902,31 +2158,37 @@ namespace Bezetting2
             this.listBox81.ForeColor = System.Drawing.SystemColors.WindowText;
             this.listBox81.FormattingEnabled = true;
             this.listBox81.ItemHeight = 16;
-            this.listBox81.Location = new System.Drawing.Point(69, 21);
+            this.listBox81.Location = new System.Drawing.Point(69, 43);
             this.listBox81.Name = "listBox81";
             this.listBox81.Size = new System.Drawing.Size(150, 52);
             this.listBox81.TabIndex = 184;
-            this.listBox81.Tag = "2";
+            this.listBox81.Tag = "1";
             this.listBox81.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox81.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox81.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox81.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
-            // listBox82
+            // listBoxAfw2
             // 
-            this.listBox82.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.listBox82.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox82.FormattingEnabled = true;
-            this.listBox82.ItemHeight = 16;
-            this.listBox82.Location = new System.Drawing.Point(1373, 23);
-            this.listBox82.Name = "listBox82";
-            this.listBox82.Size = new System.Drawing.Size(60, 356);
-            this.listBox82.TabIndex = 183;
-            this.listBox82.Tag = "50";
-            this.listBox82.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBoxAfw2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.listBoxAfw2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxAfw2.FormattingEnabled = true;
+            this.listBoxAfw2.ItemHeight = 16;
+            this.listBoxAfw2.Location = new System.Drawing.Point(1373, 45);
+            this.listBoxAfw2.Name = "listBoxAfw2";
+            this.listBoxAfw2.Size = new System.Drawing.Size(60, 356);
+            this.listBoxAfw2.TabIndex = 183;
+            this.listBoxAfw2.Tag = "0";
+            this.listBoxAfw2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBoxAfw2.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBoxAfw2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBoxAfw2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
             // label42
             // 
             this.label42.AutoSize = true;
             this.label42.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(1128, 23);
+            this.label42.Location = new System.Drawing.Point(1128, 45);
             this.label42.Name = "label42";
             this.label42.Size = new System.Drawing.Size(41, 13);
             this.label42.TabIndex = 182;
@@ -1939,12 +2201,35 @@ namespace Bezetting2
             this.listBox83.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.listBox83.FormattingEnabled = true;
             this.listBox83.ItemHeight = 16;
-            this.listBox83.Location = new System.Drawing.Point(1203, 23);
+            this.listBox83.Location = new System.Drawing.Point(1203, 45);
             this.listBox83.Name = "listBox83";
             this.listBox83.Size = new System.Drawing.Size(163, 356);
             this.listBox83.TabIndex = 181;
             this.listBox83.Tag = "1";
             this.listBox83.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBox29_DrawItem);
+            this.listBox83.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
+            this.listBox83.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
+            this.listBox83.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            // 
+            // labelDatum2
+            // 
+            this.labelDatum2.AutoSize = true;
+            this.labelDatum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDatum2.Location = new System.Drawing.Point(6, 10);
+            this.labelDatum2.Name = "labelDatum2";
+            this.labelDatum2.Size = new System.Drawing.Size(91, 20);
+            this.labelDatum2.TabIndex = 181;
+            this.labelDatum2.Text = "25-04-1965";
+            // 
+            // labelDienst2
+            // 
+            this.labelDienst2.AutoSize = true;
+            this.labelDienst2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDienst2.Location = new System.Drawing.Point(289, 10);
+            this.labelDienst2.Name = "labelDienst2";
+            this.labelDienst2.Size = new System.Drawing.Size(121, 20);
+            this.labelDienst2.TabIndex = 181;
+            this.labelDienst2.Text = "Eerste Ochtend";
             // 
             // OverzichtWachtForm2Dagen
             // 
@@ -1959,6 +2244,7 @@ namespace Bezetting2
             this.Name = "OverzichtWachtForm2Dagen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "OverzichtWachtForm 2 Dagen";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OverzichtWachtForm2Dagen_FormClosed);
             this.Shown += new System.EventHandler(this.OverzichtWachtForm2_Shown);
             this.PanelDag1.ResumeLayout(false);
             this.PanelDag1.PerformLayout();
@@ -2102,8 +2388,10 @@ namespace Bezetting2
         private System.Windows.Forms.ListBox listBox79;
         private System.Windows.Forms.ListBox listBox80;
         private System.Windows.Forms.ListBox listBox81;
-        private System.Windows.Forms.ListBox listBox82;
+        private System.Windows.Forms.ListBox listBoxAfw2;
         private System.Windows.Forms.Label label42;
         private System.Windows.Forms.ListBox listBox83;
+        private System.Windows.Forms.Label labelDienst2;
+        private System.Windows.Forms.Label labelDatum2;
     }
 }
