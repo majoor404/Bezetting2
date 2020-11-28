@@ -101,6 +101,8 @@ namespace Bezetting2
             this.labelKleur = new System.Windows.Forms.Label();
             this.labelDatum = new System.Windows.Forms.Label();
             this.PanelDag2 = new System.Windows.Forms.Panel();
+            this.labelDienst2 = new System.Windows.Forms.Label();
+            this.labelDatum2 = new System.Windows.Forms.Label();
             this.listBox42 = new System.Windows.Forms.ListBox();
             this.listBox43 = new System.Windows.Forms.ListBox();
             this.listBox44 = new System.Windows.Forms.ListBox();
@@ -164,8 +166,6 @@ namespace Bezetting2
             this.listBoxAfw2 = new System.Windows.Forms.ListBox();
             this.label42 = new System.Windows.Forms.Label();
             this.listBox83 = new System.Windows.Forms.ListBox();
-            this.labelDatum2 = new System.Windows.Forms.Label();
-            this.labelDienst2 = new System.Windows.Forms.Label();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -1170,12 +1170,13 @@ namespace Bezetting2
             // buttonCopy
             // 
             this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCopy.Location = new System.Drawing.Point(907, 9);
+            this.buttonCopy.Location = new System.Drawing.Point(906, 9);
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Size = new System.Drawing.Size(230, 30);
             this.buttonCopy.TabIndex = 96;
             this.buttonCopy.Text = "Copy Bezetting 1 Wacht";
             this.buttonCopy.UseVisualStyleBackColor = true;
+            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
             // 
             // buttonNext
             // 
@@ -1306,6 +1307,26 @@ namespace Bezetting2
             this.PanelDag2.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.PanelDag2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
             this.PanelDag2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            // 
+            // labelDienst2
+            // 
+            this.labelDienst2.AutoSize = true;
+            this.labelDienst2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDienst2.Location = new System.Drawing.Point(289, 10);
+            this.labelDienst2.Name = "labelDienst2";
+            this.labelDienst2.Size = new System.Drawing.Size(121, 20);
+            this.labelDienst2.TabIndex = 181;
+            this.labelDienst2.Text = "Eerste Ochtend";
+            // 
+            // labelDatum2
+            // 
+            this.labelDatum2.AutoSize = true;
+            this.labelDatum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDatum2.Location = new System.Drawing.Point(6, 10);
+            this.labelDatum2.Name = "labelDatum2";
+            this.labelDatum2.Size = new System.Drawing.Size(91, 20);
+            this.labelDatum2.TabIndex = 181;
+            this.labelDatum2.Text = "25-04-1965";
             // 
             // listBox42
             // 
@@ -2210,26 +2231,6 @@ namespace Bezetting2
             this.listBox83.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox83.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
             this.listBox83.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
-            // 
-            // labelDatum2
-            // 
-            this.labelDatum2.AutoSize = true;
-            this.labelDatum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDatum2.Location = new System.Drawing.Point(6, 10);
-            this.labelDatum2.Name = "labelDatum2";
-            this.labelDatum2.Size = new System.Drawing.Size(91, 20);
-            this.labelDatum2.TabIndex = 181;
-            this.labelDatum2.Text = "25-04-1965";
-            // 
-            // labelDienst2
-            // 
-            this.labelDienst2.AutoSize = true;
-            this.labelDienst2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDienst2.Location = new System.Drawing.Point(289, 10);
-            this.labelDienst2.Name = "labelDienst2";
-            this.labelDienst2.Size = new System.Drawing.Size(121, 20);
-            this.labelDienst2.TabIndex = 181;
-            this.labelDienst2.Text = "Eerste Ochtend";
             // 
             // OverzichtWachtForm2Dagen
             // 

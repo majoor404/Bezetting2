@@ -939,7 +939,7 @@ namespace Bezetting2
 
 		private void WachtOverzichtToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			if (InstellingenProg._Wachtoverzicht2Dagen)
+			if (InstellingenProg._Wachtoverzicht2Dagen && ProgData.RechtenHuidigeGebruiker < 101)
 			{
 				OverzichtWachtForm2Dagen owacht2 = new OverzichtWachtForm2Dagen();
 				owacht2.ShowDialog();

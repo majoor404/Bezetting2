@@ -122,7 +122,7 @@ namespace Bezetting2
             opbouw.Add(new Invoerveld(label20, listBox20, listBox40));
             opbouw.Add(new Invoerveld(label21, listBox21, listBox41));
 
-            LaadDataFormulier();
+            LaadDataFormulier(); // zet juiste vakjes aan
 
             // zet datum en kleur in beeld
 
@@ -130,7 +130,8 @@ namespace Bezetting2
 
             //ProgData.GekozenKleur = ProgData.Main.comboBoxKleurKeuze.Text;
 
-            ViewUpdate();
+            if(ProgData.RechtenHuidigeGebruiker < 101)
+                ViewUpdate();
         }
 
         // geklikt op label, als in edit mode vraag nieuwe tekst
@@ -218,28 +219,7 @@ namespace Bezetting2
             label20.Visible = listBox20.Visible;
             label21.Visible = listBox21.Visible;
 
-            InstellingenProg.ProgrammaData[21] = checkBox1.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[22] = checkBox2.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[23] = checkBox3.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[24] = checkBox4.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[25] = checkBox5.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[26] = checkBox6.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[27] = checkBox7.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[28] = checkBox8.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[29] = checkBox9.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[30] = checkBox10.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[31] = checkBox11.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[32] = checkBox12.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[33] = checkBox13.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[34] = checkBox14.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[35] = checkBox15.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[36] = checkBox16.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[37] = checkBox17.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[38] = checkBox18.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[39] = checkBox19.Checked ? true.ToString() : false.ToString();
-            InstellingenProg.ProgrammaData[40] = checkBox20.Checked ? true.ToString() : false.ToString();
-
-            InstellingenProg.SaveProgrammaData();
+            //InstellingenProg.SaveProgrammaData();
         }
 
         private void UpdateAfwijkingListBox(ListBox box)
@@ -298,6 +278,12 @@ namespace Bezetting2
         private void OverzichtWachtForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveData();
+
+            if(ProgData.RechtenHuidigeGebruiker == 101)
+            {
+                SaveCheckboxStatus();
+                InstellingenProg.SaveProgrammaData();
+            }
         }
 
         private void SaveData()
@@ -693,47 +679,47 @@ namespace Bezetting2
                 label20.Text = InstellingenProg.ProgrammaData[19];
                 label21.Text = InstellingenProg.ProgrammaData[20];
 
-                listBox2.Visible = listBox22.Visible = bool.Parse(InstellingenProg.ProgrammaData[21]);
-                listBox3.Visible = listBox23.Visible = bool.Parse(InstellingenProg.ProgrammaData[22]);
-                listBox4.Visible = listBox24.Visible = bool.Parse(InstellingenProg.ProgrammaData[23]);
-                listBox5.Visible = listBox25.Visible = bool.Parse(InstellingenProg.ProgrammaData[24]);
-                listBox6.Visible = listBox26.Visible = bool.Parse(InstellingenProg.ProgrammaData[25]);
-                listBox7.Visible = listBox27.Visible = bool.Parse(InstellingenProg.ProgrammaData[26]);
-                listBox8.Visible = listBox28.Visible = bool.Parse(InstellingenProg.ProgrammaData[27]);
-                listBox9.Visible = listBox29.Visible = bool.Parse(InstellingenProg.ProgrammaData[28]);
-                listBox10.Visible = listBox30.Visible = bool.Parse(InstellingenProg.ProgrammaData[29]);
-                listBox11.Visible = listBox31.Visible = bool.Parse(InstellingenProg.ProgrammaData[30]);
-                listBox12.Visible = listBox32.Visible = bool.Parse(InstellingenProg.ProgrammaData[31]);
-                listBox13.Visible = listBox33.Visible = bool.Parse(InstellingenProg.ProgrammaData[32]);
-                listBox14.Visible = listBox34.Visible = bool.Parse(InstellingenProg.ProgrammaData[33]);
-                listBox15.Visible = listBox35.Visible = bool.Parse(InstellingenProg.ProgrammaData[34]);
-                listBox16.Visible = listBox36.Visible = bool.Parse(InstellingenProg.ProgrammaData[35]);
-                listBox17.Visible = listBox37.Visible = bool.Parse(InstellingenProg.ProgrammaData[36]);
-                listBox18.Visible = listBox38.Visible = bool.Parse(InstellingenProg.ProgrammaData[37]);
-                listBox19.Visible = listBox39.Visible = bool.Parse(InstellingenProg.ProgrammaData[38]);
-                listBox20.Visible = listBox40.Visible = bool.Parse(InstellingenProg.ProgrammaData[39]);
-                listBox21.Visible = listBox41.Visible = bool.Parse(InstellingenProg.ProgrammaData[40]);
+                checkBox1.Checked = bool.Parse(InstellingenProg.ProgrammaData[21]);
+                checkBox2.Checked = bool.Parse(InstellingenProg.ProgrammaData[22]);
+                checkBox3.Checked = bool.Parse(InstellingenProg.ProgrammaData[23]);
+                checkBox4.Checked = bool.Parse(InstellingenProg.ProgrammaData[24]);
+                checkBox5.Checked = bool.Parse(InstellingenProg.ProgrammaData[25]);
+                checkBox6.Checked = bool.Parse(InstellingenProg.ProgrammaData[26]);
+                checkBox7.Checked = bool.Parse(InstellingenProg.ProgrammaData[27]);
+                checkBox8.Checked = bool.Parse(InstellingenProg.ProgrammaData[28]);
+                checkBox9.Checked = bool.Parse(InstellingenProg.ProgrammaData[29]);
+                checkBox10.Checked = bool.Parse(InstellingenProg.ProgrammaData[30]);
+                checkBox11.Checked = bool.Parse(InstellingenProg.ProgrammaData[31]);
+                checkBox12.Checked = bool.Parse(InstellingenProg.ProgrammaData[32]);
+                checkBox13.Checked = bool.Parse(InstellingenProg.ProgrammaData[33]);
+                checkBox14.Checked = bool.Parse(InstellingenProg.ProgrammaData[34]);
+                checkBox15.Checked = bool.Parse(InstellingenProg.ProgrammaData[35]);
+                checkBox16.Checked = bool.Parse(InstellingenProg.ProgrammaData[36]);
+                checkBox17.Checked = bool.Parse(InstellingenProg.ProgrammaData[37]);
+                checkBox18.Checked = bool.Parse(InstellingenProg.ProgrammaData[38]);
+                checkBox19.Checked = bool.Parse(InstellingenProg.ProgrammaData[39]);
+                checkBox20.Checked = bool.Parse(InstellingenProg.ProgrammaData[40]);
 
-                label2.Visible = listBox2.Visible;
-                label3.Visible = listBox3.Visible;
-                label4.Visible = listBox4.Visible;
-                label5.Visible = listBox5.Visible;
-                label6.Visible = listBox6.Visible;
-                label7.Visible = listBox7.Visible;
-                label8.Visible = listBox8.Visible;
-                label9.Visible = listBox9.Visible;
-                label10.Visible = listBox10.Visible;
-                label11.Visible = listBox11.Visible;
-                label12.Visible = listBox12.Visible;
-                label13.Visible = listBox13.Visible;
-                label14.Visible = listBox14.Visible;
-                label15.Visible = listBox15.Visible;
-                label16.Visible = listBox16.Visible;
-                label17.Visible = listBox17.Visible;
-                label18.Visible = listBox18.Visible;
-                label19.Visible = listBox19.Visible;
-                label20.Visible = listBox20.Visible;
-                label21.Visible = listBox21.Visible;
+                label2.Visible = listBox22.Visible = listBox2.Visible;
+                label3.Visible = listBox23.Visible = listBox3.Visible;
+                label4.Visible = listBox24.Visible = listBox4.Visible;
+                label5.Visible = listBox25.Visible = listBox5.Visible;
+                label6.Visible = listBox26.Visible = listBox6.Visible;
+                label7.Visible = listBox27.Visible = listBox7.Visible;
+                label8.Visible = listBox28.Visible = listBox8.Visible;
+                label9.Visible = listBox29.Visible = listBox9.Visible;
+                label10.Visible = listBox30.Visible = listBox10.Visible;
+                label11.Visible = listBox31.Visible = listBox11.Visible;
+                label12.Visible = listBox32.Visible = listBox12.Visible;
+                label13.Visible = listBox33.Visible = listBox13.Visible;
+                label14.Visible = listBox34.Visible = listBox14.Visible;
+                label15.Visible = listBox35.Visible = listBox15.Visible;
+                label16.Visible = listBox36.Visible = listBox16.Visible;
+                label17.Visible = listBox37.Visible = listBox17.Visible;
+                label18.Visible = listBox38.Visible = listBox18.Visible;
+                label19.Visible = listBox39.Visible = listBox19.Visible;
+                label20.Visible = listBox40.Visible = listBox20.Visible;
+                label21.Visible = listBox41.Visible = listBox21.Visible;
             }
             catch { }
         }
@@ -803,6 +789,30 @@ namespace Bezetting2
                     e.Graphics.DrawString(Sender.Items[e.Index].ToString(), e.Font, textBrush, e.Bounds.Location);
                 }
             }
+        }
+
+        private void SaveCheckboxStatus()
+        {
+            InstellingenProg.ProgrammaData[21] = checkBox1.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[22] = checkBox2.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[23] = checkBox3.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[24] = checkBox4.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[25] = checkBox5.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[26] = checkBox6.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[27] = checkBox7.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[28] = checkBox8.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[29] = checkBox9.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[30] = checkBox10.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[31] = checkBox11.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[32] = checkBox12.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[33] = checkBox13.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[34] = checkBox14.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[35] = checkBox15.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[36] = checkBox16.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[37] = checkBox17.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[38] = checkBox18.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[39] = checkBox19.Checked ? true.ToString() : false.ToString();
+            InstellingenProg.ProgrammaData[40] = checkBox20.Checked ? true.ToString() : false.ToString();
         }
     }
 }
