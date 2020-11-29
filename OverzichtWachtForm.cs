@@ -305,17 +305,21 @@ namespace Bezetting2
                                 // pak naam
                                 string naam = box.Items[i].ToString();
                                 // haal juiste werkdag bij persoon
-                                werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
-                                if (box.Tag.ToString() == "1")
+                                try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
                                 {
-                                    ver._werkplek = "";
+                                    werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
+                                    if (box.Tag.ToString() == "1")
+                                    {
+                                        ver._werkplek = "";
+                                    }
+                                    else
+                                    {
+                                        // save werkplek
+                                        Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                                        ver._werkplek = veld._Label.Text;
+                                    }
                                 }
-                                else
-                                {
-                                    // save werkplek
-                                    Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                    ver._werkplek = veld._Label.Text;
-                                }
+                                catch { }
                             }
                         }
                     }
@@ -814,5 +818,7 @@ namespace Bezetting2
             InstellingenProg.ProgrammaData[39] = checkBox19.Checked ? true.ToString() : false.ToString();
             InstellingenProg.ProgrammaData[40] = checkBox20.Checked ? true.ToString() : false.ToString();
         }
+
+        
     }
 }

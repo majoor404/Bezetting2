@@ -18,7 +18,6 @@ namespace Bezetting2
 		public const int y_as_add_lijn = 4;
 		private bool kill = false;
 		private bool WindowUpdateViewScreen = true;
-		private bool screenshot = false;
 
 		private readonly ToolTip mTooltip = new ToolTip();
 		private Point mLastPos = new Point(-1, -1);
@@ -326,14 +325,12 @@ namespace Bezetting2
 					ZetLijnen();
 
 				labelDebug.Text = "";
-
-				screenshot = true; // in mouse move komt dan aanroep capture screen
-				//ProgData.CaptureMainScreen();
 			}
 		}
 
 		private void ButtonJan_Click(object sender, EventArgs e)
 		{
+			ProgData.CaptureMainScreen();
 			System.Windows.Forms.Button myButton = (System.Windows.Forms.Button)sender;
 			ProgData.igekozenmaand = int.Parse(myButton.Tag.ToString());
 			KleurMaandButton();
@@ -342,6 +339,7 @@ namespace Bezetting2
 
 		private void NumericUpDownJaar_ValueChanged(object sender, EventArgs e)
 		{
+			ProgData.CaptureMainScreen();
 			ProgData.Igekozenjaar = (int)numericUpDownJaar.Value;
 			VulViewScherm();
 		}
@@ -1038,12 +1036,6 @@ namespace Bezetting2
 					}
 				}
 				mLastPos = e.Location;
-
-				if (screenshot)
-				{
-					ProgData.CaptureMainScreen();
-					screenshot = false;
-				}
 			}
 			catch { }
 		}
@@ -1401,6 +1393,7 @@ namespace Bezetting2
 
 		private void CloseExitStopToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			ProgData.CaptureMainScreen();
 			Close();
 		}
 

@@ -111,7 +111,7 @@ namespace Bezetting2
 
             ViewUpdate();
         }
-        private void listBox29_DrawItem(object sender, DrawItemEventArgs e)
+        private void ListBox29_DrawItem(object sender, DrawItemEventArgs e)
         {
             if (e.Index > -1)
             {
@@ -363,7 +363,7 @@ namespace Bezetting2
             
             ViewDag2(dat2);
         }
-        private void buttonNext_Click(object sender, EventArgs e)
+        private void ButtonNext_Click(object sender, EventArgs e)
         {
             SaveData();
             dat = dat.AddDays(1);
@@ -379,7 +379,7 @@ namespace Bezetting2
             ProgData.igekozenmaand = dat.Month;
             ViewUpdate();
         }
-        private void buttonPrev_Click(object sender, EventArgs e)
+        private void ButtonPrev_Click(object sender, EventArgs e)
         {
             SaveData();
             dat = dat.AddDays(-1);
@@ -396,7 +396,7 @@ namespace Bezetting2
 
             ViewUpdate();
         }
-        private void buttonNu_Click(object sender, EventArgs e)
+        private void ButtonNu_Click(object sender, EventArgs e)
         {
             SaveData();
             dat = DateTime.Now;
@@ -450,8 +450,8 @@ namespace Bezetting2
                                     _werkplek = "",
                                     _afwijkingdienst = naam._metcode
                                 };
-                                //ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                                //ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                                ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
+                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
                             }
                         }
                     }
@@ -544,8 +544,8 @@ namespace Bezetting2
                                     _werkplek = "",
                                     _afwijkingdienst = naam._metcode
                                 };
-                                //ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                                //ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                                ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
+                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
                             }
                         }
                     }
@@ -612,17 +612,21 @@ namespace Bezetting2
                                 // pak naam
                                 string naam = box.Items[i].ToString();
                                 // haal juiste werkdag bij persoon
-                                werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
-                                if (box == listBox1)
+                                try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
                                 {
-                                    ver._werkplek = "";
+                                    werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
+                                    if (box == listBox1)
+                                    {
+                                        ver._werkplek = "";
+                                    }
+                                    else
+                                    {
+                                        // save werkplek
+                                        Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                                        ver._werkplek = veld._Label.Text;
+                                    }
                                 }
-                                else
-                                {
-                                    // save werkplek
-                                    Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                    ver._werkplek = veld._Label.Text;
-                                }
+                                catch { }
                             }
                         }
                     }
@@ -646,17 +650,21 @@ namespace Bezetting2
                                 // pak naam
                                 string naam = box.Items[i].ToString();
                                 // haal juiste werkdag bij persoon
-                                werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat2.Day.ToString()));
-                                if (box == listBox83)
+                                try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
                                 {
-                                    ver._werkplek = "";
+                                    werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat2.Day.ToString()));
+                                    if (box == listBox83)
+                                    {
+                                        ver._werkplek = "";
+                                    }
+                                    else
+                                    {
+                                        // save werkplek
+                                        Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                                        ver._werkplek = veld._Label.Text;
+                                    }
                                 }
-                                else
-                                {
-                                    // save werkplek
-                                    Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                    ver._werkplek = veld._Label.Text;
-                                }
+                                catch { }
                             }
                         }
                     }
@@ -682,8 +690,7 @@ namespace Bezetting2
                 bitmap.Save(ProgData.GetLocatieOverzichtPlaatje(dat), ImageFormat.Jpeg);
             }
         }
-
-        private void buttonCopy_Click(object sender, EventArgs e)
+        private void ButtonCopy_Click(object sender, EventArgs e)
         {
             foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
             {
