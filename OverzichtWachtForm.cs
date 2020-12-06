@@ -290,7 +290,7 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
@@ -324,14 +324,14 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
                 CaptureMyScreen();
             }
         }
 
         private void ViewUpdate()
         {
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
@@ -397,7 +397,7 @@ namespace Bezetting2
                                     _afwijkingdienst = naam._metcode
                                 };
                                 ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
                             }
                         }
                     }
@@ -763,6 +763,8 @@ namespace Bezetting2
                 if (afw.Length > 3) afw = afw.Substring(0, 3);
                 if (afw.Length > 2 && afw.Substring(0, 2) == "EV")
                     afw = "EV";
+                if (afw.Length > 2 && afw.Substring(0, 2) == "VK") // bv VK1 VK2 enz
+                    afw = "VK";
 
                 switch (afw)
                 {

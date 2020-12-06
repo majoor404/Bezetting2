@@ -17,7 +17,7 @@ namespace Bezetting2
 
 		private void FormDagAfwijkingInvoer_Shown(object sender, EventArgs e)
 		{
-			ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,30);
+			ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,15);
 			listBoxItems.Enabled = true;
 			textBoxAfwijking.Enabled = true;
 			buttonHistory.Enabled = true;

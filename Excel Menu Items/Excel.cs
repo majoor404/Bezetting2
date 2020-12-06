@@ -192,7 +192,7 @@ namespace Bezetting2
             //eerst vanuit ploegbezetting een string list maken met afwijkingen en normaal schema van persoon
             if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(kleur)))
             {
-                ProgData.LoadPloegBezetting(kleur,30);
+                ProgData.LoadPloegBezetting(kleur,15);
                 foreach (werkdag dag in ProgData.ListWerkdagPloeg)
                 {
                     if (dag._naam == naam)
@@ -474,9 +474,19 @@ namespace Bezetting2
                 ListVuilwerkData.Clear();
                 ListVuilwerkData = File.ReadAllLines("vuilwerk.ini").ToList();
 
+                List<string> TelNietMeeNamen = new List<string>();
+                string locatie = @"telnietmee.ini";
+                try
+                {
+                    TelNietMeeNamen = File.ReadAllLines(locatie).ToList();
+                }
+                catch { }
+
                 // eerst maar lijst maken wie vuilwerk verdiend.
                 ListClassTelVuilwerk.Clear();
                 int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
+
+                string korte_afwijking = "";
 
                 foreach (personeel a in ProgData.ListPersoneelKleur)
                 {
@@ -496,10 +506,34 @@ namespace Bezetting2
                                     if (string.IsNullOrEmpty(afwijking)) rechtop = true;
                                     if (afwijking == "*") rechtop = true;
 
+                                    if(TelNietMeeNamen.Contains(afwijking))
+                                        rechtop = true;
+
+                                    if (afwijking.Length > 3)
+                                        korte_afwijking = afwijking.Substring(0, 2);
+
+                                    if (korte_afwijking == "ED")
+                                    {
+                                        rechtop = true;
+                                        dienst = "X"; // extra
+                                    }
+
+                                    if (korte_afwijking == "VD")
+                                    {
+                                        rechtop = true;
+                                        dienst = "X"; // extra
+                                    }
+                                    if (korte_afwijking == "RD")
+                                    {
+                                        rechtop = true;
+                                        dienst = "X"; // extra
+                                    }
+
                                     if (rechtop && !string.IsNullOrEmpty(dienst))
                                     {
                                         ClassTelVuilwerk afw = new ClassTelVuilwerk(a._achternaam, d.ToString());
                                         ListClassTelVuilwerk.Add(afw);   // recht op vuilwerk
+                                        korte_afwijking = "";
                                     }
                                 }
                             }
@@ -529,8 +563,8 @@ namespace Bezetting2
                     ProgData.igekozenmaand = i;
                     if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                     {
-                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
-                        ProgData.LoadPloegNamenLijst(30);
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                        ProgData.LoadPloegNamenLijst(15);
 
                         foreach (personeel a in ProgData.ListPersoneelKleur)
                         {
@@ -561,8 +595,8 @@ namespace Bezetting2
                 }
                 ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,30);
-                ProgData.LoadPloegNamenLijst(30);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                ProgData.LoadPloegNamenLijst(15);
             }
             catch
             {
@@ -681,7 +715,7 @@ namespace Bezetting2
                 ProgData.igekozenmaand = i;
                 if (File.Exists(ProgData.Ploeg_Namen_Locatie()))
                 {
-                    ProgData.LoadPloegNamenLijst(30);
+                    ProgData.LoadPloegNamenLijst(15);
                     if (ProgData.ListPersoneelKleur.Count > 0)
                     {
                         foreach (personeel a in ProgData.ListPersoneelKleur)

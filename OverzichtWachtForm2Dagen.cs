@@ -120,6 +120,8 @@ namespace Bezetting2
                 if (afw.Length > 3) afw = afw.Substring(0, 3);
                 if (afw.Length > 2 && afw.Substring(0, 2) == "EV")
                     afw = "EV";
+                if (afw.Length > 2 && afw.Substring(0, 2) == "VK") // bv VK1 VK2 enz
+                    afw = "VK";
 
                 switch (afw)
                 {
@@ -406,7 +408,7 @@ namespace Bezetting2
         {
             ProgData.Igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
             foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
             {
                 box.Items.Clear();
@@ -451,7 +453,7 @@ namespace Bezetting2
                                     _afwijkingdienst = naam._metcode
                                 };
                                 ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
                             }
                         }
                     }
@@ -499,7 +501,7 @@ namespace Bezetting2
         {
             ProgData.Igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
             
             foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
             {
@@ -545,7 +547,7 @@ namespace Bezetting2
                                     _afwijkingdienst = naam._metcode
                                 };
                                 ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
                             }
                         }
                     }
@@ -597,7 +599,7 @@ namespace Bezetting2
             {
                 ProgData.Igekozenjaar = dat.Year;
                 ProgData.igekozenmaand = dat.Month;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
                 foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
                 {
@@ -631,11 +633,11 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
 
                 ProgData.Igekozenjaar = dat2.Year;
                 ProgData.igekozenmaand = dat2.Month;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 30);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
                 foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
                 {
@@ -669,7 +671,7 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 30);
+                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
 
                 CaptureMyScreen();
             }

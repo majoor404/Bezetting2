@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox3 = new System.Windows.Forms.ListBox();
@@ -119,7 +118,6 @@
             this.listBox40 = new System.Windows.Forms.ListBox();
             this.listBox41 = new System.Windows.Forms.ListBox();
             this.buttonNu = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // listBox1
@@ -1600,6 +1598,5 @@
         private System.Windows.Forms.ListBox listBox40;
         private System.Windows.Forms.ListBox listBox41;
         private System.Windows.Forms.Button buttonNu;
-        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
