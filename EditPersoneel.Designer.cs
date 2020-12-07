@@ -69,7 +69,6 @@
             this.label17 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.textBoxKleur = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonVoegToe = new System.Windows.Forms.Button();
             this.LabelRoosterNieuw = new System.Windows.Forms.Label();
@@ -82,6 +81,7 @@
             this.vuilwerk = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxKleur = new System.Windows.Forms.ComboBox();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -415,14 +415,6 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.ButtonClose_Click);
             // 
-            // textBoxKleur
-            // 
-            this.textBoxKleur.Location = new System.Drawing.Point(456, 473);
-            this.textBoxKleur.Name = "textBoxKleur";
-            this.textBoxKleur.ReadOnly = true;
-            this.textBoxKleur.Size = new System.Drawing.Size(201, 20);
-            this.textBoxKleur.TabIndex = 39;
-            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(6, 24);
@@ -544,17 +536,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nieuw";
             // 
+            // comboBoxKleur
+            // 
+            this.comboBoxKleur.Enabled = false;
+            this.comboBoxKleur.FormattingEnabled = true;
+            this.comboBoxKleur.Items.AddRange(new object[] {
+            "Blauw",
+            "Rood",
+            "Wit",
+            "Groen",
+            "Geel",
+            "DD"});
+            this.comboBoxKleur.Location = new System.Drawing.Point(456, 474);
+            this.comboBoxKleur.Name = "comboBoxKleur";
+            this.comboBoxKleur.Size = new System.Drawing.Size(196, 21);
+            this.comboBoxKleur.TabIndex = 51;
+            // 
             // EditPersoneel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(962, 607);
+            this.Controls.Add(this.comboBoxKleur);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.vuilwerk);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.groupBoxNieuwRooster);
-            this.Controls.Add(this.textBoxKleur);
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonRechten);
             this.Controls.Add(this.buttonSave);
@@ -645,7 +653,6 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.TextBox textBoxKleur;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonVoegToe;
         public System.Windows.Forms.Label LabelRoosterNieuw;
@@ -659,5 +666,6 @@
         private System.Windows.Forms.CheckBox vuilwerk;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox comboBoxKleur;
     }
 }

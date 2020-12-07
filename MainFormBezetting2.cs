@@ -152,6 +152,24 @@ namespace Bezetting2
 
 			if (ProgData.LeesLijnen())
 				ZetLijnen();
+
+			// auto inlog
+			var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			var autoinlogfile = $"{directory}\\bezetting2.log";
+			if (File.Exists(autoinlogfile))
+			{
+				List<string> inlognaam = new List<string>();
+				try
+				{
+					inlognaam = File.ReadAllLines(autoinlogfile).ToList();
+					ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
+					ProgData.RechtenHuidigeGebruiker = int.Parse(inlognaam[1]);
+					ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.Get_Gebruiker_Kleur(inlognaam[0]);
+				}
+				catch (IOException)
+				{
+				}
+			}
 		}
 
 		private void ImportNamenOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1297,36 +1315,42 @@ namespace Bezetting2
 						//Console.Write("{0} ", meta[9].ToString()); // personeel nummer invoerder
 						//Console.Write("{0} ", meta[11].ToString()); // rede
 
-						string[] datum = meta[7].ToString().Split('-');
-						datum[2] = datum[2].Substring(0, 4);
+						string[] datum = new string[12];
 
-						DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
-
-						if ((gekozen > inladen_vanaf_datum) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
-						//if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
+						if (meta[7] != null)
 						{
-							try
-							{
-								string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
+							datum = meta[7].ToString().Split('-');
+							datum[2] = datum[2].Substring(0, 4);
 
-								// in oude programma is afwijking soms gelijk aan orginele dienst
-								// die hoef ik in te voeren
-								if (meta[5].ToString() == "O" || meta[5].ToString() == "M" || meta[5].ToString() == "N")
+
+							DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
+
+							if ((gekozen > inladen_vanaf_datum) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
+							//if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
+							{
+								try
 								{
-									if (ProgData.MDatum.GetDienst("5PL", gekozen, kleur) == meta[5].ToString())
+									string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
+
+									// in oude programma is afwijking soms gelijk aan orginele dienst
+									// die hoef ik in te voeren
+									if (meta[5].ToString() == "O" || meta[5].ToString() == "M" || meta[5].ToString() == "N")
 									{
-										kleur = "niet invoeren";
+										if (ProgData.MDatum.GetDienst("5PL", gekozen, kleur) == meta[5].ToString())
+										{
+											kleur = "niet invoeren";
+										}
+									}
+
+									if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit" || kleur == "DD")
+									{
+										string naam = ProgData.Get_Gebruiker_Naam(meta[2].ToString());
+										string invoer_naam = ProgData.Get_Gebruiker_Naam(meta[9].ToString());
+										ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, naam, datum[0], meta[5].ToString().ToUpper(), meta[11].ToString(), "Import " + invoer_naam);
 									}
 								}
-
-								if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit" || kleur == "DD")
-								{
-									string naam = ProgData.Get_Gebruiker_Naam(meta[2].ToString());
-									string invoer_naam = ProgData.Get_Gebruiker_Naam(meta[9].ToString());
-									ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, naam, datum[0], meta[5].ToString().ToUpper(), meta[11].ToString(), "Import " + invoer_naam);
-								}
+								catch { }
 							}
-							catch { }
 						}
 						read = reader.Read();
 					} while (read == true);

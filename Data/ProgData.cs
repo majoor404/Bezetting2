@@ -624,7 +624,7 @@ namespace Bezetting2
 				char character = (char)xx22;
 				ret += character.ToString();
 			}
-			return ret;
+				return ret;
 		}
 
 		static public bool LeesLijnen()

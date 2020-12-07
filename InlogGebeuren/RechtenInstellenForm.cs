@@ -46,5 +46,10 @@ namespace Bezetting2.InlogGebeuren
                 recht += 50;
             labelRechtenNivo.Text = recht.ToString();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -56,7 +56,7 @@ namespace Bezetting2
             textBoxTelMobWerk.Text = "";
             textBoxAdresCodeWerk.Text = "";
             textBoxTelWerk.Text = "";
-            textBoxKleur.Text = "";
+            comboBoxKleur.Text = "";
             textBoxFuntie.Text = "";
             textBoxWerkplek.Text = "";
             LabelRoosterNieuw.Text = "";
@@ -74,7 +74,7 @@ namespace Bezetting2
             {
                 // direct edit ploeg rooster als admin
                 MessageBox.Show("als Admin nu direct rooster wissel mogelijk");
-                textBoxKleur.ReadOnly = false;
+                comboBoxKleur.Enabled = true;
             }
         }
 
@@ -110,7 +110,7 @@ namespace Bezetting2
             textBoxTelMobWerk.Text = "";
             textBoxAdresCodeWerk.Text = "";
             textBoxTelWerk.Text = "";
-            textBoxKleur.Text = "";
+            comboBoxKleur.Text = "";
             textBoxFuntie.Text = "";
             textBoxWerkplek.Text = "";
             LabelRoosterNieuw.Text = "";
@@ -151,7 +151,7 @@ namespace Bezetting2
                     textBoxTelMobWerk.Text = a._tel06werk;
                     textBoxAdresCodeWerk.Text = a._adrescodewerk;
                     textBoxTelWerk.Text = a._telwerk;
-                    textBoxKleur.Text = a._kleur;
+                    comboBoxKleur.Text = a._kleur;
                     textBoxFuntie.Text = a._funtie;
                     textBoxWerkplek.Text = a._werkgroep;
                     vuilwerk.Checked = bool.Parse(a._vuilwerk);
@@ -202,7 +202,7 @@ namespace Bezetting2
                 VerhuisForm verhuis = new VerhuisForm();
                 verhuis.labelNaam.Text = textBoxAchterNaam.Text;
                 verhuis.labelPersoneelNummer.Text = textBoxPersNum.Text;
-                verhuis.labelHuidigRooster.Text = textBoxKleur.Text;
+                verhuis.labelHuidigRooster.Text = comboBoxKleur.Text;
                 verhuis.ShowDialog();
 
                 MessageBox.Show("Geduld, copyeren van dagen");
@@ -231,7 +231,8 @@ namespace Bezetting2
 
                     // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
                     // meegeven eerste dag.
-                    Bewaar_oude_afwijkingen(persoon_gekozen._achternaam, eerste_dag_weg, persoon_gekozen._verhuisdatum.Month, persoon_gekozen._verhuisdatum.Year);
+                    if(persoon_gekozen._kleur != "Nieuw")
+                        Bewaar_oude_afwijkingen(persoon_gekozen._achternaam, eerste_dag_weg, persoon_gekozen._verhuisdatum.Month, persoon_gekozen._verhuisdatum.Year);
 
                     int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
 
@@ -429,6 +430,7 @@ namespace Bezetting2
 
         private void ButtonVoegToe_Click(object sender, EventArgs e)
         {
+            comboBoxKleur.Enabled = false;
             personeel a = new personeel
             {
                 _persnummer = int.Parse(textBoxPersNum.Text),
@@ -447,19 +449,19 @@ namespace Bezetting2
                 _vuilwerk = vuilwerk.Checked.ToString()
             };
 
-            if (string.IsNullOrEmpty(textBoxKleur.Text))
-            {
-                a._kleur = "Nieuw";
-            }
-            else
-            {
-                a._kleur = textBoxKleur.Text;
-            }
+            //if (string.IsNullOrEmpty(textBoxKleur.Text))
+            //{
+            //    a._kleur = "Nieuw";
+            //}
+            //else
+            //{
+                a._kleur = comboBoxKleur.Text;
+            //}
 
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
                 // direct edit ploeg rooster als admin
-                a._kleur = textBoxKleur.Text;
+                a._kleur = comboBoxKleur.Text;
             }
 
             a._funtie = textBoxFuntie.Text;
@@ -485,12 +487,14 @@ namespace Bezetting2
             textBoxTelMobWerk.Text = "";
             textBoxAdresCodeWerk.Text = "";
             textBoxTelWerk.Text = "";
-            textBoxKleur.Text = "";
+            comboBoxKleur.Text = "";
             textBoxFuntie.Text = "";
             textBoxWerkplek.Text = "";
             LabelRoosterNieuw.Text = "";
             vuilwerk.Checked = false;
-            MessageBox.Show("Na invoeren naam enz, druk op voeg toe.\nDoe daarna kleur verhuizing naar juiste kleur/plek.");
+            comboBoxKleur.Enabled = true;
+            MessageBox.Show("Na invoeren naam enz, druk op voeg toe.");
+            /*\nDoe daarna kleur verhuizing naar juiste kleur/plek.*/
         }
         // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
         private void Bewaar_oude_afwijkingen(string personeel_naam, int eerste_dag, int maand, int jaar)
