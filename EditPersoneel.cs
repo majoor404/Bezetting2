@@ -317,8 +317,9 @@ namespace Bezetting2
                     // meegeven eerste dag.
                     Restore_oude_afwijkingen(persoon_gekozen._nieuwkleur);
 
-                    ProgData.GekozenKleur = GekozenKleurInBeeld;
+                    MessageBox.Show("Klaar met Verhuis");
 
+                    ProgData.GekozenKleur = GekozenKleurInBeeld;
                 }
                 catch { }
             }// vraagje 
@@ -389,6 +390,8 @@ namespace Bezetting2
                 ProgData.igekozenmaand = maand;
                 ProgData.GekozenKleur = kleur;
                 EditPersoneel_Shown(this, null);
+
+                MessageBox.Show("Klaar met cancel verhuis");
             }
         }
 
@@ -580,16 +583,19 @@ namespace Bezetting2
             int backupjaar = ProgData.Igekozenjaar;
             int backupmaand = ProgData.igekozenmaand;
             ProgData.GekozenKleur = nieuwekleur;
-
+            string temp = labelNieuwRoosterDatum.Text;
+            int t = 0;
             foreach (VeranderingenVerhuis ver in VeranderingenLijstTemp)
             {
+                labelNieuwRoosterDatum.Text = t.ToString();
+                labelNieuwRoosterDatum.Refresh();
                 DateTime dat = new DateTime(int.Parse(ver.Jaar_), int.Parse(ver.Maand_), int.Parse(ver._datumafwijking));
                 string invoerdoor = $"Verhuis: {ver._invoerdoor}";
                 if (ver._afwijking == "X")
                     ver._afwijking = "";
                 ProgData.RegelAfwijkingOpDatumEnKleur(dat, nieuwekleur, ver._naam, ver._datumafwijking, ver._afwijking, ver._rede, invoerdoor);
             }
-
+            labelNieuwRoosterDatum.Text = temp;
             // restore maand jaar
             ProgData.Igekozenjaar = backupjaar;
             ProgData.igekozenmaand = backupmaand;

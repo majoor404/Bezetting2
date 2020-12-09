@@ -153,9 +153,9 @@ namespace Bezetting2
 			if (ProgData.LeesLijnen())
 				ZetLijnen();
 
-			// auto inlog
-			var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-			var autoinlogfile = $"{directory}\\bezetting2.log";
+            // auto inlog
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string autoinlogfile = $"{directory}\\bezetting2.log";
 			if (File.Exists(autoinlogfile))
 			{
 				List<string> inlognaam = new List<string>();
@@ -215,12 +215,14 @@ namespace Bezetting2
 			instellingenProgrammaToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
 			importOudeVeranderDataOudeVersieToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
 			nietMeeTelLijstToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
+			removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
 
 			vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
 			tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
 			namenAdressenEMailToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
 			afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 0;
 			afwijkingTovRoosterPloegToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
+			
 		}
 
 		private void UitloggenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1446,5 +1448,15 @@ namespace Bezetting2
         {
 
         }
+
+        private void removeAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string autoinlogfile = $"{directory}\\bezetting2.log";
+			if (File.Exists(autoinlogfile))
+			{
+				File.Delete(autoinlogfile);
+			}
+		}
     }
 }

@@ -43,7 +43,7 @@ namespace Bezetting2.Invoer
                     int aantal = (int)AantalDagen.Value;
                     while (aantal > 0)
                     {
-                        Text = aantal.ToString();
+                        labelAftellen.Text = aantal.ToString();
                         labelAftellen.Refresh();
 
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);

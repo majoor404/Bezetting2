@@ -32,9 +32,13 @@ namespace Bezetting2
             textBoxPass.Text = "";
             textBoxChangePasswoord.Text = "";
 
+            // auto inlog alleen als Environment.UserName 6 char met alleen nummers
             int dum;
             if (textBoxNum.Text.Length == 6 && int.TryParse(textBoxNum.Text,out dum))
                 groupBoxAutoInlog.Visible = true;
+
+            // voor debug op deze pc even aanzetten ;-)
+            // groupBoxAutoInlog.Visible = true;
 
             // auto inlog
             var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
@@ -67,7 +71,7 @@ namespace Bezetting2
                     ProgData.Huidige_Gebruiker_Personeel_nummer = "Admin";
                     ProgData.RechtenHuidigeGebruiker = 101;
                 }
-                else if (textBoxNum.Text == "000000" && textBoxPass.Text.ToLower() == "kompas59")
+                else if (textBoxNum.Text == "000000" && textBoxPass.Text == DateTime.Now.ToString("ddMM"))
                 {
                     ProgData.Huidige_Gebruiker_Personeel_nummer = "000000";
                     ProgData.RechtenHuidigeGebruiker = 100;
@@ -194,7 +198,9 @@ namespace Bezetting2
         private void TextBoxNum_TextChanged(object sender, EventArgs e)
         {
             if (textBoxNum.Text == "Admin" || textBoxNum.Text == "000000")
+            {
                 checkBoxAutoInlog.Checked = false;
+            }
 
             // na reset passwoord is het "verander_nu", pas meteen aan.
             try
