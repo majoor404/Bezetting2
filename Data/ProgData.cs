@@ -142,6 +142,11 @@ namespace Bezetting2
 			set
 			{
 				_inlognaam.Text = value;
+				if(Main != null)
+				{
+					Main.Text = $"Bezetting 2.0          Ingelogd :   {Huidige_Gebruiker_Naam()} -- {_inlognaam.Text}";
+				}
+
 			}
 		}
 
