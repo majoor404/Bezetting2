@@ -416,7 +416,9 @@ namespace Bezetting2
                 personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
                 persoon._rechten = int.Parse(recht.labelRechtenNivo.Text);
                 ProgData.Save_Namen_lijst();
+                ComboBoxFilter_SelectedIndexChanged(this, null);
             }
+
         }
 
         private void ButtonDelete_Click(object sender, EventArgs e)
