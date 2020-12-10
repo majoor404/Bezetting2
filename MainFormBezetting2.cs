@@ -233,9 +233,9 @@ namespace Bezetting2
 
 		private void ComboBoxKleurKeuze_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			ProgData.CaptureMainScreen();
 			ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
 			VulViewScherm();
-			//ProgData.CaptureMainScreen();
 		}
 
 		public void VulViewScherm()
@@ -1259,7 +1259,8 @@ namespace Bezetting2
 
 		private void MainFormBezetting2_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			VulViewScherm();
+			Thread.Sleep(300);
+			ProgData.CaptureMainScreen();
 		}
 
 		private void ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1434,8 +1435,8 @@ namespace Bezetting2
 
 		private void CloseExitStopToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Thread.Sleep(300);
-			ProgData.CaptureMainScreen();
+			//Thread.Sleep(300);
+			//ProgData.CaptureMainScreen();
 			Close();
 		}
 
