@@ -60,6 +60,7 @@
             this.repareerPloegAfwijkingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenProgrammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nietMeeTelLijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -101,9 +102,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
-            this.checkBox1SelLine = new System.Windows.Forms.CheckBox();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -359,6 +358,14 @@
             this.nietMeeTelLijstToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.nietMeeTelLijstToolStripMenuItem.Text = "Niet Mee Tel Lijst";
             this.nietMeeTelLijstToolStripMenuItem.Click += new System.EventHandler(this.NietMeeTelLijstToolStripMenuItem_Click);
+            // 
+            // removeAutoInlogOnderDitWindowsAccountToolStripMenuItem
+            // 
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Enabled = false;
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Name = "removeAutoInlogOnderDitWindowsAccountToolStripMenuItem";
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Text = "Remove Auto inlog onder dit Windows Account";
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Click += new System.EventHandler(this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -817,34 +824,17 @@
             this.labelDebug.TabIndex = 29;
             this.labelDebug.Text = "Debug Info";
             // 
-            // checkBox1SelLine
-            // 
-            this.checkBox1SelLine.AutoSize = true;
-            this.checkBox1SelLine.Location = new System.Drawing.Point(15, 625);
-            this.checkBox1SelLine.Name = "checkBox1SelLine";
-            this.checkBox1SelLine.Size = new System.Drawing.Size(97, 17);
-            this.checkBox1SelLine.TabIndex = 30;
-            this.checkBox1SelLine.Text = "Selecteer regel";
-            this.checkBox1SelLine.UseVisualStyleBackColor = true;
-            this.checkBox1SelLine.CheckedChanged += new System.EventHandler(this.CheckBox1SelLine_CheckedChanged);
-            // 
             // checkBoxHoverNaam
             // 
             this.checkBoxHoverNaam.AutoSize = true;
+            this.checkBoxHoverNaam.Checked = true;
+            this.checkBoxHoverNaam.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxHoverNaam.Location = new System.Drawing.Point(14, 648);
             this.checkBoxHoverNaam.Name = "checkBoxHoverNaam";
             this.checkBoxHoverNaam.Size = new System.Drawing.Size(86, 17);
             this.checkBoxHoverNaam.TabIndex = 31;
             this.checkBoxHoverNaam.Text = "Hover Naam";
             this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
-            // 
-            // removeAutoInlogOnderDitWindowsAccountToolStripMenuItem
-            // 
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Enabled = false;
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Name = "removeAutoInlogOnderDitWindowsAccountToolStripMenuItem";
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Text = "Remove Auto inlog onder dit Windows Account";
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Click += new System.EventHandler(this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click);
             // 
             // MainFormBezetting2
             // 
@@ -853,7 +843,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1834, 961);
             this.Controls.Add(this.checkBoxHoverNaam);
-            this.Controls.Add(this.checkBox1SelLine);
             this.Controls.Add(this.labelDebug);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.label4);
@@ -979,7 +968,6 @@
         private System.Windows.Forms.ToolStripMenuItem witToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allemaalToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBox1SelLine;
         private System.Windows.Forms.CheckBox checkBoxHoverNaam;
         private System.Windows.Forms.ToolStripMenuItem removeAutoInlogOnderDitWindowsAccountToolStripMenuItem;
     }

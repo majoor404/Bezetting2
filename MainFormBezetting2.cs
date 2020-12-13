@@ -170,6 +170,7 @@ namespace Bezetting2
 				{
 				}
 			}
+			Refresh();
 		}
 
 		private void ImportNamenOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -827,12 +828,9 @@ namespace Bezetting2
 			return new DateTime(year, month, day);
 		}
 
-		/// <summary>
-		/// Geklikt op view scherm, open invoer form
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void View_MouseClick(object sender, MouseEventArgs e)
+
+        // Geklikt op view scherm, open invoer form
+        private void View_MouseClick(object sender, MouseEventArgs e)
 		{
 			//Point point = new Point(e.X, e.Y);
 			ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
@@ -1276,11 +1274,12 @@ namespace Bezetting2
 				ProgData.Disable_error_Meldingen = true;
 				ProgData.Lees_Namen_lijst();
 				OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
-				MessageBox.Show("Klaar met invoer, start programma opnieuw op.");
+				//MessageBox.Show("Klaar met invoer, start programma opnieuw op.");
 				ProgData.GekozenKleur = "Blauw";
 				ButtonNu_Click(this, null);
 				ProgData.Disable_error_Meldingen = false;
-			}
+				Close();
+            }
 		}
 
 		private void OpenDataBase_en_Voer_oude_data_in_Bezetting(string file)
@@ -1289,9 +1288,9 @@ namespace Bezetting2
 			using (OleDbConnection connection =
 				new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
 			{
-				object[] meta = new object[12];
-				bool read;
-				int teller = 0;
+				
+                bool read;
+                int teller = 0;
 
 				OleDbCommand command = new OleDbCommand("select * from Wijzeging", connection);
 
@@ -1300,18 +1299,23 @@ namespace Bezetting2
 				WindowUpdateViewScreen = false;
 				DateTime inladen_vanaf_datum = DateTime.Now;
 				//inladen_vanaf_datum = inladen_vanaf_datum.AddMonths(-3);
+				ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
+														// check of er vorige maand mensen zijn verhuisd
 
 				if (reader.Read() == true)
 				{
 					do
 					{
 						Application.DoEvents();
-						//int NumberOfColums = reader.GetValues(meta);
+						object[] meta = new object[12]; // zodat ze leeg zijn elke keer ivm vorige data
+						// inlezen waarden
+						_ = reader.GetValues(meta);
 
-						labelDebug.Text = $"{teller++}";
+                        labelDebug.Text = $"{teller++}";
 						labelDebug.Refresh();
 
 						//Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
+						//Console.Write("{0} ", meta[3].ToString()); // naam persoon
 						//Console.Write("{0} ", meta[6].ToString()); // datum invoer
 						//Console.Write("{0} ", meta[7].ToString()); // datum afwijking
 						//Console.Write("{0} ", meta[5].ToString()); // afwijking
@@ -1320,40 +1324,58 @@ namespace Bezetting2
 
 						string[] datum = new string[12];
 
-						if (meta[7] != null)
+						datum = meta[7].ToString().Split('-');
+						datum[2] = datum[2].Substring(0, 4);
+
+						DateTime datum_afwijking = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
+
+						if ((datum_afwijking > inladen_vanaf_datum) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
 						{
-							datum = meta[7].ToString().Split('-');
-							datum[2] = datum[2].Substring(0, 4);
-
-
-							DateTime gekozen = new DateTime(int.Parse(datum[2]), int.Parse(datum[1]), int.Parse(datum[0]));
-
-							if ((gekozen > inladen_vanaf_datum) && (ProgData.Bestaat_Gebruiker(meta[2].ToString())))
-							//if (ProgData.Bestaat_Gebruiker(meta[2].ToString()))
+							try
 							{
-								try
+								string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
+
+								// in oude programma is afwijking soms gelijk aan orginele dienst
+								// die hoef ik in te voeren
+								if (meta[5].ToString() == "O" || meta[5].ToString() == "M" || meta[5].ToString() == "N")
 								{
-									string kleur = ProgData.Get_Gebruiker_Kleur(meta[2].ToString());
-
-									// in oude programma is afwijking soms gelijk aan orginele dienst
-									// die hoef ik in te voeren
-									if (meta[5].ToString() == "O" || meta[5].ToString() == "M" || meta[5].ToString() == "N")
+									if (ProgData.MDatum.GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
 									{
-										if (ProgData.MDatum.GetDienst("5PL", gekozen, kleur) == meta[5].ToString())
-										{
-											kleur = "niet invoeren";
-										}
-									}
-
-									if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit" || kleur == "DD")
-									{
-										string naam = ProgData.Get_Gebruiker_Naam(meta[2].ToString());
-										string invoer_naam = ProgData.Get_Gebruiker_Naam(meta[9].ToString());
-										ProgData.RegelAfwijkingOpDatumEnKleur(gekozen, kleur, naam, datum[0], meta[5].ToString().ToUpper(), meta[11].ToString(), "Import " + invoer_naam);
+										kleur = "niet invoeren";
 									}
 								}
-								catch { }
+
+
+
+								if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit" || kleur == "DD")
+								{
+									string naam = meta[3].ToString();
+									string invoer_naam = ProgData.Get_Gebruiker_Naam(meta[9].ToString());
+									string rede = meta[11].ToString();
+									string afwijking = meta[5].ToString().ToUpper();
+
+									//gaat fout als persoon ondertussen op andere kleur zit
+
+									IEnumerable<personeel> persoon = from a in ProgData.ListPersoneel
+																		where (a._achternaam == naam)
+																		where (!string.IsNullOrEmpty(a._nieuwkleur))
+																		select a;
+
+									foreach (personeel a in persoon)
+									{
+										// als verhuis datum-maand in verleden is tov huidige maand,
+										// aanpassen.
+										DateTime overgang = new DateTime(a._verhuisdatum.Year, a._verhuisdatum.Month, a._verhuisdatum.Day);
+
+										if (overgang <= datum_afwijking)
+										{
+											kleur = a._nieuwkleur;
+										}
+									}
+									ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam);
+								}
 							}
+							catch { }
 						}
 						read = reader.Read();
 					} while (read == true);
@@ -1369,9 +1391,9 @@ namespace Bezetting2
 							new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
 			{
 				object[] meta = new object[20];
-				bool read;
+                bool read;
 
-				OleDbCommand command = new OleDbCommand("select * from Adresen", connection);
+                OleDbCommand command = new OleDbCommand("select * from Adresen", connection);
 
 				connection.Open();
 				OleDbDataReader reader = command.ExecuteReader();
@@ -1382,16 +1404,16 @@ namespace Bezetting2
 					do
 					{
 						System.Windows.Forms.Application.DoEvents();
-						//int NumberOfColums = reader.GetValues(meta);
+                        _ = reader.GetValues(meta);
 
-						//Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
-						//Console.Write("{0} ", meta[6].ToString()); // datum invoer
-						//Console.Write("{0} ", meta[7].ToString()); // datum afwijking
-						//Console.Write("{0} ", meta[5].ToString()); // afwijking
-						//Console.Write("{0} ", meta[9].ToString()); // personeel nummer invoerder
-						//Console.Write("{0} ", meta[11].ToString()); // rede
+                        //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
+                        //Console.Write("{0} ", meta[6].ToString()); // datum invoer
+                        //Console.Write("{0} ", meta[7].ToString()); // datum afwijking
+                        //Console.Write("{0} ", meta[5].ToString()); // afwijking
+                        //Console.Write("{0} ", meta[9].ToString()); // personeel nummer invoerder
+                        //Console.Write("{0} ", meta[11].ToString()); // rede
 
-						try
+                        try
 						{
 							personeel p = new personeel
 							{
@@ -1439,16 +1461,6 @@ namespace Bezetting2
 			//ProgData.CaptureMainScreen();
 			Close();
 		}
-
-		private void CheckBox1SelLine_CheckedChanged(object sender, EventArgs e)
-		{
-			View.HoverSelection = checkBox1SelLine.Checked;
-		}
-
-        private void checkBoxHoverNaam_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void removeAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
