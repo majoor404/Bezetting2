@@ -1263,6 +1263,9 @@ namespace Bezetting2
 
 		private void ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			ProgData.ScreenCapture = false;
+			WindowUpdateViewScreen = false;
+
 			MessageBox.Show("Gaat soms fout als iemand in tussen tijd verhuisd is!");
 			MessageBox.Show("Delete de komende 25 maanden in de toekomst, en maak lege");
 
@@ -1299,7 +1302,7 @@ namespace Bezetting2
 			DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
 			if (result == DialogResult.OK) // Test result.
 			{
-				MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!");
+				MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!\nAls import klaar is sluit programma vanzelf af.");
 				ProgData.Disable_error_Meldingen = true;
 				ProgData.Lees_Namen_lijst();
 				OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
@@ -1309,6 +1312,9 @@ namespace Bezetting2
 				ProgData.Disable_error_Meldingen = false;
 				Close();
             }
+
+			ProgData.ScreenCapture = true;
+			WindowUpdateViewScreen = true;
 		}
 
 		private void OpenDataBase_en_Voer_oude_data_in_Bezetting(string file)

@@ -827,8 +827,6 @@
             // checkBoxHoverNaam
             // 
             this.checkBoxHoverNaam.AutoSize = true;
-            this.checkBoxHoverNaam.Checked = true;
-            this.checkBoxHoverNaam.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxHoverNaam.Location = new System.Drawing.Point(14, 648);
             this.checkBoxHoverNaam.Name = "checkBoxHoverNaam";
             this.checkBoxHoverNaam.Size = new System.Drawing.Size(86, 17);

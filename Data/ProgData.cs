@@ -50,6 +50,8 @@ namespace Bezetting2
 		public static bool Disable_error_Meldingen = false;
 		public static MainFormBezetting2 Main;
 
+		public static bool ScreenCapture = true;
+
 		public static ToolStripStatusLabel _inlognaam;
 		public static ToolStripStatusLabel _toegangnivo;
 
@@ -808,7 +810,7 @@ namespace Bezetting2
 		{
 			try
 			{
-				if (!string.IsNullOrEmpty(GekozenKleur))
+				if (ScreenCapture && !string.IsNullOrEmpty(GekozenKleur))
 				{
 					Rectangle bounds = ProgData.Main.Bounds;
 					using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
