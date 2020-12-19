@@ -1263,7 +1263,8 @@ namespace Bezetting2
 
 		private void ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Copy ook de namen uit oude bezetting, ivm ploeg verhuizing gebeuren");
+			MessageBox.Show("Gaat soms fout als iemand in tussen tijd verhuisd is.");
+			MessageBox.Show("Delete de maanden in de toekomst.");
 			openFileDialog.FileName = "";
 			//openFileDialog.Filter = "(*.Bez)|*.Bez";
 			MessageBox.Show("Open oude data bez file. (Wijz...Bez)");
