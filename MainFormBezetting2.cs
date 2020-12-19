@@ -515,7 +515,7 @@ namespace Bezetting2
 				else
 				{
 					// 1) Haal Ploeg Bezetting
-					ProgData.LoadPloegNamenLijst(15);
+					ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
 
 					// 2) Zet ploeg en werkplek op scherm
 					for (int i = 0; i < ProgData.ListWerkgroepPersoneel.Count; i++)
@@ -636,7 +636,7 @@ namespace Bezetting2
 
 				ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
 				ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-				ProgData.SavePloegNamenLijst(15);     // save ploegbezetting (de mensen)
+				ProgData.SavePloegNamenLijst(ProgData.GekozenKleur,15);     // save ploegbezetting (de mensen)
 
 				// maak bezettingafwijking.bin voor kleur als die niet bestaat
 				// is lijst met werkdagen
@@ -649,7 +649,7 @@ namespace Bezetting2
 				CheckEnDealVerhuizing();
 
 				// 1) Haal Ploeg Bezetting
-				ProgData.LoadPloegNamenLijst(15);
+				ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
 
 				// 2) Zet ploeg en werkplek op scherm
 				for (int i = 0; i < ProgData.ListWerkgroepPersoneel.Count; i++)
@@ -800,7 +800,7 @@ namespace Bezetting2
 					ProgData.Save_Namen_lijst();
 					ProgData.GekozenKleur = a._kleur;
 					ProgData.MaakPloegNamenLijst(a._kleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-					ProgData.SavePloegNamenLijst(30);         // save ploegbezetting (de mensen)
+					ProgData.SavePloegNamenLijst(a._kleur, 15);         // save ploegbezetting (de mensen)
 					ProgData.GekozenKleur = bewaar;
 				}
 			}
@@ -1263,8 +1263,36 @@ namespace Bezetting2
 
 		private void ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			MessageBox.Show("Gaat soms fout als iemand in tussen tijd verhuisd is.");
-			MessageBox.Show("Delete de maanden in de toekomst.");
+			MessageBox.Show("Gaat soms fout als iemand in tussen tijd verhuisd is!");
+			MessageBox.Show("Delete de komende 25 maanden in de toekomst, en maak lege");
+
+			DateTime nu = DateTime.Now;
+
+            for (int i = 0; i < 25; i++)
+            {
+				nu = nu.AddMonths(1);
+				string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
+				if (Directory.Exists(path))
+                {
+                    Directory.Delete(path,true); // delete met inhoud
+                }
+				_ = Directory.CreateDirectory(path);
+				ProgData.Igekozenjaar = nu.Year;
+				ProgData.igekozenmaand = nu.Month;
+				ProgData.MaakPloegNamenLijst("Blauw");
+				ProgData.SavePloegNamenLijst("Blauw",15);
+				ProgData.MaakPloegNamenLijst("Rood");
+				ProgData.SavePloegNamenLijst("Rood",15);
+				ProgData.MaakPloegNamenLijst("Wit");
+				ProgData.SavePloegNamenLijst("Wit",15);
+				ProgData.MaakPloegNamenLijst("Groen");
+				ProgData.SavePloegNamenLijst("Groen",15);
+				ProgData.MaakPloegNamenLijst("Geel");
+				ProgData.SavePloegNamenLijst("Geel",15);
+				ProgData.MaakPloegNamenLijst("DD");
+				ProgData.SavePloegNamenLijst("DD",15);
+			}
+
 			openFileDialog.FileName = "";
 			//openFileDialog.Filter = "(*.Bez)|*.Bez";
 			MessageBox.Show("Open oude data bez file. (Wijz...Bez)");

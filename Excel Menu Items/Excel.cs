@@ -564,7 +564,7 @@ namespace Bezetting2
                     if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                     {
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
-                        ProgData.LoadPloegNamenLijst(15);
+                        ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
 
                         foreach (personeel a in ProgData.ListPersoneelKleur)
                         {
@@ -596,7 +596,7 @@ namespace Bezetting2
                 ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
                 ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
-                ProgData.LoadPloegNamenLijst(15);
+                ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
             }
             catch
             {
@@ -713,9 +713,9 @@ namespace Bezetting2
             for (int i = 1; i < 13; i++)
             {
                 ProgData.igekozenmaand = i;
-                if (File.Exists(ProgData.Ploeg_Namen_Locatie()))
+                if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.LoadPloegNamenLijst(15);
+                    ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
                     if (ProgData.ListPersoneelKleur.Count > 0)
                     {
                         foreach (personeel a in ProgData.ListPersoneelKleur)

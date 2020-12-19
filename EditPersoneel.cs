@@ -272,7 +272,7 @@ namespace Bezetting2
                     ProgData.Igekozenjaar = persoon_gekozen._verhuisdatum.Year;
 
                     ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                    ProgData.SavePloegNamenLijst(15);     // save ploegbezetting (de mensen)
+                    ProgData.SavePloegNamenLijst(ProgData.GekozenKleur,15);     // save ploegbezetting (de mensen)
 
                     // moet nieuwe collega toevoegen aan bezetting
 

@@ -164,7 +164,7 @@ namespace Bezetting2
 			}
 		}
 
-		public static void LoadPloegNamenLijst(int try_again)
+		public static void LoadPloegNamenLijst(string kleur,int try_again)
 		{
 			if (try_again < 0)
 			{
@@ -175,7 +175,7 @@ namespace Bezetting2
 			try
 			{
 				//string _Ploeg_Namen_Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
-				using (Stream stream = File.Open(Ploeg_Namen_Locatie(), FileMode.Open))
+				using (Stream stream = File.Open(Ploeg_Namen_Locatie(kleur), FileMode.Open))
 				{
 					ListPersoneelKleur.Clear();
 					BinaryFormatter bin = new BinaryFormatter();
@@ -186,25 +186,25 @@ namespace Bezetting2
 			{
 				Main.labelDebug.Text = "catch LoadPloegNamenLijst() error, try again";
 				Thread.Sleep(300);
-				LoadPloegNamenLijst(try_again--);
+				LoadPloegNamenLijst(kleur,try_again--);
 			}
 			// haal werkgroepen op
 			MaakWerkPlekkenLijst();
 			Main.labelDebug.Text = "";
 		}
 
-		public static void SavePloegNamenLijst(int try_again)
+		public static void SavePloegNamenLijst(string kleur,int try_again)
 		{
 			if (try_again < 0 && !Disable_error_Meldingen)
 			{
-				MessageBox.Show("SavePloegNamenLijst() error na 15 keer, " + Ploeg_Namen_Locatie());
+				MessageBox.Show("SavePloegNamenLijst() error na 15 keer, " + Ploeg_Namen_Locatie(kleur));
 			}
 			Main.labelDebug.Text = "Save Ploeg Namen Lijst";
-			if (!string.IsNullOrEmpty(GekozenKleur))
+			if (!string.IsNullOrEmpty(kleur))
 			{
 				try
 				{
-					string Locatie = Ploeg_Namen_Locatie();
+					string Locatie = Ploeg_Namen_Locatie(kleur);
 					using (Stream stream = File.Open(Locatie, FileMode.Create))
 					{
 						BinaryFormatter bin = new BinaryFormatter();
@@ -214,7 +214,7 @@ namespace Bezetting2
 				catch (IOException)
 				{
 					Thread.Sleep(300);
-					SavePloegNamenLijst(try_again--);
+					SavePloegNamenLijst(kleur,try_again--);
 				}
 			}
 		}
@@ -281,7 +281,7 @@ namespace Bezetting2
 			// bij een ploegnamen lijst hoort een bezetting lijst
 			if (!File.Exists(Ploeg_Bezetting_Locatie(kleur)))
 			{
-				MaakLegeBezetting(/*Sgekozenjaar(), igekozenmaand.ToString(),*/ GekozenKleur); // in deze roetine wordt het ook opgeslagen
+				MaakLegeBezetting(kleur); // in deze roetine wordt het ook opgeslagen
 			}
 		}
 
@@ -313,7 +313,7 @@ namespace Bezetting2
 
 				// bij nieuwe bezetting hoort ook een nieuwe verander lijst
 				ListVeranderingen.Clear(); // stel er bestond er nog 1, niet overschrijven.
-				SaveVeranderingenPloeg(15);
+				SaveVeranderingenPloeg(kleur,15);
             }
             else
             {
@@ -416,11 +416,11 @@ namespace Bezetting2
 			}
 		}
 
-		public static void SaveVeranderingenPloeg(int try_again)
+		public static void SaveVeranderingenPloeg(string kleur, int try_again)
 		{
 			if (try_again < 0 && !Disable_error_Meldingen)
 			{
-				MessageBox.Show($"SaveVeranderingenPloeg() error na 15 keer, \n{Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)}");
+				MessageBox.Show($"SaveVeranderingenPloeg() error na 15 keer, \n{Ploeg_Veranderingen_Locatie(kleur)}");
 			}
 
 
@@ -429,7 +429,7 @@ namespace Bezetting2
 			{
 				try
 				{
-					using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur), FileMode.Create))
+					using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(kleur), FileMode.Create))
 					{
 						BinaryFormatter bin = new BinaryFormatter();
 						bin.Serialize(stream, ListVeranderingen);
@@ -439,7 +439,7 @@ namespace Bezetting2
 				catch (IOException)
 				{
 					Thread.Sleep(300);
-					SaveVeranderingenPloeg(try_again--);
+					SaveVeranderingenPloeg(kleur,try_again--);
 				}
 			}
 		}
@@ -561,7 +561,7 @@ namespace Bezetting2
                     _invoerdoor = invoerdoor
                 };
                 ListVeranderingen.Add(verander);
-				SaveVeranderingenPloeg(15);
+				SaveVeranderingenPloeg(kleur,15);
 			}
 			catch
 			{
@@ -782,9 +782,9 @@ namespace Bezetting2
 			return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_bezetting.bin");
 		}
 
-		public static string Ploeg_Namen_Locatie()
+		public static string Ploeg_Namen_Locatie(string kleur)
 		{
-			return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{GekozenKleur}_namen.bin");
+			return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_namen.bin");
 		}
 
 		public static string Ploeg_Veranderingen_Locatie(string kleur)
@@ -895,7 +895,7 @@ namespace Bezetting2
 					_ = Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}"));
 
 					MaakPloegNamenLijst(kleur);
-					SavePloegNamenLijst(15);
+					SavePloegNamenLijst(kleur,15);
 
 					LoadPloegBezetting(kleur, 15);
 					GekozenKleur = kleur;
@@ -995,7 +995,7 @@ namespace Bezetting2
 			catch
 			{
 				Thread.Sleep(300);
-				SaveVeranderingenPloeg(test--);
+				TestNetwerkBeschikbaar(test--);
 			}
 			MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
 			return false;
