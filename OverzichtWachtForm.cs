@@ -2,8 +2,10 @@
 using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -87,6 +89,8 @@ namespace Bezetting2
 
         private void OverzichtWachtForm_Shown(object sender, EventArgs e)
         {
+            buttonOpmerking.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
+
             // als ToegangNivo hoog genoeg, vrijgave edit
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
@@ -821,6 +825,14 @@ namespace Bezetting2
             InstellingenProg.ProgrammaData[40] = checkBox20.Checked ? true.ToString() : false.ToString();
         }
 
-        
+        private void buttonOpmerking_Click(object sender, EventArgs e)
+        {
+            string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+            if (!File.Exists(file))
+            {
+                File.Create(file).Dispose();
+            }
+            Process.Start(file);
+        }
     }
 }

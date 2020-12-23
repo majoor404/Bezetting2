@@ -1,8 +1,10 @@
 ﻿using Bezetting2.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -38,6 +40,8 @@ namespace Bezetting2
         }
         private void OverzichtWachtForm2_Shown(object sender, EventArgs e)
         {
+            buttonOpmerking.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
+
             // als ToegangNivo hoog genoeg, vrijgave edit
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
@@ -46,7 +50,7 @@ namespace Bezetting2
                     check.Visible = true;
                 }
 
-                MessageBox.Show("In edit mode, Gebruikers rechten > 100");
+                MessageBox.Show("Gebruikers rechten > 100, ADMIN!");
             }
 
             opbouw.Clear();
@@ -790,6 +794,16 @@ namespace Bezetting2
             }
             SaveData();
             ViewUpdate();
+        }
+
+        private void buttonOpmerking_Click(object sender, EventArgs e)
+        {
+            string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+            if (!File.Exists(file))
+            {
+                    File.Create(file).Dispose();
+            }
+            Process.Start(file);
         }
     }
 }

@@ -118,6 +118,7 @@
             this.listBox40 = new System.Windows.Forms.ListBox();
             this.listBox41 = new System.Windows.Forms.ListBox();
             this.buttonNu = new System.Windows.Forms.Button();
+            this.buttonOpmerking = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -1063,7 +1064,7 @@
             // buttonPrev
             // 
             this.buttonPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPrev.Location = new System.Drawing.Point(493, 30);
+            this.buttonPrev.Location = new System.Drawing.Point(492, 4);
             this.buttonPrev.Name = "buttonPrev";
             this.buttonPrev.Size = new System.Drawing.Size(100, 30);
             this.buttonPrev.TabIndex = 66;
@@ -1074,7 +1075,7 @@
             // buttonNext
             // 
             this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNext.Location = new System.Drawing.Point(608, 30);
+            this.buttonNext.Location = new System.Drawing.Point(607, 4);
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(100, 30);
             this.buttonNext.TabIndex = 67;
@@ -1085,7 +1086,7 @@
             // buttonCopy
             // 
             this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCopy.Location = new System.Drawing.Point(900, 30);
+            this.buttonCopy.Location = new System.Drawing.Point(899, 4);
             this.buttonCopy.Name = "buttonCopy";
             this.buttonCopy.Size = new System.Drawing.Size(230, 30);
             this.buttonCopy.TabIndex = 68;
@@ -1390,7 +1391,7 @@
             // buttonNu
             // 
             this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNu.Location = new System.Drawing.Point(724, 30);
+            this.buttonNu.Location = new System.Drawing.Point(723, 4);
             this.buttonNu.Name = "buttonNu";
             this.buttonNu.Size = new System.Drawing.Size(157, 30);
             this.buttonNu.TabIndex = 90;
@@ -1398,11 +1399,23 @@
             this.buttonNu.UseVisualStyleBackColor = true;
             this.buttonNu.Click += new System.EventHandler(this.ButtonNu_Click);
             // 
+            // buttonOpmerking
+            // 
+            this.buttonOpmerking.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpmerking.Location = new System.Drawing.Point(236, 4);
+            this.buttonOpmerking.Name = "buttonOpmerking";
+            this.buttonOpmerking.Size = new System.Drawing.Size(230, 30);
+            this.buttonOpmerking.TabIndex = 182;
+            this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
+            this.buttonOpmerking.UseVisualStyleBackColor = true;
+            this.buttonOpmerking.Click += new System.EventHandler(this.buttonOpmerking_Click);
+            // 
             // OverzichtWachtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 625);
+            this.Controls.Add(this.buttonOpmerking);
             this.Controls.Add(this.buttonNu);
             this.Controls.Add(this.listBox41);
             this.Controls.Add(this.listBox40);
@@ -1598,5 +1611,6 @@
         private System.Windows.Forms.ListBox listBox40;
         private System.Windows.Forms.ListBox listBox41;
         private System.Windows.Forms.Button buttonNu;
+        private System.Windows.Forms.Button buttonOpmerking;
     }
 }

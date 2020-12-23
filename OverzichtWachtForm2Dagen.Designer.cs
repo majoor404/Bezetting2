@@ -166,6 +166,7 @@ namespace Bezetting2
             this.label30 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
+            this.buttonOpmerking = new System.Windows.Forms.Button();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -173,6 +174,7 @@ namespace Bezetting2
             // PanelDag1
             // 
             this.PanelDag1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag1.Controls.Add(this.buttonOpmerking);
             this.PanelDag1.Controls.Add(this.listBox41);
             this.PanelDag1.Controls.Add(this.listBox40);
             this.PanelDag1.Controls.Add(this.listBox39);
@@ -2232,6 +2234,17 @@ namespace Bezetting2
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
             // 
+            // buttonOpmerking
+            // 
+            this.buttonOpmerking.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpmerking.Location = new System.Drawing.Point(1270, 9);
+            this.buttonOpmerking.Name = "buttonOpmerking";
+            this.buttonOpmerking.Size = new System.Drawing.Size(230, 30);
+            this.buttonOpmerking.TabIndex = 181;
+            this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
+            this.buttonOpmerking.UseVisualStyleBackColor = true;
+            this.buttonOpmerking.Click += new System.EventHandler(this.buttonOpmerking_Click);
+            // 
             // OverzichtWachtForm2Dagen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2394,5 +2407,6 @@ namespace Bezetting2
         private System.Windows.Forms.ListBox listBox83;
         private System.Windows.Forms.Label labelDienst2;
         private System.Windows.Forms.Label labelDatum2;
+        private System.Windows.Forms.Button buttonOpmerking;
     }
 }
