@@ -91,7 +91,7 @@ namespace Bezetting2
                             juist = true;
                         }
                     }
-                    if (ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
+                    if (!string.IsNullOrEmpty(textBoxPass.Text) && ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
                     {
                         {
                             // juiste inlog
@@ -104,7 +104,7 @@ namespace Bezetting2
                             if (textBoxNum.Text == textBoxPass.Text)
                                 checkBoxAutoInlog.Checked = false;
 
-                            if ((textBoxNum.Text != labelAutoInlogNaam.Text) && (checkBoxAutoInlog.Checked) && (labelAutoInlogNaam.Text!= ""))
+                            if ((textBoxNum.Text != labelAutoInlogNaam.Text) && checkBoxAutoInlog.Checked && (!string.IsNullOrEmpty(labelAutoInlogNaam.Text)))
                             {
                                 checkBoxAutoInlog.Checked = false;
                                 MessageBox.Show("Auto inlog is al op andere naam, zet deze onder die naam uit!");
@@ -228,6 +228,11 @@ namespace Bezetting2
         {
             if (textBoxNum.Text == textBoxPass.Text)
                 checkBoxAutoInlog.Checked = false;
+        }
+
+        private void checkBoxAutoInlog_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -49,7 +49,10 @@ namespace Bezetting2.InlogGebeuren
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
+            
+            if (GetRecht() > 0 && string.IsNullOrEmpty(persoon._passwoord))
+                Button2_Click(this,null);
         }
     }
 }

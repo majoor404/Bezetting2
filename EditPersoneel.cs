@@ -13,7 +13,7 @@ namespace Bezetting2
         private int selpersnummer;
         private int rechten;
         // sla de veranderingen op van persoon in tijdelijke lijst
-        List<VeranderingenVerhuis> VeranderingenLijstTemp = new List<VeranderingenVerhuis>();
+        readonly List<VeranderingenVerhuis> VeranderingenLijstTemp = new List<VeranderingenVerhuis>();
 
         public EditPersoneel()
         {
@@ -527,15 +527,17 @@ namespace Bezetting2
                 int I = int.Parse(Item._datumafwijking);
 
                 if (I >= eerste_dag) {
-                    VeranderingenVerhuis verhuisje = new VeranderingenVerhuis();
-                    verhuisje.Maand_ = ProgData.igekozenmaand.ToString();
-                    verhuisje.Jaar_ = ProgData.Igekozenjaar.ToString();
-                    verhuisje._afwijking = Item._afwijking;
-                    verhuisje._datumafwijking = Item._datumafwijking;
-                    verhuisje._datuminvoer = Item._datuminvoer;
-                    verhuisje._invoerdoor = Item._invoerdoor;
-                    verhuisje._naam = Item._naam;
-                    verhuisje._rede = Item._rede;
+                    VeranderingenVerhuis verhuisje = new VeranderingenVerhuis
+                    {
+                        Maand_ = ProgData.igekozenmaand.ToString(),
+                        Jaar_ = ProgData.Igekozenjaar.ToString(),
+                        _afwijking = Item._afwijking,
+                        _datumafwijking = Item._datumafwijking,
+                        _datuminvoer = Item._datuminvoer,
+                        _invoerdoor = Item._invoerdoor,
+                        _naam = Item._naam,
+                        _rede = Item._rede
+                    };
 
                     VeranderingenLijstTemp.Add(verhuisje);
                 }
@@ -560,15 +562,17 @@ namespace Bezetting2
 
                     foreach (veranderingen Item in veranderingen)
                     {
-                        VeranderingenVerhuis verhuisje = new VeranderingenVerhuis();
-                        verhuisje.Maand_ = ProgData.igekozenmaand.ToString();
-                        verhuisje.Jaar_ = ProgData.Igekozenjaar.ToString();
-                        verhuisje._afwijking = Item._afwijking;
-                        verhuisje._datumafwijking = Item._datumafwijking;
-                        verhuisje._datuminvoer = Item._datuminvoer;
-                        verhuisje._invoerdoor = Item._invoerdoor;
-                        verhuisje._naam = Item._naam;
-                        verhuisje._rede = Item._rede;
+                        VeranderingenVerhuis verhuisje = new VeranderingenVerhuis
+                        {
+                            Maand_ = ProgData.igekozenmaand.ToString(),
+                            Jaar_ = ProgData.Igekozenjaar.ToString(),
+                            _afwijking = Item._afwijking,
+                            _datumafwijking = Item._datumafwijking,
+                            _datuminvoer = Item._datuminvoer,
+                            _invoerdoor = Item._invoerdoor,
+                            _naam = Item._naam,
+                            _rede = Item._rede
+                        };
 
                         VeranderingenLijstTemp.Add(verhuisje);
                     }

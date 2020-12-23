@@ -158,13 +158,30 @@ namespace Bezetting2
             string autoinlogfile = $"{directory}\\bezetting2.log";
 			if (File.Exists(autoinlogfile))
 			{
-				List<string> inlognaam = new List<string>();
-				try
+                try
 				{
-					inlognaam = File.ReadAllLines(autoinlogfile).ToList();
-					ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
+                    List<string> inlognaam = File.ReadAllLines(autoinlogfile).ToList();
+                    ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
 					ProgData.RechtenHuidigeGebruiker = int.Parse(inlognaam[1]);
 					ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.Get_Gebruiker_Kleur(inlognaam[0]);
+
+					// test of gebruiker nog bestaat
+					ProgData.Lees_Namen_lijst();
+					try
+					{
+						personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == inlognaam[0].ToString());
+
+                    }
+                    catch
+                    {
+						MessageBox.Show("auto inlog naam bestaat niet in personeel lijst!, ik verwijder auto inlog!");
+						ProgData.Huidige_Gebruiker_Personeel_nummer = "";
+						ProgData.RechtenHuidigeGebruiker = 0;
+						ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
+						File.Delete(autoinlogfile);
+					}
+
+
 				}
 				catch (IOException)
 				{
@@ -173,24 +190,8 @@ namespace Bezetting2
 			Refresh();
 		}
 
-		private void ImportNamenOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			ProgData.ListPersoneel.Clear();
-			//openFileDialog.Filter = "(*.Bez)|*.Bez";
-			MessageBox.Show("Delete eerst directory's van toekomst");
-			MessageBox.Show("Let op, alle oude personeel gaat weg, open Bezetting5ploegen....Bez");
-
-			DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
-
-			if (result == DialogResult.OK) // Test result.
-			{
-				OpenDataBase_en_Voer_Oude_Namen_In(openFileDialog.FileName);
-				ProgData.Save_Namen_lijst();
-			}
-			MessageBox.Show("Klaar, druk op refresh");
-		}
-
-		private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
+	
+        private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			InlogForm log = new InlogForm();
 			log.ShowDialog();
@@ -1279,7 +1280,11 @@ namespace Bezetting2
                 {
                     Directory.Delete(path,true); // delete met inhoud
                 }
+				labelDebug.Text = $"maak dir {path}";
+				labelDebug.Refresh();
 				_ = Directory.CreateDirectory(path);
+				labelDebug.Text = $"vul met kleuren data : {path}";
+				labelDebug.Refresh();
 				ProgData.Igekozenjaar = nu.Year;
 				ProgData.igekozenmaand = nu.Month;
 				ProgData.MaakPloegNamenLijst("Blauw");
@@ -1297,7 +1302,7 @@ namespace Bezetting2
 			}
 
 			openFileDialog.FileName = "";
-			//openFileDialog.Filter = "(*.Bez)|*.Bez";
+			openFileDialog.Filter = "(*.Bez)|*.Bez";
 			MessageBox.Show("Open oude data bez file. (Wijz...Bez)");
 			DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
 			if (result == DialogResult.OK) // Test result.
@@ -1407,6 +1412,8 @@ namespace Bezetting2
 											kleur = a._nieuwkleur;
 										}
 									}
+									labelDebug.Text = $"{teller} {naam} {afwijking}";
+									labelDebug.Refresh();
 									ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam);
 								}
 							}
@@ -1433,6 +1440,11 @@ namespace Bezetting2
 				connection.Open();
 				OleDbDataReader reader = command.ExecuteReader();
 
+				// als rechten <> 0 dan vertalen naar nieuwe rechten, en
+				// zet passwoord op "verander_nu", zodat bij eerste keer inlog vraag komt aanpassen
+
+
+
 				if (reader.Read() == true)
 				{
 					//DateTime nu = DateTime.Now;
@@ -1441,12 +1453,6 @@ namespace Bezetting2
 						System.Windows.Forms.Application.DoEvents();
                         _ = reader.GetValues(meta);
 
-                        //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
-                        //Console.Write("{0} ", meta[6].ToString()); // datum invoer
-                        //Console.Write("{0} ", meta[7].ToString()); // datum afwijking
-                        //Console.Write("{0} ", meta[5].ToString()); // afwijking
-                        //Console.Write("{0} ", meta[9].ToString()); // personeel nummer invoerder
-                        //Console.Write("{0} ", meta[11].ToString()); // rede
 
                         try
 						{
@@ -1505,6 +1511,137 @@ namespace Bezetting2
 			{
 				File.Delete(autoinlogfile);
 			}
+		}
+		
+		private void ImportNamenOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ProgData.ListPersoneel.Clear();
+			//MessageBox.Show("Programma verwijderd nu eerst de directory's van toekomst");
+
+			//DateTime nu = DateTime.Now;
+			//for (int i = 0; i < 25; i++)
+			//{
+			//	nu = nu.AddMonths(1);
+			//	string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
+			//	if (Directory.Exists(path))
+			//	{
+			//		Directory.Delete(path, true); // delete met inhoud
+			//	}
+			//}
+
+			MessageBox.Show("Let op, alle oude personeel gaat weg, open Bezetting5ploegen....Bez");
+			openFileDialog.FileName = "";
+			openFileDialog.Filter = "(*.Bez)|*.Bez";
+
+			DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
+
+			if (result == DialogResult.OK) // Test result.
+			{
+				OpenDataBase_en_Voer_Oude_Namen_In(openFileDialog.FileName);
+				ProgData.Save_Namen_lijst();
+			}
+
+			MessageBox.Show("Open nu bijbehorende Rechten en passwoorden, open Lock.mdb");
+
+			openFileDialog.FileName = "Lock.mdb";
+			openFileDialog.Filter = "(*.mdb)|*.mdb";
+			result = openFileDialog.ShowDialog(); // Show the dialog.
+
+
+			if (result == DialogResult.OK) // Test result.
+			{
+				OpenDataBase_Wachtwoorden_en_Rechten(openFileDialog.FileName);
+			}
+
+			MessageBox.Show("Klaar, druk op refresh");
+		}
+
+		private void OpenDataBase_Wachtwoorden_en_Rechten(string file)
+		{
+			using (OleDbConnection connection =
+				new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
+			{
+				bool read;
+
+				OleDbCommand command = new OleDbCommand("select * from Tabel1", connection);
+
+				connection.Open();
+				OleDbDataReader reader = command.ExecuteReader();
+				WindowUpdateViewScreen = false;
+
+				ProgData.Lees_Namen_lijst();
+
+				if (reader.Read() == true)
+				{
+					do
+					{
+						Application.DoEvents();
+						object[] meta = new object[12]; // zodat ze leeg zijn elke keer ivm vorige data
+														// inlezen waarden
+						_ = reader.GetValues(meta);
+
+						try
+						{
+							//							''  onderstaande geld als 1 is
+							//''  Rechten(1) = Mag alles															0 100
+							//''  Rechten(2) = Mag database nieuw jaar maken en Comprimeren enz
+							//''  Rechten(3) = Mag bij iedereen op zijn ploeg een telling vk's enz maken
+							//''  Rechten(4) = Mag op alle ploegen een telling maken
+							//''  Rechten(5) = Mag in maand wijzigen bij zich zelf									4 25
+							//''  Rechten(6) = Mag in maand wijzigen hele ploeg										5 50
+							//''  Rechten(7) = Mag in maand wijzigen alleen zijn werkplek
+							//''  Rechten(8) = Mag in maand wijzigen alle ploegen									7 100
+							//''  Rechten(9) = Mag in namen wijzigen alle ploegen									8 100
+							//''  Rechten(10) = Mag in namen wijzigen eigen ploeg									9 50
+							//''  Rechten(11) = Mag in naam van zichzelf wijzigen									10 25
+							//''  Rechten(12) = Mag met inlogen rechten zetten
+							//''  Rechten(13) = Mag voor iedereen rechten zetten Behalve Rechten(1)
+							//''  Rechten(14) = Mag op eigen ploeg rechten zetten en paswoord veranderen			13 50
+							//''  Rechten(15) = Vuilwerk uitdraaien
+							//''  Rechten(16) = vakantie vullen
+							//''  Rechten(17) = Mag op andere ploegen kijken										
+
+							string oud_recht = meta[1].ToString();
+							personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == meta[2].ToString());
+							string naam = persoon._achternaam;
+							int rechten = 0;
+							// mag alles in oude programma
+							// dus hier ook
+							if (oud_recht.Substring(0, 1) == "1")
+								rechten = 100;
+							// nog uitzoeken
+							if (oud_recht.Substring(4, 1) == "1")
+								if (rechten < 25) rechten = 25;
+							if (oud_recht.Substring(5, 1) == "1")
+								if (rechten < 50) rechten = 50;
+							if (oud_recht.Substring(7, 1) == "1")
+								if (rechten < 100) rechten = 100;
+							if (oud_recht.Substring(8, 1) == "1")
+								if (rechten < 100) rechten = 100;
+							if (oud_recht.Substring(9, 1) == "1")
+								if (rechten < 50) rechten = 50;
+							if (oud_recht.Substring(10, 1) == "1")
+								if (rechten < 25) rechten = 25;
+							if (oud_recht.Substring(13, 1) == "1")
+								if (rechten < 50) rechten = 50;
+
+							if (rechten > 0)
+								persoon._passwoord = ProgData.Scramble("verander_nu");
+							persoon._rechten = rechten;
+						}
+						catch { }
+
+						//meta[1] = rechten string
+						//meta[2] = personeel nummer
+
+
+						read = reader.Read();
+					} while (read == true);
+				}
+				reader.Close();
+				ProgData.Save_Namen_lijst();
+			}
+			WindowUpdateViewScreen = true;
 		}
     }
 }
