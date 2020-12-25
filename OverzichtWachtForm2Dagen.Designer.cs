@@ -2243,7 +2243,7 @@ namespace Bezetting2
             this.buttonOpmerking.TabIndex = 181;
             this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
             this.buttonOpmerking.UseVisualStyleBackColor = true;
-            this.buttonOpmerking.Click += new System.EventHandler(this.buttonOpmerking_Click);
+            this.buttonOpmerking.Click += new System.EventHandler(this.ButtonOpmerking_Click);
             // 
             // OverzichtWachtForm2Dagen
             // 

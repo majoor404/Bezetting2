@@ -1063,10 +1063,10 @@
             // 
             // buttonPrev
             // 
-            this.buttonPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPrev.Location = new System.Drawing.Point(492, 4);
+            this.buttonPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPrev.Location = new System.Drawing.Point(455, 5);
             this.buttonPrev.Name = "buttonPrev";
-            this.buttonPrev.Size = new System.Drawing.Size(100, 30);
+            this.buttonPrev.Size = new System.Drawing.Size(100, 24);
             this.buttonPrev.TabIndex = 66;
             this.buttonPrev.Text = "Vorige";
             this.buttonPrev.UseVisualStyleBackColor = true;
@@ -1074,10 +1074,10 @@
             // 
             // buttonNext
             // 
-            this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNext.Location = new System.Drawing.Point(607, 4);
+            this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNext.Location = new System.Drawing.Point(561, 5);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(100, 30);
+            this.buttonNext.Size = new System.Drawing.Size(100, 24);
             this.buttonNext.TabIndex = 67;
             this.buttonNext.Text = "Volgende";
             this.buttonNext.UseVisualStyleBackColor = true;
@@ -1085,10 +1085,10 @@
             // 
             // buttonCopy
             // 
-            this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCopy.Location = new System.Drawing.Point(899, 4);
+            this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCopy.Location = new System.Drawing.Point(899, 5);
             this.buttonCopy.Name = "buttonCopy";
-            this.buttonCopy.Size = new System.Drawing.Size(230, 30);
+            this.buttonCopy.Size = new System.Drawing.Size(230, 24);
             this.buttonCopy.TabIndex = 68;
             this.buttonCopy.Text = "Copy Bezetting 1 Wacht";
             this.buttonCopy.UseVisualStyleBackColor = true;
@@ -1390,10 +1390,10 @@
             // 
             // buttonNu
             // 
-            this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNu.Location = new System.Drawing.Point(723, 4);
+            this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNu.Location = new System.Drawing.Point(677, 5);
             this.buttonNu.Name = "buttonNu";
-            this.buttonNu.Size = new System.Drawing.Size(157, 30);
+            this.buttonNu.Size = new System.Drawing.Size(157, 24);
             this.buttonNu.TabIndex = 90;
             this.buttonNu.Text = "Huidige Datum";
             this.buttonNu.UseVisualStyleBackColor = true;
@@ -1401,14 +1401,14 @@
             // 
             // buttonOpmerking
             // 
-            this.buttonOpmerking.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonOpmerking.Location = new System.Drawing.Point(236, 4);
+            this.buttonOpmerking.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpmerking.Location = new System.Drawing.Point(899, 35);
             this.buttonOpmerking.Name = "buttonOpmerking";
-            this.buttonOpmerking.Size = new System.Drawing.Size(230, 30);
+            this.buttonOpmerking.Size = new System.Drawing.Size(230, 24);
             this.buttonOpmerking.TabIndex = 182;
             this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
             this.buttonOpmerking.UseVisualStyleBackColor = true;
-            this.buttonOpmerking.Click += new System.EventHandler(this.buttonOpmerking_Click);
+            this.buttonOpmerking.Click += new System.EventHandler(this.ButtonOpmerking_Click);
             // 
             // OverzichtWachtForm
             // 

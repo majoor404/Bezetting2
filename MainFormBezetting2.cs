@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using static Bezetting2.DatumVijfPloegUtils;
 
 namespace Bezetting2
 {
@@ -139,7 +140,7 @@ namespace Bezetting2
 				if (nu.Hour < 6 && dienst == "N")
 					nu = nu.AddDays(-1);
 
-				comboBoxKleurKeuze.Text = ProgData.MDatum.GetKleurDieWerkt(nu, dienst);
+				comboBoxKleurKeuze.Text = /*ProgData.MDatum.*/GetKleurDieWerkt(ProgData.GekozenRooster(),nu, dienst);
 			}
 			else
 			{
@@ -274,8 +275,8 @@ namespace Bezetting2
 				{
 					dagnr[i] = i.ToString();
 					datum = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, i);
-					rooster[i] = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
-					dag[i] = ProgData.MDatum.GetDag(datum);
+					rooster[i] = /*ProgData.MDatum.*/GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
+					dag[i] = /*ProgData.MDatum.*/GetDag(datum);
 					weeknr[i] = "";
 					if (dag[i] == "W")
 					{
@@ -1379,7 +1380,7 @@ namespace Bezetting2
 								// die hoef ik in te voeren
 								if (meta[5].ToString() == "O" || meta[5].ToString() == "M" || meta[5].ToString() == "N")
 								{
-									if (ProgData.MDatum.GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
+									if (/*ProgData.MDatum.*/GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
 									{
 										kleur = "niet invoeren";
 									}
@@ -1503,7 +1504,7 @@ namespace Bezetting2
 			Close();
 		}
 
-        private void removeAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
             string autoinlogfile = $"{directory}\\bezetting2.log";

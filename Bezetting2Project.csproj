@@ -132,7 +132,6 @@
     <Compile Include="HistoryForm.Designer.cs">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\ModuleDatum.cs" />
     <Compile Include="InlogGebeuren\InlogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -329,6 +328,12 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PloegenDatum\PloegenDatum.csproj">
+      <Project>{fe47e5bd-55ea-4d96-935b-8e739bfba822}</Project>
+      <Name>PloegenDatum</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

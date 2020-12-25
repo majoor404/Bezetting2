@@ -832,7 +832,7 @@
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Name = "removeAutoInlogOnderDitWindowsAccountToolStripMenuItem";
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Text = "Remove Auto inlog onder dit Windows Account";
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Click += new System.EventHandler(this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click);
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Click += new System.EventHandler(this.RemoveAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click);
             // 
             // MainFormBezetting2
             // 

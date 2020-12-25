@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
+using static Bezetting2.DatumVijfPloegUtils;
 
 /*****************************************************************************
 
@@ -64,7 +65,7 @@ namespace Bezetting2
 		public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
 
 		public static List<string> ListWerkgroepPersoneel = new List<string>();
-		public static ModuleDatum MDatum = new ModuleDatum();
+		//public static ModuleDatum MDatum = new ModuleDatum();
 
 		public static List<veranderingen> ListVeranderingen = new List<veranderingen>();
 
@@ -256,8 +257,9 @@ namespace Bezetting2
                                 werkdag dag = new werkdag
                                 {
                                     _naam = a._achternaam,
-                                    _standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._nieuwkleur),
-                                    _werkplek = "",
+									//_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._nieuwkleur),
+									_standaarddienst = GetDienst(GekozenRooster(), dat, a._nieuwkleur),
+									_werkplek = "",
                                     _afwijkingdienst = "",
                                     _dagnummer = i
                                 };
@@ -303,7 +305,8 @@ namespace Bezetting2
 						werkdag dag = new werkdag
 						{
 							_naam = a._achternaam,
-							_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._kleur),
+							//_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._kleur),
+							_standaarddienst = GetDienst(GekozenRooster(), dat, a._kleur),
 							_werkplek = "",
 							_afwijkingdienst = "",
 							_dagnummer = i
@@ -370,11 +373,16 @@ namespace Bezetting2
 					{
 						ListWerkdagPloeg.Clear();
 						ListWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
-						stream.Dispose();
+						//stream.Dispose();
 					}
 					catch
 					{
 						MessageBox.Show("Deserialize(stream) error, gebruik repareer tool als Admin");
+					}
+					finally
+					{
+						if (stream != null)
+							stream.Dispose();
 					}
 				}
 			}
@@ -389,6 +397,7 @@ namespace Bezetting2
 				if (!Disable_error_Meldingen)
 					MessageBox.Show($"LoadPloegBezettingLijst() error\n{Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)}");
 			}
+			
 		}
 
 		public static void LoadVeranderingenPloeg(string kleur, int try_again)
@@ -921,7 +930,7 @@ namespace Bezetting2
 			{
 				DateTime dag_er_voor = new DateTime(Igekozenjaar, igekozenmaand, int.Parse(dagnr));
 				dag_er_voor = dag_er_voor.AddDays(-1);
-				if (MDatum.GetDienst(GekozenRooster(), dag_er_voor, GekozenKleur) == "N")
+				if (/*MDatum.*/GetDienst(GekozenRooster(), dag_er_voor, GekozenKleur) == "N")
 				{
 					if (afwijking == "VK" || afwijking == "8OI" || afwijking == "A" ||
 						afwijking == "VRIJ" || afwijking == "VAK" || afwijking == "VF" 
@@ -963,8 +972,9 @@ namespace Bezetting2
                     werkdag dag = new werkdag
                     {
                         _naam = naam,
-                        _standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, GekozenKleur),
-                        _werkplek = "",
+                        //_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, GekozenKleur),
+						_standaarddienst = GetDienst(GekozenRooster(), dat, GekozenKleur),
+						_werkplek = "",
                         _afwijkingdienst = "",
                         _dagnummer = i
                     };

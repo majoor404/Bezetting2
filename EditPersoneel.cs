@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using static Bezetting2.DatumVijfPloegUtils;
 
 namespace Bezetting2
 {
@@ -285,7 +286,7 @@ namespace Bezetting2
                         werkdag dag = new werkdag
                         {
                             _naam = persoon_gekozen._achternaam,
-                            _standaarddienst = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dat, persoon_gekozen._nieuwkleur),
+                            _standaarddienst = /*ProgData.MDatum.*/GetDienst(ProgData.GekozenRooster(), dat, persoon_gekozen._nieuwkleur),
                             _werkplek = "",
                             _afwijkingdienst = "",
                             _dagnummer = i

@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
+using static Bezetting2.DatumVijfPloegUtils;
 
 namespace Bezetting2
 {
@@ -202,7 +203,7 @@ namespace Bezetting2
                             dag_gekozen = new DateTime(jaar, maand, dag._dagnummer);
 
                             // get en zet eerst orginele dienst
-                            string wacht = ProgData.MDatum.GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
+                            string wacht = /*ProgData.MDatum.*/GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
                             if (!string.IsNullOrEmpty(wacht))
                             {
                                 deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
