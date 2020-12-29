@@ -38,7 +38,7 @@ namespace Bezetting2.Invoer
         private void MonthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             // bepaal afhankelijk van datum en ploeg kleur dienst
-            comboBoxDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), monthCalendar1.SelectionStart, comboBoxPloeg.Text);
+            comboBoxDienst.Text = GetDienstLong(ProgData.GekozenRooster(), monthCalendar1.SelectionStart, comboBoxPloeg.Text);
         }
 
         private void Button1_Click(object sender, EventArgs e)

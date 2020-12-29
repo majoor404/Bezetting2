@@ -47,7 +47,7 @@ namespace Bezetting2.InlogGebeuren
             labelRechtenNivo.Text = recht.ToString();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
             

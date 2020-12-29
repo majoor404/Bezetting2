@@ -250,11 +250,11 @@ namespace Bezetting2
         {
             SaveData();
             dat = dat.AddDays(-1);
-            string dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+            string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
             {
                 dat = dat.AddDays(-1);
-                dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
             ProgData.igekozenmaand = dat.Month;
@@ -267,11 +267,11 @@ namespace Bezetting2
         {
             SaveData();
             dat = dat.AddDays(1);
-            string dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+            string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
             {
                 dat = dat.AddDays(1);
-                dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
             ProgData.igekozenmaand = dat.Month;
@@ -343,18 +343,18 @@ namespace Bezetting2
 
             labelKleur.Text = ProgData.GekozenKleur;
 
-            labelDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+            labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
             if (string.IsNullOrEmpty(labelDienst.Text))
             {
                 // kan geen next roetine gebruiken ivm save data daar terwijl deze leeg is.
                 dat = dat.AddDays(1);
-                labelDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
                 while (string.IsNullOrEmpty(labelDienst.Text))
                 {
                     dat = dat.AddDays(1);
-                    labelDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                    labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
                 }
                 labelDatum.Text = dat.ToLongDateString();
             }

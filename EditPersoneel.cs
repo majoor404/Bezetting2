@@ -286,7 +286,7 @@ namespace Bezetting2
                         werkdag dag = new werkdag
                         {
                             _naam = persoon_gekozen._achternaam,
-                            _standaarddienst = /*ProgData.MDatum.*/GetDienst(ProgData.GekozenRooster(), dat, persoon_gekozen._nieuwkleur),
+                            _standaarddienst = GetDienst(ProgData.GekozenRooster(), dat, persoon_gekozen._nieuwkleur),
                             _werkplek = "",
                             _afwijkingdienst = "",
                             _dagnummer = i

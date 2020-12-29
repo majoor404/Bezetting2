@@ -330,7 +330,7 @@ namespace Bezetting2
         private void ViewUpdate()
         {
             labelKleur.Text = ProgData.GekozenKleur;
-            labelDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+            labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
@@ -338,11 +338,11 @@ namespace Bezetting2
             {
                 // kan geen next roetine gebruiken ivm save data daar terwijl deze leeg is.
                 dat = dat.AddDays(1);
-                labelDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
                 while (string.IsNullOrEmpty(labelDienst.Text))
                 {
                     dat = dat.AddDays(1);
-                    labelDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                    labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
                 }
                 labelDatum.Text = dat.ToLongDateString();
             }
@@ -351,7 +351,7 @@ namespace Bezetting2
             ViewDag1(dat);
 
             dat2 = dat.AddDays(1);
-            labelDienst2.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat2, ProgData.GekozenKleur);
+            labelDienst2.Text = GetDienstLong(ProgData.GekozenRooster(), dat2, ProgData.GekozenKleur);
             labelDatum2.Text = dat2.ToLongDateString(); // dat.ToShortDateString();
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
@@ -359,11 +359,11 @@ namespace Bezetting2
             {
                 // kan geen next roetine gebruiken ivm save data daar terwijl deze leeg is.
                 dat2 = dat2.AddDays(1);
-                labelDienst2.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat2, ProgData.GekozenKleur);
+                labelDienst2.Text = GetDienstLong(ProgData.GekozenRooster(), dat2, ProgData.GekozenKleur);
                 while (string.IsNullOrEmpty(labelDienst2.Text))
                 {
                     dat2 = dat2.AddDays(1);
-                    labelDienst2.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat2, ProgData.GekozenKleur);
+                    labelDienst2.Text = GetDienstLong(ProgData.GekozenRooster(), dat2, ProgData.GekozenKleur);
                 }
                 labelDatum2.Text = dat2.ToLongDateString();
             }
@@ -375,11 +375,11 @@ namespace Bezetting2
             SaveData();
             dat = dat.AddDays(1);
             
-            string dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+            string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
             {
                 dat = dat.AddDays(1);
-                dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
             ProgData.igekozenmaand = dat.Month;
@@ -391,11 +391,11 @@ namespace Bezetting2
             SaveData();
             dat = dat.AddDays(-1);
             
-            string dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+            string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
             {
                 dat = dat.AddDays(-1);
-                dienst = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
+                dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             }
 
             ProgData.igekozenmaand = dat.Month;

@@ -203,7 +203,7 @@ namespace Bezetting2
                             dag_gekozen = new DateTime(jaar, maand, dag._dagnummer);
 
                             // get en zet eerst orginele dienst
-                            string wacht = /*ProgData.MDatum.*/GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
+                            string wacht = GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
                             if (!string.IsNullOrEmpty(wacht))
                             {
                                 deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -373,18 +374,18 @@ namespace Bezetting2
 					{
 						ListWerkdagPloeg.Clear();
 						ListWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
-						//stream.Dispose();
+						stream.Dispose();
 					}
 					catch
 					{
 						MessageBox.Show("Deserialize(stream) error, gebruik repareer tool als Admin");
 					}
-					finally
-					{
-						if (stream != null)
-							stream.Dispose();
-					}
-				}
+                    finally
+                    {
+                        if (stream != null)
+                            stream.Dispose();
+                    }
+                }
 			}
 			catch (IOException)
 			{
@@ -397,7 +398,6 @@ namespace Bezetting2
 				if (!Disable_error_Meldingen)
 					MessageBox.Show($"LoadPloegBezettingLijst() error\n{Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)}");
 			}
-			
 		}
 
 		public static void LoadVeranderingenPloeg(string kleur, int try_again)
@@ -828,7 +828,12 @@ namespace Bezetting2
 						{
 							g.CopyFromScreen(new Point(bounds.Left, bounds.Top), Point.Empty, bounds.Size);
 						}
-                        string opslag = Path.GetFullPath($"{Sgekozenjaar()}\\{igekozenmaand}\\maand_overzicht_{GekozenKleur}.jpg");
+						// haal data uit plaatje, kan niet uit imaand bv, want na opslag wordt pas nieuwe maand getekend.
+						string maand = Main.View.Items[2].SubItems[0].Text;
+						string jaar = Main.View.Items[3].SubItems[0].Text;
+						int imaand = DateTime.ParseExact(maand, "MMMM", CultureInfo.CurrentCulture).Month;
+						string kleur = Main.View.Items[4].SubItems[0].Text;
+						string opslag = Path.GetFullPath($"{jaar}\\{imaand}\\maand_overzicht_{kleur}.jpg");
 						bitmap.Save(opslag, ImageFormat.Jpeg);
 					}
 				}

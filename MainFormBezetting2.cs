@@ -13,7 +13,7 @@ using static Bezetting2.DatumVijfPloegUtils;
 
 namespace Bezetting2
 {
-    public partial class MainFormBezetting2 : Form
+	public partial class MainFormBezetting2 : Form
 	{
 		public const int kolom_breed = 49;
 		public const int y_as_eerste_lijn = 136;
@@ -140,7 +140,7 @@ namespace Bezetting2
 				if (nu.Hour < 6 && dienst == "N")
 					nu = nu.AddDays(-1);
 
-				comboBoxKleurKeuze.Text = /*ProgData.MDatum.*/GetKleurDieWerkt(ProgData.GekozenRooster(),nu, dienst);
+				comboBoxKleurKeuze.Text = GetKleurDieWerkt(ProgData.GekozenRooster(),nu, dienst);
 			}
 			else
 			{
@@ -154,15 +154,15 @@ namespace Bezetting2
 			if (ProgData.LeesLijnen())
 				ZetLijnen();
 
-            // auto inlog
-            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string autoinlogfile = $"{directory}\\bezetting2.log";
+			// auto inlog
+			string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			string autoinlogfile = $"{directory}\\bezetting2.log";
 			if (File.Exists(autoinlogfile))
 			{
-                try
+				try
 				{
-                    List<string> inlognaam = File.ReadAllLines(autoinlogfile).ToList();
-                    ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
+					List<string> inlognaam = File.ReadAllLines(autoinlogfile).ToList();
+					ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
 					ProgData.RechtenHuidigeGebruiker = int.Parse(inlognaam[1]);
 					ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.Get_Gebruiker_Kleur(inlognaam[0]);
 
@@ -172,9 +172,9 @@ namespace Bezetting2
 					{
 						personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == inlognaam[0].ToString());
 
-                    }
-                    catch
-                    {
+					}
+					catch
+					{
 						MessageBox.Show("auto inlog naam bestaat niet in personeel lijst!, ik verwijder auto inlog!");
 						ProgData.Huidige_Gebruiker_Personeel_nummer = "";
 						ProgData.RechtenHuidigeGebruiker = 0;
@@ -192,7 +192,7 @@ namespace Bezetting2
 		}
 
 	
-        private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
+		private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			InlogForm log = new InlogForm();
 			log.ShowDialog();
@@ -275,8 +275,8 @@ namespace Bezetting2
 				{
 					dagnr[i] = i.ToString();
 					datum = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, i);
-					rooster[i] = /*ProgData.MDatum.*/GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
-					dag[i] = /*ProgData.MDatum.*/GetDag(datum);
+					rooster[i] = GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
+					dag[i] = GetDag(datum);
 					weeknr[i] = "";
 					if (dag[i] == "W")
 					{
@@ -346,6 +346,11 @@ namespace Bezetting2
 				View.Items[3].UseItemStyleForSubItems = false;
 				View.Items[3].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
 				View.Items[3].SubItems[0].Text = ProgData.Sgekozenjaar().ToUpper();
+
+				// Kleur in beeld
+				View.Items[4].UseItemStyleForSubItems = false;
+				//View.Items[4].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
+				View.Items[4].SubItems[0].Text = ProgData.GekozenKleur;
 
 				LijnenWeg();
 				if (ProgData.LeesLijnen())
@@ -831,8 +836,8 @@ namespace Bezetting2
 		}
 
 
-        // Geklikt op view scherm, open invoer form
-        private void View_MouseClick(object sender, MouseEventArgs e)
+		// Geklikt op view scherm, open invoer form
+		private void View_MouseClick(object sender, MouseEventArgs e)
 		{
 			//Point point = new Point(e.X, e.Y);
 			ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
@@ -1023,7 +1028,7 @@ namespace Bezetting2
 						if (!string.IsNullOrEmpty(toolStripStatusRedeAfwijking.Text) && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
 						{
 							mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
-                        }
+						}
 					}
 					// personeel nummer bij naam
 					if (col == 0 && row > 3 && row < View.Items.Count - 1)
@@ -1273,14 +1278,14 @@ namespace Bezetting2
 
 			DateTime nu = DateTime.Now;
 
-            for (int i = 0; i < 25; i++)
-            {
+			for (int i = 0; i < 25; i++)
+			{
 				nu = nu.AddMonths(1);
 				string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
 				if (Directory.Exists(path))
-                {
-                    Directory.Delete(path,true); // delete met inhoud
-                }
+				{
+					Directory.Delete(path,true); // delete met inhoud
+				}
 				labelDebug.Text = $"maak dir {path}";
 				labelDebug.Refresh();
 				_ = Directory.CreateDirectory(path);
@@ -1317,7 +1322,7 @@ namespace Bezetting2
 				ButtonNu_Click(this, null);
 				ProgData.Disable_error_Meldingen = false;
 				Close();
-            }
+			}
 
 			ProgData.ScreenCapture = true;
 			WindowUpdateViewScreen = true;
@@ -1330,8 +1335,8 @@ namespace Bezetting2
 				new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
 			{
 				
-                bool read;
-                int teller = 0;
+				bool read;
+				int teller = 0;
 
 				OleDbCommand command = new OleDbCommand("select * from Wijzeging", connection);
 
@@ -1352,7 +1357,7 @@ namespace Bezetting2
 						// inlezen waarden
 						_ = reader.GetValues(meta);
 
-                        labelDebug.Text = $"{teller++}";
+						labelDebug.Text = $"{teller++}";
 						labelDebug.Refresh();
 
 						//Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
@@ -1380,7 +1385,7 @@ namespace Bezetting2
 								// die hoef ik in te voeren
 								if (meta[5].ToString() == "O" || meta[5].ToString() == "M" || meta[5].ToString() == "N")
 								{
-									if (/*ProgData.MDatum.*/GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
+									if (GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
 									{
 										kleur = "niet invoeren";
 									}
@@ -1434,9 +1439,9 @@ namespace Bezetting2
 							new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
 			{
 				object[] meta = new object[20];
-                bool read;
+				bool read;
 
-                OleDbCommand command = new OleDbCommand("select * from Adresen", connection);
+				OleDbCommand command = new OleDbCommand("select * from Adresen", connection);
 
 				connection.Open();
 				OleDbDataReader reader = command.ExecuteReader();
@@ -1452,10 +1457,10 @@ namespace Bezetting2
 					do
 					{
 						System.Windows.Forms.Application.DoEvents();
-                        _ = reader.GetValues(meta);
+						_ = reader.GetValues(meta);
 
 
-                        try
+						try
 						{
 							personeel p = new personeel
 							{
@@ -1504,10 +1509,10 @@ namespace Bezetting2
 			Close();
 		}
 
-        private void RemoveAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string autoinlogfile = $"{directory}\\bezetting2.log";
+		private void RemoveAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+			string autoinlogfile = $"{directory}\\bezetting2.log";
 			if (File.Exists(autoinlogfile))
 			{
 				File.Delete(autoinlogfile);
@@ -1644,5 +1649,5 @@ namespace Bezetting2
 			}
 			WindowUpdateViewScreen = true;
 		}
-    }
+	}
 }

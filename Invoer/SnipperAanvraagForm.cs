@@ -205,7 +205,7 @@ namespace Bezetting2.Invoer
 
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            labelDienst.Text = /*ProgData.MDatum.*/GetDienstLong(ProgData.GekozenRooster(), dateTimePicker1.Value, comboBoxKleur.Text);
+            labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dateTimePicker1.Value, comboBoxKleur.Text);
         }
     }
 }

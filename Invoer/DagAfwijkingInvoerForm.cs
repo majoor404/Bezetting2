@@ -82,7 +82,7 @@ namespace Bezetting2
 
 					// get huidige kleur op
 					string dienst = textBoxAfwijking.Text.Substring(3, 1);
-					string gaat_lopen_op_kleur = /*ProgData.MDatum.*/GetKleurDieWerkt(ProgData.GekozenRooster(),_verzoekdag, dienst);
+					string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(),_verzoekdag, dienst);
 					string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
 					ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
 
@@ -124,7 +124,7 @@ namespace Bezetting2
 				// get huidige kleur op
 				string dienst = textBoxAfwijking.Text.Substring(3, 1);
 				DateTime _verzoekdag = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));
-				string gaat_lopen_op_kleur = /*ProgData.MDatum.*/GetKleurDieWerkt(ProgData.GekozenRooster(),_verzoekdag, dienst);
+				string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(),_verzoekdag, dienst);
 				string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
 				ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
 				try
