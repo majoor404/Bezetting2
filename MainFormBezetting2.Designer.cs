@@ -52,7 +52,6 @@
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afwijkingTovRoosterPloegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.importNamenOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,6 +102,7 @@
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
+            this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -297,14 +297,6 @@
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
             this.beheerToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
             this.beheerToolStripMenuItem.Text = "Beheer";
-            // 
-            // editPersoneelToolStripMenuItem
-            // 
-            this.editPersoneelToolStripMenuItem.Enabled = false;
-            this.editPersoneelToolStripMenuItem.Name = "editPersoneelToolStripMenuItem";
-            this.editPersoneelToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.editPersoneelToolStripMenuItem.Text = "Edit Personeel";
-            this.editPersoneelToolStripMenuItem.Click += new System.EventHandler(this.EditPersoneelClick);
             // 
             // kleurLijnenToolStripMenuItem
             // 
@@ -818,7 +810,7 @@
             // labelDebug
             // 
             this.labelDebug.AutoSize = true;
-            this.labelDebug.Location = new System.Drawing.Point(718, 9);
+            this.labelDebug.Location = new System.Drawing.Point(646, 9);
             this.labelDebug.Name = "labelDebug";
             this.labelDebug.Size = new System.Drawing.Size(60, 13);
             this.labelDebug.TabIndex = 29;
@@ -833,6 +825,14 @@
             this.checkBoxHoverNaam.TabIndex = 31;
             this.checkBoxHoverNaam.Text = "Hover Naam";
             this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
+            // 
+            // editPersoneelToolStripMenuItem
+            // 
+            this.editPersoneelToolStripMenuItem.Enabled = false;
+            this.editPersoneelToolStripMenuItem.Name = "editPersoneelToolStripMenuItem";
+            this.editPersoneelToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.editPersoneelToolStripMenuItem.Text = "Edit Personeel";
+            this.editPersoneelToolStripMenuItem.Click += new System.EventHandler(this.EditPersoneelClick);
             // 
             // MainFormBezetting2
             // 
@@ -901,7 +901,6 @@
         private System.Windows.Forms.ToolStripMenuItem beheerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importNamenOudeVersieToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
-        private System.Windows.Forms.ToolStripMenuItem editPersoneelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inloggenToolStripMenuItem1;
         public System.Windows.Forms.StatusStrip StatusStrip;
         private System.Windows.Forms.ToolStripStatusLabel IngelogdPersNr;
@@ -968,6 +967,7 @@
         private System.Windows.Forms.CheckBox checkBoxHoverNaam;
         private System.Windows.Forms.ToolStripMenuItem removeAutoInlogOnderDitWindowsAccountToolStripMenuItem;
         public System.Windows.Forms.ListView View;
+        private System.Windows.Forms.ToolStripMenuItem editPersoneelToolStripMenuItem;
     }
 }
 

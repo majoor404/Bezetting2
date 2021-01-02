@@ -113,43 +113,39 @@ namespace Bezetting2
 			if (!ProgData.TestNetwerkBeschikbaar(15))
 				Close();
 
-			DateTime nu = DateTime.Now;
+            WindowUpdateViewScreen = false; // gekozen kleur is nog niet bekend, en bij andere maand/jaar wilt die al gaan tekenen op beeld
+
+            DateTime nu = DateTime.Now;
 
 			ProgData.ihuidigemaand = nu.Month;
-			ProgData.igekozenmaand = nu.Month;
+            ProgData.igekozenmaand = nu.Month;
 
-			ProgData.Igekozenjaar = nu.Year;
-			ProgData.ihuidigjaar = nu.Year;
+            ProgData.Igekozenjaar = nu.Year;
+            ProgData.ihuidigjaar = nu.Year;
 
-			ProgData.backup_zipnaam = "Backup\\" + nu.ToShortDateString() + ".zip";
+            ProgData.backup_zipnaam = "Backup\\" + nu.ToShortDateString() + ".zip";
 
-			Random rnd = new Random();
-			ProgData.backup_time = rnd.Next(60);
+            Random rnd = new Random();
+            ProgData.backup_time = rnd.Next(60);
 
-			KleurMaandButton();
+            KleurMaandButton();
 
-			if (InstellingenProg._Rooster == "5pl")
-			{
-				// get huidige kleur op
-				string dienst = "N";
-				if (nu.Hour > 5 && nu.Hour < 14)
-					dienst = "O";
-				if (nu.Hour > 13 && nu.Hour < 22)
-					dienst = "M";
+            string dienst = "N";
+            if (nu.Hour > 5 && nu.Hour < 14)
+                dienst = "O";
+            if (nu.Hour > 13 && nu.Hour < 22)
+                dienst = "M";
 
-				if (nu.Hour < 6 && dienst == "N")
-					nu = nu.AddDays(-1);
+            if (nu.Hour < 6 && dienst == "N")
+                nu = nu.AddDays(-1);
 
-				comboBoxKleurKeuze.Text = GetKleurDieWerkt(ProgData.GekozenRooster(),nu, dienst);
-			}
-			else
-			{
-				comboBoxKleurKeuze.Text = "DD";
+            comboBoxKleurKeuze.Text = GetKleurDieWerkt(ProgData.GekozenRooster(), nu, dienst);
+
+            if (comboBoxKleurKeuze.Text == "DD")
 				comboBoxKleurKeuze.Enabled = false;
-			}
 
-			//comboBoxKleurKeuze.Text = "Blauw"; // roept ook VulViewScherm(); aan.
-			//VulViewScherm(); aanroep door comboBoxKleurKeuze.Text = "Blauw"
+			WindowUpdateViewScreen = true;
+			VulViewScherm();
 
 			if (ProgData.LeesLijnen())
 				ZetLijnen();

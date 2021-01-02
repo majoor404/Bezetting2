@@ -56,10 +56,10 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>38706C070132F81E841972472D89D136403481E9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>1F17E9EA68E45E1BB3B5ACBCA3458F2B7F73C3FF</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Bezetting2Project_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Bezetting2Project_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -68,7 +68,10 @@
     <DelaySign>false</DelaySign>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Bezetting2Project_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Bezetting2Project_1_TemporaryKey.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestTimestampUrl>http://timestamp.sectigo.com</ManifestTimestampUrl>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -271,7 +274,7 @@
     <EmbeddedResource Include="VerhuisForm.resx">
       <DependentUpon>VerhuisForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Bezetting2Project_TemporaryKey.pfx" />
+    <None Include="Bezetting2Project_1_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
