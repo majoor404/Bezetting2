@@ -1011,9 +1011,18 @@ namespace Bezetting2
 						}
 						else
 						{
-							toolStripStatusLabelInfo.Text = "extra dienst nog te doen"; // nog te doen
-																						//if (toolStripStatusRedeAfwijking.Text != "" && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
-																						//    mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+							toolStripStatusLabelInfo.Text = "Meer dan 1 extra dienst";
+							string namen = "";
+							foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
+							{
+								if (col == ex._datum.Day)
+								{
+									namen = $"{namen}{ex._naam}\n";
+									
+								}
+							}
+							if (!string.IsNullOrEmpty(toolStripStatusLabelInfo.Text) && mLastPos != e.Location)
+								mTooltip.Show(namen, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
 						}
 					}
 					// rede afwijking
