@@ -53,7 +53,7 @@
     <ApplicationIcon>bezetting2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>1F17E9EA68E45E1BB3B5ACBCA3458F2B7F73C3FF</ManifestCertificateThumbprint>
