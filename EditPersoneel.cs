@@ -414,10 +414,17 @@ namespace Bezetting2
             DialogResult dialog = recht.ShowDialog();
             if (dialog == DialogResult.OK)
             {
-                personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
-                persoon._rechten = int.Parse(recht.labelRechtenNivo.Text);
-                ProgData.Save_Namen_lijst();
-                ComboBoxFilter_SelectedIndexChanged(this, null);
+                try
+                {
+                    personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                    persoon._rechten = int.Parse(recht.labelRechtenNivo.Text);
+                    ProgData.Save_Namen_lijst();
+                    ComboBoxFilter_SelectedIndexChanged(this, null);
+                }
+                catch
+                {
+                    MessageBox.Show("Persoon niet gevonden, eerst opslaan");
+                }
             }
 
         }
@@ -436,46 +443,47 @@ namespace Bezetting2
 
         private void ButtonVoegToe_Click(object sender, EventArgs e)
         {
-            comboBoxKleur.Enabled = false;
-            personeel a = new personeel
+            if (string.IsNullOrEmpty(comboBoxKleur.Text))
             {
-                _persnummer = int.Parse(textBoxPersNum.Text),
-                _achternaam = textBoxAchterNaam.Text,
-                _voornaam = textBoxVoorNaam.Text,
-                _adres = textBoxAdres.Text,
-                _postcode = textBoxPostcode.Text,
-                _woonplaats = textBoxWoonplaats.Text,
-                _emailthuis = textBoxEmailThuis.Text,
-                _emailwerk = textBoxEmailWerk.Text,
-                _telthuis = textBoxTelThuis.Text,
-                _tel06prive = textBoxTelMobPrive.Text,
-                _tel06werk = textBoxTelMobWerk.Text,
-                _adrescodewerk = textBoxAdresCodeWerk.Text,
-                _telwerk = textBoxTelWerk.Text,
-                _vuilwerk = vuilwerk.Checked.ToString()
-            };
-
-            //if (string.IsNullOrEmpty(textBoxKleur.Text))
-            //{
-            //    a._kleur = "Nieuw";
-            //}
-            //else
-            //{
-                a._kleur = comboBoxKleur.Text;
-            //}
-
-            if (ProgData.RechtenHuidigeGebruiker > 100)
-            {
-                // direct edit ploeg rooster als admin
-                a._kleur = comboBoxKleur.Text;
+                MessageBox.Show("Op welke wacht of kleur gaat persoon lopen?");
             }
+            else
+            {
 
-            a._funtie = textBoxFuntie.Text;
-            a._werkgroep = textBoxWerkplek.Text;
-            a._rechten = 0;
-            ProgData.ListPersoneel.Add(a);
-            ProgData.Save_Namen_lijst();
-            EditPersoneel_Shown(this, null);
+                comboBoxKleur.Enabled = false;
+                personeel a = new personeel
+                {
+                    _persnummer = int.Parse(textBoxPersNum.Text),
+                    _achternaam = textBoxAchterNaam.Text,
+                    _voornaam = textBoxVoorNaam.Text,
+                    _adres = textBoxAdres.Text,
+                    _postcode = textBoxPostcode.Text,
+                    _woonplaats = textBoxWoonplaats.Text,
+                    _emailthuis = textBoxEmailThuis.Text,
+                    _emailwerk = textBoxEmailWerk.Text,
+                    _telthuis = textBoxTelThuis.Text,
+                    _tel06prive = textBoxTelMobPrive.Text,
+                    _tel06werk = textBoxTelMobWerk.Text,
+                    _adrescodewerk = textBoxAdresCodeWerk.Text,
+                    _telwerk = textBoxTelWerk.Text,
+                    _vuilwerk = vuilwerk.Checked.ToString()
+                };
+
+                a._kleur = comboBoxKleur.Text;
+
+                if (ProgData.RechtenHuidigeGebruiker > 100)
+                {
+                    // direct edit ploeg rooster als admin
+                    a._kleur = comboBoxKleur.Text;
+                }
+
+                a._funtie = textBoxFuntie.Text;
+                a._werkgroep = textBoxWerkplek.Text;
+                a._rechten = 0;
+                ProgData.ListPersoneel.Add(a);
+                ProgData.Save_Namen_lijst();
+                EditPersoneel_Shown(this, null);
+            }
         }
 
         private void ButtonNieuw_Click(object sender, EventArgs e)

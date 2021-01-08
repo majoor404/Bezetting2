@@ -118,7 +118,7 @@
             this.textBoxPersNum.Location = new System.Drawing.Point(123, 314);
             this.textBoxPersNum.Name = "textBoxPersNum";
             this.textBoxPersNum.Size = new System.Drawing.Size(201, 20);
-            this.textBoxPersNum.TabIndex = 4;
+            this.textBoxPersNum.TabIndex = 0;
             // 
             // ViewNamen
             // 
@@ -167,7 +167,7 @@
             this.textBoxAchterNaam.Location = new System.Drawing.Point(123, 346);
             this.textBoxAchterNaam.Name = "textBoxAchterNaam";
             this.textBoxAchterNaam.Size = new System.Drawing.Size(201, 20);
-            this.textBoxAchterNaam.TabIndex = 7;
+            this.textBoxAchterNaam.TabIndex = 1;
             // 
             // label3
             // 
@@ -183,7 +183,7 @@
             this.textBoxVoorNaam.Location = new System.Drawing.Point(123, 378);
             this.textBoxVoorNaam.Name = "textBoxVoorNaam";
             this.textBoxVoorNaam.Size = new System.Drawing.Size(201, 20);
-            this.textBoxVoorNaam.TabIndex = 9;
+            this.textBoxVoorNaam.TabIndex = 2;
             // 
             // label4
             // 
@@ -199,7 +199,7 @@
             this.textBoxAdres.Location = new System.Drawing.Point(123, 410);
             this.textBoxAdres.Name = "textBoxAdres";
             this.textBoxAdres.Size = new System.Drawing.Size(201, 20);
-            this.textBoxAdres.TabIndex = 11;
+            this.textBoxAdres.TabIndex = 3;
             // 
             // label5
             // 
@@ -215,7 +215,7 @@
             this.textBoxPostcode.Location = new System.Drawing.Point(123, 442);
             this.textBoxPostcode.Name = "textBoxPostcode";
             this.textBoxPostcode.Size = new System.Drawing.Size(201, 20);
-            this.textBoxPostcode.TabIndex = 13;
+            this.textBoxPostcode.TabIndex = 4;
             // 
             // label6
             // 
@@ -231,7 +231,7 @@
             this.textBoxWoonplaats.Location = new System.Drawing.Point(123, 474);
             this.textBoxWoonplaats.Name = "textBoxWoonplaats";
             this.textBoxWoonplaats.Size = new System.Drawing.Size(201, 20);
-            this.textBoxWoonplaats.TabIndex = 15;
+            this.textBoxWoonplaats.TabIndex = 5;
             // 
             // label7
             // 
@@ -247,7 +247,7 @@
             this.textBoxEmailWerk.Location = new System.Drawing.Point(123, 506);
             this.textBoxEmailWerk.Name = "textBoxEmailWerk";
             this.textBoxEmailWerk.Size = new System.Drawing.Size(201, 20);
-            this.textBoxEmailWerk.TabIndex = 17;
+            this.textBoxEmailWerk.TabIndex = 6;
             // 
             // label8
             // 
@@ -263,7 +263,7 @@
             this.textBoxEmailThuis.Location = new System.Drawing.Point(123, 538);
             this.textBoxEmailThuis.Name = "textBoxEmailThuis";
             this.textBoxEmailThuis.Size = new System.Drawing.Size(201, 20);
-            this.textBoxEmailThuis.TabIndex = 19;
+            this.textBoxEmailThuis.TabIndex = 7;
             // 
             // label9
             // 
@@ -279,7 +279,7 @@
             this.textBoxWerkplek.Location = new System.Drawing.Point(456, 538);
             this.textBoxWerkplek.Name = "textBoxWerkplek";
             this.textBoxWerkplek.Size = new System.Drawing.Size(201, 20);
-            this.textBoxWerkplek.TabIndex = 35;
+            this.textBoxWerkplek.TabIndex = 15;
             // 
             // labelWerkplek
             // 
@@ -295,7 +295,7 @@
             this.textBoxFuntie.Location = new System.Drawing.Point(456, 506);
             this.textBoxFuntie.Name = "textBoxFuntie";
             this.textBoxFuntie.Size = new System.Drawing.Size(201, 20);
-            this.textBoxFuntie.TabIndex = 33;
+            this.textBoxFuntie.TabIndex = 14;
             // 
             // label11
             // 
@@ -320,7 +320,7 @@
             this.textBoxTelWerk.Location = new System.Drawing.Point(456, 442);
             this.textBoxTelWerk.Name = "textBoxTelWerk";
             this.textBoxTelWerk.Size = new System.Drawing.Size(201, 20);
-            this.textBoxTelWerk.TabIndex = 29;
+            this.textBoxTelWerk.TabIndex = 12;
             // 
             // labelTelWerk
             // 
@@ -336,7 +336,7 @@
             this.textBoxAdresCodeWerk.Location = new System.Drawing.Point(456, 410);
             this.textBoxAdresCodeWerk.Name = "textBoxAdresCodeWerk";
             this.textBoxAdresCodeWerk.Size = new System.Drawing.Size(201, 20);
-            this.textBoxAdresCodeWerk.TabIndex = 27;
+            this.textBoxAdresCodeWerk.TabIndex = 11;
             // 
             // label14
             // 
@@ -352,7 +352,7 @@
             this.textBoxTelMobWerk.Location = new System.Drawing.Point(456, 378);
             this.textBoxTelMobWerk.Name = "textBoxTelMobWerk";
             this.textBoxTelMobWerk.Size = new System.Drawing.Size(201, 20);
-            this.textBoxTelMobWerk.TabIndex = 25;
+            this.textBoxTelMobWerk.TabIndex = 10;
             // 
             // label15
             // 
@@ -368,7 +368,7 @@
             this.textBoxTelMobPrive.Location = new System.Drawing.Point(456, 346);
             this.textBoxTelMobPrive.Name = "textBoxTelMobPrive";
             this.textBoxTelMobPrive.Size = new System.Drawing.Size(201, 20);
-            this.textBoxTelMobPrive.TabIndex = 23;
+            this.textBoxTelMobPrive.TabIndex = 9;
             // 
             // label16
             // 
@@ -384,7 +384,7 @@
             this.textBoxTelThuis.Location = new System.Drawing.Point(456, 314);
             this.textBoxTelThuis.Name = "textBoxTelThuis";
             this.textBoxTelThuis.Size = new System.Drawing.Size(201, 20);
-            this.textBoxTelThuis.TabIndex = 21;
+            this.textBoxTelThuis.TabIndex = 8;
             // 
             // label17
             // 
@@ -550,7 +550,7 @@
             this.comboBoxKleur.Location = new System.Drawing.Point(456, 474);
             this.comboBoxKleur.Name = "comboBoxKleur";
             this.comboBoxKleur.Size = new System.Drawing.Size(196, 21);
-            this.comboBoxKleur.TabIndex = 51;
+            this.comboBoxKleur.TabIndex = 13;
             // 
             // EditPersoneel
             // 
