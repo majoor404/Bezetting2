@@ -55,7 +55,8 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(120, 231);
             this.listBox1.TabIndex = 0;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.ListBox1_SelectedIndexChanged);
+            this.listBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseClick);
+            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // QuickInvoerForm
             // 
@@ -71,6 +72,7 @@
             this.Name = "QuickInvoerForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Shown += new System.EventHandler(this.QuickInvoerForm_Shown);
             this.ResumeLayout(false);
 
         }

@@ -52,6 +52,7 @@
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afwijkingTovRoosterPloegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.importNamenOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +61,7 @@
             this.instellingenProgrammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nietMeeTelLijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editPopupMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -102,7 +104,6 @@
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
-            this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -139,26 +140,26 @@
             // inloggenToolStripMenuItem1
             // 
             this.inloggenToolStripMenuItem1.Name = "inloggenToolStripMenuItem1";
-            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
             this.inloggenToolStripMenuItem1.Text = "Inloggen";
             this.inloggenToolStripMenuItem1.Click += new System.EventHandler(this.InloggenToolStripMenuItem1_Click);
             // 
             // uitloggenToolStripMenuItem
             // 
             this.uitloggenToolStripMenuItem.Name = "uitloggenToolStripMenuItem";
-            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.uitloggenToolStripMenuItem.Text = "Uitloggen";
             this.uitloggenToolStripMenuItem.Click += new System.EventHandler(this.UitloggenToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 6);
             // 
             // closeExitStopToolStripMenuItem
             // 
             this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
-            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.closeExitStopToolStripMenuItem.Text = "Close / Exit";
             this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.CloseExitStopToolStripMenuItem_Click);
             // 
@@ -293,10 +294,19 @@
             this.repareerPloegAfwijkingToolStripMenuItem,
             this.instellingenProgrammaToolStripMenuItem,
             this.nietMeeTelLijstToolStripMenuItem,
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem});
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem,
+            this.editPopupMenuToolStripMenuItem});
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
             this.beheerToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
             this.beheerToolStripMenuItem.Text = "Beheer";
+            // 
+            // editPersoneelToolStripMenuItem
+            // 
+            this.editPersoneelToolStripMenuItem.Enabled = false;
+            this.editPersoneelToolStripMenuItem.Name = "editPersoneelToolStripMenuItem";
+            this.editPersoneelToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.editPersoneelToolStripMenuItem.Text = "Edit Personeel";
+            this.editPersoneelToolStripMenuItem.Click += new System.EventHandler(this.EditPersoneelClick);
             // 
             // kleurLijnenToolStripMenuItem
             // 
@@ -358,6 +368,14 @@
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Text = "Remove Auto inlog onder dit Windows Account";
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Click += new System.EventHandler(this.RemoveAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click);
+            // 
+            // editPopupMenuToolStripMenuItem
+            // 
+            this.editPopupMenuToolStripMenuItem.Enabled = false;
+            this.editPopupMenuToolStripMenuItem.Name = "editPopupMenuToolStripMenuItem";
+            this.editPopupMenuToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.editPopupMenuToolStripMenuItem.Text = "Edit Popup Menu";
+            this.editPopupMenuToolStripMenuItem.Click += new System.EventHandler(this.editPopupMenuToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -826,14 +844,6 @@
             this.checkBoxHoverNaam.Text = "Hover Naam";
             this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
             // 
-            // editPersoneelToolStripMenuItem
-            // 
-            this.editPersoneelToolStripMenuItem.Enabled = false;
-            this.editPersoneelToolStripMenuItem.Name = "editPersoneelToolStripMenuItem";
-            this.editPersoneelToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
-            this.editPersoneelToolStripMenuItem.Text = "Edit Personeel";
-            this.editPersoneelToolStripMenuItem.Click += new System.EventHandler(this.EditPersoneelClick);
-            // 
             // MainFormBezetting2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -968,6 +978,7 @@
         private System.Windows.Forms.ToolStripMenuItem removeAutoInlogOnderDitWindowsAccountToolStripMenuItem;
         public System.Windows.Forms.ListView View;
         private System.Windows.Forms.ToolStripMenuItem editPersoneelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editPopupMenuToolStripMenuItem;
     }
 }
 

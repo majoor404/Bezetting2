@@ -3,6 +3,7 @@ using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -96,14 +97,53 @@ namespace Bezetting2
 			ProgData.RechtenHuidigeGebruiker = 0; // alleen lezen
 			ProgData.Huidige_Gebruiker_Personeel_nummer = "Niemand Ingelogd";
 			WindowUpdateViewScreen = true;
+
+			// test lees rechten
+			if (!File.Exists("Programdata.ini"))
+            {
+				MessageBox.Show("Geen lees rechten of Programdata.ini niet aanwezig, exit");
+				Close();
+            }
+			// test schrijf rechten
+			string loc = Path.GetFullPath("Bezetting2.exe");
+			try
+			{
+				// Attempt to get a list of security permissions from the folder. 
+				// This will raise an exception if the path is read only or do not have access to view the permissions. 
+				System.Security.AccessControl.DirectorySecurity ds = Directory.GetAccessControl(loc);
+			}
+			catch (UnauthorizedAccessException)
+			{
+				MessageBox.Show($"Debug test write toegang : {loc}");
+				MessageBox.Show("Geen schrijf rechten , exit");
+				Close();
+
+			}
 			InstellingenProg.LeesProgrammaData();
+
+			if (!File.Exists("popupmenu.ini"))
+				MaakLeegPopUpMenu();
 		}
 
 		// start programma
 		private void MainFormBezetting2_Shown(object sender, EventArgs e)
 		{
 			if (File.Exists("kill.ini"))
-				Close();
+            {
+				DateTime creation = File.GetCreationTime(@"kill.ini");
+				DateTime nu_tijd = DateTime.Now;
+				creation = creation.AddMinutes(30);
+				if (creation < nu_tijd)
+				{
+					MessageBox.Show("Oud stop bericht gevonden (meer dan 30 minuten), waarschijnlijk netwerk problemen gehad\nVerwijder deze en ga door.");
+					File.Delete("kill.ini");
+				}
+				else
+				{
+					Close();
+				}
+			}
+				
 
 			ruilOverwerkToolStripMenuItem.Visible = InstellingenProg._GebruikExtraRuil;
 			snipperDagAanvraagToolStripMenuItem.Visible = InstellingenProg._GebruikSnipper;
@@ -186,8 +226,7 @@ namespace Bezetting2
 			}
 			Refresh();
 		}
-
-	
+			
 		private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
 			InlogForm log = new InlogForm();
@@ -215,6 +254,7 @@ namespace Bezetting2
 			importOudeVeranderDataOudeVersieToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
 			nietMeeTelLijstToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
 			removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
+			editPopupMenuToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
 
 			vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
 			tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -885,9 +925,9 @@ namespace Bezetting2
 								if (quick.listBox1.SelectedIndex > -1)
 								{
 									string afwijking = quick.listBox1.SelectedItem.ToString();
-									switch (afwijking)
+									switch (afwijking.ToUpper())
 									{
-										case "Wis":
+										case "WIS":
 											string eerste_2 = "";
 											if (value.Length > 2)
 												eerste_2 = value.Substring(0, 2);
@@ -901,21 +941,21 @@ namespace Bezetting2
 												ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
 											}
 											break;
-										case "Copy":
-											quick.listBox1.Items[2] = info.SubItem.Text;
-											// extra,ruil of vd niet op deze manier
-											if (info.SubItem.Text.Length > 3)
-											{
-												string test = info.SubItem.Text.Substring(0, 2);
-												if (test == "ED" || test == "RD" || test == "VD")
-												{
-													quick.listBox1.Items[2] = "*****";
-													MessageBox.Show("Extra of verschoven diensten kunt u niet zo invoeren");
-												}
-											}
-											break;
-										case "*****":
-											break;
+										//case "COPY":
+										//	quick.listBox1.Items[2] = info.SubItem.Text;
+										//	// extra,ruil of vd niet op deze manier
+										//	if (info.SubItem.Text.Length > 3)
+										//	{
+										//		string test = info.SubItem.Text.Substring(0, 2);
+										//		if (test == "ED" || test == "RD" || test == "VD")
+										//		{
+										//			quick.listBox1.Items[2] = "*****";
+										//			MessageBox.Show("Extra of verschoven diensten kunt u niet zo invoeren");
+										//		}
+										//	}
+										//	break;
+										//case "*****":
+										//	break;
 										default:
 											ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
 											ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
@@ -1281,36 +1321,40 @@ namespace Bezetting2
 			MessageBox.Show("Gaat soms fout als iemand in tussen tijd verhuisd is!");
 			MessageBox.Show("Delete de komende 25 maanden in de toekomst, en maak lege");
 
-			DateTime nu = DateTime.Now;
+			DateTime start = DateTime.Now;
+			DateTime eind = start.AddMonths(25);
+			DeleteDataDir(start, eind);
 
-			for (int i = 0; i < 25; i++)
-			{
-				nu = nu.AddMonths(1);
-				string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
-				if (Directory.Exists(path))
-				{
-					Directory.Delete(path,true); // delete met inhoud
-				}
-				labelDebug.Text = $"maak dir {path}";
-				labelDebug.Refresh();
-				_ = Directory.CreateDirectory(path);
-				labelDebug.Text = $"vul met kleuren data : {path}";
-				labelDebug.Refresh();
-				ProgData.Igekozenjaar = nu.Year;
-				ProgData.igekozenmaand = nu.Month;
-				ProgData.MaakPloegNamenLijst("Blauw");
-				ProgData.SavePloegNamenLijst("Blauw",15);
-				ProgData.MaakPloegNamenLijst("Rood");
-				ProgData.SavePloegNamenLijst("Rood",15);
-				ProgData.MaakPloegNamenLijst("Wit");
-				ProgData.SavePloegNamenLijst("Wit",15);
-				ProgData.MaakPloegNamenLijst("Groen");
-				ProgData.SavePloegNamenLijst("Groen",15);
-				ProgData.MaakPloegNamenLijst("Geel");
-				ProgData.SavePloegNamenLijst("Geel",15);
-				ProgData.MaakPloegNamenLijst("DD");
-				ProgData.SavePloegNamenLijst("DD",15);
-			}
+			//DateTime nu = DateTime.Now;
+
+			//for (int i = 0; i < 25; i++)
+			//{
+			//	nu = nu.AddMonths(1);
+			//	string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
+			//	if (Directory.Exists(path))
+			//	{
+			//		Directory.Delete(path,true); // delete met inhoud
+			//	}
+			//	labelDebug.Text = $"maak dir {path}";
+			//	labelDebug.Refresh();
+			//	_ = Directory.CreateDirectory(path);
+			//	labelDebug.Text = $"vul met kleuren data : {path}";
+			//	labelDebug.Refresh();
+			//	ProgData.Igekozenjaar = nu.Year;
+			//	ProgData.igekozenmaand = nu.Month;
+			//	ProgData.MaakPloegNamenLijst("Blauw");
+			//	ProgData.SavePloegNamenLijst("Blauw",15);
+			//	ProgData.MaakPloegNamenLijst("Rood");
+			//	ProgData.SavePloegNamenLijst("Rood",15);
+			//	ProgData.MaakPloegNamenLijst("Wit");
+			//	ProgData.SavePloegNamenLijst("Wit",15);
+			//	ProgData.MaakPloegNamenLijst("Groen");
+			//	ProgData.SavePloegNamenLijst("Groen",15);
+			//	ProgData.MaakPloegNamenLijst("Geel");
+			//	ProgData.SavePloegNamenLijst("Geel",15);
+			//	ProgData.MaakPloegNamenLijst("DD");
+			//	ProgData.SavePloegNamenLijst("DD",15);
+			//}
 
 			openFileDialog.FileName = "";
 			openFileDialog.Filter = "(*.Bez)|*.Bez";
@@ -1348,7 +1392,30 @@ namespace Bezetting2
 				connection.Open();
 				OleDbDataReader reader = command.ExecuteReader();
 				WindowUpdateViewScreen = false;
-				DateTime inladen_vanaf_datum = DateTime.Now;
+				DateTime inladen_vanaf_datum;
+
+
+
+				const string message = "Vanaf welke datum invoeren (Yes is huidige datum , No is hele jaar)";
+				const string caption = "Vraag";
+				var result = MessageBox.Show(message, caption,
+											 MessageBoxButtons.YesNo,
+											 MessageBoxIcon.Question);
+
+				// If the no button was pressed ...
+				if (result == DialogResult.No)
+				{
+					inladen_vanaf_datum = new DateTime(DateTime.Now.Year, 1, 1);
+					inladen_vanaf_datum = inladen_vanaf_datum.AddMonths(-1);
+					// delete dan nog even die directory's
+					DeleteDataDir(inladen_vanaf_datum, DateTime.Now);
+				}
+					else
+                {
+					inladen_vanaf_datum = DateTime.Now;
+				}
+                
+
 				//inladen_vanaf_datum = inladen_vanaf_datum.AddMonths(-3);
 				ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
 														// check of er vorige maand mensen zijn verhuisd
@@ -1654,5 +1721,70 @@ namespace Bezetting2
 			}
 			WindowUpdateViewScreen = true;
 		}
+
+        private void editPopupMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			if (!File.Exists("popupmenu.ini"))
+			{
+				MaakLeegPopUpMenu();
+			}
+			Process.Start("popupmenu.ini");
+		}
+
+		private void MaakLeegPopUpMenu()
+        {
+			File.Create("popupmenu.ini").Dispose();
+
+			List<string> PopUpNamen = new List<string>();
+
+			PopUpNamen.Add("Deze regel en Wis niet aanpassen, Geen ED of RD invullen!");
+			PopUpNamen.Add("WIS");
+			PopUpNamen.Add("VK");
+			PopUpNamen.Add("A");
+			PopUpNamen.Add("8OI");
+			PopUpNamen.Add("VRIJ");
+			PopUpNamen.Add("VAK");
+			PopUpNamen.Add("Z");
+			PopUpNamen.Add("K");
+			PopUpNamen.Add("GP");
+			PopUpNamen.Add("*");
+			PopUpNamen.Add("OPLO");
+
+			File.WriteAllLines("popupmenu.ini", PopUpNamen);
+		}
+
+		private void DeleteDataDir(DateTime start, DateTime eind)
+        {
+			while (eind >= start)
+			//for (int i = 0; i < aantal; i++)
+			{
+				start = start.AddMonths(1);
+				string path = Path.GetFullPath($"{start.Year}\\{start.Month}"); // maand als nummer
+				if (Directory.Exists(path))
+				{
+					Directory.Delete(path, true); // delete met inhoud
+				}
+				labelDebug.Text = $"maak dir {path}";
+				labelDebug.Refresh();
+				_ = Directory.CreateDirectory(path);
+				labelDebug.Text = $"vul met kleuren data : {path}";
+				labelDebug.Refresh();
+				ProgData.Igekozenjaar = start.Year;
+				ProgData.igekozenmaand = start.Month;
+				ProgData.MaakPloegNamenLijst("Blauw");
+				ProgData.SavePloegNamenLijst("Blauw", 15);
+				ProgData.MaakPloegNamenLijst("Rood");
+				ProgData.SavePloegNamenLijst("Rood", 15);
+				ProgData.MaakPloegNamenLijst("Wit");
+				ProgData.SavePloegNamenLijst("Wit", 15);
+				ProgData.MaakPloegNamenLijst("Groen");
+				ProgData.SavePloegNamenLijst("Groen", 15);
+				ProgData.MaakPloegNamenLijst("Geel");
+				ProgData.SavePloegNamenLijst("Geel", 15);
+				ProgData.MaakPloegNamenLijst("DD");
+				ProgData.SavePloegNamenLijst("DD", 15);
+			}
+		}
+
 	}
 }

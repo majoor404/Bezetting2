@@ -38,7 +38,7 @@ namespace Bezetting2
                 groupBoxAutoInlog.Visible = true;
 
             // voor debug op deze pc even aanzetten ;-)
-            // groupBoxAutoInlog.Visible = true;
+            //groupBoxAutoInlog.Visible = true;
 
             // auto inlog
             var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
