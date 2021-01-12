@@ -246,15 +246,15 @@ namespace Bezetting2
 		private void ToegangNivo_TextChanged(object sender, EventArgs e)
 		{
 			// rechten worden gewijzigd, pas dus div menu items aan
-			importNamenOudeVersieToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
+			importNamenOudeVersieToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
 			editPersoneelToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 45;
 			kleurLijnenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 45;
-			repareerPloegAfwijkingToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
-			instellingenProgrammaToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
-			importOudeVeranderDataOudeVersieToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
-			nietMeeTelLijstToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
-			removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
-			editPopupMenuToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
+			repareerPloegAfwijkingToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+			instellingenProgrammaToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+			importOudeVeranderDataOudeVersieToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+			nietMeeTelLijstToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+			removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+			editPopupMenuToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
 
 			vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
 			tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;

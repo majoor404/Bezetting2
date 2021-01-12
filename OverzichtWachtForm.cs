@@ -765,7 +765,7 @@ namespace Bezetting2
             if (e.Index > -1)
             {
                 ListBox Sender = (ListBox)sender;
-                string afw = Sender.Items[e.Index].ToString();
+                string afw = Sender.Items[e.Index].ToString().ToUpper();
                 if (afw.Length > 3) afw = afw.Substring(0, 3);
                 if (afw.Length > 2 && afw.Substring(0, 2) == "EV")
                     afw = "EV";

@@ -54,7 +54,6 @@
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.importNamenOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importOudeVeranderDataOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.repareerPloegAfwijkingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -288,7 +287,6 @@
             this.beheerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editPersoneelToolStripMenuItem,
             this.kleurLijnenToolStripMenuItem,
-            this.toolStripMenuItem2,
             this.importNamenOudeVersieToolStripMenuItem,
             this.importOudeVeranderDataOudeVersieToolStripMenuItem,
             this.repareerPloegAfwijkingToolStripMenuItem,
@@ -316,65 +314,60 @@
             this.kleurLijnenToolStripMenuItem.Text = "KleurLijnen";
             this.kleurLijnenToolStripMenuItem.Click += new System.EventHandler(this.KleurLijnenToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(349, 6);
-            // 
             // importNamenOudeVersieToolStripMenuItem
             // 
-            this.importNamenOudeVersieToolStripMenuItem.Enabled = false;
             this.importNamenOudeVersieToolStripMenuItem.Name = "importNamenOudeVersieToolStripMenuItem";
             this.importNamenOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.importNamenOudeVersieToolStripMenuItem.Text = "Import Namen oude Versie";
+            this.importNamenOudeVersieToolStripMenuItem.Visible = false;
             this.importNamenOudeVersieToolStripMenuItem.Click += new System.EventHandler(this.ImportNamenOudeVersieToolStripMenuItem_Click);
             // 
             // importOudeVeranderDataOudeVersieToolStripMenuItem
             // 
-            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Enabled = false;
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Name = "importOudeVeranderDataOudeVersieToolStripMenuItem";
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Text = "Import Verander data oude Versie";
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Visible = false;
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Click += new System.EventHandler(this.ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click);
             // 
             // repareerPloegAfwijkingToolStripMenuItem
             // 
-            this.repareerPloegAfwijkingToolStripMenuItem.Enabled = false;
             this.repareerPloegAfwijkingToolStripMenuItem.Name = "repareerPloegAfwijkingToolStripMenuItem";
             this.repareerPloegAfwijkingToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.repareerPloegAfwijkingToolStripMenuItem.Text = "Repareer Ploeg Bezetting met afwijking file.";
+            this.repareerPloegAfwijkingToolStripMenuItem.Visible = false;
             this.repareerPloegAfwijkingToolStripMenuItem.Click += new System.EventHandler(this.RepareerPloegAfwijkingToolStripMenuItem_Click);
             // 
             // instellingenProgrammaToolStripMenuItem
             // 
-            this.instellingenProgrammaToolStripMenuItem.Enabled = false;
             this.instellingenProgrammaToolStripMenuItem.Name = "instellingenProgrammaToolStripMenuItem";
             this.instellingenProgrammaToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.instellingenProgrammaToolStripMenuItem.Text = "Instellingen Programma";
+            this.instellingenProgrammaToolStripMenuItem.Visible = false;
             this.instellingenProgrammaToolStripMenuItem.Click += new System.EventHandler(this.InstellingenProgrammaToolStripMenuItem_Click);
             // 
             // nietMeeTelLijstToolStripMenuItem
             // 
-            this.nietMeeTelLijstToolStripMenuItem.Enabled = false;
             this.nietMeeTelLijstToolStripMenuItem.Name = "nietMeeTelLijstToolStripMenuItem";
             this.nietMeeTelLijstToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.nietMeeTelLijstToolStripMenuItem.Text = "Niet Mee Tel Lijst";
+            this.nietMeeTelLijstToolStripMenuItem.Visible = false;
             this.nietMeeTelLijstToolStripMenuItem.Click += new System.EventHandler(this.NietMeeTelLijstToolStripMenuItem_Click);
             // 
             // removeAutoInlogOnderDitWindowsAccountToolStripMenuItem
             // 
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Enabled = false;
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Name = "removeAutoInlogOnderDitWindowsAccountToolStripMenuItem";
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Text = "Remove Auto inlog onder dit Windows Account";
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Visible = false;
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Click += new System.EventHandler(this.RemoveAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click);
             // 
             // editPopupMenuToolStripMenuItem
             // 
-            this.editPopupMenuToolStripMenuItem.Enabled = false;
             this.editPopupMenuToolStripMenuItem.Name = "editPopupMenuToolStripMenuItem";
             this.editPopupMenuToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.editPopupMenuToolStripMenuItem.Text = "Edit Popup Menu";
+            this.editPopupMenuToolStripMenuItem.Visible = false;
             this.editPopupMenuToolStripMenuItem.Click += new System.EventHandler(this.editPopupMenuToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
@@ -952,7 +945,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolStripMenuItem kleurLijnenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem repareerPloegAfwijkingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.Timer timerKill;
         private System.Windows.Forms.ToolStripMenuItem ruilOverwerkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem snipperDagAanvraagToolStripMenuItem;
