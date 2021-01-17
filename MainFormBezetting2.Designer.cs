@@ -368,7 +368,7 @@
             this.editPopupMenuToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
             this.editPopupMenuToolStripMenuItem.Text = "Edit Popup Menu";
             this.editPopupMenuToolStripMenuItem.Visible = false;
-            this.editPopupMenuToolStripMenuItem.Click += new System.EventHandler(this.editPopupMenuToolStripMenuItem_Click);
+            this.editPopupMenuToolStripMenuItem.Click += new System.EventHandler(this.EditPopupMenuToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 

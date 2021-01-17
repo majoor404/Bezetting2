@@ -211,11 +211,20 @@ namespace Bezetting2
 					}
 					catch
 					{
-						MessageBox.Show("auto inlog naam bestaat niet in personeel lijst!, ik verwijder auto inlog!");
-						ProgData.Huidige_Gebruiker_Personeel_nummer = "";
-						ProgData.RechtenHuidigeGebruiker = 0;
-						ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
-						File.Delete(autoinlogfile);
+						const string message = "Auto inlog naam bestaat niet in in deze bezetting personeel lijst!, auto inlog verwijderen?";
+						const string caption = "Vraag";
+						var result = MessageBox.Show(message, caption,
+													 MessageBoxButtons.YesNo,
+													 MessageBoxIcon.Question);
+
+						if (result == DialogResult.Yes)
+						{
+
+							ProgData.Huidige_Gebruiker_Personeel_nummer = "";
+							ProgData.RechtenHuidigeGebruiker = 0;
+							ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
+							File.Delete(autoinlogfile);
+						}
 					}
 
 
@@ -1722,7 +1731,7 @@ namespace Bezetting2
 			WindowUpdateViewScreen = true;
 		}
 
-        private void editPopupMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditPopupMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			if (!File.Exists("popupmenu.ini"))
 			{
@@ -1735,22 +1744,23 @@ namespace Bezetting2
         {
 			File.Create("popupmenu.ini").Dispose();
 
-			List<string> PopUpNamen = new List<string>();
+            List<string> PopUpNamen = new List<string>
+            {
+                "Deze regel en Wis niet aanpassen, Geen ED of RD invullen!",
+                "WIS",
+                "VK",
+                "A",
+                "8OI",
+                "VRIJ",
+                "VAK",
+                "Z",
+                "K",
+                "GP",
+                "*",
+                "OPLO"
+            };
 
-			PopUpNamen.Add("Deze regel en Wis niet aanpassen, Geen ED of RD invullen!");
-			PopUpNamen.Add("WIS");
-			PopUpNamen.Add("VK");
-			PopUpNamen.Add("A");
-			PopUpNamen.Add("8OI");
-			PopUpNamen.Add("VRIJ");
-			PopUpNamen.Add("VAK");
-			PopUpNamen.Add("Z");
-			PopUpNamen.Add("K");
-			PopUpNamen.Add("GP");
-			PopUpNamen.Add("*");
-			PopUpNamen.Add("OPLO");
-
-			File.WriteAllLines("popupmenu.ini", PopUpNamen);
+            File.WriteAllLines("popupmenu.ini", PopUpNamen);
 		}
 
 		private void DeleteDataDir(DateTime start, DateTime eind)
