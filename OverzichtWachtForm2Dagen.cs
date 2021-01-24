@@ -367,7 +367,18 @@ namespace Bezetting2
                 }
                 labelDatum2.Text = dat2.ToLongDateString();
             }
-            
+
+            // als dag info, kleur button
+            string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+            if (File.Exists(file))
+            {
+                buttonOpmerking.BackColor = Color.Yellow;
+            }
+            else
+            {
+                buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
+            }
+
             ViewDag2(dat2);
         }
         private void ButtonNext_Click(object sender, EventArgs e)
@@ -805,6 +816,7 @@ namespace Bezetting2
                     File.Create(file).Dispose();
             }
             Process.Start(file);
+            buttonOpmerking.BackColor = Color.Yellow;
         }
     }
 }

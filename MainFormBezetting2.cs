@@ -100,10 +100,10 @@ namespace Bezetting2
 
 			// test lees rechten
 			if (!File.Exists("Programdata.ini"))
-            {
+			{
 				MessageBox.Show("Geen lees rechten of Programdata.ini niet aanwezig, exit");
 				Close();
-            }
+			}
 			// test schrijf rechten
 			string loc = Path.GetFullPath("Bezetting2.exe");
 			try
@@ -129,7 +129,7 @@ namespace Bezetting2
 		private void MainFormBezetting2_Shown(object sender, EventArgs e)
 		{
 			if (File.Exists("kill.ini"))
-            {
+			{
 				DateTime creation = File.GetCreationTime(@"kill.ini");
 				DateTime nu_tijd = DateTime.Now;
 				creation = creation.AddMinutes(30);
@@ -153,35 +153,35 @@ namespace Bezetting2
 			if (!ProgData.TestNetwerkBeschikbaar(15))
 				Close();
 
-            WindowUpdateViewScreen = false; // gekozen kleur is nog niet bekend, en bij andere maand/jaar wilt die al gaan tekenen op beeld
+			WindowUpdateViewScreen = false; // gekozen kleur is nog niet bekend, en bij andere maand/jaar wilt die al gaan tekenen op beeld
 
-            DateTime nu = DateTime.Now;
+			DateTime nu = DateTime.Now;
 
 			ProgData.ihuidigemaand = nu.Month;
-            ProgData.igekozenmaand = nu.Month;
+			ProgData.igekozenmaand = nu.Month;
 
-            ProgData.Igekozenjaar = nu.Year;
-            ProgData.ihuidigjaar = nu.Year;
+			ProgData.Igekozenjaar = nu.Year;
+			ProgData.ihuidigjaar = nu.Year;
 
-            ProgData.backup_zipnaam = "Backup\\" + nu.ToShortDateString() + ".zip";
+			ProgData.backup_zipnaam = "Backup\\" + nu.ToShortDateString() + ".zip";
 
-            Random rnd = new Random();
-            ProgData.backup_time = rnd.Next(60);
+			Random rnd = new Random();
+			ProgData.backup_time = rnd.Next(60);
 
-            KleurMaandButton();
+			KleurMaandButton();
 
-            string dienst = "N";
-            if (nu.Hour > 5 && nu.Hour < 14)
-                dienst = "O";
-            if (nu.Hour > 13 && nu.Hour < 22)
-                dienst = "M";
+			string dienst = "N";
+			if (nu.Hour > 5 && nu.Hour < 14)
+				dienst = "O";
+			if (nu.Hour > 13 && nu.Hour < 22)
+				dienst = "M";
 
-            if (nu.Hour < 6 && dienst == "N")
-                nu = nu.AddDays(-1);
+			if (nu.Hour < 6 && dienst == "N")
+				nu = nu.AddDays(-1);
 
-            comboBoxKleurKeuze.Text = GetKleurDieWerkt(ProgData.GekozenRooster(), nu, dienst);
+			comboBoxKleurKeuze.Text = GetKleurDieWerkt(ProgData.GekozenRooster(), nu, dienst);
 
-            if (comboBoxKleurKeuze.Text == "DD")
+			if (comboBoxKleurKeuze.Text == "DD")
 				comboBoxKleurKeuze.Enabled = false;
 
 			WindowUpdateViewScreen = true;
@@ -219,12 +219,11 @@ namespace Bezetting2
 
 						if (result == DialogResult.Yes)
 						{
-
-							ProgData.Huidige_Gebruiker_Personeel_nummer = "";
-							ProgData.RechtenHuidigeGebruiker = 0;
-							ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
 							File.Delete(autoinlogfile);
 						}
+						ProgData.Huidige_Gebruiker_Personeel_nummer = "";
+						ProgData.RechtenHuidigeGebruiker = 0;
+						ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
 					}
 
 
@@ -315,12 +314,18 @@ namespace Bezetting2
 				weeknr[0] = "";
 				dagnr[0] = "";
 				CultureInfo cul = CultureInfo.CurrentCulture;
-				DateTime datum;// = new DateTime();
+				
+				// als DD tab gekozen in 5plg rooster
+				string roost = ProgData.GekozenRooster();
+				if (ProgData.GekozenKleur == "DD")
+					roost = "dd";
+				
+				DateTime datum;
 				for (int i = 1; i < aantal_dagen + 1; i++)
 				{
 					dagnr[i] = i.ToString();
 					datum = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, i);
-					rooster[i] = GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
+					rooster[i] = GetDienst(roost, datum, ProgData.GekozenKleur);
 					dag[i] = GetDag(datum);
 					weeknr[i] = "";
 					if (dag[i] == "W")
@@ -1420,10 +1425,10 @@ namespace Bezetting2
 					DeleteDataDir(inladen_vanaf_datum, DateTime.Now);
 				}
 					else
-                {
+				{
 					inladen_vanaf_datum = DateTime.Now;
 				}
-                
+				
 
 				//inladen_vanaf_datum = inladen_vanaf_datum.AddMonths(-3);
 				ProgData.Lees_Namen_lijst();            // lees alle mensen in sectie , personeel_lijst
@@ -1731,8 +1736,8 @@ namespace Bezetting2
 			WindowUpdateViewScreen = true;
 		}
 
-        private void EditPopupMenuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+		private void EditPopupMenuToolStripMenuItem_Click(object sender, EventArgs e)
+		{
 			if (!File.Exists("popupmenu.ini"))
 			{
 				MaakLeegPopUpMenu();
@@ -1741,30 +1746,30 @@ namespace Bezetting2
 		}
 
 		private void MaakLeegPopUpMenu()
-        {
+		{
 			File.Create("popupmenu.ini").Dispose();
 
-            List<string> PopUpNamen = new List<string>
-            {
-                "Deze regel en Wis niet aanpassen, Geen ED of RD invullen!",
-                "WIS",
-                "VK",
-                "A",
-                "8OI",
-                "VRIJ",
-                "VAK",
-                "Z",
-                "K",
-                "GP",
-                "*",
-                "OPLO"
-            };
+			List<string> PopUpNamen = new List<string>
+			{
+				"Deze regel en Wis niet aanpassen, Geen ED of RD invullen!",
+				"WIS",
+				"VK",
+				"A",
+				"8OI",
+				"VRIJ",
+				"VAK",
+				"Z",
+				"K",
+				"GP",
+				"*",
+				"OPLO"
+			};
 
-            File.WriteAllLines("popupmenu.ini", PopUpNamen);
+			File.WriteAllLines("popupmenu.ini", PopUpNamen);
 		}
 
 		private void DeleteDataDir(DateTime start, DateTime eind)
-        {
+		{
 			while (eind >= start)
 			//for (int i = 0; i < aantal; i++)
 			{

@@ -12,21 +12,6 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -51,37 +36,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>bezetting2.ico</ApplicationIcon>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>4818E441E192E576F13ABD431A7FBDAF313A117D</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>Bezetting2Project_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignAssembly>false</SignAssembly>
-  </PropertyGroup>
-  <PropertyGroup>
-    <DelaySign>false</DelaySign>
-  </PropertyGroup>
-  <PropertyGroup>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestTimestampUrl>http://timestamp.sectigo.com</ManifestTimestampUrl>
-  </PropertyGroup>
-  <PropertyGroup>
-    <TargetZone>LocalIntranet</TargetZone>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -110,7 +64,6 @@
     <Compile Include="Data\AanvraagRuilExtra.cs" />
     <Compile Include="Data\SnipperAanvraag.cs" />
     <Compile Include="Data\veranderingen.cs" />
-    <Compile Include="Data\VeranderingenVerhuis.cs" />
     <Compile Include="Data\werkdag.cs" />
     <Compile Include="EditPersoneel.cs">
       <SubType>Form</SubType>
@@ -145,6 +98,7 @@
     <Compile Include="HistoryForm.Designer.cs">
       <DependentUpon>HistoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\ModuleDatum.cs" />
     <Compile Include="InlogGebeuren\InlogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,12 +161,6 @@
     <Compile Include="OverzichtWachtForm.Designer.cs">
       <DependentUpon>OverzichtWachtForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OverzichtWachtForm2Dagen.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OverzichtWachtForm2Dagen.Designer.cs">
-      <DependentUpon>OverzichtWachtForm2Dagen.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VerhuisForm.cs">
@@ -269,9 +217,6 @@
     <EmbeddedResource Include="OverzichtWachtForm.resx">
       <DependentUpon>OverzichtWachtForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="OverzichtWachtForm2Dagen.resx">
-      <DependentUpon>OverzichtWachtForm2Dagen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -284,8 +229,6 @@
     <EmbeddedResource Include="VerhuisForm.resx">
       <DependentUpon>VerhuisForm.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Bezetting2Project_TemporaryKey.pfx" />
-    <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -330,24 +273,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PloegenDatum\PloegenDatum.csproj">
-      <Project>{fe47e5bd-55ea-4d96-935b-8e739bfba822}</Project>
-      <Name>PloegenDatum</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

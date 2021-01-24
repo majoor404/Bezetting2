@@ -159,7 +159,7 @@
             this.button1.TabIndex = 14;
             this.button1.Text = "?";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // checkBoxAutoInlog
             // 
@@ -170,8 +170,7 @@
             this.checkBoxAutoInlog.TabIndex = 13;
             this.checkBoxAutoInlog.Text = "Auto inlog";
             this.checkBoxAutoInlog.UseVisualStyleBackColor = true;
-            this.checkBoxAutoInlog.CheckedChanged += new System.EventHandler(this.checkBoxAutoInlog_CheckedChanged);
-            this.checkBoxAutoInlog.Click += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.checkBoxAutoInlog.Click += new System.EventHandler(this.CheckBox1_CheckedChanged);
             // 
             // InlogForm
             // 

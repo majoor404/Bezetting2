@@ -38,7 +38,7 @@ ListPersoneel
 
 namespace Bezetting2
 {
-    public class ProgData
+	public class ProgData
 	{
 		public enum Kleur
 		{
@@ -255,16 +255,16 @@ namespace Bezetting2
 							for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
 							{
 								DateTime dat = new DateTime(Igekozenjaar, igekozenmaand, i);
-                                werkdag dag = new werkdag
-                                {
-                                    _naam = a._achternaam,
+								werkdag dag = new werkdag
+								{
+									_naam = a._achternaam,
 									//_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._nieuwkleur),
 									_standaarddienst = GetDienst(GekozenRooster(), dat, a._nieuwkleur),
 									_werkplek = "",
-                                    _afwijkingdienst = "",
-                                    _dagnummer = i
-                                };
-                                ListWerkdagPloeg.Add(dag);
+									_afwijkingdienst = "",
+									_dagnummer = i
+								};
+								ListWerkdagPloeg.Add(dag);
 							}
 							SavePloegBezetting(a._nieuwkleur,15);
 						}
@@ -320,12 +320,12 @@ namespace Bezetting2
 				// bij nieuwe bezetting hoort ook een nieuwe verander lijst
 				ListVeranderingen.Clear(); // stel er bestond er nog 1, niet overschrijven.
 				SaveVeranderingenPloeg(kleur,15);
-            }
-            else
-            {
+			}
+			else
+			{
 				MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
 				Main.Close();
-            }
+			}
 		}
 
 		public static void SavePloegBezetting(string kleur, int try_again)
@@ -380,12 +380,12 @@ namespace Bezetting2
 					{
 						MessageBox.Show("Deserialize(stream) error, gebruik repareer tool als Admin");
 					}
-                    finally
-                    {
-                        if (stream != null)
-                            stream.Dispose();
-                    }
-                }
+					finally
+					{
+						if (stream != null)
+							stream.Dispose();
+					}
+				}
 			}
 			catch (IOException)
 			{
@@ -562,16 +562,16 @@ namespace Bezetting2
 				SavePloegBezetting(kleur,15);
 
 				LoadVeranderingenPloeg(kleur,15);
-                veranderingen verander = new veranderingen
-                {
-                    _naam = naam,
-                    _afwijking = afwijking,
-                    _datumafwijking = dagnr,
-                    _datuminvoer = DateTime.Now.ToShortDateString(),
-                    _rede = rede, // de rede
-                    _invoerdoor = invoerdoor
-                };
-                ListVeranderingen.Add(verander);
+				veranderingen verander = new veranderingen
+				{
+					_naam = naam,
+					_afwijking = afwijking,
+					_datumafwijking = dagnr,
+					_datuminvoer = DateTime.Now.ToShortDateString(),
+					_rede = rede, // de rede
+					_invoerdoor = invoerdoor
+				};
+				ListVeranderingen.Add(verander);
 				SaveVeranderingenPloeg(kleur,15);
 			}
 			catch
@@ -620,7 +620,7 @@ namespace Bezetting2
 				xx22 += woord.Length - h - 1;
 				//xx22 += xx22 = (int)woord[h];
 				xx22 += (int)woord[h];
-                char character = (char)xx22;
+				char character = (char)xx22;
 				ret += character.ToString();
 			}
 			return ret;
@@ -799,7 +799,7 @@ namespace Bezetting2
 		}
 
 		public static string Ploeg_Veranderingen_Locatie(string kleur)
-        {
+		{
 			//var test = Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_afwijkingen.bin");
 			return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_afwijkingen.bin");
 		}
@@ -811,15 +811,18 @@ namespace Bezetting2
 
 		public static string GetLocatieOverzichtPlaatje(DateTime datum)
 		{
-            // datum bv 18-8-2020
-            return Path.GetFullPath($"{datum.Year}\\{datum.Month}\\{datum.Day}_overzicht_{GekozenKleur}.jpg");
+			// datum bv 18-8-2020
+			return Path.GetFullPath($"{datum.Year}\\{datum.Month}\\{datum.Day}_overzicht_{GekozenKleur}.jpg");
 		}
 
 		public static void CaptureMainScreen()
 		{
 			try
 			{
-				if (ScreenCapture && !string.IsNullOrEmpty(GekozenKleur))
+				var _ScreenWidth = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Width;
+				var _ScreenHeight = System.Windows.Forms.Screen.PrimaryScreen.Bounds.Height;
+
+				if (ScreenCapture && !string.IsNullOrEmpty(GekozenKleur) && _ScreenWidth > 1850 && _ScreenHeight > 1000)
 				{
 					Rectangle bounds = ProgData.Main.Bounds;
 					using (Bitmap bitmap = new Bitmap(bounds.Width, bounds.Height))
@@ -915,11 +918,11 @@ namespace Bezetting2
 
 					LoadPloegBezetting(kleur, 15);
 					GekozenKleur = kleur;
-                }
-                else
-                {
+				}
+				else
+				{
 					Main.Close();
-                }
+				}
 			}
 		}
 
@@ -974,30 +977,30 @@ namespace Bezetting2
 				for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
 				{
 					DateTime dat = new DateTime(Igekozenjaar, igekozenmaand, i);
-                    werkdag dag = new werkdag
-                    {
-                        _naam = naam,
-                        //_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, GekozenKleur),
+					werkdag dag = new werkdag
+					{
+						_naam = naam,
+						//_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, GekozenKleur),
 						_standaarddienst = GetDienst(GekozenRooster(), dat, GekozenKleur),
 						_werkplek = "",
-                        _afwijkingdienst = "",
-                        _dagnummer = i
-                    };
-                    ListWerkdagPloeg.Add(dag);
+						_afwijkingdienst = "",
+						_dagnummer = i
+					};
+					ListWerkdagPloeg.Add(dag);
 				}
 				SavePloegBezetting(GekozenKleur,15);
 			}
 		}
 		public static bool TestNetwerkBeschikbaar(int test)
-        {
+		{
 			Main.labelDebug.Text = "Test Netwerk";
 			
 
 			if(test == 0)
-            {
+			{
 				MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
 				return false;
-            }
+			}
 
 			try
 			{
@@ -1016,6 +1019,53 @@ namespace Bezetting2
 			}
 			MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
 			return false;
+		}
+
+		public static void AddNaamInBezetting(string kleur, string naam)
+        {
+			LoadPloegBezetting(kleur, 15);
+			// check of naam er in zit
+			try
+			{
+				werkdag ver = ListWerkdagPloeg.First(x => (x._naam == naam));
+			}
+			catch
+			{
+				string rooster = GekozenRooster();
+				if (kleur == "DD")
+					rooster = "dd";
+
+				int jaar = Igekozenjaar;
+				int maand = igekozenmaand;
+				DateTime datt = new DateTime(jaar, maand, 1);
+				for (int x = 0; x < 15; x++)
+				{
+
+					// deze persoon bestaat niet in bezetting, dus toevoegen
+					// elke dag in deze maand
+					int aantal_dagen_deze_maand = DateTime.DaysInMonth(Igekozenjaar, igekozenmaand);
+					for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+					{
+						DateTime dat = new DateTime(Igekozenjaar, igekozenmaand, i);
+						werkdag dag = new werkdag
+						{
+							_naam = naam,
+							_standaarddienst = GetDienst(rooster, dat, kleur),
+							_werkplek = "",
+							_afwijkingdienst = "",
+							_dagnummer = i
+						};
+						ListWerkdagPloeg.Add(dag);
+					}
+					SavePloegBezetting(kleur, 15);
+					
+					datt = datt.AddMonths(1);
+					igekozenmaand = datt.Month;
+					Igekozenjaar = datt.Year;
+				}
+                Igekozenjaar = jaar;
+                igekozenmaand = maand;
+            }
 		}
 	}
 }

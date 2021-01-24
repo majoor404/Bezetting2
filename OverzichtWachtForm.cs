@@ -444,6 +444,17 @@ namespace Bezetting2
                         }
                     }
                 }
+
+                // als dag info, kleur button
+                string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+                if (File.Exists(file))
+                {
+                    buttonOpmerking.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    buttonOpmerking.BackColor = Color.FromArgb(255,240,240,240);
+                }
             }
             catch { }
         }
@@ -835,6 +846,7 @@ namespace Bezetting2
                 File.Create(file).Dispose();
             }
             Process.Start(file);
+            buttonOpmerking.BackColor = Color.Yellow;
         }
     }
 }
