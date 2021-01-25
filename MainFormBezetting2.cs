@@ -1473,11 +1473,9 @@ namespace Bezetting2
 								{
 									if (GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
 									{
-										kleur = "niet invoeren";
+										meta[5] = ""; // in oude programma als afwijking werdt verwijderd, werdt orginele wacht ingevuld.
 									}
 								}
-
-
 
 								if (kleur == "Blauw" || kleur == "Geel" || kleur == "Groen" || kleur == "Rood" || kleur == "Wit" || kleur == "DD")
 								{
@@ -1608,20 +1606,8 @@ namespace Bezetting2
 		private void ImportNamenOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ProgData.ListPersoneel.Clear();
-			//MessageBox.Show("Programma verwijderd nu eerst de directory's van toekomst");
 
-			//DateTime nu = DateTime.Now;
-			//for (int i = 0; i < 25; i++)
-			//{
-			//	nu = nu.AddMonths(1);
-			//	string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
-			//	if (Directory.Exists(path))
-			//	{
-			//		Directory.Delete(path, true); // delete met inhoud
-			//	}
-			//}
-
-			MessageBox.Show("Let op, alle oude personeel gaat weg, open Bezetting5ploegen....Bez");
+            MessageBox.Show("Let op, alle oude personeel gaat weg, open Bezetting5ploegen....Bez");
 			openFileDialog.FileName = "";
 			openFileDialog.Filter = "(*.Bez)|*.Bez";
 

@@ -329,6 +329,8 @@ namespace Bezetting2
         }
         private void ViewUpdate()
         {
+            dateTimePicker1.Visible = false;
+            GaNaarDat.Visible = false;
             labelKleur.Text = ProgData.GekozenKleur;
             labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
@@ -369,7 +371,7 @@ namespace Bezetting2
             }
 
             // als dag info, kleur button
-            string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+            string file = $"{dat.Year}\\{dat.Month}\\{labelDatum.Text} - {labelDienst.Text}.txt";
             if (File.Exists(file))
             {
                 buttonOpmerking.BackColor = Color.Yellow;
@@ -380,6 +382,17 @@ namespace Bezetting2
             }
 
             ViewDag2(dat2);
+
+            file = $"{dat2.Year}\\{dat2.Month}\\{labelDatum2.Text} - {labelDienst2.Text}.txt";
+            if (File.Exists(file))
+            {
+                buttonOpmerking2.BackColor = Color.Yellow;
+            }
+            else
+            {
+                buttonOpmerking2.BackColor = Color.FromArgb(255, 240, 240, 240);
+            }
+
         }
         private void ButtonNext_Click(object sender, EventArgs e)
         {
@@ -810,13 +823,39 @@ namespace Bezetting2
 
         private void ButtonOpmerking_Click(object sender, EventArgs e)
         {
-            string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+            //string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+            string file = $"{dat.Year}\\{dat.Month}\\{labelDatum.Text} - {labelDienst.Text}.txt";
             if (!File.Exists(file))
             {
                     File.Create(file).Dispose();
             }
             Process.Start(file);
             buttonOpmerking.BackColor = Color.Yellow;
+        }
+
+        private void buttonOpmerkingDag2_Click(object sender, EventArgs e)
+        {
+            string file = $"{dat2.Year}\\{dat2.Month}\\{labelDatum2.Text} - {labelDienst2.Text}.txt";
+            if (!File.Exists(file))
+            {
+                File.Create(file).Dispose();
+            }
+            Process.Start(file);
+            buttonOpmerking2.BackColor = Color.Yellow;
+        }
+
+        private void GaNaarDatumButton_Click(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = DateTime.Today;
+            dateTimePicker1.Visible = !dateTimePicker1.Visible;
+            GaNaarDat.Visible = dateTimePicker1.Visible;
+        }
+
+        private void GaNaarDat_Click(object sender, EventArgs e)
+        {
+            SaveData();
+            dat = dateTimePicker1.Value;
+            ViewUpdate();
         }
     }
 }

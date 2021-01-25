@@ -37,7 +37,7 @@ namespace Bezetting2
                 groupBoxAutoInlog.Visible = true;
 
             // voor debug op deze pc even aanzetten ;-)
-            if(Environment.UserName == "majoor404")
+            if(Environment.UserName == "ronal")
 				groupBoxAutoInlog.Visible = true;
 
             // auto inlog

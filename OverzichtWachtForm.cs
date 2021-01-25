@@ -337,6 +337,9 @@ namespace Bezetting2
 
         private void ViewUpdate()
         {
+            dateTimePicker1.Visible = false;
+            GaNaarDat.Visible = false;
+
             ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
@@ -847,6 +850,20 @@ namespace Bezetting2
             }
             Process.Start(file);
             buttonOpmerking.BackColor = Color.Yellow;
+        }
+
+        private void GaNaarDatumButton_Click(object sender, EventArgs e)
+        {
+            dateTimePicker1.Value = DateTime.Today;
+            dateTimePicker1.Visible = !dateTimePicker1.Visible;
+            GaNaarDat.Visible = dateTimePicker1.Visible;
+        }
+
+        private void GaNaarDat_Click(object sender, EventArgs e)
+        {
+            SaveData();
+            dat = dateTimePicker1.Value;
+            ViewUpdate();
         }
     }
 }

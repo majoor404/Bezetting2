@@ -30,6 +30,7 @@ namespace Bezetting2
         private void InitializeComponent()
         {
             this.PanelDag1 = new System.Windows.Forms.Panel();
+            this.buttonOpmerking = new System.Windows.Forms.Button();
             this.listBox41 = new System.Windows.Forms.ListBox();
             this.listBox40 = new System.Windows.Forms.ListBox();
             this.listBox39 = new System.Windows.Forms.ListBox();
@@ -101,6 +102,7 @@ namespace Bezetting2
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.PanelDag2 = new System.Windows.Forms.Panel();
+            this.buttonOpmerking2 = new System.Windows.Forms.Button();
             this.labelDienst2 = new System.Windows.Forms.Label();
             this.labelDatum2 = new System.Windows.Forms.Label();
             this.listBox42 = new System.Windows.Forms.ListBox();
@@ -166,7 +168,9 @@ namespace Bezetting2
             this.label30 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.buttonOpmerking = new System.Windows.Forms.Button();
+            this.GaNaarDatumButton = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.GaNaarDat = new System.Windows.Forms.Button();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -174,6 +178,9 @@ namespace Bezetting2
             // PanelDag1
             // 
             this.PanelDag1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag1.Controls.Add(this.GaNaarDat);
+            this.PanelDag1.Controls.Add(this.dateTimePicker1);
+            this.PanelDag1.Controls.Add(this.GaNaarDatumButton);
             this.PanelDag1.Controls.Add(this.buttonOpmerking);
             this.PanelDag1.Controls.Add(this.listBox41);
             this.PanelDag1.Controls.Add(this.listBox40);
@@ -253,6 +260,17 @@ namespace Bezetting2
             this.PanelDag1.TabIndex = 0;
             this.PanelDag1.Tag = "0";
             this.PanelDag1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            // 
+            // buttonOpmerking
+            // 
+            this.buttonOpmerking.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpmerking.Location = new System.Drawing.Point(1270, 10);
+            this.buttonOpmerking.Name = "buttonOpmerking";
+            this.buttonOpmerking.Size = new System.Drawing.Size(227, 24);
+            this.buttonOpmerking.TabIndex = 181;
+            this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
+            this.buttonOpmerking.UseVisualStyleBackColor = true;
+            this.buttonOpmerking.Click += new System.EventHandler(this.ButtonOpmerking_Click);
             // 
             // listBox41
             // 
@@ -950,21 +968,21 @@ namespace Bezetting2
             // 
             // buttonNu
             // 
-            this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNu.Location = new System.Drawing.Point(728, 9);
+            this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNu.Location = new System.Drawing.Point(689, 10);
             this.buttonNu.Name = "buttonNu";
-            this.buttonNu.Size = new System.Drawing.Size(157, 30);
+            this.buttonNu.Size = new System.Drawing.Size(108, 24);
             this.buttonNu.TabIndex = 97;
-            this.buttonNu.Text = "Huidige Datum";
+            this.buttonNu.Text = "Vandaag";
             this.buttonNu.UseVisualStyleBackColor = true;
             this.buttonNu.Click += new System.EventHandler(this.ButtonNu_Click);
             // 
             // buttonCopy
             // 
-            this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCopy.Location = new System.Drawing.Point(906, 9);
+            this.buttonCopy.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCopy.Location = new System.Drawing.Point(986, 10);
             this.buttonCopy.Name = "buttonCopy";
-            this.buttonCopy.Size = new System.Drawing.Size(230, 30);
+            this.buttonCopy.Size = new System.Drawing.Size(160, 24);
             this.buttonCopy.TabIndex = 96;
             this.buttonCopy.Text = "Copy Bezetting 1 Wacht";
             this.buttonCopy.UseVisualStyleBackColor = true;
@@ -972,53 +990,53 @@ namespace Bezetting2
             // 
             // buttonNext
             // 
-            this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNext.Location = new System.Drawing.Point(605, 9);
+            this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonNext.Location = new System.Drawing.Point(586, 10);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(100, 30);
+            this.buttonNext.Size = new System.Drawing.Size(97, 24);
             this.buttonNext.TabIndex = 95;
-            this.buttonNext.Text = "Volgende";
+            this.buttonNext.Text = "Dag +";
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.ButtonNext_Click);
             // 
             // buttonPrev
             // 
-            this.buttonPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPrev.Location = new System.Drawing.Point(483, 9);
+            this.buttonPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPrev.Location = new System.Drawing.Point(483, 10);
             this.buttonPrev.Name = "buttonPrev";
-            this.buttonPrev.Size = new System.Drawing.Size(100, 30);
+            this.buttonPrev.Size = new System.Drawing.Size(97, 24);
             this.buttonPrev.TabIndex = 94;
-            this.buttonPrev.Text = "Vorige";
+            this.buttonPrev.Text = "Dag -";
             this.buttonPrev.UseVisualStyleBackColor = true;
             this.buttonPrev.Click += new System.EventHandler(this.ButtonPrev_Click);
             // 
             // labelDienst
             // 
             this.labelDienst.AutoSize = true;
-            this.labelDienst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDienst.Location = new System.Drawing.Point(289, 28);
+            this.labelDienst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDienst.Location = new System.Drawing.Point(289, 14);
             this.labelDienst.Name = "labelDienst";
-            this.labelDienst.Size = new System.Drawing.Size(121, 20);
+            this.labelDienst.Size = new System.Drawing.Size(100, 16);
             this.labelDienst.TabIndex = 93;
             this.labelDienst.Text = "Eerste Ochtend";
             // 
             // labelKleur
             // 
             this.labelKleur.AutoSize = true;
-            this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelKleur.Location = new System.Drawing.Point(6, 6);
             this.labelKleur.Name = "labelKleur";
-            this.labelKleur.Size = new System.Drawing.Size(52, 20);
+            this.labelKleur.Size = new System.Drawing.Size(44, 16);
             this.labelKleur.TabIndex = 92;
             this.labelKleur.Text = "Blauw";
             // 
             // labelDatum
             // 
             this.labelDatum.AutoSize = true;
-            this.labelDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDatum.Location = new System.Drawing.Point(6, 28);
             this.labelDatum.Name = "labelDatum";
-            this.labelDatum.Size = new System.Drawing.Size(91, 20);
+            this.labelDatum.Size = new System.Drawing.Size(72, 16);
             this.labelDatum.TabIndex = 91;
             this.labelDatum.Text = "25-04-1965";
             // 
@@ -1235,6 +1253,7 @@ namespace Bezetting2
             // PanelDag2
             // 
             this.PanelDag2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag2.Controls.Add(this.buttonOpmerking2);
             this.PanelDag2.Controls.Add(this.labelDienst2);
             this.PanelDag2.Controls.Add(this.labelDatum2);
             this.PanelDag2.Controls.Add(this.listBox42);
@@ -1310,23 +1329,34 @@ namespace Bezetting2
             this.PanelDag2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
             this.PanelDag2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
+            // buttonOpmerking2
+            // 
+            this.buttonOpmerking2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOpmerking2.Location = new System.Drawing.Point(1270, 6);
+            this.buttonOpmerking2.Name = "buttonOpmerking2";
+            this.buttonOpmerking2.Size = new System.Drawing.Size(227, 24);
+            this.buttonOpmerking2.TabIndex = 182;
+            this.buttonOpmerking2.Text = "Opmerkingen deze dag/wacht";
+            this.buttonOpmerking2.UseVisualStyleBackColor = true;
+            this.buttonOpmerking2.Click += new System.EventHandler(this.buttonOpmerkingDag2_Click);
+            // 
             // labelDienst2
             // 
             this.labelDienst2.AutoSize = true;
-            this.labelDienst2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDienst2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDienst2.Location = new System.Drawing.Point(289, 10);
             this.labelDienst2.Name = "labelDienst2";
-            this.labelDienst2.Size = new System.Drawing.Size(121, 20);
+            this.labelDienst2.Size = new System.Drawing.Size(100, 16);
             this.labelDienst2.TabIndex = 181;
             this.labelDienst2.Text = "Eerste Ochtend";
             // 
             // labelDatum2
             // 
             this.labelDatum2.AutoSize = true;
-            this.labelDatum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDatum2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDatum2.Location = new System.Drawing.Point(6, 10);
             this.labelDatum2.Name = "labelDatum2";
-            this.labelDatum2.Size = new System.Drawing.Size(91, 20);
+            this.labelDatum2.Size = new System.Drawing.Size(72, 16);
             this.labelDatum2.TabIndex = 181;
             this.labelDatum2.Text = "25-04-1965";
             // 
@@ -2234,16 +2264,36 @@ namespace Bezetting2
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
             // 
-            // buttonOpmerking
+            // GaNaarDatumButton
             // 
-            this.buttonOpmerking.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonOpmerking.Location = new System.Drawing.Point(1270, 9);
-            this.buttonOpmerking.Name = "buttonOpmerking";
-            this.buttonOpmerking.Size = new System.Drawing.Size(230, 30);
-            this.buttonOpmerking.TabIndex = 181;
-            this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
-            this.buttonOpmerking.UseVisualStyleBackColor = true;
-            this.buttonOpmerking.Click += new System.EventHandler(this.ButtonOpmerking_Click);
+            this.GaNaarDatumButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GaNaarDatumButton.Location = new System.Drawing.Point(805, 10);
+            this.GaNaarDatumButton.Name = "GaNaarDatumButton";
+            this.GaNaarDatumButton.Size = new System.Drawing.Size(97, 24);
+            this.GaNaarDatumButton.TabIndex = 182;
+            this.GaNaarDatumButton.Text = "Kalender";
+            this.GaNaarDatumButton.UseVisualStyleBackColor = true;
+            this.GaNaarDatumButton.Click += new System.EventHandler(this.GaNaarDatumButton_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(883, 23);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(231, 22);
+            this.dateTimePicker1.TabIndex = 183;
+            this.dateTimePicker1.Visible = false;
+            // 
+            // GaNaarDat
+            // 
+            this.GaNaarDat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GaNaarDat.Location = new System.Drawing.Point(1116, 23);
+            this.GaNaarDat.Name = "GaNaarDat";
+            this.GaNaarDat.Size = new System.Drawing.Size(39, 23);
+            this.GaNaarDat.TabIndex = 184;
+            this.GaNaarDat.Text = "Ga";
+            this.GaNaarDat.UseVisualStyleBackColor = true;
+            this.GaNaarDat.Visible = false;
+            this.GaNaarDat.Click += new System.EventHandler(this.GaNaarDat_Click);
             // 
             // OverzichtWachtForm2Dagen
             // 
@@ -2408,5 +2458,9 @@ namespace Bezetting2
         private System.Windows.Forms.Label labelDienst2;
         private System.Windows.Forms.Label labelDatum2;
         private System.Windows.Forms.Button buttonOpmerking;
+        private System.Windows.Forms.Button buttonOpmerking2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button GaNaarDatumButton;
+        private System.Windows.Forms.Button GaNaarDat;
     }
 }

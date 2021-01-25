@@ -119,6 +119,9 @@
             this.listBox41 = new System.Windows.Forms.ListBox();
             this.buttonNu = new System.Windows.Forms.Button();
             this.buttonOpmerking = new System.Windows.Forms.Button();
+            this.GaNaarDatumButton = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.GaNaarDat = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -1034,30 +1037,30 @@
             // labelDatum
             // 
             this.labelDatum.AutoSize = true;
-            this.labelDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDatum.Location = new System.Drawing.Point(12, 9);
             this.labelDatum.Name = "labelDatum";
-            this.labelDatum.Size = new System.Drawing.Size(91, 20);
+            this.labelDatum.Size = new System.Drawing.Size(72, 16);
             this.labelDatum.TabIndex = 63;
             this.labelDatum.Text = "25-04-1965";
             // 
             // labelKleur
             // 
             this.labelKleur.AutoSize = true;
-            this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelKleur.Location = new System.Drawing.Point(232, 35);
             this.labelKleur.Name = "labelKleur";
-            this.labelKleur.Size = new System.Drawing.Size(52, 20);
+            this.labelKleur.Size = new System.Drawing.Size(44, 16);
             this.labelKleur.TabIndex = 64;
             this.labelKleur.Text = "Blauw";
             // 
             // labelDienst
             // 
             this.labelDienst.AutoSize = true;
-            this.labelDienst.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDienst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDienst.Location = new System.Drawing.Point(10, 35);
             this.labelDienst.Name = "labelDienst";
-            this.labelDienst.Size = new System.Drawing.Size(121, 20);
+            this.labelDienst.Size = new System.Drawing.Size(100, 16);
             this.labelDienst.TabIndex = 65;
             this.labelDienst.Text = "Eerste Ochtend";
             // 
@@ -1066,20 +1069,20 @@
             this.buttonPrev.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPrev.Location = new System.Drawing.Point(455, 5);
             this.buttonPrev.Name = "buttonPrev";
-            this.buttonPrev.Size = new System.Drawing.Size(100, 24);
+            this.buttonPrev.Size = new System.Drawing.Size(87, 24);
             this.buttonPrev.TabIndex = 66;
-            this.buttonPrev.Text = "Vorige";
+            this.buttonPrev.Text = "Dag -";
             this.buttonPrev.UseVisualStyleBackColor = true;
             this.buttonPrev.Click += new System.EventHandler(this.ButtonPrev_Click);
             // 
             // buttonNext
             // 
             this.buttonNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNext.Location = new System.Drawing.Point(561, 5);
+            this.buttonNext.Location = new System.Drawing.Point(548, 5);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(100, 24);
+            this.buttonNext.Size = new System.Drawing.Size(87, 24);
             this.buttonNext.TabIndex = 67;
-            this.buttonNext.Text = "Volgende";
+            this.buttonNext.Text = "Dag +";
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.ButtonNext_Click);
             // 
@@ -1391,11 +1394,11 @@
             // buttonNu
             // 
             this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNu.Location = new System.Drawing.Point(677, 5);
+            this.buttonNu.Location = new System.Drawing.Point(641, 5);
             this.buttonNu.Name = "buttonNu";
-            this.buttonNu.Size = new System.Drawing.Size(157, 24);
+            this.buttonNu.Size = new System.Drawing.Size(87, 24);
             this.buttonNu.TabIndex = 90;
-            this.buttonNu.Text = "Huidige Datum";
+            this.buttonNu.Text = "Vandaag";
             this.buttonNu.UseVisualStyleBackColor = true;
             this.buttonNu.Click += new System.EventHandler(this.ButtonNu_Click);
             // 
@@ -1410,11 +1413,44 @@
             this.buttonOpmerking.UseVisualStyleBackColor = true;
             this.buttonOpmerking.Click += new System.EventHandler(this.ButtonOpmerking_Click);
             // 
+            // GaNaarDatumButton
+            // 
+            this.GaNaarDatumButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GaNaarDatumButton.Location = new System.Drawing.Point(734, 5);
+            this.GaNaarDatumButton.Name = "GaNaarDatumButton";
+            this.GaNaarDatumButton.Size = new System.Drawing.Size(97, 24);
+            this.GaNaarDatumButton.TabIndex = 183;
+            this.GaNaarDatumButton.Text = "Kalender";
+            this.GaNaarDatumButton.UseVisualStyleBackColor = true;
+            this.GaNaarDatumButton.Click += new System.EventHandler(this.GaNaarDatumButton_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(631, 31);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 184;
+            // 
+            // GaNaarDat
+            // 
+            this.GaNaarDat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GaNaarDat.Location = new System.Drawing.Point(834, 31);
+            this.GaNaarDat.Name = "GaNaarDat";
+            this.GaNaarDat.Size = new System.Drawing.Size(44, 22);
+            this.GaNaarDat.TabIndex = 185;
+            this.GaNaarDat.Text = "Ga";
+            this.GaNaarDat.UseVisualStyleBackColor = true;
+            this.GaNaarDat.Visible = false;
+            this.GaNaarDat.Click += new System.EventHandler(this.GaNaarDat_Click);
+            // 
             // OverzichtWachtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 625);
+            this.Controls.Add(this.GaNaarDat);
+            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.GaNaarDatumButton);
             this.Controls.Add(this.buttonOpmerking);
             this.Controls.Add(this.buttonNu);
             this.Controls.Add(this.listBox41);
@@ -1612,5 +1648,8 @@
         private System.Windows.Forms.ListBox listBox41;
         private System.Windows.Forms.Button buttonNu;
         private System.Windows.Forms.Button buttonOpmerking;
+        private System.Windows.Forms.Button GaNaarDatumButton;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button GaNaarDat;
     }
 }
