@@ -70,31 +70,13 @@ namespace Bezetting2
 				textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
 				ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
 				ProgData.NachtErVoorVrij(labelNaam.Text,labelDatum.Text, textBoxAfwijking.Text);
-				string eerste_2 = "";
+				//string eerste_2 = "";
 
-				if (textBoxAfwijking.Text.Length > 2)
-					eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
+				string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
 
 				if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
 				{
-					// als ED-O of ED-M of ED-N aanpassing op andere kleur, of VD of RD
-					// bepaal de kleur die dan loopt.
-
-					// get huidige kleur op
-					string dienst = textBoxAfwijking.Text.Substring(3, 1);
-					string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(),_verzoekdag, dienst);
-					string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
-					ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
-
-                    LooptExtraDienst lop = new LooptExtraDienst
-                    {
-                        _datum = _verzoekdag,
-                        _naam = labelNaam.Text,
-                        _metcode = textBoxAfwijking.Text
-                    };
-
-                    ProgData.ListLooptExtra.Add(lop);
-					ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
+					ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, _verzoekdag, labelNaam.Text);
 				}
 			}
 			else
@@ -112,28 +94,13 @@ namespace Bezetting2
 
 		private void ButtonCancelInvoer_Click(object sender, EventArgs e)
 		{
-			string eerste_2 = "";
-			if (textBoxAfwijking.Text.Length > 2)
-				eerste_2 = textBoxAfwijking.Text.Substring(0, 2);
+			//string eerste_2 = "";
+			string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
 
 			if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
 			{
-				// als ED-O of ED-M of ED-N aanpassing op andere kleur
-				// bepaal de kleur die dan loopt.
-
-				// get huidige kleur op
-				string dienst = textBoxAfwijking.Text.Substring(3, 1);
 				DateTime _verzoekdag = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));
-				string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(),_verzoekdag, dienst);
-				string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
-				ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
-				try
-				{
-					LooptExtraDienst lp = ProgData.ListLooptExtra.First(a => (a._naam == labelNaam.Text) && (a._datum == _verzoekdag));
-					ProgData.ListLooptExtra.Remove(lp);
-					ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
-				}
-				catch { }
+				ProgData.VerwijderLooptExtraDienst(textBoxAfwijking.Text, _verzoekdag, labelNaam.Text);
 			}
 			ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, "", "Verwijderd", this.Text, ProgData.GekozenKleur);
 		}

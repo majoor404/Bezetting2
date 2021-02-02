@@ -906,5 +906,130 @@ namespace Bezetting2
             }
             ProgData.igekozenmaand = bewaar_maand;
         }
+
+        private void MaandenOverzichtNaarExcelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Microsoft.Office.Interop.Excel.Application oXL;
+            Microsoft.Office.Interop.Excel._Workbook oWB;
+            Microsoft.Office.Interop.Excel._Worksheet oSheet;
+            Microsoft.Office.Interop.Excel.Range oRng;
+
+            try
+            {
+                //Start Excel and get Application object.
+                oXL = new Microsoft.Office.Interop.Excel.Application
+                {
+                    Visible = true
+                };
+
+                //Get a new workbook.
+                oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+
+                int aantal_row = 20;    // nog bedenken
+                int aantal_col = 35;    // maakt niet uit aantal dagen + wat extra
+
+                for (int row = 0; row < aantal_row; row++)
+                {
+                    for (int col = 0; col < aantal_col; col++)
+                    {
+                        try
+                        {
+                            oSheet.Cells[row+1, col+1] = View.Items[row].SubItems[col].Text;
+                            
+                            if (View.Items[row].SubItems[col].BackColor == Werkplek_)
+                            {
+                                var columnHeadingsRange = oSheet.Range[
+                                                          oSheet.Cells[row+1, col+1],
+                                                          oSheet.Cells[row+1, col+1]];
+
+                                columnHeadingsRange.Interior.Color = Werkplek_;
+                            }
+                            if (View.Items[row].SubItems[col].BackColor == Weekend_)
+                            {
+                                var columnHeadingsRange = oSheet.Range[
+                                                          oSheet.Cells[row + 1, col + 1],
+                                                          oSheet.Cells[row + 1, col + 1]];
+
+                                columnHeadingsRange.Interior.Color = Weekend_;
+                            }
+                            
+                        }
+                        catch { }
+                    }
+                }
+
+                oRng = oSheet.get_Range("A1", "A100");
+                oRng.EntireColumn.ColumnWidth = 20;
+                oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+
+                oRng = oSheet.get_Range("B1", "AZ100");
+                oRng.EntireColumn.ColumnWidth = 6;
+                oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                oSheet.Name = View.Items[2].SubItems[0].Text;
+
+                // volgende maand
+                oWB.Sheets.Add(After: oWB.Sheets[oWB.Sheets.Count]);
+                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oXL.Sheets["Blad2"];
+                VolgendeMaandToolStripMenuItem_Click(this, null);
+                View.Refresh();
+
+                for (int row = 0; row < aantal_row; row++)
+                {
+                    for (int col = 0; col < aantal_col; col++)
+                    {
+                        try
+                        {
+                            oSheet.Cells[row + 1, col + 1] = View.Items[row].SubItems[col].Text;
+
+                            if (View.Items[row].SubItems[col].BackColor == Werkplek_)
+                            {
+                                var columnHeadingsRange = oSheet.Range[
+                                                          oSheet.Cells[row + 1, col + 1],
+                                                          oSheet.Cells[row + 1, col + 1]];
+
+                                columnHeadingsRange.Interior.Color = Werkplek_;
+                            }
+                            if (View.Items[row].SubItems[col].BackColor == Weekend_)
+                            {
+                                var columnHeadingsRange = oSheet.Range[
+                                                          oSheet.Cells[row + 1, col + 1],
+                                                          oSheet.Cells[row + 1, col + 1]];
+
+                                columnHeadingsRange.Interior.Color = Weekend_;
+                            }
+
+                        }
+                        catch { }
+                    }
+                }
+
+                oRng = oSheet.get_Range("A1", "A100");
+                oRng.EntireColumn.ColumnWidth = 20;
+                oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+
+                oRng = oSheet.get_Range("B1", "AZ100");
+                oRng.EntireColumn.ColumnWidth = 6;
+                oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                oSheet.Name = View.Items[2].SubItems[0].Text;
+
+                //Make sure Excel is visible and give the user control
+                //of Microsoft Excel's lifetime.
+                oXL.Visible = true;
+                oXL.UserControl = true;
+            }
+            catch (Exception theException)
+            {
+                String errorMessage;
+                errorMessage = "Error: ";
+                errorMessage = String.Concat(errorMessage, theException.Message);
+                errorMessage = String.Concat(errorMessage, " Line: ");
+                errorMessage = String.Concat(errorMessage, theException.Source);
+
+                MessageBox.Show(errorMessage, "Error");
+            }
+        }
     }
 }

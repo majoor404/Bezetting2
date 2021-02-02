@@ -286,11 +286,11 @@ namespace Bezetting2
 			// bij een ploegnamen lijst hoort een bezetting lijst
 			if (!File.Exists(Ploeg_Bezetting_Locatie(kleur)))
 			{
-				MaakLegeBezetting(kleur); // in deze roetine wordt het ook opgeslagen
+				MaakLegeBezetting(kleur,true); // in deze roetine wordt het ook opgeslagen
 			}
 		}
 
-		public static void MaakLegeBezetting(string kleur)
+		public static void MaakLegeBezetting(string kleur, bool MetVeranderLijst)
 		{
 			if (TestNetwerkBeschikbaar(15))
 			{
@@ -318,8 +318,11 @@ namespace Bezetting2
 				SavePloegBezetting(kleur, 15);
 
 				// bij nieuwe bezetting hoort ook een nieuwe verander lijst
-				ListVeranderingen.Clear(); // stel er bestond er nog 1, niet overschrijven.
-				SaveVeranderingenPloeg(kleur,15);
+				if (MetVeranderLijst)
+				{
+					ListVeranderingen.Clear(); // stel er bestond er nog 1, niet overschrijven.
+					SaveVeranderingenPloeg(kleur, 15);
+				}
 			}
 			else
 			{
@@ -928,7 +931,8 @@ namespace Bezetting2
 
 		public static void Backup()
 		{
-			string startPath = GetDirectoryBezettingMaand(DateTime.Now);
+            string startPath = GetDirectoryBezettingMaand(DateTime.Now);
+			
 			ZipFile.CreateFromDirectory(startPath, backup_zipnaam);
 		}
 		public static void NachtErVoorVrij(string gekozen_naam, string dagnr, string afwijking)
@@ -1067,5 +1071,46 @@ namespace Bezetting2
                 igekozenmaand = maand;
             }
 		}
+
+		public static void VulInLooptExtraDienst(string afwijking, DateTime _verzoekdag, string naam)
+        {
+			// als ED-O of ED-M of ED-N aanpassing op andere kleur, of VD of RD
+			// bepaal de kleur die dan loopt.
+
+			// get huidige kleur op
+			string dienst = afwijking.Substring(3, 1);
+			string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), _verzoekdag, dienst);
+			string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
+			ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
+
+			LooptExtraDienst lop = new LooptExtraDienst
+			{
+				_datum = _verzoekdag,
+				_naam = naam,
+				_metcode = afwijking
+			};
+
+			ProgData.ListLooptExtra.Add(lop);
+			ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
+		}
+		
+		public static void VerwijderLooptExtraDienst(string afwijking, DateTime _verzoekdag, string naam)
+        {
+			// als ED-O of ED-M of ED-N aanpassing op andere kleur
+			// bepaal de kleur die dan loopt.
+
+			// get huidige kleur op
+			string dienst = afwijking.Substring(3, 1);
+			string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), _verzoekdag, dienst);
+			string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
+			ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
+			try
+			{
+				LooptExtraDienst lp = ProgData.ListLooptExtra.First(a => (a._naam == naam) && (a._datum == _verzoekdag));
+				ProgData.ListLooptExtra.Remove(lp);
+				ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
+			}
+			catch { }
+        }
 	}
 }

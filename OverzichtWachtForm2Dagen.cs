@@ -42,6 +42,7 @@ namespace Bezetting2
         private void OverzichtWachtForm2_Shown(object sender, EventArgs e)
         {
             buttonOpmerking.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
+            buttonOpmerking2.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
 
             // als ToegangNivo hoog genoeg, vrijgave edit
             if (ProgData.RechtenHuidigeGebruiker > 100)

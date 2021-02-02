@@ -103,6 +103,7 @@
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
+            this.maandenOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -121,7 +122,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1834, 25);
+            this.menuStrip.Size = new System.Drawing.Size(1834, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -133,53 +134,53 @@
             this.toolStripMenuItem1,
             this.closeExitStopToolStripMenuItem});
             this.inloggenToolStripMenuItem.Name = "inloggenToolStripMenuItem";
-            this.inloggenToolStripMenuItem.Size = new System.Drawing.Size(96, 21);
+            this.inloggenToolStripMenuItem.Size = new System.Drawing.Size(89, 20);
             this.inloggenToolStripMenuItem.Text = "In/Uit loggen";
             // 
             // inloggenToolStripMenuItem1
             // 
             this.inloggenToolStripMenuItem1.Name = "inloggenToolStripMenuItem1";
-            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(141, 22);
+            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
             this.inloggenToolStripMenuItem1.Text = "Inloggen";
             this.inloggenToolStripMenuItem1.Click += new System.EventHandler(this.InloggenToolStripMenuItem1_Click);
             // 
             // uitloggenToolStripMenuItem
             // 
             this.uitloggenToolStripMenuItem.Name = "uitloggenToolStripMenuItem";
-            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.uitloggenToolStripMenuItem.Text = "Uitloggen";
             this.uitloggenToolStripMenuItem.Click += new System.EventHandler(this.UitloggenToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(130, 6);
             // 
             // closeExitStopToolStripMenuItem
             // 
             this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
-            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
             this.closeExitStopToolStripMenuItem.Text = "Close / Exit";
             this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.CloseExitStopToolStripMenuItem_Click);
             // 
             // wachtOverzichtToolStripMenuItem
             // 
             this.wachtOverzichtToolStripMenuItem.Name = "wachtOverzichtToolStripMenuItem";
-            this.wachtOverzichtToolStripMenuItem.Size = new System.Drawing.Size(113, 21);
+            this.wachtOverzichtToolStripMenuItem.Size = new System.Drawing.Size(106, 20);
             this.wachtOverzichtToolStripMenuItem.Text = "Wacht Overzicht";
             this.wachtOverzichtToolStripMenuItem.Click += new System.EventHandler(this.WachtOverzichtToolStripMenuItem_Click);
             // 
             // ruilOverwerkToolStripMenuItem
             // 
             this.ruilOverwerkToolStripMenuItem.Name = "ruilOverwerkToolStripMenuItem";
-            this.ruilOverwerkToolStripMenuItem.Size = new System.Drawing.Size(109, 21);
+            this.ruilOverwerkToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.ruilOverwerkToolStripMenuItem.Text = "Ruil / Overwerk";
             this.ruilOverwerkToolStripMenuItem.Click += new System.EventHandler(this.RuilOverwerkToolStripMenuItem_Click);
             // 
             // snipperDagAanvraagToolStripMenuItem
             // 
             this.snipperDagAanvraagToolStripMenuItem.Name = "snipperDagAanvraagToolStripMenuItem";
-            this.snipperDagAanvraagToolStripMenuItem.Size = new System.Drawing.Size(148, 21);
+            this.snipperDagAanvraagToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
             this.snipperDagAanvraagToolStripMenuItem.Text = "SnipperDag Aanvraag";
             this.snipperDagAanvraagToolStripMenuItem.Click += new System.EventHandler(this.SnipperDagAanvraagToolStripMenuItem_Click);
             // 
@@ -190,16 +191,17 @@
             this.tellingWaarGewerktToolStripMenuItem,
             this.namenAdressenEMailToolStripMenuItem,
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem,
-            this.afwijkingTovRoosterPloegToolStripMenuItem});
+            this.afwijkingTovRoosterPloegToolStripMenuItem,
+            this.maandenOverzichtNaarExcelToolStripMenuItem});
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
-            this.excelToolStripMenuItem.Size = new System.Drawing.Size(49, 21);
+            this.excelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.excelToolStripMenuItem.Text = "Excel";
             // 
             // vuilwerkToolStripMenuItem
             // 
             this.vuilwerkToolStripMenuItem.Enabled = false;
             this.vuilwerkToolStripMenuItem.Name = "vuilwerkToolStripMenuItem";
-            this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
+            this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.vuilwerkToolStripMenuItem.Text = "Vuilwerk";
             this.vuilwerkToolStripMenuItem.Click += new System.EventHandler(this.VuilwerkToolStripMenuItem_Click);
             // 
@@ -207,7 +209,7 @@
             // 
             this.tellingWaarGewerktToolStripMenuItem.Enabled = false;
             this.tellingWaarGewerktToolStripMenuItem.Name = "tellingWaarGewerktToolStripMenuItem";
-            this.tellingWaarGewerktToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
+            this.tellingWaarGewerktToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.tellingWaarGewerktToolStripMenuItem.Text = "Telling waar gewerkt";
             this.tellingWaarGewerktToolStripMenuItem.Click += new System.EventHandler(this.TellingWaarGewerktToolStripMenuItem_Click);
             // 
@@ -222,47 +224,47 @@
             this.allemaalToolStripMenuItem});
             this.namenAdressenEMailToolStripMenuItem.Enabled = false;
             this.namenAdressenEMailToolStripMenuItem.Name = "namenAdressenEMailToolStripMenuItem";
-            this.namenAdressenEMailToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
+            this.namenAdressenEMailToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.namenAdressenEMailToolStripMenuItem.Text = "Namen Adressen E-Mail";
             // 
             // blauwToolStripMenuItem
             // 
             this.blauwToolStripMenuItem.Name = "blauwToolStripMenuItem";
-            this.blauwToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.blauwToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.blauwToolStripMenuItem.Text = "Blauw";
             this.blauwToolStripMenuItem.Click += new System.EventHandler(this.BlauwToolStripMenuItem_Click);
             // 
             // geelToolStripMenuItem
             // 
             this.geelToolStripMenuItem.Name = "geelToolStripMenuItem";
-            this.geelToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.geelToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.geelToolStripMenuItem.Text = "Geel";
             // 
             // groenToolStripMenuItem
             // 
             this.groenToolStripMenuItem.Name = "groenToolStripMenuItem";
-            this.groenToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.groenToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.groenToolStripMenuItem.Text = "Groen";
             this.groenToolStripMenuItem.Click += new System.EventHandler(this.GroenToolStripMenuItem_Click);
             // 
             // witToolStripMenuItem
             // 
             this.witToolStripMenuItem.Name = "witToolStripMenuItem";
-            this.witToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.witToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.witToolStripMenuItem.Text = "Wit";
             this.witToolStripMenuItem.Click += new System.EventHandler(this.WitToolStripMenuItem_Click);
             // 
             // roodToolStripMenuItem
             // 
             this.roodToolStripMenuItem.Name = "roodToolStripMenuItem";
-            this.roodToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.roodToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.roodToolStripMenuItem.Text = "Rood";
             this.roodToolStripMenuItem.Click += new System.EventHandler(this.RoodToolStripMenuItem_Click);
             // 
             // allemaalToolStripMenuItem
             // 
             this.allemaalToolStripMenuItem.Name = "allemaalToolStripMenuItem";
-            this.allemaalToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.allemaalToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.allemaalToolStripMenuItem.Text = "Alle Kleuren / Dagdienst";
             this.allemaalToolStripMenuItem.Click += new System.EventHandler(this.AllemaalToolStripMenuItem_Click);
             // 
@@ -270,7 +272,7 @@
             // 
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Enabled = false;
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Name = "afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem";
-            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Text = "Afwijkingen tov Rooster ingelogd Persoon";
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Click += new System.EventHandler(this.AfwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click);
             // 
@@ -278,7 +280,7 @@
             // 
             this.afwijkingTovRoosterPloegToolStripMenuItem.Enabled = false;
             this.afwijkingTovRoosterPloegToolStripMenuItem.Name = "afwijkingTovRoosterPloegToolStripMenuItem";
-            this.afwijkingTovRoosterPloegToolStripMenuItem.Size = new System.Drawing.Size(321, 22);
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.afwijkingTovRoosterPloegToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg";
             this.afwijkingTovRoosterPloegToolStripMenuItem.Click += new System.EventHandler(this.AfwijkingTovRoosterPloegToolStripMenuItem_Click);
             // 
@@ -295,14 +297,14 @@
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem,
             this.editPopupMenuToolStripMenuItem});
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
-            this.beheerToolStripMenuItem.Size = new System.Drawing.Size(60, 21);
+            this.beheerToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.beheerToolStripMenuItem.Text = "Beheer";
             // 
             // editPersoneelToolStripMenuItem
             // 
             this.editPersoneelToolStripMenuItem.Enabled = false;
             this.editPersoneelToolStripMenuItem.Name = "editPersoneelToolStripMenuItem";
-            this.editPersoneelToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.editPersoneelToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.editPersoneelToolStripMenuItem.Text = "Edit Personeel";
             this.editPersoneelToolStripMenuItem.Click += new System.EventHandler(this.EditPersoneelClick);
             // 
@@ -310,14 +312,14 @@
             // 
             this.kleurLijnenToolStripMenuItem.Enabled = false;
             this.kleurLijnenToolStripMenuItem.Name = "kleurLijnenToolStripMenuItem";
-            this.kleurLijnenToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.kleurLijnenToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.kleurLijnenToolStripMenuItem.Text = "KleurLijnen";
             this.kleurLijnenToolStripMenuItem.Click += new System.EventHandler(this.KleurLijnenToolStripMenuItem_Click);
             // 
             // importNamenOudeVersieToolStripMenuItem
             // 
             this.importNamenOudeVersieToolStripMenuItem.Name = "importNamenOudeVersieToolStripMenuItem";
-            this.importNamenOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.importNamenOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.importNamenOudeVersieToolStripMenuItem.Text = "Import Namen oude Versie";
             this.importNamenOudeVersieToolStripMenuItem.Visible = false;
             this.importNamenOudeVersieToolStripMenuItem.Click += new System.EventHandler(this.ImportNamenOudeVersieToolStripMenuItem_Click);
@@ -325,7 +327,7 @@
             // importOudeVeranderDataOudeVersieToolStripMenuItem
             // 
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Name = "importOudeVeranderDataOudeVersieToolStripMenuItem";
-            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.importOudeVeranderDataOudeVersieToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Text = "Import Verander data oude Versie";
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Visible = false;
             this.importOudeVeranderDataOudeVersieToolStripMenuItem.Click += new System.EventHandler(this.ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click);
@@ -333,7 +335,7 @@
             // repareerPloegAfwijkingToolStripMenuItem
             // 
             this.repareerPloegAfwijkingToolStripMenuItem.Name = "repareerPloegAfwijkingToolStripMenuItem";
-            this.repareerPloegAfwijkingToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.repareerPloegAfwijkingToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.repareerPloegAfwijkingToolStripMenuItem.Text = "Repareer Ploeg Bezetting met afwijking file.";
             this.repareerPloegAfwijkingToolStripMenuItem.Visible = false;
             this.repareerPloegAfwijkingToolStripMenuItem.Click += new System.EventHandler(this.RepareerPloegAfwijkingToolStripMenuItem_Click);
@@ -341,7 +343,7 @@
             // instellingenProgrammaToolStripMenuItem
             // 
             this.instellingenProgrammaToolStripMenuItem.Name = "instellingenProgrammaToolStripMenuItem";
-            this.instellingenProgrammaToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.instellingenProgrammaToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.instellingenProgrammaToolStripMenuItem.Text = "Instellingen Programma";
             this.instellingenProgrammaToolStripMenuItem.Visible = false;
             this.instellingenProgrammaToolStripMenuItem.Click += new System.EventHandler(this.InstellingenProgrammaToolStripMenuItem_Click);
@@ -349,7 +351,7 @@
             // nietMeeTelLijstToolStripMenuItem
             // 
             this.nietMeeTelLijstToolStripMenuItem.Name = "nietMeeTelLijstToolStripMenuItem";
-            this.nietMeeTelLijstToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.nietMeeTelLijstToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.nietMeeTelLijstToolStripMenuItem.Text = "Niet Mee Tel Lijst";
             this.nietMeeTelLijstToolStripMenuItem.Visible = false;
             this.nietMeeTelLijstToolStripMenuItem.Click += new System.EventHandler(this.NietMeeTelLijstToolStripMenuItem_Click);
@@ -357,7 +359,7 @@
             // removeAutoInlogOnderDitWindowsAccountToolStripMenuItem
             // 
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Name = "removeAutoInlogOnderDitWindowsAccountToolStripMenuItem";
-            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Text = "Remove Auto inlog onder dit Windows Account";
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Visible = false;
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Click += new System.EventHandler(this.RemoveAutoInlogOnderDitWindowsAccountToolStripMenuItem_Click);
@@ -365,7 +367,7 @@
             // editPopupMenuToolStripMenuItem
             // 
             this.editPopupMenuToolStripMenuItem.Name = "editPopupMenuToolStripMenuItem";
-            this.editPopupMenuToolStripMenuItem.Size = new System.Drawing.Size(352, 22);
+            this.editPopupMenuToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.editPopupMenuToolStripMenuItem.Text = "Edit Popup Menu";
             this.editPopupMenuToolStripMenuItem.Visible = false;
             this.editPopupMenuToolStripMenuItem.Click += new System.EventHandler(this.EditPopupMenuToolStripMenuItem_Click);
@@ -373,7 +375,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(55, 21);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -384,9 +386,9 @@
             this.ToegangNivo,
             this.toolStripStatusLabelInfo,
             this.toolStripStatusRedeAfwijking});
-            this.StatusStrip.Location = new System.Drawing.Point(0, 935);
+            this.StatusStrip.Location = new System.Drawing.Point(0, 937);
             this.StatusStrip.Name = "StatusStrip";
-            this.StatusStrip.Size = new System.Drawing.Size(1834, 26);
+            this.StatusStrip.Size = new System.Drawing.Size(1834, 24);
             this.StatusStrip.TabIndex = 1;
             this.StatusStrip.Text = "statusStrip1";
             // 
@@ -395,7 +397,7 @@
             this.IngelogdPersNr.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.IngelogdPersNr.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.IngelogdPersNr.Name = "IngelogdPersNr";
-            this.IngelogdPersNr.Size = new System.Drawing.Size(121, 21);
+            this.IngelogdPersNr.Size = new System.Drawing.Size(110, 19);
             this.IngelogdPersNr.Text = "Niemand Ingelogd";
             // 
             // ToegangNivo
@@ -403,7 +405,7 @@
             this.ToegangNivo.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.ToegangNivo.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.ToegangNivo.Name = "ToegangNivo";
-            this.ToegangNivo.Size = new System.Drawing.Size(19, 21);
+            this.ToegangNivo.Size = new System.Drawing.Size(17, 19);
             this.ToegangNivo.Text = "0";
             this.ToegangNivo.TextChanged += new System.EventHandler(this.ToegangNivo_TextChanged);
             // 
@@ -412,7 +414,7 @@
             this.toolStripStatusLabelInfo.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.toolStripStatusLabelInfo.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.toolStripStatusLabelInfo.Name = "toolStripStatusLabelInfo";
-            this.toolStripStatusLabelInfo.Size = new System.Drawing.Size(54, 21);
+            this.toolStripStatusLabelInfo.Size = new System.Drawing.Size(49, 19);
             this.toolStripStatusLabelInfo.Text = "majoor";
             // 
             // toolStripStatusRedeAfwijking
@@ -420,7 +422,7 @@
             this.toolStripStatusRedeAfwijking.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Left;
             this.toolStripStatusRedeAfwijking.BorderStyle = System.Windows.Forms.Border3DStyle.Etched;
             this.toolStripStatusRedeAfwijking.Name = "toolStripStatusRedeAfwijking";
-            this.toolStripStatusRedeAfwijking.Size = new System.Drawing.Size(36, 21);
+            this.toolStripStatusRedeAfwijking.Size = new System.Drawing.Size(34, 19);
             this.toolStripStatusRedeAfwijking.Text = "BBQ";
             // 
             // comboBoxKleurKeuze
@@ -837,6 +839,14 @@
             this.checkBoxHoverNaam.Text = "Hover Naam";
             this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
             // 
+            // maandenOverzichtNaarExcelToolStripMenuItem
+            // 
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Enabled = false;
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Name = "maandenOverzichtNaarExcelToolStripMenuItem";
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Text = "2 Maanden overzicht naar Excel";
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.MaandenOverzichtNaarExcelToolStripMenuItem_Click);
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -971,6 +981,7 @@
         public System.Windows.Forms.ListView View;
         private System.Windows.Forms.ToolStripMenuItem editPersoneelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editPopupMenuToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem maandenOverzichtNaarExcelToolStripMenuItem;
     }
 }
 
