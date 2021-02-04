@@ -20,7 +20,7 @@ namespace Bezetting2
 
             ListClassTelAfwijkingen.Clear();
 
-            //string locatie = @"telnietmee.ini";
+            //string locatie = @"BezData\\telnietmee.ini";
             //ListTelNietMeeNamen = File.ReadAllLines(locatie).ToList();
 
             Microsoft.Office.Interop.Excel.Application xlApp;
@@ -44,7 +44,7 @@ namespace Bezetting2
                 };
 
                 //Get a new workbook.
-                string file = Path.GetFullPath("OverzichtPersoon.xls");
+                string file = Path.GetFullPath("BezData\\OverzichtPersoon.xls");
 
                 xlWorkBook = xlApp.Workbooks.Open(file, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, true, 0, true, 1, 0);
 
@@ -302,7 +302,7 @@ namespace Bezetting2
                 };
 
                 //Get a new workbook.
-                string file = Path.GetFullPath("vuilwerk.xls");
+                string file = Path.GetFullPath("BezData\\vuilwerk.xls");
 
                 /*
                  public Microsoft.Office.Interop.Excel.Workbook Open
@@ -470,13 +470,13 @@ namespace Bezetting2
 
         private void VuilwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (File.Exists("vuilwerk.ini"))
+            if (File.Exists("BezData\\vuilwerk.ini"))
             {
                 ListVuilwerkData.Clear();
-                ListVuilwerkData = File.ReadAllLines("vuilwerk.ini").ToList();
+                ListVuilwerkData = File.ReadAllLines("BezData\\vuilwerk.ini").ToList();
 
                 List<string> TelNietMeeNamen = new List<string>();
-                string locatie = @"telnietmee.ini";
+                string locatie = @"BezData\\telnietmee.ini";
                 try
                 {
                     TelNietMeeNamen = File.ReadAllLines(locatie).ToList();
@@ -543,9 +543,9 @@ namespace Bezetting2
                 }
                 ZetGevondenDataTellingVuilWerktInExcel();
             }
-            else // geen vuilwerk.ini
+            else // geen BezData\\vuilwerk.ini
             {
-                MessageBox.Show("Geen vuilwerk.ini gevonden!");
+                MessageBox.Show("Geen BezData\\vuilwerk.ini gevonden!");
             }
         }
 
@@ -606,7 +606,7 @@ namespace Bezetting2
 
         private void NietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("telnietmee.ini");
+            Process.Start("BezData\\telnietmee.ini");
         }
 
         public void ToExcelNamenEnAdressen(string kleur)
@@ -739,7 +739,7 @@ namespace Bezetting2
                 };
 
                 //Get a new workbook.
-                string file = Path.GetFullPath("OverzichtPloeg.xls");
+                string file = Path.GetFullPath("BezData\\OverzichtPloeg.xls");
 
                 xlWorkBook = xlApp.Workbooks.Open(file, 0, false, 5, "", "", true, Microsoft.Office.Interop.Excel.XlPlatform.xlWindows, "\t", false, true, 0, true, 1, 0);
 

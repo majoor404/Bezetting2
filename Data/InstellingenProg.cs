@@ -74,7 +74,7 @@ namespace Bezetting2.Data
             {
                 // strings to class data
                 // als niet bestaat maak lege aan.
-                if (!File.Exists("Programdata.ini"))
+                if (!File.Exists("BezData\\Programdata.ini"))
                 {
                     for (int i = 0; i < 100; i++)
                     {
@@ -84,7 +84,7 @@ namespace Bezetting2.Data
                     // maak lege aan
                     SaveProgrammaData();
                 }
-                ProgrammaData = File.ReadAllLines("Programdata.ini").ToList();
+                ProgrammaData = File.ReadAllLines("BezData\\Programdata.ini").ToList();
             }
             catch (IOException)
             {
@@ -99,7 +99,7 @@ namespace Bezetting2.Data
                 // tot ProgrammaData[40] is data wachoverzicht
                 ProgrammaData[41] = _GebruikExtraRuil.ToString();
                 ProgrammaData[42] = _GebruikSnipper.ToString();
-                File.WriteAllLines("Programdata.ini", ProgrammaData);
+                File.WriteAllLines("BezData\\Programdata.ini", ProgrammaData);
             }
             catch (IOException)
             {

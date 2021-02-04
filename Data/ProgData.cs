@@ -32,7 +32,7 @@ Ploeg_Veranderingen_Locatie()	\\{GekozenKleur}_afwijkingen.bin"
 Save_Namen_lijst()
 Lees_Namen_lijst()
 ListPersoneel
-				"personeel.bin"
+"BezData\\personeel.bin"
 
  * ****************************************************************************/
 
@@ -49,6 +49,9 @@ namespace Bezetting2
 			Rood
 		}
 
+		//once you have the path you get the directory with:
+		public static string DataDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+		
 		public static bool Disable_error_Meldingen = false;
 		public static MainFormBezetting2 Main;
 
@@ -463,9 +466,9 @@ namespace Bezetting2
 			Main.labelDebug.Text = "Save Namen Lijst";
 			try
 			{
-				if (File.Exists("personeel.bin"))
+				if (File.Exists("BezData\\personeel.bin"))
 				{
-					long length = new FileInfo("personeel.bin").Length;
+					long length = new FileInfo("BezData\\personeel.bin").Length;
 					if (length > 0)
 					{
 						if (!Directory.Exists("Backup"))
@@ -474,7 +477,7 @@ namespace Bezetting2
 						string s = DateTime.Now.ToString("MM-dd-yyyy HH-mm");
 						/**/
 						string nieuw_naam = Directory.GetCurrentDirectory() + @"\Backup\personeel" + s + ".bin";
-						File.Copy("personeel.bin", nieuw_naam, true);  // overwrite oude file
+						File.Copy("BezData\\personeel.bin", nieuw_naam, true);  // overwrite oude file
 
 						List<FileInfo> files = new DirectoryInfo("Backup").EnumerateFiles()
 										.OrderByDescending(f => f.CreationTime)
@@ -485,7 +488,7 @@ namespace Bezetting2
 					Main.labelDebug.Text = "";
 				}
 
-				using (Stream stream = File.Open("personeel.bin", FileMode.Create))
+				using (Stream stream = File.Open("BezData\\personeel.bin", FileMode.Create))
 				{
 					BinaryFormatter bin = new BinaryFormatter();
 					bin.Serialize(stream, ListPersoneel);
@@ -503,7 +506,7 @@ namespace Bezetting2
 			Main.labelDebug.Text = "Load Namen Lijst";
 			try
 			{
-				using (Stream stream = File.Open("personeel.bin", FileMode.Open))
+				using (Stream stream = File.Open("BezData\\personeel.bin", FileMode.Open))
 				{
 					ListPersoneel.Clear();
 					BinaryFormatter bin = new BinaryFormatter();
@@ -565,6 +568,7 @@ namespace Bezetting2
 				SavePloegBezetting(kleur,15);
 
 				LoadVeranderingenPloeg(kleur,15);
+				
 				veranderingen verander = new veranderingen
 				{
 					_naam = naam,

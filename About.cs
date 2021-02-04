@@ -25,7 +25,7 @@ namespace Bezetting2
             label1.Text = buildDate.ToString();
 
             textBox2.Clear();
-            string[] lines = File.ReadAllLines("versie.ini");
+            string[] lines = File.ReadAllLines("BezData\\versie.ini");
             textBox2.Text = String.Join(Environment.NewLine, lines);
             textBox2.SelectionStart = textBox2.TextLength;
             textBox2.ScrollToCaret();

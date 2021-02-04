@@ -23,7 +23,7 @@ namespace Bezetting2.Invoer
         {
             Exit = false;
             List<string> PopUpNamen = new List<string>();
-            string locatie = @"popupmenu.ini";
+            string locatie = @"BezData\\popupmenu.ini";
             try
             {
                 PopUpNamen = File.ReadAllLines(locatie).ToList();

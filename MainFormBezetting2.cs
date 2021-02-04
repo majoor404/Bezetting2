@@ -99,9 +99,9 @@ namespace Bezetting2
             WindowUpdateViewScreen = true;
 
             // test lees rechten
-            if (!File.Exists("Programdata.ini"))
+            if (!File.Exists("BezData\\Programdata.ini"))
             {
-                MessageBox.Show("Geen lees rechten of Programdata.ini niet aanwezig, exit");
+                MessageBox.Show("Geen lees rechten of BezData\\Programdata.ini niet aanwezig, exit");
                 Close();
             }
             // test schrijf rechten
@@ -121,7 +121,7 @@ namespace Bezetting2
             }
             InstellingenProg.LeesProgrammaData();
 
-            if (!File.Exists("popupmenu.ini"))
+            if (!File.Exists("BezData\\popupmenu.ini"))
                 MaakLeegPopUpMenu();
 
             if (!Directory.Exists("Backup"))
@@ -634,7 +634,7 @@ namespace Bezetting2
                     int aantal_mensen;// = ProgData.ListPersoneelKleur.Count;
 
                     List<string> TelNietMeeNamen = new List<string>();
-                    string locatie = @"telnietmee.ini";
+                    string locatie = @"BezData\\telnietmee.ini";
                     try
                     {
                         TelNietMeeNamen = File.ReadAllLines(locatie).ToList();
@@ -769,14 +769,14 @@ namespace Bezetting2
                 int aantal_mensen;// = ProgData.ListPersoneelKleur.Count;
 
                 List<string> TelNietMeeNamen = new List<string>();
-                string locatie = @"telnietmee.ini";
+                string locatie = @"BezData\\telnietmee.ini";
                 try
                 {
                     TelNietMeeNamen = File.ReadAllLines(locatie).ToList();
                 }
                 catch
                 {
-                    MessageBox.Show("telnietmee.ini niet gevonden");
+                    MessageBox.Show("BezData\\telnietmee.ini niet gevonden");
                 }
 
                 for (dag = 1; dag < aantal_dagen_deze_maand + 1; dag++) // aantal dagen
@@ -1460,7 +1460,25 @@ namespace Bezetting2
                                 {
                                     if (GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
                                     {
-                                        meta[5] = ""; // in oude programma als afwijking werdt verwijderd, werdt orginele wacht ingevuld.
+                                        // als ed vd of rd wordt verwijderd, dan ook in VerwijderLooptExtraDienst
+                                        // check eerst of laatse wijzeging dan ook een ed ve of rd was
+                                        ProgData.Igekozenjaar = datum_afwijking.Year;
+                                        ProgData.igekozenmaand = datum_afwijking.Month;
+                                        ProgData.LoadVeranderingenPloeg(kleur, 15);
+                                        try
+                                        {
+                                            veranderingen wijz = ProgData.ListVeranderingen.Last(a => (a._naam == meta[3].ToString()) && (a._datumafwijking == datum_afwijking.Day.ToString()));
+                                            // zo ja verwijder VerwijderLooptExtraDienst
+                                            string eerste_2 = wijz._afwijking.Length >= 2 ? wijz._afwijking.Substring(0, 2) : wijz._afwijking;
+                                            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                                            {
+                                                ProgData.VerwijderLooptExtraDienst(wijz._afwijking, datum_afwijking, wijz._naam);
+                                            }
+                                        }
+                                        catch { }
+
+                                        // in oude programma als afwijking werdt verwijderd, werdt orginele wacht ingevuld.
+                                        meta[5] = ""; 
                                     }
                                 }
 
@@ -1489,19 +1507,18 @@ namespace Bezetting2
                                             kleur = a._nieuwkleur;
                                         }
                                     }
+                                    
+                                    
                                     labelDebug.Text = $"{teller} {naam} {afwijking}";
                                     labelDebug.Refresh();
                                     ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam);
 
-                                    //if (afwijking.Length > 2)
-                                    //{
-                                    //	string eerste_2 = "";
-                                    //	eerste_2 = afwijking.Substring(0, 2);
-                                    //	if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
-                                    //	{
-                                    //		ProgData.VulInLooptExtraDienst(afwijking, datum_afwijking, "Import " + invoer_naam);
-                                    //	}
-                                    //}
+                                    // toevoegen extra ruil of verschoven dienst
+                                    string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
+                                    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                                    {
+                                        ProgData.VulInLooptExtraDienst(afwijking, datum_afwijking, naam);
+                                    }
                                 }
                             }
                             catch { }
@@ -1721,16 +1738,16 @@ namespace Bezetting2
 
         private void EditPopupMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (!File.Exists("popupmenu.ini"))
+            if (!File.Exists("BezData\\popupmenu.ini"))
             {
                 MaakLeegPopUpMenu();
             }
-            Process.Start("popupmenu.ini");
+            Process.Start("BezData\\popupmenu.ini");
         }
 
         private void MaakLeegPopUpMenu()
         {
-            File.Create("popupmenu.ini").Dispose();
+            File.Create("BezData\\popupmenu.ini").Dispose();
 
             List<string> PopUpNamen = new List<string>
             {
@@ -1748,7 +1765,7 @@ namespace Bezetting2
                 "OPLO"
             };
 
-            File.WriteAllLines("popupmenu.ini", PopUpNamen);
+            File.WriteAllLines("BezData\\popupmenu.ini", PopUpNamen);
         }
 
         private void DeleteDataDir(DateTime start, DateTime eind)
