@@ -51,6 +51,7 @@
             this.allemaalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afwijkingTovRoosterPloegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.maandenOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +104,6 @@
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
-            this.maandenOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -283,6 +283,14 @@
             this.afwijkingTovRoosterPloegToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.afwijkingTovRoosterPloegToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg";
             this.afwijkingTovRoosterPloegToolStripMenuItem.Click += new System.EventHandler(this.AfwijkingTovRoosterPloegToolStripMenuItem_Click);
+            // 
+            // maandenOverzichtNaarExcelToolStripMenuItem
+            // 
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Enabled = false;
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Name = "maandenOverzichtNaarExcelToolStripMenuItem";
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Text = "2 Maanden overzicht naar Excel";
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.MaandenOverzichtNaarExcelToolStripMenuItem_Click);
             // 
             // beheerToolStripMenuItem
             // 
@@ -839,17 +847,10 @@
             this.checkBoxHoverNaam.Text = "Hover Naam";
             this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
             // 
-            // maandenOverzichtNaarExcelToolStripMenuItem
-            // 
-            this.maandenOverzichtNaarExcelToolStripMenuItem.Enabled = false;
-            this.maandenOverzichtNaarExcelToolStripMenuItem.Name = "maandenOverzichtNaarExcelToolStripMenuItem";
-            this.maandenOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
-            this.maandenOverzichtNaarExcelToolStripMenuItem.Text = "2 Maanden overzicht naar Excel";
-            this.maandenOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.MaandenOverzichtNaarExcelToolStripMenuItem_Click);
-            // 
             // MainFormBezetting2
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1834, 961);

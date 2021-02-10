@@ -16,7 +16,7 @@ namespace Bezetting2
 {
     public partial class MainFormBezetting2 : Form
     {
-        public const int kolom_breed = 49;
+        public int kolom_breed = 49;
         public const int y_as_eerste_lijn = 136;
         public const int y_as_add_lijn = 4;
         private bool kill = false;
@@ -91,6 +91,7 @@ namespace Bezetting2
         public MainFormBezetting2()
         {
             InitializeComponent();
+
             ProgData._inlognaam = IngelogdPersNr;
             ProgData._toegangnivo = ToegangNivo;
 
@@ -186,6 +187,43 @@ namespace Bezetting2
 
             if (comboBoxKleurKeuze.Text == "DD")
                 comboBoxKleurKeuze.Enabled = false;
+
+            // als scherm te groot is voor kleine monitors, aanpassen
+            int ourScreenWidth = Screen.FromControl(this).WorkingArea.Width;
+            if (ourScreenWidth < 1920)
+            {
+                this.Size = new Size(1220, 730);
+                View.Size = new Size(1080, 550);
+                View.Font = new Font("Microsoft Sans Serif", 8);
+
+                kolom_breed = 30;
+                CenterToScreen();
+
+                foreach (System.Windows.Forms.Button button in this.Controls.OfType<System.Windows.Forms.Button>())
+                {
+                    button.Font = new Font("Microsoft Sans Serif",8);
+                    if (button.Width > 100)
+                    {
+                        button.Width = 70;
+                    }
+                    else
+                    {
+                        button.Width = 30;
+                        if (button.Text == ">")
+                            button.Left -= 20;
+                    }
+                    
+                }
+                foreach (System.Windows.Forms.ComboBox combo in this.Controls.OfType<System.Windows.Forms.ComboBox>())
+                {
+                    combo.Width = 70;
+                }
+                foreach (System.Windows.Forms.NumericUpDown num in this.Controls.OfType<System.Windows.Forms.NumericUpDown>())
+                {
+                    num.Width = 70;
+                }
+                View.Left -= 40;
+            }
 
             WindowUpdateViewScreen = true;
             VulViewScherm();
