@@ -375,6 +375,27 @@ namespace Bezetting2
                 ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
                 if (ProgData.ListLooptExtra.Count > 0)
                 {
+                    /////////////////////////////////////////////////////////////////////////////////////
+
+                    // VD is bv veranderd in ED
+                    // verwijder dus eerst die oude
+
+                    for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
+                    {
+                        for (int a = 0; a < ProgData.ListWerkdagPloeg.Count; a++)
+                        {
+                            if (ProgData.ListLooptExtra[i]._naam == ProgData.ListWerkdagPloeg[a]._naam && ProgData.ListLooptExtra[i]._datum.Day == ProgData.ListWerkdagPloeg[a]._dagnummer)
+                            {
+                                if (ProgData.ListLooptExtra[i]._metcode != ProgData.ListWerkdagPloeg[a]._afwijkingdienst)
+                                {
+                                    ProgData.ListWerkdagPloeg[a]._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
+                                    ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
+                                }
+                            }
+                        }
+                    }
+
+                    ///////////////////////////////////////////////////////////////////////////////////////
                     foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
                     {
                         if (naam._datum.ToShortDateString() == dat.ToShortDateString())

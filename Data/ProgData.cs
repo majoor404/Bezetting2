@@ -1086,7 +1086,7 @@ namespace Bezetting2
 			string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), _verzoekdag, dienst);
 			string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
 			ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
-
+			
 			LooptExtraDienst lop = new LooptExtraDienst
 			{
 				_datum = _verzoekdag,
@@ -1094,27 +1094,23 @@ namespace Bezetting2
 				_metcode = afwijking
 			};
 
-			ProgData.ListLooptExtra.Add(lop);
-			ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
-		}
-		
-		public static void VerwijderLooptExtraDienst(string afwijking, DateTime _verzoekdag, string naam)
-        {
-			// als ED-O of ED-M of ED-N aanpassing op andere kleur
-			// bepaal de kleur die dan loopt.
-
-			// get huidige kleur op
-			string dienst = afwijking.Substring(3, 1);
-			string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), _verzoekdag, dienst);
-			string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
-			ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
-			try
-			{
-				LooptExtraDienst lp = ProgData.ListLooptExtra.First(a => (a._naam == naam) && (a._datum == _verzoekdag));
-				ProgData.ListLooptExtra.Remove(lp);
+			if (!ListLooptExtra.Contains(lop)) // neem soort niet mee in vergelijking, of het een ED of VD is niet belangrijk
+            {
+				ProgData.ListLooptExtra.Add(lop);
+				ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
+            }
+            else
+            {
+				// naam en datum staat al in lijst, maar VD is bv veranderd in ED
+				// verwijder dus eerst die oude, en plaats dan nieuwe
+				for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
+				{
+					if(ProgData.ListLooptExtra[i]._naam == lop._naam && ProgData.ListLooptExtra[i]._datum == lop._datum)
+						ProgData.ListLooptExtra.RemoveAt(i);
+				}
+				ProgData.ListLooptExtra.Add(lop);
 				ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
 			}
-			catch { }
-        }
+		}
 	}
 }

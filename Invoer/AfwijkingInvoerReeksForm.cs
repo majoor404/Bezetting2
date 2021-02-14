@@ -31,6 +31,8 @@ namespace Bezetting2.Invoer
 
             if (okido)
             {
+                textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
+                string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
                 int maand = ProgData.igekozenmaand;
                 int jaar = ProgData.Igekozenjaar;
                 DateTime start = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));
@@ -52,6 +54,11 @@ namespace Bezetting2.Invoer
                         {
                             ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                             Thread.Sleep(300);
+                            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                            {
+                                ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
+                                Thread.Sleep(300);
+                            }
                             aantal--;
                         }
                         start = start.AddDays(1);
@@ -83,6 +90,11 @@ namespace Bezetting2.Invoer
                         labelAftellen.Refresh();
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
+                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                        {
+                            ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
+                            Thread.Sleep(300);
+                        }
                         start = start.AddDays(1);
                     }
 
@@ -99,6 +111,11 @@ namespace Bezetting2.Invoer
                     {
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, per._achternaam, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
+                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                        {
+                            ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
+                            Thread.Sleep(300);
+                        }
                     }
                 }
                 // GP 2 op 2 af
@@ -187,6 +204,11 @@ namespace Bezetting2.Invoer
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
+                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                        {
+                            ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
+                            Thread.Sleep(300);
+                        }
                         X--;
                         start = start.AddDays(Y);
                         ProgData.igekozenmaand = start.Month;

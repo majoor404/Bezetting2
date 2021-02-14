@@ -444,10 +444,19 @@ namespace Bezetting2
 			DialogResult dialogResult = MessageBox.Show("Delete deze naam ?", "Delete", MessageBoxButtons.YesNo);
 			if (dialogResult == DialogResult.Yes)
 			{
-				personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
-				ProgData.ListPersoneel.Remove(persoon);
-				ProgData.Save_Namen_lijst();
-				EditPersoneel_Shown(this, null);
+				// je kan je zelf niet verwijderen, dit daar als je rechten 50 hebt,
+				// je na verwijderen bij andere wachten kan komen.
+				if (textBoxPersNum.Text == ProgData.Huidige_Gebruiker_Personeel_nummer)
+				{
+					MessageBox.Show("je kan je zelf niet verwijderen, ivm rechten");
+				}
+				else
+				{
+					personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+					ProgData.ListPersoneel.Remove(persoon);
+					ProgData.Save_Namen_lijst();
+					EditPersoneel_Shown(this, null);
+				}
 			}
 		}
 

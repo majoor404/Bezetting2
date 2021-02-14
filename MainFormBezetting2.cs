@@ -710,6 +710,39 @@ namespace Bezetting2
                         extralijst[0] = "Extra dienst";
                         ListViewItem item_extra = new ListViewItem(extralijst);
                         View.Items.Add(item_extra);
+
+                        //=====================================================================================================
+                        // test of in orginele bezetting die persoon nog loopt
+                        // anders verwijder uit lijst
+                        // sla dit niet op, is toch oude data in verleden
+
+                        string kleur = ProgData.GekozenKleur;
+
+                        for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
+                        {
+                            string loopt_op_kleur = ProgData.Get_Gebruiker_Kleur(ProgData.Get_Gebruiker_Nummer(ProgData.ListLooptExtra[i]._naam));
+
+                            if (loopt_op_kleur != "")
+                            {
+                                ProgData.LoadPloegBezetting(loopt_op_kleur, 15);
+                                try
+                                {
+                                    werkdag ros = ProgData.ListWerkdagPloeg.Last(a => (a._naam == ProgData.ListLooptExtra[i]._naam) && (a._dagnummer == ProgData.ListLooptExtra[i]._datum.Day));
+                                    string eerste_2 = ros._afwijkingdienst.Length >= 2 ? ros._afwijkingdienst.Substring(0, 2) : ros._afwijkingdienst;
+                                    if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"))
+                                    {
+                                        ProgData.ListLooptExtra.RemoveAt(i);
+                                    }
+                                }
+                                catch { }
+                            }
+                        }
+
+                        ProgData.GekozenKleur = kleur;
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+
+                        //===================================================================================
+
                         foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
                         {
                             int dagy = ex._datum.Day;
@@ -848,6 +881,39 @@ namespace Bezetting2
                     extralijst[0] = "Extra dienst";
                     ListViewItem item_extra = new ListViewItem(extralijst);
                     View.Items.Add(item_extra);
+                    
+                    //=====================================================================================================
+                    // test of in orginele bezetting die persoon nog loopt
+                    // anders verwijder uit lijst
+                    
+                    string kleur = ProgData.GekozenKleur;
+
+                    for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
+                    {
+                        string loopt_op_kleur = ProgData.Get_Gebruiker_Kleur(ProgData.Get_Gebruiker_Nummer(ProgData.ListLooptExtra[i]._naam));
+
+                        if (loopt_op_kleur != "")
+                        {
+                            ProgData.LoadPloegBezetting(loopt_op_kleur, 15);
+                            try
+                            {
+                                werkdag ros = ProgData.ListWerkdagPloeg.Last(a => (a._naam == ProgData.ListLooptExtra[i]._naam) && (a._dagnummer == ProgData.ListLooptExtra[i]._datum.Day));
+                                string eerste_2 = ros._afwijkingdienst.Length >= 2 ? ros._afwijkingdienst.Substring(0, 2) : ros._afwijkingdienst;
+                                if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"))
+                                {
+                                    ProgData.ListLooptExtra.RemoveAt(i);
+                                }
+                            }
+                            catch { }
+                        }
+                    }
+
+                    ProgData.GekozenKleur = kleur;
+                    ProgData.SaveLooptExtraLijst(dir, ProgData.GekozenKleur);
+                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+
+                    //================================================================================================================
+                    
                     foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
                     {
                         int dagy = ex._datum.Day;
@@ -982,18 +1048,18 @@ namespace Bezetting2
                                     switch (afwijking.ToUpper())
                                     {
                                         case "WIS":
-                                            string eerste_2 = "";
-                                            if (value.Length > 2)
-                                                eerste_2 = value.Substring(0, 2);
+                                            //string eerste_2 = "";
+                                            //if (value.Length > 2)
+                                            //    eerste_2 = value.Substring(0, 2);
 
-                                            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
-                                            {
-                                                MessageBox.Show("Wis een extra/ruil/verschoven dienst aan met linker muisknop");
-                                            }
-                                            else
-                                            {
+                                            //if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                                            //{
+                                            //    MessageBox.Show("Wis een extra/ruil/verschoven dienst aan met linker muisknop");
+                                            //}
+                                            //else
+                                            //{
                                                 ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                            }
+                                            //}
                                             break;
                                         default:
                                             ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
@@ -1498,22 +1564,22 @@ namespace Bezetting2
                                 {
                                     if (GetDienst("5PL", datum_afwijking, kleur) == meta[5].ToString())
                                     {
-                                        // als ed vd of rd wordt verwijderd, dan ook in VerwijderLooptExtraDienst
-                                        // check eerst of laatse wijzeging dan ook een ed ve of rd was
-                                        ProgData.Igekozenjaar = datum_afwijking.Year;
-                                        ProgData.igekozenmaand = datum_afwijking.Month;
-                                        ProgData.LoadVeranderingenPloeg(kleur, 15);
-                                        try
-                                        {
-                                            veranderingen wijz = ProgData.ListVeranderingen.Last(a => (a._naam == meta[3].ToString()) && (a._datumafwijking == datum_afwijking.Day.ToString()));
-                                            // zo ja verwijder VerwijderLooptExtraDienst
-                                            string eerste_2 = wijz._afwijking.Length >= 2 ? wijz._afwijking.Substring(0, 2) : wijz._afwijking;
-                                            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
-                                            {
-                                                ProgData.VerwijderLooptExtraDienst(wijz._afwijking, datum_afwijking, wijz._naam);
-                                            }
-                                        }
-                                        catch { }
+                                        //// als ed vd of rd wordt verwijderd, dan ook in VerwijderLooptExtraDienst
+                                        //// check eerst of laatse wijzeging dan ook een ed ve of rd was
+                                        //ProgData.Igekozenjaar = datum_afwijking.Year;
+                                        //ProgData.igekozenmaand = datum_afwijking.Month;
+                                        //ProgData.LoadVeranderingenPloeg(kleur, 15);
+                                        //try
+                                        //{
+                                        //    veranderingen wijz = ProgData.ListVeranderingen.Last(a => (a._naam == meta[3].ToString()) && (a._datumafwijking == datum_afwijking.Day.ToString()));
+                                        //    // zo ja verwijder VerwijderLooptExtraDienst
+                                        //    string eerste_2 = wijz._afwijking.Length >= 2 ? wijz._afwijking.Substring(0, 2) : wijz._afwijking;
+                                        //    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                                        //    {
+                                        //        //ProgData.VerwijderLooptExtraDienst(wijz._afwijking, datum_afwijking, wijz._naam);
+                                        //    }
+                                        //}
+                                        //catch { }
 
                                         // in oude programma als afwijking werdt verwijderd, werdt orginele wacht ingevuld.
                                         meta[5] = ""; 
