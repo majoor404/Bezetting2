@@ -378,7 +378,7 @@ namespace Bezetting2
                     /////////////////////////////////////////////////////////////////////////////////////
 
                     // VD is bv veranderd in ED
-                    // verwijder dus eerst die oude
+                    // pas dus aan.
 
                     for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
                     {
