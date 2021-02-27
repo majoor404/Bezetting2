@@ -32,6 +32,7 @@ namespace Bezetting2
         private readonly Color Werkplek_ = Color.LightGray;
         private readonly Color MinimaalPersonen_ = Color.LightPink;
         private readonly Color HoverNaam_ = Color.LightGreen;
+        private int aantal_regels_gekleurd = 0;
 
         public List<ClassTelPlekGewerkt> ListClassTelPlekGewerkt = new List<ClassTelPlekGewerkt>();
         public List<string> ListTelNamen = new List<string>();
@@ -201,7 +202,7 @@ namespace Bezetting2
 
                 foreach (System.Windows.Forms.Button button in this.Controls.OfType<System.Windows.Forms.Button>())
                 {
-                    button.Font = new Font("Microsoft Sans Serif",8);
+                    button.Font = new Font("Microsoft Sans Serif", 8);
                     if (button.Width > 100)
                     {
                         button.Width = 70;
@@ -212,7 +213,7 @@ namespace Bezetting2
                         if (button.Text == ">")
                             button.Left -= 20;
                     }
-                    
+
                 }
                 foreach (System.Windows.Forms.ComboBox combo in this.Controls.OfType<System.Windows.Forms.ComboBox>())
                 {
@@ -395,7 +396,6 @@ namespace Bezetting2
                 // kleur weekenden
                 //int col = 20;
                 //int row = 1;
-                //int aantal_rows = ProgData.ListPersoneelKleur.Count();
                 string dag_string;
                 for (int col = 1; col < aantal_dagen + 1; col++)
                 {
@@ -403,8 +403,7 @@ namespace Bezetting2
                     dag_string = View.Items[1].SubItems[col].Text;
                     if (dag_string == "Z") // zaterdag of zondag
                     {
-                        //for (int row = 0; row < aantal_rows + 4 + ProgData.werkgroep_personeel.Count; row++)
-                        for (int row = 0; row < View.Items.Count - 1; row++)
+                        for (int row = 0; row < aantal_regels_gekleurd - 1; row++)
                         {
                             //this is very Important
                             View.Items[row].UseItemStyleForSubItems = false;
@@ -414,12 +413,13 @@ namespace Bezetting2
                         }
                     }
                 }
+
                 KleurFeestdagen();
 
                 // kleur huidige dag
                 if (ProgData.igekozenmaand == DateTime.Now.Month && ProgData.Igekozenjaar == DateTime.Now.Year)
                 {
-                    for (int i = 0; i < View.Items.Count - 1; i++)
+                    for (int i = 0; i < aantal_regels_gekleurd - 1; i++)
                     {
                         View.Items[i].UseItemStyleForSubItems = false;
                         // Now you can Change the Particular Cell Property of Style
@@ -568,7 +568,7 @@ namespace Bezetting2
                     (maand == pinksteren2.Month && col == pinksteren2.Day)
                     )
                 {
-                    for (int row = 0; row < aantal_rows + 5 + ProgData.ListWerkgroepPersoneel.Count; row++)
+                    for (int row = 0; row < aantal_regels_gekleurd - 1; row++)
                     {
                         //this is very Important
                         View.Items[row].UseItemStyleForSubItems = false;
@@ -698,6 +698,8 @@ namespace Bezetting2
                             View.Items[View.Items.Count - 1].SubItems[dag].BackColor = MinimaalPersonen_;
                         }
                     }
+
+                    aantal_regels_gekleurd = View.Items.Count;
 
                     // extra diensten
                     DateTime dat = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, 1);
@@ -870,6 +872,8 @@ namespace Bezetting2
                     }
                 }
 
+                aantal_regels_gekleurd = View.Items.Count;
+
                 // extra diensten
                 DateTime dat = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, 1);
                 string dir = ProgData.GetDirectoryBezettingMaand(dat);
@@ -881,11 +885,11 @@ namespace Bezetting2
                     extralijst[0] = "Extra dienst";
                     ListViewItem item_extra = new ListViewItem(extralijst);
                     View.Items.Add(item_extra);
-                    
+
                     //=====================================================================================================
                     // test of in orginele bezetting die persoon nog loopt
                     // anders verwijder uit lijst
-                    
+
                     string kleur = ProgData.GekozenKleur;
 
                     for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
@@ -899,10 +903,21 @@ namespace Bezetting2
                             {
                                 werkdag ros = ProgData.ListWerkdagPloeg.Last(a => (a._naam == ProgData.ListLooptExtra[i]._naam) && (a._dagnummer == ProgData.ListLooptExtra[i]._datum.Day));
                                 string eerste_2 = ros._afwijkingdienst.Length >= 2 ? ros._afwijkingdienst.Substring(0, 2) : ros._afwijkingdienst;
+
+                                string dienst = ros._afwijkingdienst.Length >= 4 ? ros._afwijkingdienst.Substring(3, 1) : ros._afwijkingdienst;
+                                DateTime datum = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, ros._dagnummer);
+                                var dienst_rooster = GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
+
                                 if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"))
                                 {
                                     ProgData.ListLooptExtra.RemoveAt(i);
                                 }
+
+                                if (dienst != dienst_rooster)
+                                {
+                                    ProgData.ListLooptExtra.RemoveAt(i);
+                                }
+
                             }
                             catch { }
                         }
@@ -913,10 +928,15 @@ namespace Bezetting2
                     ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
                     //================================================================================================================
-                    
+
                     foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
                     {
                         int dagy = ex._datum.Day;
+
+                        //string dienst = ros._afwijkingdienst.Length >= 4 ? ros._afwijkingdienst.Substring(3, 1) : ros._afwijkingdienst;
+                        //DateTime datum = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, ros._dagnummer);
+                        //var dienst_rooster = GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
+
                         if (string.IsNullOrEmpty(View.Items[View.Items.Count - 1].SubItems[dagy].Text))
                         {
                             View.Items[View.Items.Count - 1].SubItems[dagy].Text = "1";
@@ -1048,18 +1068,7 @@ namespace Bezetting2
                                     switch (afwijking.ToUpper())
                                     {
                                         case "WIS":
-                                            //string eerste_2 = "";
-                                            //if (value.Length > 2)
-                                            //    eerste_2 = value.Substring(0, 2);
-
-                                            //if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
-                                            //{
-                                            //    MessageBox.Show("Wis een extra/ruil/verschoven dienst aan met linker muisknop");
-                                            //}
-                                            //else
-                                            //{
-                                                ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                            //}
+                                            ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
                                             break;
                                         default:
                                             ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
@@ -1325,23 +1334,33 @@ namespace Bezetting2
 
         private void RepareerPloegAfwijkingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // test of blauw_bezetting.bin bestaat
-            MessageBox.Show($"Ploeg bezetting {ProgData.GekozenKleur} bestaat niet\nOf is corrupt, Kijken wat ik kan doen", ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
-            //string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_afwijkingen.bin");
-            if (File.Exists(ProgData.Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)))
+            if (ProgData.RechtenHuidigeGebruiker > 100)
             {
-                MessageBox.Show($"Ploeg veranderingen bestaat wel, repareren!");
-                File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
-                ProgData.MaakLegeBezetting(ProgData.GekozenKleur, false);
-                ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
-                foreach (veranderingen verander in ProgData.ListVeranderingen)
+                // test of blauw_bezetting.bin bestaat
+                string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_afwijkingen.bin");
+                if (File.Exists(ProgData.Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)))
                 {
-                    werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == verander._naam) && (a._dagnummer.ToString() == verander._datumafwijking));
-                    ver._afwijkingdienst = verander._afwijking;
+                    File.Delete(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur));
+                    ProgData.MaakLegeBezetting(ProgData.GekozenKleur, false);
+                    ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
+                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+                    foreach (veranderingen verander in ProgData.ListVeranderingen)
+                    {
+                        try
+                        {
+                            werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == verander._naam) && (a._dagnummer.ToString() == verander._datumafwijking));
+                            ver._afwijkingdienst = verander._afwijking;
+                        }
+                        catch { }
+                    }
+                    ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
+                    VulViewScherm();
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
-                VulViewScherm();
+                else
+                {
+                    MessageBox.Show($"Ploeg veranderingen bestaat niet, kan niet repareren!");
+                }
+
             }
         }
 
@@ -1420,66 +1439,75 @@ namespace Bezetting2
 
         private void ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProgData.ScreenCapture = false;
-            WindowUpdateViewScreen = false;
+            var result = MessageBox.Show("import oude data?", "vraagje",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
 
-            MessageBox.Show("Gaat soms fout als iemand in tussen tijd verhuisd is!");
-            MessageBox.Show("Delete de komende 25 maanden in de toekomst, en maak lege");
-
-            DateTime start = DateTime.Now;
-            DateTime eind = start.AddMonths(25);
-            DeleteDataDir(start, eind);
-
-            //DateTime nu = DateTime.Now;
-
-            //for (int i = 0; i < 25; i++)
-            //{
-            //	nu = nu.AddMonths(1);
-            //	string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
-            //	if (Directory.Exists(path))
-            //	{
-            //		Directory.Delete(path,true); // delete met inhoud
-            //	}
-            //	labelDebug.Text = $"maak dir {path}";
-            //	labelDebug.Refresh();
-            //	_ = Directory.CreateDirectory(path);
-            //	labelDebug.Text = $"vul met kleuren data : {path}";
-            //	labelDebug.Refresh();
-            //	ProgData.Igekozenjaar = nu.Year;
-            //	ProgData.igekozenmaand = nu.Month;
-            //	ProgData.MaakPloegNamenLijst("Blauw");
-            //	ProgData.SavePloegNamenLijst("Blauw",15);
-            //	ProgData.MaakPloegNamenLijst("Rood");
-            //	ProgData.SavePloegNamenLijst("Rood",15);
-            //	ProgData.MaakPloegNamenLijst("Wit");
-            //	ProgData.SavePloegNamenLijst("Wit",15);
-            //	ProgData.MaakPloegNamenLijst("Groen");
-            //	ProgData.SavePloegNamenLijst("Groen",15);
-            //	ProgData.MaakPloegNamenLijst("Geel");
-            //	ProgData.SavePloegNamenLijst("Geel",15);
-            //	ProgData.MaakPloegNamenLijst("DD");
-            //	ProgData.SavePloegNamenLijst("DD",15);
-            //}
-
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = "(*.Bez)|*.Bez";
-            MessageBox.Show("Open oude data bez file. (Wijz...Bez)");
-            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
+            // If the no button was pressed ...
+            if (result == DialogResult.Yes)
             {
-                MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!\nAls import klaar is sluit programma vanzelf af.");
-                ProgData.Disable_error_Meldingen = true;
-                ProgData.Lees_Namen_lijst();
-                OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
-                //MessageBox.Show("Klaar met invoer, start programma opnieuw op.");
-                ProgData.GekozenKleur = "Blauw";
-                ButtonNu_Click(this, null);
-                ProgData.Disable_error_Meldingen = false;
-                Close();
-            }
 
-            ProgData.ScreenCapture = true;
-            WindowUpdateViewScreen = true;
+                ProgData.ScreenCapture = false;
+                WindowUpdateViewScreen = false;
+
+                MessageBox.Show("Gaat soms fout als iemand in tussen tijd verhuisd is!");
+                MessageBox.Show("Delete de komende 25 maanden in de toekomst, en maak lege");
+
+                DateTime start = DateTime.Now;
+                DateTime eind = start.AddMonths(25);
+                DeleteDataDir(start, eind);
+
+                //DateTime nu = DateTime.Now;
+
+                //for (int i = 0; i < 25; i++)
+                //{
+                //	nu = nu.AddMonths(1);
+                //	string path = Path.GetFullPath($"{nu.Year}\\{nu.Month}"); // maand als nummer
+                //	if (Directory.Exists(path))
+                //	{
+                //		Directory.Delete(path,true); // delete met inhoud
+                //	}
+                //	labelDebug.Text = $"maak dir {path}";
+                //	labelDebug.Refresh();
+                //	_ = Directory.CreateDirectory(path);
+                //	labelDebug.Text = $"vul met kleuren data : {path}";
+                //	labelDebug.Refresh();
+                //	ProgData.Igekozenjaar = nu.Year;
+                //	ProgData.igekozenmaand = nu.Month;
+                //	ProgData.MaakPloegNamenLijst("Blauw");
+                //	ProgData.SavePloegNamenLijst("Blauw",15);
+                //	ProgData.MaakPloegNamenLijst("Rood");
+                //	ProgData.SavePloegNamenLijst("Rood",15);
+                //	ProgData.MaakPloegNamenLijst("Wit");
+                //	ProgData.SavePloegNamenLijst("Wit",15);
+                //	ProgData.MaakPloegNamenLijst("Groen");
+                //	ProgData.SavePloegNamenLijst("Groen",15);
+                //	ProgData.MaakPloegNamenLijst("Geel");
+                //	ProgData.SavePloegNamenLijst("Geel",15);
+                //	ProgData.MaakPloegNamenLijst("DD");
+                //	ProgData.SavePloegNamenLijst("DD",15);
+                //}
+
+                openFileDialog.FileName = "";
+                openFileDialog.Filter = "(*.Bez)|*.Bez";
+                MessageBox.Show("Open oude data bez file. (Wijz...Bez)");
+                result = openFileDialog.ShowDialog(); // Show the dialog.
+                if (result == DialogResult.OK) // Test result.
+                {
+                    MessageBox.Show("Dit gaat tijdje duren, geduld..... (10 min)\nAl ingevulde data wordt overschreven!\nAls import klaar is sluit programma vanzelf af.");
+                    ProgData.Disable_error_Meldingen = true;
+                    ProgData.Lees_Namen_lijst();
+                    OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
+                    //MessageBox.Show("Klaar met invoer, start programma opnieuw op.");
+                    ProgData.GekozenKleur = "Blauw";
+                    ButtonNu_Click(this, null);
+                    ProgData.Disable_error_Meldingen = false;
+                    Close();
+                }
+
+                ProgData.ScreenCapture = true;
+                WindowUpdateViewScreen = true;
+            }
         }
 
         private void OpenDataBase_en_Voer_oude_data_in_Bezetting(string file)
@@ -1582,7 +1610,7 @@ namespace Bezetting2
                                         //catch { }
 
                                         // in oude programma als afwijking werdt verwijderd, werdt orginele wacht ingevuld.
-                                        meta[5] = ""; 
+                                        meta[5] = "";
                                     }
                                 }
 
@@ -1611,8 +1639,8 @@ namespace Bezetting2
                                             kleur = a._nieuwkleur;
                                         }
                                     }
-                                    
-                                    
+
+
                                     labelDebug.Text = $"{teller} {naam} {afwijking}";
                                     labelDebug.Refresh();
                                     ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam);
@@ -1723,33 +1751,42 @@ namespace Bezetting2
 
         private void ImportNamenOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProgData.ListPersoneel.Clear();
+            var result = MessageBox.Show("import oude namen?", "vraagje",
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
 
-            MessageBox.Show("Let op, alle oude personeel gaat weg, open Bezetting5ploegen....Bez");
-            openFileDialog.FileName = "";
-            openFileDialog.Filter = "(*.Bez)|*.Bez";
-
-            DialogResult result = openFileDialog.ShowDialog(); // Show the dialog.
-
-            if (result == DialogResult.OK) // Test result.
+            // If the no button was pressed ...
+            if (result == DialogResult.Yes)
             {
-                OpenDataBase_en_Voer_Oude_Namen_In(openFileDialog.FileName);
-                ProgData.Save_Namen_lijst();
+
+                ProgData.ListPersoneel.Clear();
+
+                MessageBox.Show("Let op, alle oude personeel gaat weg, open Bezetting5ploegen....Bez");
+                openFileDialog.FileName = "";
+                openFileDialog.Filter = "(*.Bez)|*.Bez";
+
+                result = openFileDialog.ShowDialog(); // Show the dialog.
+
+                if (result == DialogResult.OK) // Test result.
+                {
+                    OpenDataBase_en_Voer_Oude_Namen_In(openFileDialog.FileName);
+                    ProgData.Save_Namen_lijst();
+                }
+
+                MessageBox.Show("Open nu bijbehorende Rechten en passwoorden, open Lock.mdb");
+
+                openFileDialog.FileName = "Lock.mdb";
+                openFileDialog.Filter = "(*.mdb)|*.mdb";
+                result = openFileDialog.ShowDialog(); // Show the dialog.
+
+
+                if (result == DialogResult.OK) // Test result.
+                {
+                    OpenDataBase_Wachtwoorden_en_Rechten(openFileDialog.FileName);
+                }
+
+                MessageBox.Show("Klaar, druk op refresh");
             }
-
-            MessageBox.Show("Open nu bijbehorende Rechten en passwoorden, open Lock.mdb");
-
-            openFileDialog.FileName = "Lock.mdb";
-            openFileDialog.Filter = "(*.mdb)|*.mdb";
-            result = openFileDialog.ShowDialog(); // Show the dialog.
-
-
-            if (result == DialogResult.OK) // Test result.
-            {
-                OpenDataBase_Wachtwoorden_en_Rechten(openFileDialog.FileName);
-            }
-
-            MessageBox.Show("Klaar, druk op refresh");
         }
 
         private void OpenDataBase_Wachtwoorden_en_Rechten(string file)

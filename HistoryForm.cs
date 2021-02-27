@@ -13,7 +13,7 @@ namespace Bezetting2
 
         private void History_Shown(object sender, EventArgs e)
         {
-            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,15);
+            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
 
             int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
             comboBoxDag.Items.Clear();
@@ -28,7 +28,7 @@ namespace Bezetting2
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
-            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,15);
+            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
             listViewHis.Items.Clear();
             string[] regel = new string[6];
             foreach (veranderingen a in ProgData.ListVeranderingen)

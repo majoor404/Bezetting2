@@ -80,7 +80,7 @@ namespace Bezetting2
             opbouw.Add(new Invoerveld(label21, listBox21, listBox41));
 
             opbouw.Add(new Invoerveld(label42, listBox83, listBoxAfw2));
-            
+
             opbouw.Add(new Invoerveld(label41, listBox81, listBox77));
             opbouw.Add(new Invoerveld(label40, listBox80, listBox76));
             opbouw.Add(new Invoerveld(label39, listBox79, listBox75));
@@ -217,7 +217,7 @@ namespace Bezetting2
                             UpdateAfwijkingListBox(tb, dat2.Day);
                             UpdateAfwijkingListBox(sourse, dat2.Day);
                         }
-                        
+
                     }
                 }
             }
@@ -231,7 +231,7 @@ namespace Bezetting2
 
             return ret;
         }
-        private void UpdateAfwijkingListBox(ListBox box,int dag)
+        private void UpdateAfwijkingListBox(ListBox box, int dag)
         {
             Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
             broer = veld._ListAfw;
@@ -280,17 +280,17 @@ namespace Bezetting2
                 listBox3.Visible = listBox23.Visible = listBox80.Visible = listBox76.Visible = bool.Parse(InstellingenProg.ProgrammaData[22]);
                 listBox4.Visible = listBox24.Visible = listBox79.Visible = listBox75.Visible = bool.Parse(InstellingenProg.ProgrammaData[23]);
                 listBox5.Visible = listBox25.Visible = listBox78.Visible = listBox74.Visible = bool.Parse(InstellingenProg.ProgrammaData[24]);
-                
+
                 listBox6.Visible = listBox26.Visible = listBox73.Visible = listBox69.Visible = bool.Parse(InstellingenProg.ProgrammaData[25]);
                 listBox7.Visible = listBox27.Visible = listBox72.Visible = listBox68.Visible = bool.Parse(InstellingenProg.ProgrammaData[26]);
                 listBox8.Visible = listBox28.Visible = listBox71.Visible = listBox67.Visible = bool.Parse(InstellingenProg.ProgrammaData[27]);
                 listBox9.Visible = listBox29.Visible = listBox70.Visible = listBox66.Visible = bool.Parse(InstellingenProg.ProgrammaData[28]);
-                
+
                 listBox10.Visible = listBox30.Visible = listBox65.Visible = listBox57.Visible = bool.Parse(InstellingenProg.ProgrammaData[29]);
                 listBox11.Visible = listBox31.Visible = listBox64.Visible = listBox56.Visible = bool.Parse(InstellingenProg.ProgrammaData[30]);
                 listBox12.Visible = listBox32.Visible = listBox63.Visible = listBox55.Visible = bool.Parse(InstellingenProg.ProgrammaData[31]);
                 listBox13.Visible = listBox33.Visible = listBox62.Visible = listBox54.Visible = bool.Parse(InstellingenProg.ProgrammaData[32]);
-                
+
                 listBox14.Visible = listBox34.Visible = listBox61.Visible = listBox53.Visible = bool.Parse(InstellingenProg.ProgrammaData[33]);
                 listBox15.Visible = listBox35.Visible = listBox60.Visible = listBox52.Visible = bool.Parse(InstellingenProg.ProgrammaData[34]);
                 listBox16.Visible = listBox36.Visible = listBox59.Visible = listBox51.Visible = bool.Parse(InstellingenProg.ProgrammaData[35]);
@@ -349,8 +349,8 @@ namespace Bezetting2
                 }
                 labelDatum.Text = dat.ToLongDateString();
             }
-            
-            
+
+
             ViewDag1(dat);
 
             dat2 = dat.AddDays(1);
@@ -399,7 +399,7 @@ namespace Bezetting2
         {
             SaveData();
             dat = dat.AddDays(1);
-            
+
             string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
             {
@@ -415,7 +415,7 @@ namespace Bezetting2
         {
             SaveData();
             dat = dat.AddDays(-1);
-            
+
             string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
             {
@@ -453,25 +453,20 @@ namespace Bezetting2
                 if (ProgData.ListLooptExtra.Count > 0)
                 {
                     /////////////////////////////////////////////////////////////////////////////////////
-
                     // VD is bv veranderd in ED
                     // pas dus aan.
-
                     for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
                     {
-                        for (int a = 0; a < ProgData.ListWerkdagPloeg.Count; a++)
+                        try
                         {
-                            if (ProgData.ListLooptExtra[i]._naam == ProgData.ListWerkdagPloeg[a]._naam && ProgData.ListLooptExtra[i]._datum.Day == ProgData.ListWerkdagPloeg[a]._dagnummer)
-                            {
-                                if (ProgData.ListLooptExtra[i]._metcode != ProgData.ListWerkdagPloeg[a]._afwijkingdienst)
-                                {
-                                    ProgData.ListWerkdagPloeg[a]._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
-                                    ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
-                                }
-                            }
+                            werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
+                                                                             && (aa._dagnummer == ProgData.ListLooptExtra[i]._datum.Day)
+                                                                             && (aa._afwijkingdienst != ProgData.ListLooptExtra[i]._metcode));
+                            ver._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
+                            ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
                         }
+                        catch { }
                     }
-
                     ///////////////////////////////////////////////////////////////////////////////////////
 
                     foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
@@ -554,7 +549,7 @@ namespace Bezetting2
             ProgData.Igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
             ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
-            
+
             foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
             {
                 box.Items.Clear();
@@ -631,16 +626,16 @@ namespace Bezetting2
                 {
                     // als op werkplek geen personeel, dan invisible afwijking
                     int tag = int.Parse(box.Tag.ToString());
-                    if(tag == 1)
-                    if (box.Items.Count == 0)
-                    {
+                    if (tag == 1)
+                        if (box.Items.Count == 0)
+                        {
                             //try
                             //{
-                                Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                veld._ListAfw.Visible = false;
+                            Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                            veld._ListAfw.Visible = false;
                             //}
                             //catch { }
-                    }
+                        }
                 }
             }
             catch { }
@@ -755,7 +750,7 @@ namespace Bezetting2
             {
                 listBox83.Items.Add(listBox1.Items[i].ToString());
             }
-            
+
             for (int i = 0; i < listBox2.Items.Count; i++)
             {
                 listBox81.Items.Add(listBox2.Items[i].ToString());
@@ -772,7 +767,7 @@ namespace Bezetting2
             {
                 listBox78.Items.Add(listBox5.Items[i].ToString());
             }
-            
+
             for (int i = 0; i < listBox6.Items.Count; i++)
             {
                 listBox73.Items.Add(listBox6.Items[i].ToString());
@@ -850,7 +845,7 @@ namespace Bezetting2
             string file = $"{dat.Year}\\{dat.Month}\\{labelDatum.Text} - {labelDienst.Text}.txt";
             if (!File.Exists(file))
             {
-                    File.Create(file).Dispose();
+                File.Create(file).Dispose();
             }
             Process.Start(file);
             buttonOpmerking.BackColor = Color.Yellow;

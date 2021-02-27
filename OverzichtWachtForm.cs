@@ -135,7 +135,7 @@ namespace Bezetting2
 
             //ProgData.GekozenKleur = ProgData.Main.comboBoxKleurKeuze.Text;
 
-            if(ProgData.RechtenHuidigeGebruiker < 101)
+            if (ProgData.RechtenHuidigeGebruiker < 101)
                 ViewUpdate();
         }
 
@@ -276,7 +276,7 @@ namespace Bezetting2
 
             ProgData.igekozenmaand = dat.Month;
             ProgData.Igekozenjaar = dat.Year;
-            
+
 
             ViewUpdate();
         }
@@ -285,7 +285,7 @@ namespace Bezetting2
         {
             SaveData();
 
-            if(ProgData.RechtenHuidigeGebruiker == 101)
+            if (ProgData.RechtenHuidigeGebruiker == 101)
             {
                 SaveCheckboxStatus();
                 InstellingenProg.SaveProgrammaData();
@@ -376,26 +376,22 @@ namespace Bezetting2
                 if (ProgData.ListLooptExtra.Count > 0)
                 {
                     /////////////////////////////////////////////////////////////////////////////////////
-
                     // VD is bv veranderd in ED
                     // pas dus aan.
-
                     for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
                     {
-                        for (int a = 0; a < ProgData.ListWerkdagPloeg.Count; a++)
+                        try
                         {
-                            if (ProgData.ListLooptExtra[i]._naam == ProgData.ListWerkdagPloeg[a]._naam && ProgData.ListLooptExtra[i]._datum.Day == ProgData.ListWerkdagPloeg[a]._dagnummer)
-                            {
-                                if (ProgData.ListLooptExtra[i]._metcode != ProgData.ListWerkdagPloeg[a]._afwijkingdienst)
-                                {
-                                    ProgData.ListWerkdagPloeg[a]._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
-                                    ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
-                                }
-                            }
+                            werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
+                                                                             && (aa._dagnummer == ProgData.ListLooptExtra[i]._datum.Day)
+                                                                             && (aa._afwijkingdienst != ProgData.ListLooptExtra[i]._metcode));
+                            ver._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
+                            ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
                         }
+                        catch { }
                     }
-
                     ///////////////////////////////////////////////////////////////////////////////////////
+
                     foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
                     {
                         if (naam._datum.ToShortDateString() == dat.ToShortDateString())
@@ -477,7 +473,7 @@ namespace Bezetting2
                 }
                 else
                 {
-                    buttonOpmerking.BackColor = Color.FromArgb(255,240,240,240);
+                    buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
                 }
             }
             catch { }

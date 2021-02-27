@@ -1,6 +1,5 @@
 ﻿using Bezetting2.Data;
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -48,7 +47,7 @@ namespace Bezetting2.Invoer
                         labelAftellen.Text = aantal.ToString();
                         labelAftellen.Refresh();
 
-                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
                         werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         if (!string.IsNullOrEmpty(ver._standaarddienst)) // dus werkdag
                         {
@@ -81,8 +80,8 @@ namespace Bezetting2.Invoer
                     ProgData.igekozenmaand = start.Month;
                     ProgData.Igekozenjaar = start.Year;
 
-                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
-                    ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur,15);
+                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+                    ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
                     // volgens kalender
                     for (int i = 0; i < AantalDagen.Value; i++)
                     {
@@ -126,7 +125,7 @@ namespace Bezetting2.Invoer
                     int aantal = (int)AantalDagen.Value;
                     bool Schrijf_GP = true;
 
-                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                    ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
                     werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
                     while (aantal > 0)
@@ -140,7 +139,7 @@ namespace Bezetting2.Invoer
                             ProgData.igekozenmaand = start.Month;
                             ProgData.Igekozenjaar = start.Year;
                             if (start.Month != maand)           // als nieuwe maand deze laden, anders gaat het fout bij "ver = ProgData.Bezetting_Ploeg_Lijst.First"
-                                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
                             ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         }
@@ -152,7 +151,7 @@ namespace Bezetting2.Invoer
                         ProgData.igekozenmaand = start.Month;
                         ProgData.Igekozenjaar = start.Year;
                         if (start.Month != maand)
-                            ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
                         ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
@@ -163,7 +162,7 @@ namespace Bezetting2.Invoer
                         ProgData.igekozenmaand = start.Month;
                         ProgData.Igekozenjaar = start.Year;
                         if (start.Month != maand)
-                            ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
                         ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
 
                         while (string.IsNullOrEmpty(ver._standaarddienst))
@@ -172,14 +171,14 @@ namespace Bezetting2.Invoer
                             ProgData.igekozenmaand = start.Month;
                             ProgData.Igekozenjaar = start.Year;
                             if (start.Month != maand)
-                                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
                             ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         }
 
                         ProgData.igekozenmaand = start.Month;
                         ProgData.Igekozenjaar = start.Year;
                         if (start.Month != maand)
-                            ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
+                            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
                         ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
                         Schrijf_GP = !Schrijf_GP;
                     }

@@ -11,6 +11,7 @@ namespace Bezetting2.Data
         public string _datuminvoer { get; set; }
         public string _invoerdoor { get; set; }
         public string _rede { get; set; }
+
         /*
                 public bool Equals(veranderingen other)
                 {

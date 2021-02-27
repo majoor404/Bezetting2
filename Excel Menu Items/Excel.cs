@@ -193,7 +193,7 @@ namespace Bezetting2
             //eerst vanuit ploegbezetting een string list maken met afwijkingen en normaal schema van persoon
             if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(kleur)))
             {
-                ProgData.LoadPloegBezetting(kleur,15);
+                ProgData.LoadPloegBezetting(kleur, 15);
                 foreach (werkdag dag in ProgData.ListWerkdagPloeg)
                 {
                     if (dag._naam == naam)
@@ -507,7 +507,7 @@ namespace Bezetting2
                                     if (string.IsNullOrEmpty(afwijking)) rechtop = true;
                                     if (afwijking == "*") rechtop = true;
 
-                                    if(TelNietMeeNamen.Contains(afwijking))
+                                    if (TelNietMeeNamen.Contains(afwijking))
                                         rechtop = true;
 
                                     if (afwijking.Length > 3)
@@ -564,8 +564,8 @@ namespace Bezetting2
                     ProgData.igekozenmaand = i;
                     if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
                     {
-                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
-                        ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
+                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+                        ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur, 15);
 
                         foreach (personeel a in ProgData.ListPersoneelKleur)
                         {
@@ -596,8 +596,8 @@ namespace Bezetting2
                 }
                 ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur,15);
-                ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
+                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+                ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur, 15);
             }
             catch
             {
@@ -716,7 +716,7 @@ namespace Bezetting2
                 ProgData.igekozenmaand = i;
                 if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur,15);
+                    ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur, 15);
                     if (ProgData.ListPersoneelKleur.Count > 0)
                     {
                         foreach (personeel a in ProgData.ListPersoneelKleur)
@@ -728,7 +728,7 @@ namespace Bezetting2
                 }
             }
 
-            
+
 
             try
             {
@@ -777,17 +777,17 @@ namespace Bezetting2
 
 
                 int row = 4;
-                foreach (int naam in Namen) 
+                foreach (int naam in Namen)
                 {
                     ListClassTelAfwijkingen.Clear();
-                    
+
                     for (int i = 1; i < 13; i++)
                     {
                         ProgData.igekozenmaand = i;
                         GetAfwijkingenPersoonInEenMaand(naam.ToString(CultureInfo.CurrentCulture), ProgData.Igekozenjaar, i);
                         // data nu in ListClassTelAfwijkingen
                     }
-                    
+
                     if (ListClassTelAfwijkingen.Count > 0)
                     {
                         int[] tel_op = new int[12];
@@ -882,10 +882,10 @@ namespace Bezetting2
 
 
                         excelSheet.Cells[row, 1] = ProgData.Get_Gebruiker_Naam(naam.ToString(CultureInfo.CurrentCulture));
-                        
+
                     }
                     row++;
-                    
+
                 }
                 excelSheet.Cells[1, 2] = ProgData.Sgekozenjaar();
                 excelSheet.Cells[2, 2] = ProgData.GekozenKleur;
@@ -935,13 +935,13 @@ namespace Bezetting2
                     {
                         try
                         {
-                            oSheet.Cells[row+1, col+1] = View.Items[row].SubItems[col].Text;
-                            
+                            oSheet.Cells[row + 1, col + 1] = View.Items[row].SubItems[col].Text;
+
                             if (View.Items[row].SubItems[col].BackColor == Werkplek_)
                             {
                                 var columnHeadingsRange = oSheet.Range[
-                                                          oSheet.Cells[row+1, col+1],
-                                                          oSheet.Cells[row+1, col+1]];
+                                                          oSheet.Cells[row + 1, col + 1],
+                                                          oSheet.Cells[row + 1, col + 1]];
 
                                 columnHeadingsRange.Interior.Color = Werkplek_;
                             }
@@ -953,7 +953,7 @@ namespace Bezetting2
 
                                 columnHeadingsRange.Interior.Color = Weekend_;
                             }
-                            
+
                         }
                         catch { }
                     }

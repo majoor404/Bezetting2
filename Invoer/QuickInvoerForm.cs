@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Bezetting2.Invoer
@@ -31,6 +26,7 @@ namespace Bezetting2.Invoer
                 listBox1.DataSource = PopUpNamen;
             }
             catch { }
+            listBox1.SelectedIndex = -1;
             Exit = true;
         }
 

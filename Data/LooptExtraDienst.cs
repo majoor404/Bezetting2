@@ -14,7 +14,7 @@ namespace Bezetting2.Data
             // Would still want to check for null etc. first.
             return this._datum == other._datum &&
                    this._naam == other._naam;// &&
-                   //this._metcode == other._metcode;
+                                             //this._metcode == other._metcode;
         }
     }
 }
