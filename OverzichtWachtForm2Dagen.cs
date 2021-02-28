@@ -350,6 +350,9 @@ namespace Bezetting2
                 labelDatum.Text = dat.ToLongDateString();
             }
 
+            ProgData.Igekozenjaar = dat.Year;
+            ProgData.igekozenmaand = dat.Month;
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
             ViewDag1(dat);
 
@@ -381,6 +384,10 @@ namespace Bezetting2
             {
                 buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
             }
+
+            ProgData.Igekozenjaar = dat2.Year;
+            ProgData.igekozenmaand = dat2.Month;
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
             ViewDag2(dat2);
 

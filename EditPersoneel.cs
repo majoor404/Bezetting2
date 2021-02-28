@@ -208,7 +208,7 @@ namespace Bezetting2
                 MessageBox.Show("Gebruik dit alleen als gebruiker langdurig of voor altijd verhuisd,\nLanger dan 6 weken!");
 
                 DialogResult dialogResult = MessageBox.Show("Doordat er veel administratie nodig is met verhuizing van personeel," +
-                        "\nsluit ik alle andere gebruikers nu af!\nDit duurt 40 seconden. (Nadat u op Ja gedrukt heeft)", "Vraagje", MessageBoxButtons.YesNo);
+                        "\nsluit ik alle andere gebruikers nu af!\nDit duurt 60 seconden. (Nadat u op Ja gedrukt heeft)", "Vraagje", MessageBoxButtons.YesNo);
                 
                 if (dialogResult == DialogResult.Yes)
                 {
@@ -218,7 +218,7 @@ namespace Bezetting2
                     {
                         using (File.Create("kill.ini"))
                         { };
-                        Thread.Sleep(40000);
+                        Thread.Sleep(60000);
                     }
                     catch
                     {
@@ -232,7 +232,7 @@ namespace Bezetting2
                     verhuis.labelHuidigRooster.Text = comboBoxKleur.Text;
                     verhuis.ShowDialog();
 
-                    //MessageBox.Show("Geduld, copyeren van dagen");
+                    MessageBox.Show("Geduld, copyeren van dagen, u krijgt melding als het klaar is.");
 
                     try
                     {

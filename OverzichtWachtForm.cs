@@ -340,7 +340,7 @@ namespace Bezetting2
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
 
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+            //ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
@@ -361,6 +361,10 @@ namespace Bezetting2
                 }
                 labelDatum.Text = dat.ToLongDateString();
             }
+
+            ProgData.Igekozenjaar = dat.Year;
+            ProgData.igekozenmaand = dat.Month;
+            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
             foreach (ListBox box in this.Controls.OfType<ListBox>())
             {

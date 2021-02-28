@@ -245,32 +245,34 @@ namespace Bezetting2
                     if (File.Exists(Ploeg_Bezetting_Locatie(a._nieuwkleur)))
                     {
                         LoadPloegBezetting(a._nieuwkleur, 15);
-                        // check of naam er in zit
-                        try
-                        {
-                            werkdag ver = ListWerkdagPloeg.First(x => (x._naam == a._achternaam));
-                        }
-                        catch
-                        {
-                            // deze persoon bestaat niet in bezetting, dus toevoegen
-                            // elke dag in deze maand
-                            int aantal_dagen_deze_maand = DateTime.DaysInMonth(Igekozenjaar, igekozenmaand);
-                            for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
-                            {
-                                DateTime dat = new DateTime(Igekozenjaar, igekozenmaand, i);
-                                werkdag dag = new werkdag
-                                {
-                                    _naam = a._achternaam,
-                                    //_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._nieuwkleur),
-                                    _standaarddienst = GetDienst(GekozenRooster(), dat, a._nieuwkleur),
-                                    _werkplek = "",
-                                    _afwijkingdienst = "",
-                                    _dagnummer = i
-                                };
-                                ListWerkdagPloeg.Add(dag);
-                            }
-                            SavePloegBezetting(a._nieuwkleur, 15);
-                        }
+                        MaakNieuweCollegaInBezettingAan(a._achternaam, a._nieuwkleur, Igekozenjaar, igekozenmaand, 1);
+                        
+                        //// check of naam er in zit
+                        //try
+                        //{
+                        //    werkdag ver = ListWerkdagPloeg.First(x => (x._naam == a._achternaam));
+                        //}
+                        //catch
+                        //{
+                        //    // deze persoon bestaat niet in bezetting, dus toevoegen
+                        //    // elke dag in deze maand
+                        //    int aantal_dagen_deze_maand = DateTime.DaysInMonth(Igekozenjaar, igekozenmaand);
+                        //    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                        //    {
+                        //        DateTime dat = new DateTime(Igekozenjaar, igekozenmaand, i);
+                        //        werkdag dag = new werkdag
+                        //        {
+                        //            _naam = a._achternaam,
+                        //            //_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._nieuwkleur),
+                        //            _standaarddienst = GetDienst(GekozenRooster(), dat, a._nieuwkleur),
+                        //            _werkplek = "",
+                        //            _afwijkingdienst = "",
+                        //            _dagnummer = i
+                        //        };
+                        //        ListWerkdagPloeg.Add(dag);
+                        //    }
+                        //    SavePloegBezetting(a._nieuwkleur, 15);
+                        //}
                     }
                 }
                 ListPersoneelKleur.Add(a);
