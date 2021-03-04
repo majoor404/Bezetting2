@@ -15,6 +15,10 @@ namespace Bezetting2
     {
         private int selpersnummer;
         private int rechten;
+
+        private int bewaar_rechten = 0;
+        private string bewaar_passwoord = ProgData.Scramble("verander_nu");
+
         // sla de veranderingen op van persoon in tijdelijke lijst
         readonly List<VeranderingenVerhuis> VeranderingenLijstTemp = new List<VeranderingenVerhuis>();
 
@@ -189,9 +193,16 @@ namespace Bezetting2
         {
             try
             {
+                string gekozen_personeel_nummer = textBoxPersNum.Text;
                 personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                BewaarRechtenEnPasswoord(persoon_gekozen);
                 ProgData.ListPersoneel.Remove(persoon_gekozen);
                 ButtonVoegToe_Click(this, null);
+                
+                persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == gekozen_personeel_nummer);
+                ReturnRechtenEnPasswoord(persoon_gekozen);
+                ProgData.Save_Namen_lijst();
+
                 EditPersoneel_Shown(this, null);
             }
             catch
@@ -199,150 +210,130 @@ namespace Bezetting2
                 MessageBox.Show("Kan personeel nummer niet vinden om record te veranderen.");
             }
         }
-
         // verhuis bericht naar andere kleur
         private void VerhuisKnop_Click(object sender, EventArgs e)
         {
             if (ProgData.RechtenHuidigeGebruiker > 99)
             {
                 MessageBox.Show("Gebruik dit alleen als gebruiker langdurig of voor altijd verhuisd,\nLanger dan 6 weken!");
-
-                DialogResult dialogResult = MessageBox.Show("Doordat er veel administratie nodig is met verhuizing van personeel," +
-                        "\nsluit ik alle andere gebruikers nu af!\nDit duurt 60 seconden. (Nadat u op Ja gedrukt heeft)", "Vraagje", MessageBoxButtons.YesNo);
                 
-                if (dialogResult == DialogResult.Yes)
+                if (KillAlleAndereGebruikers())
                 {
-                    ProgData.Main.timerKill.Enabled = false;
-                    
-                    try
-                    {
-                        using (File.Create("kill.ini"))
-                        { };
-                        Thread.Sleep(60000);
-                    }
-                    catch
-                    {
-                        MessageBox.Show($"Kan kill.ini niet schrijven!");
-                        ProgData.Main.timerKill.Enabled = true;
-                    }
-
                     VerhuisForm verhuis = new VerhuisForm();
                     verhuis.labelNaam.Text = textBoxAchterNaam.Text;
                     verhuis.labelPersoneelNummer.Text = textBoxPersNum.Text;
                     verhuis.labelHuidigRooster.Text = comboBoxKleur.Text;
-                    verhuis.ShowDialog();
+                    DialogResult dialogResult1 = verhuis.ShowDialog();
 
-                    MessageBox.Show("Geduld, copyeren van dagen, u krijgt melding als het klaar is.");
+                    int teller = 0;
 
-                    try
+                    if (dialogResult1 != DialogResult.Cancel)
                     {
-                        personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                        MessageBox.Show("Geduld, copyeren van dagen, u krijgt melding als het klaar is.");
 
-                        // zat op deze kleur, maar gaat naar nieuwe
-                        // dus zet kruisjes dat hij niet meer aanwezig is.
-                        persoon_gekozen._verhuisdatum = verhuis.dateTimeVerhuisDatum.Value;
-                        persoon_gekozen._nieuwkleur = verhuis.comboBoxNieuwRooster.Text;
-                        ProgData.Save_Namen_lijst();
-
-                        int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
-
-                        LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
-
-                        string GekozenKleurInBeeld = ProgData.GekozenKleur;
-
-                        // zet path goed van kleur ploeg
-                        ProgData.GekozenKleur = persoon_gekozen._kleur;
-                        // zet maand en jaar goed van verhuis datum
-                        ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
-                        ProgData.Igekozenjaar = persoon_gekozen._verhuisdatum.Year;
-
-                        // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
-                        // meegeven eerste dag.
-                        if (persoon_gekozen._kleur != "Nieuw")
-                            Bewaar_oude_afwijkingen(persoon_gekozen._achternaam, eerste_dag_weg, persoon_gekozen._verhuisdatum.Month, persoon_gekozen._verhuisdatum.Year);
-
-                        int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
-
-                        if (ProgData.GekozenKleur != "Nieuw") // als nieuw persoon, dan hoef je niet X te zetten bij weg gaan ploeg
+                        try
                         {
-                            for (int i = eerste_dag_weg; i < aantal_dagen_deze_maand + 1; i++)
-                            {
-                                ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
-                            }
-                        }
+                            personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
 
-                        // tevens 12 maanden verder de X
-                        for (int maandenverder = 1; maandenverder < 12; maandenverder++)
-                        {
+                            // zat op deze kleur, maar gaat naar nieuwe
+                            // dus zet kruisjes dat hij niet meer aanwezig is.
+                            persoon_gekozen._verhuisdatum = verhuis.dateTimeVerhuisDatum.Value;
+                            persoon_gekozen._nieuwkleur = verhuis.comboBoxNieuwRooster.Text;
+                            ProgData.Save_Namen_lijst();
 
-                            DateTime dummy = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, 1);
-                            dummy = dummy.AddMonths(1);
-                            aantal_dagen_deze_maand = DateTime.DaysInMonth(dummy.Year, dummy.Month);
-                            ProgData.Igekozenjaar = dummy.Year;
-                            ProgData.igekozenmaand = dummy.Month;
+                            int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
+
+                            LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
+
+                            string GekozenKleurInBeeld = ProgData.GekozenKleur;
+
+                            // zet path goed van kleur ploeg
+                            ProgData.GekozenKleur = persoon_gekozen._kleur;
+                            // zet maand en jaar goed van verhuis datum
+                            ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
+                            ProgData.Igekozenjaar = persoon_gekozen._verhuisdatum.Year;
+
+                            // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
+                            // meegeven eerste dag.
+                            if (persoon_gekozen._kleur != "Nieuw")
+                                Bewaar_oude_afwijkingen(persoon_gekozen._achternaam, eerste_dag_weg, persoon_gekozen._verhuisdatum.Month, persoon_gekozen._verhuisdatum.Year);
+
+                            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
 
                             if (ProgData.GekozenKleur != "Nieuw") // als nieuw persoon, dan hoef je niet X te zetten bij weg gaan ploeg
                             {
-                                for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                                for (int i = eerste_dag_weg; i < aantal_dagen_deze_maand + 1; i++)
                                 {
+                                    labelNieuwRoosterDatum.Text = $"{teller++}      ";
+                                    labelNieuwRoosterDatum.Refresh();
                                     ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
                                 }
                             }
+
+                            // tevens 12 maanden verder de X
+                            for (int maandenverder = 1; maandenverder < 12; maandenverder++)
+                            {
+                                DateTime dummy = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, 1);
+                                dummy = dummy.AddMonths(1);
+                                aantal_dagen_deze_maand = DateTime.DaysInMonth(dummy.Year, dummy.Month);
+                                ProgData.Igekozenjaar = dummy.Year;
+                                ProgData.igekozenmaand = dummy.Month;
+
+                                if (ProgData.GekozenKleur != "Nieuw") // als nieuw persoon, dan hoef je niet X te zetten bij weg gaan ploeg
+                                {
+                                    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                                    {
+                                        labelNieuwRoosterDatum.Text = $"{teller++}      ";
+                                        labelNieuwRoosterDatum.Refresh();
+                                        ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
+                                    }
+                                }
+                            }
+
+                            ProgData.GekozenKleur = persoon_gekozen._nieuwkleur;
+
+                            // zet maand en jaar goed van verhuis datum
+                            ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
+                            ProgData.Igekozenjaar = persoon_gekozen._verhuisdatum.Year;
+
+                            ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
+                            ProgData.SavePloegNamenLijst(ProgData.GekozenKleur, 15);     // save ploegbezetting (de mensen)
+
+                            // voeg nieuwe collega toevoegen aan bezetting
+
+                            string naam_ = ProgData.Get_Gebruiker_Naam(textBoxPersNum.Text);
+                            ProgData.MaakNieuweCollegaInBezettingAan(naam_, ProgData.GekozenKleur, ProgData.Igekozenjaar, ProgData.igekozenmaand, 12);
+
+                            for (int i = 1; i < eerste_dag_weg; i++)
+                            {
+                                DateTime dat = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, i);
+                                ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing",false);
+                            }
+
+                            LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
+                            if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
+                            {
+                                labelNieuwRoosterDatum.Text = persoon_gekozen._verhuisdatum.ToString("d");
+                                button1.Enabled = false;
+                            }
+                            else
+                            {
+                                labelNieuwRoosterDatum.Text = "";
+                                button1.Enabled = true;
+                            }
+                            ProgData.Save_Namen_lijst();
+
+                            // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
+                            // meegeven eerste dag.
+                            Restore_oude_afwijkingen(persoon_gekozen._nieuwkleur);
+
+                            MessageBox.Show("Klaar met Verhuis");
+
+                            ProgData.GekozenKleur = GekozenKleurInBeeld;
                         }
-
-                        ProgData.GekozenKleur = persoon_gekozen._nieuwkleur;
-
-                        // zet maand en jaar goed van verhuis datum
-                        ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
-                        ProgData.Igekozenjaar = persoon_gekozen._verhuisdatum.Year;
-
-                        ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                        ProgData.SavePloegNamenLijst(ProgData.GekozenKleur, 15);     // save ploegbezetting (de mensen)
-
-                        // voeg nieuwe collega toevoegen aan bezetting
-
-                        string naam_ = ProgData.Get_Gebruiker_Naam(textBoxPersNum.Text);
-                        ProgData.MaakNieuweCollegaInBezettingAan(naam_, ProgData.GekozenKleur, ProgData.Igekozenjaar, ProgData.igekozenmaand , 12);
-
-                        for (int i = 1; i < eerste_dag_weg; i++)
-                        {
-                            DateTime dat = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, i);
-                            ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing");
-                        }
-
-                        LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
-                        if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
-                        {
-                            labelNieuwRoosterDatum.Text = persoon_gekozen._verhuisdatum.ToString("d");
-                            button1.Enabled = false;
-                        }
-                        else
-                        {
-                            labelNieuwRoosterDatum.Text = "";
-                            button1.Enabled = true;
-                        }
-                        ProgData.Save_Namen_lijst();
-
-                        // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
-                        // meegeven eerste dag.
-                        Restore_oude_afwijkingen(persoon_gekozen._nieuwkleur);
-
-                        MessageBox.Show("Klaar met Verhuis");
-
-                        ProgData.GekozenKleur = GekozenKleurInBeeld;
+                        catch { }
                     }
-                    catch { }
                 }// vraagje 
-
-                try
-                {
-                    File.Delete("kill.ini");
-                }
-                catch (IOException)
-                {
-                    MessageBox.Show("Kon kill.ini niet verwijderen, verwijder deze met de hand.");
-                }
-                ProgData.Main.timerKill.Enabled = true;
             }
             else
             {
@@ -354,67 +345,77 @@ namespace Bezetting2
         {
             if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
             {
-
-                int maand = ProgData.igekozenmaand;
-                int jaar = ProgData.Igekozenjaar;
-                string kleur = ProgData.GekozenKleur;
-
-                personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
-
-                DateTime verhuisdatum_was = persoon_gekozen._verhuisdatum;
-                string kleur_was = persoon_gekozen._nieuwkleur;
-                string kleur_terug = persoon_gekozen._kleur;
-
-                DateTime dum = new DateTime(9999, 1, 1);
-                persoon_gekozen._verhuisdatum = dum;
-                persoon_gekozen._nieuwkleur = "";
-                labelNieuwRoosterDatum.Text = "";
-                LabelRoosterNieuw.Text = "";
-                ProgData.Save_Namen_lijst();
-
-                // get data van nieuwkleur
-                ProgData.GekozenKleur = kleur_was;
-                Bewaar_oude_afwijkingen(persoon_gekozen._achternaam, verhuisdatum_was.Day,
-                    verhuisdatum_was.Month, verhuisdatum_was.Year);
-
-                int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
-
-                // zet path goed van kleur ploeg
-                ProgData.GekozenKleur = kleur_terug;
-                ProgData.Igekozenjaar = verhuisdatum_was.Year;
-                ProgData.igekozenmaand = verhuisdatum_was.Month;
-
-                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
-
-                for (int i = eerste_dag_weg; i < aantal_dagen_deze_maand + 1; i++)
+                if (KillAlleAndereGebruikers())
                 {
-                    ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
-                }
+                    int maand = ProgData.igekozenmaand;
+                    int jaar = ProgData.Igekozenjaar;
+                    string kleur = ProgData.GekozenKleur;
+                    int teller = 0;
 
-                // tevens 12 maanden verder de X
-                for (int maandenverder = 1; maandenverder < 12; maandenverder++)
-                {
+                    personeel persoon_gekozen = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
 
-                    DateTime dummy = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, 1);
-                    dummy = dummy.AddMonths(1);
-                    aantal_dagen_deze_maand = DateTime.DaysInMonth(dummy.Year, dummy.Month);
-                    ProgData.Igekozenjaar = dummy.Year;
-                    ProgData.igekozenmaand = dummy.Month;
+                    DateTime verhuisdatum_was = persoon_gekozen._verhuisdatum;
+                    string kleur_was = persoon_gekozen._nieuwkleur;
+                    string kleur_terug = persoon_gekozen._kleur;
 
-                    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                    DateTime dum = new DateTime(9999, 1, 1);
+                    persoon_gekozen._verhuisdatum = dum;
+                    persoon_gekozen._nieuwkleur = "";
+                    labelNieuwRoosterDatum.Text = "";
+                    LabelRoosterNieuw.Text = "";
+                    ProgData.Save_Namen_lijst();
+
+                    // get data van nieuwkleur
+                    ProgData.GekozenKleur = kleur_was;
+
+                    Bewaar_oude_afwijkingen(persoon_gekozen._achternaam, verhuisdatum_was.Day,
+                        verhuisdatum_was.Month, verhuisdatum_was.Year);
+
+                    int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
+
+                    // zet path goed van kleur ploeg
+                    ProgData.GekozenKleur = kleur_terug;
+                    ProgData.Igekozenjaar = verhuisdatum_was.Year;
+                    ProgData.igekozenmaand = verhuisdatum_was.Month;
+
+                    int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
+
+                    for (int i = eerste_dag_weg; i < aantal_dagen_deze_maand + 1; i++)
                     {
+                        labelNieuwRoosterDatum.Text = $"{teller++}      ";
+                        labelNieuwRoosterDatum.Refresh();
                         ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
                     }
+
+                    // tevens 12 maanden verder de X
+                    for (int maandenverder = 1; maandenverder < 12; maandenverder++)
+                    {
+                        DateTime dummy = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, 1);
+                        dummy = dummy.AddMonths(1);
+                        aantal_dagen_deze_maand = DateTime.DaysInMonth(dummy.Year, dummy.Month);
+                        ProgData.Igekozenjaar = dummy.Year;
+                        ProgData.igekozenmaand = dummy.Month;
+
+                        for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                        {
+                            labelNieuwRoosterDatum.Text = $"{teller++}      ";
+                            labelNieuwRoosterDatum.Refresh();
+                            ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
+                        }
+                    }
+
+                    Restore_oude_afwijkingen(kleur_terug);
+
+                    ProgData.Igekozenjaar = jaar;
+                    ProgData.igekozenmaand = maand;
+                    ProgData.GekozenKleur = kleur;
+                    EditPersoneel_Shown(this, null);
+
+                    labelNieuwRoosterDatum.Text = "";
+                    labelNieuwRoosterDatum.Refresh();
+
+                    MessageBox.Show("Klaar met cancel verhuis");
                 }
-
-                Restore_oude_afwijkingen(kleur_terug);
-
-                ProgData.Igekozenjaar = jaar;
-                ProgData.igekozenmaand = maand;
-                ProgData.GekozenKleur = kleur;
-                EditPersoneel_Shown(this, null);
-
-                MessageBox.Show("Klaar met cancel verhuis");
             }
         }
 
@@ -492,6 +493,7 @@ namespace Bezetting2
                 buttonDelete.Enabled = true;
                 button1.Enabled = true;
                 buttonCancelVerhuis.Enabled = true;
+                buttonRechten.Enabled = true;
 
                 personeel a = new personeel
                 {
@@ -563,14 +565,16 @@ namespace Bezetting2
             comboBoxKleur.Enabled = true;
             textBoxPersNum.Enabled = true;
             textBoxAchterNaam.Enabled = true;
-            MessageBox.Show("Na invoeren naam enz, druk op voeg toe.");
+            buttonRechten.Enabled = false;
+            MessageBox.Show("Na invoeren naam enz, druk op voeg toe.\nHierna kunt u ook rechten van deze persoon aangeven.");
             /*\nDoe daarna kleur verhuizing naar juiste kleur/plek.*/
         }
         // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
-
         private void Bewaar_oude_afwijkingen(string personeel_naam, int eerste_dag, int maand, int jaar)
         {
             VeranderingenLijstTemp.Clear();
+
+            int teller = 0;
 
             // sla de veranderingen op van persoon in tijdelijke lijst
             // save maand/jaar
@@ -591,6 +595,9 @@ namespace Bezetting2
             foreach (veranderingen Item in veranderingen)
             {
                 int I = int.Parse(Item._datumafwijking);
+
+                labelNieuwRoosterDatum.Text = $"{teller++}      ";
+                labelNieuwRoosterDatum.Refresh();
 
                 if (I >= eerste_dag)
                 {
@@ -629,6 +636,9 @@ namespace Bezetting2
 
                     foreach (veranderingen Item in veranderingen)
                     {
+                        labelNieuwRoosterDatum.Text = $"{teller++}      ";
+                        labelNieuwRoosterDatum.Refresh();
+
                         VeranderingenVerhuis verhuisje = new VeranderingenVerhuis
                         {
                             Maand_ = ProgData.igekozenmaand.ToString(),
@@ -658,21 +668,95 @@ namespace Bezetting2
             int backupmaand = ProgData.igekozenmaand;
             ProgData.GekozenKleur = nieuwekleur;
             string temp = labelNieuwRoosterDatum.Text;
-            int t = 0;
+            int teller = 0;
             foreach (VeranderingenVerhuis ver in VeranderingenLijstTemp)
             {
-                labelNieuwRoosterDatum.Text = t.ToString();
+                labelNieuwRoosterDatum.Text = $"{teller++}      ";
                 labelNieuwRoosterDatum.Refresh();
                 DateTime dat = new DateTime(int.Parse(ver.Jaar_), int.Parse(ver.Maand_), int.Parse(ver._datumafwijking));
                 string invoerdoor = $"Verhuis: {ver._invoerdoor}";
                 if (ver._afwijking == "X")
                     ver._afwijking = "";
-                ProgData.RegelAfwijkingOpDatumEnKleur(dat, nieuwekleur, ver._naam, ver._datumafwijking, ver._afwijking, ver._rede, invoerdoor);
+                ProgData.RegelAfwijkingOpDatumEnKleur(dat, nieuwekleur, ver._naam, ver._datumafwijking, ver._afwijking, ver._rede, invoerdoor,false);
             }
             labelNieuwRoosterDatum.Text = temp;
             // restore maand jaar
             ProgData.Igekozenjaar = backupjaar;
             ProgData.igekozenmaand = backupmaand;
+        }
+
+        private void BewaarRechtenEnPasswoord(personeel persoon_gekozen)
+        {
+            bewaar_rechten = persoon_gekozen._rechten;
+            bewaar_passwoord = persoon_gekozen._passwoord;
+        }
+
+        private void ReturnRechtenEnPasswoord(personeel persoon_gekozen)
+        {
+            persoon_gekozen._rechten = bewaar_rechten;
+            persoon_gekozen._passwoord = bewaar_passwoord;
+            // zeker zijn dat eea niet blijft hangen.
+            bewaar_rechten = 0;
+            bewaar_passwoord = ProgData.Scramble("verander_nu");
+    }
+
+        private void EditPersoneel_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!ProgData.Main.timerKill.Enabled)
+            {
+                try
+                {
+                    if(File.Exists("kill.ini"))
+                        File.Delete("kill.ini");
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("Kon kill.ini niet verwijderen, verwijder deze met de hand.");
+                }
+                ProgData.Main.timerKill.Enabled = true;
+            }
+        }
+
+        private bool KillAlleAndereGebruikers()
+        {
+            if (!ProgData.Main.timerKill.Enabled)
+                return true;
+            
+            DialogResult dialogResult = MessageBox.Show("Doordat er veel administratie nodig is met verhuizing van personeel," +
+                            "\nsluit ik alle andere gebruikers nu af!\nDit duurt 60 seconden. (Nadat u op Ja gedrukt heeft)", "Vraagje", MessageBoxButtons.YesNo);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                // als kill.ini al bestaat hoeft dit niet
+                ProgData.Main.timerKill.Enabled = false;
+                try
+                {
+                    if (!File.Exists("kill.ini"))
+                    {
+                        using (File.Create("kill.ini"))
+                        { };
+                        for (int i = 0; i < 60; i++)
+                        {
+                            Thread.Sleep(1000);
+                            labelNieuwRoosterDatum.Text = $" {60-i}            ";
+                            labelNieuwRoosterDatum.Refresh();
+                        }
+                        labelNieuwRoosterDatum.Text = "";
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show($"Kan kill.ini niet schrijven!");
+                    ProgData.Main.timerKill.Enabled = true;
+                }
+            }
+            return !ProgData.Main.timerKill.Enabled;
+        }
+
+        private void buttonUitlegCancel_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Als u een persoon heeft verhuisd van rooster,\nKunt u dit cancelen tot op moment einde " +
+                "maand van start verhuizing.\nBij Start nieuwe maand is wordt verhuizing defenitief.");
         }
     }
 }

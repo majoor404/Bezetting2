@@ -82,6 +82,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxKleur = new System.Windows.Forms.ComboBox();
+            this.buttonUitlegCancel = new System.Windows.Forms.Button();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -446,6 +447,7 @@
             // 
             // groupBoxNieuwRooster
             // 
+            this.groupBoxNieuwRooster.Controls.Add(this.buttonUitlegCancel);
             this.groupBoxNieuwRooster.Controls.Add(this.labelNieuwRoosterDatum);
             this.groupBoxNieuwRooster.Controls.Add(this.LabelRoosterNieuw);
             this.groupBoxNieuwRooster.Controls.Add(this.button1);
@@ -455,7 +457,7 @@
             this.groupBoxNieuwRooster.Size = new System.Drawing.Size(256, 99);
             this.groupBoxNieuwRooster.TabIndex = 44;
             this.groupBoxNieuwRooster.TabStop = false;
-            this.groupBoxNieuwRooster.Text = "Nieuw Rooster";
+            this.groupBoxNieuwRooster.Text = " Verplaatst persoon naar ander Rooster/Kleur ";
             // 
             // labelNieuwRoosterDatum
             // 
@@ -552,6 +554,16 @@
             this.comboBoxKleur.Size = new System.Drawing.Size(196, 21);
             this.comboBoxKleur.TabIndex = 13;
             // 
+            // buttonUitlegCancel
+            // 
+            this.buttonUitlegCancel.Location = new System.Drawing.Point(228, 53);
+            this.buttonUitlegCancel.Name = "buttonUitlegCancel";
+            this.buttonUitlegCancel.Size = new System.Drawing.Size(21, 23);
+            this.buttonUitlegCancel.TabIndex = 46;
+            this.buttonUitlegCancel.Text = "?";
+            this.buttonUitlegCancel.UseVisualStyleBackColor = true;
+            this.buttonUitlegCancel.Click += new System.EventHandler(this.buttonUitlegCancel_Click);
+            // 
             // EditPersoneel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -603,6 +615,7 @@
             this.Name = "EditPersoneel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "EditPersoneel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EditPersoneel_FormClosing);
             this.Shown += new System.EventHandler(this.EditPersoneel_Shown);
             this.groupBoxNieuwRooster.ResumeLayout(false);
             this.groupBoxNieuwRooster.PerformLayout();
@@ -667,5 +680,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBoxKleur;
+        private System.Windows.Forms.Button buttonUitlegCancel;
     }
 }

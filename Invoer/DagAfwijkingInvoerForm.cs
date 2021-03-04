@@ -53,7 +53,7 @@ namespace Bezetting2
 
                 string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
 
-                if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 =="DD")
                 {
                     ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, _verzoekdag, labelNaam.Text);
                 }

@@ -136,16 +136,17 @@
             "RD-N",
             "ED-O",
             "ED-M",
-            "ED-N"});
+            "ED-N",
+            "DD"});
             this.listBoxItems.Location = new System.Drawing.Point(12, 61);
             this.listBoxItems.Name = "listBoxItems";
-            this.listBoxItems.Size = new System.Drawing.Size(250, 225);
+            this.listBoxItems.Size = new System.Drawing.Size(250, 290);
             this.listBoxItems.TabIndex = 24;
             this.listBoxItems.SelectedIndexChanged += new System.EventHandler(this.ListBoxItems_SelectedIndexChanged);
             // 
             // textBoxRede
             // 
-            this.textBoxRede.Location = new System.Drawing.Point(282, 327);
+            this.textBoxRede.Location = new System.Drawing.Point(282, 403);
             this.textBoxRede.Name = "textBoxRede";
             this.textBoxRede.Size = new System.Drawing.Size(267, 20);
             this.textBoxRede.TabIndex = 23;
@@ -153,7 +154,7 @@
             // textBoxAfwijking
             // 
             this.textBoxAfwijking.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBoxAfwijking.Location = new System.Drawing.Point(12, 327);
+            this.textBoxAfwijking.Location = new System.Drawing.Point(12, 403);
             this.textBoxAfwijking.Name = "textBoxAfwijking";
             this.textBoxAfwijking.Size = new System.Drawing.Size(250, 20);
             this.textBoxAfwijking.TabIndex = 22;
@@ -161,7 +162,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(279, 302);
+            this.label2.Location = new System.Drawing.Point(279, 378);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(136, 13);
             this.label2.TabIndex = 25;
@@ -193,7 +194,7 @@
             // buttonVoerUit
             // 
             this.buttonVoerUit.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonVoerUit.Location = new System.Drawing.Point(282, 366);
+            this.buttonVoerUit.Location = new System.Drawing.Point(282, 442);
             this.buttonVoerUit.Name = "buttonVoerUit";
             this.buttonVoerUit.Size = new System.Drawing.Size(267, 23);
             this.buttonVoerUit.TabIndex = 30;
@@ -204,7 +205,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(12, 366);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 442);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(250, 23);
             this.buttonCancel.TabIndex = 31;
@@ -292,7 +293,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 302);
+            this.label6.Location = new System.Drawing.Point(12, 378);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 35;
@@ -312,7 +313,7 @@
             this.AcceptButton = this.buttonCancel;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 401);
+            this.ClientSize = new System.Drawing.Size(561, 477);
             this.Controls.Add(this.labelAftellen);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);

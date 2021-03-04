@@ -20,7 +20,7 @@ namespace Bezetting2
         public const int y_as_eerste_lijn = 136;
         public const int y_as_add_lijn = 4;
         private bool kill = false;
-        private bool WindowUpdateViewScreen = true;
+        public bool WindowUpdateViewScreen = true;
 
         private readonly ToolTip mTooltip = new ToolTip();
         private Point mLastPos = new Point(-1, -1);
@@ -908,12 +908,12 @@ namespace Bezetting2
                                 DateTime datum = new DateTime(ProgData.Igekozenjaar, ProgData.igekozenmaand, ros._dagnummer);
                                 var dienst_rooster = GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
 
-                                if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"))
+                                if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD"))
                                 {
                                     ProgData.ListLooptExtra.RemoveAt(i);
                                 }
 
-                                if (dienst != dienst_rooster)
+                                if (dienst != dienst_rooster && dienst != "DD")
                                 {
                                     ProgData.ListLooptExtra.RemoveAt(i);
                                 }

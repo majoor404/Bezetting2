@@ -50,7 +50,7 @@ namespace Bezetting2
         }
 
         //once you have the path you get the directory with:
-        public static string DataDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
+        //public static string DataDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
 
         public static bool Disable_error_Meldingen = false;
         public static MainFormBezetting2 Main;
@@ -69,7 +69,6 @@ namespace Bezetting2
         public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
 
         public static List<string> ListWerkgroepPersoneel = new List<string>();
-        //public static ModuleDatum MDatum = new ModuleDatum();
 
         public static List<veranderingen> ListVeranderingen = new List<veranderingen>();
 
@@ -89,7 +88,6 @@ namespace Bezetting2
         public static int ihuidigjaar;
         private static int _igekozenjaar; // Backing
 
-        //public static class ZipFile;
         public static string backup_zipnaam;
 
         public static int backup_time;
@@ -193,7 +191,7 @@ namespace Bezetting2
             {
                 Main.labelDebug.Text = "catch LoadPloegNamenLijst() error, try again";
                 Thread.Sleep(300);
-                LoadPloegNamenLijst(kleur, try_again--);
+                LoadPloegNamenLijst(kleur, --try_again);
             }
             // haal werkgroepen op
             MaakWerkPlekkenLijst();
@@ -221,7 +219,7 @@ namespace Bezetting2
                 catch (IOException)
                 {
                     Thread.Sleep(300);
-                    SavePloegNamenLijst(kleur, try_again--);
+                    SavePloegNamenLijst(kleur, --try_again);
                 }
             }
         }
@@ -358,7 +356,7 @@ namespace Bezetting2
                 catch
                 {
                     Thread.Sleep(300);
-                    SavePloegBezetting(kleur, try_again--);
+                    SavePloegBezetting(kleur, --try_again);
                 }
             }
         }
@@ -399,7 +397,7 @@ namespace Bezetting2
             {
                 //Main.labelDebug.Text = " LoadPloegBezettingLijst() error, try again";
                 Thread.Sleep(300);
-                LoadPloegBezetting(kleur, try_again--);
+                LoadPloegBezetting(kleur, --try_again);
             }
             catch
             {
@@ -417,9 +415,19 @@ namespace Bezetting2
             else
             {
                 Main.labelDebug.Text = "Load Ploeg Veranderingen";
+                
+                var file = Ploeg_Veranderingen_Locatie(kleur);
+
+                if (!File.Exists(file))
+                { 
+                    MessageBox.Show($"verander lijst {file}  bestond niet!, checkfiles zou dit hebben moeten afvangen!");
+                    //ListVeranderingen.Clear();
+                    //SaveVeranderingenPloeg(kleur, 15);
+                }
+
                 try
                 {
-                    using (Stream stream = File.Open(Ploeg_Veranderingen_Locatie(kleur), FileMode.Open))
+                    using (Stream stream = File.Open(file , FileMode.Open))
                     {
                         BinaryFormatter bin = new BinaryFormatter();
                         ListVeranderingen.Clear();
@@ -430,7 +438,7 @@ namespace Bezetting2
                 catch
                 {
                     Thread.Sleep(300);
-                    LoadVeranderingenPloeg(kleur, try_again--);
+                    LoadVeranderingenPloeg(kleur, --try_again);
                 }
             }
         }
@@ -458,7 +466,7 @@ namespace Bezetting2
                 catch (IOException)
                 {
                     Thread.Sleep(300);
-                    SaveVeranderingenPloeg(kleur, try_again--);
+                    SaveVeranderingenPloeg(kleur, --try_again);
                 }
             }
         }
@@ -590,8 +598,9 @@ namespace Bezetting2
             }
         }
 
-        static public void RegelAfwijkingOpDatumEnKleur(DateTime datum, string kleur, string naam, string dagnr, string afwijking, string rede, string invoerdoor)
+        static public void RegelAfwijkingOpDatumEnKleur(DateTime datum, string kleur, string naam, string dagnr, string afwijking, string rede, string invoerdoor ,bool Update_screen = true)
         {
+            Main.WindowUpdateViewScreen = Update_screen;
             // zet datum goed en kleur goed
             string bewaar_kleur = GekozenKleur;
             int bewaar_maand = igekozenmaand;
@@ -616,6 +625,8 @@ namespace Bezetting2
                 igekozenmaand = bewaar_maand;
             if (Igekozenjaar != bewaar_jaar)
                 Igekozenjaar = bewaar_jaar;
+
+            Main.WindowUpdateViewScreen = true;
         }
 
         static public String Scramble(string woord)
@@ -933,6 +944,14 @@ namespace Bezetting2
                     Main.Close();
                 }
             }
+            
+            if (!File.Exists(Ploeg_Veranderingen_Locatie(kleur)))
+            {
+                MessageBox.Show($"verander lijst {Ploeg_Veranderingen_Locatie(kleur)}  bestond niet, maak deze aan.");
+                ListVeranderingen.Clear();
+                SaveVeranderingenPloeg(kleur, 15);
+            }
+
         }
 
         public static void Backup()
@@ -1016,6 +1035,7 @@ namespace Bezetting2
                 //}
             }
         }
+
         public static bool TestNetwerkBeschikbaar(int test)
         {
             Main.labelDebug.Text = "Test Netwerk";
@@ -1051,10 +1071,23 @@ namespace Bezetting2
             // als ED-O of ED-M of ED-N aanpassing op andere kleur, of VD of RD
             // bepaal de kleur die dan loopt.
 
-            // get huidige kleur op
-            string dienst = afwijking.Substring(3, 1);
-            string gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), _verzoekdag, dienst);
-            string dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
+            string dienst;
+            string gaat_lopen_op_kleur;
+            string dir;
+            if (afwijking.ToUpper() == "DD")
+            {
+                dienst = afwijking.ToUpper();
+                gaat_lopen_op_kleur = "DD";
+                dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
+            }
+            else
+            {
+                // get huidige kleur op
+                dienst = afwijking.Substring(3, 1);
+                gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), _verzoekdag, dienst);
+                dir = ProgData.GetDirectoryBezettingMaand(_verzoekdag);
+            }
+
             ProgData.LoadLooptExtraLijst(dir, gaat_lopen_op_kleur);
 
             LooptExtraDienst lop = new LooptExtraDienst

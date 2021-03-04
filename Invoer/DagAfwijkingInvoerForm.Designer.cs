@@ -57,7 +57,7 @@
             // textBoxAfwijking
             // 
             this.textBoxAfwijking.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBoxAfwijking.Location = new System.Drawing.Point(15, 373);
+            this.textBoxAfwijking.Location = new System.Drawing.Point(15, 409);
             this.textBoxAfwijking.Name = "textBoxAfwijking";
             this.textBoxAfwijking.Size = new System.Drawing.Size(250, 20);
             this.textBoxAfwijking.TabIndex = 2;
@@ -66,7 +66,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 396);
+            this.label2.Location = new System.Drawing.Point(15, 442);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(136, 13);
             this.label2.TabIndex = 3;
@@ -74,14 +74,14 @@
             // 
             // textBoxRede
             // 
-            this.textBoxRede.Location = new System.Drawing.Point(15, 412);
+            this.textBoxRede.Location = new System.Drawing.Point(15, 458);
             this.textBoxRede.Name = "textBoxRede";
             this.textBoxRede.Size = new System.Drawing.Size(250, 20);
             this.textBoxRede.TabIndex = 4;
             // 
             // buttonHistory
             // 
-            this.buttonHistory.Location = new System.Drawing.Point(15, 493);
+            this.buttonHistory.Location = new System.Drawing.Point(15, 518);
             this.buttonHistory.Name = "buttonHistory";
             this.buttonHistory.Size = new System.Drawing.Size(115, 25);
             this.buttonHistory.TabIndex = 5;
@@ -93,7 +93,7 @@
             // 
             this.buttonVoerIn.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonVoerIn.Enabled = false;
-            this.buttonVoerIn.Location = new System.Drawing.Point(150, 493);
+            this.buttonVoerIn.Location = new System.Drawing.Point(150, 518);
             this.buttonVoerIn.Name = "buttonVoerIn";
             this.buttonVoerIn.Size = new System.Drawing.Size(115, 25);
             this.buttonVoerIn.TabIndex = 6;
@@ -127,10 +127,11 @@
             "RD-N",
             "VD-O",
             "VD-M",
-            "VD-N"});
+            "VD-N",
+            "DD"});
             this.listBoxItems.Location = new System.Drawing.Point(15, 87);
             this.listBoxItems.Name = "listBoxItems";
-            this.listBoxItems.Size = new System.Drawing.Size(250, 277);
+            this.listBoxItems.Size = new System.Drawing.Size(250, 316);
             this.listBoxItems.TabIndex = 7;
             this.listBoxItems.SelectedIndexChanged += new System.EventHandler(this.ListBoxItems_SelectedIndexChanged);
             // 
@@ -175,7 +176,7 @@
             // 
             // buttonReeks
             // 
-            this.buttonReeks.Location = new System.Drawing.Point(15, 531);
+            this.buttonReeks.Location = new System.Drawing.Point(15, 556);
             this.buttonReeks.Name = "buttonReeks";
             this.buttonReeks.Size = new System.Drawing.Size(250, 25);
             this.buttonReeks.TabIndex = 12;
@@ -186,7 +187,7 @@
             // buttonCancelInvoer
             // 
             this.buttonCancelInvoer.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonCancelInvoer.Location = new System.Drawing.Point(15, 459);
+            this.buttonCancelInvoer.Location = new System.Drawing.Point(15, 484);
             this.buttonCancelInvoer.Name = "buttonCancelInvoer";
             this.buttonCancelInvoer.Size = new System.Drawing.Size(250, 25);
             this.buttonCancelInvoer.TabIndex = 13;
@@ -217,7 +218,7 @@
             this.AcceptButton = this.buttonVoerIn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 568);
+            this.ClientSize = new System.Drawing.Size(274, 592);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.buttonCancelInvoer);

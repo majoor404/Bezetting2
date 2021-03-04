@@ -53,7 +53,7 @@ namespace Bezetting2.Invoer
                         {
                             ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                             Thread.Sleep(300);
-                            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                             {
                                 ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
                                 Thread.Sleep(300);
@@ -89,7 +89,7 @@ namespace Bezetting2.Invoer
                         labelAftellen.Refresh();
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
-                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                         {
                             ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
                             Thread.Sleep(300);
@@ -110,7 +110,7 @@ namespace Bezetting2.Invoer
                     {
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, per._achternaam, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
-                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                         {
                             ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
                             Thread.Sleep(300);
@@ -203,7 +203,7 @@ namespace Bezetting2.Invoer
                         ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
-                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                         {
                             ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
                             Thread.Sleep(300);
