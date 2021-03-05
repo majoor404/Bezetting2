@@ -1643,7 +1643,7 @@ namespace Bezetting2
 
                                     labelDebug.Text = $"{teller} {naam} {afwijking}";
                                     labelDebug.Refresh();
-                                    ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam);
+                                    ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam,false);
 
                                     // toevoegen extra ruil of verschoven dienst
                                     string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
