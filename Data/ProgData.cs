@@ -60,6 +60,8 @@ namespace Bezetting2
         public static ToolStripStatusLabel _inlognaam;
         public static ToolStripStatusLabel _toegangnivo;
 
+        public static AllVerCain chain = new AllVerCain();
+
         public static List<string> Lijnen = new List<string>();
 
         public static List<personeel> ListPersoneel = new List<personeel>();
@@ -573,6 +575,12 @@ namespace Bezetting2
             TestNaamInBezetting(naam, dagnr, kleur);
             try
             {
+                /// test
+                chain.Load();
+                chain.voeg_toe(AllVerCain.soort_.dag_inhoud, dagnr, Get_Gebruiker_Nummer(naam), afwijking, rede, invoerdoor, kleur);
+                chain.Save();
+                ///
+
                 werkdag ver = ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dagnr));
                 ver._afwijkingdienst = afwijking;
                 SavePloegBezetting(kleur, 15);
