@@ -3,6 +3,7 @@ using Bezetting2.Invoer;
 using System;
 using System.Linq;
 using System.Windows.Forms;
+using static Bezetting2.Data.MaandDataClass;
 
 namespace Bezetting2
 {
@@ -17,14 +18,17 @@ namespace Bezetting2
 
         private void FormDagAfwijkingInvoer_Shown(object sender, EventArgs e)
         {
-            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
+            ProgData.MaandData.Load(ProgData.GekozenKleur);
             try
             {
-                veranderingen ver = ProgData.ListVeranderingen.Last(a => (a._naam == labelNaam.Text) && (a._datumafwijking == labelDatum.Text));
-                if (!string.IsNullOrEmpty(ver._afwijking))
+                var persnr = ProgData.Get_Gebruiker_Nummer(labelNaam.Text);
+
+                Item ver = ProgData.MaandData.MaandDataLijst.Last(a => (a.personeel_nr_ == persnr) && (a.datum_.Day.ToString() == labelDatum.Text));
+                
+                if (!string.IsNullOrEmpty(ver.afwijking_))
                 {
-                    textBoxAfwijking.Text = ver._afwijking;
-                    textBoxRede.Text = ver._rede;
+                    textBoxAfwijking.Text = ver.afwijking_;
+                    textBoxRede.Text = ver.rede_;
                 }
                 else
                 {

@@ -17,7 +17,7 @@ namespace Bezetting2
         private void InlogForm_Shown(object sender, EventArgs e)
         {
             buttonVerander.Enabled = false;
-            ProgData.Lees_Namen_lijst();
+            ProgData.Laad_LijstNamen();
             textBoxNum.Text = Environment.UserName;
 
             // maak van a590588 -> 590588
@@ -78,7 +78,7 @@ namespace Bezetting2
                 else
                 {
                     bool juist = false;
-                    personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
+                    personeel persoon = ProgData.LijstPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
                     if (textBoxNum.Text == textBoxPass.Text)
                     {
                         {
@@ -167,7 +167,7 @@ namespace Bezetting2
             //check passwoord
             try
             {
-                personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString(CultureInfo.CurrentCulture) == textBoxNum.Text);
+                personeel persoon = ProgData.LijstPersoneel.First(b => b._persnummer.ToString(CultureInfo.CurrentCulture) == textBoxNum.Text);
                 if (ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
                 {
                     // juiste inlog
@@ -181,7 +181,7 @@ namespace Bezetting2
 
         private void ButtonVerander_Click(object sender, EventArgs e)
         {
-            personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == textBoxNum.Text);
+            personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxNum.Text);
             // encrypt pass
             if (textBoxChangePasswoord.Text == textBoxNum.Text)
             {
@@ -190,7 +190,7 @@ namespace Bezetting2
             else
             {
                 persoon._passwoord = ProgData.Scramble(textBoxChangePasswoord.Text);
-                ProgData.Save_Namen_lijst();
+                ProgData.Save_LijstNamen();
                 MessageBox.Show("Wachtwoord is aangepast, log nu nogmaals in met dit wachtwoord.");
 
                 textBoxNum.Enabled = true;
@@ -209,7 +209,7 @@ namespace Bezetting2
             // na reset passwoord is het "verander_nu", pas meteen aan.
             try
             {
-                personeel persoon = ProgData.ListPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
+                personeel persoon = ProgData.LijstPersoneel.First(b => b._persnummer.ToString() == textBoxNum.Text);
                 if (ProgData.Unscramble(persoon._passwoord) == "verander_nu")
                 {
                     MessageBox.Show("Geef nieuwe passwoord op, verboden is uw gebruikers naam/personeel nummer!");

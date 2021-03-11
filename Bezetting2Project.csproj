@@ -104,7 +104,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="Data\AllVerCain.cs" />
+    <Compile Include="Data\MaandDataClass.cs" />
     <Compile Include="Data\InstellingenProg.cs" />
     <Compile Include="Data\LooptExtraDienst.cs" />
     <Compile Include="Data\AanvraagRuilExtra.cs" />

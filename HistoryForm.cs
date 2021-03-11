@@ -1,6 +1,7 @@
 ﻿using Bezetting2.Data;
 using System;
 using System.Windows.Forms;
+using static Bezetting2.Data.MaandDataClass;
 
 namespace Bezetting2
 {
@@ -13,9 +14,9 @@ namespace Bezetting2
 
         private void History_Shown(object sender, EventArgs e)
         {
-            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
+            ProgData.MaandData.Load(ProgData.GekozenKleur);
 
-            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
+            int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
             comboBoxDag.Items.Clear();
             comboBoxDag.Items.Add("");
 
@@ -28,19 +29,22 @@ namespace Bezetting2
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
-            ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
+            ProgData.MaandData.Load(ProgData.GekozenKleur);
+
             listViewHis.Items.Clear();
             string[] regel = new string[6];
-            foreach (veranderingen a in ProgData.ListVeranderingen)
+            
+            foreach (Item a in ProgData.MaandData.MaandDataLijst)
             {
-                if (comboBoxDag.Text == a._datumafwijking || string.IsNullOrEmpty(comboBoxDag.Text))
+                var dat = a.datum_.Day.ToString();
+                if (comboBoxDag.Text == dat || string.IsNullOrEmpty(comboBoxDag.Text))
                 {
-                    regel[1] = a._afwijking;
-                    regel[2] = a._datumafwijking;
-                    regel[4] = a._datuminvoer;
-                    regel[3] = ProgData.Get_Gebruiker_Naam(a._invoerdoor);
-                    regel[0] = a._naam;
-                    regel[5] = a._rede;
+                    regel[1] = a.afwijking_;
+                    regel[2] = a.datum_.ToShortDateString();
+                    regel[4] = a.ingevoerd_op_.ToShortDateString(); ;
+                    regel[3] = a.invoerdoor_;
+                    regel[0] = ProgData.Get_Gebruiker_Naam(a.personeel_nr_);
+                    regel[5] = a.rede_;
                     ListViewItem listItem = new ListViewItem(regel);
                     listViewHis.Items.Add(listItem);
                 }

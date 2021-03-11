@@ -16,7 +16,7 @@ namespace Bezetting2
         private void AfwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int bewaar_maand = ProgData.igekozenmaand;
-            int bewaar_jaar = ProgData.Igekozenjaar;
+            int bewaar_jaar = ProgData.igekozenjaar;
 
             ListClassTelAfwijkingen.Clear();
 
@@ -33,7 +33,7 @@ namespace Bezetting2
                 GetAfwijkingenPersoonInEenMaand(ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.ihuidigjaar, ProgData.igekozenmaand);
             }
             ProgData.igekozenmaand = bewaar_maand;
-            ProgData.Igekozenjaar = bewaar_jaar;
+            ProgData.igekozenjaar = bewaar_jaar;
 
             try
             {
@@ -191,10 +191,10 @@ namespace Bezetting2
             string[] deze_maand_overzicht_persoon = new string[33];
 
             //eerst vanuit ploegbezetting een string list maken met afwijkingen en normaal schema van persoon
-            if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(kleur)))
+            if (File.Exists(ProgData.LijstWerkdagPloeg_Locatie(kleur)))
             {
-                ProgData.LoadPloegBezetting(kleur, 15);
-                foreach (werkdag dag in ProgData.ListWerkdagPloeg)
+                ProgData.LaadLijstWerkdagPloeg(kleur, 15);
+                foreach (werkdag dag in ProgData.LijstWerkdagPloeg)
                 {
                     if (dag._naam == naam)
                     {
@@ -485,11 +485,11 @@ namespace Bezetting2
 
                 // eerst maar lijst maken wie vuilwerk verdiend.
                 ListClassTelVuilwerk.Clear();
-                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.Igekozenjaar, ProgData.igekozenmaand);
+                int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
 
                 string korte_afwijking = "";
 
-                foreach (personeel a in ProgData.ListPersoneelKleur)
+                foreach (personeel a in ProgData.LijstPersoneelKleur)
                 {
                     if ((a._vuilwerk == "True"))
                     {
@@ -562,18 +562,18 @@ namespace Bezetting2
                 for (int i = 1; i < 13; i++)    // maanden
                 {
                     ProgData.igekozenmaand = i;
-                    if (File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
+                    if (File.Exists(ProgData.LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)))
                     {
-                        ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
-                        ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur, 15);
+                        ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                        ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
 
-                        foreach (personeel a in ProgData.ListPersoneelKleur)
+                        foreach (personeel a in ProgData.LijstPersoneelKleur)
                         {
                             if (!ListTelNamen.Contains(a._achternaam))
                                 ListTelNamen.Add(a._achternaam);
                         }
 
-                        foreach (werkdag a in ProgData.ListWerkdagPloeg)
+                        foreach (werkdag a in ProgData.LijstWerkdagPloeg)
                         {
                             if (!ListTelWerkPlek.Contains(a._werkplek) && !string.IsNullOrEmpty(a._werkplek))
                                 ListTelWerkPlek.Add(a._werkplek);
@@ -596,8 +596,8 @@ namespace Bezetting2
                 }
                 ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
-                ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur, 15);
+                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
             }
             catch
             {
@@ -642,7 +642,7 @@ namespace Bezetting2
                 Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 int start_row = 2;
-                foreach (personeel a in ProgData.ListPersoneel)
+                foreach (personeel a in ProgData.LijstPersoneel)
                 {
                     if (a._kleur == kleur || kleur == "Allemaal")
                     {
@@ -716,10 +716,10 @@ namespace Bezetting2
                 ProgData.igekozenmaand = i;
                 if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.LoadPloegNamenLijst(ProgData.GekozenKleur, 15);
-                    if (ProgData.ListPersoneelKleur.Count > 0)
+                    ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+                    if (ProgData.LijstPersoneelKleur.Count > 0)
                     {
-                        foreach (personeel a in ProgData.ListPersoneelKleur)
+                        foreach (personeel a in ProgData.LijstPersoneelKleur)
                         {
                             if (!Namen.Contains(a._persnummer))
                                 Namen.Add(a._persnummer);
@@ -784,7 +784,7 @@ namespace Bezetting2
                     for (int i = 1; i < 13; i++)
                     {
                         ProgData.igekozenmaand = i;
-                        GetAfwijkingenPersoonInEenMaand(naam.ToString(CultureInfo.CurrentCulture), ProgData.Igekozenjaar, i);
+                        GetAfwijkingenPersoonInEenMaand(naam.ToString(CultureInfo.CurrentCulture), ProgData.igekozenjaar, i);
                         // data nu in ListClassTelAfwijkingen
                     }
 

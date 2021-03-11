@@ -6,7 +6,7 @@ namespace Bezetting2.Data
     public class LooptExtraDienst : IEquatable<LooptExtraDienst>
     {
         public DateTime _datum { get; set; }
-        public string _naam { get; set; }
+        public string _naam { get; set; }       // is ondertussen personeel nummer geworden.
         public string _metcode { get; set; }
 
         public bool Equals(LooptExtraDienst other)

@@ -22,10 +22,10 @@ namespace Bezetting2.InlogGebeuren
         private void Button2_Click(object sender, EventArgs e)
         {
             // reset wachtwoord (maak gelijk aan personeel nummer
-            personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
+            personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
             // encrypt pass
             persoon._passwoord = ProgData.Scramble("verander_nu");
-            ProgData.Save_Namen_lijst();
+            ProgData.Save_LijstNamen();
         }
 
         private int GetRecht()
@@ -52,7 +52,7 @@ namespace Bezetting2.InlogGebeuren
         {
             try
             {
-                personeel persoon = ProgData.ListPersoneel.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
+                personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
 
                 if (GetRecht() > 0 && string.IsNullOrEmpty(persoon._passwoord))
                     Button2_Click(this, null);

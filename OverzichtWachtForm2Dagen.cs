@@ -242,7 +242,7 @@ namespace Bezetting2
             {
                 // voor elke persoon in lijst
                 string naam = box.Items[i].ToString();
-                werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer == dag));
+                werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer == dag));
                 broer.Items.Add(ver._afwijkingdienst);
                 if (!string.IsNullOrEmpty(ver._afwijkingdienst))
                     afwijking = true;
@@ -350,9 +350,9 @@ namespace Bezetting2
                 labelDatum.Text = dat.ToLongDateString();
             }
 
-            ProgData.Igekozenjaar = dat.Year;
+            ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
             ViewDag1(dat);
 
@@ -385,9 +385,9 @@ namespace Bezetting2
                 buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
             }
 
-            ProgData.Igekozenjaar = dat2.Year;
+            ProgData.igekozenjaar = dat2.Year;
             ProgData.igekozenmaand = dat2.Month;
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
             ViewDag2(dat2);
 
@@ -415,7 +415,7 @@ namespace Bezetting2
             }
 
             ProgData.igekozenmaand = dat.Month;
-            ProgData.Igekozenjaar = dat.Year;
+            ProgData.igekozenjaar = dat.Year;
             ViewUpdate();
         }
         private void ButtonPrev_Click(object sender, EventArgs e)
@@ -431,7 +431,7 @@ namespace Bezetting2
             }
 
             ProgData.igekozenmaand = dat.Month;
-            ProgData.Igekozenjaar = dat.Year;
+            ProgData.igekozenjaar = dat.Year;
 
             ViewUpdate();
         }
@@ -443,9 +443,9 @@ namespace Bezetting2
         }
         private void ViewDag1(DateTime dat)
         {
-            ProgData.Igekozenjaar = dat.Year;
+            ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
             foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
             {
                 box.Items.Clear();
@@ -466,11 +466,11 @@ namespace Bezetting2
                     {
                         try
                         {
-                            werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
+                            werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
                                                                              && (aa._dagnummer == ProgData.ListLooptExtra[i]._datum.Day)
                                                                              && (aa._afwijkingdienst != ProgData.ListLooptExtra[i]._metcode));
                             ver._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
-                            ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
+                            ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
                         }
                         catch { }
                     }
@@ -482,7 +482,7 @@ namespace Bezetting2
                         {
                             try
                             {
-                                personeel perso = ProgData.ListPersoneelKleur.First(aa => (aa._achternaam == naam._naam));
+                                personeel perso = ProgData.LijstPersoneelKleur.First(aa => (aa._achternaam == naam._naam));
                             }
                             catch
                             {
@@ -490,12 +490,12 @@ namespace Bezetting2
                                 {
                                     _achternaam = naam._naam
                                 };
-                                ProgData.ListPersoneelKleur.Add(extra_man);
+                                ProgData.LijstPersoneelKleur.Add(extra_man);
                             }
 
                             try
                             {
-                                werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
+                                werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
                             }
                             catch
                             {
@@ -506,19 +506,19 @@ namespace Bezetting2
                                     _werkplek = "",
                                     _afwijkingdienst = naam._metcode
                                 };
-                                ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
+                                ProgData.LijstWerkdagPloeg.Add(werkdag_extra_man);
+                                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
                             }
                         }
                     }
                 }
 
-                foreach (personeel man in ProgData.ListPersoneelKleur)
+                foreach (personeel man in ProgData.LijstPersoneelKleur)
                 {
                     try
                     {
                         // 
-                        werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
+                        werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
 
                         if (string.IsNullOrEmpty(ver._werkplek))
                         {
@@ -553,9 +553,9 @@ namespace Bezetting2
         }
         private void ViewDag2(DateTime dat)
         {
-            ProgData.Igekozenjaar = dat.Year;
+            ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
             foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
             {
@@ -576,7 +576,7 @@ namespace Bezetting2
                         {
                             try
                             {
-                                personeel perso = ProgData.ListPersoneelKleur.First(aa => (aa._achternaam == naam._naam));
+                                personeel perso = ProgData.LijstPersoneelKleur.First(aa => (aa._achternaam == naam._naam));
                             }
                             catch
                             {
@@ -584,12 +584,12 @@ namespace Bezetting2
                                 {
                                     _achternaam = naam._naam
                                 };
-                                ProgData.ListPersoneelKleur.Add(extra_man);
+                                ProgData.LijstPersoneelKleur.Add(extra_man);
                             }
 
                             try
                             {
-                                werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
+                                werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
                             }
                             catch
                             {
@@ -600,19 +600,19 @@ namespace Bezetting2
                                     _werkplek = "",
                                     _afwijkingdienst = naam._metcode
                                 };
-                                ProgData.ListWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
+                                ProgData.LijstWerkdagPloeg.Add(werkdag_extra_man);
+                                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
                             }
                         }
                     }
                 }
 
-                foreach (personeel man in ProgData.ListPersoneelKleur)
+                foreach (personeel man in ProgData.LijstPersoneelKleur)
                 {
                     try
                     {
                         // 
-                        werkdag ver = ProgData.ListWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
+                        werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
 
                         if (string.IsNullOrEmpty(ver._werkplek))
                         {
@@ -651,9 +651,9 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                ProgData.Igekozenjaar = dat.Year;
+                ProgData.igekozenjaar = dat.Year;
                 ProgData.igekozenmaand = dat.Month;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
                 foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
                 {
@@ -670,7 +670,7 @@ namespace Bezetting2
                                 // haal juiste werkdag bij persoon
                                 try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
                                 {
-                                    werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
+                                    werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
                                     if (box == listBox1)
                                     {
                                         ver._werkplek = "";
@@ -687,11 +687,11 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
+                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
-                ProgData.Igekozenjaar = dat2.Year;
+                ProgData.igekozenjaar = dat2.Year;
                 ProgData.igekozenmaand = dat2.Month;
-                ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
+                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
                 foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
                 {
@@ -708,7 +708,7 @@ namespace Bezetting2
                                 // haal juiste werkdag bij persoon
                                 try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
                                 {
-                                    werkdag ver = ProgData.ListWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat2.Day.ToString()));
+                                    werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat2.Day.ToString()));
                                     if (box == listBox83)
                                     {
                                         ver._werkplek = "";
@@ -725,7 +725,7 @@ namespace Bezetting2
                         }
                     }
                 }
-                ProgData.SavePloegBezetting(ProgData.GekozenKleur, 15);
+                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
                 CaptureMyScreen();
             }
