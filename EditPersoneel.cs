@@ -444,6 +444,21 @@ namespace Bezetting2
             if (rechten > 49)
                 recht.radioButton50.Checked = true;
 
+            if(ProgData.RechtenHuidigeGebruiker == 25)
+            {
+                recht.checkBoxAllePloegen.Enabled = false;
+                recht.radioButton0.Enabled = true;
+                recht.radioButton25.Enabled = true;
+                recht.radioButton50.Enabled = false;
+            }
+            if (ProgData.RechtenHuidigeGebruiker == 50)
+            {
+                recht.checkBoxAllePloegen.Enabled = false;
+                recht.radioButton0.Enabled = true;
+                recht.radioButton25.Enabled = true;
+                recht.radioButton50.Enabled = true;
+            }
+
             DialogResult dialog = recht.ShowDialog();
             if (dialog == DialogResult.OK)
             {
@@ -638,7 +653,7 @@ namespace Bezetting2
                 ProgData.igekozenmaand = datum.Month;
                 aantal_dagen_dezemaand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
 
-                var path = Path.GetFullPath($"{datum.Year}\\{maand}\\{ProgData.GekozenKleur}_MaandData.bin");
+                var path = Path.GetFullPath($"{datum.Year}\\{maand}\\{ProgData.GekozenKleur}_Maand_Data.bin");
                 if (File.Exists(path))
                 {
                     ProgData.MaandData.Load(ProgData.GekozenKleur);

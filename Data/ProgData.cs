@@ -18,14 +18,14 @@ namespace Bezetting2
 {
     public class ProgData
     {
-        public enum Kleur
-        {
-            Blauw,
-            Wit,
-            Geel,
-            Groen,
-            Rood
-        }
+        //public enum Kleur
+        //{
+        //    Blauw,
+        //    Wit,
+        //    Geel,
+        //    Groen,
+        //    Rood
+        //}
 
         //once you have the path you get the directory with:
         //public static string DataDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
@@ -129,7 +129,7 @@ namespace Bezetting2
                 _inlognaam.Text = value;
                 if (Main != null)
                 {
-                    Main.Text = $"Bezetting 2.0          Ingelogd :   {Huidige_Gebruiker_Naam()} -- {_inlognaam.Text}";
+                    Main.Text = $"Bezetting 2.1          Ingelogd :   {Huidige_Gebruiker_Naam()} -- {_inlognaam.Text}";
                 }
 
             }
@@ -224,33 +224,6 @@ namespace Bezetting2
                     {
                         LaadLijstWerkdagPloeg(a._nieuwkleur, 15);
                         MaakNieuweCollegaInBezettingAan(a._achternaam, a._nieuwkleur, igekozenjaar, igekozenmaand, 1);
-                        
-                        //// check of naam er in zit
-                        //try
-                        //{
-                        //    werkdag ver = ListWerkdagPloeg.First(x => (x._naam == a._achternaam));
-                        //}
-                        //catch
-                        //{
-                        //    // deze persoon bestaat niet in bezetting, dus toevoegen
-                        //    // elke dag in deze maand
-                        //    int aantal_dagen_deze_maand = DateTime.DaysInMonth(Igekozenjaar, igekozenmaand);
-                        //    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
-                        //    {
-                        //        DateTime dat = new DateTime(Igekozenjaar, igekozenmaand, i);
-                        //        werkdag dag = new werkdag
-                        //        {
-                        //            _naam = a._achternaam,
-                        //            //_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._nieuwkleur),
-                        //            _standaarddienst = GetDienst(GekozenRooster(), dat, a._nieuwkleur),
-                        //            _werkplek = "",
-                        //            _afwijkingdienst = "",
-                        //            _dagnummer = i
-                        //        };
-                        //        ListWerkdagPloeg.Add(dag);
-                        //    }
-                        //    SavePloegBezetting(a._nieuwkleur, 15);
-                        //}
                     }
                 }
                 LijstPersoneelKleur.Add(a);
@@ -266,16 +239,15 @@ namespace Bezetting2
             // haal werkgroepen op
             MaakWerkPlekkenLijst();
 
-            //// bij een ploegnamen lijst hoort een bezetting lijst
-            //if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
-            //{
-            //    MaakLegeBezetting(kleur, true); // in deze roetine wordt het ook opgeslagen
-            //}
+            //// bij een ploegnamen lijst hoort een bezetting dag lijst
+            if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
+            {
+                MaakLegeDagWerkplekBestand(kleur, true); // in deze roetine wordt het ook opgeslagen
+            }
         }
 
-        //public static void MaakLegeBezetting(string kleur, bool MetVeranderLijst)
-        // {
-            /*
+        public static void MaakLegeDagWerkplekBestand(string kleur, bool MetVeranderLijst)
+        {
             if (TestNetwerkBeschikbaar(15))
             {
                 LijstWerkdagPloeg.Clear();
@@ -317,8 +289,7 @@ namespace Bezetting2
                 MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
                 Main.Close();
             }
-            */
-        //}
+        }
 
         public static void SaveLijstWerkdagPloeg(string kleur, int try_again)
         {
@@ -499,15 +470,15 @@ namespace Bezetting2
         {
             Main.WindowUpdateViewScreen = Update_screen;
             // zet datum goed en kleur goed
-            string bewaar_kleur = GekozenKleur;
+            string bewaar_kleur = ProgData.GekozenKleur; // ???
             int bewaar_maand = igekozenmaand;
             int bewaar_jaar = igekozenjaar;
             // zet nieuwe kleur en datum
-            //if (GekozenKleur != kleur)
-                GekozenKleur = kleur;
-            //if (igekozenmaand != datum.Month)
+            
+                ProgData.GekozenKleur = kleur;
+            
                 igekozenmaand = datum.Month;
-            //if (igekozenjaar != datum.Year)
+            
                 igekozenjaar = datum.Year;
 
             // bestaat kleur en maand jaar file's ?
@@ -516,11 +487,11 @@ namespace Bezetting2
             // roep afwijking roetine aan
             RegelAfwijking(naam, dagnr, afwijking, rede, invoerdoor, kleur);
             // datum terug en kleur goed
-            //if (GekozenKleur != bewaar_kleur)
+            
                 GekozenKleur = bewaar_kleur;
-            //if (igekozenmaand != bewaar_maand)
+            
                 igekozenmaand = bewaar_maand;
-            //if (igekozenjaar != bewaar_jaar)
+            
                 igekozenjaar = bewaar_jaar;
 
             Main.WindowUpdateViewScreen = true;
@@ -824,8 +795,9 @@ namespace Bezetting2
 
             // maak namen.bin 
 
-            if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
-            {
+            //if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
+            if (!File.Exists(Ploeg_Namen_Locatie(kleur)))
+                {
                 if (TestNetwerkBeschikbaar(15))
                 {
                     _ = Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}"));
@@ -833,7 +805,7 @@ namespace Bezetting2
                     MaakPloegNamenLijst(kleur);
                     SaveLijstPersoneelKleur(kleur, 15);
 
-                    LaadLijstWerkdagPloeg(kleur, 15);
+                    //LaadLijstWerkdagPloeg(kleur, 15);
                     GekozenKleur = kleur;
                 }
                 else
@@ -1041,7 +1013,7 @@ namespace Bezetting2
             var maand = ProgData.igekozenmaand;
             var jaar = ProgData.igekozenjaar;
             
-            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_MaandData.bin");
+            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
             var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
             if (!File.Exists(path))
             {
@@ -1071,9 +1043,10 @@ namespace Bezetting2
                             MaandData.Voeg_toe(verander._datumafwijking,
                                 personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "" , "");
                             MaandData.VeranderInvoerDatum(verander._datuminvoer);
+                            MaandData.Save(kleur);
                         }
                     }
-                    MaandData.Save(kleur);
+                    File.Delete(path_oud);
                 }
                 
             }
@@ -1092,7 +1065,6 @@ namespace Bezetting2
             }
             return ret;
         }
-
         public static void CheckDubbelAchterNaam()
         {
             List<string> Lijst = new List<string>();

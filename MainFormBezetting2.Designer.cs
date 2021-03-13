@@ -883,7 +883,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainFormBezetting2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Bezetting 2.0";
+            this.Text = "Bezetting 2.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormBezetting2_FormClosing);
             this.Shown += new System.EventHandler(this.MainFormBezetting2_Shown);
             this.menuStrip.ResumeLayout(false);

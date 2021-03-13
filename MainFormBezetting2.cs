@@ -821,7 +821,7 @@ namespace Bezetting2
                         var dag_afwijking = Item.datum_.Day;
                         for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
                         {
-                            if (naam == View.Items[i].Text) // gevonden naam
+                            if (naam == View.Items[i].Text && !string.IsNullOrEmpty(naam)) // gevonden naam
                             {
                                 View.Items[i].SubItems[dag_afwijking].Text = Item.afwijking_;
                             }
@@ -1122,6 +1122,25 @@ namespace Bezetting2
 
         private void WachtOverzichtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // test of alle gebruikers op deze ploeg, zijn opgenomen in LijstWerkdagPloeg
+            ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur,15);
+            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            foreach(personeel a in ProgData.LijstPersoneelKleur)
+            {
+                var naam = a._achternaam;
+                try
+                {
+                    werkdag ver = ProgData.LijstWerkdagPloeg.First(d => (d._naam == naam));
+                }
+                catch
+                {
+                    // naam bestond niet in werkdaglijst, toevoegen
+                    ProgData.MaakNieuweCollegaInBezettingAan(naam, ProgData.GekozenKleur, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
+                }
+            }
+
+
+
             if (InstellingenProg._Wachtoverzicht2Dagen && ProgData.RechtenHuidigeGebruiker < 101)
             {
                 OverzichtWachtForm2Dagen owacht2 = new OverzichtWachtForm2Dagen();
@@ -1875,6 +1894,7 @@ namespace Bezetting2
                 _ = Directory.CreateDirectory(path);
                 labelDebug.Text = $"vul met kleuren data : {path}";
                 labelDebug.Refresh();
+                /*
                 ProgData.igekozenjaar = start.Year;
                 ProgData.igekozenmaand = start.Month;
                 ProgData.MaakPloegNamenLijst("Blauw");
@@ -1889,6 +1909,7 @@ namespace Bezetting2
                 ProgData.SaveLijstPersoneelKleur("Geel", 15);
                 ProgData.MaakPloegNamenLijst("DD");
                 ProgData.SaveLijstPersoneelKleur("DD", 15);
+                */
             }
         }
     }

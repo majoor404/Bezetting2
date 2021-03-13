@@ -238,10 +238,19 @@ namespace Bezetting2
             {
                 // voor elke persoon in lijst
                 string naam = box.Items[i].ToString();
-                werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
-                broer.Items.Add(ver._afwijkingdienst);
-                if (!string.IsNullOrEmpty(ver._afwijkingdienst))
+                
+                var nummer = ProgData.Get_Gebruiker_Nummer(naam);
+                DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
+                string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                    nummer, datum);
+                broer.Items.Add(afwijking_);
+                if (!string.IsNullOrEmpty(afwijking_))
                     afwijking = true;
+
+                //werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
+                //broer.Items.Add(ver._afwijkingdienst);
+                //if (!string.IsNullOrEmpty(ver._afwijkingdienst))
+                //    afwijking = true;
             }
             broer.Visible = afwijking;
         }
@@ -339,8 +348,6 @@ namespace Bezetting2
         {
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
-
-            //ProgData.LoadPloegBezetting(ProgData.GekozenKleur, 15);
 
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 

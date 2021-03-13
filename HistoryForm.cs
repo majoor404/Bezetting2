@@ -14,6 +14,7 @@ namespace Bezetting2
 
         private void History_Shown(object sender, EventArgs e)
         {
+            listViewHis.Items.Clear();
             ProgData.MaandData.Load(ProgData.GekozenKleur);
 
             int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);

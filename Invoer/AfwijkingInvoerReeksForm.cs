@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using static Bezetting2.DatumVijfPloegUtils;
 
 namespace Bezetting2.Invoer
 {
@@ -46,10 +47,12 @@ namespace Bezetting2.Invoer
                     {
                         labelAftellen.Text = aantal.ToString();
                         labelAftellen.Refresh();
+                        
+                        // welke dienst heeft deze kleur ?
+                        var ploeg = ProgData.Get_Gebruiker_Kleur(labelPersoneelnr.Text);
+                        var dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
 
-                        ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                        werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
-                        if (!string.IsNullOrEmpty(ver._standaarddienst)) // dus werkdag
+                        if (!string.IsNullOrEmpty(dienst)) // dus werkdag
                         {
                             ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                             Thread.Sleep(300);
@@ -64,23 +67,14 @@ namespace Bezetting2.Invoer
                         ProgData.igekozenmaand = start.Month;
                         ProgData.igekozenjaar = start.Year;
                     }
-                    //ProgData.Main.VulViewScherm();
-                    //ProgData.Main.KleurMaandButton();
                 }
                 // Aantal copyeren volgens kalender dagen
                 if (comboBox1.SelectedIndex == 1)
                 {
-                    // zet datum goed en kleur goed
-                    //string bewaar_kleur = ProgData.GekozenKleur;
-                    //int bewaar_maand = ProgData.igekozenmaand;
-                    //int bewaar_jaar = ProgData.igekozenjaar;
-
-                    // zet nieuwe kleur en datum
-                    //ProgData.GekozenKleur = kleur;
                     ProgData.igekozenmaand = start.Month;
                     ProgData.igekozenjaar = start.Year;
 
-                    ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                    //ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
                     //ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
                     // volgens kalender
                     for (int i = 0; i < AantalDagen.Value; i++)
@@ -96,14 +90,9 @@ namespace Bezetting2.Invoer
                         }
                         start = start.AddDays(1);
                     }
-
-                    // datum terug en kleur goed
-                    //ProgData.GekozenKleur = bewaar_kleur;
-
-
                 }
 
-                // ploeg invullen
+                // voor hele ploeg invullen
                 if (comboBox1.SelectedIndex == 2)
                 {
                     foreach (personeel per in ProgData.LijstPersoneelKleur)
@@ -125,23 +114,22 @@ namespace Bezetting2.Invoer
                     int aantal = (int)AantalDagen.Value;
                     bool Schrijf_GP = true;
 
-                    ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                    werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                    // welke dienst heeft deze kleur ?
+                    var ploeg = ProgData.Get_Gebruiker_Kleur(labelPersoneelnr.Text);
+                    var dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
 
                     while (aantal > 0)
                     {
                         labelAftellen.Text = aantal.ToString();
                         labelAftellen.Refresh();
-                        while (string.IsNullOrEmpty(ver._standaarddienst))
+                        while (string.IsNullOrEmpty(dienst))
                         {
                             start = start.AddDays(1);
 
                             ProgData.igekozenmaand = start.Month;
                             ProgData.igekozenjaar = start.Year;
-                            if (start.Month != maand)           // als nieuwe maand deze laden, anders gaat het fout bij "ver = ProgData.Bezetting_Ploeg_Lijst.First"
-                                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-
-                            ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                            
+                            dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
                         }
 
                         if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
@@ -150,10 +138,8 @@ namespace Bezetting2.Invoer
                         start = start.AddDays(1);
                         ProgData.igekozenmaand = start.Month;
                         ProgData.igekozenjaar = start.Year;
-                        if (start.Month != maand)
-                            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-
-                        ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                        
+                        dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
 
                         if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
@@ -161,29 +147,24 @@ namespace Bezetting2.Invoer
                         start = start.AddDays(1);
                         ProgData.igekozenmaand = start.Month;
                         ProgData.igekozenjaar = start.Year;
-                        if (start.Month != maand)
-                            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                        ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
-
-                        while (string.IsNullOrEmpty(ver._standaarddienst))
+                        dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
+                        
+                        while (string.IsNullOrEmpty(dienst))
                         {
                             start = start.AddDays(1);
                             ProgData.igekozenmaand = start.Month;
                             ProgData.igekozenjaar = start.Year;
-                            if (start.Month != maand)
-                                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                            ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                            dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
                         }
 
                         ProgData.igekozenmaand = start.Month;
                         ProgData.igekozenjaar = start.Year;
-                        if (start.Month != maand)
-                            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                        ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == labelNaam.Text) && (a._dagnummer.ToString() == start.Day.ToString()));
+                        dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
                         Schrijf_GP = !Schrijf_GP;
                     }
                     AantalDagen.Enabled = true;
                 }
+                
                 // aantal X om de Y dagen
                 if (comboBox1.SelectedIndex == 4)
                 {
@@ -199,8 +180,7 @@ namespace Bezetting2.Invoer
                         // gaat fout als ploegbezetting niet bestaat!!
                         //ProgData.CheckFiles(ProgData.GekozenKleur);
                         // nu check in loadploegbezetting gedaan
-
-                        ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                        
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
                         if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")

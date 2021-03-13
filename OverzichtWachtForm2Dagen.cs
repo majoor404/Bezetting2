@@ -231,7 +231,7 @@ namespace Bezetting2
 
             return ret;
         }
-        private void UpdateAfwijkingListBox(ListBox box, int dag)
+        private void UpdateAfwijkingListBox(ListBox box, int dag_)
         {
             Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
             broer = veld._ListAfw;
@@ -242,10 +242,29 @@ namespace Bezetting2
             {
                 // voor elke persoon in lijst
                 string naam = box.Items[i].ToString();
-                werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer == dag));
-                broer.Items.Add(ver._afwijkingdienst);
-                if (!string.IsNullOrEmpty(ver._afwijkingdienst))
-                    afwijking = true;
+
+                // als dag == day.Day dan eerste datum
+
+                if (dag_ == dat.Day)
+                {
+                    var nummer = ProgData.Get_Gebruiker_Nummer(naam);
+                    DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
+                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                        nummer, datum);
+                    broer.Items.Add(afwijking_);
+                    if (!string.IsNullOrEmpty(afwijking_))
+                        afwijking = true;
+                }
+                else
+                {
+                    var nummer = ProgData.Get_Gebruiker_Nummer(naam);
+                    DateTime datum = new DateTime(dat2.Year, dat2.Month, dat2.Day);
+                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                        nummer, datum);
+                    broer.Items.Add(afwijking_);
+                    if (!string.IsNullOrEmpty(afwijking_))
+                        afwijking = true;
+                }
             }
             broer.Visible = afwijking;
         }
