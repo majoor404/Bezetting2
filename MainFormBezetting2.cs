@@ -645,6 +645,7 @@ namespace Bezetting2
                             {
                                 naamlijst[0] = a._achternaam;
                                 ListViewItem item_naam = new ListViewItem(naamlijst);
+                                item_naam.Tag = a._persnummer;
                                 View.Items.Add(item_naam);
                             }
                         }
@@ -811,6 +812,7 @@ namespace Bezetting2
                         {
                             naamlijst[0] = a._achternaam;
                             ListViewItem item_naam = new ListViewItem(naamlijst);
+                            item_naam.Tag = a._persnummer;      // bewaar personeel nummer in tag van item
                             View.Items.Add(item_naam);
                         }
                     }
@@ -1077,10 +1079,10 @@ namespace Bezetting2
                                     switch (afwijking.ToUpper())
                                     {
                                         case "WIS":
-                                            ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
                                             break;
                                         default:
-                                            ProgData.RegelAfwijking(gekozen_naam, gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
                                             ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
                                             break;
                                     }
@@ -1221,9 +1223,13 @@ namespace Bezetting2
                     if (col == 0 && row > 3 && row < View.Items.Count - 1)
                     {
                         string naam = View.Items[row].Text;
-                        string persnummer = ProgData.Get_Gebruiker_Nummer(naam);
-                        if (!string.IsNullOrEmpty(persnummer) && mLastPos != e.Location)
-                            mTooltip.Show(persnummer, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                        //string persnummer = ProgData.Get_Gebruiker_Nummer(naam);
+                        if (View.Items[row].Tag != null)
+                        {
+                            string persnummer = View.Items[row].Tag.ToString();
+                            if (!string.IsNullOrEmpty(persnummer) && mLastPos != e.Location)
+                                mTooltip.Show(persnummer, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                        }
                     }
                     // feestdag
                     if (col > 0 && row < 5) // feestdag info ?

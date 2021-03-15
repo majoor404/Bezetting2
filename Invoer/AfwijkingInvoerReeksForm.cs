@@ -54,7 +54,7 @@ namespace Bezetting2.Invoer
 
                         if (!string.IsNullOrEmpty(dienst)) // dus werkdag
                         {
-                            ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
+                            ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelPersoneelnr.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                             Thread.Sleep(300);
                             if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                             {
@@ -81,7 +81,7 @@ namespace Bezetting2.Invoer
                     {
                         labelAftellen.Text = i.ToString();
                         labelAftellen.Refresh();
-                        ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
+                        ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelPersoneelnr.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
                         if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                         {
@@ -97,7 +97,7 @@ namespace Bezetting2.Invoer
                 {
                     foreach (personeel per in ProgData.LijstPersoneelKleur)
                     {
-                        ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, per._achternaam, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
+                        ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, per._persnummer.ToString(), start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
                         if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                         {
@@ -132,7 +132,7 @@ namespace Bezetting2.Invoer
                             dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
                         }
 
-                        if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
+                        if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelPersoneelnr.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
                         aantal--;
                         start = start.AddDays(1);
@@ -141,7 +141,7 @@ namespace Bezetting2.Invoer
                         
                         dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
 
-                        if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
+                        if (Schrijf_GP) ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelPersoneelnr.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
                         aantal--;
                         start = start.AddDays(1);
@@ -181,7 +181,7 @@ namespace Bezetting2.Invoer
                         //ProgData.CheckFiles(ProgData.GekozenKleur);
                         // nu check in loadploegbezetting gedaan
                         
-                        ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelNaam.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
+                        ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelPersoneelnr.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);
                         if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
                         {

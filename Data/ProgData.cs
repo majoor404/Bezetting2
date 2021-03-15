@@ -459,14 +459,14 @@ namespace Bezetting2
         /// <param name="afwijking">de afwijking</param>
         /// <param name="rede">de rede</param>
         /// <param name="invoerdoor">ingevoerd door</param>
-        static public void RegelAfwijking(string naam, string dagnr, string afwijking, string rede, string invoerdoor, string kleur)
+        static public void RegelAfwijking(string personeel_nr, string dagnr, string afwijking, string rede, string invoerdoor, string kleur)
         {
             MaandData.Load(kleur);
-            MaandData.Voeg_toe(dagnr,ProgData.Get_Gebruiker_Nummer(naam), afwijking, invoerdoor, rede, "", "");
+            MaandData.Voeg_toe(dagnr,personeel_nr, afwijking, invoerdoor, rede, "", "");
             MaandData.Save(kleur);
         }
 
-        static public void RegelAfwijkingOpDatumEnKleur(DateTime datum, string kleur, string naam, string dagnr, string afwijking, string rede, string invoerdoor ,bool Update_screen = true)
+        static public void RegelAfwijkingOpDatumEnKleur(DateTime datum, string kleur, string personeel_nr, string dagnr, string afwijking, string rede, string invoerdoor ,bool Update_screen = true)
         {
             Main.WindowUpdateViewScreen = Update_screen;
             // zet datum goed en kleur goed
@@ -485,7 +485,7 @@ namespace Bezetting2
             CheckFiles(kleur);
 
             // roep afwijking roetine aan
-            RegelAfwijking(naam, dagnr, afwijking, rede, invoerdoor, kleur);
+            RegelAfwijking(personeel_nr, dagnr, afwijking, rede, invoerdoor, kleur);
             // datum terug en kleur goed
             
                 GekozenKleur = bewaar_kleur;
@@ -845,7 +845,7 @@ namespace Bezetting2
                             igekozenmaand = dag_er_voor.Month;
                             igekozenjaar = dag_er_voor.Year;
 
-                            ProgData.RegelAfwijking(gekozen_naam, dag_er_voor.Day.ToString(), "VRIJ", "IVM WERKDAG MORGEN", "Rooster Regel", ProgData.GekozenKleur);
+                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), dag_er_voor.Day.ToString(), "VRIJ", "IVM WERKDAG MORGEN", "Rooster Regel", ProgData.GekozenKleur);
 
                             dag_er_voor = dag_er_voor.AddDays(1);
                             igekozenmaand = dag_er_voor.Month;

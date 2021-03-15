@@ -278,7 +278,7 @@ namespace Bezetting2
                                 {
                                     labelNieuwRoosterDatum.Text = $"{teller++}      ";
                                     labelNieuwRoosterDatum.Refresh();
-                                    ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
+                                    ProgData.RegelAfwijking(persoon_gekozen._persnummer.ToString(), i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
                                 }
                             }
 
@@ -297,7 +297,7 @@ namespace Bezetting2
                                     {
                                         labelNieuwRoosterDatum.Text = $"{teller++}      ";
                                         labelNieuwRoosterDatum.Refresh();
-                                        ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
+                                        ProgData.RegelAfwijking(persoon_gekozen._persnummer.ToString(), i.ToString(), "X", "Rooster Wissel", "Verhuizing", ProgData.GekozenKleur);
                                     }
                                 }
                             }
@@ -319,7 +319,7 @@ namespace Bezetting2
                             for (int i = 1; i < eerste_dag_weg; i++)
                             {
                                 DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, i);
-                                ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._achternaam, i.ToString(), "X", "Rooster Wissel", "Verhuizing",false);
+                                ProgData.RegelAfwijkingOpDatumEnKleur(dat, persoon_gekozen._nieuwkleur, persoon_gekozen._persnummer.ToString(), i.ToString(), "X", "Rooster Wissel", "Verhuizing",false);
                             }
 
                             LabelRoosterNieuw.Text = persoon_gekozen._nieuwkleur;
@@ -396,7 +396,7 @@ namespace Bezetting2
                     {
                         labelNieuwRoosterDatum.Text = $"{teller++}      ";
                         labelNieuwRoosterDatum.Refresh();
-                        ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
+                        ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(persoon_gekozen._achternaam), i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
                     }
 
                     // tevens 12 maanden verder de X
@@ -412,7 +412,7 @@ namespace Bezetting2
                         {
                             labelNieuwRoosterDatum.Text = $"{teller++}      ";
                             labelNieuwRoosterDatum.Refresh();
-                            ProgData.RegelAfwijking(persoon_gekozen._achternaam, i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
+                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(persoon_gekozen._achternaam), i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
                         }
                     }
 
@@ -780,7 +780,7 @@ namespace Bezetting2
                 string invoerdoor = $"Verhuis: {ver.Invoerdoor_}";
                 if (ver.Afwijking_ == "X")
                     ver.Afwijking_ = "";
-                ProgData.RegelAfwijkingOpDatumEnKleur(ver.Datumafwijking_, nieuwekleur, naam, ver.Datumafwijking_.Day.ToString(), ver.Afwijking_, ver.Rede_, invoerdoor,false);
+                ProgData.RegelAfwijkingOpDatumEnKleur(ver.Datumafwijking_, nieuwekleur, ver.Personeel_nr, ver.Datumafwijking_.Day.ToString(), ver.Afwijking_, ver.Rede_, invoerdoor,false);
             }
             labelNieuwRoosterDatum.Text = temp;
             // restore maand jaar
