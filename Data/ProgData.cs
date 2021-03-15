@@ -1009,47 +1009,51 @@ namespace Bezetting2
 
         public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
         {
-            // zet oude file's om naar nieuwe ketting
-            var maand = ProgData.igekozenmaand;
-            var jaar = ProgData.igekozenjaar;
-            
-            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
-            var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
-            if (!File.Exists(path))
-            {
-                if(File.Exists(path_oud))
+            //if (File.Exists(Path.GetFullPath($"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\{kleur}_afwijkingen.bin")))
+            //{
+
+                // zet oude file's om naar nieuwe ketting
+                var maand = ProgData.igekozenmaand;
+                var jaar = ProgData.igekozenjaar;
+
+                var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+                var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
+                if (!File.Exists(path))
                 {
-                    Laad_LijstNamen();  // nodig voor personeel nummer te krijgen hieronder
-
-                    try
+                    if (File.Exists(path_oud))
                     {
-                        using (Stream stream = File.Open(path_oud, FileMode.Open))
-                        {
-                            BinaryFormatter bin = new BinaryFormatter();
-                            ListVeranderingen.Clear();
-                            ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
-                        }
-                    }
-                    catch{}
-                    
-                    MaandData.MaandDataLijst.Clear();
-                    foreach (veranderingen verander in ProgData.ListVeranderingen)
-                    {
-                        // verander
-                        var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
+                        Laad_LijstNamen();  // nodig voor personeel nummer te krijgen hieronder
 
-                        if (!string.IsNullOrEmpty(personeel_nummer))
+                        try
                         {
-                            MaandData.Voeg_toe(verander._datumafwijking,
-                                personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "" , "");
-                            MaandData.VeranderInvoerDatum(verander._datuminvoer);
-                            MaandData.Save(kleur);
+                            using (Stream stream = File.Open(path_oud, FileMode.Open))
+                            {
+                                BinaryFormatter bin = new BinaryFormatter();
+                                ListVeranderingen.Clear();
+                                ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
+                            }
                         }
+                        catch { }
+
+                        MaandData.MaandDataLijst.Clear();
+                        foreach (veranderingen verander in ProgData.ListVeranderingen)
+                        {
+                            // verander
+                            var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
+
+                            if (!string.IsNullOrEmpty(personeel_nummer))
+                            {
+                                MaandData.Voeg_toe(verander._datumafwijking,
+                                    personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
+                                MaandData.VeranderInvoerDatum(verander._datuminvoer);
+                                MaandData.Save(kleur);
+                            }
+                        }
+                        File.Delete(path_oud);
                     }
-                    File.Delete(path_oud);
+
                 }
-                
-            }
+            //}
         }
 
         public static string GetLaatsteAfwijkingPersoon(string loopt_op_kleur, string persnr , DateTime datum)

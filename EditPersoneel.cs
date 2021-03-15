@@ -84,7 +84,9 @@ namespace Bezetting2
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
                 // direct edit ploeg rooster als admin
-                MessageBox.Show("Als Admin nu direct rooster wissel mogelijk\nTevens Naam wijzigen als er bv zelfde achternamen bestaan.");
+                MessageBox.Show("Als Admin nu direct rooster wissel mogelijk\n" +
+                    "Tevens Naam wijzigen als er bv zelfde achternamen bestaan.\n" +
+                    "Als Achternaam zelfde, zet er een spatie achter bij 1 van de 2.");
                 comboBoxKleur.Enabled = true;
                 textBoxAchterNaam.Enabled = true;
             }

@@ -36,6 +36,7 @@ namespace Bezetting2
         private readonly Color Werkplek_ = Color.LightGray;
         private readonly Color MinimaalPersonen_ = Color.LightPink;
         private readonly Color HoverNaam_ = Color.LightGreen;
+        private Color Kleur_Standaard_Font = Color.Black;
         private int aantal_regels_gekleurd = 0;
 
         public List<ClassTelPlekGewerkt> ListClassTelPlekGewerkt = new List<ClassTelPlekGewerkt>();
@@ -132,6 +133,8 @@ namespace Bezetting2
 
             if (!Directory.Exists("Backup"))
                 Directory.CreateDirectory("Backup");
+
+            Kleur_Standaard_Font = buttonRefresh.ForeColor;
         }
 
         // start programma
@@ -316,6 +319,7 @@ namespace Bezetting2
             afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 0;
             afwijkingTovRoosterPloegToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
             maandenOverzichtNaarExcelToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
+            jaarOverzichtNaarExcelToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
         }
 
         private void UitloggenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -337,7 +341,7 @@ namespace Bezetting2
             {
                 View.Columns.Clear();
                 View.Items.Clear();
-                
+
                 ProgData.Zetom_naar_versie21(ProgData.GekozenKleur);
 
                 int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
@@ -379,7 +383,7 @@ namespace Bezetting2
                     if (dag[i] == "W")
                     {
                         weeknr[i - 1] = "WK";
-                        int weekNum = cul.Calendar.GetWeekOfYear(datum, CalendarWeekRule.FirstDay, DayOfWeek.Sunday);
+                        int weekNum = cul.Calendar.GetWeekOfYear(datum, CalendarWeekRule.FirstFullWeek, DayOfWeek.Sunday);
                         weeknr[i] = weekNum.ToString();
                     }
                     lijn_regel[i] = "";
@@ -476,8 +480,7 @@ namespace Bezetting2
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
             WindowUpdateViewScreen = true;
-            //ProgData.ReloadSpeed1 = "";
-            //ProgData.ReloadSpeed2 = "";
+            buttonRefresh.ForeColor = Color.Black;
             VulViewScherm();
         }
 
@@ -650,17 +653,16 @@ namespace Bezetting2
                     ProgData.MaandData.Load(ProgData.GekozenKleur);
                     foreach (MaandDataClass.Item Item in ProgData.MaandData.MaandDataLijst)
                     {
-                        
-                            var naam = ProgData.Get_Gebruiker_Naam(Item.personeel_nr_);
-                            var dag_afwijking = Item.datum_.Day;
-                            for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
+                        var naam = ProgData.Get_Gebruiker_Naam(Item.personeel_nr_).Trim();
+                        var dag_afwijking = Item.datum_.Day;
+                        for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
+                        {
+                            if (naam == View.Items[i].Text.Trim()) // gevonden naam
                             {
-                                if (naam == View.Items[i].Text) // gevonden naam
-                                {
-                                    View.Items[i].SubItems[dag_afwijking].Text = Item.afwijking_;
-                                }
+                                View.Items[i].SubItems[dag_afwijking].Text = Item.afwijking_;
                             }
-                        
+                        }
+
                     }
 
                     //ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
@@ -815,17 +817,18 @@ namespace Bezetting2
                 }
 
                 ProgData.MaandData.Load(ProgData.GekozenKleur);
-                foreach(MaandDataClass.Item Item in ProgData.MaandData.MaandDataLijst)
+                foreach (MaandDataClass.Item Item in ProgData.MaandData.MaandDataLijst)
                 {
-                        var naam = ProgData.Get_Gebruiker_Naam(Item.personeel_nr_);
-                        var dag_afwijking = Item.datum_.Day;
-                        for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
+                    var naam = ProgData.Get_Gebruiker_Naam(Item.personeel_nr_).Trim();
+                    var dag_afwijking = Item.datum_.Day;
+                    for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
+                    {
+                        if (naam == View.Items[i].Text.Trim()) // gevonden naam
                         {
-                            if (naam == View.Items[i].Text && !string.IsNullOrEmpty(naam)) // gevonden naam
-                            {
-                                View.Items[i].SubItems[dag_afwijking].Text = Item.afwijking_;
-                            }
+                            View.Items[i].SubItems[dag_afwijking].Text = Item.afwijking_;
                         }
+                    }
+
                 }
                 //ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
 
@@ -903,13 +906,13 @@ namespace Bezetting2
                             try
                             {
                                 DateTime datum = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, ProgData.ListLooptExtra[i]._datum.Day);
-                                string AfWijkingPersoon = ProgData.GetLaatsteAfwijkingPersoon(loopt_op_kleur, persnr , datum);
+                                string AfWijkingPersoon = ProgData.GetLaatsteAfwijkingPersoon(loopt_op_kleur, persnr, datum);
 
-                                
+
                                 string eerste_2 = AfWijkingPersoon.Length >= 2 ? AfWijkingPersoon.Substring(0, 2) : AfWijkingPersoon;
                                 string dienst = AfWijkingPersoon.Length >= 4 ? AfWijkingPersoon.Substring(3, 1) : AfWijkingPersoon;
-                                
-                                
+
+
                                 var dienst_rooster = GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
 
                                 if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD"))
@@ -962,7 +965,7 @@ namespace Bezetting2
         private void CheckEnDealVerhuizing()
         {
             ProgData.Laad_LijstNamen();            // lees alle mensen in sectie , personeel_lijst
-                                                    // check of er vorige maand mensen zijn verhuisd
+                                                   // check of er vorige maand mensen zijn verhuisd
 
             IEnumerable<personeel> persoon = from a in ProgData.LijstPersoneel
                                              where (!string.IsNullOrEmpty(a._nieuwkleur))
@@ -1123,9 +1126,9 @@ namespace Bezetting2
         private void WachtOverzichtToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // test of alle gebruikers op deze ploeg, zijn opgenomen in LijstWerkdagPloeg
-            ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur,15);
+            ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
             ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-            foreach(personeel a in ProgData.LijstPersoneelKleur)
+            foreach (personeel a in ProgData.LijstPersoneelKleur)
             {
                 var naam = a._achternaam;
                 try
@@ -1254,8 +1257,9 @@ namespace Bezetting2
                 {
                     try
                     {
+                        int time = (int)HoverTime.Value * 1000;
                         int row1 = info.Item.Index;
-                        mTooltip.Show(View.Items[row1].Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                        mTooltip.Show(View.Items[row1].Text, info.Item.ListView, e.X + 15, e.Y + 15, time);
                     }
                     catch { }
                 }
@@ -1391,6 +1395,15 @@ namespace Bezetting2
                     labelDebug.Text = "Dagelijkse Backup gelukt";
                 }
             }
+
+            if (ProgData.MaandData.TestNieuweFile(ProgData.GekozenKleur))
+            {
+                buttonRefresh.ForeColor = Color.Red;
+            }
+            else
+            {
+                buttonRefresh.ForeColor = Kleur_Standaard_Font;
+            }
         }
 
         private void RuilOverwerkToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1520,7 +1533,7 @@ namespace Bezetting2
 
                 //inladen_vanaf_datum = inladen_vanaf_datum.AddMonths(-3);
                 ProgData.Laad_LijstNamen();            // lees alle mensen in sectie , personeel_lijst
-                                                        // check of er vorige maand mensen zijn verhuisd
+                                                       // check of er vorige maand mensen zijn verhuisd
 
                 if (reader.Read() == true)
                 {
@@ -1612,7 +1625,7 @@ namespace Bezetting2
 
                                     labelDebug.Text = $"{teller} {naam} {afwijking}";
                                     labelDebug.Refresh();
-                                    ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam,false);
+                                    ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam, false);
 
                                     // toevoegen extra ruil of verschoven dienst
                                     string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
@@ -1911,6 +1924,11 @@ namespace Bezetting2
                 ProgData.SaveLijstPersoneelKleur("DD", 15);
                 */
             }
+        }
+
+        private void checkBoxHoverNaam_CheckedChanged(object sender, EventArgs e)
+        {
+            HoverTime.Visible = checkBoxHoverNaam.Checked;
         }
     }
 }

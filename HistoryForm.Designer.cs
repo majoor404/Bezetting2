@@ -120,6 +120,7 @@
             this.Name = "HistoryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "History";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HistoryForm_FormClosed);
             this.Shown += new System.EventHandler(this.History_Shown);
             this.ResumeLayout(false);
 

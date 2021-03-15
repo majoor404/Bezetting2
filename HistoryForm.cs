@@ -12,6 +12,8 @@ namespace Bezetting2
             InitializeComponent();
         }
 
+        bool is_in_beeld = false;
+
         private void History_Shown(object sender, EventArgs e)
         {
             listViewHis.Items.Clear();
@@ -25,12 +27,13 @@ namespace Bezetting2
             {
                 comboBoxDag.Items.Add(i.ToString());
             }
+            is_in_beeld = true;
             buttonFilter_Click(this, null);
         }
 
         private void buttonFilter_Click(object sender, EventArgs e)
         {
-            ProgData.MaandData.Load(ProgData.GekozenKleur);
+            //ProgData.MaandData.Load(ProgData.GekozenKleur);
 
             listViewHis.Items.Clear();
             string[] regel = new string[6];
@@ -43,7 +46,7 @@ namespace Bezetting2
                     regel[1] = a.afwijking_;
                     regel[2] = a.datum_.ToShortDateString();
                     regel[4] = a.ingevoerd_op_.ToShortDateString(); ;
-                    regel[3] = a.invoerdoor_;
+                    regel[3] = ProgData.Get_Gebruiker_Naam(a.invoerdoor_);
                     regel[0] = ProgData.Get_Gebruiker_Naam(a.personeel_nr_);
                     regel[5] = a.rede_;
                     ListViewItem listItem = new ListViewItem(regel);
@@ -54,7 +57,13 @@ namespace Bezetting2
 
         private void comboBoxDag_TextChanged(object sender, EventArgs e)
         {
-            buttonFilter_Click(this, null);
+            if(is_in_beeld) 
+                buttonFilter_Click(this, null);
+        }
+
+        private void HistoryForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            is_in_beeld = false;
         }
     }
 }
