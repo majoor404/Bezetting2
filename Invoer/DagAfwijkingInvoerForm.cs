@@ -51,7 +51,7 @@ namespace Bezetting2
             if (!string.IsNullOrEmpty(textBoxAfwijking.Text))
             {
                 textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
-                ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
+                ProgData.RegelAfwijking(labelPersoneelnr.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
                 ProgData.NachtErVoorVrij(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text);
                 //string eerste_2 = "";
 
@@ -77,7 +77,7 @@ namespace Bezetting2
 
         private void ButtonCancelInvoer_Click(object sender, EventArgs e)
         {
-            ProgData.RegelAfwijking(labelNaam.Text, labelDatum.Text, "", "Verwijderd", this.Text, ProgData.GekozenKleur);
+            ProgData.RegelAfwijking(labelPersoneelnr.Text, labelDatum.Text, "", "Verwijderd", this.Text, ProgData.GekozenKleur);
         }
 
         private void TextBoxAfwijking_TextChanged(object sender, EventArgs e)

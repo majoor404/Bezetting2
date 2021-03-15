@@ -52,6 +52,7 @@
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afwijkingTovRoosterPloegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maandenOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.jaarOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,10 +104,12 @@
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
+            this.HoverTime = new System.Windows.Forms.NumericUpDown();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HoverTime)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -191,7 +194,8 @@
             this.namenAdressenEMailToolStripMenuItem,
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem,
             this.afwijkingTovRoosterPloegToolStripMenuItem,
-            this.maandenOverzichtNaarExcelToolStripMenuItem});
+            this.maandenOverzichtNaarExcelToolStripMenuItem,
+            this.jaarOverzichtNaarExcelToolStripMenuItem});
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
             this.excelToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
             this.excelToolStripMenuItem.Text = "Excel";
@@ -290,6 +294,14 @@
             this.maandenOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
             this.maandenOverzichtNaarExcelToolStripMenuItem.Text = "2 Maanden overzicht naar Excel";
             this.maandenOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.MaandenOverzichtNaarExcelToolStripMenuItem_Click);
+            // 
+            // jaarOverzichtNaarExcelToolStripMenuItem
+            // 
+            this.jaarOverzichtNaarExcelToolStripMenuItem.Enabled = false;
+            this.jaarOverzichtNaarExcelToolStripMenuItem.Name = "jaarOverzichtNaarExcelToolStripMenuItem";
+            this.jaarOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.jaarOverzichtNaarExcelToolStripMenuItem.Text = "Jaar overzicht naar Excel";
+            this.jaarOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.jaarOverzichtNaarExcelToolStripMenuItem_Click);
             // 
             // beheerToolStripMenuItem
             // 
@@ -648,7 +660,8 @@
             this.buttonRefresh.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.buttonRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRefresh.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRefresh.Location = new System.Drawing.Point(13, 564);
+            this.buttonRefresh.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.buttonRefresh.Location = new System.Drawing.Point(13, 566);
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(103, 25);
             this.buttonRefresh.TabIndex = 18;
@@ -687,7 +700,7 @@
             this.buttonNu.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.buttonNu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonNu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonNu.Location = new System.Drawing.Point(14, 594);
+            this.buttonNu.Location = new System.Drawing.Point(14, 598);
             this.buttonNu.Name = "buttonNu";
             this.buttonNu.Size = new System.Drawing.Size(102, 25);
             this.buttonNu.TabIndex = 21;
@@ -830,12 +843,31 @@
             // checkBoxHoverNaam
             // 
             this.checkBoxHoverNaam.AutoSize = true;
-            this.checkBoxHoverNaam.Location = new System.Drawing.Point(14, 648);
+            this.checkBoxHoverNaam.Location = new System.Drawing.Point(14, 632);
             this.checkBoxHoverNaam.Name = "checkBoxHoverNaam";
-            this.checkBoxHoverNaam.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxHoverNaam.Size = new System.Drawing.Size(55, 17);
             this.checkBoxHoverNaam.TabIndex = 31;
-            this.checkBoxHoverNaam.Text = "Hover Naam";
+            this.checkBoxHoverNaam.Text = "Hover";
             this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
+            this.checkBoxHoverNaam.CheckedChanged += new System.EventHandler(this.checkBoxHoverNaam_CheckedChanged);
+            // 
+            // HoverTime
+            // 
+            this.HoverTime.Location = new System.Drawing.Point(80, 631);
+            this.HoverTime.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.HoverTime.Name = "HoverTime";
+            this.HoverTime.Size = new System.Drawing.Size(35, 20);
+            this.HoverTime.TabIndex = 32;
+            this.HoverTime.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.HoverTime.Visible = false;
             // 
             // MainFormBezetting2
             // 
@@ -844,6 +876,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.HoverTime);
             this.Controls.Add(this.checkBoxHoverNaam);
             this.Controls.Add(this.labelDebug);
             this.Controls.Add(this.panel8);
@@ -892,6 +925,7 @@
             this.StatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HoverTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -972,6 +1006,8 @@
         private System.Windows.Forms.ToolStripMenuItem editPopupMenuToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem maandenOverzichtNaarExcelToolStripMenuItem;
         public System.Windows.Forms.Timer timerKill;
+        private System.Windows.Forms.ToolStripMenuItem jaarOverzichtNaarExcelToolStripMenuItem;
+        private System.Windows.Forms.NumericUpDown HoverTime;
     }
 }
 

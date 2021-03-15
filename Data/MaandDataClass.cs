@@ -10,6 +10,7 @@ namespace Bezetting2.Data
     {
         // als file zelfde datum heeft als deze, hoef ik niet te laden.
         private DateTime laaste_versie;
+        private DateTime laaste_versie_van_huidige_kleur;
         private string laaste_path;
 
         [Serializable]
@@ -67,11 +68,11 @@ namespace Bezetting2.Data
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
             ProgData.Zetom_naar_versie21(kleur);
-
+            
             if (File.Exists(path))
             {
                 var veranderd = File.GetLastWriteTime(path);
-                if (veranderd != laaste_versie && path != laaste_path)
+                if (veranderd != laaste_versie || path != laaste_path)
                 {
                     // laden
                     MaandDataLijst.Clear();
@@ -84,7 +85,10 @@ namespace Bezetting2.Data
                         }
                     }
                     catch { }
-
+                    
+                    if(kleur == ProgData.GekozenKleur)
+                        laaste_versie_van_huidige_kleur = veranderd;
+                    
                     laaste_versie = veranderd;
                     laaste_path = path;
                 }
@@ -123,6 +127,21 @@ namespace Bezetting2.Data
                 {
                     //
                 }
+        }
+
+        public bool TestNieuweFile(string kleur)
+        {
+            var path = Path.GetFullPath($"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\{kleur}_Maand_Data.bin");
+
+            if (File.Exists(path))
+            {
+                var veranderd = File.GetLastWriteTime(path);
+                if (veranderd != laaste_versie_van_huidige_kleur)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
