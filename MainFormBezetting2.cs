@@ -338,6 +338,20 @@ namespace Bezetting2
         {
             ProgData.CaptureMainScreen();
             ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
+
+            if(comboBoxKleurKeuze.Text == "Blauw")
+                panelColor.BackColor = Color.Blue;
+            if (comboBoxKleurKeuze.Text == "Rood")
+                panelColor.BackColor = Color.Red;
+            if (comboBoxKleurKeuze.Text == "Geel")
+                panelColor.BackColor = Color.Yellow;
+            if (comboBoxKleurKeuze.Text == "Groen")
+                panelColor.BackColor = Color.Green;
+            if (comboBoxKleurKeuze.Text == "Wit")
+                panelColor.BackColor = Color.Gray;
+            if (comboBoxKleurKeuze.Text == "DD")
+                panelColor.BackColor = Color.White;
+
             VulViewScherm();
         }
 
@@ -1951,6 +1965,16 @@ namespace Bezetting2
         {
             if (e.KeyCode == Keys.F5)
                 ButtonRefresh_Click(this, null);
+        }
+
+        private void comboBoxKleurKeuze_DropDown(object sender, EventArgs e)
+        {
+            comboBoxKleurKeuze.ForeColor = Color.Black;
+        }
+
+        private void comboBoxKleurKeuze_DropDownClosed(object sender, EventArgs e)
+        {
+            comboBoxKleurKeuze.ForeColor = Color.Red;
         }
     }
 }

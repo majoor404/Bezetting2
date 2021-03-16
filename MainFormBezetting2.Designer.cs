@@ -105,6 +105,7 @@
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
             this.HoverTime = new System.Windows.Forms.NumericUpDown();
+            this.panelColor = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -449,7 +450,7 @@
             "Geel",
             "Groen",
             "DD"});
-            this.comboBoxKleurKeuze.Location = new System.Drawing.Point(12, 45);
+            this.comboBoxKleurKeuze.Location = new System.Drawing.Point(12, 47);
             this.comboBoxKleurKeuze.Name = "comboBoxKleurKeuze";
             this.comboBoxKleurKeuze.Size = new System.Drawing.Size(103, 24);
             this.comboBoxKleurKeuze.TabIndex = 2;
@@ -869,6 +870,14 @@
             0});
             this.HoverTime.Visible = false;
             // 
+            // panelColor
+            // 
+            this.panelColor.BackColor = System.Drawing.Color.RoyalBlue;
+            this.panelColor.Location = new System.Drawing.Point(10, 45);
+            this.panelColor.Name = "panelColor";
+            this.panelColor.Size = new System.Drawing.Size(107, 28);
+            this.panelColor.TabIndex = 33;
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -876,6 +885,8 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.comboBoxKleurKeuze);
+            this.Controls.Add(this.panelColor);
             this.Controls.Add(this.HoverTime);
             this.Controls.Add(this.checkBoxHoverNaam);
             this.Controls.Add(this.labelDebug);
@@ -908,7 +919,6 @@
             this.Controls.Add(this.buttonMaart);
             this.Controls.Add(this.buttonFebruari);
             this.Controls.Add(this.buttonJan);
-            this.Controls.Add(this.comboBoxKleurKeuze);
             this.Controls.Add(this.StatusStrip);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.View);
@@ -1010,6 +1020,7 @@
         public System.Windows.Forms.Timer timerKill;
         private System.Windows.Forms.ToolStripMenuItem jaarOverzichtNaarExcelToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown HoverTime;
+        private System.Windows.Forms.Panel panelColor;
     }
 }
 
