@@ -122,6 +122,12 @@
     <Compile Include="Excel Menu Items\Excel.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help.Designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
+    </Compile>
     <Compile Include="InlogGebeuren\RechtenInstellenForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -227,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EditPersoneel.resx">
       <DependentUpon>EditPersoneel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InlogGebeuren\RechtenInstellenForm.resx">
       <DependentUpon>RechtenInstellenForm.cs</DependentUpon>

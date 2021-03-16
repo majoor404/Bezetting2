@@ -106,6 +106,7 @@
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
             this.HoverTime = new System.Windows.Forms.NumericUpDown();
             this.panelColor = new System.Windows.Forms.Panel();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -122,6 +123,7 @@
             this.snipperDagAanvraagToolStripMenuItem,
             this.excelToolStripMenuItem,
             this.beheerToolStripMenuItem,
+            this.helpToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -878,6 +880,13 @@
             this.panelColor.Size = new System.Drawing.Size(107, 28);
             this.panelColor.TabIndex = 33;
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1021,6 +1030,7 @@
         private System.Windows.Forms.ToolStripMenuItem jaarOverzichtNaarExcelToolStripMenuItem;
         private System.Windows.Forms.NumericUpDown HoverTime;
         private System.Windows.Forms.Panel panelColor;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
     }
 }
 

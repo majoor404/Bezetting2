@@ -2066,5 +2066,11 @@ namespace Bezetting2
         {
             
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help he = new Help();
+            he.ShowDialog();
+        }
     }
 }
