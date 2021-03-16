@@ -501,6 +501,7 @@ namespace Bezetting2
         {
             WindowUpdateViewScreen = true;
             buttonRefresh.ForeColor = Color.Black;
+            UpdateExtraDienstLijst(ProgData.GekozenKleur);
             VulViewScherm();
         }
 
@@ -686,8 +687,6 @@ namespace Bezetting2
 
                     }
 
-                    //ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
-
                     // aantal bezetting regel
                     int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
                     string[] maxlijst = new string[aantal_dagen_deze_maand + 1];
@@ -852,7 +851,6 @@ namespace Bezetting2
                     }
 
                 }
-                //ProgData.LoadVeranderingenPloeg(ProgData.GekozenKleur, 15);
 
                 // aantal bezetting regel
                 int aantal_dagen_deze_maand = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
@@ -896,6 +894,7 @@ namespace Bezetting2
 
                 aantal_regels_gekleurd = View.Items.Count;
 
+                
                 // extra diensten
                 DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
                 string dir = ProgData.GetDirectoryBezettingMaand(dat);
@@ -1967,14 +1966,105 @@ namespace Bezetting2
                 ButtonRefresh_Click(this, null);
         }
 
-        private void comboBoxKleurKeuze_DropDown(object sender, EventArgs e)
+        private void UpdateExtraDienstLijst(string kleur)
         {
-            comboBoxKleurKeuze.ForeColor = Color.Black;
+            // maak nieuwe extra diensten lijst
+
+            DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
+            string dir = ProgData.GetDirectoryBezettingMaand(dat);
+
+            if (kleur == "Blauw")
+            {
+                ProgData.ListLooptExtra.Clear();
+                ProgData.SaveLooptExtraLijst(dir, kleur);
+                CheckExtraLopen("Rood",kleur);
+                CheckExtraLopen("Geel", kleur);
+                CheckExtraLopen("Wit", kleur);
+                CheckExtraLopen("Groen", kleur);
+                CheckExtraLopen("DD", kleur);
+            }
+            if (kleur == "Geel")
+            {
+                ProgData.ListLooptExtra.Clear();
+                ProgData.SaveLooptExtraLijst(dir, kleur);
+                CheckExtraLopen("Rood", kleur);
+                CheckExtraLopen("Blauw", kleur);
+                CheckExtraLopen("Wit", kleur);
+                CheckExtraLopen("Groen", kleur);
+                CheckExtraLopen("DD", kleur);
+            }
+            if (kleur == "Groen")
+            {
+                ProgData.ListLooptExtra.Clear();
+                ProgData.SaveLooptExtraLijst(dir, kleur);
+                CheckExtraLopen("Rood", kleur);
+                CheckExtraLopen("Geel", kleur);
+                CheckExtraLopen("Wit", kleur);
+                CheckExtraLopen("Blauw", kleur);
+                CheckExtraLopen("DD", kleur);
+            }
+            if (kleur == "Wit")
+            {
+                ProgData.ListLooptExtra.Clear();
+                ProgData.SaveLooptExtraLijst(dir, kleur);
+                CheckExtraLopen("Rood", kleur);
+                CheckExtraLopen("Geel", kleur);
+                CheckExtraLopen("Blauw", kleur);
+                CheckExtraLopen("Groen", kleur);
+                CheckExtraLopen("DD", kleur);
+            }
+            if (kleur == "Rood")
+            {
+                ProgData.ListLooptExtra.Clear();
+                ProgData.SaveLooptExtraLijst(dir, kleur);
+                CheckExtraLopen("Blauw", kleur);
+                CheckExtraLopen("Geel", kleur);
+                CheckExtraLopen("Wit", kleur);
+                CheckExtraLopen("Groen", kleur);
+                CheckExtraLopen("DD", kleur);
+            }
+            if (kleur == "DD")
+            {
+                ProgData.ListLooptExtra.Clear();
+                ProgData.SaveLooptExtraLijst(dir, kleur);
+                CheckExtraLopen("Rood", kleur);
+                CheckExtraLopen("Geel", kleur);
+                CheckExtraLopen("Wit", kleur);
+                CheckExtraLopen("Groen", kleur);
+                CheckExtraLopen("Blauw", kleur);
+            }
         }
 
-        private void comboBoxKleurKeuze_DropDownClosed(object sender, EventArgs e)
+        private void CheckExtraLopen(string kleur,string Gaat_lopen_op_kleur)
         {
-            comboBoxKleurKeuze.ForeColor = Color.Red;
+            ProgData.LaadLijstPersoneelKleur(kleur, 15);
+            DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
+            int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
+
+            foreach (personeel  pers in ProgData.LijstPersoneelKleur)
+            {
+                dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
+                for (int i = 0; i < aantal_dagen - 1; i++)
+                {
+                    string afwijking = ProgData.GetLaatsteAfwijkingPersoon(kleur, pers._persnummer.ToString(), dat);
+
+                    string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
+
+                    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
+                    {
+                        var dienst = afwijking.Substring(3, 1);
+                        var gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), dat, dienst);
+                        if(gaat_lopen_op_kleur == Gaat_lopen_op_kleur)
+                            ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
+                    }
+                    dat = dat.AddDays(1);
+                }
+            }
+        }
+
+        private void updateExtraRuilVerschovenDienstenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

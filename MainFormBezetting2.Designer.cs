@@ -753,7 +753,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 676);
+            this.label1.Location = new System.Drawing.Point(12, 720);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 24;
@@ -763,7 +763,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.Red;
-            this.panel5.Location = new System.Drawing.Point(15, 692);
+            this.panel5.Location = new System.Drawing.Point(15, 736);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(100, 6);
             this.panel5.TabIndex = 25;
@@ -772,7 +772,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 705);
+            this.label2.Location = new System.Drawing.Point(12, 749);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 26;
@@ -782,7 +782,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.Color.Green;
-            this.panel6.Location = new System.Drawing.Point(15, 721);
+            this.panel6.Location = new System.Drawing.Point(15, 765);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(100, 6);
             this.panel6.TabIndex = 24;
@@ -791,7 +791,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 735);
+            this.label3.Location = new System.Drawing.Point(12, 779);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 27;
@@ -801,7 +801,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.Fuchsia;
-            this.panel7.Location = new System.Drawing.Point(16, 750);
+            this.panel7.Location = new System.Drawing.Point(16, 794);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(100, 6);
             this.panel7.TabIndex = 24;
@@ -810,7 +810,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 763);
+            this.label4.Location = new System.Drawing.Point(12, 807);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 28;
@@ -820,7 +820,7 @@
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.Blue;
-            this.panel8.Location = new System.Drawing.Point(15, 779);
+            this.panel8.Location = new System.Drawing.Point(15, 823);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(100, 6);
             this.panel8.TabIndex = 24;
@@ -844,7 +844,7 @@
             // checkBoxHoverNaam
             // 
             this.checkBoxHoverNaam.AutoSize = true;
-            this.checkBoxHoverNaam.Location = new System.Drawing.Point(14, 632);
+            this.checkBoxHoverNaam.Location = new System.Drawing.Point(14, 676);
             this.checkBoxHoverNaam.Name = "checkBoxHoverNaam";
             this.checkBoxHoverNaam.Size = new System.Drawing.Size(55, 17);
             this.checkBoxHoverNaam.TabIndex = 31;
@@ -854,7 +854,7 @@
             // 
             // HoverTime
             // 
-            this.HoverTime.Location = new System.Drawing.Point(80, 631);
+            this.HoverTime.Location = new System.Drawing.Point(80, 675);
             this.HoverTime.Maximum = new decimal(new int[] {
             5,
             0,
