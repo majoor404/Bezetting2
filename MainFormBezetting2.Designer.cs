@@ -665,7 +665,7 @@
             this.buttonRefresh.Name = "buttonRefresh";
             this.buttonRefresh.Size = new System.Drawing.Size(103, 25);
             this.buttonRefresh.TabIndex = 18;
-            this.buttonRefresh.Text = "Refresh";
+            this.buttonRefresh.Text = "Refresh (F5)";
             this.buttonRefresh.UseVisualStyleBackColor = false;
             this.buttonRefresh.Click += new System.EventHandler(this.ButtonRefresh_Click);
             // 
@@ -913,6 +913,7 @@
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.View);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainFormBezetting2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
