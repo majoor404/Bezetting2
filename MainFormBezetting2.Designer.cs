@@ -919,6 +919,7 @@
             this.Text = "Bezetting 2.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainFormBezetting2_FormClosing);
             this.Shown += new System.EventHandler(this.MainFormBezetting2_Shown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainFormBezetting2_KeyDown);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.StatusStrip.ResumeLayout(false);

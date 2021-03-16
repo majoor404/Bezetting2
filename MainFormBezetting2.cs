@@ -1631,7 +1631,11 @@ namespace Bezetting2
 
                                     labelDebug.Text = $"{teller} {naam} {afwijking}";
                                     labelDebug.Refresh();
-                                    ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam, false);
+                                    //ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam, false);
+
+                                    //int personeelNr = int.Parse(meta[2].ToString());
+                                    ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, meta[2].ToString(), datum[0], afwijking, rede, "Import " + invoer_naam, false);
+                                    //ProgData.RegelAfwijkingOpDatumEnKleurEnPersoneelNummer(datum_afwijking, kleur, personeelNr, datum[0], afwijking, rede, "Import " + invoer_naam, false);
 
                                     // toevoegen extra ruil of verschoven dienst
                                     string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
@@ -1935,6 +1939,12 @@ namespace Bezetting2
         private void checkBoxHoverNaam_CheckedChanged(object sender, EventArgs e)
         {
             HoverTime.Visible = checkBoxHoverNaam.Checked;
+        }
+
+        private void MainFormBezetting2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+                ButtonRefresh_Click(this, null);
         }
     }
 }
