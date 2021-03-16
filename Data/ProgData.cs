@@ -3,6 +3,7 @@
 using Bezetting2.Data;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -882,6 +883,7 @@ namespace Bezetting2
             if (test == 0)
             {
                 MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
+                Process.GetCurrentProcess().Kill();
                 return false;
             }
 
@@ -901,6 +903,7 @@ namespace Bezetting2
                 TestNetwerkBeschikbaar(test--);
             }
             MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
+            Process.GetCurrentProcess().Kill();
             return false;
         }
 

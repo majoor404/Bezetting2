@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Bezetting2.Data
@@ -95,16 +97,17 @@ namespace Bezetting2.Data
             }
             else
             {
-                if(ProgData.TestNetwerkBeschikbaar(15))
+                if (TestZekerWetenNietAanwezig(5,kleur))
                 {
-                    // save lege
-                    
-                    MaandDataLijst.Clear();     // anders zou dit data kunnen zijn van andere kleur
-                    Save(kleur);
+                    Load(kleur);
                 }
                 else
                 {
-                    MessageBox.Show($"Netwerk problemen!");
+                    // save lege
+                    MessageBox.Show($"{path}\n" +
+                        $"niet gevonden, maak nieuwe aan!");
+                    MaandDataLijst.Clear();     // anders zou dit data kunnen zijn van andere kleur
+                    Save(kleur);
                 }
                   
             }
@@ -126,7 +129,7 @@ namespace Bezetting2.Data
                 }
                 catch
                 {
-                    //
+                MessageBox.Show($"Kon bestand \n{path}\nNiet saven?");
                 }
         }
 
@@ -141,6 +144,30 @@ namespace Bezetting2.Data
                 {
                     return true;
                 }
+            }
+            return false;
+        }
+
+        private bool TestZekerWetenNietAanwezig(int aantal,string kleur)
+        {
+            var maand = ProgData.igekozenmaand;
+            var jaar = ProgData.igekozenjaar;
+
+            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+            
+            for (int i = 0; i < aantal; i++)
+            {
+                if (ProgData.TestNetwerkBeschikbaar(15))
+                {
+                    if(File.Exists(path))
+                        return true;
+                }
+                else
+                {
+                    MessageBox.Show("Netwerk problemen, Exit!");
+                    Process.GetCurrentProcess().Kill();
+                }
+                Thread.Sleep(1000);
             }
             return false;
         }
