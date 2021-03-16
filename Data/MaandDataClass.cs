@@ -98,6 +98,7 @@ namespace Bezetting2.Data
                 if(ProgData.TestNetwerkBeschikbaar(15))
                 {
                     // save lege
+                    
                     MaandDataLijst.Clear();     // anders zou dit data kunnen zijn van andere kleur
                     Save(kleur);
                 }

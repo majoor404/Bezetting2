@@ -1,6 +1,4 @@
-﻿#define ketting
-
-using Bezetting2.Data;
+﻿using Bezetting2.Data;
 using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
@@ -15,6 +13,14 @@ using System.Windows.Forms;
 using static Bezetting2.Data.MaandDataClass;
 using static Bezetting2.DatumVijfPloegUtils;
 
+/*/===================================================================================================
+
+Niet op 64 bits compeleren, daar office implatatie dan niet werkt.
+
+kleur_Maand_Data.bin heeft de maand data, dat is de MaandDataLijst.
+Deze bestaat uit Item met de verander data van maand overzicht.
+
+//=================================================================================================*/
 
 namespace Bezetting2
 {
@@ -1206,7 +1212,7 @@ namespace Bezetting2
                                 }
                             }
                             if (!string.IsNullOrEmpty(toolStripStatusLabelInfo.Text) && mLastPos != e.Location)
-                                mTooltip.Show(namen, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                                mTooltip.Show(namen, info.Item.ListView, e.X + 15, e.Y + 15, 3000);
                         }
                     }
                     // rede afwijking
