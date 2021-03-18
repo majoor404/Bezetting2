@@ -181,7 +181,12 @@ namespace Bezetting2
             ProgData.igekozenjaar = nu.Year;
             ProgData.ihuidigjaar = nu.Year;
 
-            ProgData.backup_zipnaam = "Backup\\" + nu.ToShortDateString() + ".zip";
+            DateTime backup = nu;
+            ProgData.backup_zipnaam_huidige_maand = $"Backup\\maand_{backup.Month}.zip";
+            backup = backup.AddMonths(1);
+            ProgData.backup_zipnaam_maand_verder = $"Backup\\maand_{backup.Month}.zip";
+            backup = backup.AddMonths(1);
+            ProgData.backup_zipnaam_2maanden_verder = $"Backup\\maand_{backup.Month}.zip";
 
             Random rnd = new Random();
             ProgData.backup_time = rnd.Next(60);
@@ -1413,7 +1418,7 @@ namespace Bezetting2
 
             if (ProgData.backup_time == DateTime.Now.Minute)
             {
-                if (!File.Exists(ProgData.backup_zipnaam))
+                if (!File.Exists(ProgData.backup_zipnaam_huidige_maand))
                 {
                     timerKill.Enabled = false;
                     labelDebug.Text = "Dagelijkse Backup, moment.....";

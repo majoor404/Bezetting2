@@ -69,7 +69,10 @@ namespace Bezetting2
         public static int ihuidigjaar;
         private static int _igekozenjaar; // Backing
 
-        public static string backup_zipnaam;
+        public static string backup_zipnaam_huidige_maand;
+        public static string backup_zipnaam_maand_verder;
+        public static string backup_zipnaam_2maanden_verder;
+
 
         public static int backup_time;
 
@@ -818,9 +821,24 @@ namespace Bezetting2
 
         public static void Backup()
         {
-            string startPath = GetDirectoryBezettingMaand(DateTime.Now);
-
-            ZipFile.CreateFromDirectory(startPath, backup_zipnaam);
+            DateTime bak = DateTime.Now;
+            string startPath = GetDirectoryBezettingMaand(bak);
+            if (File.Exists(backup_zipnaam_huidige_maand))
+                File.Delete(backup_zipnaam_huidige_maand);
+            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_maand);
+            
+            bak = bak.AddMonths(1);
+            startPath = GetDirectoryBezettingMaand(bak);
+            if (File.Exists(backup_zipnaam_maand_verder))
+                File.Delete(backup_zipnaam_maand_verder);
+            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_maand_verder);
+            
+            
+            bak = bak.AddMonths(1);
+            startPath = GetDirectoryBezettingMaand(bak);
+            if (File.Exists(backup_zipnaam_2maanden_verder))
+                File.Delete(backup_zipnaam_2maanden_verder);
+            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_2maanden_verder);
         }
 
         public static void NachtErVoorVrij(string gekozen_naam, string dagnr, string afwijking)

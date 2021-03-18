@@ -438,13 +438,18 @@ namespace Bezetting2
 
                 for (int i = 0; i < ListClassTelPlekGewerkt.Count; i++)
                 {
-                    //var test = Tel[i]._PlekTelPlek;
-                    //var test2 = TelWerkPlek.IndexOf(test);      // y coord
-                    //var test4 = Tel[i]._NaamTelPlek;
-                    //var test5 = TelNamen.IndexOf(test4);      // x coord
-                    //var test3 = Tel[i]._AantalTelPlek;      // inhoud
-                    oSheet.Cells[ListTelNamen.IndexOf(ListClassTelPlekGewerkt[i]._NaamTelPlek) + 4,
-                        ListTelWerkPlek.IndexOf(ListClassTelPlekGewerkt[i]._PlekTelPlek) + 2] = ListClassTelPlekGewerkt[i]._AantalTelPlek;
+                    var test = ListClassTelPlekGewerkt[i]._PlekTelPlek;
+                    var test2 = ListTelWerkPlek.IndexOf(test);      // y coord
+                    var test4 = ListClassTelPlekGewerkt[i]._NaamTelPlek;
+                    var test5 = ListTelNamen.IndexOf(test4);      // x coord    als naam niet gevonden, dan antwoord -1 bv een extra dienst
+                    var test3 = ListClassTelPlekGewerkt[i]._AantalTelPlek;      // inhoud
+
+                    if (test5 > -1)
+                    {
+                        var row = ListTelNamen.IndexOf(ListClassTelPlekGewerkt[i]._NaamTelPlek) + 4;
+                        var col = ListTelWerkPlek.IndexOf(ListClassTelPlekGewerkt[i]._PlekTelPlek) + 2;
+                        oSheet.Cells[row, col] = ListClassTelPlekGewerkt[i]._AantalTelPlek;
+                    }
                 }
 
                 //AutoFit columns A:D.
