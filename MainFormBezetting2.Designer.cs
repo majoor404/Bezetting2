@@ -56,12 +56,14 @@
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.updateExtraDienstenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importNamenOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importOudeVeranderDataOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenProgrammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nietMeeTelLijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPopupMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -106,7 +108,6 @@
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
             this.HoverTime = new System.Windows.Forms.NumericUpDown();
             this.panelColor = new System.Windows.Forms.Panel();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -311,6 +312,7 @@
             this.beheerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editPersoneelToolStripMenuItem,
             this.kleurLijnenToolStripMenuItem,
+            this.updateExtraDienstenToolStripMenuItem,
             this.importNamenOudeVersieToolStripMenuItem,
             this.importOudeVeranderDataOudeVersieToolStripMenuItem,
             this.instellingenProgrammaToolStripMenuItem,
@@ -336,6 +338,14 @@
             this.kleurLijnenToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.kleurLijnenToolStripMenuItem.Text = "KleurLijnen";
             this.kleurLijnenToolStripMenuItem.Click += new System.EventHandler(this.KleurLijnenToolStripMenuItem_Click);
+            // 
+            // updateExtraDienstenToolStripMenuItem
+            // 
+            this.updateExtraDienstenToolStripMenuItem.Enabled = false;
+            this.updateExtraDienstenToolStripMenuItem.Name = "updateExtraDienstenToolStripMenuItem";
+            this.updateExtraDienstenToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
+            this.updateExtraDienstenToolStripMenuItem.Text = "Update Extra Diensten";
+            this.updateExtraDienstenToolStripMenuItem.Click += new System.EventHandler(this.updateExtraDienstenToolStripMenuItem_Click);
             // 
             // importNamenOudeVersieToolStripMenuItem
             // 
@@ -384,6 +394,13 @@
             this.editPopupMenuToolStripMenuItem.Text = "Edit Popup Menu";
             this.editPopupMenuToolStripMenuItem.Visible = false;
             this.editPopupMenuToolStripMenuItem.Click += new System.EventHandler(this.EditPopupMenuToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -643,6 +660,7 @@
             // 
             // View
             // 
+            this.View.BackColor = System.Drawing.SystemColors.ControlLight;
             this.View.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.View.FullRowSelect = true;
             this.View.GridLines = true;
@@ -880,19 +898,12 @@
             this.panelColor.Size = new System.Drawing.Size(107, 28);
             this.panelColor.TabIndex = 33;
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.helpToolStripMenuItem.Text = "Help";
-            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
-            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1834, 961);
             this.Controls.Add(this.comboBoxKleurKeuze);
             this.Controls.Add(this.panelColor);
@@ -1031,6 +1042,7 @@
         private System.Windows.Forms.NumericUpDown HoverTime;
         private System.Windows.Forms.Panel panelColor;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem updateExtraDienstenToolStripMenuItem;
     }
 }
 

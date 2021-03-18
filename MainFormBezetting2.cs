@@ -37,7 +37,7 @@ namespace Bezetting2
 
         private readonly Color Weekend_ = Color.LightSkyBlue;
         private readonly Color Feestdag_ = Color.LightSalmon;
-        private readonly Color Huidigedag_ = Color.Lavender;
+        private readonly Color Huidigedag_ = Color.LightSteelBlue; // Lavender;
         private readonly Color MaandButton_ = Color.LightSkyBlue;
         private readonly Color Werkplek_ = Color.LightGray;
         private readonly Color MinimaalPersonen_ = Color.LightPink;
@@ -232,10 +232,14 @@ namespace Bezetting2
                 {
                     combo.Width = 70;
                 }
+
+                panelColor.Width = 74;
+
                 foreach (System.Windows.Forms.NumericUpDown num in this.Controls.OfType<System.Windows.Forms.NumericUpDown>())
                 {
                     num.Width = 70;
                 }
+
                 View.Left -= 40;
             }
 
@@ -326,6 +330,7 @@ namespace Bezetting2
             afwijkingTovRoosterPloegToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
             maandenOverzichtNaarExcelToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
             jaarOverzichtNaarExcelToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
+            updateExtraDienstenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
         }
 
         private void UitloggenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -501,7 +506,6 @@ namespace Bezetting2
         {
             WindowUpdateViewScreen = true;
             buttonRefresh.ForeColor = Color.Black;
-            UpdateExtraDienstLijst(ProgData.GekozenKleur);
             VulViewScherm();
         }
 
@@ -1295,9 +1299,7 @@ namespace Bezetting2
 
         private string GetRedenAfwijking(string naam, int dag)
         {
-
-            if (ProgData.MaandData.MaandDataLijst.Count < 1)
-                ProgData.MaandData.Load(ProgData.GekozenKleur);
+            ProgData.MaandData.Load(ProgData.GekozenKleur);
             string sdag = dag.ToString(CultureInfo.CurrentCulture);
             try
             {
@@ -2043,6 +2045,9 @@ namespace Bezetting2
 
             foreach (personeel  pers in ProgData.LijstPersoneelKleur)
             {
+                labelDebug.Text = $"{pers._achternaam}                           ";
+                labelDebug.Refresh();
+
                 dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
                 for (int i = 0; i < aantal_dagen - 1; i++)
                 {
@@ -2054,8 +2059,11 @@ namespace Bezetting2
                     {
                         var dienst = afwijking.Substring(3, 1);
                         var gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), dat, dienst);
-                        if(gaat_lopen_op_kleur == Gaat_lopen_op_kleur)
+                        if (gaat_lopen_op_kleur == Gaat_lopen_op_kleur)
+                        {
                             ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
+                            Thread.Sleep(300);
+                        }
                     }
                     dat = dat.AddDays(1);
                 }
@@ -2071,6 +2079,24 @@ namespace Bezetting2
         {
             Help he = new Help();
             he.ShowDialog();
+        }
+
+        private void updateExtraDienstenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            const string message = "Als aantal extra diensten niet klopt op maand overzicht, kan je deze hertellen.\n" +
+                "Dit duurt wel even (netwerk traag). U krijgt melding als programma klaar is.";
+            const string caption = "Vraag updaten ?";
+            var result = MessageBox.Show(message, caption,
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                UpdateExtraDienstLijst(ProgData.GekozenKleur);
+                labelDebug.Text = "";
+                labelDebug.Refresh();
+                MessageBox.Show("Klaar");
+            }
         }
     }
 }

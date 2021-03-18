@@ -464,7 +464,7 @@ namespace Bezetting2
         {
             MaandData.Load(kleur);
             MaandData.Voeg_toe(dagnr, personeel_nr, afwijking, invoerdoor, rede, "", "");
-            MaandData.Save(kleur);
+            MaandData.Save(kleur,15);
         }
 
         static public void RegelAfwijkingOpDatumEnKleur(DateTime datum, string kleur, string personeel_nr, string dagnr, string afwijking, string rede, string invoerdoor, bool Update_screen = true)
@@ -1046,7 +1046,7 @@ namespace Bezetting2
                             MaandData.Voeg_toe(verander._datumafwijking,
                                 personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
                             MaandData.VeranderInvoerDatum(verander._datuminvoer);
-                            MaandData.Save(kleur);
+                            MaandData.Save(kleur,15);
                         }
                     }
                     File.Delete(path_oud);

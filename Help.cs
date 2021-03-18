@@ -12,7 +12,7 @@ namespace Bezetting2
 {
     public partial class Help : Form
     {
-        string url = Application.StartupPath + @"\Help\help.htm";
+        string url = Application.StartupPath + @"\Help\help.html";
 
         public Help()
         {

@@ -38,7 +38,7 @@ namespace Bezetting2
             this.webBrowser.Location = new System.Drawing.Point(0, 0);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(800, 450);
+            this.webBrowser.Size = new System.Drawing.Size(800, 601);
             this.webBrowser.TabIndex = 0;
             this.webBrowser.Url = new System.Uri("", System.UriKind.Relative);
             // 
@@ -46,9 +46,10 @@ namespace Bezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 601);
             this.Controls.Add(this.webBrowser);
             this.Name = "Help";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Help";
             this.Shown += new System.EventHandler(this.Help_Shown);
             this.ResumeLayout(false);

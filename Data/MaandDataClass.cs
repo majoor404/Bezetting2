@@ -18,7 +18,7 @@ namespace Bezetting2.Data
         [Serializable]
         public class Item
         {
-            public Item() {}
+            public Item() { }
             public DateTime ingevoerd_op_ { get; set; }
             public DateTime datum_ { get; set; }
             public string personeel_nr_ { get; set; }
@@ -30,7 +30,7 @@ namespace Bezetting2.Data
         }
 
         public List<Item> MaandDataLijst = new List<Item>();
-        
+
         public void Voeg_toe(string dag, string personeel_nr, string afwijking, string invoer_door, string rede, string reserve1, string reserve2)
         {
             DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, int.Parse(dag));
@@ -57,20 +57,20 @@ namespace Bezetting2.Data
             {
                 subs = datum.Split('/');
             }
-            
-            DateTime Dat = new DateTime(int.Parse(subs[2]),int.Parse(subs[1]),int.Parse(subs[0]));
-            MaandDataLijst[MaandDataLijst.Count-1].ingevoerd_op_ = Dat;
+
+            DateTime Dat = new DateTime(int.Parse(subs[2]), int.Parse(subs[1]), int.Parse(subs[0]));
+            MaandDataLijst[MaandDataLijst.Count - 1].ingevoerd_op_ = Dat;
         }
 
         public void Load(string kleur)
         {
             var maand = ProgData.igekozenmaand;
             var jaar = ProgData.igekozenjaar;
-            
+
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
             ProgData.Zetom_naar_versie21(kleur);
-            
+
             if (File.Exists(path))
             {
                 var veranderd = File.GetLastWriteTime(path);
@@ -87,17 +87,17 @@ namespace Bezetting2.Data
                         }
                     }
                     catch { }
-                    
-                    if(kleur == ProgData.GekozenKleur)
+
+                    if (kleur == ProgData.GekozenKleur)
                         laaste_versie_van_huidige_kleur = veranderd;
-                    
+
                     laaste_versie = veranderd;
                     laaste_path = path;
                 }
             }
             else
             {
-                if (TestZekerWetenNietAanwezig(5,kleur))
+                if (TestZekerWetenNietAanwezig(5, kleur))
                 {
                     Load(kleur);
                 }
@@ -107,30 +107,37 @@ namespace Bezetting2.Data
                     MessageBox.Show($"{path}\n" +
                         $"niet gevonden, maak nieuwe aan!");
                     MaandDataLijst.Clear();     // anders zou dit data kunnen zijn van andere kleur
-                    Save(kleur);
+                    Save(kleur,15);
                 }
-                  
+
             }
         }
 
-        public void Save(string kleur)
+        public void Save(string kleur, int try_again)
         {
             var maand = ProgData.igekozenmaand;
             var jaar = ProgData.igekozenjaar;
-            
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
-                try
+
+            if (try_again < 0)
+            {
+                MessageBox.Show($"Kon bestand \n{path}\nNiet saven?\nExit.");
+                Process.GetCurrentProcess().Kill();
+            }
+
+            try
+            {
+                using (Stream stream = File.Open(path, FileMode.OpenOrCreate))
                 {
-                    using (Stream stream = File.Open(path, FileMode.OpenOrCreate))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, MaandDataLijst);
-                    }
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, MaandDataLijst);
                 }
-                catch
-                {
-                MessageBox.Show($"Kon bestand \n{path}\nNiet saven?");
-                }
+            }
+            catch
+            {
+                Thread.Sleep(300);
+                Save(kleur, --try_again);
+            }
         }
 
         public bool TestNieuweFile(string kleur)
@@ -148,18 +155,18 @@ namespace Bezetting2.Data
             return false;
         }
 
-        private bool TestZekerWetenNietAanwezig(int aantal,string kleur)
+        private bool TestZekerWetenNietAanwezig(int aantal, string kleur)
         {
             var maand = ProgData.igekozenmaand;
             var jaar = ProgData.igekozenjaar;
 
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
-            
+
             for (int i = 0; i < aantal; i++)
             {
                 if (ProgData.TestNetwerkBeschikbaar(15))
                 {
-                    if(File.Exists(path))
+                    if (File.Exists(path))
                         return true;
                 }
                 else
