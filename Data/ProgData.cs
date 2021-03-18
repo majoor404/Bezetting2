@@ -826,7 +826,7 @@ namespace Bezetting2
             if (File.Exists(backup_zipnaam_huidige_maand))
                 File.Delete(backup_zipnaam_huidige_maand);
             ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_maand);
-            
+
             bak = bak.AddMonths(1);
             startPath = GetDirectoryBezettingMaand(bak);
             if (File.Exists(backup_zipnaam_maand_verder))

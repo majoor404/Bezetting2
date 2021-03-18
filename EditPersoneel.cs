@@ -90,6 +90,8 @@ namespace Bezetting2
                 comboBoxKleur.Enabled = true;
                 textBoxAchterNaam.Enabled = true;
             }
+
+            button1.Enabled = ProgData.Huidige_Gebruiker_Personeel_nummer == "590588";
             
         }
 
@@ -194,6 +196,7 @@ namespace Bezetting2
                     }
                 }
             }
+            button1.Enabled = ProgData.Huidige_Gebruiker_Personeel_nummer == "590588";
         }
 
         private void ButtonClose_Click(object sender, EventArgs e)
@@ -580,6 +583,7 @@ namespace Bezetting2
 
                 ProgData.CheckDubbelAchterNaam();
             }
+            button1.Enabled = ProgData.Huidige_Gebruiker_Personeel_nummer == "590588";
         }
 
         private void ButtonNieuw_Click(object sender, EventArgs e)

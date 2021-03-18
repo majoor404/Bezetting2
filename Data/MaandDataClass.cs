@@ -77,16 +77,18 @@ namespace Bezetting2.Data
                 if (veranderd != laaste_versie || path != laaste_path)
                 {
                     // laden
-                    MaandDataLijst.Clear();
                     try
                     {
                         using (Stream stream = File.Open(path, FileMode.Open))
                         {
+                            MaandDataLijst.Clear();
                             BinaryFormatter bin = new BinaryFormatter();
                             MaandDataLijst = (List<Item>)bin.Deserialize(stream);
                         }
                     }
-                    catch { }
+                    catch {
+                        MessageBox.Show("kon {path} niet laden! error 2351");
+                    }
 
                     if (kleur == ProgData.GekozenKleur)
                         laaste_versie_van_huidige_kleur = veranderd;

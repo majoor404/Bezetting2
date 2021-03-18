@@ -2060,7 +2060,7 @@ namespace Bezetting2
 
                     string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
 
-                    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
+                    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"/* || eerste_2 == "DD"*/)
                     {
                         var dienst = afwijking.Substring(3, 1);
                         var gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), dat, dienst);
