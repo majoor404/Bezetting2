@@ -25,7 +25,8 @@ namespace Bezetting2.InlogGebeuren
             personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == labelPersoneelNummer.Text);
             // encrypt pass
             persoon._passwoord = ProgData.Scramble("verander_nu");
-            ProgData.Save_LijstNamen();
+            //ProgData.Save_LijstNamen();
+            ProgData.AlleMensen.Save();
         }
 
         private int GetRecht()

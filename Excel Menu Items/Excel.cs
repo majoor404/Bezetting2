@@ -570,7 +570,8 @@ namespace Bezetting2
                     if (File.Exists(ProgData.LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)))
                     {
                         ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                        ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+                        ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+                        //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
 
                         foreach (personeel a in ProgData.LijstPersoneelKleur)
                         {
@@ -602,7 +603,8 @@ namespace Bezetting2
                 ZetGevondenDataTellingWaarGewerktInExcel();
                 ProgData.igekozenmaand = bewaar_maand;
                 ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+                ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+                //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
             }
             catch
             {
@@ -721,7 +723,8 @@ namespace Bezetting2
                 ProgData.igekozenmaand = i;
                 if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+                    //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
                     if (ProgData.LijstPersoneelKleur.Count > 0)
                     {
                         foreach (personeel a in ProgData.LijstPersoneelKleur)

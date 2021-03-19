@@ -12,14 +12,14 @@ namespace Bezetting2.Data
     public class PersoneelOverzicht
     {
 
-        public static List<personeel> LijstPersonen = new List<personeel>();
-        public static List<personeel> LijstPersoonKleur = new List<personeel>();
-        public static List<string> LijstWerkgroepenPersoneel = new List<string>();
+        public List<personeel> LijstPersonen = new List<personeel>();
+        public List<personeel> LijstPersoonKleur = new List<personeel>();
+        public List<string> LijstWerkgroepenPersoneel = new List<string>();
 
-        static private DateTime laaste_versie;
-        static private DateTime laaste_versie_kleur;
+        private DateTime laaste_versie;
+        private DateTime laaste_versie_kleur;
 
-        private static void Load()
+        public void Load()
         {
             var path = "BezData\\personeel.bin";
             var veranderd = File.GetLastWriteTime(path);
@@ -41,7 +41,45 @@ namespace Bezetting2.Data
                 }
             }
         }
-        public static void HaalPloegNamenOpKleur(string kleur)
+
+        public void Save()
+        {
+            try
+            {
+                if (File.Exists("BezData\\personeel.bin"))
+                {
+                    long length = new FileInfo("BezData\\personeel.bin").Length;
+                    if (length > 0)
+                    {
+                        if (!Directory.Exists("Backup"))
+                            Directory.CreateDirectory("Backup");
+
+                        string s = DateTime.Now.ToString("MM-dd-yyyy HH-mm");
+
+                        string nieuw_naam = Directory.GetCurrentDirectory() + @"\Backup\personeel" + s + ".bin";
+                        File.Copy("BezData\\personeel.bin", nieuw_naam, true);  // overwrite oude file
+
+                        List<FileInfo> files = new DirectoryInfo("Backup").EnumerateFiles()
+                                        .OrderByDescending(f => f.CreationTime)
+                                        .Skip(5)
+                                        .ToList();
+                        files.ForEach(f => f.Delete());
+                    }
+                }
+
+                using (Stream stream = File.Open("BezData\\personeel.bin", FileMode.Create))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, LijstPersonen);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Save Namen error");
+                Process.GetCurrentProcess().Kill();
+            }
+        }
+        public void HaalPloegNamenOpKleur(string kleur)
         {
             // afhankelijk kwa tijdstip, als deze maand of toekomst, dan uit 
             // LijstPersonen halen.
@@ -86,7 +124,7 @@ namespace Bezetting2.Data
                 BewaarPloegNamenOpKleurOpSchijf(kleur, 15);
             }
         }
-        public static void HaalPloegNamenOpKleurVanSchijf(string kleur, int try_again)
+        public void HaalPloegNamenOpKleurVanSchijf(string kleur, int try_again)
         {
             if (try_again < 0)
             {
@@ -111,7 +149,7 @@ namespace Bezetting2.Data
             // haal werkgroepen op
             MaakWerkPlekkenLijst();
         }
-        public static void MaakWerkPlekkenLijst()
+        public void MaakWerkPlekkenLijst()
         {
             LijstWerkgroepenPersoneel.Clear();
             foreach (personeel a in LijstPersoonKleur)
@@ -120,14 +158,14 @@ namespace Bezetting2.Data
                     LijstWerkgroepenPersoneel.Add(a._werkgroep);
             }
         }
-        public static void BewaarPloegNamenOpKleurOpSchijf(string kleur, int try_again)
+        public void BewaarPloegNamenOpKleurOpSchijf(string kleur, int try_again)
         {
             string Locatie = ProgData.Ploeg_Namen_Locatie(kleur);
 
             var veranderdkleur = File.GetLastAccessTime(Locatie);
-            
+
             var diffInSeconds = System.Math.Abs((veranderdkleur - laaste_versie_kleur).TotalSeconds);
-            
+
             if (diffInSeconds > 1000)
             {
                 if (try_again < 0)

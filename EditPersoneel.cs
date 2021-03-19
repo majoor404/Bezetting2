@@ -32,7 +32,7 @@ namespace Bezetting2
         private void EditPersoneel_Shown(object sender, EventArgs e)
         {
             comboBoxFilter.Enabled = true;
-            ProgData.Laad_LijstNamen();
+            ProgData.AlleMensen.Load();
             ViewNamen.Items.Clear();
             comboBoxFilter.Items.Clear();
             string[] arr = new string[5];
@@ -209,7 +209,7 @@ namespace Bezetting2
             try
             {
                 string gekozen_personeel_nummer = textBoxPersNum.Text;
-                personeel persoon_gekozen = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                personeel persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
 
                 // als er een _nieuwkleur betaat, dan niet saven, maar melding!
                 if (persoon_gekozen._nieuwkleur != "")
@@ -219,12 +219,13 @@ namespace Bezetting2
                 else
                 {
                     BewaarRechtenEnPasswoord(persoon_gekozen);
-                    ProgData.LijstPersoneel.Remove(persoon_gekozen);
+                    ProgData.AlleMensen.LijstPersonen.Remove(persoon_gekozen);
                     ButtonVoegToe_Click(this, null);
 
-                    persoon_gekozen = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == gekozen_personeel_nummer);
+                    persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == gekozen_personeel_nummer);
                     ReturnRechtenEnPasswoord(persoon_gekozen);
-                    ProgData.Save_LijstNamen();
+                    //ProgData.Save_LijstNamen();
+                    ProgData.AlleMensen.Save();
 
                     EditPersoneel_Shown(this, null);
                 }
@@ -268,7 +269,8 @@ namespace Bezetting2
                                 // dus zet kruisjes dat hij niet meer aanwezig is.
                                 persoon_gekozen._verhuisdatum = verhuis.dateTimeVerhuisDatum.Value;
                                 persoon_gekozen._nieuwkleur = verhuis.comboBoxNieuwRooster.Text;
-                                ProgData.Save_LijstNamen();
+                                //ProgData.Save_LijstNamen();
+                                ProgData.AlleMensen.Save();
 
                                 int eerste_dag_weg = persoon_gekozen._verhuisdatum.Day;
 
@@ -325,8 +327,8 @@ namespace Bezetting2
                                 ProgData.igekozenmaand = persoon_gekozen._verhuisdatum.Month;
                                 ProgData.igekozenjaar = persoon_gekozen._verhuisdatum.Year;
 
-                                ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                                ProgData.SaveLijstPersoneelKleur(ProgData.GekozenKleur, 15);     // save ploegbezetting (de mensen)
+                                //ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
+                                //ProgData.SaveLijstPersoneelKleur(ProgData.GekozenKleur, 15);     // save ploegbezetting (de mensen)
 
                                 // voeg nieuwe collega toevoegen aan bezetting
 
@@ -350,7 +352,8 @@ namespace Bezetting2
                                     labelNieuwRoosterDatum.Text = "";
                                     button1.Enabled = true;
                                 }
-                                ProgData.Save_LijstNamen();
+                                //ProgData.Save_LijstNamen();
+                                ProgData.AlleMensen.Save();
 
                                 // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
                                 // meegeven eerste dag.
@@ -393,7 +396,8 @@ namespace Bezetting2
                     persoon_gekozen._nieuwkleur = "";
                     labelNieuwRoosterDatum.Text = "";
                     LabelRoosterNieuw.Text = "";
-                    ProgData.Save_LijstNamen();
+                    //ProgData.Save_LijstNamen();
+                    ProgData.AlleMensen.Save();
 
                     // get data van nieuwkleur
                     ProgData.GekozenKleur = kleur_was;
@@ -486,7 +490,8 @@ namespace Bezetting2
                 {
                     personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
                     persoon._rechten = int.Parse(recht.labelRechtenNivo.Text);
-                    ProgData.Save_LijstNamen();
+                    //ProgData.Save_LijstNamen();
+                    ProgData.AlleMensen.Save();
                     ComboBoxFilter_SelectedIndexChanged(this, null);
                     // als rechten aangepast dan auto inlog verwijderen, zou zelfde persoon kunnen zijn.
                     // als ander auto inlog dan helaas ook even weg
@@ -517,7 +522,8 @@ namespace Bezetting2
                 {
                     personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
                     ProgData.LijstPersoneel.Remove(persoon);
-                    ProgData.Save_LijstNamen();
+                    //ProgData.Save_LijstNamen();
+                    ProgData.AlleMensen.Save();
                     EditPersoneel_Shown(this, null);
                 }
             }
@@ -569,14 +575,15 @@ namespace Bezetting2
                 a._funtie = textBoxFuntie.Text;
                 a._werkgroep = textBoxWerkplek.Text;
                 a._rechten = 0;
-                ProgData.LijstPersoneel.Add(a);
-                ProgData.Save_LijstNamen();
+                ProgData.AlleMensen.LijstPersonen.Add(a);
+                //ProgData.Save_LijstNamen();
+                ProgData.AlleMensen.Save();
 
-                ProgData.MaakPloegNamenLijst(comboBoxKleur.Text);
+                //ProgData.MaakPloegNamenLijst(comboBoxKleur.Text);
 
                 // voeg nieuw naam toe in listwerkdagploeg
                 //ProgData.AddNaamInBezetting(comboBoxKleur.Text, textBoxAchterNaam.Text);
-                
+
                 ProgData.MaakNieuweCollegaInBezettingAan(textBoxAchterNaam.Text, comboBoxKleur.Text, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
 
                 EditPersoneel_Shown(this, null);
