@@ -1,0 +1,160 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Threading;
+using System.Windows.Forms;
+
+namespace Bezetting2.Data
+{
+    public class PersoneelOverzicht
+    {
+
+        public static List<personeel> LijstPersonen = new List<personeel>();
+        public static List<personeel> LijstPersoonKleur = new List<personeel>();
+        public static List<string> LijstWerkgroepenPersoneel = new List<string>();
+
+        static private DateTime laaste_versie;
+        static private DateTime laaste_versie_kleur;
+
+        private static void Load()
+        {
+            var path = "BezData\\personeel.bin";
+            var veranderd = File.GetLastWriteTime(path);
+            if (veranderd != laaste_versie)
+            {
+                try
+                {
+                    using (Stream stream = File.Open(path, FileMode.Open))
+                    {
+                        LijstPersonen.Clear();
+                        BinaryFormatter bin = new BinaryFormatter();
+                        LijstPersonen = (List<personeel>)bin.Deserialize(stream);
+                        laaste_versie = veranderd;
+                    }
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("Laad LijstPersonen error");
+                }
+            }
+        }
+        public static void HaalPloegNamenOpKleur(string kleur)
+        {
+            // afhankelijk kwa tijdstip, als deze maand of toekomst, dan uit 
+            // LijstPersonen halen.
+            // Als in verleden, haal van schijf.
+
+            if (ProgData.WaarInTijd() == 1)
+            {
+                // laad van schijf
+                HaalPloegNamenOpKleurVanSchijf(kleur, 15);
+            }
+            else
+            {
+                Load();
+                DateTime nu = DateTime.Now;
+                LijstPersoonKleur.Clear();
+
+                // voor sort, 
+
+                // als nieuwkleur er niet is, dan persoon
+                // als nieuwkleur aanwezig, dan afhankelijk van tijdstip overgang
+                // overgang is huidige maand, dan hoor je bij ploeg
+                // overgang verleden, dan gebruiken we dit niet
+                // 
+
+
+                IEnumerable<personeel> ploeg_gekozen = from a in LijstPersonen
+                                                       where (a._kleur == kleur) || (a._nieuwkleur == kleur && a._verhuisdatum >= nu)
+                                                       select a;
+
+                foreach (personeel a in ploeg_gekozen)
+                {
+                    LijstPersoonKleur.Add(a);
+                }
+
+                LijstPersoonKleur.Sort(delegate (personeel x, personeel y)
+                {
+                    return x._achternaam.CompareTo(y._achternaam);
+                });
+
+                MaakWerkPlekkenLijst();
+
+                BewaarPloegNamenOpKleurOpSchijf(kleur, 15);
+            }
+        }
+        public static void HaalPloegNamenOpKleurVanSchijf(string kleur, int try_again)
+        {
+            if (try_again < 0)
+            {
+                MessageBox.Show("HaalPloegNamenOpKleurVanSchijf() lukt niet!, te vaak geprobeerd.");
+                Process.GetCurrentProcess().Kill();
+            }
+
+            try
+            {
+                using (Stream stream = File.Open(ProgData.Ploeg_Namen_Locatie(kleur), FileMode.Open))
+                {
+                    LijstPersoonKleur.Clear();
+                    BinaryFormatter bin = new BinaryFormatter();
+                    LijstPersoonKleur = (List<personeel>)bin.Deserialize(stream);
+                }
+            }
+            catch (IOException)
+            {
+                Thread.Sleep(300);
+                HaalPloegNamenOpKleurVanSchijf(kleur, --try_again);
+            }
+            // haal werkgroepen op
+            MaakWerkPlekkenLijst();
+        }
+        public static void MaakWerkPlekkenLijst()
+        {
+            LijstWerkgroepenPersoneel.Clear();
+            foreach (personeel a in LijstPersoonKleur)
+            {
+                if (!LijstWerkgroepenPersoneel.Contains(a._werkgroep))
+                    LijstWerkgroepenPersoneel.Add(a._werkgroep);
+            }
+        }
+        public static void BewaarPloegNamenOpKleurOpSchijf(string kleur, int try_again)
+        {
+            string Locatie = ProgData.Ploeg_Namen_Locatie(kleur);
+
+            var veranderdkleur = File.GetLastAccessTime(Locatie);
+            
+            var diffInSeconds = System.Math.Abs((veranderdkleur - laaste_versie_kleur).TotalSeconds);
+            
+            if (diffInSeconds > 1000)
+            {
+                if (try_again < 0)
+                {
+                    MessageBox.Show("BewaarPloegNamenOpKleurVanSchijf() error na 15 keer, exit.");
+                    Process.GetCurrentProcess().Kill();
+                }
+
+                if (!string.IsNullOrEmpty(kleur))
+                {
+                    try
+                    {
+
+                        using (Stream stream = File.Open(Locatie, FileMode.Create))
+                        {
+                            laaste_versie_kleur = veranderdkleur;
+                            BinaryFormatter bin = new BinaryFormatter();
+                            bin.Serialize(stream, LijstPersoonKleur);
+                        }
+                    }
+                    catch (IOException)
+                    {
+                        Thread.Sleep(300);
+                        BewaarPloegNamenOpKleurOpSchijf(kleur, --try_again);
+                    }
+                }
+            }
+        }
+    }
+}

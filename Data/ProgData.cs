@@ -19,18 +19,6 @@ namespace Bezetting2
 {
     public class ProgData
     {
-        //public enum Kleur
-        //{
-        //    Blauw,
-        //    Wit,
-        //    Geel,
-        //    Groen,
-        //    Rood
-        //}
-
-        //once you have the path you get the directory with:
-        //public static string DataDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().CodeBase);
-
         public static bool Disable_error_Meldingen = false;
         public static MainFormBezetting2 Main;
 
@@ -40,6 +28,7 @@ namespace Bezetting2
         public static ToolStripStatusLabel _toegangnivo;
 
         public static MaandDataClass MaandData = new MaandDataClass();
+        public static PersoneelOverzicht AlleMensen = new PersoneelOverzicht();
 
         public static List<string> Lijnen = new List<string>();
 
@@ -50,8 +39,6 @@ namespace Bezetting2
         public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
 
         public static List<string> LijstWerkgroepenPersoneel = new List<string>();
-
-        public static List<veranderingen> ListVeranderingen = new List<veranderingen>();
 
         public static List<werkdag> LijstWerkdagPloeg = new List<werkdag>();
 
@@ -1028,49 +1015,49 @@ namespace Bezetting2
             igekozenmaand = save_maand;
         }
 
-        public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
-        {
-            // zet oude file's om naar nieuwe ketting
-            var maand = ProgData.igekozenmaand;
-            var jaar = ProgData.igekozenjaar;
+        //public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
+        //{
+        //    // zet oude file's om naar nieuwe ketting
+        //    var maand = ProgData.igekozenmaand;
+        //    var jaar = ProgData.igekozenjaar;
 
-            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
-            if (!File.Exists(path))
-            {
-                var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
-                if (File.Exists(path_oud))
-                {
-                    Laad_LijstNamen();  // nodig voor personeel nummer te krijgen hieronder
+        //    var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+        //    if (!File.Exists(path))
+        //    {
+        //        var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
+        //        if (File.Exists(path_oud))
+        //        {
+        //            Laad_LijstNamen();  // nodig voor personeel nummer te krijgen hieronder
 
-                    try
-                    {
-                        using (Stream stream = File.Open(path_oud, FileMode.Open))
-                        {
-                            BinaryFormatter bin = new BinaryFormatter();
-                            ListVeranderingen.Clear();
-                            ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
-                        }
-                    }
-                    catch { }
+        //            try
+        //            {
+        //                using (Stream stream = File.Open(path_oud, FileMode.Open))
+        //                {
+        //                    BinaryFormatter bin = new BinaryFormatter();
+        //                    ListVeranderingen.Clear();
+        //                    ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
+        //                }
+        //            }
+        //            catch { }
 
-                    MaandData.MaandDataLijst.Clear();
-                    foreach (veranderingen verander in ProgData.ListVeranderingen)
-                    {
-                        // verander
-                        var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
+        //            MaandData.MaandDataLijst.Clear();
+        //            foreach (veranderingen verander in ProgData.ListVeranderingen)
+        //            {
+        //                // verander
+        //                var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
 
-                        if (!string.IsNullOrEmpty(personeel_nummer))
-                        {
-                            MaandData.Voeg_toe(verander._datumafwijking,
-                                personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
-                            MaandData.VeranderInvoerDatum(verander._datuminvoer);
-                            MaandData.Save(kleur,15);
-                        }
-                    }
-                    File.Delete(path_oud);
-                }
-            }
-        }
+        //                if (!string.IsNullOrEmpty(personeel_nummer))
+        //                {
+        //                    MaandData.Voeg_toe(verander._datumafwijking,
+        //                        personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
+        //                    MaandData.VeranderInvoerDatum(verander._datuminvoer);
+        //                    MaandData.Save(kleur,15);
+        //                }
+        //            }
+        //            File.Delete(path_oud);
+        //        }
+        //    }
+        //}
 
         public static string GetLaatsteAfwijkingPersoon(string loopt_op_kleur, string persnr, DateTime datum)
         {

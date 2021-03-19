@@ -372,7 +372,7 @@ namespace Bezetting2
                 View.Columns.Clear();
                 View.Items.Clear();
 
-                ProgData.Zetom_naar_versie21(ProgData.GekozenKleur);
+                //ProgData.Zetom_naar_versie21(ProgData.GekozenKleur);
 
                 int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
 
@@ -621,6 +621,9 @@ namespace Bezetting2
 
         private void HaalBezetting()
         {
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
+
             // HaalBezetting Bestaat uit 2 delen
             // afhankelijk wat er gevraagd wordt en waarneer
 

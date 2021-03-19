@@ -109,6 +109,7 @@
     <Compile Include="Data\InstellingenProg.cs" />
     <Compile Include="Data\LooptExtraDienst.cs" />
     <Compile Include="Data\AanvraagRuilExtra.cs" />
+    <Compile Include="Data\PersoneelOverzicht.cs" />
     <Compile Include="Data\SnipperAanvraag.cs" />
     <Compile Include="Data\veranderingen.cs" />
     <Compile Include="Data\VeranderingenVerhuis.cs" />

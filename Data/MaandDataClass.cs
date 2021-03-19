@@ -69,7 +69,7 @@ namespace Bezetting2.Data
 
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
-            ProgData.Zetom_naar_versie21(kleur);
+            //ProgData.Zetom_naar_versie21(kleur);
 
             if (File.Exists(path))
             {
