@@ -501,7 +501,7 @@ namespace Bezetting2
                         {
                             try
                             {
-                                personeel perso = ProgData.LijstPersoneelKleur.First(aa => (aa._achternaam == naam._naam));
+                                personeel perso = ProgData.AlleMensen.LijstPersoonKleur.First(aa => (aa._achternaam == naam._naam));
                             }
                             catch
                             {
@@ -509,7 +509,7 @@ namespace Bezetting2
                                 {
                                     _achternaam = naam._naam
                                 };
-                                ProgData.LijstPersoneelKleur.Add(extra_man);
+                                ProgData.AlleMensen.LijstPersoonKleur.Add(extra_man);
                             }
 
                             try
@@ -532,7 +532,7 @@ namespace Bezetting2
                     }
                 }
 
-                foreach (personeel man in ProgData.LijstPersoneelKleur)
+                foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {
@@ -595,7 +595,7 @@ namespace Bezetting2
                         {
                             try
                             {
-                                personeel perso = ProgData.LijstPersoneelKleur.First(aa => (aa._achternaam == naam._naam));
+                                personeel perso = ProgData.AlleMensen.LijstPersoonKleur.First(aa => (aa._achternaam == naam._naam));
                             }
                             catch
                             {
@@ -603,7 +603,7 @@ namespace Bezetting2
                                 {
                                     _achternaam = naam._naam
                                 };
-                                ProgData.LijstPersoneelKleur.Add(extra_man);
+                                ProgData.AlleMensen.LijstPersoonKleur.Add(extra_man);
                             }
 
                             try
@@ -626,7 +626,7 @@ namespace Bezetting2
                     }
                 }
 
-                foreach (personeel man in ProgData.LijstPersoneelKleur)
+                foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {

@@ -95,7 +95,7 @@ namespace Bezetting2.Invoer
                 // voor hele ploeg invullen
                 if (comboBox1.SelectedIndex == 2)
                 {
-                    foreach (personeel per in ProgData.LijstPersoneelKleur)
+                    foreach (personeel per in ProgData.AlleMensen.LijstPersoonKleur)
                     {
                         ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, per._persnummer.ToString(), start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
                         Thread.Sleep(300);

@@ -37,7 +37,7 @@ namespace Bezetting2
             comboBoxFilter.Items.Clear();
             string[] arr = new string[5];
             ListViewItem itm;
-            foreach (personeel a in ProgData.LijstPersoneel)
+            foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
             {
                 arr[0] = a._persnummer.ToString();
                 arr[1] = a._achternaam;
@@ -101,7 +101,7 @@ namespace Bezetting2
             ViewNamen.Items.Clear();
             string[] arr = new string[5];
             ListViewItem itm;
-            foreach (personeel a in ProgData.LijstPersoneel)
+            foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
             {
                 if (a._kleur == comboBoxFilter.Text || string.IsNullOrEmpty(comboBoxFilter.Text))
                 {
@@ -154,7 +154,7 @@ namespace Bezetting2
             catch
             {
             }
-            foreach (personeel a in ProgData.LijstPersoneel)
+            foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
             {
                 if (a._persnummer == selpersnummer)
                 {
@@ -263,7 +263,7 @@ namespace Bezetting2
 
                             try
                             {
-                                personeel persoon_gekozen = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                                personeel persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
 
                                 // zat op deze kleur, maar gaat naar nieuwe
                                 // dus zet kruisjes dat hij niet meer aanwezig is.
@@ -385,7 +385,7 @@ namespace Bezetting2
                     string kleur = ProgData.GekozenKleur;
                     int teller = 0;
 
-                    personeel persoon_gekozen = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                    personeel persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
 
                     DateTime verhuisdatum_was = persoon_gekozen._verhuisdatum;
                     string kleur_was = persoon_gekozen._nieuwkleur;
@@ -488,7 +488,7 @@ namespace Bezetting2
             {
                 try
                 {
-                    personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                    personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
                     persoon._rechten = int.Parse(recht.labelRechtenNivo.Text);
                     //ProgData.Save_LijstNamen();
                     ProgData.AlleMensen.Save();
@@ -520,8 +520,8 @@ namespace Bezetting2
                 }
                 else
                 {
-                    personeel persoon = ProgData.LijstPersoneel.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
-                    ProgData.LijstPersoneel.Remove(persoon);
+                    personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                    ProgData.AlleMensen.LijstPersonen.Remove(persoon);
                     //ProgData.Save_LijstNamen();
                     ProgData.AlleMensen.Save();
                     EditPersoneel_Shown(this, null);

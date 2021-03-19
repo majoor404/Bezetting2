@@ -494,7 +494,7 @@ namespace Bezetting2
 
                 string korte_afwijking = "";
 
-                foreach (personeel a in ProgData.LijstPersoneelKleur)
+                foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     if ((a._vuilwerk == "True"))
                     {
@@ -573,7 +573,7 @@ namespace Bezetting2
                         ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
                         //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
 
-                        foreach (personeel a in ProgData.LijstPersoneelKleur)
+                        foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
                         {
                             if (!ListTelNamen.Contains(a._achternaam))
                                 ListTelNamen.Add(a._achternaam);
@@ -649,7 +649,7 @@ namespace Bezetting2
                 Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 int start_row = 2;
-                foreach (personeel a in ProgData.LijstPersoneel)
+                foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
                 {
                     if (a._kleur == kleur || kleur == "Allemaal")
                     {
@@ -725,9 +725,9 @@ namespace Bezetting2
                 {
                     ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
                     //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
-                    if (ProgData.LijstPersoneelKleur.Count > 0)
+                    if (ProgData.AlleMensen.LijstPersoonKleur.Count > 0)
                     {
-                        foreach (personeel a in ProgData.LijstPersoneelKleur)
+                        foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
                         {
                             if (!Namen.Contains(a._persnummer))
                                 Namen.Add(a._persnummer);

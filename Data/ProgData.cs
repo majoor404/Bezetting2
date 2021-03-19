@@ -32,13 +32,8 @@ namespace Bezetting2
 
         public static List<string> Lijnen = new List<string>();
 
-        public static List<personeel> LijstPersoneel = new List<personeel>();
-        public static List<personeel> LijstPersoneelKleur = new List<personeel>();
-
         public static string _LooptExtra_Locatie;
         public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
-
-        public static List<string> LijstWerkgroepenPersoneel = new List<string>();
 
         public static List<werkdag> LijstWerkdagPloeg = new List<werkdag>();
 
@@ -131,7 +126,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(_inlognaam.Text);
-                personeel persoon = LijstPersoneel.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
                 return persoon._achternaam;
             }
             catch
@@ -140,149 +135,7 @@ namespace Bezetting2
             }
         }
 
-        //public static void LaadLijstPersoneelKleur(string kleur, int try_again)
-        //{
-        //    if (try_again < 0)
-        //    {
-        //        MessageBox.Show("LoadPloegNamenLijst() lukt niet!, te vaak geprobeerd.");
-        //    }
-        //    Main.labelDebug.Text = "Load Ploeg Namen Lijst";
-
-        //    try
-        //    {
-        //        //string _Ploeg_Namen_Locatie = Path.GetFullPath(GetDir() + "\\" + _GekozenKleur + "_namen.bin");
-        //        using (Stream stream = File.Open(Ploeg_Namen_Locatie(kleur), FileMode.Open))
-        //        {
-        //            LijstPersoneelKleur.Clear();
-        //            BinaryFormatter bin = new BinaryFormatter();
-        //            LijstPersoneelKleur = (List<personeel>)bin.Deserialize(stream);
-        //        }
-        //    }
-        //    catch (IOException)
-        //    {
-        //        Main.labelDebug.Text = "catch LoadPloegNamenLijst() error, try again";
-        //        Thread.Sleep(300);
-        //        LaadLijstPersoneelKleur(kleur, --try_again);
-        //    }
-        //    // haal werkgroepen op
-        //    MaakWerkPlekkenLijst();
-        //    Main.labelDebug.Text = "";
-        //}
-
-        //public static void SaveLijstPersoneelKleur(string kleur, int try_again)
-        //{
-        //    if (try_again < 0 && !Disable_error_Meldingen)
-        //    {
-        //        MessageBox.Show("SaveLijstPersoneelKleur() error na 15 keer, " + Ploeg_Namen_Locatie(kleur));
-        //    }
-        //    Main.labelDebug.Text = "Save Ploeg Namen Lijst";
-        //    if (!string.IsNullOrEmpty(kleur))
-        //    {
-        //        try
-        //        {
-        //            string Locatie = Ploeg_Namen_Locatie(kleur);
-        //            using (Stream stream = File.Open(Locatie, FileMode.Create))
-        //            {
-        //                BinaryFormatter bin = new BinaryFormatter();
-        //                bin.Serialize(stream, LijstPersoneelKleur);
-        //            }
-        //        }
-        //        catch (IOException)
-        //        {
-        //            Thread.Sleep(300);
-        //            SaveLijstPersoneelKleur(kleur, --try_again);
-        //        }
-        //    }
-        //}
-
-        //public static void MaakPloegNamenLijst(string kleur)
-        //{
-        //    //DateTime dezemaand = new DateTime(igekozenjaar, igekozenmaand, 1, 0, 0, 0, 0, 0);
-        //    LijstPersoneelKleur.Clear();
-
-        //    // query om juiste mensen te vinden
-        //    IEnumerable<personeel> ploeg_gekozen = from a in LijstPersoneel
-        //                                           where (a._kleur == kleur) || (a._nieuwkleur == kleur)
-        //                                           select a;
-
-        //    foreach (personeel a in ploeg_gekozen)
-        //    {
-        //        if (!string.IsNullOrEmpty(a._nieuwkleur) && kleur != a._nieuwkleur)
-        //        {
-        //            //als nieuwkleur aanwezig, kijk of hij in die bezetting_Ploeg_lijst voorkomt,
-        //            //regel dat anders, als file niet bestaat, gaat dat vanzelf
-        //            if (File.Exists(LijstWerkdagPloeg_Locatie(a._nieuwkleur)))
-        //            {
-        //                LaadLijstWerkdagPloeg(a._nieuwkleur, 15);
-        //                MaakNieuweCollegaInBezettingAan(a._achternaam, a._nieuwkleur, igekozenjaar, igekozenmaand, 1);
-        //            }
-        //        }
-        //        LijstPersoneelKleur.Add(a);
-        //    }
-
-        //    //kleur_personeel.Sort();
-        //    // sorteer kleur_personeel
-        //    LijstPersoneelKleur.Sort(delegate (personeel x, personeel y)
-        //    {
-        //        return x._achternaam.CompareTo(y._achternaam);
-        //    });
-
-        //    // haal werkgroepen op
-        //    MaakWerkPlekkenLijst();
-
-        //    //// bij een ploegnamen lijst hoort een bezetting dag lijst
-        //    if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
-        //    {
-        //        MaakLegeDagWerkplekBestand(kleur, true); // in deze roetine wordt het ook opgeslagen
-        //    }
-        //}
-
-        public static void MaakLegeDagWerkplekBestand(string kleur, bool MetVeranderLijst)
-        {
-            if (TestNetwerkBeschikbaar(15))
-            {
-                LijstWerkdagPloeg.Clear();
-                // elke dag in deze maand
-                int aantal_dagen_deze_maand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
-                // elke persoon
-                foreach (personeel a in LijstPersoneelKleur)
-                {
-                    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
-                    {
-                        DateTime dat = new DateTime(igekozenjaar, igekozenmaand, i);
-                        werkdag dag = new werkdag
-                        {
-                            _naam = a._achternaam,
-                            //_standaarddienst = MDatum.GetDienst(GekozenRooster(), dat, a._kleur),
-                            _standaarddienst = GetDienst(GekozenRooster(), dat, a._kleur),
-                            _werkplek = "",
-                            _afwijkingdienst = "",
-                            _dagnummer = i
-                        };
-                        LijstWerkdagPloeg.Add(dag);
-                    }
-                }
-                SaveLijstWerkdagPloeg(kleur, 15);
-
-                // bij nieuwe bezetting hoort ook een nieuwe verander lijst
-                if (MetVeranderLijst)
-                {
-#if ketting
-                    //MaandData.NieuweMaandDataLijst();
-#else
-                    ListVeranderingen.Clear(); // stel er bestond er nog 1, niet overschrijven.
-                    SaveVeranderingenPloeg(kleur, 15);
-#endif
-                }
-            }
-            else
-            {
-                MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
-                Main.Close();
-            }
-        }
-
-        public static void SaveLijstWerkdagPloeg(string kleur, int try_again)
+         public static void SaveLijstWerkdagPloeg(string kleur, int try_again)
         {
             if (try_again < 0 && !Disable_error_Meldingen)
             {
@@ -354,66 +207,6 @@ namespace Bezetting2
             }
         }
 
-        //public static void Save_LijstNamen()
-        //{
-        //    Main.labelDebug.Text = "Save Namen Lijst";
-        //    try
-        //    {
-        //        if (File.Exists("BezData\\personeel.bin"))
-        //        {
-        //            long length = new FileInfo("BezData\\personeel.bin").Length;
-        //            if (length > 0)
-        //            {
-        //                if (!Directory.Exists("Backup"))
-        //                    Directory.CreateDirectory("Backup");
-
-        //                string s = DateTime.Now.ToString("MM-dd-yyyy HH-mm");
-        //                /**/
-        //                string nieuw_naam = Directory.GetCurrentDirectory() + @"\Backup\personeel" + s + ".bin";
-        //                File.Copy("BezData\\personeel.bin", nieuw_naam, true);  // overwrite oude file
-
-        //                List<FileInfo> files = new DirectoryInfo("Backup").EnumerateFiles()
-        //                                .OrderByDescending(f => f.CreationTime)
-        //                                .Skip(15)
-        //                                .ToList();
-        //                files.ForEach(f => f.Delete());
-        //            }
-        //            Main.labelDebug.Text = "";
-        //        }
-
-        //        using (Stream stream = File.Open("BezData\\personeel.bin", FileMode.Create))
-        //        {
-        //            BinaryFormatter bin = new BinaryFormatter();
-        //            bin.Serialize(stream, LijstPersoneel);
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        if (!Disable_error_Meldingen)
-        //            MessageBox.Show("Save_LijstNamen() error");
-        //    }
-        //}
-
-        //public static void Laad_LijstNamen()
-        //{
-        //    Main.labelDebug.Text = "Load Namen Lijst";
-        //    try
-        //    {
-        //        using (Stream stream = File.Open("BezData\\personeel.bin", FileMode.Open))
-        //        {
-        //            LijstPersoneel.Clear();
-        //            BinaryFormatter bin = new BinaryFormatter();
-        //            LijstPersoneel = (List<personeel>)bin.Deserialize(stream);
-        //        }
-        //    }
-        //    catch (IOException)
-        //    {
-        //        if (!Disable_error_Meldingen)
-        //            MessageBox.Show("Laad_LijstNamen() error");
-        //    }
-        //    Main.labelDebug.Text = "";
-        //}
-
         public static int WaarInTijd()
         {
             // er zijn nu 3 mogelijkheden, welke afhankelijk ik andere keuze's maak
@@ -432,15 +225,15 @@ namespace Bezetting2
             return 2;
         }
 
-        private static void MaakWerkPlekkenLijst()
-        {
-            LijstWerkgroepenPersoneel.Clear();
-            foreach (personeel a in LijstPersoneelKleur)
-            {
-                if (!LijstWerkgroepenPersoneel.Contains(a._werkgroep))
-                    LijstWerkgroepenPersoneel.Add(a._werkgroep);
-            }
-        }
+        //private static void MaakWerkPlekkenLijst()
+        //{
+        //    LijstWerkgroepenPersoneel.Clear();
+        //    foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+        //    {
+        //        if (!LijstWerkgroepenPersoneel.Contains(a._werkgroep))
+        //            LijstWerkgroepenPersoneel.Add(a._werkgroep);
+        //    }
+        //}
 
         /// <summary>
         /// Regel de afwijkingen van rooster
@@ -677,12 +470,6 @@ namespace Bezetting2
             return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_namen.bin");
         }
 
-        //public static string Ploeg_Veranderingen_Locatie(string kleur)
-        //{
-        //    //var test = Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_afwijkingen.bin");
-        //    return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_afwijkingen.bin");
-        //}
-
         public static string Lijnen_Locatie()
         {
             return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\lijnen.ini");
@@ -728,7 +515,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(nummer);
-                personeel persoon = LijstPersoneel.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
                 return true;
             }
             catch
@@ -742,7 +529,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(nummer);
-                personeel persoon = LijstPersoneel.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
                 return persoon._kleur;
             }
             catch
@@ -756,7 +543,7 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(nummer);
-                personeel persoon = LijstPersoneel.First(a => a._persnummer == personeel_nr);
+                personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
                 return persoon._achternaam;
             }
             catch
@@ -770,7 +557,7 @@ namespace Bezetting2
             try
             {
                 //int personeel_nr = int.Parse(nummer);
-                personeel persoon = LijstPersoneel.First(a => a._achternaam == naam);
+                personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._achternaam == naam);
                 return persoon._persnummer.ToString();
             }
             catch
@@ -962,7 +749,6 @@ namespace Bezetting2
                 ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
             }
         }
-
         public static void MaakNieuweCollegaInBezettingAan(string Naam, string Kleur, int jaar, int maand, int aantal_maanden)
         {
             // als bij verhuizing er een persoon bij komt, moet in deze toevoegen aan ListWerkdagPloeg,
@@ -1015,51 +801,6 @@ namespace Bezetting2
             igekozenjaar = save_jaar;
             igekozenmaand = save_maand;
         }
-
-        //public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
-        //{
-        //    // zet oude file's om naar nieuwe ketting
-        //    var maand = ProgData.igekozenmaand;
-        //    var jaar = ProgData.igekozenjaar;
-
-        //    var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
-        //    if (!File.Exists(path))
-        //    {
-        //        var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
-        //        if (File.Exists(path_oud))
-        //        {
-        //            Laad_LijstNamen();  // nodig voor personeel nummer te krijgen hieronder
-
-        //            try
-        //            {
-        //                using (Stream stream = File.Open(path_oud, FileMode.Open))
-        //                {
-        //                    BinaryFormatter bin = new BinaryFormatter();
-        //                    ListVeranderingen.Clear();
-        //                    ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
-        //                }
-        //            }
-        //            catch { }
-
-        //            MaandData.MaandDataLijst.Clear();
-        //            foreach (veranderingen verander in ProgData.ListVeranderingen)
-        //            {
-        //                // verander
-        //                var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
-
-        //                if (!string.IsNullOrEmpty(personeel_nummer))
-        //                {
-        //                    MaandData.Voeg_toe(verander._datumafwijking,
-        //                        personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
-        //                    MaandData.VeranderInvoerDatum(verander._datuminvoer);
-        //                    MaandData.Save(kleur,15);
-        //                }
-        //            }
-        //            File.Delete(path_oud);
-        //        }
-        //    }
-        //}
-
         public static string GetLaatsteAfwijkingPersoon(string loopt_op_kleur, string persnr, DateTime datum)
         {
             string ret = "";
@@ -1077,7 +818,7 @@ namespace Bezetting2
         {
             List<string> Lijst = new List<string>();
 
-            foreach (personeel a in ProgData.LijstPersoneel)
+            foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
             {
                 if (Lijst.Contains(a._achternaam))
                     MessageBox.Show($"Er bestaat een dubbele achternaam, pas dit aan! \n{a._achternaam}");

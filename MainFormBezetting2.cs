@@ -580,7 +580,7 @@ namespace Bezetting2
 
             int maand = ProgData.igekozenmaand;
             int aantal_dagen = DateTime.DaysInMonth((int)numericUpDownJaar.Value, maand);
-            int aantal_rows = ProgData.LijstPersoneelKleur.Count();
+            int aantal_rows = ProgData.AlleMensen.LijstPersoonKleur.Count();
             //string dag_string;
 
             DateTime pasen = EasterSunday((int)numericUpDownJaar.Value);
@@ -639,8 +639,8 @@ namespace Bezetting2
                 if (!File.Exists(Locatie))
                 {
                     MessageBox.Show("bezetting deze maand bestaat niet, kan dus niks laten zien");
-                    ProgData.LijstPersoneelKleur.Clear();
-                    ProgData.LijstWerkgroepenPersoneel.Clear();
+                    ProgData.AlleMensen.LijstPersoonKleur.Clear();
+                    ProgData.AlleMensen.LijstWerkgroepenPersoneel.Clear();
                 }
                 else
                 {
@@ -1003,7 +1003,7 @@ namespace Bezetting2
                             string gekozen_naam = info.Item.SubItems[0].Text;
                             string gekozen_datum = col.ToString();
 
-                            personeel persoon = ProgData.LijstPersoneelKleur.First(a => a._achternaam == gekozen_naam);
+                            personeel persoon = ProgData.AlleMensen.LijstPersoonKleur.First(a => a._achternaam == gekozen_naam);
 
                             if (e.Button == MouseButtons.Right)
                             {
@@ -1068,7 +1068,7 @@ namespace Bezetting2
             ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
             //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
             ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-            foreach (personeel a in ProgData.LijstPersoneelKleur)
+            foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
             {
                 var naam = a._achternaam;
                 try
@@ -1547,7 +1547,7 @@ namespace Bezetting2
 
                                     //gaat fout als persoon ondertussen op andere kleur zit
 
-                                    IEnumerable<personeel> persoon = from a in ProgData.LijstPersoneel
+                                    IEnumerable<personeel> persoon = from a in ProgData.AlleMensen.LijstPersonen
                                                                      where (a._achternaam == naam)
                                                                      where (!string.IsNullOrEmpty(a._nieuwkleur))
                                                                      select a;
@@ -1649,7 +1649,7 @@ namespace Bezetting2
                                 _reserve4 = "",
                                 _reserve5 = ""
                             };
-                            ProgData.LijstPersoneel.Add(p);
+                            ProgData.AlleMensen.LijstPersonen.Add(p);
                         }
                         catch { }
                         read = reader.Read();
@@ -1688,7 +1688,7 @@ namespace Bezetting2
             if (result == DialogResult.Yes)
             {
 
-                ProgData.LijstPersoneel.Clear();
+                ProgData.AlleMensen.LijstPersonen.Clear();
 
                 MessageBox.Show("Let op, alle oude personeel gaat weg, open Bezetting5ploegen....Bez");
                 openFileDialog.FileName = "";
@@ -1765,7 +1765,7 @@ namespace Bezetting2
                             //''  Rechten(17) = Mag op andere ploegen kijken										
 
                             string oud_recht = meta[1].ToString();
-                            personeel persoon = ProgData.LijstPersoneel.First(b => b._persnummer.ToString() == meta[2].ToString());
+                            personeel persoon = ProgData.AlleMensen.LijstPersonen.First(b => b._persnummer.ToString() == meta[2].ToString());
                             string naam = persoon._achternaam;
                             int rechten = 0;
                             // mag alles in oude programma
@@ -1962,7 +1962,7 @@ namespace Bezetting2
             DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
             int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
 
-            foreach (personeel  pers in ProgData.LijstPersoneelKleur)
+            foreach (personeel  pers in ProgData.AlleMensen.LijstPersoonKleur)
             {
                 labelDebug.Text = $"{pers._achternaam}                           ";
                 labelDebug.Refresh();
