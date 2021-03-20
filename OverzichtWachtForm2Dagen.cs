@@ -141,6 +141,7 @@ namespace Bezetting2
                     case "OI8":
                     case "EV":
                     case "GP":
+                    case "X":
                         e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
                         break;
                     case "ED-":
@@ -864,7 +865,6 @@ namespace Bezetting2
             SaveData();
             ViewUpdate();
         }
-
         private void ButtonOpmerking_Click(object sender, EventArgs e)
         {
             //string file = $"{ProgData.Igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
@@ -876,7 +876,6 @@ namespace Bezetting2
             Process.Start(file);
             buttonOpmerking.BackColor = Color.Yellow;
         }
-
         private void buttonOpmerkingDag2_Click(object sender, EventArgs e)
         {
             string file = $"{dat2.Year}\\{dat2.Month}\\{labelDatum2.Text} - {labelDienst2.Text}.txt";
@@ -887,14 +886,12 @@ namespace Bezetting2
             Process.Start(file);
             buttonOpmerking2.BackColor = Color.Yellow;
         }
-
         private void GaNaarDatumButton_Click(object sender, EventArgs e)
         {
             dateTimePicker1.Value = DateTime.Today;
             dateTimePicker1.Visible = !dateTimePicker1.Visible;
             GaNaarDat.Visible = dateTimePicker1.Visible;
         }
-
         private void GaNaarDat_Click(object sender, EventArgs e)
         {
             SaveData();

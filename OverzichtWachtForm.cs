@@ -826,6 +826,7 @@ namespace Bezetting2
                     case "OI8":
                     case "EV":
                     case "GP":
+                    case "X":
                         e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
                         break;
                     case "ED-":

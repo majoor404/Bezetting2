@@ -699,7 +699,6 @@ namespace Bezetting2
             Process.GetCurrentProcess().Kill();
             return false;
         }
-
         public static void VulInLooptExtraDienst(string afwijking, DateTime _verzoekdag, string naam)
         {
             // als ED-O of ED-M of ED-N aanpassing op andere kleur, of VD of RD
@@ -814,17 +813,18 @@ namespace Bezetting2
             }
             return ret;
         }
-        public static void CheckDubbelAchterNaam()
-        {
-            List<string> Lijst = new List<string>();
+        
+        //public static void CheckDubbelAchterNaam()
+        //{
+        //    List<string> Lijst = new List<string>();
 
-            foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
-            {
-                if (Lijst.Contains(a._achternaam))
-                    MessageBox.Show($"Er bestaat een dubbele achternaam, pas dit aan! \n{a._achternaam}");
-                Lijst.Add(a._achternaam);
-            }
-        }
+        //    foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
+        //    {
+        //        if (Lijst.Contains(a._achternaam))
+        //            MessageBox.Show($"Er bestaat een dubbele achternaam, pas dit aan! \n{a._achternaam}");
+        //        Lijst.Add(a._achternaam);
+        //    }
+        //}
     }
 }
 

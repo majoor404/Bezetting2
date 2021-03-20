@@ -567,7 +567,7 @@ namespace Bezetting2
 
                 EditPersoneel_Shown(this, null);
 
-                ProgData.CheckDubbelAchterNaam();
+                //ProgData.CheckDubbelAchterNaam();
             }
         }
 

@@ -296,7 +296,7 @@ namespace Bezetting2
                 {
                 }
             }
-            ProgData.CheckDubbelAchterNaam();
+            //ProgData.CheckDubbelAchterNaam();
             Refresh();
         }
 

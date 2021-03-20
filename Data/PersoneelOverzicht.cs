@@ -196,11 +196,11 @@ namespace Bezetting2.Data
         {
             string Locatie = ProgData.Ploeg_Namen_Locatie(kleur);
 
-            var veranderdkleur = File.GetLastAccessTime(Locatie);
+            var veranderdkleur = File.GetLastWriteTime(Locatie);
 
-            var diffInSeconds = System.Math.Abs((veranderdkleur - laaste_versie_kleur).TotalSeconds);
+            //var diffInSeconds = System.Math.Abs((veranderdkleur - laaste_versie_kleur).TotalSeconds);
 
-            if (diffInSeconds > 1000)
+            if (laaste_versie_kleur != veranderdkleur /* diffInSeconds > 1000*/)
             {
                 if (try_again < 0)
                 {
@@ -215,9 +215,10 @@ namespace Bezetting2.Data
 
                         using (Stream stream = File.Open(Locatie, FileMode.Create))
                         {
-                            laaste_versie_kleur = veranderdkleur;
                             BinaryFormatter bin = new BinaryFormatter();
                             bin.Serialize(stream, LijstPersoonKleur);
+                            laaste_versie_kleur = File.GetLastWriteTime(Locatie);
+                            veranderdkleur = laaste_versie_kleur;
                         }
                     }
                     catch (IOException)
