@@ -46,10 +46,13 @@ namespace Bezetting2
         public static string Huidige_Gebruiker_Werkt_Op_Kleur;
 
         public static int ihuidigemaand;
+
         public static int igekozenmaand;
+        private static int BewaarMaand;
 
         public static int ihuidigjaar;
-        private static int _igekozenjaar; // Backing
+        private static int _igekozenjaar;  // Backing
+        private static int BewaarJaar;
 
         public static string backup_zipnaam_huidige_maand;
         public static string backup_zipnaam_maand_verder;
@@ -615,6 +618,12 @@ namespace Bezetting2
                 File.Delete(backup_zipnaam_2maanden_verder);
             ZipFile.CreateFromDirectory(startPath, backup_zipnaam_2maanden_verder);
 
+            ProgData.BewaarDatum();
+
+            bak = DateTime.Now;
+            ProgData.igekozenjaar = bak.Year;
+            ProgData.igekozenmaand = bak.Month;
+
             ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
             ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Blauw", 15);
 
@@ -632,6 +641,8 @@ namespace Bezetting2
 
             ProgData.AlleMensen.HaalPloegNamenOpKleur("DD");
             ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
+
+            ProgData.ReturnDatum();
         }
 
         public static void NachtErVoorVrij(string gekozen_naam, string dagnr, string afwijking)
@@ -843,6 +854,19 @@ namespace Bezetting2
         //        Lijst.Add(a._achternaam);
         //    }
         //}
+
+        public static void BewaarDatum()
+        {
+            BewaarJaar = igekozenjaar;
+            BewaarMaand = igekozenmaand;
+        }
+
+        public static void ReturnDatum()
+        {
+            igekozenjaar = BewaarJaar;
+            igekozenmaand = BewaarMaand;
+        }
+
     }
 }
 
