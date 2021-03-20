@@ -1329,15 +1329,30 @@ namespace Bezetting2
                 }
             }
 
-            if (ProgData.backup_time == DateTime.Now.Minute)
+
+            // elke 30 sec kom ik hier
+            // ProgData.backup_time is random getal 00-60
+            // dus 1 keer per uur kom je bij else
+            if (true || ProgData.backup_time == DateTime.Now.Minute)
             {
-                if (!File.Exists(ProgData.backup_zipnaam_huidige_maand))
+                if (!File.Exists("BezData\\backup.time"))
                 {
-                    timerKill.Enabled = false;
-                    labelDebug.Text = "Dagelijkse Backup, moment.....";
-                    ProgData.Backup();
-                    timerKill.Enabled = true;
-                    labelDebug.Text = "Dagelijkse Backup gelukt";
+                    using (File.Create("BezData\\backup.time"))
+                    { };
+                }
+                else // hier kijken of er een nieuwe dag is
+                {
+                    var laatste_keer = File.GetLastWriteTime("BezData\\backup.time");
+                    // 1 keer per dag
+                    if (laatste_keer.Day != DateTime.Now.Day)   // zo ja, backup en maken _namen.bin documenten
+                    {
+                        timerKill.Enabled = false;
+                        labelDebug.Text = "Dagelijkse Backup, moment.....";
+                        ProgData.Backup();
+                        File.SetLastWriteTime("BezData\\backup.time", DateTime.Now);
+                        timerKill.Enabled = true;
+                        labelDebug.Text = "Dagelijkse Backup gelukt";
+                    }
                 }
             }
 

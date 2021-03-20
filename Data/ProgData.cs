@@ -614,6 +614,24 @@ namespace Bezetting2
             if (File.Exists(backup_zipnaam_2maanden_verder))
                 File.Delete(backup_zipnaam_2maanden_verder);
             ZipFile.CreateFromDirectory(startPath, backup_zipnaam_2maanden_verder);
+
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
+            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Blauw", 15);
+
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("Groen");
+            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Groen", 15);
+            
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("Wit");
+            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Wit", 15);
+
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("Geel");
+            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Geel", 15);
+
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("Rood");
+            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Rood", 15);
+
+            ProgData.AlleMensen.HaalPloegNamenOpKleur("DD");
+            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
         }
 
         public static void NachtErVoorVrij(string gekozen_naam, string dagnr, string afwijking)

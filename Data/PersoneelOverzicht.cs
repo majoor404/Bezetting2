@@ -155,7 +155,8 @@ namespace Bezetting2.Data
 
                 MaakWerkPlekkenLijst();
 
-                BewaarPloegNamenOpKleurOpSchijf(kleur, 15);
+                //wordt in backup geregeld, alleen nodig voor maanden in verleden.
+                //BewaarPloegNamenOpKleurOpSchijf(kleur, 15);
             }
         }
         public void HaalPloegNamenOpKleurVanSchijf(string kleur, int try_again)
