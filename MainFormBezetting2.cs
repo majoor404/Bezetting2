@@ -814,7 +814,7 @@ namespace Bezetting2
                 ProgData.MaandData.Load(ProgData.GekozenKleur);
                 foreach (MaandDataClass.Item Item in ProgData.MaandData.MaandDataLijst)
                 {
-                    for (int i = 0; i < View.Items.Count; i++) // alle namen/rows
+                    for (int i = 4; i < View.Items.Count; i++) // alle namen/rows
                     {
                         if (View.Items[i].Tag != null && Item.personeel_nr_ != "" && Item.personeel_nr_ == View.Items[i].Tag.ToString())
                         {
@@ -929,12 +929,15 @@ namespace Bezetting2
                     if (a._nieuwkleur == null) // geen idee waar dit soms gebeurt
                         a._nieuwkleur = "";
                     if (!string.IsNullOrEmpty(a._nieuwkleur))
+                    {
                         a._kleur = a._nieuwkleur;
-                    a._nieuwkleur = "";
+                        a._nieuwkleur = "";
+                    }
                     if (a._nieuwkleur == null) // geen idee waar dit soms gebeurt
                         a._nieuwkleur = "";
                     ProgData.AlleMensen.Save();
                 }
+                
             }
         }
 

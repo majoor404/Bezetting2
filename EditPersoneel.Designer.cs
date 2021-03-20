@@ -38,7 +38,6 @@
             this.Voornaam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Kleur = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Rechten = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.textBoxAchterNaam = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxVoorNaam = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -73,6 +72,7 @@
             this.buttonVoegToe = new System.Windows.Forms.Button();
             this.LabelRoosterNieuw = new System.Windows.Forms.Label();
             this.groupBoxNieuwRooster = new System.Windows.Forms.GroupBox();
+            this.buttonUitlegCancel = new System.Windows.Forms.Button();
             this.labelNieuwRoosterDatum = new System.Windows.Forms.Label();
             this.buttonCancelVerhuis = new System.Windows.Forms.Button();
             this.buttonRechten = new System.Windows.Forms.Button();
@@ -82,7 +82,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxKleur = new System.Windows.Forms.ComboBox();
-            this.buttonUitlegCancel = new System.Windows.Forms.Button();
+            this.textBoxAchterNaam = new System.Windows.Forms.TextBox();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -162,13 +162,6 @@
             // Rechten
             // 
             this.Rechten.Text = "Rechten";
-            // 
-            // textBoxAchterNaam
-            // 
-            this.textBoxAchterNaam.Location = new System.Drawing.Point(123, 346);
-            this.textBoxAchterNaam.Name = "textBoxAchterNaam";
-            this.textBoxAchterNaam.Size = new System.Drawing.Size(201, 20);
-            this.textBoxAchterNaam.TabIndex = 1;
             // 
             // label3
             // 
@@ -459,6 +452,16 @@
             this.groupBoxNieuwRooster.TabStop = false;
             this.groupBoxNieuwRooster.Text = " Verplaatst persoon naar ander Rooster/Kleur ";
             // 
+            // buttonUitlegCancel
+            // 
+            this.buttonUitlegCancel.Location = new System.Drawing.Point(228, 53);
+            this.buttonUitlegCancel.Name = "buttonUitlegCancel";
+            this.buttonUitlegCancel.Size = new System.Drawing.Size(21, 23);
+            this.buttonUitlegCancel.TabIndex = 46;
+            this.buttonUitlegCancel.Text = "?";
+            this.buttonUitlegCancel.UseVisualStyleBackColor = true;
+            this.buttonUitlegCancel.Click += new System.EventHandler(this.buttonUitlegCancel_Click);
+            // 
             // labelNieuwRoosterDatum
             // 
             this.labelNieuwRoosterDatum.AutoSize = true;
@@ -554,15 +557,12 @@
             this.comboBoxKleur.Size = new System.Drawing.Size(196, 21);
             this.comboBoxKleur.TabIndex = 13;
             // 
-            // buttonUitlegCancel
+            // textBoxAchterNaam
             // 
-            this.buttonUitlegCancel.Location = new System.Drawing.Point(228, 53);
-            this.buttonUitlegCancel.Name = "buttonUitlegCancel";
-            this.buttonUitlegCancel.Size = new System.Drawing.Size(21, 23);
-            this.buttonUitlegCancel.TabIndex = 46;
-            this.buttonUitlegCancel.Text = "?";
-            this.buttonUitlegCancel.UseVisualStyleBackColor = true;
-            this.buttonUitlegCancel.Click += new System.EventHandler(this.buttonUitlegCancel_Click);
+            this.textBoxAchterNaam.Location = new System.Drawing.Point(123, 346);
+            this.textBoxAchterNaam.Name = "textBoxAchterNaam";
+            this.textBoxAchterNaam.Size = new System.Drawing.Size(201, 20);
+            this.textBoxAchterNaam.TabIndex = 1;
             // 
             // EditPersoneel
             // 
@@ -635,7 +635,6 @@
         private System.Windows.Forms.ColumnHeader Naam;
         private System.Windows.Forms.ColumnHeader Voornaam;
         private System.Windows.Forms.ColumnHeader Kleur;
-        private System.Windows.Forms.TextBox textBoxAchterNaam;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxVoorNaam;
         private System.Windows.Forms.Label label4;
@@ -681,5 +680,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ComboBox comboBoxKleur;
         private System.Windows.Forms.Button buttonUitlegCancel;
+        private System.Windows.Forms.TextBox textBoxAchterNaam;
     }
 }

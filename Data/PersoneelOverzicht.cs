@@ -93,7 +93,6 @@ namespace Bezetting2.Data
             else
             {
                 Load();
-                DateTime nu = DateTime.Now;
                 LijstPersoonKleur.Clear();
 
                 // voor sort, 
@@ -102,16 +101,51 @@ namespace Bezetting2.Data
                 // als nieuwkleur aanwezig, dan afhankelijk van tijdstip overgang
                 // overgang is huidige maand, dan hoor je bij ploeg
                 // overgang verleden, dan gebruiken we dit niet
-                // 
 
+                 
 
                 IEnumerable<personeel> ploeg_gekozen = from a in LijstPersonen
-                                                       where (a._kleur == kleur) || (a._nieuwkleur == kleur && a._verhuisdatum >= nu)
+                                                       where (a._kleur == kleur || a._nieuwkleur == kleur)
                                                        select a;
 
                 foreach (personeel a in ploeg_gekozen)
                 {
-                    LijstPersoonKleur.Add(a);
+                    if(ProgData.GekozenKleur == a._kleur )
+                    {
+                        bool nieuwe_wacht = !(a._nieuwkleur == null || a._nieuwkleur == "");
+                        if (nieuwe_wacht)
+                        {
+                            var verhuis_maand = a._verhuisdatum.Month;
+                            var verhuis_jaar = a._verhuisdatum.Year;
+                            var jaar = ProgData.igekozenjaar;
+                            var maand = ProgData.igekozenmaand;
+                            if (verhuis_jaar >= jaar && verhuis_maand >= maand)
+                                LijstPersoonKleur.Add(a);
+                        }
+                        else
+                        {
+                            LijstPersoonKleur.Add(a);
+                        }
+                    }
+                    else
+                    {
+                        bool nieuwe_wacht = !(a._nieuwkleur == null || a._nieuwkleur == "");
+                        if (nieuwe_wacht)
+                        {
+                            var verhuis_maand = a._verhuisdatum.Month;
+                            var verhuis_jaar = a._verhuisdatum.Year;
+                            var jaar = ProgData.igekozenjaar;
+                            var maand = ProgData.igekozenmaand;
+                            if (jaar >= verhuis_jaar && maand >= verhuis_maand)
+                                LijstPersoonKleur.Add(a);
+                        }
+                        else
+                        {
+                            LijstPersoonKleur.Add(a);
+                        }
+                    }
+                    
+                    
                 }
 
                 LijstPersoonKleur.Sort(delegate (personeel x, personeel y)
