@@ -2073,5 +2073,17 @@ namespace Bezetting2
             ProgData.SaveLooptExtraLijst(dir, ProgData.GekozenKleur);
             ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
         }
+
+        private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            About a = new About();
+            a.ShowDialog();
+        }
+
+        private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Help he = new Help();
+            he.ShowDialog();
+        }
     }
 }
