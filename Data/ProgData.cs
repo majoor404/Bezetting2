@@ -54,7 +54,7 @@ namespace Bezetting2
         private static int _igekozenjaar;  // Backing
         private static int BewaarJaar;
 
-        public static string backup_zipnaam_huidige_maand;
+        public static string backup_zipnaam_huidige_dag;
         public static string backup_zipnaam_maand_verder;
         public static string backup_zipnaam_2maanden_verder;
 
@@ -569,16 +569,8 @@ namespace Bezetting2
                 if (TestNetwerkBeschikbaar(15))
                 {
                     _ = Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}"));
-
-                    ///
-                    string file = LijstWerkdagPloeg_Locatie(kleur);
-                    LijstWerkdagPloeg.Clear();
-                    using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, LijstWerkdagPloeg);
-                    }
-                    ///
+                    if(!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
+                        MaakNieuwPloegBezettingAan(kleur);
                     GekozenKleur = kleur;
                 }
                 else
@@ -592,9 +584,9 @@ namespace Bezetting2
         {
             DateTime bak = DateTime.Now;
             string startPath = GetDirectoryBezettingMaand(bak);
-            if (File.Exists(backup_zipnaam_huidige_maand))
-                File.Delete(backup_zipnaam_huidige_maand);
-            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_maand);
+            if (File.Exists(backup_zipnaam_huidige_dag))
+                File.Delete(backup_zipnaam_huidige_dag);
+            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_dag);
 
             bak = bak.AddMonths(1);
             startPath = GetDirectoryBezettingMaand(bak);
@@ -609,6 +601,9 @@ namespace Bezetting2
                 File.Delete(backup_zipnaam_2maanden_verder);
             ZipFile.CreateFromDirectory(startPath, backup_zipnaam_2maanden_verder);
 
+            
+            // maak ploeg namen op schijf.
+            
             ProgData.BewaarDatum();
 
             bak = DateTime.Now;
@@ -858,6 +853,42 @@ namespace Bezetting2
             igekozenmaand = BewaarMaand;
         }
 
+        public static void MaakNieuwPloegBezettingAan(string kleur)
+        {
+            string file = LijstWerkdagPloeg_Locatie(kleur);
+            LijstWerkdagPloeg.Clear();
+            ProgData.AlleMensen.HaalPloegNamenOpKleur(kleur);
+            int aantal_dagen_deze_maand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
+            DateTime dat = new DateTime(igekozenjaar, igekozenmaand, 1);
+            if (dat > DateTime.Now)
+            {
+                foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+                {
+                    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                    {
+                        dat = new DateTime(igekozenjaar, igekozenmaand, i);
+                        try
+                        {
+                            werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == a._achternaam && x._dagnummer == i));
+                        }
+                        catch
+                        {
+                            werkdag dag = new werkdag
+                            {
+                                _naam = a._achternaam,
+                                _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, kleur),
+                                _werkplek = "",
+                                _afwijkingdienst = "",
+                                _dagnummer = i
+                            };
+                            ProgData.LijstWerkdagPloeg.Add(dag);
+                        }
+                    }
+                    ProgData.SaveLijstWerkdagPloeg(kleur, 15);
+                }
+                SaveLijstWerkdagPloeg(kleur, 15);
+            }
+        }
     }
 }
 

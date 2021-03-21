@@ -159,8 +159,13 @@ namespace Bezetting2.Data
                 //BewaarPloegNamenOpKleurOpSchijf(kleur, 15);
             }
         }
-        public void HaalPloegNamenOpKleurVanSchijf(string kleur, int try_again)
+        public bool HaalPloegNamenOpKleurVanSchijf(string kleur, int try_again)
         {
+            string file = ProgData.Ploeg_Namen_Locatie(kleur);
+            
+            if (!File.Exists(file))
+                return false;
+            
             if (try_again < 0)
             {
                 MessageBox.Show("HaalPloegNamenOpKleurVanSchijf() lukt niet!, te vaak geprobeerd.");
@@ -169,7 +174,7 @@ namespace Bezetting2.Data
 
             try
             {
-                using (Stream stream = File.Open(ProgData.Ploeg_Namen_Locatie(kleur), FileMode.Open))
+                using (Stream stream = File.Open(file, FileMode.Open))
                 {
                     LijstPersoonKleur.Clear();
                     BinaryFormatter bin = new BinaryFormatter();
@@ -183,6 +188,8 @@ namespace Bezetting2.Data
             }
             // haal werkgroepen op
             MaakWerkPlekkenLijst();
+
+            return true;
         }
         public void MaakWerkPlekkenLijst()
         {
