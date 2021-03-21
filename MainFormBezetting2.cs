@@ -182,7 +182,7 @@ namespace Bezetting2
             ProgData.ihuidigjaar = nu.Year;
 
             DateTime backup = nu;
-            ProgData.backup_zipnaam_huidige_dag = $"Backup\\GemaaktOpDag_{backup.Day}_HuidigeMaand.zip";
+            ProgData.backup_zipnaam_huidige_dag = $"Backup\\GemaaktOpDag_{backup.Day}.zip";
             backup = backup.AddMonths(1);
             ProgData.backup_zipnaam_maand_verder = $"Backup\\maand_{backup.Month}.zip";
             backup = backup.AddMonths(1);
@@ -373,6 +373,7 @@ namespace Bezetting2
                 View.Items.Clear();
 
                 //ProgData.Zetom_naar_versie21(ProgData.GekozenKleur);
+                ProgData.CheckFiles(ProgData.GekozenKleur);
 
                 int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
 
@@ -2017,7 +2018,7 @@ namespace Bezetting2
 
         private void CheckExtraLopen(string kleur, string Gaat_lopen_op_kleur)
         {
-            ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+            ProgData.AlleMensen.HaalPloegNamenOpKleur(kleur);
             //ProgData.LaadLijstPersoneelKleur(kleur, 15);
             DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
             int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
@@ -2074,6 +2075,7 @@ namespace Bezetting2
                 labelDebug.Text = "";
                 labelDebug.Refresh();
                 MessageBox.Show("Klaar");
+                ButtonRefresh_Click(this, null);
             }
         }
 

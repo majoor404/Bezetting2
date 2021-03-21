@@ -47,21 +47,21 @@ namespace Bezetting2.Data
             MaandDataLijst.Add(nieuw);
         }
 
-        public void VeranderInvoerDatum(string datum)   // bij omzetten versie 2.0 naar 2.1 nodig
-        {
-            string[] subs;
-            if (datum.Contains("-"))
-            {
-                subs = datum.Split('-');
-            }
-            else
-            {
-                subs = datum.Split('/');
-            }
+        //public void VeranderInvoerDatum(string datum)   // bij omzetten versie 2.0 naar 2.1 nodig
+        //{
+        //    string[] subs;
+        //    if (datum.Contains("-"))
+        //    {
+        //        subs = datum.Split('-');
+        //    }
+        //    else
+        //    {
+        //        subs = datum.Split('/');
+        //    }
 
-            DateTime Dat = new DateTime(int.Parse(subs[2]), int.Parse(subs[1]), int.Parse(subs[0]));
-            MaandDataLijst[MaandDataLijst.Count - 1].ingevoerd_op_ = Dat;
-        }
+        //    DateTime Dat = new DateTime(int.Parse(subs[2]), int.Parse(subs[1]), int.Parse(subs[0]));
+        //    MaandDataLijst[MaandDataLijst.Count - 1].ingevoerd_op_ = Dat;
+        //}
 
         public void Load(string kleur)
         {
@@ -106,10 +106,8 @@ namespace Bezetting2.Data
                 {
                     // save lege
                     if(!InVoerOudeData)
-                        MessageBox.Show($"{path}\n" +
-                        $"niet gevonden, maak nieuwe aan!");
-                    MaandDataLijst.Clear();     // anders zou dit data kunnen zijn van andere kleur
-                    Save(kleur,15);
+                        MessageBox.Show($"{path}\nniet gevonden, maak nieuwe aan!");
+                    SaveLeegPloeg(kleur);
                 }
 
             }
@@ -179,6 +177,25 @@ namespace Bezetting2.Data
                 Thread.Sleep(1000);
             }
             return false;
+        }
+
+        public void SaveLeegPloeg(string kleur)
+        {
+            var maand = ProgData.igekozenmaand;
+            var jaar = ProgData.igekozenjaar;
+            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+            MaandDataLijst.Clear();
+            try
+            {
+                using (Stream stream = File.Open(path, FileMode.OpenOrCreate))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, MaandDataLijst);
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

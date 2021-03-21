@@ -167,7 +167,7 @@ namespace Bezetting2
 
         public static void LaadLijstWerkdagPloeg(string kleur, int try_again)
         {
-            CheckFiles(kleur);
+            //CheckFiles(kleur);
 
             if (try_again < 0)
             {
@@ -238,6 +238,9 @@ namespace Bezetting2
         /// <param name="invoerdoor">ingevoerd door</param>
         static public void RegelAfwijking(string personeel_nr, string dagnr, string afwijking, string rede, string invoerdoor, string kleur)
         {
+            // bestaat kleur en maand jaar file's ?
+            CheckFiles(kleur);
+
             MaandData.Load(kleur);
             MaandData.Voeg_toe(dagnr, personeel_nr, afwijking, invoerdoor, rede, "", "");
             MaandData.Save(kleur,15);
@@ -258,8 +261,7 @@ namespace Bezetting2
 
             igekozenjaar = datum.Year;
 
-            // bestaat kleur en maand jaar file's ?
-            CheckFiles(kleur);
+            
 
             // roep afwijking roetine aan
             RegelAfwijking(personeel_nr, dagnr, afwijking, rede, invoerdoor, kleur);
@@ -561,21 +563,35 @@ namespace Bezetting2
 
         public static void CheckFiles(string kleur)
         {
-            // check of juiste directory bestaat en gevuld is met juiste file's
-            // maak ze anders aan.
 
-            if (!File.Exists(Ploeg_Namen_Locatie(kleur)))
+            if (TestNetwerkBeschikbaar(15))
             {
-                if (TestNetwerkBeschikbaar(15))
+                string path = Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}");
+                if (!Directory.Exists(path))
                 {
-                    _ = Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}"));
-                    if(!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
-                        MaakNieuwPloegBezettingAan(kleur);
-                    GekozenKleur = kleur;
+                    MessageBox.Show("Maak nieuwe directory aan, met inhoud");
+                    // directory betond niet, dus aanmaken
+                    _ = Directory.CreateDirectory(path);
+                    // dir aangemaakt, dus weet zeker geen maand data
+                    MaandData.SaveLeegPloeg("Blauw");
+                    MaandData.SaveLeegPloeg("Rood");
+                    MaandData.SaveLeegPloeg("Geel");
+                    MaandData.SaveLeegPloeg("Groen");
+                    MaandData.SaveLeegPloeg("Wit");
+                    MaandData.SaveLeegPloeg("DD");
+                    // dir aangemaakt, dus weet zeker ploeg bezetting leeg is.
+                    MaakNieuwPloegBezettingAan("Blauw");
+                    MaakNieuwPloegBezettingAan("Rood");
+                    MaakNieuwPloegBezettingAan("Wit");
+                    MaakNieuwPloegBezettingAan("Groen");
+                    MaakNieuwPloegBezettingAan("Geel");
+                    MaakNieuwPloegBezettingAan("DD");
                 }
-                else
+
+                if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
                 {
-                    Main.Close();
+                    MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}");
+                    MaakNieuwPloegBezettingAan(kleur);
                 }
             }
         }
