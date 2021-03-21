@@ -1427,7 +1427,7 @@ namespace Bezetting2
 
                 DateTime start = DateTime.Now;
                 DateTime eind = start.AddMonths(15);
-                DeleteDataDir(start, eind);
+                DeleteOudeData(start, eind);
 
                 openFileDialog.FileName = "";
                 openFileDialog.Filter = "(*.Bez)|*.Bez";
@@ -1483,7 +1483,7 @@ namespace Bezetting2
                     inladen_vanaf_datum = new DateTime(DateTime.Now.Year, 1, 1);
                     inladen_vanaf_datum = inladen_vanaf_datum.AddMonths(-1);
                     // delete dan nog even die directory's
-                    DeleteDataDir(inladen_vanaf_datum, DateTime.Now);
+                    DeleteOudeData(inladen_vanaf_datum, DateTime.Now);
                 }
                 else
                 {
@@ -1859,38 +1859,6 @@ namespace Bezetting2
             File.WriteAllLines("BezData\\popupmenu.ini", PopUpNamen);
         }
 
-        private void DeleteDataDir(DateTime start, DateTime eind)
-        {
-            DeleteOudeData(start, eind);
-
-            //while (eind >= start)
-            ////for (int i = 0; i < aantal; i++)
-            //{
-            //    start = start.AddMonths(1);
-            //    string path = Path.GetFullPath($"{start.Year}\\{start.Month}"); // maand als nummer
-            //    if (Directory.Exists(path))
-            //    {
-            //        Directory.Delete(path, true); // delete met inhoud
-            //    }
-            //    labelDebug.Text = $"maak dir {path}";
-            //    labelDebug.Refresh();
-            //    _ = Directory.CreateDirectory(path);
-            //    labelDebug.Text = $"vul met kleuren data : {path}";
-            //    labelDebug.Refresh();
-
-            //    ProgData.igekozenjaar = start.Year;
-            //    ProgData.igekozenmaand = start.Month;
-            //    labelDebug.Text = $"Bezetting lijst kleuren {start.Year} - {start.Month}";
-            //    labelDebug.Refresh();
-            //    ProgData.MaakNieuwPloegBezettingAan("Blauw");
-            //    ProgData.MaakNieuwPloegBezettingAan("Rood");
-            //    ProgData.MaakNieuwPloegBezettingAan("Wit");
-            //    ProgData.MaakNieuwPloegBezettingAan("Groen");
-            //    ProgData.MaakNieuwPloegBezettingAan("Geel");
-            //    ProgData.MaakNieuwPloegBezettingAan("DD");
-            //}
-        }
-
         private void DeleteOudeData(DateTime start, DateTime eind)
         {
             while (eind >= start)
@@ -1900,24 +1868,12 @@ namespace Bezetting2
                 if (Directory.Exists(path))
                 {
                     // delete _maand
-                    var kleur = "Blauw";
-                    var maanddata = Path.GetFullPath($"{start.Year}\\{start.Month}\\{kleur}_Maand_Data.bin");
-                    File.Delete(maanddata);
-                    kleur = "Geel";
-                    maanddata = Path.GetFullPath($"{start.Year}\\{start.Month}\\{kleur}_Maand_Data.bin");
-                    File.Delete(maanddata);
-                    kleur = "Groen";
-                    maanddata = Path.GetFullPath($"{start.Year}\\{start.Month}\\{kleur}_Maand_Data.bin");
-                    File.Delete(maanddata);
-                    kleur = "Wit";
-                    maanddata = Path.GetFullPath($"{start.Year}\\{start.Month}\\{kleur}_Maand_Data.bin");
-                    File.Delete(maanddata);
-                    kleur = "Rood";
-                    maanddata = Path.GetFullPath($"{start.Year}\\{start.Month}\\{kleur}_Maand_Data.bin");
-                    File.Delete(maanddata);
-                    kleur = "DD";
-                    maanddata = Path.GetFullPath($"{start.Year}\\{start.Month}\\{kleur}_Maand_Data.bin");
-                    File.Delete(maanddata);
+                    ProgData.MaandData.SaveLeegPloeg("Blauw", path);
+                    ProgData.MaandData.SaveLeegPloeg("Geel", path);
+                    ProgData.MaandData.SaveLeegPloeg("Groen", path);
+                    ProgData.MaandData.SaveLeegPloeg("Wit", path);
+                    ProgData.MaandData.SaveLeegPloeg("Rood", path);
+                    ProgData.MaandData.SaveLeegPloeg("DD", path);
                 }
                 else
                 {
@@ -1926,6 +1882,13 @@ namespace Bezetting2
                     _ = Directory.CreateDirectory(path);
                     labelDebug.Text = $"vul met kleuren data : {path}";
                     labelDebug.Refresh();
+                    // delete _maand
+                    ProgData.MaandData.SaveLeegPloeg("Blauw", path);
+                    ProgData.MaandData.SaveLeegPloeg("Geel", path);
+                    ProgData.MaandData.SaveLeegPloeg("Groen", path);
+                    ProgData.MaandData.SaveLeegPloeg("Wit", path);
+                    ProgData.MaandData.SaveLeegPloeg("Rood", path);
+                    ProgData.MaandData.SaveLeegPloeg("DD", path);
 
                     ProgData.igekozenjaar = start.Year;
                     ProgData.igekozenmaand = start.Month;

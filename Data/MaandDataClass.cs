@@ -85,7 +85,8 @@ namespace Bezetting2.Data
                             MaandDataLijst = (List<Item>)bin.Deserialize(stream);
                         }
                     }
-                    catch {
+                    catch
+                    {
                         MessageBox.Show("kon {path} niet laden! error 2351");
                     }
 
@@ -105,7 +106,7 @@ namespace Bezetting2.Data
                 else
                 {
                     // save lege
-                    if(!InVoerOudeData)
+                    if (!InVoerOudeData)
                         MessageBox.Show($"{path}\nniet gevonden, maak nieuwe aan!");
                     SaveLeegPloeg(kleur);
                 }
@@ -184,6 +185,22 @@ namespace Bezetting2.Data
             var maand = ProgData.igekozenmaand;
             var jaar = ProgData.igekozenjaar;
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+            MaandDataLijst.Clear();
+            try
+            {
+                using (Stream stream = File.Open(path, FileMode.OpenOrCreate))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, MaandDataLijst);
+                }
+            }
+            catch
+            {
+            }
+        }
+        
+        public void SaveLeegPloeg(string kleur, string path)
+        {
             MaandDataLijst.Clear();
             try
             {
