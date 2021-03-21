@@ -499,6 +499,10 @@ namespace Bezetting2
                         string kleur = Main.View.Items[4].SubItems[0].Text;
                         string opslag = Path.GetFullPath($"{jaar}\\{imaand}\\maand_overzicht_{kleur}.jpg");
                         bitmap.Save(opslag, ImageFormat.Jpeg);
+                        
+                        // voor als er problemen zijn met data ;-)
+                        opslag = Path.GetFullPath($"{jaar}\\{imaand}\\maand_overzicht_{kleur}_{DateTime.Now.ToShortDateString()}.jpg");
+                        bitmap.Save(opslag, ImageFormat.Jpeg);
                     }
                 }
             }
@@ -569,7 +573,7 @@ namespace Bezetting2
                 string path = Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}");
                 if (!Directory.Exists(path))
                 {
-                    MessageBox.Show("Maak nieuwe directory aan, met inhoud");
+                    MessageBox.Show("Maak nieuwe directory aan, met inhoud\nGeduld ;-)");
                     // directory betond niet, dus aanmaken
                     _ = Directory.CreateDirectory(path);
                     // dir aangemaakt, dus weet zeker geen maand data
