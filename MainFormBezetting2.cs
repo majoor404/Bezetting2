@@ -1204,9 +1204,8 @@ namespace Bezetting2
                 {
                     try
                     {
-                        int time = (int)HoverTime.Value * 1000;
                         int row1 = info.Item.Index;
-                        mTooltip.Show(View.Items[row1].Text, info.Item.ListView, e.X + 15, e.Y + 15, time);
+                        mTooltip.Show(View.Items[row1].Text, info.Item.ListView, e.X + 15, e.Y + 15, 2000);
                     }
                     catch { }
                 }
@@ -1442,9 +1441,9 @@ namespace Bezetting2
                     OpenDataBase_en_Voer_oude_data_in_Bezetting(openFileDialog.FileName);
                     //MessageBox.Show("Klaar met invoer, start programma opnieuw op.");
                     ProgData.GekozenKleur = "Blauw";
-                    ButtonNu_Click(this, null);
+                    //ButtonNu_Click(this, null);
                     ProgData.Disable_error_Meldingen = false;
-                    Close();
+                    Process.GetCurrentProcess().Kill();
                 }
 
                 ProgData.ScreenCapture = true;
@@ -1455,6 +1454,7 @@ namespace Bezetting2
         private void OpenDataBase_en_Voer_oude_data_in_Bezetting(string file)
         {
             WindowUpdateViewScreen = false;
+            ProgData.MaandData.InVoerOudeData = true;
             using (OleDbConnection connection =
                 new OleDbConnection($"Provider = Microsoft.Jet.OLEDB.4.0; Data Source = \"{file}\"; Jet OLEDB:Database Password = fcl721"))
             {
@@ -1607,6 +1607,7 @@ namespace Bezetting2
                 reader.Close();
             }
             WindowUpdateViewScreen = true;
+            ProgData.MaandData.InVoerOudeData = true;
         }
 
         private void OpenDataBase_en_Voer_Oude_Namen_In(string file)
@@ -1892,12 +1893,7 @@ namespace Bezetting2
                 */
             }
         }
-
-        private void checkBoxHoverNaam_CheckedChanged(object sender, EventArgs e)
-        {
-            HoverTime.Visible = checkBoxHoverNaam.Checked;
-        }
-
+        
         private void MainFormBezetting2_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.F5)
@@ -2020,8 +2016,7 @@ namespace Bezetting2
 
         private void updateExtraDienstenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            const string message = "Als aantal extra diensten niet klopt op maand overzicht, kan je deze hertellen.\n" +
-                "Dit duurt wel even (netwerk traag). U krijgt melding als programma klaar is.";
+            const string message = "Als aantal extra diensten niet klopt op maand overzicht, kan je deze hertellen.";
             const string caption = "Vraag updaten ?";
             var result = MessageBox.Show(message, caption,
                                          MessageBoxButtons.YesNo,

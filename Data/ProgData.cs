@@ -228,16 +228,6 @@ namespace Bezetting2
             return 2;
         }
 
-        //private static void MaakWerkPlekkenLijst()
-        //{
-        //    LijstWerkgroepenPersoneel.Clear();
-        //    foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
-        //    {
-        //        if (!LijstWerkgroepenPersoneel.Contains(a._werkgroep))
-        //            LijstWerkgroepenPersoneel.Add(a._werkgroep);
-        //    }
-        //}
-
         /// <summary>
         /// Regel de afwijkingen van rooster
         /// </summary>
@@ -574,20 +564,21 @@ namespace Bezetting2
             // check of juiste directory bestaat en gevuld is met juiste file's
             // maak ze anders aan.
 
-            // maak namen.bin 
-
-            //if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
             if (!File.Exists(Ploeg_Namen_Locatie(kleur)))
             {
                 if (TestNetwerkBeschikbaar(15))
                 {
                     _ = Directory.CreateDirectory(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}"));
 
-                    //MaakPloegNamenLijst(kleur);
-                    //ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf(ProgData.GekozenKleur, 15);
-                    //SaveLijstPersoneelKleur(kleur, 15);
-
-                    //LaadLijstWerkdagPloeg(kleur, 15);
+                    ///
+                    string file = LijstWerkdagPloeg_Locatie(kleur);
+                    LijstWerkdagPloeg.Clear();
+                    using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
+                    {
+                        BinaryFormatter bin = new BinaryFormatter();
+                        bin.Serialize(stream, LijstWerkdagPloeg);
+                    }
+                    ///
                     GekozenKleur = kleur;
                 }
                 else

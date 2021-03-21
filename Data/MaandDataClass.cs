@@ -14,6 +14,7 @@ namespace Bezetting2.Data
         private DateTime laaste_versie;
         private DateTime laaste_versie_van_huidige_kleur;
         private string laaste_path;
+        public bool InVoerOudeData = false;
 
         [Serializable]
         public class Item
@@ -69,8 +70,6 @@ namespace Bezetting2.Data
 
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
-            //ProgData.Zetom_naar_versie21(kleur);
-
             if (File.Exists(path))
             {
                 var veranderd = File.GetLastWriteTime(path);
@@ -99,14 +98,15 @@ namespace Bezetting2.Data
             }
             else
             {
-                if (TestZekerWetenNietAanwezig(5, kleur))
+                if (!InVoerOudeData && TestZekerWetenNietAanwezig(5, kleur))
                 {
                     Load(kleur);
                 }
                 else
                 {
                     // save lege
-                    MessageBox.Show($"{path}\n" +
+                    if(!InVoerOudeData)
+                        MessageBox.Show($"{path}\n" +
                         $"niet gevonden, maak nieuwe aan!");
                     MaandDataLijst.Clear();     // anders zou dit data kunnen zijn van andere kleur
                     Save(kleur,15);

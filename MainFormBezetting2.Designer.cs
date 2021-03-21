@@ -65,6 +65,7 @@
             this.editPopupMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.StatusStrip = new System.Windows.Forms.StatusStrip();
@@ -107,14 +108,11 @@
             this.timerKill = new System.Windows.Forms.Timer(this.components);
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
-            this.HoverTime = new System.Windows.Forms.NumericUpDown();
             this.panelColor = new System.Windows.Forms.Panel();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HoverTime)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -409,14 +407,19 @@
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(104, 6);
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -881,25 +884,6 @@
             this.checkBoxHoverNaam.TabIndex = 31;
             this.checkBoxHoverNaam.Text = "Hover";
             this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
-            this.checkBoxHoverNaam.CheckedChanged += new System.EventHandler(this.checkBoxHoverNaam_CheckedChanged);
-            // 
-            // HoverTime
-            // 
-            this.HoverTime.Location = new System.Drawing.Point(80, 675);
-            this.HoverTime.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.HoverTime.Name = "HoverTime";
-            this.HoverTime.Size = new System.Drawing.Size(35, 20);
-            this.HoverTime.TabIndex = 32;
-            this.HoverTime.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.HoverTime.Visible = false;
             // 
             // panelColor
             // 
@@ -908,11 +892,6 @@
             this.panelColor.Name = "panelColor";
             this.panelColor.Size = new System.Drawing.Size(107, 28);
             this.panelColor.TabIndex = 33;
-            // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // MainFormBezetting2
             // 
@@ -923,7 +902,6 @@
             this.ClientSize = new System.Drawing.Size(1834, 961);
             this.Controls.Add(this.comboBoxKleurKeuze);
             this.Controls.Add(this.panelColor);
-            this.Controls.Add(this.HoverTime);
             this.Controls.Add(this.checkBoxHoverNaam);
             this.Controls.Add(this.labelDebug);
             this.Controls.Add(this.panel8);
@@ -973,7 +951,6 @@
             this.StatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HoverTime)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1054,7 +1031,6 @@
         private System.Windows.Forms.ToolStripMenuItem maandenOverzichtNaarExcelToolStripMenuItem;
         public System.Windows.Forms.Timer timerKill;
         private System.Windows.Forms.ToolStripMenuItem jaarOverzichtNaarExcelToolStripMenuItem;
-        private System.Windows.Forms.NumericUpDown HoverTime;
         private System.Windows.Forms.Panel panelColor;
         private System.Windows.Forms.ToolStripMenuItem updateExtraDienstenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
