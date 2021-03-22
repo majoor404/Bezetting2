@@ -46,23 +46,7 @@ namespace Bezetting2.Data
             nieuw.ingevoerd_op_ = DateTime.Now;         // ingevoerd op
             MaandDataLijst.Add(nieuw);
         }
-
-        //public void VeranderInvoerDatum(string datum)   // bij omzetten versie 2.0 naar 2.1 nodig
-        //{
-        //    string[] subs;
-        //    if (datum.Contains("-"))
-        //    {
-        //        subs = datum.Split('-');
-        //    }
-        //    else
-        //    {
-        //        subs = datum.Split('/');
-        //    }
-
-        //    DateTime Dat = new DateTime(int.Parse(subs[2]), int.Parse(subs[1]), int.Parse(subs[0]));
-        //    MaandDataLijst[MaandDataLijst.Count - 1].ingevoerd_op_ = Dat;
-        //}
-
+        
         public void Load(string kleur)
         {
             var maand = ProgData.igekozenmaand;
@@ -105,10 +89,29 @@ namespace Bezetting2.Data
                 }
                 else
                 {
-                    // save lege
-                    if (!InVoerOudeData)
-                        MessageBox.Show($"{path}\nniet gevonden, maak nieuwe aan!");
-                    SaveLeegPloeg(kleur);
+                    if (ProgData.RechtenHuidigeGebruiker == 101)
+                    {
+                        DialogResult dialogResult = MessageBox.Show($"Kijk eerst of file\n" +
+                            $"{path}\n" +
+                            $"Werkelijk niet bestaat\n" +
+                            $"Zo niet, druk op Ja!\n" +
+                            $"Er wordt dan een nieuwe LEGE maand data gemaakt voor deze ploeg.", "Vraagje", MessageBoxButtons.YesNo);
+
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            SaveLeegPloeg(kleur, path);
+                        }
+                    }
+                    else
+                    {
+
+                        string melding = $"Kan {jaar}\\{maand}\\{kleur}_Maand_Data.bin niet laden," +
+                            $"\nlaat een Admin van u groep dit oplossen!\n" +
+                            $"Deze file kan alleen gecreerd worden bij maken van juiste directory.\n" +
+                            $"Of door een Admin";
+                        MessageBox.Show(melding);
+                        Process.GetCurrentProcess().Kill();
+                    }
                 }
 
             }
