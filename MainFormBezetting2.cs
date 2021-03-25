@@ -181,16 +181,6 @@ namespace Bezetting2
             ProgData.igekozenjaar = nu.Year;
             ProgData.ihuidigjaar = nu.Year;
 
-            DateTime backup = nu;
-            ProgData.backup_zipnaam_huidige_dag = $"Backup\\GemaaktOpDag_{backup.Day}.zip";
-            backup = backup.AddMonths(1);
-            ProgData.backup_zipnaam_maand_verder = $"Backup\\maand_{backup.Month}.zip";
-            backup = backup.AddMonths(1);
-            ProgData.backup_zipnaam_2maanden_verder = $"Backup\\maand_{backup.Month}.zip";
-
-            Random rnd = new Random();
-            ProgData.backup_time = rnd.Next(60);
-
             KleurMaandButton();
 
             string dienst = "N";
@@ -327,6 +317,7 @@ namespace Bezetting2
             nietMeeTelLijstToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             editPopupMenuToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+            maakBackupToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
 
             vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -479,9 +470,7 @@ namespace Bezetting2
                 View.Items[3].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
                 View.Items[3].SubItems[0].Text = ProgData.Sgekozenjaar().ToUpper();
 
-                // Kleur in beeld
-                View.Items[4].UseItemStyleForSubItems = false;
-                //View.Items[4].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
+                // Kleur in beeld ( normaal font )
                 View.Items[4].SubItems[0].Text = ProgData.GekozenKleur;
 
                 LijnenWeg();
@@ -972,87 +961,87 @@ namespace Bezetting2
             int row = info.Item.Index;
             int col = info.Item.SubItems.IndexOf(info.SubItem);
 
-            if (ProgData.WaarInTijd() == 1)
+            //if (ProgData.WaarInTijd() == 1)
+            //{
+            //    if (col > 0 && row < 4)
+            //    {
+            //        HistoryForm his = new HistoryForm();
+            //        his.comboBoxDag.Text = col.ToString();
+            //        his.ShowDialog();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("In verleden kunt u alleen kijken, niet meer aanpassen!");
+            //    }
+            //}
+            //else
+            //{
+            if (((ProgData.RechtenHuidigeGebruiker > 24) && (ProgData.RechtenHuidigeGebruiker < 51) && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur == ProgData.GekozenKleur))
+                || ProgData.RechtenHuidigeGebruiker > 51)
             {
-                if (col > 0 && row < 4)
+                try
                 {
-                    HistoryForm his = new HistoryForm();
-                    his.comboBoxDag.Text = col.ToString();
-                    his.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("In verleden kunt u alleen kijken, niet meer aanpassen!");
-                }
-            }
-            else
-            {
-                if (((ProgData.RechtenHuidigeGebruiker > 24) && (ProgData.RechtenHuidigeGebruiker < 51) && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur == ProgData.GekozenKleur))
-                    || ProgData.RechtenHuidigeGebruiker > 51)
-                {
-                    try
+                    string value = info.Item.SubItems[col].Text;
+                    //MessageBox.Show(string.Format("R{0}:C{1} val '{2}'", row, col, value));
+
+                    if (col > 0 && row < 4)
                     {
-                        string value = info.Item.SubItems[col].Text;
-                        //MessageBox.Show(string.Format("R{0}:C{1} val '{2}'", row, col, value));
+                        HistoryForm his = new HistoryForm();
+                        his.comboBoxDag.Text = col.ToString();
+                        his.ShowDialog();
+                    }
 
-                        if (col > 0 && row < 4)
+                    if (col != 0 && View.Items[row].SubItems[0].BackColor != Werkplek_)
+                    {
+                        string gekozen_naam = info.Item.SubItems[0].Text;
+                        string gekozen_datum = col.ToString();
+
+                        personeel persoon = ProgData.AlleMensen.LijstPersoonKleur.First(a => a._achternaam == gekozen_naam);
+
+                        if (e.Button == MouseButtons.Right)
                         {
-                            HistoryForm his = new HistoryForm();
-                            his.comboBoxDag.Text = col.ToString();
-                            his.ShowDialog();
-                        }
 
-                        if (col != 0 && View.Items[row].SubItems[0].BackColor != Werkplek_)
-                        {
-                            string gekozen_naam = info.Item.SubItems[0].Text;
-                            string gekozen_datum = col.ToString();
-
-                            personeel persoon = ProgData.AlleMensen.LijstPersoonKleur.First(a => a._achternaam == gekozen_naam);
-
-                            if (e.Button == MouseButtons.Right)
+                            quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
+                            quick.ShowDialog();
+                            if (quick.listBox1.SelectedIndex > -1)
                             {
-
-                                quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
-                                quick.ShowDialog();
-                                if (quick.listBox1.SelectedIndex > -1)
+                                string afwijking = quick.listBox1.SelectedItem.ToString();
+                                switch (afwijking.ToUpper())
                                 {
-                                    string afwijking = quick.listBox1.SelectedItem.ToString();
-                                    switch (afwijking.ToUpper())
-                                    {
-                                        case "WIS":
-                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                            break;
-                                        default:
-                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                            ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
-                                            break;
-                                    }
-                                    VulViewScherm();
+                                    case "WIS":
+                                        ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                        break;
+                                    default:
+                                        ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                        ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
+                                        break;
                                 }
-                            }
-                            else
-                            {
-                                DagAfwijkingInvoerForm afw = new DagAfwijkingInvoerForm();
-                                afw.labelNaam.Text = gekozen_naam;
-                                afw.labelDatum.Text = gekozen_datum;
-                                afw.labelMaand.Text = ProgData.Sgekozenmaand();
-                                afw.labelPersoneelnr.Text = persoon._persnummer.ToString();
-                                afw.Text = ProgData.Huidige_Gebruiker_Personeel_nummer;
-                                // voor ed-o ed-m en ed-n
-                                afw._verzoekdag = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
-                                afw.ShowDialog();
                                 VulViewScherm();
                             }
                         }
+                        else
+                        {
+                            DagAfwijkingInvoerForm afw = new DagAfwijkingInvoerForm();
+                            afw.labelNaam.Text = gekozen_naam;
+                            afw.labelDatum.Text = gekozen_datum;
+                            afw.labelMaand.Text = ProgData.Sgekozenmaand();
+                            afw.labelPersoneelnr.Text = persoon._persnummer.ToString();
+                            afw.Text = ProgData.Huidige_Gebruiker_Personeel_nummer;
+                            // voor ed-o ed-m en ed-n
+                            afw._verzoekdag = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
+                            afw.ShowDialog();
+                            VulViewScherm();
+                        }
                     }
-                    catch { }
                 }
-                // geen rechten/ingelogt
-                else
-                {
-                    MessageBox.Show("Even inloggen!");
-                }
+                catch { }
             }
+            // geen rechten/ingelogt
+            else
+            {
+                MessageBox.Show("Even inloggen!");
+            }
+            //}
         }
 
         private void ButtonNu_Click(object sender, EventArgs e)
@@ -1331,28 +1320,18 @@ namespace Bezetting2
 
 
             // elke 30 sec kom ik hier
-            // ProgData.backup_time is random getal 00-60
-            // dus 1 keer per uur kom je bij else
-            if (true || ProgData.backup_time == DateTime.Now.Minute)
+            if (!File.Exists("BezData\\backup.time"))
             {
-                if (!File.Exists("BezData\\backup.time"))
+                using (File.Create("BezData\\backup.time"))
+                { };
+            }
+            else // hier kijken of er een nieuwe dag is
+            {
+                var laatste_keer = File.GetLastWriteTime("BezData\\backup.time");
+                // 1 keer per dag
+                if (laatste_keer.Day != DateTime.Now.Day)   // zo ja, backup en maken _namen.bin documenten
                 {
-                    using (File.Create("BezData\\backup.time"))
-                    { };
-                }
-                else // hier kijken of er een nieuwe dag is
-                {
-                    var laatste_keer = File.GetLastWriteTime("BezData\\backup.time");
-                    // 1 keer per dag
-                    if (laatste_keer.Day != DateTime.Now.Day)   // zo ja, backup en maken _namen.bin documenten
-                    {
-                        timerKill.Enabled = false;
-                        labelDebug.Text = "Dagelijkse Backup, moment.....";
-                        ProgData.Backup();
-                        File.SetLastWriteTime("BezData\\backup.time", DateTime.Now);
-                        timerKill.Enabled = true;
-                        labelDebug.Text = "Dagelijkse Backup gelukt";
-                    }
+                    maakBackupToolStripMenuItem_Click(this, null);
                 }
             }
 
@@ -2105,6 +2084,18 @@ namespace Bezetting2
         {
             Help he = new Help();
             he.ShowDialog();
+        }
+
+        private void maakBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            timerKill.Enabled = false;
+            labelDebug.Text = "Dagelijkse Backup, moment.....";
+            labelDebug.Refresh();
+            File.SetLastWriteTime("BezData\\backup.time", DateTime.Now);
+            ProgData.Backup();
+            timerKill.Enabled = true;
+            labelDebug.Text = "Dagelijkse Backup gelukt";
+            labelDebug.Refresh();
         }
     }
 }

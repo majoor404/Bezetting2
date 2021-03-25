@@ -31,6 +31,7 @@ namespace Bezetting2.Data
         }
 
         public List<Item> MaandDataLijst = new List<Item>();
+        public List<Item> BlauwMaandDataLijst = new List<Item>();   // test op kleur basis 
 
         public void Voeg_toe(string dag, string personeel_nr, string afwijking, string invoer_door, string rede, string reserve1, string reserve2)
         {
@@ -59,6 +60,8 @@ namespace Bezetting2.Data
                 var veranderd = File.GetLastWriteTime(path);
                 if (veranderd != laaste_versie || path != laaste_path)
                 {
+                    // geef netwerk de tijd om voorgaande te regelen ;-(
+                    Thread.Sleep(30);
                     // laden
                     try
                     {
@@ -216,6 +219,22 @@ namespace Bezetting2.Data
             catch
             {
             }
+        }
+
+        public void VeranderInvoerDatum(string datum)   // bij omzetten versie 2.0 naar 2.1 nodig
+        {
+            string[] subs;
+            if (datum.Contains("-"))
+            {
+                subs = datum.Split('-');
+            }
+            else
+            {
+                subs = datum.Split('/');
+            }
+
+            DateTime Dat = new DateTime(int.Parse(subs[2]), int.Parse(subs[1]), int.Parse(subs[0]));
+            MaandDataLijst[MaandDataLijst.Count - 1].ingevoerd_op_ = Dat;
         }
     }
 }

@@ -501,7 +501,6 @@ namespace Bezetting2
                 {
                     personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
                     ProgData.AlleMensen.LijstPersonen.Remove(persoon);
-                    //ProgData.Save_LijstNamen();
                     ProgData.AlleMensen.Save();
                     EditPersoneel_Shown(this, null);
                 }

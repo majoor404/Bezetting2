@@ -63,6 +63,7 @@
             this.nietMeeTelLijstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPopupMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.maakBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -317,7 +318,8 @@
             this.instellingenProgrammaToolStripMenuItem,
             this.nietMeeTelLijstToolStripMenuItem,
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem,
-            this.editPopupMenuToolStripMenuItem});
+            this.editPopupMenuToolStripMenuItem,
+            this.maakBackupToolStripMenuItem});
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
             this.beheerToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.beheerToolStripMenuItem.Text = "Beheer";
@@ -393,6 +395,14 @@
             this.editPopupMenuToolStripMenuItem.Text = "Edit Popup Menu";
             this.editPopupMenuToolStripMenuItem.Visible = false;
             this.editPopupMenuToolStripMenuItem.Click += new System.EventHandler(this.EditPopupMenuToolStripMenuItem_Click);
+            // 
+            // maakBackupToolStripMenuItem
+            // 
+            this.maakBackupToolStripMenuItem.Enabled = false;
+            this.maakBackupToolStripMenuItem.Name = "maakBackupToolStripMenuItem";
+            this.maakBackupToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
+            this.maakBackupToolStripMenuItem.Text = "Maak Backup";
+            this.maakBackupToolStripMenuItem.Click += new System.EventHandler(this.maakBackupToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
@@ -1037,6 +1047,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem maakBackupToolStripMenuItem;
     }
 }
 

@@ -37,6 +37,9 @@ namespace Bezetting2
 
         public static List<werkdag> LijstWerkdagPloeg = new List<werkdag>();
 
+        // kan later weg als alles omgezet is.
+        public static List<veranderingen> ListVeranderingen = new List<veranderingen>();
+
         public static string _RuilExtra_Locatie;
         public static List<AanvraagRuilExtra> ListAanvraagRuilExtra = new List<AanvraagRuilExtra>();
 
@@ -59,7 +62,7 @@ namespace Bezetting2
         public static string backup_zipnaam_2maanden_verder;
 
 
-        public static int backup_time;
+        //public static int backup_time;
 
         public static int igekozenjaar
         {
@@ -597,58 +600,91 @@ namespace Bezetting2
                     MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}");
                     MaakNieuwPloegBezettingAan(kleur);
                 }
+
+                // kan in toekomst ooit weg
+                if (File.Exists(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_afwijkingen.bin")))
+                    Zetom_naar_versie21(kleur);
             }
         }
 
         public static void Backup()
         {
-            DateTime bak = DateTime.Now;
-            string startPath = GetDirectoryBezettingMaand(bak);
-            if (File.Exists(backup_zipnaam_huidige_dag))
-                File.Delete(backup_zipnaam_huidige_dag);
-            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_dag);
+            try
+            {
+                DateTime backup = DateTime.Now;
 
-            bak = bak.AddMonths(1);
-            startPath = GetDirectoryBezettingMaand(bak);
-            if (File.Exists(backup_zipnaam_maand_verder))
-                File.Delete(backup_zipnaam_maand_verder);
-            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_maand_verder);
-            
-            
-            bak = bak.AddMonths(1);
-            startPath = GetDirectoryBezettingMaand(bak);
-            if (File.Exists(backup_zipnaam_2maanden_verder))
-                File.Delete(backup_zipnaam_2maanden_verder);
-            ZipFile.CreateFromDirectory(startPath, backup_zipnaam_2maanden_verder);
+                Main.labelDebug.Text = "Backup huidige maand, moment.....";
+                Main.labelDebug.Refresh();
+                backup_zipnaam_huidige_dag = $"Backup\\GemaaktOpDag_{backup.Day}.zip";
+                string startPath = GetDirectoryBezettingMaand(backup);
+                SchijfLocatieVanBackup(startPath, backup_zipnaam_huidige_dag);
+                if (File.Exists(backup_zipnaam_huidige_dag))
+                    File.Delete(backup_zipnaam_huidige_dag);
+                ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_dag);
 
-            
-            // maak ploeg namen op schijf.
-            
-            ProgData.BewaarDatum();
+                Main.labelDebug.Text = "Backup volgende maand, moment.....";
+                Main.labelDebug.Refresh();
+                backup = backup.AddMonths(1);
+                ProgData.backup_zipnaam_maand_verder = $"Backup\\maand_{backup.Month}.zip";
+                startPath = GetDirectoryBezettingMaand(backup);
+                if (File.Exists(backup_zipnaam_maand_verder))
+                    File.Delete(backup_zipnaam_maand_verder);
+                ZipFile.CreateFromDirectory(startPath, backup_zipnaam_maand_verder);
 
-            bak = DateTime.Now;
-            ProgData.igekozenjaar = bak.Year;
-            ProgData.igekozenmaand = bak.Month;
 
-            ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
-            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Blauw", 15);
+                Main.labelDebug.Text = "Backup 2 maanden in toekomst, moment.....";
+                Main.labelDebug.Refresh();
+                backup = backup.AddMonths(1);
+                ProgData.backup_zipnaam_2maanden_verder = $"Backup\\maand_{backup.Month}.zip";
+                startPath = GetDirectoryBezettingMaand(backup);
+                if (File.Exists(backup_zipnaam_2maanden_verder))
+                    File.Delete(backup_zipnaam_2maanden_verder);
+                ZipFile.CreateFromDirectory(startPath, backup_zipnaam_2maanden_verder);
 
-            ProgData.AlleMensen.HaalPloegNamenOpKleur("Groen");
-            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Groen", 15);
-            
-            ProgData.AlleMensen.HaalPloegNamenOpKleur("Wit");
-            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Wit", 15);
+                // maak ploeg namen op schijf.
 
-            ProgData.AlleMensen.HaalPloegNamenOpKleur("Geel");
-            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Geel", 15);
+                ProgData.BewaarDatum();
 
-            ProgData.AlleMensen.HaalPloegNamenOpKleur("Rood");
-            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Rood", 15);
+                backup = DateTime.Now;
+                ProgData.igekozenjaar = backup.Year;
+                ProgData.igekozenmaand = backup.Month;
 
-            ProgData.AlleMensen.HaalPloegNamenOpKleur("DD");
-            ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
+                Main.labelDebug.Text = "Backup Blauw namen , moment.....";
+                Main.labelDebug.Refresh();
+                ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
+                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Blauw", 15);
 
-            ProgData.ReturnDatum();
+                Main.labelDebug.Text = "Backup Groen namen , moment.....";
+                Main.labelDebug.Refresh();
+                ProgData.AlleMensen.HaalPloegNamenOpKleur("Groen");
+                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Groen", 15);
+
+                Main.labelDebug.Text = "Backup Wit namen , moment.....";
+                Main.labelDebug.Refresh();
+                ProgData.AlleMensen.HaalPloegNamenOpKleur("Wit");
+                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Wit", 15);
+
+                Main.labelDebug.Text = "Backup Geel namen , moment.....";
+                Main.labelDebug.Refresh();
+                ProgData.AlleMensen.HaalPloegNamenOpKleur("Geel");
+                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Geel", 15);
+
+                Main.labelDebug.Text = "Backup Rood namen , moment.....";
+                Main.labelDebug.Refresh();
+                ProgData.AlleMensen.HaalPloegNamenOpKleur("Rood");
+                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Rood", 15);
+
+                Main.labelDebug.Text = "Backup Dagdienst namen , moment.....";
+                Main.labelDebug.Refresh();
+                ProgData.AlleMensen.HaalPloegNamenOpKleur("DD");
+                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
+
+                ProgData.ReturnDatum();
+            }
+            catch
+            {
+                MessageBox.Show("Backup error, meld dit bij Admin!");
+            }
         }
 
         public static void NachtErVoorVrij(string gekozen_naam, string dagnr, string afwijking)
@@ -662,7 +698,8 @@ namespace Bezetting2
                 {
                     if (afwijking == "VK" || afwijking == "8OI" || afwijking == "A" ||
                         afwijking == "VRIJ" || afwijking == "VAK" || afwijking == "VF"
-                        || afwijking == "ED-N")
+                        || afwijking == "ED-N" || afwijking == "Z" || afwijking == "*"
+                        || afwijking == "GP")
                     {
 
                     }
@@ -908,6 +945,83 @@ namespace Bezetting2
                 }
                 SaveLijstWerkdagPloeg(kleur, 15);
             }
+        }
+
+        public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
+        {
+            // zet oude file's om naar nieuwe ketting
+            var maand = ProgData.igekozenmaand;
+            var jaar = ProgData.igekozenjaar;
+
+            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+            if (!File.Exists(path))
+            {
+                var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
+                if (File.Exists(path_oud))
+                {
+                    AlleMensen.Load();  // nodig voor personeel nummer te krijgen hieronder
+
+                    try
+                    {
+                        using (Stream stream = File.Open(path_oud, FileMode.Open))
+                        {
+                            BinaryFormatter bin = new BinaryFormatter();
+                            ListVeranderingen.Clear();
+                            ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
+                        }
+                    }
+                    catch { }
+
+                    if (ListVeranderingen.Count == 0)
+                    {
+                        MaandData.SaveLeegPloeg(kleur);
+                    }
+                    else
+                    {
+                        MaandData.MaandDataLijst.Clear();
+                        foreach (veranderingen verander in ProgData.ListVeranderingen)
+                        {
+                            // verander
+                            var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
+
+                            if (!string.IsNullOrEmpty(personeel_nummer))
+                            {
+                                MaandData.Voeg_toe(verander._datumafwijking,
+                                    personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
+                                MaandData.VeranderInvoerDatum(verander._datuminvoer);
+                                MaandData.Save(kleur, 15);
+                            }
+                        }
+                    }
+                    File.Delete(path_oud);
+                }
+            }
+        }
+
+        private static void SchijfLocatieVanBackup(string startPath, string filenaam)
+        {
+            // maak in backup dir een bestand locatie.txt
+            // met inhoud startPath
+
+            try
+            {
+                string helptext = $"{startPath}\\locatie.txt";
+
+                if (File.Exists(helptext))
+                {
+                    File.Delete(helptext);
+                }
+
+                File.Create(helptext).Dispose();
+
+                List<string> loc = new List<string>();
+
+                loc.Add($"Backup met de naam {filenaam},");
+                loc.Add($"Is gemaakt vanuit directory {startPath}");
+
+                File.WriteAllLines(helptext, loc);
+            }
+            catch { }
         }
     }
 }
