@@ -2093,6 +2093,12 @@ namespace Bezetting2
             timerKill.Enabled = false;
             labelDebug.Text = "Dagelijkse Backup, moment.....";
             labelDebug.Refresh();
+            if (!File.Exists("BezData\\backup.time"))
+            {
+                using (File.Create("BezData\\backup.time"))
+                { };
+            }
+
             File.SetLastWriteTime("BezData\\backup.time", DateTime.Now);
             ProgData.Backup();
             timerKill.Enabled = true;

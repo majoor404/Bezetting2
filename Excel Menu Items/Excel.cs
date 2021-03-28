@@ -1206,7 +1206,7 @@ namespace Bezetting2
             }
         }
 
-        public void ploegTotalenToolStripMenuItem_Click(object sender, EventArgs e)
+        public void PloegTotalenToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
                 List<int> Namen = new List<int>();
@@ -1214,9 +1214,11 @@ namespace Bezetting2
 
                 ProgData.SaveDatum();
 
-                // haal eerst de namen die dit jaar op kleur x gelopen hebben
-                // dus lijst met namen
-                for (int i = 1; i < 13; i++)
+            // haal eerst de namen die dit jaar op kleur x gelopen hebben
+            // dus lijst met namen
+            labelDebug.Text = "Verzamel namen deze kleur dit jaar, moment.....";
+            labelDebug.Refresh();
+            for (int i = 1; i < 13; i++)
                 {
                     ProgData.igekozenmaand = i;
                     if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
@@ -1234,14 +1236,19 @@ namespace Bezetting2
                 }
 
                 LijstclassTelAfwijkingenVanPersoons.Clear();
-                // nu de afwijkingen van die personen.
-                for (int i = 1; i < 13; i++)
+            // nu de afwijkingen van die personen.
+            labelDebug.Text = "Verzamel Afwijkingen van deze personen dit jaar, moment.....";
+            labelDebug.Refresh();
+            for (int i = 1; i < 13; i++)
                 {
                     ProgData.igekozenmaand = i;
                     int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, i);
                     foreach (int a in Namen)
                     {
-                        for (int q = 1; q < aantal_dagen; q++)
+                    string naam = ProgData.Get_Gebruiker_Naam(a.ToString());
+                    labelDebug.Text = $"Verzamel Afwijkingen van persoon dit jaar, moment..... {naam}                                       ";
+                    labelDebug.Refresh();
+                    for (int q = 1; q < aantal_dagen; q++)
                         {
                             DateTime dat = new DateTime(ProgData.igekozenjaar, i, q);
                             string afwijking = ProgData.GetLaatsteAfwijkingPersoon(ProgData.GekozenKleur, a.ToString(), dat);
@@ -1328,8 +1335,9 @@ namespace Bezetting2
 
                     MessageBox.Show(errorMessage, "Error");
                 }
-
-                ProgData.ReturnDatum();
+            labelDebug.Text = "";
+            labelDebug.Refresh();
+            ProgData.ReturnDatum();
             }
         }
     }

@@ -299,7 +299,7 @@
             this.ploegTotalenToolStripMenuItem.Name = "ploegTotalenToolStripMenuItem";
             this.ploegTotalenToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.ploegTotalenToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg Jaar";
-            this.ploegTotalenToolStripMenuItem.Click += new System.EventHandler(this.ploegTotalenToolStripMenuItem_Click);
+            this.ploegTotalenToolStripMenuItem.Click += new System.EventHandler(this.PloegTotalenToolStripMenuItem_Click);
             // 
             // maandenOverzichtNaarExcelToolStripMenuItem
             // 
