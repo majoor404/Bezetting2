@@ -13,6 +13,40 @@ namespace Bezetting2
 {
     public partial class MainFormBezetting2 : Form
     {
+
+        static List<ClassTelAfwijkingenVanPersoon> LijstclassTelAfwijkingenVanPersoons = new List<ClassTelAfwijkingenVanPersoon>();
+        public class ClassTelAfwijkingenVanPersoon
+        {
+            public ClassTelAfwijkingenVanPersoon(int persnr, string afwijking)
+            {
+                Persnr_ = persnr;
+                Afwijking_ = afwijking;
+                Aantal_ = 1;
+            }
+
+            static public void voeg_toe(int persnr, string afwijking)
+            {
+                try
+                {
+                    // als gevonden dan optellen
+                    ClassTelAfwijkingenVanPersoon persoon = LijstclassTelAfwijkingenVanPersoons.First(a => a.Persnr_ == persnr && a.Afwijking_ == afwijking);
+                    persoon.Aantal_++;
+                }
+                catch
+                {
+                    // zo niet dan toevoegen nieuwe
+                    ClassTelAfwijkingenVanPersoon a = new ClassTelAfwijkingenVanPersoon(persnr, afwijking);
+                    LijstclassTelAfwijkingenVanPersoons.Add(a);
+                }
+
+
+            }
+
+            public string Afwijking_ { get; set; }
+            public int Aantal_ { get; set; }
+            public int Persnr_ { get; set; }
+        }
+
         private void AfwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int bewaar_maand = ProgData.igekozenmaand;
@@ -736,8 +770,6 @@ namespace Bezetting2
                 }
             }
 
-
-
             try
             {
                 //Start Excel and get Application object.
@@ -915,11 +947,13 @@ namespace Bezetting2
             ProgData.igekozenmaand = bewaar_maand;
         }
 
-
         private void jaarOverzichtNaarExcelToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Nog te doen!, nu 2 maanden");
-            
+            //naar maand 1
+            ProgData.SaveDatum();
+            ProgData.igekozenmaand = 1;
+            VulViewScherm();
+
             Microsoft.Office.Interop.Excel.Application oXL;
             Microsoft.Office.Interop.Excel._Workbook oWB;
             Microsoft.Office.Interop.Excel._Worksheet oSheet;
@@ -980,52 +1014,55 @@ namespace Bezetting2
 
                 oSheet.Name = View.Items[2].SubItems[0].Text;
 
-                // volgende maand
-                oWB.Sheets.Add(After: oWB.Sheets[oWB.Sheets.Count]);
-                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oXL.Sheets["Blad2"];
-                VolgendeMaandToolStripMenuItem_Click(this, null);
-                View.Refresh();
-
-                for (int row = 0; row < aantal_row; row++)
+                for (int i = 0; i < 11; i++)
                 {
-                    for (int col = 0; col < aantal_col; col++)
+                    // volgende maanden
+                    oWB.Sheets.Add(After: oWB.Sheets[oWB.Sheets.Count]);
+                    oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oXL.Sheets[i + 2];
+                    VolgendeMaandToolStripMenuItem_Click(this, null);
+                    VulViewScherm();
+                    View.Refresh();
+
+                    for (int row = 0; row < aantal_row; row++)
                     {
-                        try
+                        for (int col = 0; col < aantal_col; col++)
                         {
-                            oSheet.Cells[row + 1, col + 1] = View.Items[row].SubItems[col].Text;
-
-                            if (View.Items[row].SubItems[col].BackColor == Werkplek_)
+                            try
                             {
-                                var columnHeadingsRange = oSheet.Range[
-                                                          oSheet.Cells[row + 1, col + 1],
-                                                          oSheet.Cells[row + 1, col + 1]];
+                                oSheet.Cells[row + 1, col + 1] = View.Items[row].SubItems[col].Text;
 
-                                columnHeadingsRange.Interior.Color = Werkplek_;
+                                if (View.Items[row].SubItems[col].BackColor == Werkplek_)
+                                {
+                                    var columnHeadingsRange = oSheet.Range[
+                                                              oSheet.Cells[row + 1, col + 1],
+                                                              oSheet.Cells[row + 1, col + 1]];
+
+                                    columnHeadingsRange.Interior.Color = Werkplek_;
+                                }
+                                if (View.Items[row].SubItems[col].BackColor == Weekend_)
+                                {
+                                    var columnHeadingsRange = oSheet.Range[
+                                                              oSheet.Cells[row + 1, col + 1],
+                                                              oSheet.Cells[row + 1, col + 1]];
+
+                                    columnHeadingsRange.Interior.Color = Weekend_;
+                                }
+
                             }
-                            if (View.Items[row].SubItems[col].BackColor == Weekend_)
-                            {
-                                var columnHeadingsRange = oSheet.Range[
-                                                          oSheet.Cells[row + 1, col + 1],
-                                                          oSheet.Cells[row + 1, col + 1]];
-
-                                columnHeadingsRange.Interior.Color = Weekend_;
-                            }
-
+                            catch { }
                         }
-                        catch { }
                     }
+
+                    oRng = oSheet.get_Range("A1", "A100");
+                    oRng.EntireColumn.ColumnWidth = 20;
+                    oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
+
+                    oRng = oSheet.get_Range("B1", "AZ100");
+                    oRng.EntireColumn.ColumnWidth = 6;
+                    oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
+
+                    oSheet.Name = View.Items[2].SubItems[0].Text;
                 }
-
-                oRng = oSheet.get_Range("A1", "A100");
-                oRng.EntireColumn.ColumnWidth = 20;
-                oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignLeft;
-
-                oRng = oSheet.get_Range("B1", "AZ100");
-                oRng.EntireColumn.ColumnWidth = 6;
-                oRng.EntireColumn.HorizontalAlignment = Microsoft.Office.Interop.Excel.XlHAlign.xlHAlignCenter;
-
-                oSheet.Name = View.Items[2].SubItems[0].Text;
-
                 //Make sure Excel is visible and give the user control
                 //of Microsoft Excel's lifetime.
                 oXL.Visible = true;
@@ -1041,6 +1078,7 @@ namespace Bezetting2
 
                 MessageBox.Show(errorMessage, "Error");
             }
+            ProgData.ReturnDatum();
         }
 
         private void MaandenOverzichtNaarExcelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1167,5 +1205,131 @@ namespace Bezetting2
                 MessageBox.Show(errorMessage, "Error");
             }
         }
+
+        public void ploegTotalenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+                List<int> Namen = new List<int>();
+                List<string> Afwijking = new List<string>();
+
+                ProgData.SaveDatum();
+
+                // haal eerst de namen die dit jaar op kleur x gelopen hebben
+                // dus lijst met namen
+                for (int i = 1; i < 13; i++)
+                {
+                    ProgData.igekozenmaand = i;
+                    if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
+                    {
+                        ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+                        if (ProgData.AlleMensen.LijstPersoonKleur.Count > 0)
+                        {
+                            foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+                            {
+                                if (!Namen.Contains(a._persnummer))
+                                    Namen.Add(a._persnummer);
+                            }
+                        }
+                    }
+                }
+
+                LijstclassTelAfwijkingenVanPersoons.Clear();
+                // nu de afwijkingen van die personen.
+                for (int i = 1; i < 13; i++)
+                {
+                    ProgData.igekozenmaand = i;
+                    int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, i);
+                    foreach (int a in Namen)
+                    {
+                        for (int q = 1; q < aantal_dagen; q++)
+                        {
+                            DateTime dat = new DateTime(ProgData.igekozenjaar, i, q);
+                            string afwijking = ProgData.GetLaatsteAfwijkingPersoon(ProgData.GekozenKleur, a.ToString(), dat);
+                            if (!Afwijking.Contains(afwijking) && afwijking != "")
+                            {
+                                Afwijking.Add(afwijking);
+                            }
+                            if (afwijking != "")
+                            {
+                                ClassTelAfwijkingenVanPersoon.voeg_toe(a, afwijking);
+                            }
+                        }
+                    }
+                }
+
+                try
+                {
+                
+                Microsoft.Office.Interop.Excel.Application oXL;
+                Microsoft.Office.Interop.Excel._Workbook oWB;
+                Microsoft.Office.Interop.Excel._Worksheet oSheet;
+                Microsoft.Office.Interop.Excel.Range oRng;
+
+                //Start Excel and get Application object.
+                oXL = new Microsoft.Office.Interop.Excel.Application
+                {
+                    Visible = true
+                };
+
+                //Get a new workbook.
+                oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
+                oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
+
+                    oSheet.Cells[1, 1] = ProgData.Sgekozenjaar();
+                    oSheet.Cells[2, 1] = ProgData.GekozenKleur;
+
+
+                for (int i = 0; i < Afwijking.Count; i++)
+                {
+                    oSheet.Cells[3, i + 2] = Afwijking[i];
+                }
+
+                oSheet.get_Range("A1", "Z2").Font.Bold = true;
+
+                for (int i = 0; i < Namen.Count; i++)
+                {
+                    oSheet.Cells[i + 4, 1] = ProgData.Get_Gebruiker_Naam(Namen[i].ToString());
+                }
+
+                foreach (ClassTelAfwijkingenVanPersoon a in LijstclassTelAfwijkingenVanPersoons)
+                {
+                    var test = a.Afwijking_;
+                    var test2 = Afwijking.IndexOf(test);      // y coord
+
+                    var test4 = a.Persnr_;
+                    var test5 = Namen.IndexOf(test4);      // x coord    als naam niet gevonden, dan antwoord -1 bv een extra dienst
+                    var test3 = a.Aantal_.ToString();      // inhoud
+
+                    if (test5 > -1)
+                    {
+                        var row = test5 + 4;
+                        var col = test2 + 2;
+                        oSheet.Cells[row, col] = test3;
+                    }
+                }
+                
+                //AutoFit columns A:D.
+                oRng = oSheet.get_Range("A1", "Z3");
+                oRng.EntireColumn.AutoFit();
+
+
+                //Make sure Excel is visible and give the user control
+                //of Microsoft Excel's lifetime.
+                oXL.Visible = true;
+                    oXL.UserControl = true;
+                }
+                catch (Exception theException)
+                {
+                    String errorMessage;
+                    errorMessage = "Error: ";
+                    errorMessage = String.Concat(errorMessage, theException.Message);
+                    errorMessage = String.Concat(errorMessage, " Line: ");
+                    errorMessage = String.Concat(errorMessage, theException.Source);
+
+                    MessageBox.Show(errorMessage, "Error");
+                }
+
+                ProgData.ReturnDatum();
+            }
+        }
     }
-}

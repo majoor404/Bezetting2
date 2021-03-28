@@ -28,6 +28,8 @@ namespace Bezetting2
         public static ToolStripStatusLabel _toegangnivo;
 
         public static MaandDataClass MaandData = new MaandDataClass();
+        //public static MaandDataClass MaandDataBlauw = new MaandDataClass();
+
         public static PersoneelOverzicht AlleMensen = new PersoneelOverzicht();
 
         public static List<string> Lijnen = new List<string>();
@@ -643,7 +645,7 @@ namespace Bezetting2
 
                 // maak ploeg namen op schijf.
 
-                ProgData.BewaarDatum();
+                ProgData.SaveDatum();
 
                 backup = DateTime.Now;
                 ProgData.igekozenjaar = backup.Year;
@@ -898,7 +900,7 @@ namespace Bezetting2
         //    }
         //}
 
-        public static void BewaarDatum()
+        public static void SaveDatum()
         {
             BewaarJaar = igekozenjaar;
             BewaarMaand = igekozenmaand;

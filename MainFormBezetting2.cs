@@ -317,7 +317,9 @@ namespace Bezetting2
             nietMeeTelLijstToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             editPopupMenuToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+            maakBackupToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+            ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
 
             vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -2097,5 +2099,7 @@ namespace Bezetting2
             labelDebug.Text = "Dagelijkse Backup gelukt";
             labelDebug.Refresh();
         }
+
+        
     }
 }

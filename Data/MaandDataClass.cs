@@ -31,7 +31,6 @@ namespace Bezetting2.Data
         }
 
         public List<Item> MaandDataLijst = new List<Item>();
-        public List<Item> BlauwMaandDataLijst = new List<Item>();   // test op kleur basis 
 
         public void Voeg_toe(string dag, string personeel_nr, string afwijking, string invoer_door, string rede, string reserve1, string reserve2)
         {
@@ -47,7 +46,7 @@ namespace Bezetting2.Data
             nieuw.ingevoerd_op_ = DateTime.Now;         // ingevoerd op
             MaandDataLijst.Add(nieuw);
         }
-        
+
         public void Load(string kleur)
         {
             var maand = ProgData.igekozenmaand;
@@ -74,7 +73,8 @@ namespace Bezetting2.Data
                     }
                     catch
                     {
-                        MessageBox.Show("kon {path} niet laden! error 2351");
+                        MessageBox.Show($"kon {path} niet laden!, netwerk druk\nEven pauze...");
+                        Thread.Sleep(1000);
                     }
 
                     if (kleur == ProgData.GekozenKleur)
@@ -120,6 +120,7 @@ namespace Bezetting2.Data
             }
         }
 
+        
         public void Save(string kleur, int try_again)
         {
             var maand = ProgData.igekozenmaand;
@@ -204,7 +205,7 @@ namespace Bezetting2.Data
             {
             }
         }
-        
+
         public void SaveLeegPloeg(string kleur, string path)
         {
             MaandDataLijst.Clear();

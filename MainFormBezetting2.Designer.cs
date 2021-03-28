@@ -51,6 +51,7 @@
             this.allemaalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.afwijkingTovRoosterPloegToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ploegTotalenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maandenOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jaarOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -198,6 +199,7 @@
             this.namenAdressenEMailToolStripMenuItem,
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem,
             this.afwijkingTovRoosterPloegToolStripMenuItem,
+            this.ploegTotalenToolStripMenuItem,
             this.maandenOverzichtNaarExcelToolStripMenuItem,
             this.jaarOverzichtNaarExcelToolStripMenuItem});
             this.excelToolStripMenuItem.Name = "excelToolStripMenuItem";
@@ -208,7 +210,7 @@
             // 
             this.vuilwerkToolStripMenuItem.Enabled = false;
             this.vuilwerkToolStripMenuItem.Name = "vuilwerkToolStripMenuItem";
-            this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.vuilwerkToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.vuilwerkToolStripMenuItem.Text = "Vuilwerk";
             this.vuilwerkToolStripMenuItem.Click += new System.EventHandler(this.VuilwerkToolStripMenuItem_Click);
             // 
@@ -216,7 +218,7 @@
             // 
             this.tellingWaarGewerktToolStripMenuItem.Enabled = false;
             this.tellingWaarGewerktToolStripMenuItem.Name = "tellingWaarGewerktToolStripMenuItem";
-            this.tellingWaarGewerktToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.tellingWaarGewerktToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.tellingWaarGewerktToolStripMenuItem.Text = "Telling waar gewerkt";
             this.tellingWaarGewerktToolStripMenuItem.Click += new System.EventHandler(this.TellingWaarGewerktToolStripMenuItem_Click);
             // 
@@ -231,7 +233,7 @@
             this.allemaalToolStripMenuItem});
             this.namenAdressenEMailToolStripMenuItem.Enabled = false;
             this.namenAdressenEMailToolStripMenuItem.Name = "namenAdressenEMailToolStripMenuItem";
-            this.namenAdressenEMailToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.namenAdressenEMailToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.namenAdressenEMailToolStripMenuItem.Text = "Namen Adressen E-Mail";
             // 
             // blauwToolStripMenuItem
@@ -279,7 +281,7 @@
             // 
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Enabled = false;
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Name = "afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem";
-            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Text = "Afwijkingen tov Rooster ingelogd Persoon";
             this.afwijkingenTovRoosterIngelogdPersoonToolStripMenuItem.Click += new System.EventHandler(this.AfwijkingenTovRoosterIngelogdPersoonToolStripMenuItem_Click);
             // 
@@ -287,15 +289,23 @@
             // 
             this.afwijkingTovRoosterPloegToolStripMenuItem.Enabled = false;
             this.afwijkingTovRoosterPloegToolStripMenuItem.Name = "afwijkingTovRoosterPloegToolStripMenuItem";
-            this.afwijkingTovRoosterPloegToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
-            this.afwijkingTovRoosterPloegToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg";
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
+            this.afwijkingTovRoosterPloegToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg Verleden/Toekomst geclusterd";
             this.afwijkingTovRoosterPloegToolStripMenuItem.Click += new System.EventHandler(this.AfwijkingTovRoosterPloegToolStripMenuItem_Click);
+            // 
+            // ploegTotalenToolStripMenuItem
+            // 
+            this.ploegTotalenToolStripMenuItem.Enabled = false;
+            this.ploegTotalenToolStripMenuItem.Name = "ploegTotalenToolStripMenuItem";
+            this.ploegTotalenToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
+            this.ploegTotalenToolStripMenuItem.Text = "Afwijkingen tov Rooster Ploeg Jaar";
+            this.ploegTotalenToolStripMenuItem.Click += new System.EventHandler(this.ploegTotalenToolStripMenuItem_Click);
             // 
             // maandenOverzichtNaarExcelToolStripMenuItem
             // 
             this.maandenOverzichtNaarExcelToolStripMenuItem.Enabled = false;
             this.maandenOverzichtNaarExcelToolStripMenuItem.Name = "maandenOverzichtNaarExcelToolStripMenuItem";
-            this.maandenOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.maandenOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.maandenOverzichtNaarExcelToolStripMenuItem.Text = "2 Maanden overzicht naar Excel";
             this.maandenOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.MaandenOverzichtNaarExcelToolStripMenuItem_Click);
             // 
@@ -303,7 +313,7 @@
             // 
             this.jaarOverzichtNaarExcelToolStripMenuItem.Enabled = false;
             this.jaarOverzichtNaarExcelToolStripMenuItem.Name = "jaarOverzichtNaarExcelToolStripMenuItem";
-            this.jaarOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(296, 22);
+            this.jaarOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.jaarOverzichtNaarExcelToolStripMenuItem.Text = "Jaar overzicht naar Excel";
             this.jaarOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.jaarOverzichtNaarExcelToolStripMenuItem_Click);
             // 
@@ -398,7 +408,6 @@
             // 
             // maakBackupToolStripMenuItem
             // 
-            this.maakBackupToolStripMenuItem.Enabled = false;
             this.maakBackupToolStripMenuItem.Name = "maakBackupToolStripMenuItem";
             this.maakBackupToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.maakBackupToolStripMenuItem.Text = "Maak Backup";
@@ -1048,6 +1057,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem maakBackupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ploegTotalenToolStripMenuItem;
     }
 }
 
