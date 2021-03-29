@@ -1209,64 +1209,66 @@ namespace Bezetting2
         public void PloegTotalenToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-                List<int> Namen = new List<int>();
-                List<string> Afwijking = new List<string>();
+            List<int> Namen = new List<int>();
+            List<string> Afwijking = new List<string>();
 
-                ProgData.SaveDatum();
+            ProgData.SaveDatum();
 
             // haal eerst de namen die dit jaar op kleur x gelopen hebben
             // dus lijst met namen
             labelDebug.Text = "Verzamel namen deze kleur dit jaar, moment.....";
             labelDebug.Refresh();
             for (int i = 1; i < 13; i++)
+            {
+                ProgData.igekozenmaand = i;
+                if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
                 {
-                    ProgData.igekozenmaand = i;
-                    if (File.Exists(ProgData.Ploeg_Namen_Locatie(ProgData.GekozenKleur)))
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+                    if (ProgData.AlleMensen.LijstPersoonKleur.Count > 0)
                     {
-                        ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
-                        if (ProgData.AlleMensen.LijstPersoonKleur.Count > 0)
+                        foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
                         {
-                            foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
-                            {
-                                if (!Namen.Contains(a._persnummer))
-                                    Namen.Add(a._persnummer);
-                            }
+                            if (!Namen.Contains(a._persnummer))
+                                Namen.Add(a._persnummer);
                         }
                     }
                 }
+            }
 
-                LijstclassTelAfwijkingenVanPersoons.Clear();
+            LijstclassTelAfwijkingenVanPersoons.Clear();
             // nu de afwijkingen van die personen.
             labelDebug.Text = "Verzamel Afwijkingen van deze personen dit jaar, moment.....";
             labelDebug.Refresh();
             for (int i = 1; i < 13; i++)
+            {
+                ProgData.igekozenmaand = i;
+                int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, i);
+                foreach (int a in Namen)
                 {
-                    ProgData.igekozenmaand = i;
-                    int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, i);
-                    foreach (int a in Namen)
-                    {
                     string naam = ProgData.Get_Gebruiker_Naam(a.ToString());
                     labelDebug.Text = $"Verzamel Afwijkingen van persoon dit jaar, moment..... {naam}                                       ";
                     labelDebug.Refresh();
                     for (int q = 1; q < aantal_dagen; q++)
+                    {
+                        DateTime dat = new DateTime(ProgData.igekozenjaar, i, q);
+                        string afwijking = ProgData.GetLaatsteAfwijkingPersoon(ProgData.GekozenKleur, a.ToString(), dat);
+                        if (!Afwijking.Contains(afwijking) && afwijking != "")
                         {
-                            DateTime dat = new DateTime(ProgData.igekozenjaar, i, q);
-                            string afwijking = ProgData.GetLaatsteAfwijkingPersoon(ProgData.GekozenKleur, a.ToString(), dat);
-                            if (!Afwijking.Contains(afwijking) && afwijking != "")
-                            {
-                                Afwijking.Add(afwijking);
-                            }
-                            if (afwijking != "")
-                            {
-                                ClassTelAfwijkingenVanPersoon.voeg_toe(a, afwijking);
-                            }
+                            Afwijking.Add(afwijking);
+                        }
+                        if (afwijking != "")
+                        {
+                            labelDebug.Text = $"Afwijkingen van persoon dit jaar, moment..... {naam}  {afwijking}                                   ";
+                            labelDebug.Refresh();
+                            ClassTelAfwijkingenVanPersoon.voeg_toe(a, afwijking);
                         }
                     }
                 }
+            }
 
-                try
-                {
-                
+            try
+            {
+
                 Microsoft.Office.Interop.Excel.Application oXL;
                 Microsoft.Office.Interop.Excel._Workbook oWB;
                 Microsoft.Office.Interop.Excel._Worksheet oSheet;
@@ -1282,8 +1284,8 @@ namespace Bezetting2
                 oWB = (Microsoft.Office.Interop.Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));
                 oSheet = (Microsoft.Office.Interop.Excel._Worksheet)oWB.ActiveSheet;
 
-                    oSheet.Cells[1, 1] = ProgData.Sgekozenjaar();
-                    oSheet.Cells[2, 1] = ProgData.GekozenKleur;
+                oSheet.Cells[1, 1] = ProgData.Sgekozenjaar();
+                oSheet.Cells[2, 1] = ProgData.GekozenKleur;
 
 
                 for (int i = 0; i < Afwijking.Count; i++)
@@ -1314,7 +1316,7 @@ namespace Bezetting2
                         oSheet.Cells[row, col] = test3;
                     }
                 }
-                
+
                 //AutoFit columns A:D.
                 oRng = oSheet.get_Range("A1", "Z3");
                 oRng.EntireColumn.AutoFit();
@@ -1323,21 +1325,21 @@ namespace Bezetting2
                 //Make sure Excel is visible and give the user control
                 //of Microsoft Excel's lifetime.
                 oXL.Visible = true;
-                    oXL.UserControl = true;
-                }
-                catch (Exception theException)
-                {
-                    String errorMessage;
-                    errorMessage = "Error: ";
-                    errorMessage = String.Concat(errorMessage, theException.Message);
-                    errorMessage = String.Concat(errorMessage, " Line: ");
-                    errorMessage = String.Concat(errorMessage, theException.Source);
+                oXL.UserControl = true;
+            }
+            catch (Exception theException)
+            {
+                String errorMessage;
+                errorMessage = "Error: ";
+                errorMessage = String.Concat(errorMessage, theException.Message);
+                errorMessage = String.Concat(errorMessage, " Line: ");
+                errorMessage = String.Concat(errorMessage, theException.Source);
 
-                    MessageBox.Show(errorMessage, "Error");
-                }
+                MessageBox.Show(errorMessage, "Error");
+            }
             labelDebug.Text = "";
             labelDebug.Refresh();
             ProgData.ReturnDatum();
-            }
         }
     }
+}

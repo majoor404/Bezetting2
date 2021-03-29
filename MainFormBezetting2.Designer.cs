@@ -111,6 +111,7 @@
             this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
             this.panelColor = new System.Windows.Forms.Panel();
+            this.buttonKalender = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -912,6 +913,19 @@
             this.panelColor.Size = new System.Drawing.Size(107, 28);
             this.panelColor.TabIndex = 33;
             // 
+            // buttonKalender
+            // 
+            this.buttonKalender.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.buttonKalender.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonKalender.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonKalender.Location = new System.Drawing.Point(13, 631);
+            this.buttonKalender.Name = "buttonKalender";
+            this.buttonKalender.Size = new System.Drawing.Size(102, 25);
+            this.buttonKalender.TabIndex = 34;
+            this.buttonKalender.Text = "Kalender";
+            this.buttonKalender.UseVisualStyleBackColor = false;
+            this.buttonKalender.Click += new System.EventHandler(this.buttonKalender_Click);
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -919,6 +933,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.buttonKalender);
             this.Controls.Add(this.comboBoxKleurKeuze);
             this.Controls.Add(this.panelColor);
             this.Controls.Add(this.checkBoxHoverNaam);
@@ -1058,6 +1073,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem maakBackupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ploegTotalenToolStripMenuItem;
+        private System.Windows.Forms.Button buttonKalender;
     }
 }
 

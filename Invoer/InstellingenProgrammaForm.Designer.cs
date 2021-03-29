@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxTelVakAlsVK = new System.Windows.Forms.CheckBox();
             this.checkBoxWachtoverzichtAls2Dagen = new System.Windows.Forms.CheckBox();
+            this.textBoxLocatieKalender = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // checkBoxGebruikRuilExtra
@@ -64,7 +66,7 @@
             // buttonSave
             // 
             this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.buttonSave.Location = new System.Drawing.Point(266, 352);
+            this.buttonSave.Location = new System.Drawing.Point(604, 352);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 2;
@@ -132,11 +134,30 @@
             this.checkBoxWachtoverzichtAls2Dagen.UseVisualStyleBackColor = true;
             this.checkBoxWachtoverzichtAls2Dagen.CheckedChanged += new System.EventHandler(this.checkBoxWachtoverzichtAls2Dagen_CheckedChanged);
             // 
+            // textBoxLocatieKalender
+            // 
+            this.textBoxLocatieKalender.Location = new System.Drawing.Point(13, 199);
+            this.textBoxLocatieKalender.Name = "textBoxLocatieKalender";
+            this.textBoxLocatieKalender.Size = new System.Drawing.Size(483, 20);
+            this.textBoxLocatieKalender.TabIndex = 9;
+            this.textBoxLocatieKalender.TextChanged += new System.EventHandler(this.textBoxLocatieKalender_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(503, 205);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(154, 13);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Locatie kalender snelkoppeling";
+            // 
             // InstellingenProgrammaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 387);
+            this.ClientSize = new System.Drawing.Size(691, 387);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxLocatieKalender);
             this.Controls.Add(this.checkBoxWachtoverzichtAls2Dagen);
             this.Controls.Add(this.checkBoxTelVakAlsVK);
             this.Controls.Add(this.label2);
@@ -166,5 +187,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxTelVakAlsVK;
         private System.Windows.Forms.CheckBox checkBoxWachtoverzichtAls2Dagen;
+        private System.Windows.Forms.TextBox textBoxLocatieKalender;
+        private System.Windows.Forms.Label label3;
     }
 }

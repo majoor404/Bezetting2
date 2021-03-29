@@ -20,6 +20,7 @@ namespace Bezetting2.Invoer
             comboBoxRooster.Text = InstellingenProg._Rooster;
             checkBoxTelVakAlsVK.Checked = InstellingenProg._TelVakAlsVK;
             checkBoxWachtoverzichtAls2Dagen.Checked = InstellingenProg._Wachtoverzicht2Dagen;
+            textBoxLocatieKalender.Text = InstellingenProg._LocatieKalender;
         }
 
         private void CheckBoxGebruikRuilExtra_CheckedChanged(object sender, EventArgs e)
@@ -53,6 +54,11 @@ namespace Bezetting2.Invoer
         private void checkBoxWachtoverzichtAls2Dagen_CheckedChanged(object sender, EventArgs e)
         {
             InstellingenProg._Wachtoverzicht2Dagen = checkBoxWachtoverzichtAls2Dagen.Checked;
+        }
+
+        private void textBoxLocatieKalender_TextChanged(object sender, EventArgs e)
+        {
+            InstellingenProg._LocatieKalender = textBoxLocatieKalender.Text;
         }
     }
 }

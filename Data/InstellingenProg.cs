@@ -65,6 +65,13 @@ namespace Bezetting2.Data
             set { ProgrammaData[46] = value.ToString(); }
         }
 
+        public static string _LocatieKalender
+        {
+            get { return ProgrammaData[47]; }
+            set { ProgrammaData[47] = value.ToString(); }
+
+        }
+
         public static List<string> ProgrammaData = new List<string>();
 
         public static void LeesProgrammaData()

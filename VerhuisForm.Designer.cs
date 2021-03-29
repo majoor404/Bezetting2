@@ -103,7 +103,7 @@
             "Wit",
             "Groen",
             "Geel",
-            "DagD",
+            "DD",
             "Weg"});
             this.comboBoxNieuwRooster.Location = new System.Drawing.Point(16, 119);
             this.comboBoxNieuwRooster.Name = "comboBoxNieuwRooster";

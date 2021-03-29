@@ -141,6 +141,11 @@ namespace Bezetting2
                 Directory.CreateDirectory("Backup");
 
             Kleur_Standaard_Font = buttonRefresh.ForeColor;
+
+            if(!File.Exists(InstellingenProg._LocatieKalender))
+            {
+                buttonKalender.Enabled = false;
+            }
         }
 
         // start programma
@@ -1383,6 +1388,8 @@ namespace Bezetting2
         {
             instellingen_programma.ShowDialog();
             MainFormBezetting2_Shown(this, null);
+            ProgData.Huidige_Gebruiker_Personeel_nummer = "Admin";
+            ProgData.RechtenHuidigeGebruiker = 101;
         }
 
         private void MainFormBezetting2_FormClosing(object sender, FormClosingEventArgs e)
@@ -2106,6 +2113,13 @@ namespace Bezetting2
             labelDebug.Refresh();
         }
 
-        
+        private void buttonKalender_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(InstellingenProg._LocatieKalender);
+            }
+            catch { }
+        }
     }
 }
