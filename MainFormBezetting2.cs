@@ -485,8 +485,6 @@ namespace Bezetting2
                 LijnenWeg();
                 if (ProgData.LeesLijnen())
                     ZetLijnen();
-
-                labelDebug.Text = "";
             }
         }
 
@@ -901,7 +899,6 @@ namespace Bezetting2
                     }
                 }
             }
-            labelDebug.Text = "";
         }
 
         private void CheckEnDealVerhuizing()
@@ -1413,6 +1410,8 @@ namespace Bezetting2
                 ProgData.ScreenCapture = false;
                 WindowUpdateViewScreen = false;
 
+                DebugPanelShow("Import oude data");
+
                 MessageBox.Show("Delete de komende maanden wordt data dus gewijzigd, cq gedeleted");
 
                 DateTime start = DateTime.Now;
@@ -1435,9 +1434,11 @@ namespace Bezetting2
                     ProgData.Disable_error_Meldingen = false;
                     Process.GetCurrentProcess().Kill();
                 }
-
+                
+                DebugPanelEnd();
                 ProgData.ScreenCapture = true;
                 WindowUpdateViewScreen = true;
+                
             }
         }
 
@@ -1494,8 +1495,7 @@ namespace Bezetting2
                                                         // inlezen waarden
                         _ = reader.GetValues(meta);
 
-                        labelDebug.Text = $"{teller++}";
-                        labelDebug.Refresh();
+                        DebugWrite($"{teller++}");
 
                         //Console.Write("{0} ", meta[2].ToString()); // pers nummer persoon
                         //Console.Write("{0} ", meta[3].ToString()); // naam persoon
@@ -1572,14 +1572,9 @@ namespace Bezetting2
                                         }
                                     }
 
+                                    DebugWrite($"{teller} {naam} {afwijking}");
 
-                                    labelDebug.Text = $"{teller} {naam} {afwijking}";
-                                    labelDebug.Refresh();
-                                    //ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, naam, datum[0], afwijking, rede, "Import " + invoer_naam, false);
-
-                                    //int personeelNr = int.Parse(meta[2].ToString());
                                     ProgData.RegelAfwijkingOpDatumEnKleur(datum_afwijking, kleur, meta[2].ToString(), datum[0], afwijking, rede, "Import " + invoer_naam, false);
-                                    //ProgData.RegelAfwijkingOpDatumEnKleurEnPersoneelNummer(datum_afwijking, kleur, personeelNr, datum[0], afwijking, rede, "Import " + invoer_naam, false);
 
                                     // toevoegen extra ruil of verschoven dienst
                                     string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
@@ -1598,6 +1593,7 @@ namespace Bezetting2
             }
             WindowUpdateViewScreen = true;
             ProgData.MaandData.InVoerOudeData = true;
+            DebugPanelEnd();
         }
 
         private void OpenDataBase_en_Voer_Oude_Namen_In(string file)
@@ -1867,11 +1863,9 @@ namespace Bezetting2
                 }
                 else
                 {
-                    labelDebug.Text = $"maak dir {path}";
-                    labelDebug.Refresh();
+                    DebugWrite($"maak dir {path}");
                     _ = Directory.CreateDirectory(path);
-                    labelDebug.Text = $"vul met kleuren data : {path}";
-                    labelDebug.Refresh();
+                    DebugWrite($"vul met kleuren data : {path}");
                     // delete _maand
                     ProgData.MaandData.SaveLeegPloeg("Blauw", path);
                     ProgData.MaandData.SaveLeegPloeg("Geel", path);
@@ -1882,8 +1876,7 @@ namespace Bezetting2
 
                     ProgData.igekozenjaar = start.Year;
                     ProgData.igekozenmaand = start.Month;
-                    labelDebug.Text = $"Bezetting lijst kleuren {start.Year} - {start.Month}                                                ";
-                    labelDebug.Refresh();
+                    DebugWrite($"Bezetting lijst kleuren {start.Year} - {start.Month}");
                     ProgData.MaakNieuwPloegBezettingAan("Blauw");
                     ProgData.MaakNieuwPloegBezettingAan("Rood");
                     ProgData.MaakNieuwPloegBezettingAan("Wit");
@@ -1978,8 +1971,7 @@ namespace Bezetting2
 
             foreach (personeel pers in ProgData.AlleMensen.LijstPersoonKleur)
             {
-                labelDebug.Text = $"{pers._achternaam}                           ";
-                labelDebug.Refresh();
+                DebugWrite($"{pers._achternaam}");
 
                 dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
                 for (int i = 0; i < aantal_dagen - 1; i++)
@@ -2025,8 +2017,6 @@ namespace Bezetting2
             if (result == DialogResult.Yes)
             {
                 UpdateExtraDienstLijst(ProgData.GekozenKleur);
-                labelDebug.Text = "";
-                labelDebug.Refresh();
                 MessageBox.Show("Klaar");
                 ButtonRefresh_Click(this, null);
             }

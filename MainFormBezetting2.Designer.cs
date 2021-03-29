@@ -108,7 +108,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
-            this.labelDebug = new System.Windows.Forms.Label();
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
             this.panelColor = new System.Windows.Forms.Panel();
             this.buttonKalender = new System.Windows.Forms.Button();
@@ -893,15 +892,6 @@
             this.timerKill.Interval = 30000;
             this.timerKill.Tick += new System.EventHandler(this.TimerKill_Tick);
             // 
-            // labelDebug
-            // 
-            this.labelDebug.AutoSize = true;
-            this.labelDebug.Location = new System.Drawing.Point(792, 9);
-            this.labelDebug.Name = "labelDebug";
-            this.labelDebug.Size = new System.Drawing.Size(60, 13);
-            this.labelDebug.TabIndex = 29;
-            this.labelDebug.Text = "Debug Info";
-            // 
             // checkBoxHoverNaam
             // 
             this.checkBoxHoverNaam.AutoSize = true;
@@ -941,15 +931,15 @@
             this.panelDebug.Controls.Add(this.textBoxDebug);
             this.panelDebug.Controls.Add(this.labelHoofdText);
             this.panelDebug.Controls.Add(this.pictureBox1);
-            this.panelDebug.Location = new System.Drawing.Point(341, 77);
+            this.panelDebug.Location = new System.Drawing.Point(142, 40);
             this.panelDebug.Name = "panelDebug";
-            this.panelDebug.Size = new System.Drawing.Size(567, 489);
+            this.panelDebug.Size = new System.Drawing.Size(567, 616);
             this.panelDebug.TabIndex = 35;
             // 
             // buttonClose
             // 
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClose.Location = new System.Drawing.Point(29, 433);
+            this.buttonClose.Location = new System.Drawing.Point(29, 564);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(505, 34);
             this.buttonClose.TabIndex = 4;
@@ -959,17 +949,17 @@
             // 
             // textBoxDebug
             // 
-            this.textBoxDebug.Location = new System.Drawing.Point(29, 251);
+            this.textBoxDebug.Location = new System.Drawing.Point(29, 290);
             this.textBoxDebug.Multiline = true;
             this.textBoxDebug.Name = "textBoxDebug";
-            this.textBoxDebug.Size = new System.Drawing.Size(505, 162);
+            this.textBoxDebug.Size = new System.Drawing.Size(505, 254);
             this.textBoxDebug.TabIndex = 3;
             // 
             // labelHoofdText
             // 
             this.labelHoofdText.AutoSize = true;
             this.labelHoofdText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHoofdText.Location = new System.Drawing.Point(255, 208);
+            this.labelHoofdText.Location = new System.Drawing.Point(25, 253);
             this.labelHoofdText.Name = "labelHoofdText";
             this.labelHoofdText.Size = new System.Drawing.Size(256, 20);
             this.labelHoofdText.TabIndex = 2;
@@ -997,7 +987,6 @@
             this.Controls.Add(this.comboBoxKleurKeuze);
             this.Controls.Add(this.panelColor);
             this.Controls.Add(this.checkBoxHoverNaam);
-            this.Controls.Add(this.labelDebug);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel7);
@@ -1104,7 +1093,6 @@
         private System.Windows.Forms.ToolStripMenuItem snipperDagAanvraagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem instellingenProgrammaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importOudeVeranderDataOudeVersieToolStripMenuItem;
-        public System.Windows.Forms.Label labelDebug;
         private System.Windows.Forms.ToolStripMenuItem excelToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vuilwerkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tellingWaarGewerktToolStripMenuItem;
