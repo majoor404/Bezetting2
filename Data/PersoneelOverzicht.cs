@@ -59,7 +59,7 @@ namespace Bezetting2.Data
                         string nieuw_naam = Directory.GetCurrentDirectory() + @"\Backup\personeel" + s + ".bin";
                         File.Copy("BezData\\personeel.bin", nieuw_naam, true);  // overwrite oude file
 
-                        List<FileInfo> files = new DirectoryInfo("Backup").EnumerateFiles()
+                        List<FileInfo> files = new DirectoryInfo("Backup").EnumerateFiles("*personeel*")
                                         .OrderByDescending(f => f.CreationTime)
                                         .Skip(5)
                                         .ToList();

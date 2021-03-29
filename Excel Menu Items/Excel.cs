@@ -1216,8 +1216,7 @@ namespace Bezetting2
 
             // haal eerst de namen die dit jaar op kleur x gelopen hebben
             // dus lijst met namen
-            labelDebug.Text = "Verzamel namen deze kleur dit jaar, moment.....";
-            labelDebug.Refresh();
+            DebugPanelShow("Verzamel namen deze kleur");
             for (int i = 1; i < 13; i++)
             {
                 ProgData.igekozenmaand = i;
@@ -1237,8 +1236,7 @@ namespace Bezetting2
 
             LijstclassTelAfwijkingenVanPersoons.Clear();
             // nu de afwijkingen van die personen.
-            labelDebug.Text = "Verzamel Afwijkingen van deze personen dit jaar, moment.....";
-            labelDebug.Refresh();
+            DebugWrite("Verzamel Afwijkingen van deze personen dit jaar");
             for (int i = 1; i < 13; i++)
             {
                 ProgData.igekozenmaand = i;
@@ -1246,8 +1244,7 @@ namespace Bezetting2
                 foreach (int a in Namen)
                 {
                     string naam = ProgData.Get_Gebruiker_Naam(a.ToString());
-                    labelDebug.Text = $"Verzamel Afwijkingen van persoon dit jaar, moment..... {naam}                                       ";
-                    labelDebug.Refresh();
+                    DebugWrite($"Verzamel Afwijkingen van persoon dit jaar {naam}");
                     for (int q = 1; q < aantal_dagen; q++)
                     {
                         DateTime dat = new DateTime(ProgData.igekozenjaar, i, q);
@@ -1258,13 +1255,14 @@ namespace Bezetting2
                         }
                         if (afwijking != "")
                         {
-                            labelDebug.Text = $"Afwijkingen van persoon dit jaar, moment..... {naam}  {afwijking}                                   ";
-                            labelDebug.Refresh();
+                            DebugWrite($"Afwijkingen van persoon dit jaar, moment..... {naam}  {afwijking}");
                             ClassTelAfwijkingenVanPersoon.voeg_toe(a, afwijking);
                         }
                     }
                 }
             }
+
+            DebugPanelEnd();
 
             try
             {
@@ -1337,9 +1335,8 @@ namespace Bezetting2
 
                 MessageBox.Show(errorMessage, "Error");
             }
-            labelDebug.Text = "";
-            labelDebug.Refresh();
             ProgData.ReturnDatum();
+
         }
     }
 }

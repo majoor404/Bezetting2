@@ -150,7 +150,6 @@ namespace Bezetting2
                 MessageBox.Show($"SaveLijstWerkdagPloeg() error na 15 keer, \n{LijstWerkdagPloeg_Locatie(kleur)}");
             }
 
-            Main.labelDebug.Text = "Save Ploeg Bezetting";
             if (!string.IsNullOrEmpty(kleur))
             {
                 try
@@ -178,7 +177,6 @@ namespace Bezetting2
             {
                 MessageBox.Show("Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?");
             }
-            Main.labelDebug.Text = "Load Ploeg Bezetting";
 
             try
             {
@@ -204,7 +202,6 @@ namespace Bezetting2
             }
             catch (IOException)
             {
-                //Main.labelDebug.Text = " LoadPloegBezettingLijst() error, try again";
                 Thread.Sleep(300);
                 LaadLijstWerkdagPloeg(kleur, --try_again);
             }
@@ -615,8 +612,8 @@ namespace Bezetting2
             {
                 DateTime backup = DateTime.Now;
 
-                Main.labelDebug.Text = "Backup huidige maand, moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup huidige maand, moment.....");
+                
                 backup_zipnaam_huidige_dag = $"Backup\\GemaaktOpDag_{backup.Day}.zip";
                 string startPath = GetDirectoryBezettingMaand(backup);
                 SchijfLocatieVanBackup(startPath, backup_zipnaam_huidige_dag);
@@ -624,8 +621,8 @@ namespace Bezetting2
                     File.Delete(backup_zipnaam_huidige_dag);
                 ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_dag);
 
-                Main.labelDebug.Text = "Backup volgende maand, moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup volgende maand, moment.....");
+                
                 backup = backup.AddMonths(1);
                 ProgData.backup_zipnaam_maand_verder = $"Backup\\maand_{backup.Month}.zip";
                 startPath = GetDirectoryBezettingMaand(backup);
@@ -634,8 +631,7 @@ namespace Bezetting2
                 ZipFile.CreateFromDirectory(startPath, backup_zipnaam_maand_verder);
 
 
-                Main.labelDebug.Text = "Backup 2 maanden in toekomst, moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup 2 maanden in toekomst, moment.....");
                 backup = backup.AddMonths(1);
                 ProgData.backup_zipnaam_2maanden_verder = $"Backup\\maand_{backup.Month}.zip";
                 startPath = GetDirectoryBezettingMaand(backup);
@@ -651,33 +647,27 @@ namespace Bezetting2
                 ProgData.igekozenjaar = backup.Year;
                 ProgData.igekozenmaand = backup.Month;
 
-                Main.labelDebug.Text = "Backup Blauw namen , moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup Blauw namen , moment.....");
                 ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
                 ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Blauw", 15);
 
-                Main.labelDebug.Text = "Backup Groen namen , moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup Groen namen , moment.....");
                 ProgData.AlleMensen.HaalPloegNamenOpKleur("Groen");
                 ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Groen", 15);
 
-                Main.labelDebug.Text = "Backup Wit namen , moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup Wit namen , moment.....");
                 ProgData.AlleMensen.HaalPloegNamenOpKleur("Wit");
                 ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Wit", 15);
 
-                Main.labelDebug.Text = "Backup Geel namen , moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup Geel namen , moment.....");
                 ProgData.AlleMensen.HaalPloegNamenOpKleur("Geel");
                 ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Geel", 15);
 
-                Main.labelDebug.Text = "Backup Rood namen , moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup Rood namen , moment.....");
                 ProgData.AlleMensen.HaalPloegNamenOpKleur("Rood");
                 ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Rood", 15);
 
-                Main.labelDebug.Text = "Backup Dagdienst namen , moment.....";
-                Main.labelDebug.Refresh();
+                Main.DebugWrite("Backup Dagdienst namen , moment.....");
                 ProgData.AlleMensen.HaalPloegNamenOpKleur("DD");
                 ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
 
@@ -744,9 +734,6 @@ namespace Bezetting2
 
         public static bool TestNetwerkBeschikbaar(int test)
         {
-            Main.labelDebug.Text = "Test Netwerk";
-
-
             if (test == 0)
             {
                 MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
@@ -760,7 +747,6 @@ namespace Bezetting2
                 if (File.Exists("TestNetWerk.txt"))
                 {
                     File.Delete("TestNetWerk.txt");
-                    Main.labelDebug.Text = "";
                     return true;
                 }
             }

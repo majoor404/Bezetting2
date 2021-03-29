@@ -112,10 +112,17 @@
             this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
             this.panelColor = new System.Windows.Forms.Panel();
             this.buttonKalender = new System.Windows.Forms.Button();
+            this.panelDebug = new System.Windows.Forms.Panel();
+            this.buttonClose = new System.Windows.Forms.Button();
+            this.textBoxDebug = new System.Windows.Forms.TextBox();
+            this.labelHoofdText = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.panelDebug.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -926,6 +933,58 @@
             this.buttonKalender.UseVisualStyleBackColor = false;
             this.buttonKalender.Click += new System.EventHandler(this.buttonKalender_Click);
             // 
+            // panelDebug
+            // 
+            this.panelDebug.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelDebug.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelDebug.Controls.Add(this.buttonClose);
+            this.panelDebug.Controls.Add(this.textBoxDebug);
+            this.panelDebug.Controls.Add(this.labelHoofdText);
+            this.panelDebug.Controls.Add(this.pictureBox1);
+            this.panelDebug.Location = new System.Drawing.Point(341, 77);
+            this.panelDebug.Name = "panelDebug";
+            this.panelDebug.Size = new System.Drawing.Size(567, 489);
+            this.panelDebug.TabIndex = 35;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonClose.Location = new System.Drawing.Point(29, 433);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(505, 34);
+            this.buttonClose.TabIndex = 4;
+            this.buttonClose.Text = "Close (3)";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // textBoxDebug
+            // 
+            this.textBoxDebug.Location = new System.Drawing.Point(29, 251);
+            this.textBoxDebug.Multiline = true;
+            this.textBoxDebug.Name = "textBoxDebug";
+            this.textBoxDebug.Size = new System.Drawing.Size(505, 162);
+            this.textBoxDebug.TabIndex = 3;
+            // 
+            // labelHoofdText
+            // 
+            this.labelHoofdText.AutoSize = true;
+            this.labelHoofdText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelHoofdText.Location = new System.Drawing.Point(255, 208);
+            this.labelHoofdText.Name = "labelHoofdText";
+            this.labelHoofdText.Size = new System.Drawing.Size(256, 20);
+            this.labelHoofdText.TabIndex = 2;
+            this.labelHoofdText.Text = "Dagelijkse Backup, moment.....";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Image = global::Bezetting2.Properties.Resources.helm_man;
+            this.pictureBox1.Location = new System.Drawing.Point(29, 28);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(199, 200);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -933,6 +992,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.panelDebug);
             this.Controls.Add(this.buttonKalender);
             this.Controls.Add(this.comboBoxKleurKeuze);
             this.Controls.Add(this.panelColor);
@@ -985,6 +1045,9 @@
             this.StatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.panelDebug.ResumeLayout(false);
+            this.panelDebug.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1074,6 +1137,11 @@
         private System.Windows.Forms.ToolStripMenuItem maakBackupToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ploegTotalenToolStripMenuItem;
         private System.Windows.Forms.Button buttonKalender;
+        private System.Windows.Forms.Panel panelDebug;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Label labelHoofdText;
+        public System.Windows.Forms.TextBox textBoxDebug;
+        private System.Windows.Forms.Button buttonClose;
     }
 }
 

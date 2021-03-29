@@ -146,6 +146,8 @@ namespace Bezetting2
             {
                 buttonKalender.Enabled = false;
             }
+
+            panelDebug.Visible = false;
         }
 
         // start programma
@@ -2098,8 +2100,9 @@ namespace Bezetting2
         private void maakBackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
             timerKill.Enabled = false;
-            labelDebug.Text = "Dagelijkse Backup, moment.....";
-            labelDebug.Refresh();
+
+            DebugPanelShow("Dagelijkse Backup, moment.....");
+            
             if (!File.Exists("BezData\\backup.time"))
             {
                 using (File.Create("BezData\\backup.time"))
@@ -2109,8 +2112,9 @@ namespace Bezetting2
             File.SetLastWriteTime("BezData\\backup.time", DateTime.Now);
             ProgData.Backup();
             timerKill.Enabled = true;
-            labelDebug.Text = "Dagelijkse Backup gelukt";
-            labelDebug.Refresh();
+
+            DebugWrite("Dagelijkse Backup gelukt");
+            DebugPanelEnd();
         }
 
         private void buttonKalender_Click(object sender, EventArgs e)
@@ -2120,6 +2124,38 @@ namespace Bezetting2
                 Process.Start(InstellingenProg._LocatieKalender);
             }
             catch { }
+        }
+
+        public void DebugPanelEnd()
+        {
+            buttonClose.Text = "Close (3)";
+            buttonClose.Refresh();
+            Thread.Sleep(1000);
+            buttonClose.Text = "Close (2)";
+            buttonClose.Refresh();
+            Thread.Sleep(1000);
+            buttonClose.Text = "Close (1)";
+            buttonClose.Refresh();
+            Thread.Sleep(1000);
+            panelDebug.Visible = false;
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            panelDebug.Visible = false;
+        }
+
+        private void DebugPanelShow(string text)
+        {
+            labelHoofdText.Text = text;
+            panelDebug.Visible = true;
+            textBoxDebug.Text = "";
+            panelDebug.Refresh();
+        }
+
+        public void DebugWrite(string regel)
+        {
+            textBoxDebug.AppendText(regel + Environment.NewLine);
         }
     }
 }
