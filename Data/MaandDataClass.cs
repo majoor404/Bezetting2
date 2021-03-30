@@ -54,6 +54,17 @@ namespace Bezetting2.Data
 
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
+            //als kleur weg, en niet bestaat, mag ik altijd een nieuwe maken
+            if(kleur == "Weg")
+            {
+                if (!File.Exists(path))
+                {
+                    MessageBox.Show($"Omdat kleur weg is en path niet bestaat,\n" +
+                        $" maak ik nieuwe aan. {path}");
+                    SaveLeegPloeg(kleur, path);
+                }
+            }
+
             if (File.Exists(path))
             {
                 var veranderd = File.GetLastWriteTime(path);

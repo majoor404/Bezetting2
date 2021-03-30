@@ -171,16 +171,28 @@ namespace Bezetting2
 
         public static void LaadLijstWerkdagPloeg(string kleur, int try_again)
         {
-            //CheckFiles(kleur);
+            // Als LijstWerkdagPloeg_Locatie(kleur) niet bestaat, zou ik nieuwe kunnen maken,
+            // maar wat als hij hem niet zou kunnen laden ?
+            string file = LijstWerkdagPloeg_Locatie(kleur);
+            if (!File.Exists(file))
+            {
+                if (TestNetwerkBeschikbaar(5))
+                {
+                    MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}\n" +
+                        $"{file}");
+                    MaakNieuwPloegBezettingAan(kleur);
+                }
+            }
 
             if (try_again < 0)
             {
-                MessageBox.Show("Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?");
+                MessageBox.Show($"Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?\n" +
+                    $" {LijstWerkdagPloeg_Locatie(kleur)}");
             }
 
             try
             {
-                using (Stream stream = File.Open(LijstWerkdagPloeg_Locatie(kleur), FileMode.Open))
+                using (Stream stream = File.Open(file, FileMode.Open))
                 {
                     BinaryFormatter bin = new BinaryFormatter();
                     try
@@ -191,7 +203,7 @@ namespace Bezetting2
                     }
                     catch
                     {
-                        MessageBox.Show("Deserialize(stream) error, gebruik repareer tool als Admin");
+                        MessageBox.Show("Deserialize(stream) LaadLijstWerkdagPloeg error");
                     }
                     finally
                     {
