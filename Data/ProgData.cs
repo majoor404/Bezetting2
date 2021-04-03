@@ -513,10 +513,14 @@ namespace Bezetting2
                         string kleur = Main.View.Items[4].SubItems[0].Text;
                         string opslag = Path.GetFullPath($"{jaar}\\{imaand}\\maand_overzicht_{kleur}.jpg");
                         bitmap.Save(opslag, ImageFormat.Jpeg);
-                        
-                        // voor als er problemen zijn met data ;-)
-                        opslag = Path.GetFullPath($"{jaar}\\{imaand}\\maand_overzicht_{kleur}_{DateTime.Now.ToShortDateString()}.jpg");
-                        bitmap.Save(opslag, ImageFormat.Jpeg);
+
+                        // als plaatje is van huidige maand, opslaan
+                        if (DateTime.Now.Month == imaand && DateTime.Now.Year.ToString() == jaar)
+                        {
+                            // voor als er problemen zijn met data ;-)
+                            opslag = Path.GetFullPath($"{jaar}\\{imaand}\\maand_overzicht_{kleur}_{DateTime.Now.ToShortDateString()}.jpg");
+                            bitmap.Save(opslag, ImageFormat.Jpeg);
+                        }
                     }
                 }
             }
@@ -653,36 +657,46 @@ namespace Bezetting2
 
                 // maak ploeg namen op schijf.
 
+                // gaat fout op bv 1 april 00:00 dan komen namen van april na verhuizing in
+                // maart, en dan mag niet.
+
+                // los ik op door op dag 1 en laatste maand eea niet op te slaan.
+
                 ProgData.SaveDatum();
 
                 backup = DateTime.Now;
                 ProgData.igekozenjaar = backup.Year;
                 ProgData.igekozenmaand = backup.Month;
 
-                Main.DebugWrite("Backup Blauw namen , moment.....");
-                ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
-                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Blauw", 15);
+                int aantal_dagen_dezemaand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
 
-                Main.DebugWrite("Backup Groen namen , moment.....");
-                ProgData.AlleMensen.HaalPloegNamenOpKleur("Groen");
-                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Groen", 15);
+                if (!(backup.Day == 1 || backup.Day == aantal_dagen_dezemaand))
+                {
 
-                Main.DebugWrite("Backup Wit namen , moment.....");
-                ProgData.AlleMensen.HaalPloegNamenOpKleur("Wit");
-                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Wit", 15);
+                    Main.DebugWrite("Backup Blauw namen , moment.....");
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur("Blauw");
+                    ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Blauw", 15);
 
-                Main.DebugWrite("Backup Geel namen , moment.....");
-                ProgData.AlleMensen.HaalPloegNamenOpKleur("Geel");
-                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Geel", 15);
+                    Main.DebugWrite("Backup Groen namen , moment.....");
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur("Groen");
+                    ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Groen", 15);
 
-                Main.DebugWrite("Backup Rood namen , moment.....");
-                ProgData.AlleMensen.HaalPloegNamenOpKleur("Rood");
-                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Rood", 15);
+                    Main.DebugWrite("Backup Wit namen , moment.....");
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur("Wit");
+                    ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Wit", 15);
 
-                Main.DebugWrite("Backup Dagdienst namen , moment.....");
-                ProgData.AlleMensen.HaalPloegNamenOpKleur("DD");
-                ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
+                    Main.DebugWrite("Backup Geel namen , moment.....");
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur("Geel");
+                    ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Geel", 15);
 
+                    Main.DebugWrite("Backup Rood namen , moment.....");
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur("Rood");
+                    ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("Rood", 15);
+
+                    Main.DebugWrite("Backup Dagdienst namen , moment.....");
+                    ProgData.AlleMensen.HaalPloegNamenOpKleur("DD");
+                    ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
+                }
                 ProgData.ReturnDatum();
             }
             catch

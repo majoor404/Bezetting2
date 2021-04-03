@@ -108,7 +108,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
             this.timerKill = new System.Windows.Forms.Timer(this.components);
-            this.checkBoxHoverNaam = new System.Windows.Forms.CheckBox();
             this.panelColor = new System.Windows.Forms.Panel();
             this.buttonKalender = new System.Windows.Forms.Button();
             this.panelDebug = new System.Windows.Forms.Panel();
@@ -116,12 +115,15 @@
             this.textBoxDebug = new System.Windows.Forms.TextBox();
             this.labelHoofdText = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panelSelect = new System.Windows.Forms.Panel();
+            this.labelNaamSelect = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.panelDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panelSelect.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -892,16 +894,6 @@
             this.timerKill.Interval = 30000;
             this.timerKill.Tick += new System.EventHandler(this.TimerKill_Tick);
             // 
-            // checkBoxHoverNaam
-            // 
-            this.checkBoxHoverNaam.AutoSize = true;
-            this.checkBoxHoverNaam.Location = new System.Drawing.Point(14, 676);
-            this.checkBoxHoverNaam.Name = "checkBoxHoverNaam";
-            this.checkBoxHoverNaam.Size = new System.Drawing.Size(55, 17);
-            this.checkBoxHoverNaam.TabIndex = 31;
-            this.checkBoxHoverNaam.Text = "Hover";
-            this.checkBoxHoverNaam.UseVisualStyleBackColor = true;
-            // 
             // panelColor
             // 
             this.panelColor.BackColor = System.Drawing.Color.RoyalBlue;
@@ -975,6 +967,25 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
+            // panelSelect
+            // 
+            this.panelSelect.Controls.Add(this.labelNaamSelect);
+            this.panelSelect.Location = new System.Drawing.Point(801, 70);
+            this.panelSelect.Name = "panelSelect";
+            this.panelSelect.Size = new System.Drawing.Size(318, 24);
+            this.panelSelect.TabIndex = 36;
+            // 
+            // labelNaamSelect
+            // 
+            this.labelNaamSelect.AutoSize = true;
+            this.labelNaamSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNaamSelect.ForeColor = System.Drawing.Color.Black;
+            this.labelNaamSelect.Location = new System.Drawing.Point(3, 4);
+            this.labelNaamSelect.Name = "labelNaamSelect";
+            this.labelNaamSelect.Size = new System.Drawing.Size(45, 16);
+            this.labelNaamSelect.TabIndex = 0;
+            this.labelNaamSelect.Text = "label5";
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -982,11 +993,11 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.panelSelect);
             this.Controls.Add(this.panelDebug);
             this.Controls.Add(this.buttonKalender);
             this.Controls.Add(this.comboBoxKleurKeuze);
             this.Controls.Add(this.panelColor);
-            this.Controls.Add(this.checkBoxHoverNaam);
             this.Controls.Add(this.panel8);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panel7);
@@ -1037,6 +1048,8 @@
             this.panelDebug.ResumeLayout(false);
             this.panelDebug.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panelSelect.ResumeLayout(false);
+            this.panelSelect.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1108,7 +1121,6 @@
         private System.Windows.Forms.ToolStripMenuItem witToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roodToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem allemaalToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBoxHoverNaam;
         private System.Windows.Forms.ToolStripMenuItem removeAutoInlogOnderDitWindowsAccountToolStripMenuItem;
         public System.Windows.Forms.ListView View;
         private System.Windows.Forms.ToolStripMenuItem editPersoneelToolStripMenuItem;
@@ -1130,6 +1142,8 @@
         public System.Windows.Forms.Label labelHoofdText;
         public System.Windows.Forms.TextBox textBoxDebug;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Panel panelSelect;
+        private System.Windows.Forms.Label labelNaamSelect;
     }
 }
 

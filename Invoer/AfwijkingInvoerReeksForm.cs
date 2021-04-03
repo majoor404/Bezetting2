@@ -194,6 +194,36 @@ namespace Bezetting2.Invoer
                         ProgData.igekozenjaar = start.Year;
                     }
                 }
+                if (comboBox1.SelectedIndex == 5)
+                {
+                    int AantalAfwijkingX = (int) numericUpDownAfwHerX.Value;
+                    int HerhallingOmYDagen = (int)numericUpDownY.Value;
+                    int Aantal = (int)AantalDagen.Value;
+
+                    DateTime EersteStartDag = start;
+
+                    while (Aantal > 0)
+                    {
+                        for (int i = 0; i < AantalAfwijkingX; i++)
+                        {
+                            labelAftellen.Text = i.ToString();
+                            labelAftellen.Refresh();
+                            ProgData.RegelAfwijkingOpDatumEnKleur(start, ProgData.GekozenKleur, labelPersoneelnr.Text, start.Day.ToString(), textBoxAfwijking.Text, textBoxRede.Text, ProgData.Huidige_Gebruiker_Naam());
+                            Thread.Sleep(300);
+                            if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
+                            {
+                                ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, start, labelNaam.Text);
+                                Thread.Sleep(300);
+                            }
+                            start = start.AddDays(1);
+                        }
+                        Aantal--;
+                        start = EersteStartDag;
+                        start = start.AddDays(HerhallingOmYDagen);
+                        EersteStartDag = start;
+                    }
+                }
+
                 ProgData.igekozenmaand = maand;
                 ProgData.igekozenjaar = jaar;
 
@@ -210,6 +240,7 @@ namespace Bezetting2.Invoer
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             panelSpeciaal.Visible = false;
+            panelSpeciaal2.Visible = false;
             if (comboBox1.SelectedIndex < 2)
             {
                 AantalDagen.Enabled = true;
@@ -230,6 +261,12 @@ namespace Bezetting2.Invoer
             {
                 panelSpeciaal.Visible = true;
                 numericUpDownOmDeAantalDagen.Value = 1;
+            }
+            if (comboBox1.SelectedIndex == 5)
+            {
+                panelSpeciaal2.Visible = true;
+                numericUpDownY.Value = 1;
+                numericUpDownAfwHerX.Value = 1;
             }
         }
 

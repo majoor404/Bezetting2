@@ -31,6 +31,7 @@ namespace Bezetting2
         public const int y_as_add_lijn = 4;
         private bool kill = false;
         public bool WindowUpdateViewScreen = true;
+        private Point positieGeselecteerdeNaam = new Point(132, 22);
 
         private readonly ToolTip mTooltip = new ToolTip();
         private Point mLastPos = new Point(-1, -1);
@@ -142,7 +143,7 @@ namespace Bezetting2
 
             Kleur_Standaard_Font = buttonRefresh.ForeColor;
 
-            if(!File.Exists(InstellingenProg._LocatieKalender))
+            if (!File.Exists(InstellingenProg._LocatieKalender))
             {
                 buttonKalender.Enabled = false;
             }
@@ -1107,8 +1108,54 @@ namespace Bezetting2
                 ListViewItem item = View.GetItemAt(e.X, e.Y);
                 ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
 
-                toolStripStatusLabelInfo.Text = "";
-                toolStripStatusRedeAfwijking.Text = "";
+                // naam select als op juiste row
+                if ((item != null) && info.Item.Index > 0 && info.Item.Index > 3 && info.Item.Index < View.Items.Count - 1)
+                {
+                    if (info.SubItem.Text == "") // er niks in cell, zet naam
+                    {
+                        panelSelect.Visible = true;
+                        panelSelect.Width = View.Columns[0].Width - 4;
+                        panelSelect.Height = 20;
+
+                        positieGeselecteerdeNaam.X = e.X + panelSelect.Width + 5;// View.Location.X + 2;
+                        positieGeselecteerdeNaam.Y = e.Y + 45;
+                        panelSelect.BackColor = View.BackColor;
+                        panelSelect.Location = positieGeselecteerdeNaam;
+                        labelNaamSelect.Text = View.Items[info.Item.Index].Text;
+
+                        toolStripStatusLabelInfo.Text = "";
+                        toolStripStatusRedeAfwijking.Text = "";
+                    }
+                    else // er is wat in cell, zet opmerking
+                    {
+                        toolStripStatusLabelInfo.Text = info.Item.Text + " " + info.SubItem.Text;
+                        toolStripStatusRedeAfwijking.Text = GetRedenAfwijking(info.Item.Text, info.Item.SubItems.IndexOf(info.SubItem));
+
+                        if (toolStripStatusRedeAfwijking.Text.Trim() != "")
+                        {
+                            panelSelect.Visible = true;
+                            panelSelect.Width = View.Columns[0].Width - 4;
+                            panelSelect.Height = 20;
+                            positieGeselecteerdeNaam.X = e.X + panelSelect.Width + 5;// View.Location.X + 2;
+                            positieGeselecteerdeNaam.Y = e.Y + 45;
+                            panelSelect.BackColor = View.BackColor;
+                            panelSelect.Location = positieGeselecteerdeNaam;
+                            labelNaamSelect.Text = toolStripStatusRedeAfwijking.Text;
+                        }
+                        else
+                        {
+                            panelSelect.Visible = false;
+                            toolStripStatusLabelInfo.Text = "";
+                            toolStripStatusRedeAfwijking.Text = "";
+                        }
+                    }
+                }
+                else
+                {
+                    toolStripStatusLabelInfo.Text = "";
+                    toolStripStatusRedeAfwijking.Text = "";
+                    panelSelect.Visible = false;
+                }
 
                 if ((item != null) && (!string.IsNullOrEmpty(info?.SubItem?.Text)))
                 {
@@ -1146,16 +1193,7 @@ namespace Bezetting2
                                 mTooltip.Show(namen, info.Item.ListView, e.X + 15, e.Y + 15, 3000);
                         }
                     }
-                    // rede afwijking
-                    if (col > 0 && row > 3 && row < View.Items.Count - 1)
-                    {
-                        toolStripStatusLabelInfo.Text = info.Item.Text + " " + info.SubItem.Text;
-                        toolStripStatusRedeAfwijking.Text = GetRedenAfwijking(info.Item.Text, col);
-                        if (!string.IsNullOrEmpty(toolStripStatusRedeAfwijking.Text) && toolStripStatusRedeAfwijking.Text != " " && mLastPos != e.Location)
-                        {
-                            mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
-                        }
-                    }
+                    
                     // personeel nummer bij naam
                     if (col == 0 && row > 3 && row < View.Items.Count - 1)
                     {
@@ -1196,15 +1234,7 @@ namespace Bezetting2
                         }
                     }
                 }
-                if (item != null && (string.IsNullOrEmpty(info?.SubItem?.Text) && checkBoxHoverNaam.Checked))
-                {
-                    try
-                    {
-                        int row1 = info.Item.Index;
-                        mTooltip.Show(View.Items[row1].Text, info.Item.ListView, e.X + 15, e.Y + 15, 2000);
-                    }
-                    catch { }
-                }
+                
                 mLastPos = e.Location;
             }
             catch { }
@@ -1334,8 +1364,8 @@ namespace Bezetting2
             else // hier kijken of er een nieuwe dag is
             {
                 var laatste_keer = File.GetLastWriteTime("BezData\\backup.time");
-                // 1 keer per dag
-                if (laatste_keer.Day != DateTime.Now.Day)   // zo ja, backup en maken _namen.bin documenten
+                // 1 keer per dag, niet bij dag wissel (00:00)
+                if (laatste_keer.Day != DateTime.Now.Day && DateTime.Now.Hour > 1)   // zo ja, backup en maken _namen.bin documenten
                 {
                     maakBackupToolStripMenuItem_Click(this, null);
                 }
@@ -1434,11 +1464,11 @@ namespace Bezetting2
                     ProgData.Disable_error_Meldingen = false;
                     Process.GetCurrentProcess().Kill();
                 }
-                
+
                 DebugPanelEnd();
                 ProgData.ScreenCapture = true;
                 WindowUpdateViewScreen = true;
-                
+
             }
         }
 
@@ -2092,7 +2122,7 @@ namespace Bezetting2
             timerKill.Enabled = false;
 
             DebugPanelShow("Dagelijkse Backup, moment.....");
-            
+
             if (!File.Exists("BezData\\backup.time"))
             {
                 using (File.Create("BezData\\backup.time"))
@@ -2147,5 +2177,6 @@ namespace Bezetting2
         {
             textBoxDebug.AppendText(regel + Environment.NewLine);
         }
+
     }
 }

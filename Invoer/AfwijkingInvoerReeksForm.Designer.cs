@@ -43,6 +43,8 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.panelSpeciaal = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.numericUpDownOmDeAantalDagen = new System.Windows.Forms.NumericUpDown();
@@ -50,11 +52,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.labelAftellen = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
+            this.panelSpeciaal2 = new System.Windows.Forms.Panel();
+            this.numericUpDownY = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownAfwHerX = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.AantalDagen)).BeginInit();
             this.panelSpeciaal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOmDeAantalDagen)).BeginInit();
+            this.panelSpeciaal2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAfwHerX)).BeginInit();
             this.SuspendLayout();
             // 
             // label4
@@ -222,7 +235,8 @@
             "Aantal Kopiëren volgens kalender dagen",
             "Voor in voor hele ploeg",
             "GP invoer (2 op 2 af)",
-            "Speciaal (X Aantal om de Y dagen)"});
+            "Speciaal (X Aantal om de Y dagen)",
+            "Speciaal(BV DD-DD-DD-DD-DD-Vrij-Vrij)"});
             this.comboBox1.Location = new System.Drawing.Point(297, 61);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(239, 21);
@@ -245,6 +259,24 @@
             this.panelSpeciaal.TabIndex = 33;
             this.panelSpeciaal.Visible = false;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(11, 99);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(105, 13);
+            this.label10.TabIndex = 5;
+            this.label10.Text = "gedurende 4 weken.";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(11, 86);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(219, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "BV 1 oplo op maandag, dan om de 7 dagen, ";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -266,6 +298,11 @@
             // numericUpDownOmDeAantalDagen
             // 
             this.numericUpDownOmDeAantalDagen.Location = new System.Drawing.Point(133, 6);
+            this.numericUpDownOmDeAantalDagen.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownOmDeAantalDagen.Name = "numericUpDownOmDeAantalDagen";
             this.numericUpDownOmDeAantalDagen.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownOmDeAantalDagen.TabIndex = 1;
@@ -281,9 +318,9 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 13);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 13);
+            this.label5.Size = new System.Drawing.Size(104, 13);
             this.label5.TabIndex = 0;
-            this.label5.Text = "Om de aantal dagen";
+            this.label5.Text = "Herhaal om Y dagen";
             // 
             // label1
             // 
@@ -312,23 +349,122 @@
             this.labelAftellen.TabIndex = 36;
             this.labelAftellen.Text = "Aftellen";
             // 
-            // label9
+            // panelSpeciaal2
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 86);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(219, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "BV 1 oplo op maandag, dan om de 7 dagen, ";
+            this.panelSpeciaal2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelSpeciaal2.Controls.Add(this.label17);
+            this.panelSpeciaal2.Controls.Add(this.label16);
+            this.panelSpeciaal2.Controls.Add(this.label15);
+            this.panelSpeciaal2.Controls.Add(this.numericUpDownY);
+            this.panelSpeciaal2.Controls.Add(this.numericUpDownAfwHerX);
+            this.panelSpeciaal2.Controls.Add(this.label14);
+            this.panelSpeciaal2.Controls.Add(this.label13);
+            this.panelSpeciaal2.Controls.Add(this.label12);
+            this.panelSpeciaal2.Controls.Add(this.label11);
+            this.panelSpeciaal2.Location = new System.Drawing.Point(282, 152);
+            this.panelSpeciaal2.Name = "panelSpeciaal2";
+            this.panelSpeciaal2.Size = new System.Drawing.Size(267, 199);
+            this.panelSpeciaal2.TabIndex = 37;
+            this.panelSpeciaal2.Visible = false;
             // 
-            // label10
+            // numericUpDownY
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(11, 99);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(105, 13);
-            this.label10.TabIndex = 5;
-            this.label10.Text = "gedurende 4 weken.";
+            this.numericUpDownY.Location = new System.Drawing.Point(133, 34);
+            this.numericUpDownY.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownY.Name = "numericUpDownY";
+            this.numericUpDownY.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownY.TabIndex = 9;
+            this.numericUpDownY.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownY.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // numericUpDownAfwHerX
+            // 
+            this.numericUpDownAfwHerX.Location = new System.Drawing.Point(133, 10);
+            this.numericUpDownAfwHerX.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownAfwHerX.Name = "numericUpDownAfwHerX";
+            this.numericUpDownAfwHerX.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownAfwHerX.TabIndex = 6;
+            this.numericUpDownAfwHerX.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDownAfwHerX.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(6, 81);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 13);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "K K - K K -";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(6, 66);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(254, 13);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "BV Als herhaling X aantal 2 is, en Y 3, en afwijking K";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(11, 36);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(104, 13);
+            this.label12.TabIndex = 6;
+            this.label12.Text = "Herhaal om Y dagen";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(11, 12);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(105, 13);
+            this.label11.TabIndex = 5;
+            this.label11.Text = "Afwijking herhaling X";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 123);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(184, 13);
+            this.label15.TabIndex = 10;
+            this.label15.Text = "BV DD-DD-DD-DD-DD voor 4 weken";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(6, 146);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(166, 13);
+            this.label16.TabIndex = 11;
+            this.label16.Text = "Start op een maandag, aantal is 4";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(6, 171);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(77, 13);
+            this.label17.TabIndex = 12;
+            this.label17.Text = "X is 5 en Y is 7";
             // 
             // AfwijkingInvoerReeksForm
             // 
@@ -336,6 +472,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(561, 477);
+            this.Controls.Add(this.panelSpeciaal2);
             this.Controls.Add(this.labelAftellen);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label1);
@@ -365,6 +502,10 @@
             this.panelSpeciaal.ResumeLayout(false);
             this.panelSpeciaal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownOmDeAantalDagen)).EndInit();
+            this.panelSpeciaal2.ResumeLayout(false);
+            this.panelSpeciaal2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownAfwHerX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,7 +520,6 @@
         public System.Windows.Forms.Label labelDatum;
         public System.Windows.Forms.Label labelNaam;
         private System.Windows.Forms.ListBox listBoxItems;
-        private System.Windows.Forms.TextBox textBoxRede;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown AantalDagen;
         private System.Windows.Forms.Button buttonVoerUit;
@@ -396,5 +536,16 @@
         public System.Windows.Forms.TextBox textBoxAfwijking;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panelSpeciaal2;
+        private System.Windows.Forms.NumericUpDown numericUpDownY;
+        private System.Windows.Forms.NumericUpDown numericUpDownAfwHerX;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        public System.Windows.Forms.TextBox textBoxRede;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
     }
 }

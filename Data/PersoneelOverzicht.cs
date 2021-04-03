@@ -205,10 +205,8 @@ namespace Bezetting2.Data
             string Locatie = ProgData.Ploeg_Namen_Locatie(kleur);
 
             var veranderdkleur = File.GetLastWriteTime(Locatie);
-
-            //var diffInSeconds = System.Math.Abs((veranderdkleur - laaste_versie_kleur).TotalSeconds);
-
-            if (laaste_versie_kleur != veranderdkleur /* diffInSeconds > 1000*/)
+           
+            if (laaste_versie_kleur != veranderdkleur)
             {
                 if (try_again < 0)
                 {

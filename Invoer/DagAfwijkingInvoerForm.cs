@@ -94,6 +94,7 @@ namespace Bezetting2
             afwReeks.labelMaand.Text = labelMaand.Text;
             afwReeks.labelPersoneelnr.Text = labelPersoneelnr.Text;
             afwReeks.textBoxAfwijking.Text = textBoxAfwijking.Text;
+            afwReeks.textBoxRede.Text = textBoxRede.Text;
             afwReeks.Text = Text;
             afwReeks.ShowDialog();
             Close();
