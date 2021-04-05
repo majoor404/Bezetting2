@@ -636,6 +636,8 @@ namespace Bezetting2
                 if (File.Exists(backup_zipnaam_huidige_dag))
                     File.Delete(backup_zipnaam_huidige_dag);
                 ZipFile.CreateFromDirectory(startPath, backup_zipnaam_huidige_dag);
+                if (File.Exists($"{startPath}\\locatie.txt"))
+                    File.Delete($"{startPath}\\locatie.txt");
 
                 Main.DebugWrite("Backup volgende maand, moment.....");
                 

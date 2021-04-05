@@ -1245,7 +1245,7 @@ namespace Bezetting2
                 {
                     string naam = ProgData.Get_Gebruiker_Naam(a.ToString());
                     DebugWrite($"Verzamel Afwijkingen van persoon dit jaar {naam}");
-                    for (int q = 1; q < aantal_dagen; q++)
+                    for (int q = 1; q < aantal_dagen+1; q++)
                     {
                         DateTime dat = new DateTime(ProgData.igekozenjaar, i, q);
                         string afwijking = ProgData.GetLaatsteAfwijkingPersoon(ProgData.GekozenKleur, a.ToString(), dat);
@@ -1258,9 +1258,9 @@ namespace Bezetting2
                             DebugWrite($"Afwijkingen van persoon dit jaar, moment..... {naam}  {afwijking}");
                             ClassTelAfwijkingenVanPersoon.voeg_toe(a, afwijking);
                         }
-                    }
-                }
-            }
+                    } //dagen
+                } // namen
+            } // maanden
 
             DebugPanelEnd();
 

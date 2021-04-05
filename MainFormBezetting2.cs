@@ -294,7 +294,7 @@ namespace Bezetting2
                 {
                 }
             }
-            //ProgData.CheckDubbelAchterNaam();
+
             Refresh();
         }
 
@@ -1111,13 +1111,16 @@ namespace Bezetting2
                 // naam select als op juiste row
                 if ((item != null) && info.Item.Index > 0 && info.Item.Index > 3 && info.Item.Index < View.Items.Count - 1)
                 {
+                    int col = info.Item.SubItems.IndexOf(info.SubItem);
                     if (info.SubItem.Text == "") // er niks in cell, zet naam
                     {
                         panelSelect.Visible = true;
                         panelSelect.Width = View.Columns[0].Width - 4;
                         panelSelect.Height = 20;
 
-                        positieGeselecteerdeNaam.X = e.X + panelSelect.Width + 5;// View.Location.X + 2;
+                        positieGeselecteerdeNaam.X = e.X + View.Columns[0].Width + 5;// View.Location.X + 2;
+                        if (col > 28)
+                            positieGeselecteerdeNaam.X -= panelSelect.Width;
                         positieGeselecteerdeNaam.Y = e.Y + 45;
                         panelSelect.BackColor = View.BackColor;
                         panelSelect.Location = positieGeselecteerdeNaam;
@@ -1134,9 +1137,13 @@ namespace Bezetting2
                         if (toolStripStatusRedeAfwijking.Text.Trim() != "")
                         {
                             panelSelect.Visible = true;
+
                             panelSelect.Width = View.Columns[0].Width - 4;
+                            //panelSelect.Width = View.Columns[0].Width - 4;
                             panelSelect.Height = 20;
-                            positieGeselecteerdeNaam.X = e.X + panelSelect.Width + 5;// View.Location.X + 2;
+                            positieGeselecteerdeNaam.X = e.X + View.Columns[0].Width + 5;// View.Location.X + 2;
+                            if (col > 28)
+                                positieGeselecteerdeNaam.X -= panelSelect.Width;
                             positieGeselecteerdeNaam.Y = e.Y + 45;
                             panelSelect.BackColor = View.BackColor;
                             panelSelect.Location = positieGeselecteerdeNaam;
