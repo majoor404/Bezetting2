@@ -131,7 +131,6 @@ namespace Bezetting2.Data
             }
         }
 
-        
         public void Save(string kleur, int try_again)
         {
             var maand = ProgData.igekozenmaand;

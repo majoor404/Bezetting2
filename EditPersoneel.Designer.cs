@@ -572,7 +572,7 @@
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(201, 26);
             this.buttonExport.TabIndex = 51;
-            this.buttonExport.Text = "Export Bezetting Persoon";
+            this.buttonExport.Text = "Export Afwijkingen rooster Persoon";
             this.buttonExport.UseVisualStyleBackColor = true;
             this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
             // 
@@ -582,7 +582,7 @@
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(201, 26);
             this.buttonImport.TabIndex = 51;
-            this.buttonImport.Text = "Import Bezetting Persoon";
+            this.buttonImport.Text = "Import Afwijkingen rooster Persoon";
             this.buttonImport.UseVisualStyleBackColor = true;
             // 
             // EditPersoneel

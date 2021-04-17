@@ -2,6 +2,7 @@
 
 namespace Bezetting2.Data
 {
+    [Serializable]
     class VeranderingenVerhuis
     {
         public string Maand_ { get; set; }
