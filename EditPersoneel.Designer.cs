@@ -83,6 +83,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxKleur = new System.Windows.Forms.ComboBox();
             this.textBoxAchterNaam = new System.Windows.Forms.TextBox();
+            this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonImport = new System.Windows.Forms.Button();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -401,7 +403,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(693, 558);
+            this.buttonClose.Location = new System.Drawing.Point(694, 610);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(261, 26);
             this.buttonClose.TabIndex = 38;
@@ -564,11 +566,32 @@
             this.textBoxAchterNaam.Size = new System.Drawing.Size(201, 20);
             this.textBoxAchterNaam.TabIndex = 1;
             // 
+            // buttonExport
+            // 
+            this.buttonExport.Location = new System.Drawing.Point(123, 610);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(201, 26);
+            this.buttonExport.TabIndex = 51;
+            this.buttonExport.Text = "Export Bezetting Persoon";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
+            // 
+            // buttonImport
+            // 
+            this.buttonImport.Location = new System.Drawing.Point(451, 610);
+            this.buttonImport.Name = "buttonImport";
+            this.buttonImport.Size = new System.Drawing.Size(201, 26);
+            this.buttonImport.TabIndex = 51;
+            this.buttonImport.Text = "Import Bezetting Persoon";
+            this.buttonImport.UseVisualStyleBackColor = true;
+            // 
             // EditPersoneel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 607);
+            this.ClientSize = new System.Drawing.Size(962, 652);
+            this.Controls.Add(this.buttonImport);
+            this.Controls.Add(this.buttonExport);
             this.Controls.Add(this.comboBoxKleur);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label10);
@@ -681,5 +704,7 @@
         private System.Windows.Forms.ComboBox comboBoxKleur;
         private System.Windows.Forms.Button buttonUitlegCancel;
         private System.Windows.Forms.TextBox textBoxAchterNaam;
+        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Button buttonImport;
     }
 }

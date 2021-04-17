@@ -91,7 +91,7 @@ namespace Bezetting2
         private void OverzichtWachtForm_Shown(object sender, EventArgs e)
         {
             buttonOpmerking.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
-
+            
             // als ToegangNivo hoog genoeg, vrijgave edit
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
@@ -699,7 +699,7 @@ namespace Bezetting2
             bool ret = false;
             if (ProgData.RechtenHuidigeGebruiker > 25) ret = true;
 
-            if (ProgData.RechtenHuidigeGebruiker == 25 && ProgData.Huidige_Gebruiker_Werkt_Op_Kleur == ProgData.GekozenKleur) ret = true;
+            if (ProgData.RechtenHuidigeGebruiker == 25 && ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur) ret = true;
 
             return ret;
         }
@@ -893,6 +893,11 @@ namespace Bezetting2
             SaveData();
             dat = dateTimePicker1.Value;
             ViewUpdate();
+        }
+
+        private void checkBox1Dag_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

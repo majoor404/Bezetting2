@@ -48,7 +48,7 @@ namespace Bezetting2
         public static string _Snipper_Locatie;
         public static List<SnipperAanvraag> ListSnipperAanvraag = new List<SnipperAanvraag>();
 
-        public static string Huidige_Gebruiker_Werkt_Op_Kleur;
+        // public static string Huidige_Gebruiker_Werkt_Op_Kleur;
 
         public static int ihuidigemaand;
 
@@ -547,6 +547,11 @@ namespace Bezetting2
             {
                 int personeel_nr = int.Parse(nummer);
                 personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
+
+                if (!string.IsNullOrEmpty(persoon._nieuwkleur))
+                    if (persoon._verhuisdatum <= DateTime.Now)
+                        return persoon._nieuwkleur;
+
                 return persoon._kleur;
             }
             catch
@@ -617,11 +622,10 @@ namespace Bezetting2
                 }
 
                 // kan in toekomst ooit weg
-                if (File.Exists(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_afwijkingen.bin")))
-                    Zetom_naar_versie21(kleur);
+                //if (File.Exists(Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_afwijkingen.bin")))
+                //    Zetom_naar_versie21(kleur);
             }
         }
-
         public static void Backup()
         {
             try
@@ -706,7 +710,6 @@ namespace Bezetting2
                 MessageBox.Show("Backup error, meld dit bij Admin!");
             }
         }
-
         public static void NachtErVoorVrij(string gekozen_naam, string dagnr, string afwijking)
         {
             // kijk of afwijking op vrije dag was, en dag ervoor Nacht, dan 
@@ -759,7 +762,6 @@ namespace Bezetting2
         //        MaakNieuweCollegaInBezettingAan(naam, kleur, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
         //    }
         //}
-
         public static bool TestNetwerkBeschikbaar(int test)
         {
             if (test == 0)
@@ -919,13 +921,11 @@ namespace Bezetting2
             BewaarJaar = igekozenjaar;
             BewaarMaand = igekozenmaand;
         }
-
         public static void ReturnDatum()
         {
             igekozenjaar = BewaarJaar;
             igekozenmaand = BewaarMaand;
         }
-
         public static void MaakNieuwPloegBezettingAan(string kleur)
         {
             string file = LijstWerkdagPloeg_Locatie(kleur);
@@ -962,58 +962,58 @@ namespace Bezetting2
                 SaveLijstWerkdagPloeg(kleur, 15);
             }
         }
+   
+        //public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
+        //{
+        //    // zet oude file's om naar nieuwe ketting
+        //    var maand = ProgData.igekozenmaand;
+        //    var jaar = ProgData.igekozenjaar;
 
-        public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
-        {
-            // zet oude file's om naar nieuwe ketting
-            var maand = ProgData.igekozenmaand;
-            var jaar = ProgData.igekozenjaar;
+        //    var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+        //    if (!File.Exists(path))
+        //    {
+        //        var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
+        //        if (File.Exists(path_oud))
+        //        {
+        //            AlleMensen.Load();  // nodig voor personeel nummer te krijgen hieronder
 
-            var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
-            if (!File.Exists(path))
-            {
-                var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
-                if (File.Exists(path_oud))
-                {
-                    AlleMensen.Load();  // nodig voor personeel nummer te krijgen hieronder
+        //            try
+        //            {
+        //                using (Stream stream = File.Open(path_oud, FileMode.Open))
+        //                {
+        //                    BinaryFormatter bin = new BinaryFormatter();
+        //                    ListVeranderingen.Clear();
+        //                    ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
+        //                }
+        //            }
+        //            catch { }
 
-                    try
-                    {
-                        using (Stream stream = File.Open(path_oud, FileMode.Open))
-                        {
-                            BinaryFormatter bin = new BinaryFormatter();
-                            ListVeranderingen.Clear();
-                            ListVeranderingen = (List<veranderingen>)bin.Deserialize(stream);
-                        }
-                    }
-                    catch { }
+        //            if (ListVeranderingen.Count == 0)
+        //            {
+        //                MaandData.SaveLeegPloeg(kleur);
+        //            }
+        //            else
+        //            {
+        //                MaandData.MaandDataLijst.Clear();
+        //                foreach (veranderingen verander in ProgData.ListVeranderingen)
+        //                {
+        //                    // verander
+        //                    var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
 
-                    if (ListVeranderingen.Count == 0)
-                    {
-                        MaandData.SaveLeegPloeg(kleur);
-                    }
-                    else
-                    {
-                        MaandData.MaandDataLijst.Clear();
-                        foreach (veranderingen verander in ProgData.ListVeranderingen)
-                        {
-                            // verander
-                            var personeel_nummer = Get_Gebruiker_Nummer(verander._naam);
-
-                            if (!string.IsNullOrEmpty(personeel_nummer))
-                            {
-                                MaandData.Voeg_toe(verander._datumafwijking,
-                                    personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
-                                MaandData.VeranderInvoerDatum(verander._datuminvoer);
-                                MaandData.Save(kleur, 15);
-                            }
-                        }
-                    }
-                    File.Delete(path_oud);
-                }
-            }
-        }
-
+        //                    if (!string.IsNullOrEmpty(personeel_nummer))
+        //                    {
+        //                        MaandData.Voeg_toe(verander._datumafwijking,
+        //                            personeel_nummer, verander._afwijking, verander._invoerdoor, verander._rede, "", "");
+        //                        MaandData.VeranderInvoerDatum(verander._datuminvoer);
+        //                        MaandData.Save(kleur, 15);
+        //                    }
+        //                }
+        //            }
+        //            File.Delete(path_oud);
+        //        }
+        //    }
+        //}
+        
         private static void SchijfLocatieVanBackup(string startPath, string filenaam)
         {
             // maak in backup dir een bestand locatie.txt
@@ -1038,6 +1038,10 @@ namespace Bezetting2
                 File.WriteAllLines(helptext, loc);
             }
             catch { }
+        }
+        public static string Huidige_Gebruiker_Werkt_Op_Kleur()
+        {
+            return Get_Gebruiker_Kleur(Huidige_Gebruiker_Personeel_nummer);
         }
     }
 }

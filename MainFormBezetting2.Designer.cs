@@ -58,6 +58,7 @@
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateExtraDienstenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wachtoverzichtFormulier1DagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importNamenOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importOudeVeranderDataOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenProgrammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -332,6 +333,7 @@
             this.editPersoneelToolStripMenuItem,
             this.kleurLijnenToolStripMenuItem,
             this.updateExtraDienstenToolStripMenuItem,
+            this.wachtoverzichtFormulier1DagToolStripMenuItem,
             this.importNamenOudeVersieToolStripMenuItem,
             this.importOudeVeranderDataOudeVersieToolStripMenuItem,
             this.instellingenProgrammaToolStripMenuItem,
@@ -366,6 +368,14 @@
             this.updateExtraDienstenToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.updateExtraDienstenToolStripMenuItem.Text = "Update Extra Diensten";
             this.updateExtraDienstenToolStripMenuItem.Click += new System.EventHandler(this.updateExtraDienstenToolStripMenuItem_Click);
+            // 
+            // wachtoverzichtFormulier1DagToolStripMenuItem
+            // 
+            this.wachtoverzichtFormulier1DagToolStripMenuItem.Enabled = false;
+            this.wachtoverzichtFormulier1DagToolStripMenuItem.Name = "wachtoverzichtFormulier1DagToolStripMenuItem";
+            this.wachtoverzichtFormulier1DagToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
+            this.wachtoverzichtFormulier1DagToolStripMenuItem.Text = "Wachtoverzicht Formulier 2 Dagen";
+            this.wachtoverzichtFormulier1DagToolStripMenuItem.Click += new System.EventHandler(this.wachtoverzichtFormulier1DagToolStripMenuItem_Click);
             // 
             // importNamenOudeVersieToolStripMenuItem
             // 
@@ -1144,6 +1154,7 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Panel panelSelect;
         private System.Windows.Forms.Label labelNaamSelect;
+        private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier1DagToolStripMenuItem;
     }
 }
 

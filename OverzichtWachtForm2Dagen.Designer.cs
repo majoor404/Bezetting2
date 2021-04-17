@@ -30,6 +30,9 @@ namespace Bezetting2
         private void InitializeComponent()
         {
             this.PanelDag1 = new System.Windows.Forms.Panel();
+            this.GaNaarDat = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.GaNaarDatumButton = new System.Windows.Forms.Button();
             this.buttonOpmerking = new System.Windows.Forms.Button();
             this.listBox41 = new System.Windows.Forms.ListBox();
             this.listBox40 = new System.Windows.Forms.ListBox();
@@ -168,9 +171,6 @@ namespace Bezetting2
             this.label30 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
-            this.GaNaarDatumButton = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.GaNaarDat = new System.Windows.Forms.Button();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -260,6 +260,37 @@ namespace Bezetting2
             this.PanelDag1.TabIndex = 0;
             this.PanelDag1.Tag = "0";
             this.PanelDag1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            // 
+            // GaNaarDat
+            // 
+            this.GaNaarDat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GaNaarDat.Location = new System.Drawing.Point(1116, 23);
+            this.GaNaarDat.Name = "GaNaarDat";
+            this.GaNaarDat.Size = new System.Drawing.Size(39, 23);
+            this.GaNaarDat.TabIndex = 184;
+            this.GaNaarDat.Text = "Ga";
+            this.GaNaarDat.UseVisualStyleBackColor = true;
+            this.GaNaarDat.Visible = false;
+            this.GaNaarDat.Click += new System.EventHandler(this.GaNaarDat_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(883, 23);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(231, 22);
+            this.dateTimePicker1.TabIndex = 183;
+            this.dateTimePicker1.Visible = false;
+            // 
+            // GaNaarDatumButton
+            // 
+            this.GaNaarDatumButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.GaNaarDatumButton.Location = new System.Drawing.Point(805, 10);
+            this.GaNaarDatumButton.Name = "GaNaarDatumButton";
+            this.GaNaarDatumButton.Size = new System.Drawing.Size(97, 24);
+            this.GaNaarDatumButton.TabIndex = 182;
+            this.GaNaarDatumButton.Text = "Kalender";
+            this.GaNaarDatumButton.UseVisualStyleBackColor = true;
+            this.GaNaarDatumButton.Click += new System.EventHandler(this.GaNaarDatumButton_Click);
             // 
             // buttonOpmerking
             // 
@@ -2263,37 +2294,6 @@ namespace Bezetting2
             this.label38.Size = new System.Drawing.Size(41, 13);
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
-            // 
-            // GaNaarDatumButton
-            // 
-            this.GaNaarDatumButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GaNaarDatumButton.Location = new System.Drawing.Point(805, 10);
-            this.GaNaarDatumButton.Name = "GaNaarDatumButton";
-            this.GaNaarDatumButton.Size = new System.Drawing.Size(97, 24);
-            this.GaNaarDatumButton.TabIndex = 182;
-            this.GaNaarDatumButton.Text = "Kalender";
-            this.GaNaarDatumButton.UseVisualStyleBackColor = true;
-            this.GaNaarDatumButton.Click += new System.EventHandler(this.GaNaarDatumButton_Click);
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(883, 23);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(231, 22);
-            this.dateTimePicker1.TabIndex = 183;
-            this.dateTimePicker1.Visible = false;
-            // 
-            // GaNaarDat
-            // 
-            this.GaNaarDat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.GaNaarDat.Location = new System.Drawing.Point(1116, 23);
-            this.GaNaarDat.Name = "GaNaarDat";
-            this.GaNaarDat.Size = new System.Drawing.Size(39, 23);
-            this.GaNaarDat.TabIndex = 184;
-            this.GaNaarDat.Text = "Ga";
-            this.GaNaarDat.UseVisualStyleBackColor = true;
-            this.GaNaarDat.Visible = false;
-            this.GaNaarDat.Click += new System.EventHandler(this.GaNaarDat_Click);
             // 
             // OverzichtWachtForm2Dagen
             // 

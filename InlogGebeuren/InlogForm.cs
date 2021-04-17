@@ -85,8 +85,14 @@ namespace Bezetting2
                             // juiste inlog
                             ProgData.Huidige_Gebruiker_Personeel_nummer = persoon._persnummer.ToString();
                             ProgData.RechtenHuidigeGebruiker = 1; // ingelogd maar kan verder niks
-                            ProgData.GekozenKleur = persoon._kleur;
-                            ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
+
+                            string kleur = ProgData.Get_Gebruiker_Kleur(persoon._persnummer.ToString());
+                            ProgData.GekozenKleur = kleur;
+                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = kleur;
+
+                            //ProgData.GekozenKleur = persoon._kleur;
+                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
+                            
                             juist = true;
                             MessageBox.Show("Ingelogd met passwoord wat uw personeel nummer is." +
                                 "\nRechten dus 1, alleen lezen en aanvragen snipper/ruildiensten!");
@@ -98,8 +104,14 @@ namespace Bezetting2
                             // juiste inlog
                             ProgData.Huidige_Gebruiker_Personeel_nummer = persoon._persnummer.ToString();
                             ProgData.RechtenHuidigeGebruiker = persoon._rechten;
-                            ProgData.GekozenKleur = persoon._kleur;
-                            ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
+
+                            string kleur = ProgData.Get_Gebruiker_Kleur(persoon._persnummer.ToString());
+                            ProgData.GekozenKleur = kleur;
+                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = kleur;
+
+                            //ProgData.GekozenKleur = persoon._kleur;
+                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
+
                             juist = true;
 
                             if (textBoxNum.Text == textBoxPass.Text)

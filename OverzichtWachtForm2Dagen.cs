@@ -228,7 +228,7 @@ namespace Bezetting2
             bool ret = false;
             if (ProgData.RechtenHuidigeGebruiker > 25) ret = true;
 
-            if (ProgData.RechtenHuidigeGebruiker == 25 && ProgData.Huidige_Gebruiker_Werkt_Op_Kleur == ProgData.GekozenKleur) ret = true;
+            if (ProgData.RechtenHuidigeGebruiker == 25 && ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur) ret = true;
 
             return ret;
         }
@@ -897,6 +897,11 @@ namespace Bezetting2
             SaveData();
             dat = dateTimePicker1.Value;
             ViewUpdate();
+        }
+
+        private void checkBox2Dagen_CheckedChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

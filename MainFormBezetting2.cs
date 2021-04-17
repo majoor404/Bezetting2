@@ -262,7 +262,7 @@ namespace Bezetting2
                     List<string> inlognaam = File.ReadAllLines(autoinlogfile).ToList();
                     ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
                     ProgData.RechtenHuidigeGebruiker = int.Parse(inlognaam[1]);
-                    ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.Get_Gebruiker_Kleur(inlognaam[0]);
+                    //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.Get_Gebruiker_Kleur(inlognaam[0]);
 
                     // test of gebruiker nog bestaat
                     ProgData.AlleMensen.Load();
@@ -285,7 +285,7 @@ namespace Bezetting2
                         }
                         ProgData.Huidige_Gebruiker_Personeel_nummer = "";
                         ProgData.RechtenHuidigeGebruiker = 0;
-                        ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
+                        //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
                     }
 
 
@@ -328,6 +328,9 @@ namespace Bezetting2
             maakBackupToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
+            wachtoverzichtFormulier1DagToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
+            wachtoverzichtFormulier1DagToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
+
 
             vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -967,23 +970,8 @@ namespace Bezetting2
             ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
             int row = info.Item.Index;
             int col = info.Item.SubItems.IndexOf(info.SubItem);
-
-            //if (ProgData.WaarInTijd() == 1)
-            //{
-            //    if (col > 0 && row < 4)
-            //    {
-            //        HistoryForm his = new HistoryForm();
-            //        his.comboBoxDag.Text = col.ToString();
-            //        his.ShowDialog();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("In verleden kunt u alleen kijken, niet meer aanpassen!");
-            //    }
-            //}
-            //else
-            //{
-            if (((ProgData.RechtenHuidigeGebruiker > 24) && (ProgData.RechtenHuidigeGebruiker < 51) && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur == ProgData.GekozenKleur))
+           
+            if (((ProgData.RechtenHuidigeGebruiker > 24) && (ProgData.RechtenHuidigeGebruiker < 51) && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur))
                 || ProgData.RechtenHuidigeGebruiker > 51)
             {
                 try
@@ -2185,5 +2173,11 @@ namespace Bezetting2
             textBoxDebug.AppendText(regel + Environment.NewLine);
         }
 
+        private void wachtoverzichtFormulier1DagToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InstellingenProg._Wachtoverzicht2Dagen = !InstellingenProg._Wachtoverzicht2Dagen;
+            wachtoverzichtFormulier1DagToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
+            MessageBox.Show("Default Wachtoverzicht Formulier kan aangepast worden door Admin");
+        }
     }
 }
