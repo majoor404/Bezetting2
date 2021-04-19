@@ -979,6 +979,7 @@
             // 
             // panelSelect
             // 
+            this.panelSelect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelSelect.Controls.Add(this.labelNaamSelect);
             this.panelSelect.Location = new System.Drawing.Point(801, 70);
             this.panelSelect.Name = "panelSelect";
@@ -990,7 +991,7 @@
             this.labelNaamSelect.AutoSize = true;
             this.labelNaamSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNaamSelect.ForeColor = System.Drawing.Color.Black;
-            this.labelNaamSelect.Location = new System.Drawing.Point(3, 4);
+            this.labelNaamSelect.Location = new System.Drawing.Point(5, 0);
             this.labelNaamSelect.Name = "labelNaamSelect";
             this.labelNaamSelect.Size = new System.Drawing.Size(45, 16);
             this.labelNaamSelect.TabIndex = 0;

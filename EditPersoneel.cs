@@ -2,6 +2,7 @@
 using Bezetting2.InlogGebeuren;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -89,8 +90,10 @@ namespace Bezetting2
                 comboBoxKleur.Enabled = true;
             }
 
-            button1.Enabled = buttonCancelVerhuis.Enabled = 
-                buttonExport.Enabled =  buttonImport.Enabled = ProgData.RechtenHuidigeGebruiker > 99;
+            button1.Enabled = buttonCancelVerhuis.Enabled =
+                buttonExport.Enabled = buttonImport.Enabled = ProgData.RechtenHuidigeGebruiker > 99;
+
+            buttonExtraAdmin.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
         }
 
         // filter aangepast
@@ -227,7 +230,7 @@ namespace Bezetting2
             {
                 MessageBox.Show("Gebruik dit alleen als gebruiker langdurig of voor altijd verhuisd,\nLanger dan 6 weken!");
 
-                if (true/*KillAlleAndereGebruikers()*/)
+                if (KillAlleAndereGebruikers())
                 {
                     VerhuisForm verhuis = new VerhuisForm();
                     verhuis.labelNaam.Text = textBoxAchterNaam.Text;
@@ -316,7 +319,7 @@ namespace Bezetting2
 
                             // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
                             // meegeven eerste dag.
-                            Restore_oude_afwijkingen(persoon_gekozen._nieuwkleur,true);
+                            Restore_oude_afwijkingen(persoon_gekozen._nieuwkleur, true);
 
                             MessageBox.Show("Klaar met Verhuis");
 
@@ -339,7 +342,7 @@ namespace Bezetting2
             {
                 if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
                 {
-                    if (true /*KillAlleAndereGebruikers()*/)
+                    if (KillAlleAndereGebruikers())
                     {
                         int maand = ProgData.igekozenmaand;
                         int jaar = ProgData.igekozenjaar;
@@ -382,7 +385,7 @@ namespace Bezetting2
                             ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(persoon_gekozen._achternaam), i.ToString(), "", "Rooster Wissel Cancel", "Verhuizing", kleur_terug);
                         }
 
-                        Restore_oude_afwijkingen(kleur_terug,false);
+                        Restore_oude_afwijkingen(kleur_terug, false);
 
                         ProgData.igekozenjaar = jaar;
                         ProgData.igekozenmaand = maand;
@@ -563,7 +566,7 @@ namespace Bezetting2
             MessageBox.Show("Na invoeren naam enz, druk op voeg toe.\nHierna kunt u ook rechten van deze persoon aangeven.");
             /*\nDoe daarna kleur verhuizing naar juiste kleur/plek.*/
         }
-        
+
         // gevraagde afwijkingen/vakantie's op oude wacht, zodat ze kunnen verhuizen naar nieuwe
         private void Bewaar_oude_afwijkingen(int personeel_nummer, int eerste_dag, int maand, int jaar)
         {
@@ -603,7 +606,8 @@ namespace Bezetting2
                             Datuminvoer_ = a.ingevoerd_op_,
                             Invoerdoor_ = a.invoerdoor_,
                             Personeel_nr = a.personeel_nr_,
-                            Rede_ = a.rede_
+                            Rede_ = a.rede_,
+                            Kleur_ = ProgData.GekozenKleur
                         };
                         VeranderingenLijstTemp.Add(verhuisje);
                     }
@@ -641,7 +645,8 @@ namespace Bezetting2
                                 Datuminvoer_ = a.ingevoerd_op_,
                                 Invoerdoor_ = a.invoerdoor_,
                                 Personeel_nr = a.personeel_nr_,
-                                Rede_ = a.rede_
+                                Rede_ = a.rede_,
+                                Kleur_ = ProgData.GekozenKleur
                             };
                             VeranderingenLijstTemp.Add(verhuisje);
                         }
@@ -655,9 +660,10 @@ namespace Bezetting2
 
             // bewaar
             var naam = ProgData.Get_Gebruiker_Naam(personeel_nummer.ToString());
-            string filenaam = $"Bewaarde Afwijkingen-{naam}-{ eerste_dag}-{ maand}-{jaar}.bin";
+            string time = $"{DateTime.Now.Hour}-{DateTime.Now.Minute}";
+            string filenaam = $"Bewaarde Afwijkingen-{naam}-{ eerste_dag}-{ maand}-{jaar}-{time}.bin";
             string pathloc = Path.GetFullPath($"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\");
-            filenaam =  pathloc + filenaam;
+            filenaam = pathloc + filenaam;
             try
             {
                 using (Stream stream = File.Open(filenaam, FileMode.OpenOrCreate))
@@ -666,7 +672,8 @@ namespace Bezetting2
                     bin.Serialize(stream, VeranderingenLijstTemp);
                 }
                 MessageBox.Show("De oude afwijkingen opgeslagen!\n in geval van problemen kunt u deze importeren.");
-            }catch{}
+            }
+            catch { }
         }
 
 
@@ -792,14 +799,48 @@ namespace Bezetting2
         private void buttonUitlegCancel_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Als u een persoon heeft verhuisd van rooster,\nKunt u dit cancelen tot op moment einde " +
-                "maand van start verhuizing.\nBij Start nieuwe maand is wordt verhuizing defenitief.");
+                "maand van start verhuizing.\nBij Start nieuwe maand is wordt verhuizing defenitief.\n\n" +
+                "Let op, veranderingen die tussen start en cancel verhuizing zijn gemaakt, verdwijnen");
         }
 
-        private void buttonExport_Click(object sender, EventArgs e)
+        private void buttonHelpImport_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Bewaar van geselecteerd persoon de komende 6 maanden de afwijkingen.");
-            ProgData.GekozenKleur = ProgData.Get_Gebruiker_Kleur(textBoxPersNum.Text);
-            Bewaar_oude_afwijkingen(int.Parse(textBoxPersNum.Text), 1, ProgData.igekozenmaand, ProgData.igekozenjaar);
+            MessageBox.Show("Bij verhuizing of bij Export kan/worden de ingevulde afwijkingen tov standaard rooster opgeslagen," +
+                "Met import kan je deze weer in bezetting terug zetten. Gebruik je bv bij verhuizing naar nieuwe sectie, of " +
+                "als verhuizing roetine fout is gegaan. Tevens kan je dagen voor de import nog bekijken.");
+        }
+
+        private void ShowVeranderingenVerhuis()
+        {
+            //BindingList<VeranderingenVerhuis> tabel = new BindingList<VeranderingenVerhuis>();
+            //dgv.Dock = DockStyle.Fill;
+            //dgv.Visible = true;
+            //dgv.DataSource = tabel;
+            //dgv.Update();
+            //dgv.Refresh();
+            
+        }
+
+        private void buttonCloseAdminPanel_Click(object sender, EventArgs e)
+        {
+            panelAdmin.Visible = false;
+        }
+
+        private void buttonExtraAdmin_Click(object sender, EventArgs e)
+        {
+            panelAdmin.Visible = true;
+        }
+
+        private void buttonExport_Click_1(object sender, EventArgs e)
+        {
+            if (textBoxPersNum.Text != "")
+            {
+                string start = $"1/{ProgData.igekozenmaand}/{ProgData.igekozenjaar}";
+                MessageBox.Show("Bewaar van geselecteerd persoon de komende 6 maanden\n" +
+                    "de afwijkingen. Start datum " + start);
+                ProgData.GekozenKleur = ProgData.Get_Gebruiker_Kleur(textBoxPersNum.Text);
+                Bewaar_oude_afwijkingen(int.Parse(textBoxPersNum.Text), 1, ProgData.igekozenmaand, ProgData.igekozenjaar);
+            }
         }
     }
 }

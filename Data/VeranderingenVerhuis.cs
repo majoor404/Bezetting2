@@ -13,5 +13,6 @@ namespace Bezetting2.Data
         public DateTime Datuminvoer_ { get; set; }
         public string Invoerdoor_ { get; set; }
         public string Rede_ { get; set; }
+        public string Kleur_ { get; set; }
     }
 }

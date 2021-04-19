@@ -83,10 +83,17 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.comboBoxKleur = new System.Windows.Forms.ComboBox();
             this.textBoxAchterNaam = new System.Windows.Forms.TextBox();
-            this.buttonExport = new System.Windows.Forms.Button();
+            this.panelAdmin = new System.Windows.Forms.Panel();
+            this.buttonCloseAdminPanel = new System.Windows.Forms.Button();
+            this.buttonHelpImport = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
+            this.buttonExport = new System.Windows.Forms.Button();
+            this.buttonExtraAdmin = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.panelAdmin.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -168,7 +175,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 349);
+            this.label3.Location = new System.Drawing.Point(12, 352);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 13);
             this.label3.TabIndex = 6;
@@ -176,7 +183,7 @@
             // 
             // textBoxVoorNaam
             // 
-            this.textBoxVoorNaam.Location = new System.Drawing.Point(123, 378);
+            this.textBoxVoorNaam.Location = new System.Drawing.Point(123, 384);
             this.textBoxVoorNaam.Name = "textBoxVoorNaam";
             this.textBoxVoorNaam.Size = new System.Drawing.Size(201, 20);
             this.textBoxVoorNaam.TabIndex = 2;
@@ -184,7 +191,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 381);
+            this.label4.Location = new System.Drawing.Point(12, 387);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 8;
@@ -192,7 +199,7 @@
             // 
             // textBoxAdres
             // 
-            this.textBoxAdres.Location = new System.Drawing.Point(123, 410);
+            this.textBoxAdres.Location = new System.Drawing.Point(123, 419);
             this.textBoxAdres.Name = "textBoxAdres";
             this.textBoxAdres.Size = new System.Drawing.Size(201, 20);
             this.textBoxAdres.TabIndex = 3;
@@ -200,7 +207,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 413);
+            this.label5.Location = new System.Drawing.Point(12, 422);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 13);
             this.label5.TabIndex = 10;
@@ -208,7 +215,7 @@
             // 
             // textBoxPostcode
             // 
-            this.textBoxPostcode.Location = new System.Drawing.Point(123, 442);
+            this.textBoxPostcode.Location = new System.Drawing.Point(123, 450);
             this.textBoxPostcode.Name = "textBoxPostcode";
             this.textBoxPostcode.Size = new System.Drawing.Size(201, 20);
             this.textBoxPostcode.TabIndex = 4;
@@ -216,7 +223,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 445);
+            this.label6.Location = new System.Drawing.Point(12, 457);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 12;
@@ -224,7 +231,7 @@
             // 
             // textBoxWoonplaats
             // 
-            this.textBoxWoonplaats.Location = new System.Drawing.Point(123, 474);
+            this.textBoxWoonplaats.Location = new System.Drawing.Point(123, 489);
             this.textBoxWoonplaats.Name = "textBoxWoonplaats";
             this.textBoxWoonplaats.Size = new System.Drawing.Size(201, 20);
             this.textBoxWoonplaats.TabIndex = 5;
@@ -232,7 +239,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 477);
+            this.label7.Location = new System.Drawing.Point(12, 492);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(64, 13);
             this.label7.TabIndex = 14;
@@ -240,7 +247,7 @@
             // 
             // textBoxEmailWerk
             // 
-            this.textBoxEmailWerk.Location = new System.Drawing.Point(123, 506);
+            this.textBoxEmailWerk.Location = new System.Drawing.Point(123, 524);
             this.textBoxEmailWerk.Name = "textBoxEmailWerk";
             this.textBoxEmailWerk.Size = new System.Drawing.Size(201, 20);
             this.textBoxEmailWerk.TabIndex = 6;
@@ -248,7 +255,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 509);
+            this.label8.Location = new System.Drawing.Point(12, 527);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(65, 13);
             this.label8.TabIndex = 16;
@@ -256,7 +263,7 @@
             // 
             // textBoxEmailThuis
             // 
-            this.textBoxEmailThuis.Location = new System.Drawing.Point(123, 538);
+            this.textBoxEmailThuis.Location = new System.Drawing.Point(123, 561);
             this.textBoxEmailThuis.Name = "textBoxEmailThuis";
             this.textBoxEmailThuis.Size = new System.Drawing.Size(201, 20);
             this.textBoxEmailThuis.TabIndex = 7;
@@ -264,7 +271,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 541);
+            this.label9.Location = new System.Drawing.Point(12, 562);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 13);
             this.label9.TabIndex = 18;
@@ -272,7 +279,7 @@
             // 
             // textBoxWerkplek
             // 
-            this.textBoxWerkplek.Location = new System.Drawing.Point(456, 538);
+            this.textBoxWerkplek.Location = new System.Drawing.Point(456, 561);
             this.textBoxWerkplek.Name = "textBoxWerkplek";
             this.textBoxWerkplek.Size = new System.Drawing.Size(201, 20);
             this.textBoxWerkplek.TabIndex = 15;
@@ -280,7 +287,7 @@
             // labelWerkplek
             // 
             this.labelWerkplek.AutoSize = true;
-            this.labelWerkplek.Location = new System.Drawing.Point(345, 541);
+            this.labelWerkplek.Location = new System.Drawing.Point(345, 564);
             this.labelWerkplek.Name = "labelWerkplek";
             this.labelWerkplek.Size = new System.Drawing.Size(53, 13);
             this.labelWerkplek.TabIndex = 34;
@@ -288,7 +295,7 @@
             // 
             // textBoxFuntie
             // 
-            this.textBoxFuntie.Location = new System.Drawing.Point(456, 506);
+            this.textBoxFuntie.Location = new System.Drawing.Point(456, 524);
             this.textBoxFuntie.Name = "textBoxFuntie";
             this.textBoxFuntie.Size = new System.Drawing.Size(201, 20);
             this.textBoxFuntie.TabIndex = 14;
@@ -296,7 +303,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(345, 509);
+            this.label11.Location = new System.Drawing.Point(345, 527);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(36, 13);
             this.label11.TabIndex = 32;
@@ -305,7 +312,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(345, 477);
+            this.label12.Location = new System.Drawing.Point(345, 492);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(44, 13);
             this.label12.TabIndex = 30;
@@ -313,7 +320,7 @@
             // 
             // textBoxTelWerk
             // 
-            this.textBoxTelWerk.Location = new System.Drawing.Point(456, 442);
+            this.textBoxTelWerk.Location = new System.Drawing.Point(456, 450);
             this.textBoxTelWerk.Name = "textBoxTelWerk";
             this.textBoxTelWerk.Size = new System.Drawing.Size(201, 20);
             this.textBoxTelWerk.TabIndex = 12;
@@ -321,7 +328,7 @@
             // labelTelWerk
             // 
             this.labelTelWerk.AutoSize = true;
-            this.labelTelWerk.Location = new System.Drawing.Point(345, 445);
+            this.labelTelWerk.Location = new System.Drawing.Point(345, 453);
             this.labelTelWerk.Name = "labelTelWerk";
             this.labelTelWerk.Size = new System.Drawing.Size(51, 13);
             this.labelTelWerk.TabIndex = 28;
@@ -329,7 +336,7 @@
             // 
             // textBoxAdresCodeWerk
             // 
-            this.textBoxAdresCodeWerk.Location = new System.Drawing.Point(456, 410);
+            this.textBoxAdresCodeWerk.Location = new System.Drawing.Point(456, 419);
             this.textBoxAdresCodeWerk.Name = "textBoxAdresCodeWerk";
             this.textBoxAdresCodeWerk.Size = new System.Drawing.Size(201, 20);
             this.textBoxAdresCodeWerk.TabIndex = 11;
@@ -337,7 +344,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(345, 413);
+            this.label14.Location = new System.Drawing.Point(345, 422);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(91, 13);
             this.label14.TabIndex = 26;
@@ -345,7 +352,7 @@
             // 
             // textBoxTelMobWerk
             // 
-            this.textBoxTelMobWerk.Location = new System.Drawing.Point(456, 378);
+            this.textBoxTelMobWerk.Location = new System.Drawing.Point(456, 384);
             this.textBoxTelMobWerk.Name = "textBoxTelMobWerk";
             this.textBoxTelMobWerk.Size = new System.Drawing.Size(201, 20);
             this.textBoxTelMobWerk.TabIndex = 10;
@@ -353,7 +360,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(345, 381);
+            this.label15.Location = new System.Drawing.Point(345, 387);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(75, 13);
             this.label15.TabIndex = 24;
@@ -361,7 +368,7 @@
             // 
             // textBoxTelMobPrive
             // 
-            this.textBoxTelMobPrive.Location = new System.Drawing.Point(456, 346);
+            this.textBoxTelMobPrive.Location = new System.Drawing.Point(456, 349);
             this.textBoxTelMobPrive.Name = "textBoxTelMobPrive";
             this.textBoxTelMobPrive.Size = new System.Drawing.Size(201, 20);
             this.textBoxTelMobPrive.TabIndex = 9;
@@ -369,7 +376,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(345, 349);
+            this.label16.Location = new System.Drawing.Point(345, 352);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(73, 13);
             this.label16.TabIndex = 22;
@@ -403,9 +410,9 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(694, 610);
+            this.buttonClose.Location = new System.Drawing.Point(694, 593);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(261, 26);
+            this.buttonClose.Size = new System.Drawing.Size(256, 26);
             this.buttonClose.TabIndex = 38;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -447,7 +454,7 @@
             this.groupBoxNieuwRooster.Controls.Add(this.LabelRoosterNieuw);
             this.groupBoxNieuwRooster.Controls.Add(this.button1);
             this.groupBoxNieuwRooster.Controls.Add(this.buttonCancelVerhuis);
-            this.groupBoxNieuwRooster.Location = new System.Drawing.Point(694, 453);
+            this.groupBoxNieuwRooster.Location = new System.Drawing.Point(694, 441);
             this.groupBoxNieuwRooster.Name = "groupBoxNieuwRooster";
             this.groupBoxNieuwRooster.Size = new System.Drawing.Size(256, 99);
             this.groupBoxNieuwRooster.TabIndex = 44;
@@ -485,7 +492,7 @@
             // 
             // buttonRechten
             // 
-            this.buttonRechten.Location = new System.Drawing.Point(123, 567);
+            this.buttonRechten.Location = new System.Drawing.Point(456, 593);
             this.buttonRechten.Name = "buttonRechten";
             this.buttonRechten.Size = new System.Drawing.Size(201, 26);
             this.buttonRechten.TabIndex = 37;
@@ -516,7 +523,7 @@
             // vuilwerk
             // 
             this.vuilwerk.AutoSize = true;
-            this.vuilwerk.Location = new System.Drawing.Point(456, 574);
+            this.vuilwerk.Location = new System.Drawing.Point(123, 600);
             this.vuilwerk.Name = "vuilwerk";
             this.vuilwerk.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.vuilwerk.Size = new System.Drawing.Size(15, 14);
@@ -526,7 +533,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(345, 574);
+            this.label10.Location = new System.Drawing.Point(12, 600);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(47, 13);
             this.label10.TabIndex = 49;
@@ -536,7 +543,7 @@
             // 
             this.groupBox1.Controls.Add(this.buttonNieuw);
             this.groupBox1.Controls.Add(this.buttonVoegToe);
-            this.groupBox1.Location = new System.Drawing.Point(694, 391);
+            this.groupBox1.Location = new System.Drawing.Point(694, 374);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(256, 56);
             this.groupBox1.TabIndex = 50;
@@ -554,44 +561,106 @@
             "Groen",
             "Geel",
             "DD"});
-            this.comboBoxKleur.Location = new System.Drawing.Point(456, 474);
+            this.comboBoxKleur.Location = new System.Drawing.Point(456, 489);
             this.comboBoxKleur.Name = "comboBoxKleur";
-            this.comboBoxKleur.Size = new System.Drawing.Size(196, 21);
+            this.comboBoxKleur.Size = new System.Drawing.Size(201, 21);
             this.comboBoxKleur.TabIndex = 13;
             // 
             // textBoxAchterNaam
             // 
-            this.textBoxAchterNaam.Location = new System.Drawing.Point(123, 346);
+            this.textBoxAchterNaam.Location = new System.Drawing.Point(123, 349);
             this.textBoxAchterNaam.Name = "textBoxAchterNaam";
             this.textBoxAchterNaam.Size = new System.Drawing.Size(201, 20);
             this.textBoxAchterNaam.TabIndex = 1;
             // 
-            // buttonExport
+            // panelAdmin
             // 
-            this.buttonExport.Location = new System.Drawing.Point(123, 610);
-            this.buttonExport.Name = "buttonExport";
-            this.buttonExport.Size = new System.Drawing.Size(201, 26);
-            this.buttonExport.TabIndex = 51;
-            this.buttonExport.Text = "Export Afwijkingen rooster Persoon";
-            this.buttonExport.UseVisualStyleBackColor = true;
-            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click);
+            this.panelAdmin.Controls.Add(this.buttonCloseAdminPanel);
+            this.panelAdmin.Controls.Add(this.buttonHelpImport);
+            this.panelAdmin.Controls.Add(this.button3);
+            this.panelAdmin.Controls.Add(this.button2);
+            this.panelAdmin.Controls.Add(this.buttonImport);
+            this.panelAdmin.Controls.Add(this.buttonExport);
+            this.panelAdmin.Location = new System.Drawing.Point(230, 73);
+            this.panelAdmin.Name = "panelAdmin";
+            this.panelAdmin.Size = new System.Drawing.Size(535, 167);
+            this.panelAdmin.TabIndex = 52;
+            this.panelAdmin.Visible = false;
+            // 
+            // buttonCloseAdminPanel
+            // 
+            this.buttonCloseAdminPanel.Location = new System.Drawing.Point(274, 120);
+            this.buttonCloseAdminPanel.Name = "buttonCloseAdminPanel";
+            this.buttonCloseAdminPanel.Size = new System.Drawing.Size(217, 23);
+            this.buttonCloseAdminPanel.TabIndex = 55;
+            this.buttonCloseAdminPanel.Text = "Close";
+            this.buttonCloseAdminPanel.UseVisualStyleBackColor = true;
+            this.buttonCloseAdminPanel.Click += new System.EventHandler(this.buttonCloseAdminPanel_Click);
+            // 
+            // buttonHelpImport
+            // 
+            this.buttonHelpImport.Location = new System.Drawing.Point(499, 49);
+            this.buttonHelpImport.Name = "buttonHelpImport";
+            this.buttonHelpImport.Size = new System.Drawing.Size(21, 23);
+            this.buttonHelpImport.TabIndex = 52;
+            this.buttonHelpImport.Text = "?";
+            this.buttonHelpImport.UseVisualStyleBackColor = true;
+            this.buttonHelpImport.Click += new System.EventHandler(this.buttonHelpImport_Click);
             // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(451, 610);
+            this.buttonImport.Location = new System.Drawing.Point(274, 64);
             this.buttonImport.Name = "buttonImport";
-            this.buttonImport.Size = new System.Drawing.Size(201, 26);
-            this.buttonImport.TabIndex = 51;
+            this.buttonImport.Size = new System.Drawing.Size(218, 26);
+            this.buttonImport.TabIndex = 53;
             this.buttonImport.Text = "Import Afwijkingen rooster Persoon";
             this.buttonImport.UseVisualStyleBackColor = true;
+            // 
+            // buttonExport
+            // 
+            this.buttonExport.Location = new System.Drawing.Point(274, 32);
+            this.buttonExport.Name = "buttonExport";
+            this.buttonExport.Size = new System.Drawing.Size(218, 26);
+            this.buttonExport.TabIndex = 54;
+            this.buttonExport.Text = "Export Afwijkingen rooster Persoon";
+            this.buttonExport.UseVisualStyleBackColor = true;
+            this.buttonExport.Click += new System.EventHandler(this.buttonExport_Click_1);
+            // 
+            // buttonExtraAdmin
+            // 
+            this.buttonExtraAdmin.Enabled = false;
+            this.buttonExtraAdmin.Location = new System.Drawing.Point(694, 555);
+            this.buttonExtraAdmin.Name = "buttonExtraAdmin";
+            this.buttonExtraAdmin.Size = new System.Drawing.Size(256, 26);
+            this.buttonExtraAdmin.TabIndex = 37;
+            this.buttonExtraAdmin.Text = "Admin / Extra";
+            this.buttonExtraAdmin.UseVisualStyleBackColor = true;
+            this.buttonExtraAdmin.Click += new System.EventHandler(this.buttonExtraAdmin_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(25, 31);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(218, 26);
+            this.button2.TabIndex = 54;
+            this.button2.Text = "Export Persoon Data";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(25, 63);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(218, 26);
+            this.button3.TabIndex = 53;
+            this.button3.Text = "Import Persoon Data";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // EditPersoneel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(962, 652);
-            this.Controls.Add(this.buttonImport);
-            this.Controls.Add(this.buttonExport);
+            this.ClientSize = new System.Drawing.Size(960, 634);
+            this.Controls.Add(this.panelAdmin);
             this.Controls.Add(this.comboBoxKleur);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label10);
@@ -599,6 +668,7 @@
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.groupBoxNieuwRooster);
             this.Controls.Add(this.buttonClose);
+            this.Controls.Add(this.buttonExtraAdmin);
             this.Controls.Add(this.buttonRechten);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.textBoxWerkplek);
@@ -643,6 +713,7 @@
             this.groupBoxNieuwRooster.ResumeLayout(false);
             this.groupBoxNieuwRooster.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.panelAdmin.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -704,7 +775,13 @@
         private System.Windows.Forms.ComboBox comboBoxKleur;
         private System.Windows.Forms.Button buttonUitlegCancel;
         private System.Windows.Forms.TextBox textBoxAchterNaam;
-        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Panel panelAdmin;
+        private System.Windows.Forms.Button buttonHelpImport;
         private System.Windows.Forms.Button buttonImport;
+        private System.Windows.Forms.Button buttonExport;
+        private System.Windows.Forms.Button buttonExtraAdmin;
+        private System.Windows.Forms.Button buttonCloseAdminPanel;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }
