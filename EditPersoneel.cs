@@ -90,7 +90,7 @@ namespace Bezetting2
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
                 // direct edit ploeg rooster als admin
-                MessageBox.Show("Als Admin nu direct rooster wissel mogelijk\n");
+                MessageBox.Show("Als Admin nu direct rooster wissel mogelijk\nLet op: dagen gaan niet mee, gebruik voor deze dagen export/import");
                 comboBoxKleur.Enabled = true;
             }
 
@@ -211,7 +211,13 @@ namespace Bezetting2
             try
             {
                 string gekozen_personeel_nummer = textBoxPersNum.Text;
+                string bewaarNieuweKleur = "";
                 personeel persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
+                
+                if(ProgData.RechtenHuidigeGebruiker > 100 && persoon_gekozen._kleur != comboBoxKleur.Text)
+                {
+                    bewaarNieuweKleur = comboBoxKleur.Text;
+                }
 
                 BewaarRechtenEnPasswoord(persoon_gekozen);
                 ProgData.AlleMensen.LijstPersonen.Remove(persoon_gekozen);
@@ -219,6 +225,14 @@ namespace Bezetting2
 
                 persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == gekozen_personeel_nummer);
                 ReturnRechtenEnPasswoord(persoon_gekozen);
+
+                if(bewaarNieuweKleur != "")
+                {
+                    persoon_gekozen._kleur = bewaarNieuweKleur;
+                    persoon_gekozen._nieuwkleur = "";
+                    persoon_gekozen._verhuisdatum = new DateTime(3000,1,1);
+                }
+
                 ProgData.AlleMensen.Save();
                 EditPersoneel_Shown(this, null);
             }
@@ -527,12 +541,13 @@ namespace Bezetting2
                     _vuilwerk = vuilwerk.Checked.ToString()
                 };
 
-                a._kleur = comboBoxKleur.Text;
+                //a._kleur = comboBoxKleur.Text;
 
                 if (ProgData.RechtenHuidigeGebruiker > 100)
                 {
                     // direct edit ploeg rooster als admin
                     a._kleur = comboBoxKleur.Text;
+                    a._nieuwkleur = "";
                 }
 
                 a._funtie = textBoxFuntie.Text;
