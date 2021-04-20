@@ -971,9 +971,10 @@
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Image = global::Bezetting2.Properties.Resources.helm_man;
+            this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(29, 28);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(199, 200);
+            this.pictureBox1.Size = new System.Drawing.Size(200, 200);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -985,6 +986,7 @@
             this.panelSelect.Name = "panelSelect";
             this.panelSelect.Size = new System.Drawing.Size(318, 24);
             this.panelSelect.TabIndex = 36;
+            this.panelSelect.Visible = false;
             // 
             // labelNaamSelect
             // 

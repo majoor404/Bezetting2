@@ -91,6 +91,8 @@
             this.buttonExtraAdmin = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.buttonBekijkAfwijkingFIle = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelAdmin.SuspendLayout();
@@ -441,7 +443,7 @@
             // LabelRoosterNieuw
             // 
             this.LabelRoosterNieuw.AutoSize = true;
-            this.LabelRoosterNieuw.Location = new System.Drawing.Point(16, 71);
+            this.LabelRoosterNieuw.Location = new System.Drawing.Point(12, 58);
             this.LabelRoosterNieuw.Name = "LabelRoosterNieuw";
             this.LabelRoosterNieuw.Size = new System.Drawing.Size(44, 13);
             this.LabelRoosterNieuw.TabIndex = 43;
@@ -456,7 +458,7 @@
             this.groupBoxNieuwRooster.Controls.Add(this.buttonCancelVerhuis);
             this.groupBoxNieuwRooster.Location = new System.Drawing.Point(694, 441);
             this.groupBoxNieuwRooster.Name = "groupBoxNieuwRooster";
-            this.groupBoxNieuwRooster.Size = new System.Drawing.Size(256, 99);
+            this.groupBoxNieuwRooster.Size = new System.Drawing.Size(256, 88);
             this.groupBoxNieuwRooster.TabIndex = 44;
             this.groupBoxNieuwRooster.TabStop = false;
             this.groupBoxNieuwRooster.Text = " Verplaatst persoon naar ander Rooster/Kleur ";
@@ -474,7 +476,7 @@
             // labelNieuwRoosterDatum
             // 
             this.labelNieuwRoosterDatum.AutoSize = true;
-            this.labelNieuwRoosterDatum.Location = new System.Drawing.Point(126, 71);
+            this.labelNieuwRoosterDatum.Location = new System.Drawing.Point(122, 58);
             this.labelNieuwRoosterDatum.Name = "labelNieuwRoosterDatum";
             this.labelNieuwRoosterDatum.Size = new System.Drawing.Size(55, 13);
             this.labelNieuwRoosterDatum.TabIndex = 44;
@@ -575,6 +577,9 @@
             // 
             // panelAdmin
             // 
+            this.panelAdmin.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelAdmin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelAdmin.Controls.Add(this.buttonBekijkAfwijkingFIle);
             this.panelAdmin.Controls.Add(this.buttonCloseAdminPanel);
             this.panelAdmin.Controls.Add(this.buttonHelpImport);
             this.panelAdmin.Controls.Add(this.button3);
@@ -583,13 +588,13 @@
             this.panelAdmin.Controls.Add(this.buttonExport);
             this.panelAdmin.Location = new System.Drawing.Point(230, 73);
             this.panelAdmin.Name = "panelAdmin";
-            this.panelAdmin.Size = new System.Drawing.Size(535, 167);
+            this.panelAdmin.Size = new System.Drawing.Size(520, 151);
             this.panelAdmin.TabIndex = 52;
             this.panelAdmin.Visible = false;
             // 
             // buttonCloseAdminPanel
             // 
-            this.buttonCloseAdminPanel.Location = new System.Drawing.Point(274, 120);
+            this.buttonCloseAdminPanel.Location = new System.Drawing.Point(260, 112);
             this.buttonCloseAdminPanel.Name = "buttonCloseAdminPanel";
             this.buttonCloseAdminPanel.Size = new System.Drawing.Size(217, 23);
             this.buttonCloseAdminPanel.TabIndex = 55;
@@ -599,7 +604,7 @@
             // 
             // buttonHelpImport
             // 
-            this.buttonHelpImport.Location = new System.Drawing.Point(499, 49);
+            this.buttonHelpImport.Location = new System.Drawing.Point(485, 31);
             this.buttonHelpImport.Name = "buttonHelpImport";
             this.buttonHelpImport.Size = new System.Drawing.Size(21, 23);
             this.buttonHelpImport.TabIndex = 52;
@@ -609,16 +614,17 @@
             // 
             // buttonImport
             // 
-            this.buttonImport.Location = new System.Drawing.Point(274, 64);
+            this.buttonImport.Location = new System.Drawing.Point(260, 46);
             this.buttonImport.Name = "buttonImport";
             this.buttonImport.Size = new System.Drawing.Size(218, 26);
             this.buttonImport.TabIndex = 53;
             this.buttonImport.Text = "Import Afwijkingen rooster Persoon";
             this.buttonImport.UseVisualStyleBackColor = true;
+            this.buttonImport.Click += new System.EventHandler(this.buttonImport_Click);
             // 
             // buttonExport
             // 
-            this.buttonExport.Location = new System.Drawing.Point(274, 32);
+            this.buttonExport.Location = new System.Drawing.Point(260, 14);
             this.buttonExport.Name = "buttonExport";
             this.buttonExport.Size = new System.Drawing.Size(218, 26);
             this.buttonExport.TabIndex = 54;
@@ -629,7 +635,7 @@
             // buttonExtraAdmin
             // 
             this.buttonExtraAdmin.Enabled = false;
-            this.buttonExtraAdmin.Location = new System.Drawing.Point(694, 555);
+            this.buttonExtraAdmin.Location = new System.Drawing.Point(694, 535);
             this.buttonExtraAdmin.Name = "buttonExtraAdmin";
             this.buttonExtraAdmin.Size = new System.Drawing.Size(256, 26);
             this.buttonExtraAdmin.TabIndex = 37;
@@ -639,7 +645,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(25, 31);
+            this.button2.Location = new System.Drawing.Point(11, 13);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(218, 26);
             this.button2.TabIndex = 54;
@@ -648,12 +654,25 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(25, 63);
+            this.button3.Location = new System.Drawing.Point(11, 45);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(218, 26);
             this.button3.TabIndex = 53;
             this.button3.Text = "Import Persoon Data";
             this.button3.UseVisualStyleBackColor = true;
+            // 
+            // buttonBekijkAfwijkingFIle
+            // 
+            this.buttonBekijkAfwijkingFIle.Location = new System.Drawing.Point(261, 78);
+            this.buttonBekijkAfwijkingFIle.Name = "buttonBekijkAfwijkingFIle";
+            this.buttonBekijkAfwijkingFIle.Size = new System.Drawing.Size(217, 23);
+            this.buttonBekijkAfwijkingFIle.TabIndex = 56;
+            this.buttonBekijkAfwijkingFIle.Text = "Bekijk Afwijking rooster file";
+            this.buttonBekijkAfwijkingFIle.UseVisualStyleBackColor = true;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // EditPersoneel
             // 
@@ -783,5 +802,7 @@
         private System.Windows.Forms.Button buttonCloseAdminPanel;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonBekijkAfwijkingFIle;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }

@@ -294,7 +294,7 @@ namespace Bezetting2
                 {
                 }
             }
-
+            panelSelect.Visible = true;
             Refresh();
         }
 

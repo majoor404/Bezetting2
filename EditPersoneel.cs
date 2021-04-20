@@ -1,8 +1,9 @@
-﻿using Bezetting2.Data;
+﻿#define Debug
+
+using Bezetting2.Data;
 using Bezetting2.InlogGebeuren;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -24,7 +25,7 @@ namespace Bezetting2
         private DateTime bewaar_verhuisdatum;
 
         // sla de veranderingen op van persoon in tijdelijke lijst
-        readonly List<VeranderingenVerhuis> VeranderingenLijstTemp = new List<VeranderingenVerhuis>();
+        private List<VeranderingenVerhuis> VeranderingenLijstTemp = new List<VeranderingenVerhuis>();
 
         public EditPersoneel()
         {
@@ -33,6 +34,9 @@ namespace Bezetting2
 
         private void EditPersoneel_Shown(object sender, EventArgs e)
         {
+#if DEBUG
+            MessageBox.Show("Debug mode!");
+#endif
             comboBoxFilter.Enabled = true;
             ProgData.AlleMensen.Load();
             ViewNamen.Items.Clear();
@@ -230,7 +234,11 @@ namespace Bezetting2
             {
                 MessageBox.Show("Gebruik dit alleen als gebruiker langdurig of voor altijd verhuisd,\nLanger dan 6 weken!");
 
+#if DEBUG
+                if (true)
+#else
                 if (KillAlleAndereGebruikers())
+#endif
                 {
                     VerhuisForm verhuis = new VerhuisForm();
                     verhuis.labelNaam.Text = textBoxAchterNaam.Text;
@@ -342,7 +350,11 @@ namespace Bezetting2
             {
                 if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
                 {
+#if DEBUG
+                    if (true)
+#else
                     if (KillAlleAndereGebruikers())
+#endif
                     {
                         int maand = ProgData.igekozenmaand;
                         int jaar = ProgData.igekozenjaar;
@@ -671,14 +683,14 @@ namespace Bezetting2
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, VeranderingenLijstTemp);
                 }
-                MessageBox.Show("De oude afwijkingen opgeslagen!\n in geval van problemen kunt u deze importeren.");
+                MessageBox.Show("De oude afwijkingen opgeslagen!\n in geval van problemen kan Admin deze importeren.");
             }
             catch { }
         }
 
 
         // zet bewaarde data in nieuwe ploeg
-        private void Restore_oude_afwijkingen(string nieuwekleur, bool alles) // bool alles is alles terug zetten of alleen huidige maand
+        private void Restore_oude_afwijkingen(string nieuwekleur, bool alles , string import = "") // bool alles is alles terug zetten of alleen huidige maand
         {
             // save maand/jaar
             int backupjaar = ProgData.igekozenjaar;
@@ -707,6 +719,9 @@ namespace Bezetting2
                     {
                         invoerdoor = $"{ver.Invoerdoor_}";
                     }
+
+                    if (import != "")
+                        invoerdoor = import;
 
                     if (ver.Afwijking_ == "X")
                         ver.Afwijking_ = "";
@@ -818,7 +833,7 @@ namespace Bezetting2
             //dgv.DataSource = tabel;
             //dgv.Update();
             //dgv.Refresh();
-            
+
         }
 
         private void buttonCloseAdminPanel_Click(object sender, EventArgs e)
@@ -840,6 +855,46 @@ namespace Bezetting2
                     "de afwijkingen. Start datum " + start);
                 ProgData.GekozenKleur = ProgData.Get_Gebruiker_Kleur(textBoxPersNum.Text);
                 Bewaar_oude_afwijkingen(int.Parse(textBoxPersNum.Text), 1, ProgData.igekozenmaand, ProgData.igekozenjaar);
+            }
+        }
+
+        private void buttonImport_Click(object sender, EventArgs e)
+        {
+            openFileDialog = new OpenFileDialog()
+            {
+                FileName = "Select Bewaarde Afwijkingen",
+                Filter = "Bewaarde Afwijkingen (Bewaar*.bin)|Bewaar*.bin",
+                Title = "Open Bewaarde Afwijkingen"
+            };
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using (Stream stream = File.Open(openFileDialog.FileName, FileMode.Open))
+                    {
+                        VeranderingenLijstTemp.Clear();
+                        BinaryFormatter bin = new BinaryFormatter();
+                        VeranderingenLijstTemp = (List<VeranderingenVerhuis>)bin.Deserialize(stream);
+                    }
+
+                    MessageBox.Show($"Ingeladen, was van kleur {VeranderingenLijstTemp[0].Kleur_} " +
+                        $"met start datum {VeranderingenLijstTemp[0].Datumafwijking_}.");
+                }
+                catch
+                {
+                    MessageBox.Show($"Kon {openFileDialog.FileName} niet laden/uitpakken!");
+                }
+                string naam = ProgData.Get_Gebruiker_Naam(VeranderingenLijstTemp[0].Personeel_nr);
+                string message = $"Deze verander lijst inladen voor persoon {naam} op kleur {VeranderingenLijstTemp[0].Kleur_}";
+                const string caption = "Vraag";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    Restore_oude_afwijkingen(VeranderingenLijstTemp[0].Kleur_, true, "Repareer admin tool");
+                }
             }
         }
     }
