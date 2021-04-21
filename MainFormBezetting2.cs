@@ -1095,7 +1095,7 @@ namespace Bezetting2
             {
                 ListViewItem item = View.GetItemAt(e.X, e.Y);
                 ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
-
+                
                 // naam select als op juiste row
                 if ((item != null) && info.Item.Index > 0 && info.Item.Index > 3 && info.Item.Index < View.Items.Count - 1)
                 {
@@ -2012,7 +2012,8 @@ namespace Bezetting2
                         if (gaat_lopen_op_kleur == Gaat_lopen_op_kleur)
                         {
                             ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
-                            Thread.Sleep(300);
+                            // DEBUG
+                            //Thread.Sleep(300);
                         }
                     }
                     dat = dat.AddDays(1);
@@ -2145,13 +2146,13 @@ namespace Bezetting2
         {
             buttonClose.Text = "Close (3)";
             buttonClose.Refresh();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             buttonClose.Text = "Close (2)";
             buttonClose.Refresh();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             buttonClose.Text = "Close (1)";
             buttonClose.Refresh();
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
             panelDebug.Visible = false;
         }
 

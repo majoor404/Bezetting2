@@ -84,14 +84,14 @@
             this.comboBoxKleur = new System.Windows.Forms.ComboBox();
             this.textBoxAchterNaam = new System.Windows.Forms.TextBox();
             this.panelAdmin = new System.Windows.Forms.Panel();
+            this.buttonBekijkAfwijkingFIle = new System.Windows.Forms.Button();
             this.buttonCloseAdminPanel = new System.Windows.Forms.Button();
             this.buttonHelpImport = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.buttonImport = new System.Windows.Forms.Button();
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonExtraAdmin = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.buttonBekijkAfwijkingFIle = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -592,6 +592,16 @@
             this.panelAdmin.TabIndex = 52;
             this.panelAdmin.Visible = false;
             // 
+            // buttonBekijkAfwijkingFIle
+            // 
+            this.buttonBekijkAfwijkingFIle.Location = new System.Drawing.Point(261, 78);
+            this.buttonBekijkAfwijkingFIle.Name = "buttonBekijkAfwijkingFIle";
+            this.buttonBekijkAfwijkingFIle.Size = new System.Drawing.Size(217, 23);
+            this.buttonBekijkAfwijkingFIle.TabIndex = 56;
+            this.buttonBekijkAfwijkingFIle.Text = "Bekijk Afwijking rooster file";
+            this.buttonBekijkAfwijkingFIle.UseVisualStyleBackColor = true;
+            this.buttonBekijkAfwijkingFIle.Click += new System.EventHandler(this.buttonBekijkAfwijkingFIle_Click);
+            // 
             // buttonCloseAdminPanel
             // 
             this.buttonCloseAdminPanel.Location = new System.Drawing.Point(260, 112);
@@ -611,6 +621,24 @@
             this.buttonHelpImport.Text = "?";
             this.buttonHelpImport.UseVisualStyleBackColor = true;
             this.buttonHelpImport.Click += new System.EventHandler(this.buttonHelpImport_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(11, 45);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(218, 26);
+            this.button3.TabIndex = 53;
+            this.button3.Text = "Import Persoon Data";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(11, 13);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(218, 26);
+            this.button2.TabIndex = 54;
+            this.button2.Text = "Export Persoon Data";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // buttonImport
             // 
@@ -642,33 +670,6 @@
             this.buttonExtraAdmin.Text = "Admin / Extra";
             this.buttonExtraAdmin.UseVisualStyleBackColor = true;
             this.buttonExtraAdmin.Click += new System.EventHandler(this.buttonExtraAdmin_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(11, 13);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(218, 26);
-            this.button2.TabIndex = 54;
-            this.button2.Text = "Export Persoon Data";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(11, 45);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(218, 26);
-            this.button3.TabIndex = 53;
-            this.button3.Text = "Import Persoon Data";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // buttonBekijkAfwijkingFIle
-            // 
-            this.buttonBekijkAfwijkingFIle.Location = new System.Drawing.Point(261, 78);
-            this.buttonBekijkAfwijkingFIle.Name = "buttonBekijkAfwijkingFIle";
-            this.buttonBekijkAfwijkingFIle.Size = new System.Drawing.Size(217, 23);
-            this.buttonBekijkAfwijkingFIle.TabIndex = 56;
-            this.buttonBekijkAfwijkingFIle.Text = "Bekijk Afwijking rooster file";
-            this.buttonBekijkAfwijkingFIle.UseVisualStyleBackColor = true;
             // 
             // openFileDialog
             // 

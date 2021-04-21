@@ -36,6 +36,7 @@ namespace Bezetting2
 
         public static string _LooptExtra_Locatie;
         public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
+        private static DateTime saveTimeExtra = DateTime.Now;
 
         public static List<werkdag> LijstWerkdagPloeg = new List<werkdag>();
 
@@ -268,25 +269,16 @@ namespace Bezetting2
             int bewaar_maand = igekozenmaand;
             int bewaar_jaar = igekozenjaar;
             // zet nieuwe kleur en datum
-
             ProgData.GekozenKleur = kleur;
-
             igekozenmaand = datum.Month;
-
             igekozenjaar = datum.Year;
-
-            
 
             // roep afwijking roetine aan
             RegelAfwijking(personeel_nr, dagnr, afwijking, rede, invoerdoor, kleur);
             // datum terug en kleur goed
-
             GekozenKleur = bewaar_kleur;
-
             igekozenmaand = bewaar_maand;
-
             igekozenjaar = bewaar_jaar;
-
             Main.WindowUpdateViewScreen = true;
         }
 
@@ -434,6 +426,11 @@ namespace Bezetting2
 
         public static void SaveLooptExtraLijst(string dir, string kleur)
         {
+            // als ik hier snel weer kom ( < 2 sec ?), dan even wachten ivm netwerk traagheid
+            var diffInSeconds = (DateTime.Now - saveTimeExtra).TotalSeconds;
+            if (diffInSeconds < 2)
+                Thread.Sleep(500);
+
             _LooptExtra_Locatie = Path.GetFullPath(dir + "\\" + kleur + "_extra.bin");
             try
             {
@@ -442,6 +439,7 @@ namespace Bezetting2
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(st, ListLooptExtra);
                 }
+                saveTimeExtra = DateTime.Now;
             }
             catch
             {

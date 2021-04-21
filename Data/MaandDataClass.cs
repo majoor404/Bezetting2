@@ -31,6 +31,7 @@ namespace Bezetting2.Data
         }
 
         public List<Item> MaandDataLijst = new List<Item>();
+        private DateTime saveTime = DateTime.Now;
 
         public void Voeg_toe(string dag, string personeel_nr, string afwijking, string invoer_door, string rede, string reserve1, string reserve2)
         {
@@ -71,6 +72,7 @@ namespace Bezetting2.Data
                 if (veranderd != laaste_versie || path != laaste_path)
                 {
                     // geef netwerk de tijd om voorgaande te regelen ;-(
+                    // tijd is meer dan een sec anders                    
                     Thread.Sleep(30);
                     // laden
                     try
@@ -137,6 +139,11 @@ namespace Bezetting2.Data
             var jaar = ProgData.igekozenjaar;
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
+            // als ik hier snel weer kom ( > 2 sec ?), dan even wachten ivm netwerk traagheid
+            var diffInSeconds = (DateTime.Now - saveTime).TotalSeconds;
+            if (diffInSeconds < 2)
+                Thread.Sleep(300);
+
             if (try_again < 0)
             {
                 MessageBox.Show($"Kon bestand \n{path}\nNiet saven?\nExit.");
@@ -150,6 +157,7 @@ namespace Bezetting2.Data
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, MaandDataLijst);
                 }
+                saveTime = DateTime.Now;
             }
             catch
             {

@@ -105,6 +105,12 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
+    <Compile Include="BekijkVerhuisFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BekijkVerhuisFile.Designer.cs">
+      <DependentUpon>BekijkVerhuisFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Data\MaandDataClass.cs" />
     <Compile Include="Data\InstellingenProg.cs" />
     <Compile Include="Data\LooptExtraDienst.cs" />
@@ -231,6 +237,9 @@
     </Compile>
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BekijkVerhuisFile.resx">
+      <DependentUpon>BekijkVerhuisFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditPersoneel.resx">
       <DependentUpon>EditPersoneel.cs</DependentUpon>

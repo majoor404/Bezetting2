@@ -1,4 +1,4 @@
-﻿#define Debug
+﻿
 
 using Bezetting2.Data;
 using Bezetting2.InlogGebeuren;
@@ -34,9 +34,6 @@ namespace Bezetting2
 
         private void EditPersoneel_Shown(object sender, EventArgs e)
         {
-#if DEBUG
-            MessageBox.Show("Debug mode!");
-#endif
             comboBoxFilter.Enabled = true;
             ProgData.AlleMensen.Load();
             ViewNamen.Items.Clear();
@@ -213,8 +210,8 @@ namespace Bezetting2
                 string gekozen_personeel_nummer = textBoxPersNum.Text;
                 string bewaarNieuweKleur = "";
                 personeel persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == textBoxPersNum.Text);
-                
-                if(ProgData.RechtenHuidigeGebruiker > 100 && persoon_gekozen._kleur != comboBoxKleur.Text)
+
+                if (ProgData.RechtenHuidigeGebruiker > 100 && persoon_gekozen._kleur != comboBoxKleur.Text)
                 {
                     bewaarNieuweKleur = comboBoxKleur.Text;
                 }
@@ -226,11 +223,11 @@ namespace Bezetting2
                 persoon_gekozen = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer.ToString() == gekozen_personeel_nummer);
                 ReturnRechtenEnPasswoord(persoon_gekozen);
 
-                if(bewaarNieuweKleur != "")
+                if (bewaarNieuweKleur != "")
                 {
                     persoon_gekozen._kleur = bewaarNieuweKleur;
                     persoon_gekozen._nieuwkleur = "";
-                    persoon_gekozen._verhuisdatum = new DateTime(3000,1,1);
+                    persoon_gekozen._verhuisdatum = new DateTime(3000, 1, 1);
                 }
 
                 ProgData.AlleMensen.Save();
@@ -248,11 +245,7 @@ namespace Bezetting2
             {
                 MessageBox.Show("Gebruik dit alleen als gebruiker langdurig of voor altijd verhuisd,\nLanger dan 6 weken!");
 
-#if DEBUG
                 if (true)
-#else
-                if (KillAlleAndereGebruikers())
-#endif
                 {
                     VerhuisForm verhuis = new VerhuisForm();
                     verhuis.labelNaam.Text = textBoxAchterNaam.Text;
@@ -364,11 +357,7 @@ namespace Bezetting2
             {
                 if (!string.IsNullOrEmpty(LabelRoosterNieuw.Text))
                 {
-#if DEBUG
                     if (true)
-#else
-                    if (KillAlleAndereGebruikers())
-#endif
                     {
                         int maand = ProgData.igekozenmaand;
                         int jaar = ProgData.igekozenjaar;
@@ -705,7 +694,7 @@ namespace Bezetting2
 
 
         // zet bewaarde data in nieuwe ploeg
-        private void Restore_oude_afwijkingen(string nieuwekleur, bool alles , string import = "") // bool alles is alles terug zetten of alleen huidige maand
+        private void Restore_oude_afwijkingen(string nieuwekleur, bool alles, string import = "") // bool alles is alles terug zetten of alleen huidige maand
         {
             // save maand/jaar
             int backupjaar = ProgData.igekozenjaar;
@@ -790,41 +779,41 @@ namespace Bezetting2
             }
         }
 
-        private bool KillAlleAndereGebruikers()
-        {
-            if (!ProgData.Main.timerKill.Enabled)
-                return true;
+        //private bool KillAlleAndereGebruikers()
+        //{
+        //    if (!ProgData.Main.timerKill.Enabled)
+        //        return true;
 
-            DialogResult dialogResult = MessageBox.Show("Doordat er veel administratie nodig is met verhuizing van personeel," +
-                            "\nsluit ik alle andere gebruikers nu af!\nDit duurt 60 seconden. (Nadat u op Ja gedrukt heeft)", "Vraagje", MessageBoxButtons.YesNo);
+        //    DialogResult dialogResult = MessageBox.Show("Doordat er veel administratie nodig is met verhuizing van personeel," +
+        //                    "\nsluit ik alle andere gebruikers nu af!\nDit duurt 60 seconden. (Nadat u op Ja gedrukt heeft)", "Vraagje", MessageBoxButtons.YesNo);
 
-            if (dialogResult == DialogResult.Yes)
-            {
-                // als kill.ini al bestaat hoeft dit niet
-                ProgData.Main.timerKill.Enabled = false;
-                try
-                {
-                    if (!File.Exists("kill.ini"))
-                    {
-                        using (File.Create("kill.ini"))
-                        { };
-                        for (int i = 0; i < 60; i++)
-                        {
-                            Thread.Sleep(1000);
-                            labelNieuwRoosterDatum.Text = $" {60 - i}            ";
-                            labelNieuwRoosterDatum.Refresh();
-                        }
-                        labelNieuwRoosterDatum.Text = "";
-                    }
-                }
-                catch
-                {
-                    MessageBox.Show($"Kan kill.ini niet schrijven!");
-                    ProgData.Main.timerKill.Enabled = true;
-                }
-            }
-            return !ProgData.Main.timerKill.Enabled;
-        }
+        //    if (dialogResult == DialogResult.Yes)
+        //    {
+        //        // als kill.ini al bestaat hoeft dit niet
+        //        ProgData.Main.timerKill.Enabled = false;
+        //        try
+        //        {
+        //            if (!File.Exists("kill.ini"))
+        //            {
+        //                using (File.Create("kill.ini"))
+        //                { };
+        //                for (int i = 0; i < 60; i++)
+        //                {
+        //                    Thread.Sleep(1000);
+        //                    labelNieuwRoosterDatum.Text = $" {60 - i}            ";
+        //                    labelNieuwRoosterDatum.Refresh();
+        //                }
+        //                labelNieuwRoosterDatum.Text = "";
+        //            }
+        //        }
+        //        catch
+        //        {
+        //            MessageBox.Show($"Kan kill.ini niet schrijven!");
+        //            ProgData.Main.timerKill.Enabled = true;
+        //        }
+        //    }
+        //    return !ProgData.Main.timerKill.Enabled;
+        //}
 
         private void buttonUitlegCancel_Click(object sender, EventArgs e)
         {
@@ -838,17 +827,6 @@ namespace Bezetting2
             MessageBox.Show("Bij verhuizing of bij Export kan/worden de ingevulde afwijkingen tov standaard rooster opgeslagen," +
                 "Met import kan je deze weer in bezetting terug zetten. Gebruik je bv bij verhuizing naar nieuwe sectie, of " +
                 "als verhuizing roetine fout is gegaan. Tevens kan je dagen voor de import nog bekijken.");
-        }
-
-        private void ShowVeranderingenVerhuis()
-        {
-            //BindingList<VeranderingenVerhuis> tabel = new BindingList<VeranderingenVerhuis>();
-            //dgv.Dock = DockStyle.Fill;
-            //dgv.Visible = true;
-            //dgv.DataSource = tabel;
-            //dgv.Update();
-            //dgv.Refresh();
-
         }
 
         private void buttonCloseAdminPanel_Click(object sender, EventArgs e)
@@ -875,6 +853,23 @@ namespace Bezetting2
 
         private void buttonImport_Click(object sender, EventArgs e)
         {
+            if (OpenBewaarAfwijking())
+            {
+
+                string naam = ProgData.Get_Gebruiker_Naam(VeranderingenLijstTemp[0].Personeel_nr);
+                string message = $"Deze verander lijst inladen voor persoon {naam} op kleur {VeranderingenLijstTemp[0].Kleur_}";
+                const string caption = "Vraag";
+                var result = MessageBox.Show(message, caption,
+                                             MessageBoxButtons.YesNo,
+                                             MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                    Restore_oude_afwijkingen(VeranderingenLijstTemp[0].Kleur_, true, "Repareer admin tool");
+            }
+        }
+
+        private bool OpenBewaarAfwijking()
+        {
             openFileDialog = new OpenFileDialog()
             {
                 FileName = "Select Bewaarde Afwijkingen",
@@ -898,18 +893,27 @@ namespace Bezetting2
                 catch
                 {
                     MessageBox.Show($"Kon {openFileDialog.FileName} niet laden/uitpakken!");
+                    return false;
                 }
-                string naam = ProgData.Get_Gebruiker_Naam(VeranderingenLijstTemp[0].Personeel_nr);
-                string message = $"Deze verander lijst inladen voor persoon {naam} op kleur {VeranderingenLijstTemp[0].Kleur_}";
-                const string caption = "Vraag";
-                var result = MessageBox.Show(message, caption,
-                                             MessageBoxButtons.YesNo,
-                                             MessageBoxIcon.Question);
 
-                if (result == DialogResult.Yes)
-                {
-                    Restore_oude_afwijkingen(VeranderingenLijstTemp[0].Kleur_, true, "Repareer admin tool");
-                }
+            }
+            return true;
+        }
+
+        private void buttonBekijkAfwijkingFIle_Click(object sender, EventArgs e)
+        {
+            if (OpenBewaarAfwijking())
+            {
+                BekijkVerhuisFile bk = new BekijkVerhuisFile();
+
+                //BindingList<VeranderingenVerhuis> tabel = new BindingList<VeranderingenVerhuis>();
+                //dgv.Dock = DockStyle.Fill;
+                //dgv.Visible = true;
+                //dgv.DataSource = tabel;
+                //dgv.Update();
+                //dgv.Refresh();
+
+                bk.ShowDialog();
             }
         }
     }
