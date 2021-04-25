@@ -49,7 +49,7 @@ namespace Bezetting2.Invoer
                         labelAftellen.Refresh();
                         
                         // welke dienst heeft deze kleur ?
-                        var ploeg = ProgData.Get_Gebruiker_Kleur(labelPersoneelnr.Text);
+                        var ploeg = ProgData.Get_Gebruiker_Kleur(labelPersoneelnr.Text, start);
                         var dienst = GetDienst(ProgData.GekozenRooster(), start, ploeg);
 
                         if (!string.IsNullOrEmpty(dienst)) // dus werkdag

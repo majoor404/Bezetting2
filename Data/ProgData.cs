@@ -64,7 +64,6 @@ namespace Bezetting2
         public static string backup_zipnaam_maand_verder;
         public static string backup_zipnaam_2maanden_verder;
 
-
         //public static int backup_time;
 
         public static int igekozenjaar
@@ -124,7 +123,8 @@ namespace Bezetting2
                 _inlognaam.Text = value;
                 if (Main != null)
                 {
-                    Main.Text = $"Bezetting 2.1          Ingelogd :   {Huidige_Gebruiker_Naam()} -- {_inlognaam.Text}";
+                    string dirName = new DirectoryInfo(Directory.GetCurrentDirectory()).Name;
+                    Main.Text = $"Bezetting 2.1   {dirName}   Ingelogd :   {Huidige_Gebruiker_Naam()} -- {_inlognaam.Text}";
                 }
 
             }
@@ -177,7 +177,7 @@ namespace Bezetting2
             string file = LijstWerkdagPloeg_Locatie(kleur);
             if (!File.Exists(file))
             {
-                if (TestNetwerkBeschikbaar(5))
+                if (TestNetwerkBeschikbaar(5) && ProgData.Main.WindowUpdateViewScreen)
                 {
                     MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}\n" +
                         $"{file}");
@@ -539,15 +539,37 @@ namespace Bezetting2
             }
         }
 
-        public static string Get_Gebruiker_Kleur(string nummer)
+        //public static string Get_Gebruiker_Kleur(string nummer)
+        //{
+        //    try
+        //    {
+        //        int personeel_nr = int.Parse(nummer);
+        //        personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
+
+        //        if (!string.IsNullOrEmpty(persoon._nieuwkleur))
+        //            if (persoon._verhuisdatum <= DateTime.Now)
+        //                return persoon._nieuwkleur;
+
+        //        return persoon._kleur;
+        //    }
+        //    catch
+        //    {
+        //        return "";
+        //    }
+        //}
+
+        
+        public static string Get_Gebruiker_Kleur(string nummer, DateTime start = default)
         {
+            if (start == default)
+                start = DateTime.Now;
             try
             {
                 int personeel_nr = int.Parse(nummer);
                 personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
 
                 if (!string.IsNullOrEmpty(persoon._nieuwkleur))
-                    if (persoon._verhuisdatum <= DateTime.Now)
+                    if (persoon._verhuisdatum <= start)
                         return persoon._nieuwkleur;
 
                 return persoon._kleur;
@@ -569,6 +591,20 @@ namespace Bezetting2
             catch
             {
                 return nummer;
+            }
+        }
+
+        public static string Get_Gebruiker_Naam_NieuweKleur(string nummer)
+        {
+            try
+            {
+                int personeel_nr = int.Parse(nummer);
+                personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
+                return persoon._nieuwkleur;
+            }
+            catch
+            {
+                return "";
             }
         }
 
@@ -615,7 +651,8 @@ namespace Bezetting2
 
                 if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
                 {
-                    MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}");
+                    if (ProgData.Main.WindowUpdateViewScreen)
+                        MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}");
                     MaakNieuwPloegBezettingAan(kleur);
                 }
 
@@ -631,6 +668,7 @@ namespace Bezetting2
                 DateTime backup = DateTime.Now;
 
                 Main.DebugWrite("Backup huidige maand, moment.....");
+
                 
                 backup_zipnaam_huidige_dag = $"Backup\\GemaaktOpDag_{backup.Day}.zip";
                 string startPath = GetDirectoryBezettingMaand(backup);

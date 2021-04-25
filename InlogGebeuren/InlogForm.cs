@@ -247,6 +247,10 @@ namespace Bezetting2
                 checkBoxAutoInlog.Checked = false;
         }
 
-
+        private void label4_DoubleClick(object sender, EventArgs e)
+        {
+            textBoxNum.Text = "590588";
+            textBoxPass.Text = "kompas59";
+        }
     }
 }

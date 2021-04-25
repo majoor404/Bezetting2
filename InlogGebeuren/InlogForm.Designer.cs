@@ -141,6 +141,7 @@
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 16;
             this.label4.Text = "Op Naam :";
+            this.label4.DoubleClick += new System.EventHandler(this.label4_DoubleClick);
             // 
             // labelAutoInlogNaam
             // 

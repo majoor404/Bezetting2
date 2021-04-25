@@ -38,11 +38,12 @@ namespace Bezetting2
 
         private readonly Color Weekend_ = Color.LightSkyBlue;
         private readonly Color Feestdag_ = Color.LightSalmon;
-        private readonly Color Huidigedag_ = Color.LightSteelBlue; // Lavender;
+        private readonly Color Huidigedag_ = Color.LightSteelBlue;
         private readonly Color MaandButton_ = Color.LightSkyBlue;
         private readonly Color Werkplek_ = Color.LightGray;
         private readonly Color MinimaalPersonen_ = Color.LightPink;
-        private readonly Color HoverNaam_ = Color.LightGreen;
+        //private readonly Color HoverNaam_ = Color.LightGreen;
+        private readonly Color GekozenNaamKleur_ = Color.PowderBlue;   //AntiqueWhite;
         private Color Kleur_Standaard_Font = Color.Black;
         private int aantal_regels_gekleurd = 0;
 
@@ -178,6 +179,11 @@ namespace Bezetting2
 
             if (!ProgData.TestNetwerkBeschikbaar(15))
                 Close();
+
+            // default naam form
+            var path = Directory.GetCurrentDirectory();
+            var dirName = new DirectoryInfo(path).Name;
+            Text = $"Bezetting 2.1   {dirName}";
 
             WindowUpdateViewScreen = false; // gekozen kleur is nog niet bekend, en bij andere maand/jaar wilt die al gaan tekenen op beeld
 
@@ -450,11 +456,14 @@ namespace Bezetting2
                     {
                         for (int row = 0; row < aantal_regels_gekleurd - 1; row++)
                         {
-                            //this is very Important
-                            View.Items[row].UseItemStyleForSubItems = false;
-                            // Now you can Change the Particular Cell Property of Style
-                            if (View.Items[row].SubItems[col].BackColor != Werkplek_)
-                                View.Items[row].SubItems[col].BackColor = Weekend_;
+                            if (View.Items.Count > row)
+                            {
+                                //this is very Important
+                                View.Items[row].UseItemStyleForSubItems = false;
+                                // Now you can Change the Particular Cell Property of Style
+                                if (View.Items[row].SubItems[col].BackColor != Werkplek_)
+                                    View.Items[row].SubItems[col].BackColor = Weekend_;
+                            }
                         }
                     }
                 }
@@ -473,6 +482,25 @@ namespace Bezetting2
                     }
                 }
 
+                // kleur ingelogde persoon
+                if (checkBoxKleurIngelogdPersoon.Checked)
+                {
+                    var ingelogd_persoon = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
+
+                    for (int row = 4; row < aantal_regels_gekleurd - 1; row++)
+                    {
+                        var naam = View.Items[row].SubItems[0].Text;
+                        if (naam == ingelogd_persoon)
+                        {
+                            for (int col = 0; col < aantal_dagen + 1; col++)
+                            {
+                                View.Items[row].UseItemStyleForSubItems = false;
+                                // Now you can Change the Particular Cell Property of Style
+                                View.Items[row].SubItems[col].BackColor = GekozenNaamKleur_;
+                            }
+                        }
+                    }
+                }
                 // maand in beeld
                 View.Items[2].UseItemStyleForSubItems = false;
                 View.Items[2].SubItems[0].Font = new System.Drawing.Font("Microsoft Sans Serif", 10, System.Drawing.FontStyle.Bold);
@@ -610,11 +638,14 @@ namespace Bezetting2
                 {
                     for (int row = 0; row < aantal_regels_gekleurd - 1; row++)
                     {
-                        //this is very Important
-                        View.Items[row].UseItemStyleForSubItems = false;
-                        // Now you can Change the Particular Cell Property of Style
-                        if (View.Items[row].SubItems[col].BackColor != Werkplek_)
-                            View.Items[row].SubItems[col].BackColor = Feestdag_;
+                        if (View.Items.Count > row)
+                        {
+                            //this is very Important
+                            View.Items[row].UseItemStyleForSubItems = false;
+                            // Now you can Change the Particular Cell Property of Style
+                            if (View.Items[row].SubItems[col].BackColor != Werkplek_)
+                                View.Items[row].SubItems[col].BackColor = Feestdag_;
+                        }
                     }
                 }
             }
@@ -966,13 +997,20 @@ namespace Bezetting2
         // Geklikt op view scherm, open invoer form
         private void View_MouseClick(object sender, MouseEventArgs e)
         {
+            // bij verhuizing en iemand heeft rechten 50, staat hij nog op oude kleur.
+            // check verhuizing
+            string nieuwe_kleur = "niet bekend";
+            if (ProgData.RechtenHuidigeGebruiker > 0 && ProgData.RechtenHuidigeGebruiker < 51)
+                nieuwe_kleur = ProgData.Get_Gebruiker_Naam_NieuweKleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
+
+
             //Point point = new Point(e.X, e.Y);
             ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
             int row = info.Item.Index;
             int col = info.Item.SubItems.IndexOf(info.SubItem);
-           
+
             if (((ProgData.RechtenHuidigeGebruiker > 24) && (ProgData.RechtenHuidigeGebruiker < 51) && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur))
-                || ProgData.RechtenHuidigeGebruiker > 51)
+                || ProgData.RechtenHuidigeGebruiker > 51 || (ProgData.RechtenHuidigeGebruiker < 51) && ProgData.GekozenKleur == nieuwe_kleur)
             {
                 try
                 {
@@ -1095,7 +1133,7 @@ namespace Bezetting2
             {
                 ListViewItem item = View.GetItemAt(e.X, e.Y);
                 ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
-                
+
                 // naam select als op juiste row
                 if ((item != null) && info.Item.Index > 0 && info.Item.Index > 3 && info.Item.Index < View.Items.Count - 1)
                 {
@@ -1188,7 +1226,7 @@ namespace Bezetting2
                                 mTooltip.Show(namen, info.Item.ListView, e.X + 15, e.Y + 15, 3000);
                         }
                     }
-                    
+
                     // personeel nummer bij naam
                     if (col == 0 && row > 3 && row < View.Items.Count - 1)
                     {
@@ -1229,7 +1267,7 @@ namespace Bezetting2
                         }
                     }
                 }
-                
+
                 mLastPos = e.Location;
             }
             catch { }
@@ -1885,6 +1923,8 @@ namespace Bezetting2
                     ProgData.MaandData.SaveLeegPloeg("Wit", path);
                     ProgData.MaandData.SaveLeegPloeg("Rood", path);
                     ProgData.MaandData.SaveLeegPloeg("DD", path);
+
+
                 }
                 else
                 {
@@ -2172,6 +2212,7 @@ namespace Bezetting2
         public void DebugWrite(string regel)
         {
             textBoxDebug.AppendText(regel + Environment.NewLine);
+            textBoxDebug.Refresh();
         }
 
         private void wachtoverzichtFormulier1DagToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2179,6 +2220,11 @@ namespace Bezetting2
             InstellingenProg._Wachtoverzicht2Dagen = !InstellingenProg._Wachtoverzicht2Dagen;
             wachtoverzichtFormulier1DagToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
             MessageBox.Show("Default Wachtoverzicht Formulier kan aangepast worden door Admin");
+        }
+
+        private void checkBoxKleurIngelogdPersoon_CheckedChanged(object sender, EventArgs e)
+        {
+            VulViewScherm();
         }
     }
 }

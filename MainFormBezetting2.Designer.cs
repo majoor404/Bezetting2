@@ -118,6 +118,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSelect = new System.Windows.Forms.Panel();
             this.labelNaamSelect = new System.Windows.Forms.Label();
+            this.checkBoxKleurIngelogdPersoon = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -427,6 +428,7 @@
             // 
             // maakBackupToolStripMenuItem
             // 
+            this.maakBackupToolStripMenuItem.Enabled = false;
             this.maakBackupToolStripMenuItem.Name = "maakBackupToolStripMenuItem";
             this.maakBackupToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.maakBackupToolStripMenuItem.Text = "Maak Backup";
@@ -999,6 +1001,17 @@
             this.labelNaamSelect.TabIndex = 0;
             this.labelNaamSelect.Text = "label5";
             // 
+            // checkBoxKleurIngelogdPersoon
+            // 
+            this.checkBoxKleurIngelogdPersoon.AutoSize = true;
+            this.checkBoxKleurIngelogdPersoon.Location = new System.Drawing.Point(13, 673);
+            this.checkBoxKleurIngelogdPersoon.Name = "checkBoxKleurIngelogdPersoon";
+            this.checkBoxKleurIngelogdPersoon.Size = new System.Drawing.Size(111, 17);
+            this.checkBoxKleurIngelogdPersoon.TabIndex = 37;
+            this.checkBoxKleurIngelogdPersoon.Text = "Kleur Eigen Naam";
+            this.checkBoxKleurIngelogdPersoon.UseVisualStyleBackColor = true;
+            this.checkBoxKleurIngelogdPersoon.CheckedChanged += new System.EventHandler(this.checkBoxKleurIngelogdPersoon_CheckedChanged);
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1006,6 +1019,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.checkBoxKleurIngelogdPersoon);
             this.Controls.Add(this.panelSelect);
             this.Controls.Add(this.panelDebug);
             this.Controls.Add(this.buttonKalender);
@@ -1158,6 +1172,7 @@
         private System.Windows.Forms.Panel panelSelect;
         private System.Windows.Forms.Label labelNaamSelect;
         private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier1DagToolStripMenuItem;
+        private System.Windows.Forms.CheckBox checkBoxKleurIngelogdPersoon;
     }
 }
 

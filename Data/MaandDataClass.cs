@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Media;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
@@ -32,6 +33,10 @@ namespace Bezetting2.Data
 
         public List<Item> MaandDataLijst = new List<Item>();
         private DateTime saveTime = DateTime.Now;
+        private DateTime saveTimeLoad = DateTime.Now;
+        private int saveTel = 0;
+        private int saveTelLoad = 0;
+
 
         public void Voeg_toe(string dag, string personeel_nr, string afwijking, string invoer_door, string rede, string reserve1, string reserve2)
         {
@@ -60,7 +65,8 @@ namespace Bezetting2.Data
             {
                 if (!File.Exists(path))
                 {
-                    MessageBox.Show($"Omdat kleur weg is en path niet bestaat,\n" +
+                    if(ProgData.Main.WindowUpdateViewScreen)
+                        MessageBox.Show($"Omdat kleur weg is en path niet bestaat,\n" +
                         $" maak ik nieuwe aan. {path}");
                     SaveLeegPloeg(kleur, path);
                 }
@@ -71,12 +77,30 @@ namespace Bezetting2.Data
                 var veranderd = File.GetLastWriteTime(path);
                 if (veranderd != laaste_versie || path != laaste_path)
                 {
+
                     // geef netwerk de tijd om voorgaande te regelen ;-(
-                    // tijd is meer dan een sec anders                    
-                    Thread.Sleep(30);
+                    var diffInSeconds = (DateTime.Now - saveTimeLoad).TotalSeconds;
+                    saveTimeLoad = DateTime.Now;
+                    
+                    if (diffInSeconds < 1)
+                    {
+                        saveTelLoad++;
+                    }
+                    else
+                    {
+                        saveTelLoad = 0;
+                    }
+
+                    if (saveTelLoad > 4)
+                    {
+                        Thread.Sleep(1000);
+                        saveTelLoad = 0;
+                    }
+                    
                     // laden
                     try
                     {
+                        Thread.Sleep(80);
                         using (Stream stream = File.Open(path, FileMode.Open))
                         {
                             MaandDataLijst.Clear();
@@ -120,7 +144,6 @@ namespace Bezetting2.Data
                     }
                     else
                     {
-
                         string melding = $"Kan {jaar}\\{maand}\\{kleur}_Maand_Data.bin niet laden," +
                             $"\nlaat een Admin van u groep dit oplossen!\n" +
                             $"Deze file kan alleen gecreerd worden bij maken van juiste directory.\n" +
@@ -139,10 +162,23 @@ namespace Bezetting2.Data
             var jaar = ProgData.igekozenjaar;
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
-            // als ik hier snel weer kom ( > 2 sec ?), dan even wachten ivm netwerk traagheid
             var diffInSeconds = (DateTime.Now - saveTime).TotalSeconds;
-            if (diffInSeconds < 2)
-                Thread.Sleep(300);
+            saveTime = DateTime.Now;
+            
+            if (diffInSeconds < 1)
+            {
+                saveTel++;
+            }
+            else
+            {
+                saveTel = 0;
+            }
+
+            if (saveTel > 4)
+            {
+                Thread.Sleep(600);
+                saveTel = 0;
+            }
 
             if (try_again < 0)
             {
@@ -157,7 +193,6 @@ namespace Bezetting2.Data
                     BinaryFormatter bin = new BinaryFormatter();
                     bin.Serialize(stream, MaandDataLijst);
                 }
-                saveTime = DateTime.Now;
             }
             catch
             {
@@ -226,6 +261,11 @@ namespace Bezetting2.Data
 
         public void SaveLeegPloeg(string kleur, string path)
         {
+            if(!path.Contains("_Maand_Data.bin"))
+            { 
+                path = $"{path}\\{kleur}_Maand_Data.bin";
+            }
+            
             MaandDataLijst.Clear();
             try
             {
