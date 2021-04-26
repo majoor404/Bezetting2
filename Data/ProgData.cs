@@ -164,7 +164,9 @@ namespace Bezetting2
                 }
                 catch
                 {
-                    Thread.Sleep(300);
+                    Wacht(300);
+                    Wacht(0);
+                    //Thread.Sleep(300);
                     SaveLijstWerkdagPloeg(kleur, --try_again);
                 }
             }
@@ -215,7 +217,9 @@ namespace Bezetting2
             }
             catch (IOException)
             {
-                Thread.Sleep(300);
+                Wacht(300);
+                Wacht(0);
+                //Thread.Sleep(300);
                 LaadLijstWerkdagPloeg(kleur, --try_again);
             }
             catch
@@ -429,7 +433,11 @@ namespace Bezetting2
             // als ik hier snel weer kom ( < 2 sec ?), dan even wachten ivm netwerk traagheid
             var diffInSeconds = (DateTime.Now - saveTimeExtra).TotalSeconds;
             if (diffInSeconds < 2)
-                Thread.Sleep(500);
+            {
+                Wacht(500);
+                Wacht(0);
+            }
+                //Thread.Sleep(500);
 
             _LooptExtra_Locatie = Path.GetFullPath(dir + "\\" + kleur + "_extra.bin");
             try
@@ -818,7 +826,9 @@ namespace Bezetting2
             }
             catch
             {
-                Thread.Sleep(300);
+                Wacht(300);
+                Wacht(0);
+                //Thread.Sleep(300);
                 TestNetwerkBeschikbaar(test--);
             }
             MessageBox.Show("Kan niet schrijven en/of lezen op locatie, netwerk problemen ?, Exit");
@@ -1078,6 +1088,21 @@ namespace Bezetting2
         public static string Huidige_Gebruiker_Werkt_Op_Kleur()
         {
             return Get_Gebruiker_Kleur(Huidige_Gebruiker_Personeel_nummer);
+        }
+
+        public static void Wacht(int tijd)
+        {
+            if(tijd != 0)
+            {
+                Main.panelMoment.Visible = true;
+                Main.panelMoment.Refresh();
+                Thread.Sleep(tijd);
+            }
+            else
+            {
+                Main.panelMoment.Visible = false;
+                Main.panelMoment.Refresh();
+            }
         }
     }
 }

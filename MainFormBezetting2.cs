@@ -302,13 +302,20 @@ namespace Bezetting2
             }
             panelSelect.Visible = true;
             Refresh();
+            LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
         }
 
         private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            // eerst oude uitloggen ivm prive data
+            UitloggenToolStripMenuItem_Click(this, null);
+
             InlogForm log = new InlogForm();
             log.ShowDialog();
             comboBoxKleurKeuze.Text = ProgData.GekozenKleur;
+            // laad prive optie's en herschrijf hierdoor scherm opnieuw
+            LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
+            VulViewScherm();
         }
 
         private void EditPersoneelClick(object sender, EventArgs e)
@@ -336,7 +343,7 @@ namespace Bezetting2
             ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             wachtoverzichtFormulier1DagToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             wachtoverzichtFormulier1DagToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
-
+            priveOptiesToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 2;
 
             vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
             tellingWaarGewerktToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -350,8 +357,13 @@ namespace Bezetting2
 
         private void UitloggenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            SaveEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
             ProgData.RechtenHuidigeGebruiker = 0; // alleen lezen
             ProgData.Huidige_Gebruiker_Personeel_nummer = "Niemand Ingelogd";
+            
+            // defailt prive gegevens
+            kleurEigenNaamToolStripMenuItem.Checked = false;
+            VulViewScherm();
         }
 
         private void ComboBoxKleurKeuze_SelectedIndexChanged(object sender, EventArgs e)
@@ -483,7 +495,7 @@ namespace Bezetting2
                 }
 
                 // kleur ingelogde persoon
-                if (checkBoxKleurIngelogdPersoon.Checked)
+                if (kleurEigenNaamToolStripMenuItem.Checked)
                 {
                     var ingelogd_persoon = ProgData.Get_Gebruiker_Naam(ProgData.Huidige_Gebruiker_Personeel_nummer);
 
@@ -1458,6 +1470,7 @@ namespace Bezetting2
         {
             Thread.Sleep(300);
             ProgData.CaptureMainScreen();
+            SaveEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
         }
 
         private void ImportOudeVeranderDataOudeVersieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2186,13 +2199,13 @@ namespace Bezetting2
         {
             buttonClose.Text = "Close (3)";
             buttonClose.Refresh();
-            Thread.Sleep(500);
+            Thread.Sleep(200);
             buttonClose.Text = "Close (2)";
             buttonClose.Refresh();
-            Thread.Sleep(500);
+            Thread.Sleep(200);
             buttonClose.Text = "Close (1)";
             buttonClose.Refresh();
-            Thread.Sleep(500);
+            Thread.Sleep(200);
             panelDebug.Visible = false;
         }
 
@@ -2222,9 +2235,51 @@ namespace Bezetting2
             MessageBox.Show("Default Wachtoverzicht Formulier kan aangepast worden door Admin");
         }
 
-        private void checkBoxKleurIngelogdPersoon_CheckedChanged(object sender, EventArgs e)
+        private void kleurEigenNaamToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            kleurEigenNaamToolStripMenuItem.Checked = !kleurEigenNaamToolStripMenuItem.Checked;
             VulViewScherm();
+        }
+
+        private void LaadEnZetPriveData(string persnr)
+        {
+            if (persnr != "Niemand Ingelogd")
+            {
+                kleurEigenNaamToolStripMenuItem.Checked = false;
+                var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                var infofile = $"{directory}\\{persnr}.ini";
+                if (File.Exists(infofile))
+                {
+                    try
+                    {
+                        List<string> info = File.ReadAllLines(infofile).ToList();
+                        kleurEigenNaamToolStripMenuItem.Checked = bool.Parse(info[0]);
+                    }
+                    catch { }
+                }
+            }
+        }
+
+        private void SaveEnZetPriveData(string persnr)
+        {
+            if (persnr != "Niemand Ingelogd" && persnr != "Admin")
+            {
+                var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                var autoinlogfile = $"{directory}\\{persnr}.ini";
+
+                // maak document
+                List<string> info = new List<string>();
+                info.Add(kleurEigenNaamToolStripMenuItem.Checked.ToString());
+
+                try
+                {
+                    File.WriteAllLines(autoinlogfile, info);
+                }
+                catch (IOException)
+                {
+                    MessageBox.Show("info file save Error()");
+                }
+            }
         }
     }
 }

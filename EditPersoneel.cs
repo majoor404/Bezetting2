@@ -1,6 +1,4 @@
-﻿
-
-using Bezetting2.Data;
+﻿using Bezetting2.Data;
 using Bezetting2.InlogGebeuren;
 using System;
 using System.Collections.Generic;
@@ -527,21 +525,27 @@ namespace Bezetting2
                     _tel06werk = textBoxTelMobWerk.Text,
                     _adrescodewerk = textBoxAdresCodeWerk.Text,
                     _telwerk = textBoxTelWerk.Text,
-                    _vuilwerk = vuilwerk.Checked.ToString()
+                    _vuilwerk = vuilwerk.Checked.ToString(),
+                    _kleur = comboBoxKleur.Text,
+                    _nieuwkleur = "",
+                    _passwoord = ProgData.Scramble("verander_nu"),
+                    _funtie = textBoxFuntie.Text,
+                    _werkgroep = textBoxWerkplek.Text,
+                    _rechten = 0
                 };
 
-                //a._kleur = comboBoxKleur.Text;
+                
 
-                if (ProgData.RechtenHuidigeGebruiker > 100)
-                {
-                    // direct edit ploeg rooster als admin
-                    a._kleur = comboBoxKleur.Text;
-                    a._nieuwkleur = "";
-                }
+                //if (ProgData.RechtenHuidigeGebruiker > 100)
+                //{
+                //    // direct edit ploeg rooster als admin
+                //    a._kleur = comboBoxKleur.Text;
+                //    a._nieuwkleur = "";
+                //}
 
-                a._funtie = textBoxFuntie.Text;
-                a._werkgroep = textBoxWerkplek.Text;
-                a._rechten = 0;
+                //a._funtie = textBoxFuntie.Text;
+                //a._werkgroep = textBoxWerkplek.Text;
+                //a._rechten = 0;
                 ProgData.AlleMensen.LijstPersonen.Add(a);
                 ProgData.AlleMensen.Save();
 

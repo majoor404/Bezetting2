@@ -123,7 +123,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 13);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Personeel Nummer";
+            this.label2.Text = "Personeelsnummer";
             // 
             // textBoxPersNum
             // 
@@ -179,9 +179,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 352);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Achter Naam";
+            this.label3.Text = "Achternaam";
             // 
             // textBoxVoorNaam
             // 

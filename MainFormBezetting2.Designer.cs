@@ -54,6 +54,8 @@
             this.ploegTotalenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maandenOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jaarOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.priveOptiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kleurEigenNaamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,7 +120,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panelSelect = new System.Windows.Forms.Panel();
             this.labelNaamSelect = new System.Windows.Forms.Label();
-            this.checkBoxKleurIngelogdPersoon = new System.Windows.Forms.CheckBox();
+            this.panelMoment = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -126,6 +130,8 @@
             this.panelDebug.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelSelect.SuspendLayout();
+            this.panelMoment.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -136,6 +142,7 @@
             this.ruilOverwerkToolStripMenuItem,
             this.snipperDagAanvraagToolStripMenuItem,
             this.excelToolStripMenuItem,
+            this.priveOptiesToolStripMenuItem,
             this.beheerToolStripMenuItem,
             this.infoToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
@@ -327,6 +334,22 @@
             this.jaarOverzichtNaarExcelToolStripMenuItem.Size = new System.Drawing.Size(395, 22);
             this.jaarOverzichtNaarExcelToolStripMenuItem.Text = "Jaar overzicht naar Excel";
             this.jaarOverzichtNaarExcelToolStripMenuItem.Click += new System.EventHandler(this.jaarOverzichtNaarExcelToolStripMenuItem_Click);
+            // 
+            // priveOptiesToolStripMenuItem
+            // 
+            this.priveOptiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kleurEigenNaamToolStripMenuItem});
+            this.priveOptiesToolStripMenuItem.Enabled = false;
+            this.priveOptiesToolStripMenuItem.Name = "priveOptiesToolStripMenuItem";
+            this.priveOptiesToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.priveOptiesToolStripMenuItem.Text = "Prive Optie\'s";
+            // 
+            // kleurEigenNaamToolStripMenuItem
+            // 
+            this.kleurEigenNaamToolStripMenuItem.Name = "kleurEigenNaamToolStripMenuItem";
+            this.kleurEigenNaamToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.kleurEigenNaamToolStripMenuItem.Text = "Kleur Eigen Naam";
+            this.kleurEigenNaamToolStripMenuItem.Click += new System.EventHandler(this.kleurEigenNaamToolStripMenuItem_Click);
             // 
             // beheerToolStripMenuItem
             // 
@@ -1001,16 +1024,34 @@
             this.labelNaamSelect.TabIndex = 0;
             this.labelNaamSelect.Text = "label5";
             // 
-            // checkBoxKleurIngelogdPersoon
+            // panelMoment
             // 
-            this.checkBoxKleurIngelogdPersoon.AutoSize = true;
-            this.checkBoxKleurIngelogdPersoon.Location = new System.Drawing.Point(13, 673);
-            this.checkBoxKleurIngelogdPersoon.Name = "checkBoxKleurIngelogdPersoon";
-            this.checkBoxKleurIngelogdPersoon.Size = new System.Drawing.Size(111, 17);
-            this.checkBoxKleurIngelogdPersoon.TabIndex = 37;
-            this.checkBoxKleurIngelogdPersoon.Text = "Kleur Eigen Naam";
-            this.checkBoxKleurIngelogdPersoon.UseVisualStyleBackColor = true;
-            this.checkBoxKleurIngelogdPersoon.CheckedChanged += new System.EventHandler(this.checkBoxKleurIngelogdPersoon_CheckedChanged);
+            this.panelMoment.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelMoment.Controls.Add(this.panel9);
+            this.panelMoment.Location = new System.Drawing.Point(142, 662);
+            this.panelMoment.Name = "panelMoment";
+            this.panelMoment.Size = new System.Drawing.Size(261, 96);
+            this.panelMoment.TabIndex = 37;
+            this.panelMoment.Visible = false;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.SystemColors.Window;
+            this.panel9.Controls.Add(this.label5);
+            this.panel9.Location = new System.Drawing.Point(13, 21);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(229, 57);
+            this.panel9.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(18, 19);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(196, 20);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Moment Netwerk Druk..";
             // 
             // MainFormBezetting2
             // 
@@ -1019,7 +1060,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1834, 961);
-            this.Controls.Add(this.checkBoxKleurIngelogdPersoon);
+            this.Controls.Add(this.panelMoment);
             this.Controls.Add(this.panelSelect);
             this.Controls.Add(this.panelDebug);
             this.Controls.Add(this.buttonKalender);
@@ -1077,6 +1118,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelSelect.ResumeLayout(false);
             this.panelSelect.PerformLayout();
+            this.panelMoment.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1172,7 +1216,11 @@
         private System.Windows.Forms.Panel panelSelect;
         private System.Windows.Forms.Label labelNaamSelect;
         private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier1DagToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBoxKleurIngelogdPersoon;
+        private System.Windows.Forms.ToolStripMenuItem priveOptiesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem kleurEigenNaamToolStripMenuItem;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label5;
+        public System.Windows.Forms.Panel panelMoment;
     }
 }
 
