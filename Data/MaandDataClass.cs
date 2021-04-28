@@ -94,7 +94,6 @@ namespace Bezetting2.Data
                     if (saveTelLoad > 4)
                     {
                         ProgData.Wacht(1000);
-                        ProgData.Wacht(0);
                         //Thread.Sleep(1000);
                         saveTelLoad = 0;
                     }
@@ -116,7 +115,6 @@ namespace Bezetting2.Data
                         //Thread.Sleep(600);
                         //MessageBox.Show($"kon {path} niet laden!, netwerk druk\nEven pauze...");
                         //Thread.Sleep(1000);
-                        ProgData.Wacht(0);
                     }
 
                     if (kleur == ProgData.GekozenKleur)
@@ -183,7 +181,6 @@ namespace Bezetting2.Data
             {
                 ProgData.Wacht(600);
                 saveTel = 0;
-                ProgData.Wacht(0);
             }
 
             if (try_again < 0)
@@ -242,7 +239,6 @@ namespace Bezetting2.Data
                     Process.GetCurrentProcess().Kill();
                 }
                 ProgData.Wacht(1000);
-                ProgData.Wacht(0);
                 //Thread.Sleep(1000);
             }
             return false;

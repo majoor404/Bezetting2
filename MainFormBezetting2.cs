@@ -174,6 +174,7 @@ namespace Bezetting2
 
             ruilOverwerkToolStripMenuItem.Visible = InstellingenProg._GebruikExtraRuil;
             snipperDagAanvraagToolStripMenuItem.Visible = InstellingenProg._GebruikSnipper;
+            wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
 
             ProgData.Main = this;
 
@@ -258,48 +259,9 @@ namespace Bezetting2
             if (ProgData.LeesLijnen())
                 ZetLijnen();
 
-            // auto inlog
-            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            string autoinlogfile = $"{directory}\\bezetting2.log";
-            if (File.Exists(autoinlogfile))
-            {
-                try
-                {
-                    List<string> inlognaam = File.ReadAllLines(autoinlogfile).ToList();
-                    ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
-                    ProgData.RechtenHuidigeGebruiker = int.Parse(inlognaam[1]);
-                    //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.Get_Gebruiker_Kleur(inlognaam[0]);
-
-                    // test of gebruiker nog bestaat
-                    ProgData.AlleMensen.Load();
-                    try
-                    {
-                        personeel persoon = ProgData.AlleMensen.LijstPersonen.First(b => b._persnummer.ToString() == inlognaam[0].ToString());
-
-                    }
-                    catch
-                    {
-                        const string message = "Auto inlog naam bestaat niet in in deze bezetting personeel lijst!, auto inlog verwijderen?";
-                        const string caption = "Vraag";
-                        var result = MessageBox.Show(message, caption,
-                                                     MessageBoxButtons.YesNo,
-                                                     MessageBoxIcon.Question);
-
-                        if (result == DialogResult.Yes)
-                        {
-                            File.Delete(autoinlogfile);
-                        }
-                        ProgData.Huidige_Gebruiker_Personeel_nummer = "";
-                        ProgData.RechtenHuidigeGebruiker = 0;
-                        //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = ProgData.GekozenKleur;
-                    }
-
-
-                }
-                catch (IOException)
-                {
-                }
-            }
+            AutoInlog();
+            autoInlogToolStripMenuItem.Click += autoInlogToolStripMenuItem_Click;
+            
             panelSelect.Visible = true;
             Refresh();
             LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
@@ -341,8 +303,6 @@ namespace Bezetting2
             maakBackupToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
-            wachtoverzichtFormulier1DagToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
-            wachtoverzichtFormulier1DagToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
             priveOptiesToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 2;
 
             vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -363,6 +323,7 @@ namespace Bezetting2
             
             // defailt prive gegevens
             kleurEigenNaamToolStripMenuItem.Checked = false;
+            autoInlogToolStripMenuItem.Checked = false;
             VulViewScherm();
         }
 
@@ -1122,7 +1083,7 @@ namespace Bezetting2
 
 
 
-            if (InstellingenProg._Wachtoverzicht2Dagen && ProgData.RechtenHuidigeGebruiker < 101)
+            if (wachtoverzichtFormulier2DagenToolStripMenuItem.Checked && ProgData.RechtenHuidigeGebruiker < 101)
             {
                 OverzichtWachtForm2Dagen owacht2 = new OverzichtWachtForm2Dagen();
                 owacht2.ShowDialog();
@@ -2042,6 +2003,7 @@ namespace Bezetting2
 
         private void CheckExtraLopen(string kleur, string Gaat_lopen_op_kleur)
         {
+            ProgData.Wacht(300);
             ProgData.AlleMensen.HaalPloegNamenOpKleur(kleur);
             //ProgData.LaadLijstPersoneelKleur(kleur, 15);
             DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
@@ -2231,8 +2193,7 @@ namespace Bezetting2
         private void wachtoverzichtFormulier1DagToolStripMenuItem_Click(object sender, EventArgs e)
         {
             InstellingenProg._Wachtoverzicht2Dagen = !InstellingenProg._Wachtoverzicht2Dagen;
-            wachtoverzichtFormulier1DagToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
-            MessageBox.Show("Default Wachtoverzicht Formulier kan aangepast worden door Admin");
+            wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
         }
 
         private void kleurEigenNaamToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2254,6 +2215,7 @@ namespace Bezetting2
                     {
                         List<string> info = File.ReadAllLines(infofile).ToList();
                         kleurEigenNaamToolStripMenuItem.Checked = bool.Parse(info[0]);
+                        wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = bool.Parse(info[1]);
                     }
                     catch { }
                 }
@@ -2270,7 +2232,8 @@ namespace Bezetting2
                 // maak document
                 List<string> info = new List<string>();
                 info.Add(kleurEigenNaamToolStripMenuItem.Checked.ToString());
-
+                info.Add(wachtoverzichtFormulier2DagenToolStripMenuItem.Checked.ToString());
+                
                 try
                 {
                     File.WriteAllLines(autoinlogfile, info);
@@ -2278,6 +2241,114 @@ namespace Bezetting2
                 catch (IOException)
                 {
                     MessageBox.Show("info file save Error()");
+                }
+            }
+        }
+
+        private void autoInlogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // auto inlog
+            var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            var autoinlogfile = $"{directory}\\bezetting2.log";
+
+            if (autoInlogToolStripMenuItem.Checked)
+            {
+                autoInlogToolStripMenuItem.Checked = false;
+                // verwijder auto inlog
+                if (File.Exists(autoinlogfile))
+                {
+                    File.Delete(autoinlogfile);
+                }
+
+            }
+            else
+            {
+                var user = Environment.UserName;
+                if (user.Length == 7 && user[0] == 'a')
+                    user = user.Substring(1);
+
+                if (user.Length == 7 && user[0] == 'A')
+                    user = user.Substring(1);
+
+                if (user.Length == 6 && int.TryParse(user, out _) || user == "ronal")
+                {
+                    if (user == ProgData.Huidige_Gebruiker_Personeel_nummer)
+                    {
+                        DialogResult dialogResult = MessageBox.Show($"Moet ik voortaan gebruiker {ProgData.Huidige_Gebruiker_Naam()}\n" +
+                            $"auto laten inloggen onder dit\n" +
+                            $"windows account {user}", "Vraagje", MessageBoxButtons.YesNo);
+
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            // maak auto inlog
+                            autoInlogToolStripMenuItem.Checked = true;
+
+                            //// maak document
+                            List<string> inlognaam = new List<string>
+                                            {
+                                                ProgData.Huidige_Gebruiker_Personeel_nummer,
+                                                ProgData.RechtenHuidigeGebruiker.ToString()
+                                            };
+                            try
+                            {
+                                File.WriteAllLines(autoinlogfile, inlognaam);
+                            }
+                            catch (IOException)
+                            {
+                                MessageBox.Show("autoinlog file save Error()");
+                                autoInlogToolStripMenuItem.Checked = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Gebruiker nu ingelogd met pers nummer {ProgData.Huidige_Gebruiker_Personeel_nummer}\n" +
+                            $"is andere welke is ingelogd in windows, {user}\n" +
+                            $"Kan dus niet auto inlog aanzetten.");
+                    }
+                }
+            }
+        }
+
+        private void AutoInlog()
+        {
+            // auto inlog
+            string directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+            string autoinlogfile = $"{directory}\\bezetting2.log";
+            if (File.Exists(autoinlogfile))
+            {
+                try
+                {
+                    List<string> inlognaam = File.ReadAllLines(autoinlogfile).ToList();
+                    ProgData.Huidige_Gebruiker_Personeel_nummer = inlognaam[0];
+                    ProgData.RechtenHuidigeGebruiker = int.Parse(inlognaam[1]);
+                    autoInlogToolStripMenuItem.Checked = true;
+
+                    // test of gebruiker nog bestaat
+                    ProgData.AlleMensen.Load();
+                    try
+                    {
+                        personeel persoon = ProgData.AlleMensen.LijstPersonen.First(b => b._persnummer.ToString() == inlognaam[0].ToString());
+                    }
+                    catch
+                    {
+                        const string message = "Auto inlog naam bestaat niet in in deze bezetting personeel lijst!, auto inlog verwijderen?";
+                        const string caption = "Vraag";
+                        var result = MessageBox.Show(message, caption,
+                                                     MessageBoxButtons.YesNo,
+                                                     MessageBoxIcon.Question);
+
+                        if (result == DialogResult.Yes)
+                        {
+                            File.Delete(autoinlogfile);
+                            autoInlogToolStripMenuItem.Checked = false;
+                        }
+                        ProgData.Huidige_Gebruiker_Personeel_nummer = "";
+                        ProgData.RechtenHuidigeGebruiker = 0;
+                    }
+                }
+                catch (IOException)
+                {
                 }
             }
         }

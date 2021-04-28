@@ -56,11 +56,12 @@
             this.jaarOverzichtNaarExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.priveOptiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurEigenNaamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoInlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateExtraDienstenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wachtoverzichtFormulier1DagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importNamenOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importOudeVeranderDataOudeVersieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.instellingenProgrammaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -338,7 +339,9 @@
             // priveOptiesToolStripMenuItem
             // 
             this.priveOptiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.kleurEigenNaamToolStripMenuItem});
+            this.kleurEigenNaamToolStripMenuItem,
+            this.autoInlogToolStripMenuItem,
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem});
             this.priveOptiesToolStripMenuItem.Enabled = false;
             this.priveOptiesToolStripMenuItem.Name = "priveOptiesToolStripMenuItem";
             this.priveOptiesToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
@@ -347,9 +350,22 @@
             // kleurEigenNaamToolStripMenuItem
             // 
             this.kleurEigenNaamToolStripMenuItem.Name = "kleurEigenNaamToolStripMenuItem";
-            this.kleurEigenNaamToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.kleurEigenNaamToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
             this.kleurEigenNaamToolStripMenuItem.Text = "Kleur Eigen Naam";
             this.kleurEigenNaamToolStripMenuItem.Click += new System.EventHandler(this.kleurEigenNaamToolStripMenuItem_Click);
+            // 
+            // autoInlogToolStripMenuItem
+            // 
+            this.autoInlogToolStripMenuItem.Name = "autoInlogToolStripMenuItem";
+            this.autoInlogToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.autoInlogToolStripMenuItem.Text = "Auto Inlog";
+            // 
+            // wachtoverzichtFormulier2DagenToolStripMenuItem
+            // 
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem.Name = "wachtoverzichtFormulier2DagenToolStripMenuItem";
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem.Text = "Wachtoverzicht Formulier 2 Dagen";
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem.Click += new System.EventHandler(this.wachtoverzichtFormulier1DagToolStripMenuItem_Click);
             // 
             // beheerToolStripMenuItem
             // 
@@ -357,7 +373,6 @@
             this.editPersoneelToolStripMenuItem,
             this.kleurLijnenToolStripMenuItem,
             this.updateExtraDienstenToolStripMenuItem,
-            this.wachtoverzichtFormulier1DagToolStripMenuItem,
             this.importNamenOudeVersieToolStripMenuItem,
             this.importOudeVeranderDataOudeVersieToolStripMenuItem,
             this.instellingenProgrammaToolStripMenuItem,
@@ -392,14 +407,6 @@
             this.updateExtraDienstenToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.updateExtraDienstenToolStripMenuItem.Text = "Update Extra Diensten";
             this.updateExtraDienstenToolStripMenuItem.Click += new System.EventHandler(this.updateExtraDienstenToolStripMenuItem_Click);
-            // 
-            // wachtoverzichtFormulier1DagToolStripMenuItem
-            // 
-            this.wachtoverzichtFormulier1DagToolStripMenuItem.Enabled = false;
-            this.wachtoverzichtFormulier1DagToolStripMenuItem.Name = "wachtoverzichtFormulier1DagToolStripMenuItem";
-            this.wachtoverzichtFormulier1DagToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
-            this.wachtoverzichtFormulier1DagToolStripMenuItem.Text = "Wachtoverzicht Formulier 2 Dagen";
-            this.wachtoverzichtFormulier1DagToolStripMenuItem.Click += new System.EventHandler(this.wachtoverzichtFormulier1DagToolStripMenuItem_Click);
             // 
             // importNamenOudeVersieToolStripMenuItem
             // 
@@ -1215,12 +1222,13 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Panel panelSelect;
         private System.Windows.Forms.Label labelNaamSelect;
-        private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier1DagToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem priveOptiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem kleurEigenNaamToolStripMenuItem;
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.Panel panelMoment;
+        private System.Windows.Forms.ToolStripMenuItem autoInlogToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier2DagenToolStripMenuItem;
     }
 }
 

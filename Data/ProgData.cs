@@ -165,7 +165,6 @@ namespace Bezetting2
                 catch
                 {
                     Wacht(300);
-                    Wacht(0);
                     //Thread.Sleep(300);
                     SaveLijstWerkdagPloeg(kleur, --try_again);
                 }
@@ -218,7 +217,6 @@ namespace Bezetting2
             catch (IOException)
             {
                 Wacht(300);
-                Wacht(0);
                 //Thread.Sleep(300);
                 LaadLijstWerkdagPloeg(kleur, --try_again);
             }
@@ -432,10 +430,9 @@ namespace Bezetting2
         {
             // als ik hier snel weer kom ( < 2 sec ?), dan even wachten ivm netwerk traagheid
             var diffInSeconds = (DateTime.Now - saveTimeExtra).TotalSeconds;
-            if (diffInSeconds < 2)
+            if (diffInSeconds < 1)
             {
                 Wacht(500);
-                Wacht(0);
             }
                 //Thread.Sleep(500);
 
@@ -827,7 +824,6 @@ namespace Bezetting2
             catch
             {
                 Wacht(300);
-                Wacht(0);
                 //Thread.Sleep(300);
                 TestNetwerkBeschikbaar(test--);
             }
@@ -1092,17 +1088,11 @@ namespace Bezetting2
 
         public static void Wacht(int tijd)
         {
-            if(tijd != 0)
-            {
                 Main.panelMoment.Visible = true;
                 Main.panelMoment.Refresh();
                 Thread.Sleep(tijd);
-            }
-            else
-            {
                 Main.panelMoment.Visible = false;
                 Main.panelMoment.Refresh();
-            }
         }
     }
 }

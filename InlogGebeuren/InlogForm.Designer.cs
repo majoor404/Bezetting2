@@ -36,12 +36,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxChangePasswoord = new System.Windows.Forms.TextBox();
             this.buttonVerander = new System.Windows.Forms.Button();
-            this.groupBoxAutoInlog = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelAutoInlogNaam = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.checkBoxAutoInlog = new System.Windows.Forms.CheckBox();
-            this.groupBoxAutoInlog.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -82,7 +76,7 @@
             // buttonOke
             // 
             this.buttonOke.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOke.Location = new System.Drawing.Point(128, 158);
+            this.buttonOke.Location = new System.Drawing.Point(128, 78);
             this.buttonOke.Name = "buttonOke";
             this.buttonOke.Size = new System.Drawing.Size(215, 23);
             this.buttonOke.TabIndex = 5;
@@ -93,7 +87,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 195);
+            this.label3.Location = new System.Drawing.Point(12, 115);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(99, 13);
             this.label3.TabIndex = 6;
@@ -101,7 +95,7 @@
             // 
             // textBoxChangePasswoord
             // 
-            this.textBoxChangePasswoord.Location = new System.Drawing.Point(128, 192);
+            this.textBoxChangePasswoord.Location = new System.Drawing.Point(128, 112);
             this.textBoxChangePasswoord.Name = "textBoxChangePasswoord";
             this.textBoxChangePasswoord.PasswordChar = '*';
             this.textBoxChangePasswoord.Size = new System.Drawing.Size(215, 20);
@@ -111,7 +105,7 @@
             // 
             this.buttonVerander.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonVerander.Enabled = false;
-            this.buttonVerander.Location = new System.Drawing.Point(128, 227);
+            this.buttonVerander.Location = new System.Drawing.Point(128, 147);
             this.buttonVerander.Name = "buttonVerander";
             this.buttonVerander.Size = new System.Drawing.Size(215, 23);
             this.buttonVerander.TabIndex = 8;
@@ -119,67 +113,12 @@
             this.buttonVerander.UseVisualStyleBackColor = true;
             this.buttonVerander.Click += new System.EventHandler(this.ButtonVerander_Click);
             // 
-            // groupBoxAutoInlog
-            // 
-            this.groupBoxAutoInlog.Controls.Add(this.label4);
-            this.groupBoxAutoInlog.Controls.Add(this.labelAutoInlogNaam);
-            this.groupBoxAutoInlog.Controls.Add(this.button1);
-            this.groupBoxAutoInlog.Controls.Add(this.checkBoxAutoInlog);
-            this.groupBoxAutoInlog.Location = new System.Drawing.Point(3, 81);
-            this.groupBoxAutoInlog.Name = "groupBoxAutoInlog";
-            this.groupBoxAutoInlog.Size = new System.Drawing.Size(344, 62);
-            this.groupBoxAutoInlog.TabIndex = 13;
-            this.groupBoxAutoInlog.TabStop = false;
-            this.groupBoxAutoInlog.Text = "Auto Inlog";
-            this.groupBoxAutoInlog.Visible = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(112, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(58, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Op Naam :";
-            this.label4.DoubleClick += new System.EventHandler(this.label4_DoubleClick);
-            // 
-            // labelAutoInlogNaam
-            // 
-            this.labelAutoInlogNaam.AutoSize = true;
-            this.labelAutoInlogNaam.Location = new System.Drawing.Point(210, 29);
-            this.labelAutoInlogNaam.Name = "labelAutoInlogNaam";
-            this.labelAutoInlogNaam.Size = new System.Drawing.Size(43, 13);
-            this.labelAutoInlogNaam.TabIndex = 15;
-            this.labelAutoInlogNaam.Text = "000000";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(304, 25);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(20, 20);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "?";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // checkBoxAutoInlog
-            // 
-            this.checkBoxAutoInlog.AutoSize = true;
-            this.checkBoxAutoInlog.Location = new System.Drawing.Point(20, 28);
-            this.checkBoxAutoInlog.Name = "checkBoxAutoInlog";
-            this.checkBoxAutoInlog.Size = new System.Drawing.Size(73, 17);
-            this.checkBoxAutoInlog.TabIndex = 13;
-            this.checkBoxAutoInlog.Text = "Auto inlog";
-            this.checkBoxAutoInlog.UseVisualStyleBackColor = true;
-            this.checkBoxAutoInlog.Click += new System.EventHandler(this.CheckBox1_CheckedChanged);
-            // 
             // InlogForm
             // 
             this.AcceptButton = this.buttonOke;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(354, 264);
-            this.Controls.Add(this.groupBoxAutoInlog);
+            this.ClientSize = new System.Drawing.Size(354, 181);
             this.Controls.Add(this.buttonVerander);
             this.Controls.Add(this.textBoxChangePasswoord);
             this.Controls.Add(this.label3);
@@ -195,8 +134,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inlog";
             this.Shown += new System.EventHandler(this.InlogForm_Shown);
-            this.groupBoxAutoInlog.ResumeLayout(false);
-            this.groupBoxAutoInlog.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,10 +149,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxChangePasswoord;
         private System.Windows.Forms.Button buttonVerander;
-        private System.Windows.Forms.GroupBox groupBoxAutoInlog;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelAutoInlogNaam;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBoxAutoInlog;
     }
 }

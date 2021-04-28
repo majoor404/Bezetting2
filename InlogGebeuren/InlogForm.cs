@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -31,32 +29,6 @@ namespace Bezetting2
             textBoxPass.Text = "";
             textBoxChangePasswoord.Text = "";
 
-            // auto inlog alleen als Environment.UserName 6 char met alleen nummers
-            if (textBoxNum.Text.Length == 6 && int.TryParse(textBoxNum.Text, out _))
-                groupBoxAutoInlog.Visible = true;
-
-            // voor debug op deze pc even aanzetten ;-)
-            if (Environment.UserName == "ronal")
-                groupBoxAutoInlog.Visible = true;
-
-            // auto inlog
-            var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-            var autoinlogfile = $"{directory}\\bezetting2.log";
-            if (File.Exists(autoinlogfile))
-            {
-                checkBoxAutoInlog.Checked = true;
-                //_ = new List<string>();
-                try
-                {
-                    List<string> inlognaam = File.ReadAllLines(autoinlogfile).ToList();
-                    labelAutoInlogNaam.Text = inlognaam[0];
-                }
-                catch { }
-            }
-            else
-            {
-                labelAutoInlogNaam.Text = "";
-            }
             textBoxPass.Focus();
         }
 
@@ -79,6 +51,9 @@ namespace Bezetting2
                 {
                     bool juist = false;
                     personeel persoon = ProgData.AlleMensen.LijstPersonen.First(b => b._persnummer.ToString() == textBoxNum.Text);
+
+                    // wachtwoord is personeel nummer, rechten dus 1
+
                     if (textBoxNum.Text == textBoxPass.Text)
                     {
                         {
@@ -88,16 +63,15 @@ namespace Bezetting2
 
                             string kleur = ProgData.Get_Gebruiker_Kleur(persoon._persnummer.ToString());
                             ProgData.GekozenKleur = kleur;
-                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = kleur;
 
-                            //ProgData.GekozenKleur = persoon._kleur;
-                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
-                            
                             juist = true;
                             MessageBox.Show("Ingelogd met passwoord wat uw personeel nummer is." +
                                 "\nRechten dus 1, alleen lezen en aanvragen snipper/ruildiensten!");
                         }
                     }
+
+                    // inlog met wachtwoord 
+
                     if (!string.IsNullOrEmpty(textBoxPass.Text) && ProgData.Unscramble(persoon._passwoord) == textBoxPass.Text)
                     {
                         {
@@ -107,54 +81,9 @@ namespace Bezetting2
 
                             string kleur = ProgData.Get_Gebruiker_Kleur(persoon._persnummer.ToString());
                             ProgData.GekozenKleur = kleur;
-                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = kleur;
-
-                            //ProgData.GekozenKleur = persoon._kleur;
-                            //ProgData.Huidige_Gebruiker_Werkt_Op_Kleur = persoon._kleur;
 
                             juist = true;
 
-                            if (textBoxNum.Text == textBoxPass.Text)
-                                checkBoxAutoInlog.Checked = false;
-
-                            if ((textBoxNum.Text != labelAutoInlogNaam.Text) && checkBoxAutoInlog.Checked
-                                && (!string.IsNullOrEmpty(labelAutoInlogNaam.Text)))
-                            {
-                                checkBoxAutoInlog.Checked = false;
-                                MessageBox.Show("Auto inlog is al op andere naam, zet deze onder die naam uit!");
-                            }
-                            else
-                            {
-
-                                // auto inlog
-                                var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-                                var autoinlogfile = $"{directory}\\bezetting2.log";
-
-                                if (checkBoxAutoInlog.Checked)
-                                {
-                                    // maak document
-                                    List<string> inlognaam = new List<string>
-                                    {
-                                        ProgData.Huidige_Gebruiker_Personeel_nummer,
-                                        ProgData.RechtenHuidigeGebruiker.ToString()
-                                    };
-                                    try
-                                    {
-                                        File.WriteAllLines(autoinlogfile, inlognaam);
-                                    }
-                                    catch (IOException)
-                                    {
-                                        MessageBox.Show("autoinlog file save Error()");
-                                    }
-                                }
-                                else
-                                {
-                                    if (File.Exists(autoinlogfile))
-                                    {
-                                        File.Delete(autoinlogfile);
-                                    }
-                                }
-                            }
                         }
                     }
                     if (!juist)
@@ -172,9 +101,6 @@ namespace Bezetting2
 
         private void TextBoxPass_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxNum.Text == textBoxPass.Text)
-                checkBoxAutoInlog.Checked = false;
-
             buttonVerander.Enabled = false;
             //check passwoord
             try
@@ -214,11 +140,6 @@ namespace Bezetting2
 
         private void TextBoxNum_TextChanged(object sender, EventArgs e)
         {
-            if (textBoxNum.Text == "Admin" || textBoxNum.Text == "000000")
-            {
-                checkBoxAutoInlog.Checked = false;
-            }
-
             // na reset passwoord is het "verander_nu", pas meteen aan.
             try
             {
@@ -233,24 +154,6 @@ namespace Bezetting2
                 }
             }
             catch { }
-        }
-
-        private void Button1_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show($"Log auto in volgende keer met deze gegevens " +
-                $"\nAls ingelogd op pc met windows gebruikers naam : {Environment.UserName}");
-        }
-
-        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (textBoxNum.Text == textBoxPass.Text)
-                checkBoxAutoInlog.Checked = false;
-        }
-
-        private void label4_DoubleClick(object sender, EventArgs e)
-        {
-            textBoxNum.Text = "590588";
-            textBoxPass.Text = "kompas59";
         }
     }
 }
