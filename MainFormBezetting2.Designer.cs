@@ -69,6 +69,7 @@
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPopupMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maakBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.speedTestNetwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -379,7 +380,8 @@
             this.nietMeeTelLijstToolStripMenuItem,
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem,
             this.editPopupMenuToolStripMenuItem,
-            this.maakBackupToolStripMenuItem});
+            this.maakBackupToolStripMenuItem,
+            this.speedTestNetwerkToolStripMenuItem});
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
             this.beheerToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.beheerToolStripMenuItem.Text = "Beheer";
@@ -463,6 +465,14 @@
             this.maakBackupToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.maakBackupToolStripMenuItem.Text = "Maak Backup";
             this.maakBackupToolStripMenuItem.Click += new System.EventHandler(this.maakBackupToolStripMenuItem_Click);
+            // 
+            // speedTestNetwerkToolStripMenuItem
+            // 
+            this.speedTestNetwerkToolStripMenuItem.Name = "speedTestNetwerkToolStripMenuItem";
+            this.speedTestNetwerkToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
+            this.speedTestNetwerkToolStripMenuItem.Text = "Speed Test Netwerk";
+            this.speedTestNetwerkToolStripMenuItem.Visible = false;
+            this.speedTestNetwerkToolStripMenuItem.Click += new System.EventHandler(this.speedTestNetwerkToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
@@ -1045,16 +1055,16 @@
             // 
             this.panel9.BackColor = System.Drawing.SystemColors.Window;
             this.panel9.Controls.Add(this.label5);
-            this.panel9.Location = new System.Drawing.Point(13, 21);
+            this.panel9.Location = new System.Drawing.Point(13, 12);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(229, 57);
+            this.panel9.Size = new System.Drawing.Size(229, 68);
             this.panel9.TabIndex = 0;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(18, 19);
+            this.label5.Location = new System.Drawing.Point(14, 26);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(196, 20);
             this.label5.TabIndex = 0;
@@ -1229,6 +1239,7 @@
         public System.Windows.Forms.Panel panelMoment;
         private System.Windows.Forms.ToolStripMenuItem autoInlogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier2DagenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem speedTestNetwerkToolStripMenuItem;
     }
 }
 

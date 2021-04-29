@@ -42,8 +42,7 @@ namespace Bezetting2
         private readonly Color MaandButton_ = Color.LightSkyBlue;
         private readonly Color Werkplek_ = Color.LightGray;
         private readonly Color MinimaalPersonen_ = Color.LightPink;
-        //private readonly Color HoverNaam_ = Color.LightGreen;
-        private readonly Color GekozenNaamKleur_ = Color.PowderBlue;   //AntiqueWhite;
+        private readonly Color GekozenNaamKleur_ = Color.PowderBlue;
         private Color Kleur_Standaard_Font = Color.Black;
         private int aantal_regels_gekleurd = 0;
 
@@ -300,6 +299,7 @@ namespace Bezetting2
             nietMeeTelLijstToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             editPopupMenuToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
+            speedTestNetwerkToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -2351,6 +2351,28 @@ namespace Bezetting2
                 {
                 }
             }
+        }
+
+        private void speedTestNetwerkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // meet snelheid netwerk
+            DebugPanelShow("Meet snelheid netwerk schrijven en lezen");
+
+            DateTime start = DateTime.Now;
+            double totaal = 0;
+
+            for (int i = 0; i < 1000; i++)
+            {
+                start = DateTime.Now;
+                ProgData.TestNetwerkBeschikbaar(3);
+                var diffInSeconds = (DateTime.Now - start).TotalSeconds;
+                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
+                totaal += diffInSeconds;
+            }
+
+            DebugWrite($"Gemiddeld Schrijf en delete {totaal/1000} seconden");
+
+            //DebugPanelEnd();
         }
     }
 }
