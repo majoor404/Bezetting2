@@ -2,6 +2,7 @@
 using Bezetting2.InlogGebeuren;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -908,16 +909,18 @@ namespace Bezetting2
         {
             if (OpenBewaarAfwijking())
             {
-                BekijkVerhuisFile bk = new BekijkVerhuisFile();
+                //BekijkVerhuisFile bk = new BekijkVerhuisFile();
 
                 //BindingList<VeranderingenVerhuis> tabel = new BindingList<VeranderingenVerhuis>();
-                //dgv.Dock = DockStyle.Fill;
-                //dgv.Visible = true;
-                //dgv.DataSource = tabel;
-                //dgv.Update();
-                //dgv.Refresh();
 
-                bk.ShowDialog();
+                //VeranderingenLijstTemp
+                //bk.dgv.Dock = DockStyle.Fill;
+                //bk.dgv.Visible = true;
+                //bk.dgv.DataSource = tabel;
+                //bk.dgv.Update();
+                //bk.dgv.Refresh();
+
+                //bk.ShowDialog();
             }
         }
     }

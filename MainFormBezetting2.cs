@@ -264,6 +264,8 @@ namespace Bezetting2
             panelSelect.Visible = true;
             Refresh();
             LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
+
+           
         }
 
         private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2356,23 +2358,50 @@ namespace Bezetting2
         private void speedTestNetwerkToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // meet snelheid netwerk
-            DebugPanelShow("Meet snelheid netwerk schrijven en lezen");
+            DebugPanelShow("Meet snelheid netwerk Load en Save");
 
-            DateTime start = DateTime.Now;
+            DateTime start;
             double totaal = 0;
 
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 25; i++)
             {
                 start = DateTime.Now;
-                ProgData.TestNetwerkBeschikbaar(3);
+                ProgData.MaandData.Load("Blauw");
                 var diffInSeconds = (DateTime.Now - start).TotalSeconds;
                 DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
                 totaal += diffInSeconds;
+
+                start = DateTime.Now;
+                ProgData.MaandData.Save("Blauw",1);
+                diffInSeconds = (DateTime.Now - start).TotalSeconds;
+                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
+                totaal += diffInSeconds;
+
+                start = DateTime.Now;
+                ProgData.MaandData.Load("Wit");
+                diffInSeconds = (DateTime.Now - start).TotalSeconds;
+                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
+                totaal += diffInSeconds;
+
+                start = DateTime.Now;
+                ProgData.MaandData.Save("Wit", 1);
+                diffInSeconds = (DateTime.Now - start).TotalSeconds;
+                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
+                totaal += diffInSeconds;
+
+                start = DateTime.Now;
+                ProgData.MaandData.Load("Geel");
+                diffInSeconds = (DateTime.Now - start).TotalSeconds;
+                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
+                totaal += diffInSeconds;
+
+                start = DateTime.Now;
+                ProgData.MaandData.Save("Geel", 1);
+                diffInSeconds = (DateTime.Now - start).TotalSeconds;
+                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
+                totaal += diffInSeconds;
             }
-
-            DebugWrite($"Gemiddeld Schrijf en delete {totaal/1000} seconden");
-
-            //DebugPanelEnd();
+            DebugWrite($"Gemiddeld Load en Save MaandData {totaal/(25*6)} seconden");
         }
     }
 }

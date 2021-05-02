@@ -956,37 +956,38 @@ namespace Bezetting2
             ProgData.AlleMensen.HaalPloegNamenOpKleur(kleur);
             int aantal_dagen_deze_maand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
             DateTime dat = new DateTime(igekozenjaar, igekozenmaand, 1);
-            
+
             // bij nieuwe maand aanmaken in zelfde maand ging het dus fout ?
-            
-            //if (dat > DateTime.Now)
-            //{
-            foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+            // als dat is 1-4-21 en now was 30-4-21 ging het fout, mag dan wel aanmaken
+            DateTime VorigeMaand = DateTime.Now.AddMonths(-1);
+            if (dat > VorigeMaand)
             {
-                for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+                foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
                 {
-                    dat = new DateTime(igekozenjaar, igekozenmaand, i);
-                    try
+                    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
                     {
-                        werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == a._achternaam && x._dagnummer == i));
-                    }
-                    catch
-                    {
-                        werkdag dag = new werkdag
+                        dat = new DateTime(igekozenjaar, igekozenmaand, i);
+                        try
                         {
-                            _naam = a._achternaam,
-                            _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, kleur),
-                            _werkplek = "",
-                            _afwijkingdienst = "",
-                            _dagnummer = i
-                        };
-                        ProgData.LijstWerkdagPloeg.Add(dag);
+                            werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == a._achternaam && x._dagnummer == i));
+                        }
+                        catch
+                        {
+                            werkdag dag = new werkdag
+                            {
+                                _naam = a._achternaam,
+                                _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, kleur),
+                                _werkplek = "",
+                                _afwijkingdienst = "",
+                                _dagnummer = i
+                            };
+                            ProgData.LijstWerkdagPloeg.Add(dag);
+                        }
                     }
+                    ProgData.SaveLijstWerkdagPloeg(kleur, 15);
                 }
-                ProgData.SaveLijstWerkdagPloeg(kleur, 15);
+                SaveLijstWerkdagPloeg(kleur, 15);
             }
-            SaveLijstWerkdagPloeg(kleur, 15);
-            //}
         }
 
         public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs

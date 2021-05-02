@@ -82,7 +82,7 @@ namespace Bezetting2.Data
                     var diffInSeconds = (DateTime.Now - saveTimeLoad).TotalSeconds;
                     saveTimeLoad = DateTime.Now;
                     
-                    if (diffInSeconds < 1)
+                    if (diffInSeconds < 2)
                     {
                         saveTelLoad++;
                     }
@@ -91,10 +91,9 @@ namespace Bezetting2.Data
                         saveTelLoad = 0;
                     }
 
-                    if (saveTelLoad > 4)
+                    if (saveTelLoad > 5)
                     {
                         ProgData.Wacht(1000);
-                        //Thread.Sleep(1000);
                         saveTelLoad = 0;
                     }
                     
@@ -112,9 +111,6 @@ namespace Bezetting2.Data
                     catch
                     {
                         ProgData.Wacht(1000);
-                        //Thread.Sleep(600);
-                        //MessageBox.Show($"kon {path} niet laden!, netwerk druk\nEven pauze...");
-                        //Thread.Sleep(1000);
                     }
 
                     if (kleur == ProgData.GekozenKleur)
