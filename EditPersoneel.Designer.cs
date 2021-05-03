@@ -562,7 +562,8 @@
             "Wit",
             "Groen",
             "Geel",
-            "DD"});
+            "DD",
+            "Weg"});
             this.comboBoxKleur.Location = new System.Drawing.Point(456, 489);
             this.comboBoxKleur.Name = "comboBoxKleur";
             this.comboBoxKleur.Size = new System.Drawing.Size(201, 21);

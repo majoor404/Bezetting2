@@ -1,5 +1,6 @@
 ﻿using Bezetting2.Data;
 using Bezetting2.InlogGebeuren;
+using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -860,16 +861,16 @@ namespace Bezetting2
         {
             if (OpenBewaarAfwijking())
             {
-
                 string naam = ProgData.Get_Gebruiker_Naam(VeranderingenLijstTemp[0].Personeel_nr);
-                string message = $"Deze verander lijst inladen voor persoon {naam} op kleur {VeranderingenLijstTemp[0].Kleur_}";
-                const string caption = "Vraag";
-                var result = MessageBox.Show(message, caption,
-                                             MessageBoxButtons.YesNo,
-                                             MessageBoxIcon.Question);
+
+                ImportOpKleurForm imp = new ImportOpKleurForm();
+                imp.labelOudeKleur.Text = imp.comboBoxNieuweKleur.Text = VeranderingenLijstTemp[0].Kleur_;
+                imp.labelNaam.Text = naam;
+
+                var result = imp.ShowDialog();
 
                 if (result == DialogResult.Yes)
-                    Restore_oude_afwijkingen(VeranderingenLijstTemp[0].Kleur_, true, "Repareer admin tool");
+                    Restore_oude_afwijkingen(imp.comboBoxNieuweKleur.Text, true, "Repareer admin tool");
             }
         }
 
@@ -891,9 +892,6 @@ namespace Bezetting2
                         BinaryFormatter bin = new BinaryFormatter();
                         VeranderingenLijstTemp = (List<VeranderingenVerhuis>)bin.Deserialize(stream);
                     }
-
-                    MessageBox.Show($"Ingeladen, was van kleur {VeranderingenLijstTemp[0].Kleur_} " +
-                        $"met start datum {VeranderingenLijstTemp[0].Datumafwijking_}.");
                 }
                 catch
                 {

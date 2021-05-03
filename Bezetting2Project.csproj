@@ -165,6 +165,12 @@
     <Compile Include="InlogGebeuren\InlogForm.Designer.cs">
       <DependentUpon>InlogForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Invoer\ImportOpKleurForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\ImportOpKleurForm.Designer.cs">
+      <DependentUpon>ImportOpKleurForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Invoer\InstellingenProgrammaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InlogGebeuren\InlogForm.resx">
       <DependentUpon>InlogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\ImportOpKleurForm.resx">
+      <DependentUpon>ImportOpKleurForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Invoer\InstellingenProgrammaForm.resx">
       <DependentUpon>InstellingenProgrammaForm.cs</DependentUpon>
