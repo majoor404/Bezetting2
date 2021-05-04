@@ -268,6 +268,7 @@
             this.geelToolStripMenuItem.Name = "geelToolStripMenuItem";
             this.geelToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.geelToolStripMenuItem.Text = "Geel";
+            this.geelToolStripMenuItem.Click += new System.EventHandler(this.geelToolStripMenuItem_Click);
             // 
             // groenToolStripMenuItem
             // 

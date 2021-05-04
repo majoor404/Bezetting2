@@ -676,10 +676,12 @@ namespace Bezetting2
                 oSheet.Cells[1, 4] = "Postcode";
                 oSheet.Cells[1, 5] = "Plaats";
                 oSheet.Cells[1, 6] = "E-mail";
+                oSheet.Cells[1, 7] = "Tel Mob.";
+                oSheet.Cells[1, 8] = "Tel Huis";
 
                 //Format A1:D1 as bold, vertical alignment = center.
-                oSheet.get_Range("A1", "F1").Font.Bold = true;
-                oSheet.get_Range("A1", "F1").VerticalAlignment =
+                oSheet.get_Range("A1", "H1").Font.Bold = true;
+                oSheet.get_Range("A1", "H1").VerticalAlignment =
                 Microsoft.Office.Interop.Excel.XlVAlign.xlVAlignCenter;
 
                 int start_row = 2;
@@ -693,12 +695,14 @@ namespace Bezetting2
                         oSheet.Cells[start_row, 4] = a._postcode;
                         oSheet.Cells[start_row, 5] = a._woonplaats;
                         oSheet.Cells[start_row, 6] = a._emailthuis;
+                        oSheet.Cells[start_row, 7] = a._tel06prive;
+                        oSheet.Cells[start_row, 8] = a._telthuis;
                         start_row++;
                     }
                 }
 
                 //AutoFit columns A:D.
-                oRng = oSheet.get_Range("A1", "F1");
+                oRng = oSheet.get_Range("A1", "H1");
                 oRng.EntireColumn.AutoFit();
 
                 //Make sure Excel is visible and give the user control
@@ -721,6 +725,11 @@ namespace Bezetting2
         private void BlauwToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ToExcelNamenEnAdressen("Blauw");
+        }
+
+        private void geelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ToExcelNamenEnAdressen("Geel");
         }
 
         private void GroenToolStripMenuItem_Click(object sender, EventArgs e)

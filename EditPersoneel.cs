@@ -505,7 +505,6 @@ namespace Bezetting2
             {
                 comboBoxKleur.Enabled = false;
                 textBoxPersNum.Enabled = false;
-                //textBoxAchterNaam.Enabled = false;
                 buttonSave.Enabled = true;
                 buttonDelete.Enabled = true;
                 button1.Enabled = true;
@@ -536,18 +535,6 @@ namespace Bezetting2
                     _rechten = 0
                 };
 
-                
-
-                //if (ProgData.RechtenHuidigeGebruiker > 100)
-                //{
-                //    // direct edit ploeg rooster als admin
-                //    a._kleur = comboBoxKleur.Text;
-                //    a._nieuwkleur = "";
-                //}
-
-                //a._funtie = textBoxFuntie.Text;
-                //a._werkgroep = textBoxWerkplek.Text;
-                //a._rechten = 0;
                 ProgData.AlleMensen.LijstPersonen.Add(a);
                 ProgData.AlleMensen.Save();
 
