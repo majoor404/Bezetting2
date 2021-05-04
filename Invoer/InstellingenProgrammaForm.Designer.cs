@@ -39,6 +39,7 @@
             this.checkBoxWachtoverzichtAls2Dagen = new System.Windows.Forms.CheckBox();
             this.textBoxLocatieKalender = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.checkBoxGebruikWachtOverzicht = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBoxGebruikRuilExtra
@@ -151,11 +152,23 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Locatie kalender snelkoppeling";
             // 
+            // checkBoxGebruikWachtOverzicht
+            // 
+            this.checkBoxGebruikWachtOverzicht.AutoSize = true;
+            this.checkBoxGebruikWachtOverzicht.Location = new System.Drawing.Point(13, 236);
+            this.checkBoxGebruikWachtOverzicht.Name = "checkBoxGebruikWachtOverzicht";
+            this.checkBoxGebruikWachtOverzicht.Size = new System.Drawing.Size(143, 17);
+            this.checkBoxGebruikWachtOverzicht.TabIndex = 11;
+            this.checkBoxGebruikWachtOverzicht.Text = "Gebruik WachtOverzicht";
+            this.checkBoxGebruikWachtOverzicht.UseVisualStyleBackColor = true;
+            this.checkBoxGebruikWachtOverzicht.CheckedChanged += new System.EventHandler(this.checkBoxGebruikWachtOverzicht_CheckedChanged);
+            // 
             // InstellingenProgrammaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(691, 387);
+            this.Controls.Add(this.checkBoxGebruikWachtOverzicht);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxLocatieKalender);
             this.Controls.Add(this.checkBoxWachtoverzichtAls2Dagen);
@@ -189,5 +202,6 @@
         private System.Windows.Forms.CheckBox checkBoxWachtoverzichtAls2Dagen;
         private System.Windows.Forms.TextBox textBoxLocatieKalender;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox checkBoxGebruikWachtOverzicht;
     }
 }

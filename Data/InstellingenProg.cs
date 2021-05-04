@@ -72,6 +72,12 @@ namespace Bezetting2.Data
 
         }
 
+        public static bool _GebruikWachtOverzicht
+        {
+            get { return bool.Parse(ProgrammaData[48]); }
+            set { ProgrammaData[48] = value.ToString(); }
+        }
+
         public static List<string> ProgrammaData = new List<string>();
 
         public static void LeesProgrammaData()

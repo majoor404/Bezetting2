@@ -174,6 +174,7 @@ namespace Bezetting2
             ruilOverwerkToolStripMenuItem.Visible = InstellingenProg._GebruikExtraRuil;
             snipperDagAanvraagToolStripMenuItem.Visible = InstellingenProg._GebruikSnipper;
             wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
+            wachtOverzichtToolStripMenuItem.Visible = InstellingenProg._GebruikWachtOverzicht;
 
             ProgData.Main = this;
 
@@ -253,7 +254,7 @@ namespace Bezetting2
             }
 
             WindowUpdateViewScreen = true;
-            VulViewScherm();
+            //VulViewScherm();  lager gezet, zodat eerst prive data geladen wordt voordat scherm getekend wordt.
 
             if (ProgData.LeesLijnen())
                 ZetLijnen();
@@ -261,11 +262,13 @@ namespace Bezetting2
             AutoInlog();
             autoInlogToolStripMenuItem.Click += autoInlogToolStripMenuItem_Click;
             
+
             panelSelect.Visible = true;
-            Refresh();
+            //Refresh();
             LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
 
-           
+            VulViewScherm();
+
         }
 
         private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2226,7 +2229,7 @@ namespace Bezetting2
 
         private void SaveEnZetPriveData(string persnr)
         {
-            if (persnr != "Niemand Ingelogd" && persnr != "Admin")
+            if (persnr != "Niemand Ingelogd" && persnr != "Admin" && persnr != "")
             {
                 var directory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
                 var autoinlogfile = $"{directory}\\{persnr}.ini";
@@ -2274,7 +2277,7 @@ namespace Bezetting2
 
                 if (user.Length == 6 && int.TryParse(user, out _) || user == "ronal")
                 {
-                    if (user == ProgData.Huidige_Gebruiker_Personeel_nummer)
+                    if (user == ProgData.Huidige_Gebruiker_Personeel_nummer || user == "ronal")
                     {
                         DialogResult dialogResult = MessageBox.Show($"Moet ik voortaan gebruiker {ProgData.Huidige_Gebruiker_Naam()}\n" +
                             $"auto laten inloggen onder dit\n" +
