@@ -125,6 +125,7 @@
             this.panelMoment = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
             this.label5 = new System.Windows.Forms.Label();
+            this.labelHulpText = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -1048,17 +1049,18 @@
             this.panelMoment.Controls.Add(this.panel9);
             this.panelMoment.Location = new System.Drawing.Point(142, 662);
             this.panelMoment.Name = "panelMoment";
-            this.panelMoment.Size = new System.Drawing.Size(261, 96);
+            this.panelMoment.Size = new System.Drawing.Size(261, 119);
             this.panelMoment.TabIndex = 37;
             this.panelMoment.Visible = false;
             // 
             // panel9
             // 
             this.panel9.BackColor = System.Drawing.SystemColors.Window;
+            this.panel9.Controls.Add(this.labelHulpText);
             this.panel9.Controls.Add(this.label5);
             this.panel9.Location = new System.Drawing.Point(13, 12);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(229, 68);
+            this.panel9.Size = new System.Drawing.Size(229, 88);
             this.panel9.TabIndex = 0;
             // 
             // label5
@@ -1070,6 +1072,15 @@
             this.label5.Size = new System.Drawing.Size(196, 20);
             this.label5.TabIndex = 0;
             this.label5.Text = "Moment Netwerk Druk..";
+            // 
+            // labelHulpText
+            // 
+            this.labelHulpText.AutoSize = true;
+            this.labelHulpText.Location = new System.Drawing.Point(15, 55);
+            this.labelHulpText.Name = "labelHulpText";
+            this.labelHulpText.Size = new System.Drawing.Size(49, 13);
+            this.labelHulpText.TabIndex = 1;
+            this.labelHulpText.Text = "0123456";
             // 
             // MainFormBezetting2
             // 
@@ -1241,6 +1252,7 @@
         private System.Windows.Forms.ToolStripMenuItem autoInlogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier2DagenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem speedTestNetwerkToolStripMenuItem;
+        public System.Windows.Forms.Label labelHulpText;
     }
 }
 

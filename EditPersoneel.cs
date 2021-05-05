@@ -908,5 +908,16 @@ namespace Bezetting2
                 //bk.ShowDialog();
             }
         }
+
+        private void buttonSorteer_Click(object sender, EventArgs e)
+        {
+            ProgData.AlleMensen.LijstPersonen.Sort(delegate (personeel x, personeel y)
+            {
+                return x._achternaam.CompareTo(y._achternaam);
+            });
+
+            ProgData.AlleMensen.Save();
+            EditPersoneel_Shown(this, null);
+        }
     }
 }

@@ -32,10 +32,10 @@ namespace Bezetting2.Data
         }
 
         public List<Item> MaandDataLijst = new List<Item>();
-        private DateTime saveTime = DateTime.Now;
-        private DateTime saveTimeLoad = DateTime.Now;
-        private int saveTel = 0;
-        private int saveTelLoad = 0;
+        private DateTime saveSaveTime = DateTime.Now;
+        private DateTime saveLoadTime = DateTime.Now;
+        private int saveSaveTel = 0;
+        private int saveLoadTel = 0;
 
 
         public void Voeg_toe(string dag, string personeel_nr, string afwijking, string invoer_door, string rede, string reserve1, string reserve2)
@@ -79,22 +79,24 @@ namespace Bezetting2.Data
                 {
 
                     // geef netwerk de tijd om voorgaande te regelen ;-(
-                    var diffInSeconds = (DateTime.Now - saveTimeLoad).TotalSeconds;
-                    saveTimeLoad = DateTime.Now;
-                    
-                    if (diffInSeconds < 2)
-                    {
-                        saveTelLoad++;
-                    }
-                    else
-                    {
-                        saveTelLoad = 0;
-                    }
+                    var diffInSeconds = (DateTime.Now - saveLoadTime).TotalSeconds;
+                    saveLoadTime = DateTime.Now;
 
-                    if (saveTelLoad > 5)
+                    saveLoadTel = diffInSeconds < 2 ? saveLoadTel++ : 0;
+                    
+                    //if (diffInSeconds < 2)
+                    //{
+                    //    saveLoadTel++;
+                    //}
+                    //else
+                    //{
+                    //    saveLoadTel = 0;
+                    //}
+
+                    if (saveLoadTel > 5)
                     {
-                        ProgData.Wacht(1000);
-                        saveTelLoad = 0;
+                        ProgData.Wacht(1000,$"load maand Data {kleur}");
+                        saveLoadTel = 0;
                     }
                     
                     // laden
@@ -110,7 +112,7 @@ namespace Bezetting2.Data
                     }
                     catch
                     {
-                        ProgData.Wacht(1000);
+                        ProgData.Wacht(1000, "load maand Data {kleur}, lukt niet");
                     }
 
                     if (kleur == ProgData.GekozenKleur)
@@ -161,22 +163,24 @@ namespace Bezetting2.Data
             var jaar = ProgData.igekozenjaar;
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
-            var diffInSeconds = (DateTime.Now - saveTime).TotalSeconds;
-            saveTime = DateTime.Now;
-            
-            if (diffInSeconds < 1)
-            {
-                saveTel++;
-            }
-            else
-            {
-                saveTel = 0;
-            }
+            var diffInSeconds = (DateTime.Now - saveSaveTime).TotalSeconds;
+            saveSaveTime = DateTime.Now;
 
-            if (saveTel > 4)
+            saveSaveTel = diffInSeconds < 1 ? saveSaveTel++ : 0;
+            
+            //if (diffInSeconds < 1)
+            //{
+            //    saveSaveTel++;
+            //}
+            //else
+            //{
+            //    saveSaveTel = 0;
+            //}
+
+            if (saveSaveTel > 4)
             {
-                ProgData.Wacht(600);
-                saveTel = 0;
+                ProgData.Wacht(600, $"Save maand data {kleur}");
+                saveSaveTel = 0;
             }
 
             if (try_again < 0)
@@ -234,8 +238,7 @@ namespace Bezetting2.Data
                     MessageBox.Show("Netwerk problemen, Exit!");
                     Process.GetCurrentProcess().Kill();
                 }
-                ProgData.Wacht(1000);
-                //Thread.Sleep(1000);
+                ProgData.Wacht(1000,"Niet aanwezig");
             }
             return false;
         }

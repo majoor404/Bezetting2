@@ -164,7 +164,7 @@ namespace Bezetting2
                 }
                 catch
                 {
-                    Wacht(300);
+                    Wacht(300, "SaveLijstWerkdagPloeg");
                     //Thread.Sleep(300);
                     SaveLijstWerkdagPloeg(kleur, --try_again);
                 }
@@ -216,7 +216,7 @@ namespace Bezetting2
             }
             catch (IOException)
             {
-                Wacht(300);
+                Wacht(300, "LaadLijstWerkdagPloeg");
                 //Thread.Sleep(300);
                 LaadLijstWerkdagPloeg(kleur, --try_again);
             }
@@ -432,7 +432,7 @@ namespace Bezetting2
             var diffInSeconds = (DateTime.Now - saveTimeExtra).TotalSeconds;
             if (diffInSeconds < 1)
             {
-                Wacht(500);
+                Wacht(500, "SaveLooptExtraLijst");
             }
             //Thread.Sleep(500);
 
@@ -804,7 +804,7 @@ namespace Bezetting2
             }
             catch
             {
-                Wacht(300);
+                Wacht(300, "TestNetwerkBeschikbaar");
                 //Thread.Sleep(300);
                 TestNetwerkBeschikbaar(test--);
             }
@@ -989,7 +989,6 @@ namespace Bezetting2
                 SaveLijstWerkdagPloeg(kleur, 15);
             }
         }
-
         public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
         {
             // zet oude file's om naar nieuwe ketting
@@ -1040,7 +1039,6 @@ namespace Bezetting2
                 }
             }
         }
-
         private static void SchijfLocatieVanBackup(string startPath, string filenaam)
         {
             // maak in backup dir een bestand locatie.txt
@@ -1070,9 +1068,9 @@ namespace Bezetting2
         {
             return Get_Gebruiker_Kleur(Huidige_Gebruiker_Personeel_nummer);
         }
-
-        public static void Wacht(int tijd)
+        public static void Wacht(int tijd, string hulptext)
         {
+            Main.labelHulpText.Text = hulptext;
             Main.panelMoment.Visible = true;
             Main.panelMoment.Refresh();
             Thread.Sleep(tijd);

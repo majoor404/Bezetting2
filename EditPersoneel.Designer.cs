@@ -93,6 +93,7 @@
             this.buttonExport = new System.Windows.Forms.Button();
             this.buttonExtraAdmin = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.buttonSorteer = new System.Windows.Forms.Button();
             this.groupBoxNieuwRooster.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.panelAdmin.SuspendLayout();
@@ -676,11 +677,22 @@
             // 
             this.openFileDialog.FileName = "openFileDialog1";
             // 
+            // buttonSorteer
+            // 
+            this.buttonSorteer.Location = new System.Drawing.Point(201, 593);
+            this.buttonSorteer.Name = "buttonSorteer";
+            this.buttonSorteer.Size = new System.Drawing.Size(180, 26);
+            this.buttonSorteer.TabIndex = 53;
+            this.buttonSorteer.Text = "Sorteer Lijst";
+            this.buttonSorteer.UseVisualStyleBackColor = true;
+            this.buttonSorteer.Click += new System.EventHandler(this.buttonSorteer_Click);
+            // 
             // EditPersoneel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(960, 634);
+            this.Controls.Add(this.buttonSorteer);
             this.Controls.Add(this.panelAdmin);
             this.Controls.Add(this.comboBoxKleur);
             this.Controls.Add(this.groupBox1);
@@ -806,5 +818,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonBekijkAfwijkingFIle;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button buttonSorteer;
     }
 }

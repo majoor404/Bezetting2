@@ -2008,7 +2008,7 @@ namespace Bezetting2
 
         private void CheckExtraLopen(string kleur, string Gaat_lopen_op_kleur)
         {
-            ProgData.Wacht(300);
+            ProgData.Wacht(300, "CheckExtraLopen");
             ProgData.AlleMensen.HaalPloegNamenOpKleur(kleur);
             //ProgData.LaadLijstPersoneelKleur(kleur, 15);
             DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
