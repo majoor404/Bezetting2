@@ -175,6 +175,7 @@ namespace Bezetting2
             snipperDagAanvraagToolStripMenuItem.Visible = InstellingenProg._GebruikSnipper;
             wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
             wachtOverzichtToolStripMenuItem.Visible = InstellingenProg._GebruikWachtOverzicht;
+            wachtoverzichtFormulier2DagenToolStripMenuItem.Visible = InstellingenProg._GebruikWachtOverzicht;
 
             ProgData.Main = this;
 
@@ -261,14 +262,13 @@ namespace Bezetting2
 
             AutoInlog();
             autoInlogToolStripMenuItem.Click += autoInlogToolStripMenuItem_Click;
-            
+
 
             panelSelect.Visible = true;
             //Refresh();
             LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
 
             VulViewScherm();
-
         }
 
         private void InloggenToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -307,7 +307,7 @@ namespace Bezetting2
             speedTestNetwerkToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
-            ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
+            ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
             priveOptiesToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 2;
 
             vuilwerkToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 49;
@@ -325,7 +325,7 @@ namespace Bezetting2
             SaveEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
             ProgData.RechtenHuidigeGebruiker = 0; // alleen lezen
             ProgData.Huidige_Gebruiker_Personeel_nummer = "Niemand Ingelogd";
-            
+
             // defailt prive gegevens
             kleurEigenNaamToolStripMenuItem.Checked = false;
             autoInlogToolStripMenuItem.Checked = false;
@@ -987,8 +987,12 @@ namespace Bezetting2
             int row = info.Item.Index;
             int col = info.Item.SubItems.IndexOf(info.SubItem);
 
-            if (((ProgData.RechtenHuidigeGebruiker > 24) && (ProgData.RechtenHuidigeGebruiker < 51) && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur))
-                || ProgData.RechtenHuidigeGebruiker > 51 || (ProgData.RechtenHuidigeGebruiker < 51) && ProgData.GekozenKleur == nieuwe_kleur)
+            if (((ProgData.RechtenHuidigeGebruiker > 24)
+                && (ProgData.RechtenHuidigeGebruiker < 51)
+                && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur))
+
+                || ProgData.RechtenHuidigeGebruiker > 51
+                || (ProgData.RechtenHuidigeGebruiker < 51) && ProgData.GekozenKleur == nieuwe_kleur)
             {
                 try
                 {
@@ -1009,39 +1013,50 @@ namespace Bezetting2
 
                         personeel persoon = ProgData.AlleMensen.LijstPersoonKleur.First(a => a._achternaam == gekozen_naam);
 
-                        if (e.Button == MouseButtons.Right)
+                        if ((ProgData.RechtenHuidigeGebruiker != 26 && ProgData.RechtenHuidigeGebruiker != 27)||
+                            (ProgData.RechtenHuidigeGebruiker == 26 && gekozen_naam == ProgData.Huidige_Gebruiker_Naam()) ||
+                            (ProgData.RechtenHuidigeGebruiker == 27 && gekozen_naam != ProgData.Huidige_Gebruiker_Naam()))
                         {
-
-                            quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
-                            quick.ShowDialog();
-                            if (quick.listBox1.SelectedIndex > -1)
+                            if (e.Button == MouseButtons.Right)
                             {
-                                string afwijking = quick.listBox1.SelectedItem.ToString();
-                                switch (afwijking.ToUpper())
+                                quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
+                                quick.ShowDialog();
+                                if (quick.listBox1.SelectedIndex > -1)
                                 {
-                                    case "WIS":
-                                        ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                        break;
-                                    default:
-                                        ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                        ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
-                                        break;
+                                    string afwijking = quick.listBox1.SelectedItem.ToString();
+                                    switch (afwijking.ToUpper())
+                                    {
+                                        case "WIS":
+                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                            break;
+                                        default:
+                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                            ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
+                                            break;
+                                    }
+                                    VulViewScherm();
                                 }
+                            }
+                            else
+                            {
+                                DagAfwijkingInvoerForm afw = new DagAfwijkingInvoerForm();
+                                afw.labelNaam.Text = gekozen_naam;
+                                afw.labelDatum.Text = gekozen_datum;
+                                afw.labelMaand.Text = ProgData.Sgekozenmaand();
+                                afw.labelPersoneelnr.Text = persoon._persnummer.ToString();
+                                afw.Text = ProgData.Huidige_Gebruiker_Personeel_nummer;
+                                // voor ed-o ed-m en ed-n
+                                afw._verzoekdag = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
+                                afw.ShowDialog();
                                 VulViewScherm();
                             }
                         }
                         else
                         {
-                            DagAfwijkingInvoerForm afw = new DagAfwijkingInvoerForm();
-                            afw.labelNaam.Text = gekozen_naam;
-                            afw.labelDatum.Text = gekozen_datum;
-                            afw.labelMaand.Text = ProgData.Sgekozenmaand();
-                            afw.labelPersoneelnr.Text = persoon._persnummer.ToString();
-                            afw.Text = ProgData.Huidige_Gebruiker_Personeel_nummer;
-                            // voor ed-o ed-m en ed-n
-                            afw._verzoekdag = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
-                            afw.ShowDialog();
-                            VulViewScherm();
+                            if (ProgData.RechtenHuidigeGebruiker == 26)
+                                MessageBox.Show("U mag alleen uw eigen afwijkingen invullen!");
+                            if (ProgData.RechtenHuidigeGebruiker == 27)
+                                MessageBox.Show("U mag niet uw eigen afwijkingen invullen!, alleen andere.");
                         }
                     }
                 }
@@ -1050,7 +1065,7 @@ namespace Bezetting2
             // geen rechten/ingelogt
             else
             {
-                MessageBox.Show("Even inloggen!");
+                MessageBox.Show("Even inloggen of juiste kleur/rooster kiezen");
             }
             //}
         }
@@ -2238,7 +2253,7 @@ namespace Bezetting2
                 List<string> info = new List<string>();
                 info.Add(kleurEigenNaamToolStripMenuItem.Checked.ToString());
                 info.Add(wachtoverzichtFormulier2DagenToolStripMenuItem.Checked.ToString());
-                
+
                 try
                 {
                     File.WriteAllLines(autoinlogfile, info);
@@ -2375,7 +2390,7 @@ namespace Bezetting2
                 totaal += diffInSeconds;
 
                 start = DateTime.Now;
-                ProgData.MaandData.Save("Blauw",1);
+                ProgData.MaandData.Save("Blauw", 1);
                 diffInSeconds = (DateTime.Now - start).TotalSeconds;
                 DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
                 totaal += diffInSeconds;
@@ -2404,7 +2419,7 @@ namespace Bezetting2
                 DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
                 totaal += diffInSeconds;
             }
-            DebugWrite($"Gemiddeld Load en Save MaandData {totaal/(25*6)} seconden");
+            DebugWrite($"Gemiddeld Load en Save MaandData {totaal / (25 * 6)} seconden");
         }
     }
 }

@@ -3,11 +3,9 @@ using Bezetting2.InlogGebeuren;
 using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading;
 using System.Windows.Forms;
 using static Bezetting2.Data.MaandDataClass;
 
@@ -426,29 +424,35 @@ namespace Bezetting2
             recht.labelNaam.Text = textBoxAchterNaam.Text;
             recht.labelPersoneelNummer.Text = textBoxPersNum.Text;
             recht.labelRechtenNivo.Text = rechten.ToString();
-            if (rechten > 51)
-                recht.checkBoxAllePloegen.Checked = true;
-            if (rechten == 0)
-                recht.radioButton0.Checked = true;
-            if (rechten > 24)
-                recht.radioButton25.Checked = true;
-            if (rechten > 49)
-                recht.radioButton50.Checked = true;
+            
+            //if (rechten > 51)
+            //    recht.checkBoxAllePloegen.Checked = true;
+            //if (rechten == 0)
+            //    recht.radioButton0.Checked = true;
+            //if (rechten > 24)
+            //    recht.radioButton25.Checked = true;
+            //if (rechten > 49)
+            //    recht.radioButton50.Checked = true;
 
-            if (ProgData.RechtenHuidigeGebruiker == 25)
-            {
-                recht.checkBoxAllePloegen.Enabled = false;
-                recht.radioButton0.Enabled = true;
-                recht.radioButton25.Enabled = true;
-                recht.radioButton50.Enabled = false;
-            }
-            if (ProgData.RechtenHuidigeGebruiker == 50)
-            {
-                recht.checkBoxAllePloegen.Enabled = false;
-                recht.radioButton0.Enabled = true;
-                recht.radioButton25.Enabled = true;
-                recht.radioButton50.Enabled = true;
-            }
+            //if (rechten == 26)
+            //    checkBoxAlleenZelf.Checked = true;
+            //if (rechten == 27)
+            //    checkboxAlleenAndere.Checked = true;
+
+            //if (ProgData.RechtenHuidigeGebruiker == 25)
+            //{
+            //    recht.checkBoxAllePloegen.Enabled = false;
+            //    recht.radioButton0.Enabled = true;
+            //    recht.radioButton25.Enabled = true;
+            //    recht.radioButton50.Enabled = false;
+            //}
+            //if (ProgData.RechtenHuidigeGebruiker == 50)
+            //{
+            //    recht.checkBoxAllePloegen.Enabled = false;
+            //    recht.radioButton0.Enabled = true;
+            //    recht.radioButton25.Enabled = true;
+            //    recht.radioButton50.Enabled = true;
+            //}
 
             DialogResult dialog = recht.ShowDialog();
             if (dialog == DialogResult.OK)

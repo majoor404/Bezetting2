@@ -39,6 +39,10 @@
             this.radioButton50 = new System.Windows.Forms.RadioButton();
             this.radioButton25 = new System.Windows.Forms.RadioButton();
             this.radioButton0 = new System.Windows.Forms.RadioButton();
+            this.checkBoxAlleenZelf = new System.Windows.Forms.CheckBox();
+            this.checkBoxAlleenAndere = new System.Windows.Forms.CheckBox();
+            this.panel25 = new System.Windows.Forms.Panel();
+            this.panel25.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -71,7 +75,7 @@
             // checkBoxAllePloegen
             // 
             this.checkBoxAllePloegen.AutoSize = true;
-            this.checkBoxAllePloegen.Location = new System.Drawing.Point(15, 231);
+            this.checkBoxAllePloegen.Location = new System.Drawing.Point(15, 225);
             this.checkBoxAllePloegen.Name = "checkBoxAllePloegen";
             this.checkBoxAllePloegen.Size = new System.Drawing.Size(234, 17);
             this.checkBoxAllePloegen.TabIndex = 5;
@@ -91,7 +95,7 @@
             // buttonSave
             // 
             this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonSave.Location = new System.Drawing.Point(15, 325);
+            this.buttonSave.Location = new System.Drawing.Point(15, 309);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(268, 23);
             this.buttonSave.TabIndex = 9;
@@ -101,7 +105,7 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.button1.Location = new System.Drawing.Point(15, 375);
+            this.button1.Location = new System.Drawing.Point(15, 359);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(268, 23);
             this.button1.TabIndex = 10;
@@ -111,7 +115,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(15, 275);
+            this.button2.Location = new System.Drawing.Point(15, 259);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(268, 23);
             this.button2.TabIndex = 11;
@@ -155,11 +159,43 @@
             this.radioButton0.UseVisualStyleBackColor = true;
             this.radioButton0.CheckedChanged += new System.EventHandler(this.RadioButton0_CheckedChanged);
             // 
+            // checkBoxAlleenZelf
+            // 
+            this.checkBoxAlleenZelf.AutoSize = true;
+            this.checkBoxAlleenZelf.Location = new System.Drawing.Point(13, 15);
+            this.checkBoxAlleenZelf.Name = "checkBoxAlleenZelf";
+            this.checkBoxAlleenZelf.Size = new System.Drawing.Size(124, 17);
+            this.checkBoxAlleenZelf.TabIndex = 15;
+            this.checkBoxAlleenZelf.Text = "Alleen je zelf invullen";
+            this.checkBoxAlleenZelf.UseVisualStyleBackColor = true;
+            this.checkBoxAlleenZelf.CheckedChanged += new System.EventHandler(this.checkBoxAlleenZelf_CheckedChanged);
+            // 
+            // checkBoxAlleenAndere
+            // 
+            this.checkBoxAlleenAndere.AutoSize = true;
+            this.checkBoxAlleenAndere.Location = new System.Drawing.Point(13, 39);
+            this.checkBoxAlleenAndere.Name = "checkBoxAlleenAndere";
+            this.checkBoxAlleenAndere.Size = new System.Drawing.Size(179, 17);
+            this.checkBoxAlleenAndere.TabIndex = 16;
+            this.checkBoxAlleenAndere.Text = "Alleen wacht invullen, niet je zelf";
+            this.checkBoxAlleenAndere.UseVisualStyleBackColor = true;
+            this.checkBoxAlleenAndere.CheckedChanged += new System.EventHandler(this.checkBoxAlleenAndere_CheckedChanged);
+            // 
+            // panel25
+            // 
+            this.panel25.Controls.Add(this.checkBoxAlleenZelf);
+            this.panel25.Controls.Add(this.checkBoxAlleenAndere);
+            this.panel25.Location = new System.Drawing.Point(298, 114);
+            this.panel25.Name = "panel25";
+            this.panel25.Size = new System.Drawing.Size(214, 68);
+            this.panel25.TabIndex = 17;
+            // 
             // RechtenInstellenForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(306, 428);
+            this.ClientSize = new System.Drawing.Size(524, 400);
+            this.Controls.Add(this.panel25);
             this.Controls.Add(this.radioButton0);
             this.Controls.Add(this.radioButton25);
             this.Controls.Add(this.radioButton50);
@@ -174,6 +210,9 @@
             this.Name = "RechtenInstellenForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Rechten Instellen";
+            this.Shown += new System.EventHandler(this.RechtenInstellenForm_Shown);
+            this.panel25.ResumeLayout(false);
+            this.panel25.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +231,8 @@
         public System.Windows.Forms.RadioButton radioButton50;
         public System.Windows.Forms.RadioButton radioButton25;
         public System.Windows.Forms.RadioButton radioButton0;
+        private System.Windows.Forms.CheckBox checkBoxAlleenZelf;
+        private System.Windows.Forms.CheckBox checkBoxAlleenAndere;
+        private System.Windows.Forms.Panel panel25;
     }
 }

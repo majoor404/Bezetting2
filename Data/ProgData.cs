@@ -1070,8 +1070,8 @@ namespace Bezetting2
         }
         public static void Wacht(int tijd, string hulptext)
         {
-            Main.labelHulpText.Text = hulptext;
             Main.panelMoment.Visible = true;
+            Main.labelHulpText.Text = hulptext;
             Main.panelMoment.Refresh();
             Thread.Sleep(tijd);
             Main.panelMoment.Visible = false;
