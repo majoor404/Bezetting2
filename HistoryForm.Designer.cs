@@ -75,7 +75,7 @@
             // IngevoerdDoor
             // 
             this.IngevoerdDoor.Text = "Ingevoerd Door";
-            this.IngevoerdDoor.Width = 138;
+            this.IngevoerdDoor.Width = 199;
             // 
             // OpDatum
             // 

@@ -42,6 +42,7 @@
             this.checkBoxAlleenZelf = new System.Windows.Forms.CheckBox();
             this.checkBoxAlleenAndere = new System.Windows.Forms.CheckBox();
             this.panel25 = new System.Windows.Forms.Panel();
+            this.buttonUitlegAlleen = new System.Windows.Forms.Button();
             this.panel25.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -77,9 +78,9 @@
             this.checkBoxAllePloegen.AutoSize = true;
             this.checkBoxAllePloegen.Location = new System.Drawing.Point(15, 225);
             this.checkBoxAllePloegen.Name = "checkBoxAllePloegen";
-            this.checkBoxAllePloegen.Size = new System.Drawing.Size(234, 17);
+            this.checkBoxAllePloegen.Size = new System.Drawing.Size(277, 17);
             this.checkBoxAllePloegen.TabIndex = 5;
-            this.checkBoxAllePloegen.Text = "Deze rechten op alle ploegen (rechten + 50)";
+            this.checkBoxAllePloegen.Text = "Deze rechten op alle ploegen/kleuren  (rechten + 50)";
             this.checkBoxAllePloegen.UseVisualStyleBackColor = true;
             this.checkBoxAllePloegen.CheckedChanged += new System.EventHandler(this.CheckBoxAllePloegen_CheckedChanged);
             // 
@@ -183,12 +184,23 @@
             // 
             // panel25
             // 
+            this.panel25.Controls.Add(this.buttonUitlegAlleen);
             this.panel25.Controls.Add(this.checkBoxAlleenZelf);
             this.panel25.Controls.Add(this.checkBoxAlleenAndere);
             this.panel25.Location = new System.Drawing.Point(298, 114);
             this.panel25.Name = "panel25";
             this.panel25.Size = new System.Drawing.Size(214, 68);
             this.panel25.TabIndex = 17;
+            // 
+            // buttonUitlegAlleen
+            // 
+            this.buttonUitlegAlleen.Location = new System.Drawing.Point(181, 11);
+            this.buttonUitlegAlleen.Name = "buttonUitlegAlleen";
+            this.buttonUitlegAlleen.Size = new System.Drawing.Size(21, 23);
+            this.buttonUitlegAlleen.TabIndex = 47;
+            this.buttonUitlegAlleen.Text = "?";
+            this.buttonUitlegAlleen.UseVisualStyleBackColor = true;
+            this.buttonUitlegAlleen.Click += new System.EventHandler(this.buttonUitlegAlleen_Click);
             // 
             // RechtenInstellenForm
             // 
@@ -234,5 +246,6 @@
         private System.Windows.Forms.CheckBox checkBoxAlleenZelf;
         private System.Windows.Forms.CheckBox checkBoxAlleenAndere;
         private System.Windows.Forms.Panel panel25;
+        private System.Windows.Forms.Button buttonUitlegAlleen;
     }
 }

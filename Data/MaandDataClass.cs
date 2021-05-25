@@ -82,8 +82,8 @@ namespace Bezetting2.Data
                     var diffInSeconds = (DateTime.Now - saveLoadTime).TotalSeconds;
                     saveLoadTime = DateTime.Now;
 
-                    saveLoadTel = diffInSeconds < 2 ? saveLoadTel++ : 0;
-                    
+                    _ = diffInSeconds > 2 ? saveLoadTel++ : saveLoadTel = 0;
+
                     //if (diffInSeconds < 2)
                     //{
                     //    saveLoadTel++;
@@ -93,9 +93,9 @@ namespace Bezetting2.Data
                     //    saveLoadTel = 0;
                     //}
 
-                    if (saveLoadTel > 5)
+                    if (saveLoadTel > 5) // >5
                     {
-                        ProgData.Wacht(1000,$"load maand Data {kleur}");
+                        ProgData.Wacht(1000,$"Load maand Data {kleur}");
                         saveLoadTel = 0;
                     }
                     
@@ -112,7 +112,7 @@ namespace Bezetting2.Data
                     }
                     catch
                     {
-                        ProgData.Wacht(1000, "load maand Data {kleur}, lukt niet");
+                        ProgData.Wacht(1000, $"Load maand Data {kleur}, lukt niet");
                     }
 
                     if (kleur == ProgData.GekozenKleur)
@@ -166,8 +166,8 @@ namespace Bezetting2.Data
             var diffInSeconds = (DateTime.Now - saveSaveTime).TotalSeconds;
             saveSaveTime = DateTime.Now;
 
-            saveSaveTel = diffInSeconds < 1 ? saveSaveTel++ : 0;
-            
+            _ = diffInSeconds < 1 ? saveSaveTel++ : saveSaveTel = 0;
+
             //if (diffInSeconds < 1)
             //{
             //    saveSaveTel++;
@@ -238,7 +238,7 @@ namespace Bezetting2.Data
                     MessageBox.Show("Netwerk problemen, Exit!");
                     Process.GetCurrentProcess().Kill();
                 }
-                ProgData.Wacht(1000,"Niet aanwezig");
+                ProgData.Wacht(1000,$"{path} Niet aanwezig");
             }
             return false;
         }

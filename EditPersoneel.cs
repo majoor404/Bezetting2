@@ -3,6 +3,7 @@ using Bezetting2.InlogGebeuren;
 using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -22,12 +23,16 @@ namespace Bezetting2
         private string bewaar_nieuwkleur;
         private DateTime bewaar_verhuisdatum;
 
+        private ListViewColumnSorter lvwColumnSorter;
+
         // sla de veranderingen op van persoon in tijdelijke lijst
         private List<VeranderingenVerhuis> VeranderingenLijstTemp = new List<VeranderingenVerhuis>();
 
         public EditPersoneel()
         {
             InitializeComponent();
+            lvwColumnSorter = new ListViewColumnSorter();
+            this.ViewNamen.ListViewItemSorter = lvwColumnSorter;
         }
 
         private void EditPersoneel_Shown(object sender, EventArgs e)
@@ -544,7 +549,9 @@ namespace Bezetting2
 
                 ProgData.MaakNieuweCollegaInBezettingAan(textBoxAchterNaam.Text, comboBoxKleur.Text, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
 
-                EditPersoneel_Shown(this, null);
+                buttonSorteer_Click(this, null);
+
+                // EditPersoneel_Shown(this, null); zit al in sorteer
             }
         }
 
@@ -922,6 +929,32 @@ namespace Bezetting2
 
             ProgData.AlleMensen.Save();
             EditPersoneel_Shown(this, null);
+        }
+
+        private void ViewNamen_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine if clicked column is already the column that is being sorted.
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.ViewNamen.Sort();
         }
     }
 }

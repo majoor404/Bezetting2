@@ -40,6 +40,7 @@ namespace Bezetting2.Invoer
                 snip._naam = labelNaamFull.Text;
                 snip._rede = textBoxRede.Text;
                 snip._kleur = comboBoxKleur.Text;
+                snip._persnr = ProgData.Get_Gebruiker_Nummer(snip._naam);
 
                 ProgData.LoadSnipperLijst(snip._datum.Year.ToString() + "\\" + snip._datum.Month.ToString());
                 bool staat_die_al_in_lijst = false;
@@ -108,11 +109,6 @@ namespace Bezetting2.Invoer
                 {
                     string dat = listViewSnipper.Items[index].SubItems[0].Text;
 
-                    //string jaar = dat.Substring(6, 4);
-                    //string maand = dat.Substring(3, 2);
-                    //if (maand.Substring(0, 1) == "0")
-                    //    maand = maand.Substring(1, 1);
-
                     string dir = ProgData.GetDirectoryBezettingMaand(dat);
                     ProgData.LoadSnipperLijst(dir);
 
@@ -124,18 +120,37 @@ namespace Bezetting2.Invoer
                         ver._Coorcinator = labelNaamFull.Text;
                         ver._rede_coordinator = "Goed Gekeurd";
                         ProgData.SaveSnipperLijst(dir);
+                        // invoer in maand overzicht
+                        DialogResult dialogResult = MessageBox.Show("Invoeren in Bezetting programma?", "Vraagje", MessageBoxButtons.YesNo);
+
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            VulAanvraagInForm invul = new VulAanvraagInForm();
+
+                            invul.labelNaam.Text = listViewSnipper.Items[index].SubItems[1].Text;
+                            invul.labelKleur.Text = listViewSnipper.Items[index].SubItems[2].Text;
+                            invul.labelDienst.Text = listViewSnipper.Items[index].SubItems[3].Text;
+                            invul.labelDatum.Text = listViewSnipper.Items[index].SubItems[0].Text;
+                            invul.textBoxRede.Text = listViewSnipper.Items[index].SubItems[5].Text;
+                            invul.textBoxAfwijking.Text = listViewSnipper.Items[index].SubItems[4].Text;
+
+                            invul.ShowDialog();
+
+                            ProgData.RegelAfwijkingOpDatumEnKleur(ver._datum, ver._kleur, ver._persnr, ver._datum.Day.ToString(), invul.textBoxAfwijking.Text, invul.textBoxRede.Text, $"via aanvraag programma {labelNaamFull.Text}");
+                        }
                     }
                     catch
                     {
                         MessageBox.Show("kon goed keuring niet opslaan");
                     }
-                    SnipperAanvraagForm_Shown(this, null);
+                    
                 }
             }
             else
             {
                 MessageBox.Show("Selecteer eerst een item");
             }
+            SnipperAanvraagForm_Shown(this, null);
         }
 
         private void ButtonCancel_Click(object sender, EventArgs e)
@@ -179,7 +194,7 @@ namespace Bezetting2.Invoer
                             MessageBox.Show("kon niet cancelen");
                         }
 
-                        SnipperAanvraagForm_Shown(this, null);
+                        //SnipperAanvraagForm_Shown(this, null);
                     }
                     else
                     {
@@ -193,6 +208,10 @@ namespace Bezetting2.Invoer
                             ver._Coorcinator = labelNaamFull.Text;
                             ver._rede_coordinator = "Afgekeurd";
                             ProgData.SaveSnipperLijst(dir);
+
+                            MessageBox.Show("Als hij eerst was goedgekeurd,\n" +
+                                "kan deze staan in maand overzicht,\n" +
+                                "even bekijken en anders daar verwijderen!");
                         }
                         catch
                         {
@@ -201,6 +220,7 @@ namespace Bezetting2.Invoer
                     }
                 }
             }
+            SnipperAanvraagForm_Shown(this, null);
         }
 
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)

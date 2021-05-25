@@ -129,12 +129,6 @@
     <Compile Include="Excel Menu Items\Excel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Help.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Help.Designer.cs">
-      <DependentUpon>Help.cs</DependentUpon>
-    </Compile>
     <Compile Include="InlogGebeuren\RechtenInstellenForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -207,12 +201,19 @@
     <Compile Include="Invoer\SnipperAanvraagForm.Designer.cs">
       <DependentUpon>SnipperAanvraagForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Invoer\VulAanvraagInForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Invoer\VulAanvraagInForm.Designer.cs">
+      <DependentUpon>VulAanvraagInForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Invoer\ZetKleurLijnen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Invoer\ZetKleurLijnen.Designer.cs">
       <DependentUpon>ZetKleurLijnen.cs</DependentUpon>
     </Compile>
+    <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="MainFormBezetting2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -250,9 +251,6 @@
     <EmbeddedResource Include="EditPersoneel.resx">
       <DependentUpon>EditPersoneel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Help.resx">
-      <DependentUpon>Help.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="InlogGebeuren\RechtenInstellenForm.resx">
       <DependentUpon>RechtenInstellenForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -288,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Invoer\SnipperAanvraagForm.resx">
       <DependentUpon>SnipperAanvraagForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Invoer\VulAanvraagInForm.resx">
+      <DependentUpon>VulAanvraagInForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Invoer\ZetKleurLijnen.resx">
       <DependentUpon>ZetKleurLijnen.cs</DependentUpon>
@@ -330,6 +331,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="2012-04-06 08.35.02.jpg" />
     <Content Include="bezetting2.ico" />
     <None Include="helm man.jpg" />
   </ItemGroup>

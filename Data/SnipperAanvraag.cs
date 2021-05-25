@@ -6,6 +6,7 @@ namespace Bezetting2.Data
     public class SnipperAanvraag
     {
         public string _naam { get; set; }
+        public string _persnr { get; set; }
         public DateTime _datum { get; set; }
         public string _hoe { get; set; }
         public string _rede { get; set; }

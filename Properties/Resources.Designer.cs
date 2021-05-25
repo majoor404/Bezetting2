@@ -63,6 +63,16 @@ namespace Bezetting2.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _2012_04_06_08_35_02 {
+            get {
+                object obj = ResourceManager.GetObject("2012-04-06 08.35.02", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap helm_man {
             get {
                 object obj = ResourceManager.GetObject("helm man", resourceCulture);

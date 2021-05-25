@@ -8,9 +8,12 @@ namespace Bezetting2.Invoer
 {
     public partial class RuilExtraForm : Form
     {
+        private ListViewColumnSorter lvwColumnSorter;
         public RuilExtraForm()
         {
             InitializeComponent();
+            lvwColumnSorter = new ListViewColumnSorter();
+            this.listViewExtra.ListViewItemSorter = lvwColumnSorter;
         }
 
         private void RuilExtraForm_Shown(object sender, EventArgs e)
@@ -124,31 +127,34 @@ namespace Bezetting2.Invoer
             ProgData.LoadExtraRuilLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
             foreach (AanvraagRuilExtra a in ProgData.ListAanvraagRuilExtra)
             {
-                info[0] = a._naamAanvraagDoor;
-                info[1] = a._naamAanvraagVoor;
-                info[2] = a._extra ? "Extra" : "Ruil";
-                info[3] = a._ploeg;
-                info[4] = a._datum.ToString("dd/MM/yyyy");
-                info[5] = a._dienst;
-                info[6] = a._werkplek;
+                if (!checkBoxVerbergOudeVragen.Checked || a._datum > DateTime.Now)
+                {
+                    info[0] = a._naamAanvraagDoor;
+                    info[1] = a._naamAanvraagVoor;
+                    info[2] = a._extra ? "Extra" : "Ruil";
+                    info[3] = a._ploeg;
+                    info[4] = a._datum.ToString("dd/MM/yyyy");
+                    info[5] = a._dienst;
+                    info[6] = a._werkplek;
 
-                int blauw = a._vanploeg & 1;
-                int wit = a._vanploeg & 2;
-                int geel = a._vanploeg & 4;
-                int groen = a._vanploeg & 8;
-                int rood = a._vanploeg & 16;
+                    int blauw = a._vanploeg & 1;
+                    int wit = a._vanploeg & 2;
+                    int geel = a._vanploeg & 4;
+                    int groen = a._vanploeg & 8;
+                    int rood = a._vanploeg & 16;
 
-                info[7] = "";
-                if (blauw > 0) info[7] = "BL";
-                if (wit > 0) info[7] += " WI";
-                if (geel > 0) info[7] += " GE";
-                if (groen > 0) info[7] += " GR";
-                if (rood > 0) info[7] += " RO";
+                    info[7] = "";
+                    if (blauw > 0) info[7] = "BL";
+                    if (wit > 0) info[7] += " WI";
+                    if (geel > 0) info[7] += " GE";
+                    if (groen > 0) info[7] += " GR";
+                    if (rood > 0) info[7] += " RO";
 
-                info[8] = a._persoonLoopt;
+                    info[8] = a._persoonLoopt;
 
-                ListViewItem item_info = new ListViewItem(info);
-                listViewExtra.Items.Add(item_info);
+                    ListViewItem item_info = new ListViewItem(info);
+                    listViewExtra.Items.Add(item_info);
+                }
             }
         }
 
@@ -226,6 +232,51 @@ namespace Bezetting2.Invoer
                         RuilExtraForm_Shown(this, null);
                     }
                 }
+            }
+        }
+
+        private void listViewExtra_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Determine if clicked column is already the column that is being sorted.
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                {
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                }
+                else
+                {
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+                }
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            this.listViewExtra.Sort();
+        }
+
+        private void checkBoxVerbergOudeVragen_CheckedChanged(object sender, EventArgs e)
+        {
+            LaadGevraagdeDiensten();
+        }
+
+        private void checkBoxVerbergGevraagdDoorEnVoor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxVerbergGevraagdDoorEnVoor.Checked)
+            {
+                listViewExtra.Columns[0].Width = 0;
+                listViewExtra.Columns[1].Width = 0;
+            }
+            else
+            {
+                listViewExtra.Columns[0].Width = 110;
+                listViewExtra.Columns[1].Width = 110;
             }
         }
 

@@ -124,8 +124,8 @@
             this.labelNaamSelect = new System.Windows.Forms.Label();
             this.panelMoment = new System.Windows.Forms.Panel();
             this.panel9 = new System.Windows.Forms.Panel();
-            this.label5 = new System.Windows.Forms.Label();
             this.labelHulpText = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -489,19 +489,19 @@
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(104, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -1049,7 +1049,7 @@
             this.panelMoment.Controls.Add(this.panel9);
             this.panelMoment.Location = new System.Drawing.Point(142, 662);
             this.panelMoment.Name = "panelMoment";
-            this.panelMoment.Size = new System.Drawing.Size(261, 119);
+            this.panelMoment.Size = new System.Drawing.Size(567, 119);
             this.panelMoment.TabIndex = 37;
             this.panelMoment.Visible = false;
             // 
@@ -1060,8 +1060,17 @@
             this.panel9.Controls.Add(this.label5);
             this.panel9.Location = new System.Drawing.Point(13, 12);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(229, 88);
+            this.panel9.Size = new System.Drawing.Size(523, 88);
             this.panel9.TabIndex = 0;
+            // 
+            // labelHulpText
+            // 
+            this.labelHulpText.AutoSize = true;
+            this.labelHulpText.Location = new System.Drawing.Point(15, 55);
+            this.labelHulpText.Name = "labelHulpText";
+            this.labelHulpText.Size = new System.Drawing.Size(49, 13);
+            this.labelHulpText.TabIndex = 1;
+            this.labelHulpText.Text = "0123456";
             // 
             // label5
             // 
@@ -1072,15 +1081,6 @@
             this.label5.Size = new System.Drawing.Size(196, 20);
             this.label5.TabIndex = 0;
             this.label5.Text = "Moment Netwerk Druk..";
-            // 
-            // labelHulpText
-            // 
-            this.labelHulpText.AutoSize = true;
-            this.labelHulpText.Location = new System.Drawing.Point(15, 55);
-            this.labelHulpText.Name = "labelHulpText";
-            this.labelHulpText.Size = new System.Drawing.Size(49, 13);
-            this.labelHulpText.TabIndex = 1;
-            this.labelHulpText.Text = "0123456";
             // 
             // MainFormBezetting2
             // 

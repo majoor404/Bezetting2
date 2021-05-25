@@ -1437,6 +1437,7 @@ namespace Bezetting2
             snip.labelNaam.Text = ProgData.Huidige_Gebruiker_Personeel_nummer;
             snip.labelNaamFull.Text = ProgData.Huidige_Gebruiker_Naam();
             snip.ShowDialog();
+            ButtonRefresh_Click(this, null);
         }
 
         private void InstellingenProgrammaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2056,17 +2057,6 @@ namespace Bezetting2
             }
         }
 
-        private void updateExtraRuilVerschovenDienstenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Help he = new Help();
-            he.ShowDialog();
-        }
-
         private void updateExtraDienstenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             const string message = "Als aantal extra diensten niet klopt op maand overzicht, kan je deze hertellen.";
@@ -2144,8 +2134,7 @@ namespace Bezetting2
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Help he = new Help();
-            he.ShowDialog();
+            Process.Start( $"{Directory.GetCurrentDirectory()}\\Help\\Bezetting.docx");
         }
 
         private void maakBackupToolStripMenuItem_Click(object sender, EventArgs e)

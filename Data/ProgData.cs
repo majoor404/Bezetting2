@@ -1070,12 +1070,17 @@ namespace Bezetting2
         }
         public static void Wacht(int tijd, string hulptext)
         {
+            // daar nu gehele scherm wordt geupdate,
+            // wat ook tijd kost, verlaag ik de tijd
+            if (tijd > 100) tijd -= 100;
+
             Main.panelMoment.Visible = true;
             Main.labelHulpText.Text = hulptext;
-            Main.panelMoment.Refresh();
+            Main.Refresh();
             Thread.Sleep(tijd);
+            System.Windows.Forms.Application.DoEvents();
             Main.panelMoment.Visible = false;
-            Main.panelMoment.Refresh();
+            Main.Refresh();
         }
     }
 }

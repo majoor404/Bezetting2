@@ -124,5 +124,14 @@ namespace Bezetting2.InlogGebeuren
             labelRechtenNivo.Text = recht.ToString();
             panel25.Visible = GetRecht() > 24 && GetRecht() < 28;
         }
+
+        private void buttonUitlegAlleen_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Verzoek was om bij een sectie dat je alleen je zelf kan invullen,\n" +
+                "niet hele ploeg. Kies dan Alleen je zelf invullen.\n\n" +
+                "Een Andere sectie wilde dat er in overleg eea wordt ingevuld,\n" +
+                "Kies dan 2de optie, dan kunnen alleen collega's op die kleur/wacht\n" +
+                "de afwijkingen invullen.");
+        }
     }
 }

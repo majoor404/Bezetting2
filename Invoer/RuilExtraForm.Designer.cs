@@ -62,6 +62,8 @@
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelVorigeMaand = new System.Windows.Forms.Label();
             this.buttonVulDienst = new System.Windows.Forms.Button();
+            this.checkBoxVerbergOudeVragen = new System.Windows.Forms.CheckBox();
+            this.checkBoxVerbergGevraagdDoorEnVoor = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -329,6 +331,7 @@
             this.listViewExtra.TabIndex = 3;
             this.listViewExtra.UseCompatibleStateImageBehavior = false;
             this.listViewExtra.View = System.Windows.Forms.View.Details;
+            this.listViewExtra.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewExtra_ColumnClick);
             // 
             // columnHeader1
             // 
@@ -395,11 +398,37 @@
             this.buttonVulDienst.UseVisualStyleBackColor = true;
             this.buttonVulDienst.Click += new System.EventHandler(this.Button2_Click);
             // 
+            // checkBoxVerbergOudeVragen
+            // 
+            this.checkBoxVerbergOudeVragen.AutoSize = true;
+            this.checkBoxVerbergOudeVragen.Checked = true;
+            this.checkBoxVerbergOudeVragen.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxVerbergOudeVragen.Location = new System.Drawing.Point(333, 615);
+            this.checkBoxVerbergOudeVragen.Name = "checkBoxVerbergOudeVragen";
+            this.checkBoxVerbergOudeVragen.Size = new System.Drawing.Size(172, 17);
+            this.checkBoxVerbergOudeVragen.TabIndex = 12;
+            this.checkBoxVerbergOudeVragen.Text = "Verberg aanvragen in verleden";
+            this.checkBoxVerbergOudeVragen.UseVisualStyleBackColor = true;
+            this.checkBoxVerbergOudeVragen.CheckedChanged += new System.EventHandler(this.checkBoxVerbergOudeVragen_CheckedChanged);
+            // 
+            // checkBoxVerbergGevraagdDoorEnVoor
+            // 
+            this.checkBoxVerbergGevraagdDoorEnVoor.AutoSize = true;
+            this.checkBoxVerbergGevraagdDoorEnVoor.Location = new System.Drawing.Point(333, 637);
+            this.checkBoxVerbergGevraagdDoorEnVoor.Name = "checkBoxVerbergGevraagdDoorEnVoor";
+            this.checkBoxVerbergGevraagdDoorEnVoor.Size = new System.Drawing.Size(179, 17);
+            this.checkBoxVerbergGevraagdDoorEnVoor.TabIndex = 12;
+            this.checkBoxVerbergGevraagdDoorEnVoor.Text = "Verberg Gevraagd Door en Voor";
+            this.checkBoxVerbergGevraagdDoorEnVoor.UseVisualStyleBackColor = true;
+            this.checkBoxVerbergGevraagdDoorEnVoor.CheckedChanged += new System.EventHandler(this.checkBoxVerbergGevraagdDoorEnVoor_CheckedChanged);
+            // 
             // RuilExtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1242, 666);
+            this.Controls.Add(this.checkBoxVerbergGevraagdDoorEnVoor);
+            this.Controls.Add(this.checkBoxVerbergOudeVragen);
             this.Controls.Add(this.buttonVulDienst);
             this.Controls.Add(this.labelVorigeMaand);
             this.Controls.Add(this.listViewExtra);
@@ -450,5 +479,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.CheckBox checkBoxVerbergOudeVragen;
+        private System.Windows.Forms.CheckBox checkBoxVerbergGevraagdDoorEnVoor;
     }
 }
