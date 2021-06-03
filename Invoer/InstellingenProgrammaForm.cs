@@ -22,6 +22,7 @@ namespace Bezetting2.Invoer
             checkBoxWachtoverzichtAls2Dagen.Checked = InstellingenProg._Wachtoverzicht2Dagen;
             textBoxLocatieKalender.Text = InstellingenProg._LocatieKalender;
             checkBoxGebruikWachtOverzicht.Checked = InstellingenProg._GebruikWachtOverzicht;
+            checkBoxSorteerOpWerkgroep.Checked = InstellingenProg._SorteerOokWerkplek;
         }
 
         private void CheckBoxGebruikRuilExtra_CheckedChanged(object sender, EventArgs e)
@@ -63,6 +64,12 @@ namespace Bezetting2.Invoer
         private void checkBoxGebruikWachtOverzicht_CheckedChanged(object sender, EventArgs e)
         {
              InstellingenProg._GebruikWachtOverzicht = checkBoxGebruikWachtOverzicht.Checked;
+        }
+
+        //checkBoxSorteerOpWerkgroep
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            InstellingenProg._SorteerOokWerkplek = checkBoxSorteerOpWerkgroep.Checked;
         }
     }
 }

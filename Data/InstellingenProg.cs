@@ -78,6 +78,12 @@ namespace Bezetting2.Data
             set { ProgrammaData[48] = value.ToString(); }
         }
 
+        public static bool _SorteerOokWerkplek
+        {
+            get { return bool.Parse(ProgrammaData[49]); }
+            set { ProgrammaData[49] = value.ToString(); }
+        }
+
         public static List<string> ProgrammaData = new List<string>();
 
         public static void LeesProgrammaData()

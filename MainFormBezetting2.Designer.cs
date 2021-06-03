@@ -58,6 +58,7 @@
             this.kleurEigenNaamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoInlogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wachtoverzichtFormulier2DagenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beheerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPersoneelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.kleurLijnenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -344,7 +345,8 @@
             this.priveOptiesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.kleurEigenNaamToolStripMenuItem,
             this.autoInlogToolStripMenuItem,
-            this.wachtoverzichtFormulier2DagenToolStripMenuItem});
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem,
+            this.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem});
             this.priveOptiesToolStripMenuItem.Enabled = false;
             this.priveOptiesToolStripMenuItem.Name = "priveOptiesToolStripMenuItem";
             this.priveOptiesToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
@@ -353,22 +355,29 @@
             // kleurEigenNaamToolStripMenuItem
             // 
             this.kleurEigenNaamToolStripMenuItem.Name = "kleurEigenNaamToolStripMenuItem";
-            this.kleurEigenNaamToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.kleurEigenNaamToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.kleurEigenNaamToolStripMenuItem.Text = "Kleur Eigen Naam";
             this.kleurEigenNaamToolStripMenuItem.Click += new System.EventHandler(this.kleurEigenNaamToolStripMenuItem_Click);
             // 
             // autoInlogToolStripMenuItem
             // 
             this.autoInlogToolStripMenuItem.Name = "autoInlogToolStripMenuItem";
-            this.autoInlogToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.autoInlogToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.autoInlogToolStripMenuItem.Text = "Auto Inlog";
             // 
             // wachtoverzichtFormulier2DagenToolStripMenuItem
             // 
             this.wachtoverzichtFormulier2DagenToolStripMenuItem.Name = "wachtoverzichtFormulier2DagenToolStripMenuItem";
-            this.wachtoverzichtFormulier2DagenToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+            this.wachtoverzichtFormulier2DagenToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.wachtoverzichtFormulier2DagenToolStripMenuItem.Text = "Wachtoverzicht Formulier 2 Dagen";
             this.wachtoverzichtFormulier2DagenToolStripMenuItem.Click += new System.EventHandler(this.wachtoverzichtFormulier1DagToolStripMenuItem_Click);
+            // 
+            // PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem
+            // 
+            this.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Name = "PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem";
+            this.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
+            this.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Text = "Sorteer Ook Werkplekken in Maandoverzicht";
+            this.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Click += new System.EventHandler(this.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem_Click);
             // 
             // beheerToolStripMenuItem
             // 
@@ -489,19 +498,19 @@
             // helpToolStripMenuItem1
             // 
             this.helpToolStripMenuItem1.Name = "helpToolStripMenuItem1";
-            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.helpToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.helpToolStripMenuItem1.Text = "Help";
             this.helpToolStripMenuItem1.Click += new System.EventHandler(this.helpToolStripMenuItem1_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(104, 6);
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -1253,6 +1262,7 @@
         private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier2DagenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem speedTestNetwerkToolStripMenuItem;
         public System.Windows.Forms.Label labelHulpText;
+        public System.Windows.Forms.ToolStripMenuItem PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem;
     }
 }
 

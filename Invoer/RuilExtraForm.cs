@@ -29,11 +29,11 @@ namespace Bezetting2.Invoer
             }
 
             comboBoxPloeg.SelectedIndex = 0;
-            //comboBoxPloeg.Text = ProgData.GekozenKleur;
-            //comboBoxPloeg.SelectedIndex = Enum.GetValues(typeof(ProgData.Kleur));
 
             buttonVulDienst.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
+            buttonAanvraagIntrekken.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
 
+            label6.Visible = textBoxAanvraagVoor.Visible = !radioButton1.Checked;
             textBoxAanvraagVoor.Text = "";
             textBoxAanvraagVoor.Focus();
         }
@@ -75,7 +75,7 @@ namespace Bezetting2.Invoer
                 MessageBox.Show("Geen ploeg gekozen");
                 ok = false;
             }
-            if (string.IsNullOrEmpty(textBoxAanvraagVoor.Text))
+            if (string.IsNullOrEmpty(textBoxAanvraagVoor.Text) && !radioButton1.Checked)
             {
                 MessageBox.Show("Geen aanvraag voor gekozen");
                 ok = false;
@@ -127,31 +127,42 @@ namespace Bezetting2.Invoer
             ProgData.LoadExtraRuilLijst(nu.Year.ToString() + "\\" + nu.Month.ToString());
             foreach (AanvraagRuilExtra a in ProgData.ListAanvraagRuilExtra)
             {
-                if (!checkBoxVerbergOudeVragen.Checked || a._datum > DateTime.Now)
+                bool toevoegen = true; // standaard
+
+                info[0] = a._naamAanvraagDoor;
+                info[1] = a._naamAanvraagVoor;
+                info[2] = a._extra ? "Extra" : "Ruil";
+                info[3] = a._ploeg;
+                info[4] = a._datum.ToString("dd/MM/yyyy");
+                info[5] = a._dienst;
+                info[6] = a._werkplek;
+
+                int blauw = a._vanploeg & 1;
+                int wit = a._vanploeg & 2;
+                int geel = a._vanploeg & 4;
+                int groen = a._vanploeg & 8;
+                int rood = a._vanploeg & 16;
+
+                info[7] = "";
+                if (blauw > 0) info[7] = "BL";
+                if (wit > 0) info[7] += " WI";
+                if (geel > 0) info[7] += " GE";
+                if (groen > 0) info[7] += " GR";
+                if (rood > 0) info[7] += " RO";
+
+                info[8] = a._persoonLoopt;
+
+                if (checkBoxVerbergOudeVragen.Checked && a._datum.AddDays(1) < DateTime.Now)
+                    toevoegen = false;
+                if (radioButton4.Checked && info[2] != "Ruil") // ruil
+                    toevoegen = false;
+                if (radioButton5.Checked && info[2] != "Extra") // Extra
+                    toevoegen = false;
+                if (checkBoxVerbergIngevulde.Checked && !string.IsNullOrEmpty(info[8]))
+                    toevoegen = false;
+
+                if (toevoegen) // ruil
                 {
-                    info[0] = a._naamAanvraagDoor;
-                    info[1] = a._naamAanvraagVoor;
-                    info[2] = a._extra ? "Extra" : "Ruil";
-                    info[3] = a._ploeg;
-                    info[4] = a._datum.ToString("dd/MM/yyyy");
-                    info[5] = a._dienst;
-                    info[6] = a._werkplek;
-
-                    int blauw = a._vanploeg & 1;
-                    int wit = a._vanploeg & 2;
-                    int geel = a._vanploeg & 4;
-                    int groen = a._vanploeg & 8;
-                    int rood = a._vanploeg & 16;
-
-                    info[7] = "";
-                    if (blauw > 0) info[7] = "BL";
-                    if (wit > 0) info[7] += " WI";
-                    if (geel > 0) info[7] += " GE";
-                    if (groen > 0) info[7] += " GR";
-                    if (rood > 0) info[7] += " RO";
-
-                    info[8] = a._persoonLoopt;
-
                     ListViewItem item_info = new ListViewItem(info);
                     listViewExtra.Items.Add(item_info);
                 }
@@ -192,6 +203,7 @@ namespace Bezetting2.Invoer
             }
         }
 
+        // vul dienst in.
         private void Button2_Click(object sender, EventArgs e)
         {
             // vul dienst op
@@ -266,9 +278,53 @@ namespace Bezetting2.Invoer
             LaadGevraagdeDiensten();
         }
 
-        private void checkBoxVerbergGevraagdDoorEnVoor_CheckedChanged(object sender, EventArgs e)
+        private void buttonAanvraagIntrekken_Click(object sender, EventArgs e)
         {
-            if (checkBoxVerbergGevraagdDoorEnVoor.Checked)
+            if (listViewExtra.SelectedItems.Count > 0)
+            {
+                int index = listViewExtra.Items.IndexOf(listViewExtra.SelectedItems[0]);
+                if (index > -1)
+                {
+                    string dat = listViewExtra.Items[index].SubItems[4].Text;
+                    string jaar = dat.Substring(6, 4);
+                    string maand = dat.Substring(3, 2);
+                    if (maand.Substring(0, 1) == "0")
+                        maand = maand.Substring(1, 1);
+                    string dir = jaar + "\\" + maand;
+
+                    ProgData.LoadExtraRuilLijst(dir);
+
+                    try
+                    {
+                        AanvraagRuilExtra ver;
+                        if (listViewExtra.Items[index].SubItems[2].Text == "Ruil")
+                        {
+                            ver = ProgData.ListAanvraagRuilExtra.First(a => (a._naamAanvraagVoor == listViewExtra.Items[index].SubItems[1].Text) && (a._datum.ToString("dd/MM/yyyy") == dat));
+                        }
+                        else
+                        {
+                            ver = ProgData.ListAanvraagRuilExtra.First(a => (a._werkplek == listViewExtra.Items[index].SubItems[6].Text) && (a._ploeg == listViewExtra.Items[index].SubItems[3].Text) && (a._datum.ToString("dd/MM/yyyy") == dat));
+                        }
+                        ver._persoonLoopt = $"Niet meer nodig, Ingetrokken door {listViewExtra.Items[index].SubItems[0].Text}";
+                        ProgData.SaveExtraRuilLijst(dir);
+                    }
+                    catch
+                    {
+                        MessageBox.Show("kon extra/ruil invulling niet opslaan");
+                    }
+                    RuilExtraForm_Shown(this, null);
+                }
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            label6.Visible = textBoxAanvraagVoor.Visible = !radioButton1.Checked;
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton5.Checked)
             {
                 listViewExtra.Columns[0].Width = 0;
                 listViewExtra.Columns[1].Width = 0;
@@ -278,29 +334,12 @@ namespace Bezetting2.Invoer
                 listViewExtra.Columns[0].Width = 110;
                 listViewExtra.Columns[1].Width = 110;
             }
+            RuilExtraForm_Shown(this, null);
         }
 
-        /*
-        private void Save()
+        private void checkBoxVerbergIngevulde_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                File.WriteAllLines("extradiensten.ini", listBoxDiensten.Items.Cast<string>());
-            }
-            catch (IOException)
-            {
-                MessageBox.Show("extradiensten.ini save error");
-            }
+            RuilExtraForm_Shown(this, null);
         }
-
-        private void Laad()
-        {
-            try
-            {
-                string[] lines = File.ReadAllLines("extradiensten.ini");
-                listBoxDiensten.Items.AddRange(lines.ToArray());
-            }
-            catch { }
-        }*/
     }
 }

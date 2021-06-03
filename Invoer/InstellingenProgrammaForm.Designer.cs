@@ -40,6 +40,7 @@
             this.textBoxLocatieKalender = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.checkBoxGebruikWachtOverzicht = new System.Windows.Forms.CheckBox();
+            this.checkBoxSorteerOpWerkgroep = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // checkBoxGebruikRuilExtra
@@ -163,11 +164,23 @@
             this.checkBoxGebruikWachtOverzicht.UseVisualStyleBackColor = true;
             this.checkBoxGebruikWachtOverzicht.CheckedChanged += new System.EventHandler(this.checkBoxGebruikWachtOverzicht_CheckedChanged);
             // 
+            // checkBoxSorteerOpWerkgroep
+            // 
+            this.checkBoxSorteerOpWerkgroep.AutoSize = true;
+            this.checkBoxSorteerOpWerkgroep.Location = new System.Drawing.Point(13, 260);
+            this.checkBoxSorteerOpWerkgroep.Name = "checkBoxSorteerOpWerkgroep";
+            this.checkBoxSorteerOpWerkgroep.Size = new System.Drawing.Size(246, 17);
+            this.checkBoxSorteerOpWerkgroep.TabIndex = 12;
+            this.checkBoxSorteerOpWerkgroep.Text = "Sorteer Ook Op Werkgroep in Maandoverzicht";
+            this.checkBoxSorteerOpWerkgroep.UseVisualStyleBackColor = true;
+            this.checkBoxSorteerOpWerkgroep.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // InstellingenProgrammaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(691, 387);
+            this.Controls.Add(this.checkBoxSorteerOpWerkgroep);
             this.Controls.Add(this.checkBoxGebruikWachtOverzicht);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBoxLocatieKalender);
@@ -203,5 +216,6 @@
         private System.Windows.Forms.TextBox textBoxLocatieKalender;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.CheckBox checkBoxGebruikWachtOverzicht;
+        private System.Windows.Forms.CheckBox checkBoxSorteerOpWerkgroep;
     }
 }

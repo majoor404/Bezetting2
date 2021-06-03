@@ -30,7 +30,6 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.labelNaam = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.labelDatum = new System.Windows.Forms.Label();
             this.labelDienst = new System.Windows.Forms.Label();
             this.textBoxLoopt = new System.Windows.Forms.TextBox();
@@ -57,19 +56,10 @@
             this.labelNaam.TabIndex = 1;
             this.labelNaam.Text = "Naam";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(101, 35);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(21, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Op";
-            // 
             // labelDatum
             // 
             this.labelDatum.AutoSize = true;
-            this.labelDatum.Location = new System.Drawing.Point(210, 34);
+            this.labelDatum.Location = new System.Drawing.Point(94, 55);
             this.labelDatum.Name = "labelDatum";
             this.labelDatum.Size = new System.Drawing.Size(55, 13);
             this.labelDatum.TabIndex = 3;
@@ -78,7 +68,7 @@
             // labelDienst
             // 
             this.labelDienst.AutoSize = true;
-            this.labelDienst.Location = new System.Drawing.Point(280, 35);
+            this.labelDienst.Location = new System.Drawing.Point(164, 56);
             this.labelDienst.Name = "labelDienst";
             this.labelDienst.Size = new System.Drawing.Size(74, 13);
             this.labelDienst.TabIndex = 4;
@@ -86,15 +76,15 @@
             // 
             // textBoxLoopt
             // 
-            this.textBoxLoopt.Location = new System.Drawing.Point(62, 85);
+            this.textBoxLoopt.Location = new System.Drawing.Point(15, 86);
             this.textBoxLoopt.Name = "textBoxLoopt";
-            this.textBoxLoopt.Size = new System.Drawing.Size(250, 20);
+            this.textBoxLoopt.Size = new System.Drawing.Size(277, 20);
             this.textBoxLoopt.TabIndex = 5;
             // 
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(24, 145);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 127);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(125, 26);
             this.buttonCancel.TabIndex = 6;
@@ -104,7 +94,7 @@
             // buttonInvoer
             // 
             this.buttonInvoer.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonInvoer.Location = new System.Drawing.Point(229, 145);
+            this.buttonInvoer.Location = new System.Drawing.Point(167, 127);
             this.buttonInvoer.Name = "buttonInvoer";
             this.buttonInvoer.Size = new System.Drawing.Size(125, 26);
             this.buttonInvoer.TabIndex = 7;
@@ -114,7 +104,7 @@
             // labelKleur
             // 
             this.labelKleur.AutoSize = true;
-            this.labelKleur.Location = new System.Drawing.Point(128, 35);
+            this.labelKleur.Location = new System.Drawing.Point(12, 56);
             this.labelKleur.Name = "labelKleur";
             this.labelKleur.Size = new System.Drawing.Size(36, 13);
             this.labelKleur.TabIndex = 8;
@@ -124,14 +114,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 199);
+            this.ClientSize = new System.Drawing.Size(318, 171);
             this.Controls.Add(this.labelKleur);
             this.Controls.Add(this.buttonInvoer);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.textBoxLoopt);
             this.Controls.Add(this.labelDienst);
             this.Controls.Add(this.labelDatum);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.labelNaam);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -149,7 +138,6 @@
 
         private System.Windows.Forms.Label label1;
         public System.Windows.Forms.Label labelNaam;
-        private System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label labelDatum;
         public System.Windows.Forms.Label labelDienst;
         private System.Windows.Forms.Button buttonCancel;

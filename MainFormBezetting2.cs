@@ -176,6 +176,7 @@ namespace Bezetting2
             wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
             wachtOverzichtToolStripMenuItem.Visible = InstellingenProg._GebruikWachtOverzicht;
             wachtoverzichtFormulier2DagenToolStripMenuItem.Visible = InstellingenProg._GebruikWachtOverzicht;
+            PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Checked = InstellingenProg._SorteerOokWerkplek;
 
             ProgData.Main = this;
 
@@ -2225,6 +2226,7 @@ namespace Bezetting2
                         List<string> info = File.ReadAllLines(infofile).ToList();
                         kleurEigenNaamToolStripMenuItem.Checked = bool.Parse(info[0]);
                         wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = bool.Parse(info[1]);
+                        PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Checked = bool.Parse(info[2]);
                     }
                     catch { }
                 }
@@ -2242,6 +2244,7 @@ namespace Bezetting2
                 List<string> info = new List<string>();
                 info.Add(kleurEigenNaamToolStripMenuItem.Checked.ToString());
                 info.Add(wachtoverzichtFormulier2DagenToolStripMenuItem.Checked.ToString());
+                info.Add(PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Checked.ToString());
 
                 try
                 {
@@ -2409,6 +2412,13 @@ namespace Bezetting2
                 totaal += diffInSeconds;
             }
             DebugWrite($"Gemiddeld Load en Save MaandData {totaal / (25 * 6)} seconden");
+        }
+
+        private void PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            InstellingenProg._SorteerOokWerkplek = !InstellingenProg._SorteerOokWerkplek;
+            PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Checked = InstellingenProg._SorteerOokWerkplek;
+            ButtonRefresh_Click(this, null);
         }
     }
 }

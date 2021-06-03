@@ -63,14 +63,20 @@
             this.labelVorigeMaand = new System.Windows.Forms.Label();
             this.buttonVulDienst = new System.Windows.Forms.Button();
             this.checkBoxVerbergOudeVragen = new System.Windows.Forms.CheckBox();
-            this.checkBoxVerbergGevraagdDoorEnVoor = new System.Windows.Forms.CheckBox();
+            this.buttonAanvraagIntrekken = new System.Windows.Forms.Button();
+            this.groupBoxFilter = new System.Windows.Forms.GroupBox();
+            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.checkBoxVerbergIngevulde = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBoxFilter.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 112);
+            this.label1.Location = new System.Drawing.Point(17, 147);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 16);
             this.label1.TabIndex = 0;
@@ -78,7 +84,7 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(96, 142);
+            this.monthCalendar1.Location = new System.Drawing.Point(96, 177);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 1;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar1_DateChanged);
@@ -92,7 +98,7 @@
             "Geel",
             "Groen",
             "Rood"});
-            this.comboBoxPloeg.Location = new System.Drawing.Point(96, 109);
+            this.comboBoxPloeg.Location = new System.Drawing.Point(96, 144);
             this.comboBoxPloeg.Name = "comboBoxPloeg";
             this.comboBoxPloeg.Size = new System.Drawing.Size(171, 24);
             this.comboBoxPloeg.TabIndex = 2;
@@ -101,7 +107,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 142);
+            this.label2.Location = new System.Drawing.Point(17, 177);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 16);
             this.label2.TabIndex = 3;
@@ -110,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 320);
+            this.label3.Location = new System.Drawing.Point(17, 366);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 16);
             this.label3.TabIndex = 4;
@@ -123,7 +129,7 @@
             "Ochtend",
             "Middag",
             "Nacht"});
-            this.comboBoxDienst.Location = new System.Drawing.Point(96, 317);
+            this.comboBoxDienst.Location = new System.Drawing.Point(96, 363);
             this.comboBoxDienst.Name = "comboBoxDienst";
             this.comboBoxDienst.Size = new System.Drawing.Size(171, 24);
             this.comboBoxDienst.TabIndex = 5;
@@ -131,7 +137,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 357);
+            this.label4.Location = new System.Drawing.Point(17, 403);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 16);
             this.label4.TabIndex = 6;
@@ -146,7 +152,7 @@
             "Wit",
             "Blauw",
             "Geel"});
-            this.comboBoxWerkplek.Location = new System.Drawing.Point(96, 354);
+            this.comboBoxWerkplek.Location = new System.Drawing.Point(96, 400);
             this.comboBoxWerkplek.Name = "comboBoxWerkplek";
             this.comboBoxWerkplek.Size = new System.Drawing.Size(171, 24);
             this.comboBoxWerkplek.TabIndex = 7;
@@ -177,7 +183,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(24, 24);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(295, 570);
+            this.groupBox1.Size = new System.Drawing.Size(295, 630);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Extra/Ruil Dienst Gevraagd";
@@ -185,7 +191,7 @@
             // checkBoxRO
             // 
             this.checkBoxRO.AutoSize = true;
-            this.checkBoxRO.Location = new System.Drawing.Point(96, 499);
+            this.checkBoxRO.Location = new System.Drawing.Point(96, 548);
             this.checkBoxRO.Name = "checkBoxRO";
             this.checkBoxRO.Size = new System.Drawing.Size(61, 20);
             this.checkBoxRO.TabIndex = 20;
@@ -195,7 +201,7 @@
             // checkBoxGR
             // 
             this.checkBoxGR.AutoSize = true;
-            this.checkBoxGR.Location = new System.Drawing.Point(96, 473);
+            this.checkBoxGR.Location = new System.Drawing.Point(96, 522);
             this.checkBoxGR.Name = "checkBoxGR";
             this.checkBoxGR.Size = new System.Drawing.Size(64, 20);
             this.checkBoxGR.TabIndex = 19;
@@ -205,7 +211,7 @@
             // checkBoxGE
             // 
             this.checkBoxGE.AutoSize = true;
-            this.checkBoxGE.Location = new System.Drawing.Point(96, 447);
+            this.checkBoxGE.Location = new System.Drawing.Point(96, 496);
             this.checkBoxGE.Name = "checkBoxGE";
             this.checkBoxGE.Size = new System.Drawing.Size(56, 20);
             this.checkBoxGE.TabIndex = 18;
@@ -215,7 +221,7 @@
             // checkBoxWI
             // 
             this.checkBoxWI.AutoSize = true;
-            this.checkBoxWI.Location = new System.Drawing.Point(96, 421);
+            this.checkBoxWI.Location = new System.Drawing.Point(96, 470);
             this.checkBoxWI.Name = "checkBoxWI";
             this.checkBoxWI.Size = new System.Drawing.Size(46, 20);
             this.checkBoxWI.TabIndex = 17;
@@ -225,7 +231,7 @@
             // checkBoxBL
             // 
             this.checkBoxBL.AutoSize = true;
-            this.checkBoxBL.Location = new System.Drawing.Point(96, 395);
+            this.checkBoxBL.Location = new System.Drawing.Point(96, 444);
             this.checkBoxBL.Name = "checkBoxBL";
             this.checkBoxBL.Size = new System.Drawing.Size(63, 20);
             this.checkBoxBL.TabIndex = 16;
@@ -235,7 +241,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(19, 397);
+            this.label7.Location = new System.Drawing.Point(19, 446);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(71, 16);
             this.label7.TabIndex = 15;
@@ -243,15 +249,15 @@
             // 
             // textBoxAanvraagVoor
             // 
-            this.textBoxAanvraagVoor.Location = new System.Drawing.Point(121, 51);
+            this.textBoxAanvraagVoor.Location = new System.Drawing.Point(128, 105);
             this.textBoxAanvraagVoor.Name = "textBoxAanvraagVoor";
-            this.textBoxAanvraagVoor.Size = new System.Drawing.Size(146, 22);
+            this.textBoxAanvraagVoor.Size = new System.Drawing.Size(139, 22);
             this.textBoxAanvraagVoor.TabIndex = 14;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 57);
+            this.label6.Location = new System.Drawing.Point(17, 108);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(105, 16);
             this.label6.TabIndex = 13;
@@ -260,7 +266,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(177, 83);
+            this.radioButton2.Location = new System.Drawing.Point(177, 64);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(90, 20);
             this.radioButton2.TabIndex = 12;
@@ -271,18 +277,19 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(20, 83);
+            this.radioButton1.Location = new System.Drawing.Point(20, 64);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(97, 20);
             this.radioButton1.TabIndex = 11;
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Extra Dienst";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // buttonVraagAan
             // 
             this.buttonVraagAan.Enabled = false;
-            this.buttonVraagAan.Location = new System.Drawing.Point(96, 535);
+            this.buttonVraagAan.Location = new System.Drawing.Point(96, 584);
             this.buttonVraagAan.Name = "buttonVraagAan";
             this.buttonVraagAan.Size = new System.Drawing.Size(171, 29);
             this.buttonVraagAan.TabIndex = 10;
@@ -327,7 +334,7 @@
             this.listViewExtra.Location = new System.Drawing.Point(333, 25);
             this.listViewExtra.MultiSelect = false;
             this.listViewExtra.Name = "listViewExtra";
-            this.listViewExtra.Size = new System.Drawing.Size(851, 569);
+            this.listViewExtra.Size = new System.Drawing.Size(1061, 569);
             this.listViewExtra.TabIndex = 3;
             this.listViewExtra.UseCompatibleStateImageBehavior = false;
             this.listViewExtra.View = System.Windows.Forms.View.Details;
@@ -346,6 +353,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Soort";
+            this.columnHeader3.Width = 80;
             // 
             // columnHeader4
             // 
@@ -360,12 +368,12 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "Dienst";
-            this.columnHeader6.Width = 100;
+            this.columnHeader6.Width = 150;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Werkplek";
-            this.columnHeader7.Width = 76;
+            this.columnHeader7.Width = 80;
             // 
             // columnHeader8
             // 
@@ -375,7 +383,7 @@
             // columnHeader9
             // 
             this.columnHeader9.Text = "Loopt door";
-            this.columnHeader9.Width = 120;
+            this.columnHeader9.Width = 400;
             // 
             // labelVorigeMaand
             // 
@@ -390,7 +398,7 @@
             // buttonVulDienst
             // 
             this.buttonVulDienst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonVulDienst.Location = new System.Drawing.Point(1013, 615);
+            this.buttonVulDienst.Location = new System.Drawing.Point(1223, 615);
             this.buttonVulDienst.Name = "buttonVulDienst";
             this.buttonVulDienst.Size = new System.Drawing.Size(171, 29);
             this.buttonVulDienst.TabIndex = 11;
@@ -403,32 +411,98 @@
             this.checkBoxVerbergOudeVragen.AutoSize = true;
             this.checkBoxVerbergOudeVragen.Checked = true;
             this.checkBoxVerbergOudeVragen.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxVerbergOudeVragen.Location = new System.Drawing.Point(333, 615);
+            this.checkBoxVerbergOudeVragen.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxVerbergOudeVragen.Location = new System.Drawing.Point(333, 608);
             this.checkBoxVerbergOudeVragen.Name = "checkBoxVerbergOudeVragen";
-            this.checkBoxVerbergOudeVragen.Size = new System.Drawing.Size(172, 17);
+            this.checkBoxVerbergOudeVragen.Size = new System.Drawing.Size(213, 20);
             this.checkBoxVerbergOudeVragen.TabIndex = 12;
             this.checkBoxVerbergOudeVragen.Text = "Verberg aanvragen in verleden";
             this.checkBoxVerbergOudeVragen.UseVisualStyleBackColor = true;
             this.checkBoxVerbergOudeVragen.CheckedChanged += new System.EventHandler(this.checkBoxVerbergOudeVragen_CheckedChanged);
             // 
-            // checkBoxVerbergGevraagdDoorEnVoor
+            // buttonAanvraagIntrekken
             // 
-            this.checkBoxVerbergGevraagdDoorEnVoor.AutoSize = true;
-            this.checkBoxVerbergGevraagdDoorEnVoor.Location = new System.Drawing.Point(333, 637);
-            this.checkBoxVerbergGevraagdDoorEnVoor.Name = "checkBoxVerbergGevraagdDoorEnVoor";
-            this.checkBoxVerbergGevraagdDoorEnVoor.Size = new System.Drawing.Size(179, 17);
-            this.checkBoxVerbergGevraagdDoorEnVoor.TabIndex = 12;
-            this.checkBoxVerbergGevraagdDoorEnVoor.Text = "Verberg Gevraagd Door en Voor";
-            this.checkBoxVerbergGevraagdDoorEnVoor.UseVisualStyleBackColor = true;
-            this.checkBoxVerbergGevraagdDoorEnVoor.CheckedChanged += new System.EventHandler(this.checkBoxVerbergGevraagdDoorEnVoor_CheckedChanged);
+            this.buttonAanvraagIntrekken.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAanvraagIntrekken.Location = new System.Drawing.Point(1027, 615);
+            this.buttonAanvraagIntrekken.Name = "buttonAanvraagIntrekken";
+            this.buttonAanvraagIntrekken.Size = new System.Drawing.Size(171, 29);
+            this.buttonAanvraagIntrekken.TabIndex = 11;
+            this.buttonAanvraagIntrekken.Text = "Aanvraag Intrekken";
+            this.buttonAanvraagIntrekken.UseVisualStyleBackColor = true;
+            this.buttonAanvraagIntrekken.Click += new System.EventHandler(this.buttonAanvraagIntrekken_Click);
+            // 
+            // groupBoxFilter
+            // 
+            this.groupBoxFilter.Controls.Add(this.radioButton5);
+            this.groupBoxFilter.Controls.Add(this.radioButton4);
+            this.groupBoxFilter.Controls.Add(this.radioButton3);
+            this.groupBoxFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxFilter.Location = new System.Drawing.Point(756, 600);
+            this.groupBoxFilter.Name = "groupBoxFilter";
+            this.groupBoxFilter.Size = new System.Drawing.Size(250, 54);
+            this.groupBoxFilter.TabIndex = 13;
+            this.groupBoxFilter.TabStop = false;
+            this.groupBoxFilter.Text = " Filter Soort Diensten ";
+            // 
+            // radioButton5
+            // 
+            this.radioButton5.AutoSize = true;
+            this.radioButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton5.Location = new System.Drawing.Point(185, 28);
+            this.radioButton5.Name = "radioButton5";
+            this.radioButton5.Size = new System.Drawing.Size(56, 20);
+            this.radioButton5.TabIndex = 0;
+            this.radioButton5.Text = "Extra";
+            this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // radioButton4
+            // 
+            this.radioButton4.AutoSize = true;
+            this.radioButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton4.Location = new System.Drawing.Point(130, 28);
+            this.radioButton4.Name = "radioButton4";
+            this.radioButton4.Size = new System.Drawing.Size(49, 20);
+            this.radioButton4.TabIndex = 0;
+            this.radioButton4.Text = "Ruil";
+            this.radioButton4.UseVisualStyleBackColor = true;
+            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Checked = true;
+            this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioButton3.Location = new System.Drawing.Point(6, 28);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(101, 20);
+            this.radioButton3.TabIndex = 0;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "Ruil En Extra";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
+            // 
+            // checkBoxVerbergIngevulde
+            // 
+            this.checkBoxVerbergIngevulde.AutoSize = true;
+            this.checkBoxVerbergIngevulde.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxVerbergIngevulde.Location = new System.Drawing.Point(333, 634);
+            this.checkBoxVerbergIngevulde.Name = "checkBoxVerbergIngevulde";
+            this.checkBoxVerbergIngevulde.Size = new System.Drawing.Size(297, 20);
+            this.checkBoxVerbergIngevulde.TabIndex = 14;
+            this.checkBoxVerbergIngevulde.Text = "Verberg ingevulde en ingetrokken aanvragen";
+            this.checkBoxVerbergIngevulde.UseVisualStyleBackColor = true;
+            this.checkBoxVerbergIngevulde.CheckedChanged += new System.EventHandler(this.checkBoxVerbergIngevulde_CheckedChanged);
             // 
             // RuilExtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1242, 666);
-            this.Controls.Add(this.checkBoxVerbergGevraagdDoorEnVoor);
+            this.ClientSize = new System.Drawing.Size(1421, 666);
+            this.Controls.Add(this.checkBoxVerbergIngevulde);
+            this.Controls.Add(this.groupBoxFilter);
             this.Controls.Add(this.checkBoxVerbergOudeVragen);
+            this.Controls.Add(this.buttonAanvraagIntrekken);
             this.Controls.Add(this.buttonVulDienst);
             this.Controls.Add(this.labelVorigeMaand);
             this.Controls.Add(this.listViewExtra);
@@ -439,6 +513,8 @@
             this.Shown += new System.EventHandler(this.RuilExtraForm_Shown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBoxFilter.ResumeLayout(false);
+            this.groupBoxFilter.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,6 +556,11 @@
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.CheckBox checkBoxVerbergOudeVragen;
-        private System.Windows.Forms.CheckBox checkBoxVerbergGevraagdDoorEnVoor;
+        private System.Windows.Forms.Button buttonAanvraagIntrekken;
+        private System.Windows.Forms.GroupBox groupBoxFilter;
+        private System.Windows.Forms.RadioButton radioButton5;
+        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.CheckBox checkBoxVerbergIngevulde;
     }
 }

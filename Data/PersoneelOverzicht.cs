@@ -150,7 +150,12 @@ namespace Bezetting2.Data
 
                 LijstPersoonKleur.Sort(delegate (personeel x, personeel y)
                 {
-                    return x._achternaam.CompareTo(y._achternaam);
+                    var result = x._achternaam.CompareTo(y._achternaam);
+                    
+                    if (ProgData.Main.PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Checked/*InstellingenProg._SorteerOokWerkplek*/)
+                        result = x._werkgroep.CompareTo(y._werkgroep); 
+                    
+                    return result;
                 });
 
                 MaakWerkPlekkenLijst();

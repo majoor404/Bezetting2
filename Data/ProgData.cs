@@ -28,7 +28,6 @@ namespace Bezetting2
         public static ToolStripStatusLabel _toegangnivo;
 
         public static MaandDataClass MaandData = new MaandDataClass();
-        //public static MaandDataClass MaandDataBlauw = new MaandDataClass();
 
         public static PersoneelOverzicht AlleMensen = new PersoneelOverzicht();
 
@@ -768,22 +767,6 @@ namespace Bezetting2
             }
         }
 
-        //private static void TestNaamInBezetting(string naam, string dagnr, string kleur)
-        //{
-        //    if (kleur != ProgData.GekozenKleur)
-        //    {
-        //        MessageBox.Show("Error kleur gevraagde kleur wijkt af van gekozen kleur, meld het aan programeur a.u.b");
-        //    }
-
-        //    try
-        //    {
-        //        werkdag ver = LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dagnr));
-        //    }
-        //    catch
-        //    {
-        //        MaakNieuweCollegaInBezettingAan(naam, kleur, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
-        //    }
-        //}
         public static bool TestNetwerkBeschikbaar(int test)
         {
             if (test == 0)
@@ -926,19 +909,6 @@ namespace Bezetting2
             }
             return ret;
         }
-
-        //public static void CheckDubbelAchterNaam()
-        //{
-        //    List<string> Lijst = new List<string>();
-
-        //    foreach (personeel a in ProgData.AlleMensen.LijstPersonen)
-        //    {
-        //        if (Lijst.Contains(a._achternaam))
-        //            MessageBox.Show($"Er bestaat een dubbele achternaam, pas dit aan! \n{a._achternaam}");
-        //        Lijst.Add(a._achternaam);
-        //    }
-        //}
-
         public static void SaveDatum()
         {
             BewaarJaar = igekozenjaar;
@@ -989,16 +959,16 @@ namespace Bezetting2
                 SaveLijstWerkdagPloeg(kleur, 15);
             }
         }
-        public static void Zetom_naar_versie21(string kleur) // ketting AllVerCain.cs
+        public static void Zetom_naar_versie21(string kleur)
         {
             // zet oude file's om naar nieuwe ketting
             var maand = ProgData.igekozenmaand;
             var jaar = ProgData.igekozenjaar;
 
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
+            var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
             if (!File.Exists(path))
             {
-                var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
                 if (File.Exists(path_oud))
                 {
                     AlleMensen.Load();  // nodig voor personeel nummer te krijgen hieronder
@@ -1035,6 +1005,14 @@ namespace Bezetting2
                             }
                         }
                     }
+                    File.Delete(path_oud);
+                }
+            }
+            else // als nieuwe bestaat kijken of oude bestaat en opruimen! , zou niet mogen, maar oke.
+            {
+                if (File.Exists(path_oud))
+                {
+                    MessageBox.Show($"Delete {path_oud}");                    
                     File.Delete(path_oud);
                 }
             }
