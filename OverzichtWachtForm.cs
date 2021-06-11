@@ -246,11 +246,6 @@ namespace Bezetting2
                 broer.Items.Add(afwijking_);
                 if (!string.IsNullOrEmpty(afwijking_))
                     afwijking = true;
-
-                //werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
-                //broer.Items.Add(ver._afwijkingdienst);
-                //if (!string.IsNullOrEmpty(ver._afwijkingdienst))
-                //    afwijking = true;
             }
             broer.Visible = afwijking;
         }
