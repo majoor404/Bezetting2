@@ -655,59 +655,59 @@ namespace Bezetting2
 
         private void TellingWaarGewerktToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ListTelNamen.Clear();
-                ListTelWerkPlek.Clear();
-                ListClassTelPlekGewerkt.Clear();
-                // bewaar huidige maand en kleur
-                int bewaar_maand = ProgData.igekozenmaand;
+            //try
+            //{
+            //    ListTelNamen.Clear();
+            //    ListTelWerkPlek.Clear();
+            //    ListClassTelPlekGewerkt.Clear();
+            //    // bewaar huidige maand en kleur
+            //    int bewaar_maand = ProgData.igekozenmaand;
 
-                for (int i = 1; i < 13; i++)    // maanden
-                {
-                    ProgData.igekozenmaand = i;
-                    if (File.Exists(ProgData.LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)))
-                    {
-                        ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                        ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
-                        //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+            //    for (int i = 1; i < 13; i++)    // maanden
+            //    {
+            //        ProgData.igekozenmaand = i;
+            //        if (File.Exists(ProgData.LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)))
+            //        {
+            //            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            //            ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+            //            //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
 
-                        foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
-                        {
-                            if (!ListTelNamen.Contains(a._achternaam))
-                                ListTelNamen.Add(a._achternaam);
-                        }
+            //            foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+            //            {
+            //                if (!ListTelNamen.Contains(a._achternaam))
+            //                    ListTelNamen.Add(a._achternaam);
+            //            }
 
-                        foreach (werkdag a in ProgData.LijstWerkdagPloeg)
-                        {
-                            if (!ListTelWerkPlek.Contains(a._werkplek) && !string.IsNullOrEmpty(a._werkplek))
-                                ListTelWerkPlek.Add(a._werkplek);
+            //            foreach (werkdag a in ProgData.LijstWerkdagPloeg)
+            //            {
+            //                if (!ListTelWerkPlek.Contains(a._werkplek) && !string.IsNullOrEmpty(a._werkplek))
+            //                    ListTelWerkPlek.Add(a._werkplek);
 
-                            if (!string.IsNullOrEmpty(a._werkplek))
-                            {
-                                ClassTelPlekGewerkt tel = new ClassTelPlekGewerkt(a._naam, a._werkplek);
-                                try
-                                {
-                                    ClassTelPlekGewerkt gevonden = ListClassTelPlekGewerkt.First(b => b._NaamTelPlek == a._naam && b._PlekTelPlek == a._werkplek);
-                                    gevonden._AantalTelPlek++;
-                                }
-                                catch
-                                {
-                                    ListClassTelPlekGewerkt.Add(tel);
-                                }
-                            }
-                        }
-                    }
-                }
-                ZetGevondenDataTellingWaarGewerktInExcel();
-                ProgData.igekozenmaand = bewaar_maand;
-                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
-                //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
-            }
-            catch
-            {
-            }
+            //                if (!string.IsNullOrEmpty(a._werkplek))
+            //                {
+            //                    ClassTelPlekGewerkt tel = new ClassTelPlekGewerkt(a._naam, a._werkplek);
+            //                    try
+            //                    {
+            //                        ClassTelPlekGewerkt gevonden = ListClassTelPlekGewerkt.First(b => b._NaamTelPlek == a._naam && b._PlekTelPlek == a._werkplek);
+            //                        gevonden._AantalTelPlek++;
+            //                    }
+            //                    catch
+            //                    {
+            //                        ListClassTelPlekGewerkt.Add(tel);
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    ZetGevondenDataTellingWaarGewerktInExcel();
+            //    ProgData.igekozenmaand = bewaar_maand;
+            //    ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            //    ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+            //    //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+            //}
+            //catch
+            //{
+            //}
         }
 
         private void NietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)

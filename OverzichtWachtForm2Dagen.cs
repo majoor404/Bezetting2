@@ -17,22 +17,24 @@ namespace Bezetting2
         private ListBox broer;
         private int sourse_index;
         public List<Invoerveld> opbouw = new List<Invoerveld>();
+        private WerkPlek WP = new WerkPlek();
         private DateTime dat;
         private DateTime dat2;
-
 
         public class Invoerveld
         {
             //  public invoerveld() { }
-            public Invoerveld(Label lb, ListBox ln, ListBox la)
+            public Invoerveld(Label lb, ListBox ln, ListBox la , int dag)
             {
                 _Label = lb;
                 _ListNaam = ln;
                 _ListAfw = la;
+                _Dag = dag;
             }
             public Label _Label { get; set; }
             public ListBox _ListNaam { get; set; }
             public ListBox _ListAfw { get; set; }
+            public int _Dag { get; set; }   // eerste of 2de dag op formulier
         } // hulp class om snel broer listbox te vinden van afwijking van naam
 
         public OverzichtWachtForm2Dagen()
@@ -57,54 +59,54 @@ namespace Bezetting2
 
             opbouw.Clear();
 
-            opbouw.Add(new Invoerveld(label1, listBox1, listBoxAfw));
-            opbouw.Add(new Invoerveld(label2, listBox2, listBox22));
-            opbouw.Add(new Invoerveld(label3, listBox3, listBox23));
-            opbouw.Add(new Invoerveld(label4, listBox4, listBox24));
-            opbouw.Add(new Invoerveld(label5, listBox5, listBox25));
-            opbouw.Add(new Invoerveld(label6, listBox6, listBox26));
-            opbouw.Add(new Invoerveld(label7, listBox7, listBox27));
-            opbouw.Add(new Invoerveld(label8, listBox8, listBox28));
-            opbouw.Add(new Invoerveld(label9, listBox9, listBox29));
-            opbouw.Add(new Invoerveld(label10, listBox10, listBox30));
-            opbouw.Add(new Invoerveld(label11, listBox11, listBox31));
-            opbouw.Add(new Invoerveld(label12, listBox12, listBox32));
-            opbouw.Add(new Invoerveld(label13, listBox13, listBox33));
-            opbouw.Add(new Invoerveld(label14, listBox14, listBox34));
-            opbouw.Add(new Invoerveld(label15, listBox15, listBox35));
-            opbouw.Add(new Invoerveld(label16, listBox16, listBox36));
-            opbouw.Add(new Invoerveld(label17, listBox17, listBox37));
-            opbouw.Add(new Invoerveld(label18, listBox18, listBox38));
-            opbouw.Add(new Invoerveld(label19, listBox19, listBox39));
-            opbouw.Add(new Invoerveld(label20, listBox20, listBox40));
-            opbouw.Add(new Invoerveld(label21, listBox21, listBox41));
+            opbouw.Add(new Invoerveld(label1, listBox1, listBoxAfw, 1));
+            opbouw.Add(new Invoerveld(label2, listBox2, listBox22, 1));
+            opbouw.Add(new Invoerveld(label3, listBox3, listBox23, 1));
+            opbouw.Add(new Invoerveld(label4, listBox4, listBox24, 1));
+            opbouw.Add(new Invoerveld(label5, listBox5, listBox25, 1));
+            opbouw.Add(new Invoerveld(label6, listBox6, listBox26, 1));
+            opbouw.Add(new Invoerveld(label7, listBox7, listBox27, 1));
+            opbouw.Add(new Invoerveld(label8, listBox8, listBox28, 1));
+            opbouw.Add(new Invoerveld(label9, listBox9, listBox29, 1));
+            opbouw.Add(new Invoerveld(label10, listBox10, listBox30, 1));
+            opbouw.Add(new Invoerveld(label11, listBox11, listBox31, 1));
+            opbouw.Add(new Invoerveld(label12, listBox12, listBox32, 1));
+            opbouw.Add(new Invoerveld(label13, listBox13, listBox33, 1));
+            opbouw.Add(new Invoerveld(label14, listBox14, listBox34, 1));
+            opbouw.Add(new Invoerveld(label15, listBox15, listBox35, 1));
+            opbouw.Add(new Invoerveld(label16, listBox16, listBox36, 1));
+            opbouw.Add(new Invoerveld(label17, listBox17, listBox37, 1));
+            opbouw.Add(new Invoerveld(label18, listBox18, listBox38, 1));
+            opbouw.Add(new Invoerveld(label19, listBox19, listBox39, 1));
+            opbouw.Add(new Invoerveld(label20, listBox20, listBox40, 1));
+            opbouw.Add(new Invoerveld(label21, listBox21, listBox41, 1));
 
-            opbouw.Add(new Invoerveld(label42, listBox83, listBoxAfw2));
+            opbouw.Add(new Invoerveld(label42, listBox83, listBoxAfw2, 2));
 
-            opbouw.Add(new Invoerveld(label41, listBox81, listBox77));
-            opbouw.Add(new Invoerveld(label40, listBox80, listBox76));
-            opbouw.Add(new Invoerveld(label39, listBox79, listBox75));
-            opbouw.Add(new Invoerveld(label38, listBox78, listBox74));
+            opbouw.Add(new Invoerveld(label41, listBox81, listBox77, 2));
+            opbouw.Add(new Invoerveld(label40, listBox80, listBox76, 2));
+            opbouw.Add(new Invoerveld(label39, listBox79, listBox75, 2));
+            opbouw.Add(new Invoerveld(label38, listBox78, listBox74, 2));
 
-            opbouw.Add(new Invoerveld(label37, listBox73, listBox69));
-            opbouw.Add(new Invoerveld(label36, listBox72, listBox68));
-            opbouw.Add(new Invoerveld(label35, listBox71, listBox67));
-            opbouw.Add(new Invoerveld(label34, listBox70, listBox66));
+            opbouw.Add(new Invoerveld(label37, listBox73, listBox69, 2));
+            opbouw.Add(new Invoerveld(label36, listBox72, listBox68, 2));
+            opbouw.Add(new Invoerveld(label35, listBox71, listBox67, 2));
+            opbouw.Add(new Invoerveld(label34, listBox70, listBox66, 2));
 
-            opbouw.Add(new Invoerveld(label33, listBox65, listBox57));
-            opbouw.Add(new Invoerveld(label32, listBox64, listBox56));
-            opbouw.Add(new Invoerveld(label31, listBox63, listBox55));
-            opbouw.Add(new Invoerveld(label30, listBox62, listBox54));
+            opbouw.Add(new Invoerveld(label33, listBox65, listBox57, 2));
+            opbouw.Add(new Invoerveld(label32, listBox64, listBox56, 2));
+            opbouw.Add(new Invoerveld(label31, listBox63, listBox55, 2));
+            opbouw.Add(new Invoerveld(label30, listBox62, listBox54, 2));
 
-            opbouw.Add(new Invoerveld(label29, listBox61, listBox53));
-            opbouw.Add(new Invoerveld(label28, listBox60, listBox52));
-            opbouw.Add(new Invoerveld(label27, listBox59, listBox51));
-            opbouw.Add(new Invoerveld(label26, listBox58, listBox50));
+            opbouw.Add(new Invoerveld(label29, listBox61, listBox53, 2));
+            opbouw.Add(new Invoerveld(label28, listBox60, listBox52, 2));
+            opbouw.Add(new Invoerveld(label27, listBox59, listBox51, 2));
+            opbouw.Add(new Invoerveld(label26, listBox58, listBox50, 2));
 
-            opbouw.Add(new Invoerveld(label22, listBox46, listBox45));
-            opbouw.Add(new Invoerveld(label23, listBox47, listBox44));
-            opbouw.Add(new Invoerveld(label24, listBox48, listBox43));
-            opbouw.Add(new Invoerveld(label25, listBox49, listBox42));
+            opbouw.Add(new Invoerveld(label22, listBox46, listBox45, 2));
+            opbouw.Add(new Invoerveld(label23, listBox47, listBox44, 2));
+            opbouw.Add(new Invoerveld(label24, listBox48, listBox43, 2));
+            opbouw.Add(new Invoerveld(label25, listBox49, listBox42, 2));
 
 
             LaadDataFormulier();
@@ -372,8 +374,6 @@ namespace Bezetting2
 
             ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-
             ViewDag1(dat);
 
             dat2 = dat.AddDays(1);
@@ -394,6 +394,8 @@ namespace Bezetting2
                 labelDatum2.Text = dat2.ToLongDateString();
             }
 
+            
+
             // als dag info, kleur button
             string file = $"{dat.Year}\\{dat.Month}\\{labelDatum.Text} - {labelDienst.Text}.txt";
             if (File.Exists(file))
@@ -407,7 +409,6 @@ namespace Bezetting2
 
             ProgData.igekozenjaar = dat2.Year;
             ProgData.igekozenmaand = dat2.Month;
-            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
             ViewDag2(dat2);
 
@@ -465,108 +466,59 @@ namespace Bezetting2
         {
             ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
+
             foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
             {
                 box.Items.Clear();
+                int tag = int.Parse(box.Tag.ToString());
+                if (tag == 0)
+                    box.Visible = false;
             }
 
             try
             {
-                // extra diensten regelen.
-                // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
+                // extra diensten in overzicht zetten
                 string dir = ProgData.GetDirectoryBezettingMaand(dat);
                 ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
                 if (ProgData.ListLooptExtra.Count > 0)
                 {
-                    /////////////////////////////////////////////////////////////////////////////////////
-                    // VD is bv veranderd in ED
-                    // pas dus aan.
-                    for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
-                    {
-                        try
-                        {
-                            werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
-                                                                             && (aa._dagnummer == ProgData.ListLooptExtra[i]._datum.Day)
-                                                                             && (aa._afwijkingdienst != ProgData.ListLooptExtra[i]._metcode));
-                            ver._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
-                            ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                        }
-                        catch { }
-                    }
-                    ///////////////////////////////////////////////////////////////////////////////////////
-
                     foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
                     {
                         if (naam._datum.ToShortDateString() == dat.ToShortDateString())
                         {
-                            try
-                            {
-                                personeel perso = ProgData.AlleMensen.LijstPersoonKleur.First(aa => (aa._achternaam == naam._naam));
-                            }
-                            catch
-                            {
-                                personeel extra_man = new personeel
-                                {
-                                    _achternaam = naam._naam
-                                };
-                                ProgData.AlleMensen.LijstPersoonKleur.Add(extra_man);
-                            }
-
-                            try
-                            {
-                                werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
-                            }
-                            catch
-                            {
-                                werkdag werkdag_extra_man = new werkdag
-                                {
-                                    _dagnummer = dat.Day,
-                                    _naam = naam._naam,
-                                    _werkplek = "",
-                                    _afwijkingdienst = naam._metcode
-                                };
-                                ProgData.LijstWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                            }
+                            listBox1.Items.Add(naam._naam);
                         }
                     }
                 }
-
+                // orginele namen van die kleur in listbox1 zetten
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {
-                        // 
-                        werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
-
-                        if (string.IsNullOrEmpty(ver._werkplek))
-                        {
-                            listBox1.Items.Add(man._achternaam);
-                            UpdateAfwijkingListBox(listBox1, dat.Day);
-                        }
-                        else
-                        {
-                            Invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
-                            veld._ListNaam.Items.Add(man._achternaam);
-                            UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
-                        }
+                        listBox1.Items.Add(man._achternaam);
                     }
                     catch { }
                 }
 
-                foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
+                UpdateAfwijkingListBox(listBox1,dat.Day);
+
+                // haal uit WP de werkplekken, en verplaats als nodig
+                for (int i = listBox1.Items.Count - 1; i > -1; i--)
                 {
-                    // als op werkplek geen personeel, dan invisible afwijking
-                    int tag = int.Parse(box.Tag.ToString());
-                    if (tag == 1)
+                    string naam = listBox1.Items[i].ToString();
+                    string werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
+                    if (werkplek != "" && werkplek != label1.Text)
                     {
-                        if (box.Items.Count == 0)
-                        {
-                            Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                            veld._ListAfw.Visible = false;
-                        }
+                        //move
+                        listBox1.Items.RemoveAt(i);
+                        UpdateAfwijkingListBox(listBox1,dat.Day);
+
+                        Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek && a._Dag == 1));
+                        veld._ListNaam.Items.Add(naam);
+                        UpdateAfwijkingListBox(veld._ListNaam,dat.Day);
                     }
+
                 }
             }
             catch { }
@@ -575,17 +527,19 @@ namespace Bezetting2
         {
             ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
 
             foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
             {
                 box.Items.Clear();
+                int tag = int.Parse(box.Tag.ToString());
+                if (tag == 0)
+                    box.Visible = false;
             }
 
             try
             {
-                // extra diensten regelen.
-                // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
+                // extra diensten in overzicht zetten
                 string dir = ProgData.GetDirectoryBezettingMaand(dat);
                 ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
                 if (ProgData.ListLooptExtra.Count > 0)
@@ -594,77 +548,40 @@ namespace Bezetting2
                     {
                         if (naam._datum.ToShortDateString() == dat.ToShortDateString())
                         {
-                            try
-                            {
-                                personeel perso = ProgData.AlleMensen.LijstPersoonKleur.First(aa => (aa._achternaam == naam._naam));
-                            }
-                            catch
-                            {
-                                personeel extra_man = new personeel
-                                {
-                                    _achternaam = naam._naam
-                                };
-                                ProgData.AlleMensen.LijstPersoonKleur.Add(extra_man);
-                            }
-
-                            try
-                            {
-                                werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
-                            }
-                            catch
-                            {
-                                werkdag werkdag_extra_man = new werkdag
-                                {
-                                    _dagnummer = dat.Day,
-                                    _naam = naam._naam,
-                                    _werkplek = "",
-                                    _afwijkingdienst = naam._metcode
-                                };
-                                ProgData.LijstWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                            }
+                            listBox83.Items.Add(naam._naam);
                         }
                     }
                 }
-
+                // orginele namen van die kleur in listbox1 zetten
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {
-                        // 
-                        werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
-
-                        if (string.IsNullOrEmpty(ver._werkplek))
-                        {
-                            listBox83.Items.Add(man._achternaam);
-                            UpdateAfwijkingListBox(listBox83, dat.Day);
-                        }
-                        else
-                        {
-                            Invoerveld veld = opbouw.Last(a => (a._Label.Text == ver._werkplek));
-                            veld._ListNaam.Items.Add(man._achternaam);
-                            UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
-                        }
+                        listBox83.Items.Add(man._achternaam);
                     }
                     catch { }
                 }
 
-                foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
+                UpdateAfwijkingListBox(listBox83, dat.Day);
+
+                // haal uit WP de werkplekken, en verplaats als nodig
+                for (int i = listBox83.Items.Count - 1; i > -1; i--)
                 {
-                    // als op werkplek geen personeel, dan invisible afwijking
-                    int tag = int.Parse(box.Tag.ToString());
-                    if (tag == 1)
-                        if (box.Items.Count == 0)
-                        {
-                            //try
-                            //{
-                            Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                            veld._ListAfw.Visible = false;
-                            //}
-                            //catch { }
-                        }
+                    string naam = listBox83.Items[i].ToString();
+                    string werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
+                    if (werkplek != "" && werkplek != label42.Text)
+                    {
+                        //move
+                        listBox83.Items.RemoveAt(i);
+                        UpdateAfwijkingListBox(listBox83, dat.Day);
+
+                        Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek && a._Dag == 2));
+                        veld._ListNaam.Items.Add(naam);
+                        UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
+                    }
+
                 }
-            }
+        }
             catch { }
         }
         private void SaveData()
@@ -673,80 +590,56 @@ namespace Bezetting2
             {
                 ProgData.igekozenjaar = dat.Year;
                 ProgData.igekozenmaand = dat.Month;
-                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
 
+                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
                 foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
                 {
                     if ((box.Tag != null))
                     {
                         int tag = int.Parse(box.Tag.ToString());
                         // staat er een naam in listbox ?
-                        if (tag == 1 && box.Items.Count > 0)
+                        if (tag == 1 && box.Items.Count > 0 && box != listBox1)
                         {
                             for (int i = 0; i < box.Items.Count; i++)
                             {
+                                Invoerveld veld = opbouw.First(a => (a._ListNaam == box && a._Dag == 1));
+                                string werkplek = veld._Label.Text;
                                 // pak naam
                                 string naam = box.Items[i].ToString();
-                                // haal juiste werkdag bij persoon
-                                try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
-                                {
-                                    werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
-                                    if (box == listBox1)
-                                    {
-                                        ver._werkplek = "";
-                                    }
-                                    else
-                                    {
-                                        // save werkplek
-                                        Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                        ver._werkplek = veld._Label.Text;
-                                    }
-                                }
-                                catch { }
+                                // save werkdag bij persoon
+                                WerkPlek.SetWerkPlek(naam, dat.Day, werkplek);
                             }
                         }
                     }
                 }
-                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
+
 
                 ProgData.igekozenjaar = dat2.Year;
                 ProgData.igekozenmaand = dat2.Month;
-                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-
+                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
+                
                 foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
                 {
-                    if (box.Tag != null)
+                    if ((box.Tag != null))
                     {
                         int tag = int.Parse(box.Tag.ToString());
                         // staat er een naam in listbox ?
-                        if (tag == 1 && box.Items.Count > 0)
+                        if (tag == 1 && box.Items.Count > 0 && box != listBox83)
                         {
                             for (int i = 0; i < box.Items.Count; i++)
                             {
+                                Invoerveld veld = opbouw.First(a => (a._ListNaam == box && a._Dag == 2));
+                                string werkplek = veld._Label.Text;
                                 // pak naam
                                 string naam = box.Items[i].ToString();
                                 // haal juiste werkdag bij persoon
-                                try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
-                                {
-                                    werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat2.Day.ToString()));
-                                    if (box == listBox83)
-                                    {
-                                        ver._werkplek = "";
-                                    }
-                                    else
-                                    {
-                                        // save werkplek
-                                        Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                        ver._werkplek = veld._Label.Text;
-                                    }
-                                }
-                                catch { }
+                                WerkPlek.SetWerkPlek(naam, dat2.Day, werkplek);
                             }
                         }
                     }
                 }
-                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat2.Month, dat2.Year);
                 CaptureMyScreen();
             }
         }
@@ -897,11 +790,6 @@ namespace Bezetting2
             SaveData();
             dat = dateTimePicker1.Value;
             ViewUpdate();
-        }
-
-        private void checkBox2Dagen_CheckedChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }

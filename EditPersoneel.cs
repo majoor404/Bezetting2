@@ -311,8 +311,8 @@ namespace Bezetting2
 
                             // voeg nieuwe collega toevoegen aan bezetting
 
-                            string naam_ = ProgData.Get_Gebruiker_Naam(textBoxPersNum.Text);
-                            ProgData.MaakNieuweCollegaInBezettingAan(naam_, ProgData.GekozenKleur, ProgData.igekozenjaar, ProgData.igekozenmaand, 5);
+                            //string naam_ = ProgData.Get_Gebruiker_Naam(textBoxPersNum.Text);
+                            //ProgData.MaakNieuweCollegaInBezettingAan(naam_, ProgData.GekozenKleur, ProgData.igekozenjaar, ProgData.igekozenmaand, 5);
 
                             // kruisjes op nieuwe ploeg
                             for (int i = 1; i < eerste_dag_weg; i++)
@@ -547,7 +547,7 @@ namespace Bezetting2
                 ProgData.AlleMensen.LijstPersonen.Add(a);
                 ProgData.AlleMensen.Save();
 
-                ProgData.MaakNieuweCollegaInBezettingAan(textBoxAchterNaam.Text, comboBoxKleur.Text, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
+                //ProgData.MaakNieuweCollegaInBezettingAan(textBoxAchterNaam.Text, comboBoxKleur.Text, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
 
                 buttonSorteer_Click(this, null);
 

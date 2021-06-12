@@ -70,7 +70,6 @@
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editPopupMenuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.maakBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.speedTestNetwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -391,8 +390,7 @@
             this.nietMeeTelLijstToolStripMenuItem,
             this.removeAutoInlogOnderDitWindowsAccountToolStripMenuItem,
             this.editPopupMenuToolStripMenuItem,
-            this.maakBackupToolStripMenuItem,
-            this.speedTestNetwerkToolStripMenuItem});
+            this.maakBackupToolStripMenuItem});
             this.beheerToolStripMenuItem.Name = "beheerToolStripMenuItem";
             this.beheerToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.beheerToolStripMenuItem.Text = "Beheer";
@@ -476,14 +474,6 @@
             this.maakBackupToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
             this.maakBackupToolStripMenuItem.Text = "Maak Backup";
             this.maakBackupToolStripMenuItem.Click += new System.EventHandler(this.maakBackupToolStripMenuItem_Click);
-            // 
-            // speedTestNetwerkToolStripMenuItem
-            // 
-            this.speedTestNetwerkToolStripMenuItem.Name = "speedTestNetwerkToolStripMenuItem";
-            this.speedTestNetwerkToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
-            this.speedTestNetwerkToolStripMenuItem.Text = "Speed Test Netwerk";
-            this.speedTestNetwerkToolStripMenuItem.Visible = false;
-            this.speedTestNetwerkToolStripMenuItem.Click += new System.EventHandler(this.speedTestNetwerkToolStripMenuItem_Click);
             // 
             // infoToolStripMenuItem
             // 
@@ -1260,7 +1250,6 @@
         public System.Windows.Forms.Panel panelMoment;
         private System.Windows.Forms.ToolStripMenuItem autoInlogToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier2DagenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem speedTestNetwerkToolStripMenuItem;
         public System.Windows.Forms.Label labelHulpText;
         public System.Windows.Forms.ToolStripMenuItem PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem;
     }

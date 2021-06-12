@@ -37,7 +37,7 @@ namespace Bezetting2
         public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
         private static DateTime saveTimeExtra = DateTime.Now;
 
-        public static List<werkdag> LijstWerkdagPloeg = new List<werkdag>();
+        //public static List<werkdag> LijstWerkdagPloeg = new List<werkdag>();
 
         // kan later weg als alles omgezet is.
         public static List<veranderingen> ListVeranderingen = new List<veranderingen>();
@@ -143,88 +143,88 @@ namespace Bezetting2
             }
         }
 
-        public static void SaveLijstWerkdagPloeg(string kleur, int try_again)
-        {
-            if (try_again < 0 && !Disable_error_Meldingen)
-            {
-                MessageBox.Show($"SaveLijstWerkdagPloeg() error na 15 keer, \n{LijstWerkdagPloeg_Locatie(kleur)}");
-            }
+        //public static void SaveLijstWerkdagPloeg(string kleur, int try_again)
+        //{
+        //    if (try_again < 0 && !Disable_error_Meldingen)
+        //    {
+        //        MessageBox.Show($"SaveLijstWerkdagPloeg() error na 15 keer, \n{LijstWerkdagPloeg_Locatie(kleur)}");
+        //    }
 
-            if (!string.IsNullOrEmpty(kleur))
-            {
-                try
-                {
-                    string file = LijstWerkdagPloeg_Locatie(kleur);
-                    using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, LijstWerkdagPloeg);
-                    }
-                }
-                catch
-                {
-                    Wacht(300, "SaveLijstWerkdagPloeg");
-                    //Thread.Sleep(300);
-                    SaveLijstWerkdagPloeg(kleur, --try_again);
-                }
-            }
-        }
+        //    if (!string.IsNullOrEmpty(kleur))
+        //    {
+        //        try
+        //        {
+        //            string file = LijstWerkdagPloeg_Locatie(kleur);
+        //            using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
+        //            {
+        //                BinaryFormatter bin = new BinaryFormatter();
+        //                bin.Serialize(stream, LijstWerkdagPloeg);
+        //            }
+        //        }
+        //        catch
+        //        {
+        //            Wacht(300, "SaveLijstWerkdagPloeg");
+        //            //Thread.Sleep(300);
+        //            SaveLijstWerkdagPloeg(kleur, --try_again);
+        //        }
+        //    }
+        //}
 
-        public static void LaadLijstWerkdagPloeg(string kleur, int try_again)
-        {
-            // Als LijstWerkdagPloeg_Locatie(kleur) niet bestaat, zou ik nieuwe kunnen maken,
-            // maar wat als hij hem niet zou kunnen laden ?
-            string file = LijstWerkdagPloeg_Locatie(kleur);
-            if (!File.Exists(file))
-            {
-                if (TestNetwerkBeschikbaar(5) && ProgData.Main.WindowUpdateViewScreen)
-                {
-                    MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}\n" +
-                        $"{file}");
-                    MaakNieuwPloegBezettingAan(kleur);
-                }
-            }
+        //public static void LaadLijstWerkdagPloeg(string kleur, int try_again)
+        //{
+        //    // Als LijstWerkdagPloeg_Locatie(kleur) niet bestaat, zou ik nieuwe kunnen maken,
+        //    // maar wat als hij hem niet zou kunnen laden ?
+        //    string file = LijstWerkdagPloeg_Locatie(kleur);
+        //    if (!File.Exists(file))
+        //    {
+        //        if (TestNetwerkBeschikbaar(5) && ProgData.Main.WindowUpdateViewScreen)
+        //        {
+        //            MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}\n" +
+        //                $"{file}");
+        //            MaakNieuwPloegBezettingAan(kleur);
+        //        }
+        //    }
 
-            if (try_again < 0)
-            {
-                MessageBox.Show($"Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?\n" +
-                    $" {LijstWerkdagPloeg_Locatie(kleur)}");
-            }
+        //    if (try_again < 0)
+        //    {
+        //        MessageBox.Show($"Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?\n" +
+        //            $" {LijstWerkdagPloeg_Locatie(kleur)}");
+        //    }
 
-            try
-            {
-                using (Stream stream = File.Open(file, FileMode.Open))
-                {
-                    BinaryFormatter bin = new BinaryFormatter();
-                    try
-                    {
-                        LijstWerkdagPloeg.Clear();
-                        LijstWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
-                        stream.Dispose();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Deserialize(stream) LaadLijstWerkdagPloeg error");
-                    }
-                    finally
-                    {
-                        if (stream != null)
-                            stream.Dispose();
-                    }
-                }
-            }
-            catch (IOException)
-            {
-                Wacht(300, "LaadLijstWerkdagPloeg");
-                //Thread.Sleep(300);
-                LaadLijstWerkdagPloeg(kleur, --try_again);
-            }
-            catch
-            {
-                if (!Disable_error_Meldingen)
-                    MessageBox.Show($"LoadPloegBezettingLijst() error\n{LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)}");
-            }
-        }
+        //    try
+        //    {
+        //        using (Stream stream = File.Open(file, FileMode.Open))
+        //        {
+        //            BinaryFormatter bin = new BinaryFormatter();
+        //            try
+        //            {
+        //                LijstWerkdagPloeg.Clear();
+        //                LijstWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
+        //                stream.Dispose();
+        //            }
+        //            catch
+        //            {
+        //                MessageBox.Show("Deserialize(stream) LaadLijstWerkdagPloeg error");
+        //            }
+        //            finally
+        //            {
+        //                if (stream != null)
+        //                    stream.Dispose();
+        //            }
+        //        }
+        //    }
+        //    catch (IOException)
+        //    {
+        //        Wacht(300, "LaadLijstWerkdagPloeg");
+        //        //Thread.Sleep(300);
+        //        LaadLijstWerkdagPloeg(kleur, --try_again);
+        //    }
+        //    catch
+        //    {
+        //        if (!Disable_error_Meldingen)
+        //            MessageBox.Show($"LoadPloegBezettingLijst() error\n{LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)}");
+        //    }
+        //}
 
         public static int WaarInTijd()
         {
@@ -624,21 +624,11 @@ namespace Bezetting2
                     MaandData.SaveLeegPloeg("Groen");
                     MaandData.SaveLeegPloeg("Wit");
                     MaandData.SaveLeegPloeg("DD");
-                    // dir aangemaakt, dus weet zeker ploeg bezetting leeg is.
-                    MaakNieuwPloegBezettingAan("Blauw");
-                    MaakNieuwPloegBezettingAan("Rood");
-                    MaakNieuwPloegBezettingAan("Wit");
-                    MaakNieuwPloegBezettingAan("Groen");
-                    MaakNieuwPloegBezettingAan("Geel");
-                    MaakNieuwPloegBezettingAan("DD");
                 }
 
-                if (!File.Exists(LijstWerkdagPloeg_Locatie(kleur)))
-                {
-                    if (ProgData.Main.WindowUpdateViewScreen)
-                        MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}");
-                    MaakNieuwPloegBezettingAan(kleur);
-                }
+                var path_oude_werkdag = Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_bezetting.bin");
+                if (File.Exists(path_oude_werkdag))
+                    File.Delete(path_oude_werkdag);
 
                 // kan in toekomst ooit weg
                 // Zekker tot start 2023 laten staan!
@@ -844,58 +834,58 @@ namespace Bezetting2
                 ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
             }
         }
-        public static void MaakNieuweCollegaInBezettingAan(string Naam, string Kleur, int jaar, int maand, int aantal_maanden)
-        {
-            // als bij verhuizing er een persoon bij komt, moet in deze toevoegen aan ListWerkdagPloeg,
-            // echter alleen als deze nog niet bestaat.
-            // check of naam er in zit, en op die dag van de maand.
+        //public static void MaakNieuweCollegaInBezettingAan(string Naam, string Kleur, int jaar, int maand, int aantal_maanden)
+        //{
+        //    // als bij verhuizing er een persoon bij komt, moet in deze toevoegen aan ListWerkdagPloeg,
+        //    // echter alleen als deze nog niet bestaat.
+        //    // check of naam er in zit, en op die dag van de maand.
 
-            DateTime dumm = new DateTime(jaar, maand, 1);
+        //    DateTime dumm = new DateTime(jaar, maand, 1);
 
-            int save_jaar = igekozenjaar;
-            int save_maand = igekozenmaand;
+        //    int save_jaar = igekozenjaar;
+        //    int save_maand = igekozenmaand;
 
-            igekozenjaar = jaar;
-            igekozenmaand = maand;
+        //    igekozenjaar = jaar;
+        //    igekozenmaand = maand;
 
-            for (int m = 0; m < aantal_maanden; m++)
-            {
-                if (m != 0)
-                    dumm = dumm.AddMonths(1);
+        //    for (int m = 0; m < aantal_maanden; m++)
+        //    {
+        //        if (m != 0)
+        //            dumm = dumm.AddMonths(1);
 
-                igekozenjaar = dumm.Year;
-                igekozenmaand = dumm.Month;
+        //        igekozenjaar = dumm.Year;
+        //        igekozenmaand = dumm.Month;
 
-                int aantal_dagen_dezemaand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
+        //        int aantal_dagen_dezemaand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
 
-                ProgData.LaadLijstWerkdagPloeg(Kleur, 15);
+        //        ProgData.LaadLijstWerkdagPloeg(Kleur, 15);
 
-                for (int i = 1; i < aantal_dagen_dezemaand + 1; i++)
-                {
-                    DateTime dat = new DateTime(igekozenjaar, igekozenmaand, i);
+        //        for (int i = 1; i < aantal_dagen_dezemaand + 1; i++)
+        //        {
+        //            DateTime dat = new DateTime(igekozenjaar, igekozenmaand, i);
 
-                    try
-                    {
-                        werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == Naam && x._dagnummer == i));
-                    }
-                    catch
-                    {
-                        werkdag dag = new werkdag
-                        {
-                            _naam = Naam,
-                            _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, Kleur),
-                            _werkplek = "",
-                            _afwijkingdienst = "",
-                            _dagnummer = i
-                        };
-                        ProgData.LijstWerkdagPloeg.Add(dag);
-                    }
-                }
-                ProgData.SaveLijstWerkdagPloeg(Kleur, 15);
-            }
-            igekozenjaar = save_jaar;
-            igekozenmaand = save_maand;
-        }
+        //            try
+        //            {
+        //                werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == Naam && x._dagnummer == i));
+        //            }
+        //            catch
+        //            {
+        //                werkdag dag = new werkdag
+        //                {
+        //                    _naam = Naam,
+        //                    _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, Kleur),
+        //                    _werkplek = "",
+        //                    _afwijkingdienst = "",
+        //                    _dagnummer = i
+        //                };
+        //                ProgData.LijstWerkdagPloeg.Add(dag);
+        //            }
+        //        }
+        //        ProgData.SaveLijstWerkdagPloeg(Kleur, 15);
+        //    }
+        //    igekozenjaar = save_jaar;
+        //    igekozenmaand = save_maand;
+        //}
         public static string GetLaatsteAfwijkingPersoon(string loopt_op_kleur, string persnr, DateTime datum)
         {
             string ret = "";
@@ -919,46 +909,46 @@ namespace Bezetting2
             igekozenjaar = BewaarJaar;
             igekozenmaand = BewaarMaand;
         }
-        public static void MaakNieuwPloegBezettingAan(string kleur)
-        {
-            string file = LijstWerkdagPloeg_Locatie(kleur);
-            LijstWerkdagPloeg.Clear();
-            ProgData.AlleMensen.HaalPloegNamenOpKleur(kleur);
-            int aantal_dagen_deze_maand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
-            DateTime dat = new DateTime(igekozenjaar, igekozenmaand, 1);
+        //public static void MaakNieuwPloegBezettingAan(string kleur)
+        //{
+        //    string file = LijstWerkdagPloeg_Locatie(kleur);
+        //    LijstWerkdagPloeg.Clear();
+        //    ProgData.AlleMensen.HaalPloegNamenOpKleur(kleur);
+        //    int aantal_dagen_deze_maand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
+        //    DateTime dat = new DateTime(igekozenjaar, igekozenmaand, 1);
 
-            // bij nieuwe maand aanmaken in zelfde maand ging het dus fout ?
-            // als dat is 1-4-21 en now was 30-4-21 ging het fout, mag dan wel aanmaken
-            DateTime VorigeMaand = DateTime.Now.AddMonths(-1);
-            if (dat > VorigeMaand)
-            {
-                foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
-                {
-                    for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
-                    {
-                        dat = new DateTime(igekozenjaar, igekozenmaand, i);
-                        try
-                        {
-                            werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == a._achternaam && x._dagnummer == i));
-                        }
-                        catch
-                        {
-                            werkdag dag = new werkdag
-                            {
-                                _naam = a._achternaam,
-                                _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, kleur),
-                                _werkplek = "",
-                                _afwijkingdienst = "",
-                                _dagnummer = i
-                            };
-                            ProgData.LijstWerkdagPloeg.Add(dag);
-                        }
-                    }
-                    ProgData.SaveLijstWerkdagPloeg(kleur, 15);
-                }
-                SaveLijstWerkdagPloeg(kleur, 15);
-            }
-        }
+        //    // bij nieuwe maand aanmaken in zelfde maand ging het dus fout ?
+        //    // als dat is 1-4-21 en now was 30-4-21 ging het fout, mag dan wel aanmaken
+        //    DateTime VorigeMaand = DateTime.Now.AddMonths(-1);
+        //    if (dat > VorigeMaand)
+        //    {
+        //        foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+        //        {
+        //            for (int i = 1; i < aantal_dagen_deze_maand + 1; i++)
+        //            {
+        //                dat = new DateTime(igekozenjaar, igekozenmaand, i);
+        //                try
+        //                {
+        //                    werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == a._achternaam && x._dagnummer == i));
+        //                }
+        //                catch
+        //                {
+        //                    werkdag dag = new werkdag
+        //                    {
+        //                        _naam = a._achternaam,
+        //                        _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, kleur),
+        //                        _werkplek = "",
+        //                        _afwijkingdienst = "",
+        //                        _dagnummer = i
+        //                    };
+        //                    ProgData.LijstWerkdagPloeg.Add(dag);
+        //                }
+        //            }
+        //            ProgData.SaveLijstWerkdagPloeg(kleur, 15);
+        //        }
+        //        SaveLijstWerkdagPloeg(kleur, 15);
+        //    }
+        //}
         public static void Zetom_naar_versie21(string kleur)
         {
             // zet oude file's om naar nieuwe ketting
@@ -967,6 +957,8 @@ namespace Bezetting2
 
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
             var path_oud = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_afwijkingen.bin");
+            
+
             if (!File.Exists(path))
             {
                 if (File.Exists(path_oud))
@@ -1016,6 +1008,8 @@ namespace Bezetting2
                     File.Delete(path_oud);
                 }
             }
+
+            
         }
         private static void SchijfLocatieVanBackup(string startPath, string filenaam)
         {

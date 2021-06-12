@@ -305,7 +305,6 @@ namespace Bezetting2
             nietMeeTelLijstToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             removeAutoInlogOnderDitWindowsAccountToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             editPopupMenuToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
-            speedTestNetwerkToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 100;
             maakBackupToolStripMenuItem.Visible = ProgData.RechtenHuidigeGebruiker > 100;
             ploegTotalenToolStripMenuItem.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
@@ -1084,23 +1083,23 @@ namespace Bezetting2
 
         private void WachtOverzichtToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // test of alle gebruikers op deze ploeg, zijn opgenomen in LijstWerkdagPloeg
-            ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
-            //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
-            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-            foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
-            {
-                var naam = a._achternaam;
-                try
-                {
-                    werkdag ver = ProgData.LijstWerkdagPloeg.First(d => (d._naam == naam));
-                }
-                catch
-                {
-                    // naam bestond niet in werkdaglijst, toevoegen
-                    ProgData.MaakNieuweCollegaInBezettingAan(naam, ProgData.GekozenKleur, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
-                }
-            }
+            //// test of alle gebruikers op deze ploeg, zijn opgenomen in LijstWerkdagPloeg
+            //ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+            ////ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+            //ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            //foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+            //{
+            //    var naam = a._achternaam;
+            //    try
+            //    {
+            //        werkdag ver = ProgData.LijstWerkdagPloeg.First(d => (d._naam == naam));
+            //    }
+            //    catch
+            //    {
+            //        // naam bestond niet in werkdaglijst, toevoegen
+            //        ProgData.MaakNieuweCollegaInBezettingAan(naam, ProgData.GekozenKleur, ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
+            //    }
+            //}
 
 
 
@@ -1937,13 +1936,13 @@ namespace Bezetting2
 
                     ProgData.igekozenjaar = start.Year;
                     ProgData.igekozenmaand = start.Month;
-                    DebugWrite($"Bezetting lijst kleuren {start.Year} - {start.Month}");
-                    ProgData.MaakNieuwPloegBezettingAan("Blauw");
-                    ProgData.MaakNieuwPloegBezettingAan("Rood");
-                    ProgData.MaakNieuwPloegBezettingAan("Wit");
-                    ProgData.MaakNieuwPloegBezettingAan("Groen");
-                    ProgData.MaakNieuwPloegBezettingAan("Geel");
-                    ProgData.MaakNieuwPloegBezettingAan("DD");
+                    //DebugWrite($"Bezetting lijst kleuren {start.Year} - {start.Month}");
+                    //ProgData.MaakNieuwPloegBezettingAan("Blauw");
+                    //ProgData.MaakNieuwPloegBezettingAan("Rood");
+                    //ProgData.MaakNieuwPloegBezettingAan("Wit");
+                    //ProgData.MaakNieuwPloegBezettingAan("Groen");
+                    //ProgData.MaakNieuwPloegBezettingAan("Geel");
+                    //ProgData.MaakNieuwPloegBezettingAan("DD");
                 }
             }
         }
@@ -2124,7 +2123,7 @@ namespace Bezetting2
 
             ProgData.GekozenKleur = kleur;
             ProgData.SaveLooptExtraLijst(dir, ProgData.GekozenKleur);
-            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            //ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2365,54 +2364,7 @@ namespace Bezetting2
             }
         }
 
-        private void speedTestNetwerkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // meet snelheid netwerk
-            DebugPanelShow("Meet snelheid netwerk Load en Save");
-
-            DateTime start;
-            double totaal = 0;
-
-            for (int i = 0; i < 25; i++)
-            {
-                start = DateTime.Now;
-                ProgData.MaandData.Load("Blauw");
-                var diffInSeconds = (DateTime.Now - start).TotalSeconds;
-                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
-                totaal += diffInSeconds;
-
-                start = DateTime.Now;
-                ProgData.MaandData.Save("Blauw", 1);
-                diffInSeconds = (DateTime.Now - start).TotalSeconds;
-                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
-                totaal += diffInSeconds;
-
-                start = DateTime.Now;
-                ProgData.MaandData.Load("Wit");
-                diffInSeconds = (DateTime.Now - start).TotalSeconds;
-                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
-                totaal += diffInSeconds;
-
-                start = DateTime.Now;
-                ProgData.MaandData.Save("Wit", 1);
-                diffInSeconds = (DateTime.Now - start).TotalSeconds;
-                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
-                totaal += diffInSeconds;
-
-                start = DateTime.Now;
-                ProgData.MaandData.Load("Geel");
-                diffInSeconds = (DateTime.Now - start).TotalSeconds;
-                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
-                totaal += diffInSeconds;
-
-                start = DateTime.Now;
-                ProgData.MaandData.Save("Geel", 1);
-                diffInSeconds = (DateTime.Now - start).TotalSeconds;
-                DebugWrite($"{i} Schrijf en delete {diffInSeconds} seconden");
-                totaal += diffInSeconds;
-            }
-            DebugWrite($"Gemiddeld Load en Save MaandData {totaal / (25 * 6)} seconden");
-        }
+       
 
         private void PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem_Click(object sender, EventArgs e)
         {

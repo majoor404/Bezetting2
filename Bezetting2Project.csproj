@@ -120,6 +120,7 @@
     <Compile Include="Data\veranderingen.cs" />
     <Compile Include="Data\VeranderingenVerhuis.cs" />
     <Compile Include="Data\werkdag.cs" />
+    <Compile Include="Data\WerkPlek.cs" />
     <Compile Include="EditPersoneel.cs">
       <SubType>Form</SubType>
     </Compile>

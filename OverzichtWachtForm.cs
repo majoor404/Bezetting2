@@ -1,4 +1,6 @@
-﻿using Bezetting2.Data;
+﻿#define oud
+
+using Bezetting2.Data;
 using Bezetting2.Invoer;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,7 @@ namespace Bezetting2
         private ListBox broer;
         private int sourse_index;
         public List<Invoerveld> opbouw = new List<Invoerveld>();
+        private WerkPlek WP = new WerkPlek();
 
         public class Invoerveld
         {
@@ -83,7 +86,6 @@ namespace Bezetting2
 
                     UpdateAfwijkingListBox(tb);
                     UpdateAfwijkingListBox(sourse);
-                    //UpdateAfwijking();
                 }
             }
         }
@@ -223,8 +225,6 @@ namespace Bezetting2
             label19.Visible = listBox19.Visible;
             label20.Visible = listBox20.Visible;
             label21.Visible = listBox21.Visible;
-
-            //InstellingenProg.SaveProgrammaData();
         }
 
         private void UpdateAfwijkingListBox(ListBox box)
@@ -300,41 +300,28 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-
+                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur,ProgData.igekozenmaand,ProgData.igekozenjaar);
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
                     if ((box.Tag != null))
                     {
                         int tag = int.Parse(box.Tag.ToString());
                         // staat er een naam in listbox ?
-                        if (tag < 22 && box.Items.Count > 0)
+                        if (tag < 22 && box.Items.Count > 0 && box != listBox1)
                         {
                             for (int i = 0; i < box.Items.Count; i++)
                             {
+                                Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                                string werkplek = veld._Label.Text;
                                 // pak naam
                                 string naam = box.Items[i].ToString();
                                 // haal juiste werkdag bij persoon
-                                try // als bv ed gecopyeerd vanuit vorige dag kan die niet gevonden worden.
-                                {
-                                    werkdag ver = ProgData.LijstWerkdagPloeg.First(a => (a._naam == naam) && (a._dagnummer.ToString() == dat.Day.ToString()));
-                                    if (box.Tag.ToString() == "1")
-                                    {
-                                        ver._werkplek = "";
-                                    }
-                                    else
-                                    {
-                                        // save werkplek
-                                        Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                                        ver._werkplek = veld._Label.Text;
-                                    }
-                                }
-                                catch { }
+                                WerkPlek.SetWerkPlek(naam, dat.Day, werkplek);
                             }
                         }
                     }
                 }
-                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
                 CaptureMyScreen();
             }
         }
@@ -366,112 +353,62 @@ namespace Bezetting2
 
             ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            //ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+            WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
 
             foreach (ListBox box in this.Controls.OfType<ListBox>())
             {
                 box.Items.Clear();
+                if (int.Parse(box.Tag.ToString()) > 21)
+                    box.Visible = false;
             }
 
             try
             {
-                // extra diensten regelen.
-                // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
+                // extra diensten in overzicht zetten
                 string dir = ProgData.GetDirectoryBezettingMaand(dat);
                 ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
                 if (ProgData.ListLooptExtra.Count > 0)
                 {
-                    /////////////////////////////////////////////////////////////////////////////////////
-                    // VD is bv veranderd in ED
-                    // pas dus aan.
-                    for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
-                    {
-                        try
-                        {
-                            werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
-                                                                             && (aa._dagnummer == ProgData.ListLooptExtra[i]._datum.Day)
-                                                                             && (aa._afwijkingdienst != ProgData.ListLooptExtra[i]._metcode));
-                            ver._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
-                            ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                        }
-                        catch { }
-                    }
-                    ///////////////////////////////////////////////////////////////////////////////////////
-
                     foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
                     {
                         if (naam._datum.ToShortDateString() == dat.ToShortDateString())
                         {
-                            try
-                            {
-                                personeel perso = ProgData.AlleMensen.LijstPersoonKleur.First(aa => (aa._achternaam == naam._naam));
-                            }
-                            catch
-                            {
-                                personeel extra_man = new personeel
-                                {
-                                    _achternaam = naam._naam
-                                };
-                                ProgData.AlleMensen.LijstPersoonKleur.Add(extra_man);
-                            }
-
-                            try
-                            {
-                                werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
-                            }
-                            catch
-                            {
-                                werkdag werkdag_extra_man = new werkdag
-                                {
-                                    _dagnummer = dat.Day,
-                                    _naam = naam._naam,
-                                    _werkplek = "",
-                                    _afwijkingdienst = naam._metcode
-                                };
-                                ProgData.LijstWerkdagPloeg.Add(werkdag_extra_man);
-                                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                            }
+                            listBox1.Items.Add(naam._naam);
                         }
                     }
                 }
-
+                // orginele namen van die kleur in listbox1 zetten
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {
-                        // 
-                        werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
-
-                        if (string.IsNullOrEmpty(ver._werkplek))
-                        {
                             listBox1.Items.Add(man._achternaam);
-                            UpdateAfwijkingListBox(listBox1);
-                        }
-                        else
-                        {
-                            Invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
-                            veld._ListNaam.Items.Add(man._achternaam);
-                            UpdateAfwijkingListBox(veld._ListNaam);
-                        }
                     }
                     catch { }
                 }
 
-                foreach (ListBox box in this.Controls.OfType<ListBox>())
+                UpdateAfwijkingListBox(listBox1);
+
+                // haal uit WP de werkplekken, en verplaats als nodig
+                for (int i = listBox1.Items.Count-1; i > -1; i--)
                 {
-                    // als op werkplek geen personeel, dan invisible afwijking
-                    int tag = int.Parse(box.Tag.ToString());
-                    if (tag < 22)
+                    string naam = listBox1.Items[i].ToString();
+                    string werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
+                    if(werkplek != "" && werkplek != label1.Text)
                     {
-                        if (box.Items.Count == 0)
-                        {
-                            Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                            veld._ListAfw.Visible = false;
-                        }
+                        //move
+                        listBox1.Items.RemoveAt(i);
+                        UpdateAfwijkingListBox(listBox1);
+
+                        Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek));
+                        veld._ListNaam.Items.Add(naam);
+                        UpdateAfwijkingListBox(veld._ListNaam);
                     }
+
                 }
 
-                // als dag info, kleur button
+                //als dag info, kleur button
                 string file = $"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
                 if (File.Exists(file))
                 {
@@ -481,9 +418,121 @@ namespace Bezetting2
                 {
                     buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
                 }
+
+
+                //try
+                //{
+                //    // extra diensten regelen.
+                //    // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
+                //    string dir = ProgData.GetDirectoryBezettingMaand(dat);
+                //    ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
+                //    if (ProgData.ListLooptExtra.Count > 0)
+                //    {
+                //        /////////////////////////////////////////////////////////////////////////////////////
+                //        // VD is bv veranderd in ED
+                //        // pas dus aan.
+                //        for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
+                //        {
+                //            try
+                //            {
+                //                werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
+                //                                                                 && (aa._dagnummer == ProgData.ListLooptExtra[i]._datum.Day)
+                //                                                                 && (aa._afwijkingdienst != ProgData.ListLooptExtra[i]._metcode));
+                //                ver._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
+                //                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                //            }
+                //            catch { }
+                //        }
+                //        ///////////////////////////////////////////////////////////////////////////////////////
+
+                //        foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
+                //        {
+                //            if (naam._datum.ToShortDateString() == dat.ToShortDateString())
+                //            {
+                //                try
+                //                {
+                //                    personeel perso = ProgData.AlleMensen.LijstPersoonKleur.First(aa => (aa._achternaam == naam._naam));
+                //                }
+                //                catch
+                //                {
+                //                    personeel extra_man = new personeel
+                //                    {
+                //                        _achternaam = naam._naam
+                //                    };
+                //                    ProgData.AlleMensen.LijstPersoonKleur.Add(extra_man);
+                //                }
+
+                //                try
+                //                {
+                //                    werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
+                //                }
+                //                catch
+                //                {
+                //                    werkdag werkdag_extra_man = new werkdag
+                //                    {
+                //                        _dagnummer = dat.Day,
+                //                        _naam = naam._naam,
+                //                        _werkplek = "",
+                //                        _afwijkingdienst = naam._metcode
+                //                    };
+                //                    ProgData.LijstWerkdagPloeg.Add(werkdag_extra_man);
+                //                    ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
+                //                }
+                //            }
+                //        }
+                //    }
+
+                //    foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
+                //    {
+                //        try
+                //        {
+                //            // 
+                //            werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
+
+                //            if (string.IsNullOrEmpty(ver._werkplek))
+                //            {
+                //                listBox1.Items.Add(man._achternaam);
+                //                UpdateAfwijkingListBox(listBox1);
+                //            }
+                //            else
+                //            {
+                //                Invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
+                //                veld._ListNaam.Items.Add(man._achternaam);
+                //                UpdateAfwijkingListBox(veld._ListNaam);
+                //            }
+                //        }
+                //        catch { }
+                //    }
+
+
+
+                //    foreach (ListBox box in this.Controls.OfType<ListBox>())
+                //    {
+                //        // als op werkplek geen personeel, dan invisible afwijking
+                //        int tag = int.Parse(box.Tag.ToString());
+                //        if (tag < 22)
+                //        {
+                //            if (box.Items.Count == 0)
+                //            {
+                //                Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
+                //                veld._ListAfw.Visible = false;
+                //            }
+                //        }
+                //    }
+
+                //    // als dag info, kleur button
+                //    string file = $"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
+                //    if (File.Exists(file))
+                //    {
+                //        buttonOpmerking.BackColor = Color.Yellow;
+                //    }
+                //    else
+                //    {
+                //        buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
+                //    }
+                }
+                catch { }
             }
-            catch { }
-        }
 
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
@@ -888,11 +937,6 @@ namespace Bezetting2
             SaveData();
             dat = dateTimePicker1.Value;
             ViewUpdate();
-        }
-
-        private void checkBox1Dag_CheckedChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }
