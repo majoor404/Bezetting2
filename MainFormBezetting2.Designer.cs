@@ -416,7 +416,7 @@
             this.updateExtraDienstenToolStripMenuItem.Enabled = false;
             this.updateExtraDienstenToolStripMenuItem.Name = "updateExtraDienstenToolStripMenuItem";
             this.updateExtraDienstenToolStripMenuItem.Size = new System.Drawing.Size(327, 22);
-            this.updateExtraDienstenToolStripMenuItem.Text = "Update Extra Diensten";
+            this.updateExtraDienstenToolStripMenuItem.Text = "Update / Hertel Extra Diensten";
             this.updateExtraDienstenToolStripMenuItem.Click += new System.EventHandler(this.updateExtraDienstenToolStripMenuItem_Click);
             // 
             // importNamenOudeVersieToolStripMenuItem

@@ -372,8 +372,9 @@ namespace Bezetting2
                 labelDatum.Text = dat.ToLongDateString();
             }
 
-            ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
+            ProgData.igekozenjaar = dat.Year;
+            
             ViewDag1(dat);
 
             dat2 = dat.AddDays(1);
@@ -407,8 +408,8 @@ namespace Bezetting2
                 buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
             }
 
-            ProgData.igekozenjaar = dat2.Year;
             ProgData.igekozenmaand = dat2.Month;
+            ProgData.igekozenjaar = dat2.Year;
 
             ViewDag2(dat2);
 
@@ -491,12 +492,25 @@ namespace Bezetting2
                         }
                     }
                 }
+
+                DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
                 // orginele namen van die kleur in listbox1 zetten
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {
-                        listBox1.Items.Add(man._achternaam);
+                        var nummer = ProgData.Get_Gebruiker_Nummer(man._achternaam);
+                        string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                            nummer, datum);
+
+                        afwijking_ = afwijking_.ToUpper();
+
+                        if (afwijking_.Length > 3)
+                            afwijking_ = afwijking_.Substring(0, 3);
+
+                        // als ED VD of RD dan hoort hij niet thuis op eigen wacht
+                        if (!(afwijking_ == "ED-" || afwijking_ == "RD-" || afwijking_ == "VD-"))
+                            listBox1.Items.Add(man._achternaam);
                     }
                     catch { }
                 }
@@ -552,12 +566,25 @@ namespace Bezetting2
                         }
                     }
                 }
+
+                DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
                 // orginele namen van die kleur in listbox1 zetten
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {
-                        listBox83.Items.Add(man._achternaam);
+                        var nummer = ProgData.Get_Gebruiker_Nummer(man._achternaam);
+                        string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                            nummer, datum);
+
+                        afwijking_ = afwijking_.ToUpper();
+
+                        if (afwijking_.Length > 3)
+                            afwijking_ = afwijking_.Substring(0, 3);
+
+                        // als ED VD of RD dan hoort hij niet thuis op eigen wacht
+                        if (!(afwijking_ == "ED-" || afwijking_ == "RD-" || afwijking_ == "VD-"))
+                            listBox83.Items.Add(man._achternaam);
                     }
                     catch { }
                 }
@@ -588,8 +615,9 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                ProgData.igekozenjaar = dat.Year;
                 ProgData.igekozenmaand = dat.Month;
+                ProgData.igekozenjaar = dat.Year;
+                
 
                 WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
                 foreach (ListBox box in PanelDag1.Controls.OfType<ListBox>())
@@ -598,7 +626,7 @@ namespace Bezetting2
                     {
                         int tag = int.Parse(box.Tag.ToString());
                         // staat er een naam in listbox ?
-                        if (tag == 1 && box.Items.Count > 0 && box != listBox1)
+                        if (tag == 1 && box.Items.Count > 0/* && box != listBox1*/)
                         {
                             for (int i = 0; i < box.Items.Count; i++)
                             {
@@ -615,8 +643,8 @@ namespace Bezetting2
                 WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
 
 
-                ProgData.igekozenjaar = dat2.Year;
                 ProgData.igekozenmaand = dat2.Month;
+                ProgData.igekozenjaar = dat2.Year;
                 WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
                 
                 foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
@@ -625,7 +653,7 @@ namespace Bezetting2
                     {
                         int tag = int.Parse(box.Tag.ToString());
                         // staat er een naam in listbox ?
-                        if (tag == 1 && box.Items.Count > 0 && box != listBox83)
+                        if (tag == 1 && box.Items.Count > 0/* && box != listBox83*/)
                         {
                             for (int i = 0; i < box.Items.Count; i++)
                             {

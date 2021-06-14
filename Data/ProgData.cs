@@ -471,10 +471,10 @@ namespace Bezetting2
             return jaar + "\\" + maand;
         }
 
-        public static string LijstWerkdagPloeg_Locatie(string kleur)
-        {
-            return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_bezetting.bin");
-        }
+        //public static string LijstWerkdagPloeg_Locatie(string kleur)
+        //{
+        //    return Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}\\{kleur}_bezetting.bin");
+        //}
 
         public static string Ploeg_Namen_Locatie(string kleur)
         {
@@ -614,7 +614,7 @@ namespace Bezetting2
                 string path = Path.GetFullPath($"{_igekozenjaar}\\{igekozenmaand}");
                 if (!Directory.Exists(path))
                 {
-                    MessageBox.Show("Maak nieuwe directory aan, met inhoud\nGeduld ;-)");
+                    MessageBox.Show("Maak nieuwe directory aan, met inhoud");
                     // directory betond niet, dus aanmaken
                     _ = Directory.CreateDirectory(path);
                     // dir aangemaakt, dus weet zeker geen maand data

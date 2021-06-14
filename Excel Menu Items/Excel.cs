@@ -67,11 +67,11 @@ namespace Bezetting2
             Microsoft.Office.Interop.Excel._Workbook xlWorkBook;
             Microsoft.Office.Interop.Excel.Range oRng;
 
-            if(InstellingenProg._TelVakAlsVK)
+            if (InstellingenProg._TelVakAlsVK)
             {
                 MessageBox.Show("VAK wordt geteld als VK (optie aangezet door Admin)");
             }
-            
+
             for (int i = 1; i < 13; i++)    // maanden
             {
                 ProgData.igekozenmaand = i;
@@ -230,8 +230,8 @@ namespace Bezetting2
 
         private void GetAfwijkingenPersoonInEenMaand(string persnum, int jaar, int maand)
         {
-                 
-            
+
+
             string kleur = ProgData.Get_Gebruiker_Kleur(persnum);
             string naam = ProgData.Get_Gebruiker_Naam(persnum);
             int AantaldagenDezeMaand = DateTime.DaysInMonth(jaar, maand);
@@ -240,7 +240,7 @@ namespace Bezetting2
             for (int dag = 1; dag < AantaldagenDezeMaand + 1; dag++)
             {
                 dag_gekozen = new DateTime(jaar, maand, dag);
-                
+
                 // get en zet eerst orginele dienst
                 string wacht = GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
                 if (!string.IsNullOrEmpty(wacht))
@@ -286,69 +286,7 @@ namespace Bezetting2
                 {
                     deze_maand_overzicht_persoon[dag] = "W"; // Werkdag
                 }
-
             }
-            
-            ////eerst vanuit ploegbezetting een string list maken met afwijkingen en normaal schema van persoon
-            //if (File.Exists(ProgData.LijstWerkdagPloeg_Locatie(kleur)))
-            //{
-            //    ProgData.LaadLijstWerkdagPloeg(kleur, 15);
-            //    foreach (werkdag dag in ProgData.LijstWerkdagPloeg)
-            //    {
-            //        if (dag._naam == naam)
-            //        {
-            //            if (dag._dagnummer < AantaldagenDezeMaand + 1)
-            //            {
-            //                dag_gekozen = new DateTime(jaar, maand, dag._dagnummer);
-
-            //                // get en zet eerst orginele dienst
-            //                string wacht = GetDienst(ProgData.GekozenRooster(), dag_gekozen, kleur);
-            //                if (!string.IsNullOrEmpty(wacht))
-            //                {
-            //                    deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
-            //                }
-            //                else
-            //                {
-            //                    deze_maand_overzicht_persoon[dag._dagnummer] = "V"; // Rooster vrij
-            //                }
-
-            //                // daarna overschrijven als die afwijkt van ""
-            //                if (!string.IsNullOrEmpty(dag._afwijkingdienst))
-            //                {
-            //                    string dum = dag._afwijkingdienst.ToUpper();
-            //                    if (dum.Length > 3 && dum.Substring(0, 3) == "ED-")
-            //                    {
-            //                        dum = "ED";
-            //                    }
-            //                    if (dum.Length > 3 && dum.Substring(0, 3) == "RD-")
-            //                    {
-            //                        dum = "RD";
-            //                    }
-            //                    if (dum.Length > 3 && dum.Substring(0, 3) == "VD-")
-            //                    {
-            //                        dum = "VD";
-            //                    }
-            //                    if (InstellingenProg._TelVakAlsVK && dum == "VAK")
-            //                    {
-            //                        dum = "VK";
-            //                    }
-
-            //                    if (dum == "A")
-            //                    {
-            //                        dum = "VK";
-            //                    }
-
-            //                    deze_maand_overzicht_persoon[dag._dagnummer] = dum;
-            //                }
-
-            //                if (ListTelNietMeeNamen.Contains(deze_maand_overzicht_persoon[dag._dagnummer]))
-            //                {
-            //                    deze_maand_overzicht_persoon[dag._dagnummer] = "W"; // Werkdag
-            //                }
-            //            }
-            //        }
-            //    }
-           // }
 
             // lijst strings nu klaar, nu tellen.
             //int dagen = DateTime.DaysInMonth(jaar, maand);
@@ -655,59 +593,59 @@ namespace Bezetting2
 
         private void TellingWaarGewerktToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    ListTelNamen.Clear();
-            //    ListTelWerkPlek.Clear();
-            //    ListClassTelPlekGewerkt.Clear();
-            //    // bewaar huidige maand en kleur
-            //    int bewaar_maand = ProgData.igekozenmaand;
+            try
+            {
+                ListTelNamen.Clear();
+                ListTelWerkPlek.Clear();
+                ListClassTelPlekGewerkt.Clear();
+                // bewaar huidige maand en kleur
+                int bewaar_maand = ProgData.igekozenmaand;
 
-            //    for (int i = 1; i < 13; i++)    // maanden
-            //    {
-            //        ProgData.igekozenmaand = i;
-            //        if (File.Exists(ProgData.LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)))
-            //        {
-            //            ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-            //            ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
-            //            //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
+                for (int i = 1; i < 13; i++)    // maanden
+                {
+                    ProgData.igekozenmaand = i;
 
-            //            foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
-            //            {
-            //                if (!ListTelNamen.Contains(a._achternaam))
-            //                    ListTelNamen.Add(a._achternaam);
-            //            }
+                    string file = Path.GetFullPath($"{ProgData.igekozenjaar}\\{i}\\{ProgData.GekozenKleur}_WerkPlek.bin");
 
-            //            foreach (werkdag a in ProgData.LijstWerkdagPloeg)
-            //            {
-            //                if (!ListTelWerkPlek.Contains(a._werkplek) && !string.IsNullOrEmpty(a._werkplek))
-            //                    ListTelWerkPlek.Add(a._werkplek);
+                    if (File.Exists(file))
+                    {
+                        WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
+                        ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
 
-            //                if (!string.IsNullOrEmpty(a._werkplek))
-            //                {
-            //                    ClassTelPlekGewerkt tel = new ClassTelPlekGewerkt(a._naam, a._werkplek);
-            //                    try
-            //                    {
-            //                        ClassTelPlekGewerkt gevonden = ListClassTelPlekGewerkt.First(b => b._NaamTelPlek == a._naam && b._PlekTelPlek == a._werkplek);
-            //                        gevonden._AantalTelPlek++;
-            //                    }
-            //                    catch
-            //                    {
-            //                        ListClassTelPlekGewerkt.Add(tel);
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //    ZetGevondenDataTellingWaarGewerktInExcel();
-            //    ProgData.igekozenmaand = bewaar_maand;
-            //    ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-            //    ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
-            //    //ProgData.LaadLijstPersoneelKleur(ProgData.GekozenKleur, 15);
-            //}
-            //catch
-            //{
-            //}
+                        foreach (personeel a in ProgData.AlleMensen.LijstPersoonKleur)
+                        {
+                            if (!ListTelNamen.Contains(a._achternaam))
+                                ListTelNamen.Add(a._achternaam);
+                        }
+
+                        foreach (WerkPlek a in WerkPlek.LijstWerkPlekPloeg)
+                        {
+                            if (!ListTelWerkPlek.Contains(a.werkplek_) && !string.IsNullOrEmpty(a.werkplek_))
+                                ListTelWerkPlek.Add(a.werkplek_);
+
+                            if (!string.IsNullOrEmpty(a.werkplek_))
+                            {
+                                ClassTelPlekGewerkt tel = new ClassTelPlekGewerkt(a.naam_, a.werkplek_);
+                                try
+                                {
+                                    ClassTelPlekGewerkt gevonden = ListClassTelPlekGewerkt.First(b => b._NaamTelPlek == a.naam_ && b._PlekTelPlek == a.werkplek_);
+                                    gevonden._AantalTelPlek++;
+                                }
+                                catch
+                                {
+                                    ListClassTelPlekGewerkt.Add(tel);
+                                }
+                            }
+                        }
+                    }
+                }
+                ZetGevondenDataTellingWaarGewerktInExcel();
+                ProgData.igekozenmaand = bewaar_maand;
+                ProgData.AlleMensen.HaalPloegNamenOpKleur(ProgData.GekozenKleur);
+            }
+            catch
+            {
+            }
         }
 
         private void NietMeeTelLijstToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1319,7 +1257,7 @@ namespace Bezetting2
                 {
                     string naam = ProgData.Get_Gebruiker_Naam(a.ToString());
                     DebugWrite($"Verzamel Afwijkingen van persoon dit jaar {naam}");
-                    for (int q = 1; q < aantal_dagen+1; q++)
+                    for (int q = 1; q < aantal_dagen + 1; q++)
                     {
                         DateTime dat = new DateTime(ProgData.igekozenjaar, i, q);
                         string afwijking = ProgData.GetLaatsteAfwijkingPersoon(ProgData.GekozenKleur, a.ToString(), dat);

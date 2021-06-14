@@ -360,7 +360,7 @@ namespace Bezetting2
                 View.Columns.Clear();
                 View.Items.Clear();
 
-                //ProgData.Zetom_naar_versie21(ProgData.GekozenKleur);
+                // bestaat dir en delete/zet om oude data.                 
                 ProgData.CheckFiles(ProgData.GekozenKleur);
 
                 int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
@@ -467,16 +467,20 @@ namespace Bezetting2
 
                     for (int row = 4; row < aantal_regels_gekleurd - 1; row++)
                     {
-                        var naam = View.Items[row].SubItems[0].Text;
-                        if (naam == ingelogd_persoon)
+                        try
                         {
-                            for (int col = 0; col < aantal_dagen + 1; col++)
+                            var naam = View.Items[row].SubItems[0].Text;
+                            if (naam == ingelogd_persoon)
                             {
-                                View.Items[row].UseItemStyleForSubItems = false;
-                                // Now you can Change the Particular Cell Property of Style
-                                View.Items[row].SubItems[col].BackColor = GekozenNaamKleur_;
+                                for (int col = 0; col < aantal_dagen + 1; col++)
+                                {
+                                    View.Items[row].UseItemStyleForSubItems = false;
+                                    // Now you can Change the Particular Cell Property of Style
+                                    View.Items[row].SubItems[col].BackColor = GekozenNaamKleur_;
+                                }
                             }
                         }
+                        catch { }   // als geen namen zou eea kunnen crasen
                     }
                 }
                 // maand in beeld
@@ -748,6 +752,7 @@ namespace Bezetting2
                         ListViewItem item_extra = new ListViewItem(extralijst);
                         View.Items.Add(item_extra);
 
+                        //test of in orginele bezetting die persoon nog loopt, anders verwijder uit lijst
                         CleanExtraDienstenLijst(dir);
 
                         foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
@@ -889,6 +894,7 @@ namespace Bezetting2
                     ListViewItem item_extra = new ListViewItem(extralijst);
                     View.Items.Add(item_extra);
 
+                    //test of in orginele bezetting die persoon nog loopt, anders verwijder uit lijst
                     CleanExtraDienstenLijst(dir);
 
                     foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
@@ -2059,7 +2065,7 @@ namespace Bezetting2
 
         private void updateExtraDienstenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            const string message = "Als aantal extra diensten niet klopt op maand overzicht, kan je deze hertellen.";
+            string message = $"Als aantal extra diensten niet klopt op maand overzicht, kan je deze hertellen.Voor kleur {ProgData.GekozenKleur} op maand {ProgData.Sgekozenmaand()}";
             const string caption = "Vraag updaten ?";
             var result = MessageBox.Show(message, caption,
                                          MessageBoxButtons.YesNo,
@@ -2094,15 +2100,17 @@ namespace Bezetting2
                 {
                     try
                     {
-                        DateTime datum = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, ProgData.ListLooptExtra[i]._datum.Day);
-                        string AfWijkingPersoon = ProgData.GetLaatsteAfwijkingPersoon(loopt_op_kleur, persnr, datum);
+                        //DateTime datum = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, ProgData.ListLooptExtra[i]._datum.Day);
+                        string AfWijkingPersoon = ProgData.GetLaatsteAfwijkingPersoon
+                            (loopt_op_kleur, persnr, ProgData.ListLooptExtra[i]._datum);
 
 
                         string eerste_2 = AfWijkingPersoon.Length >= 2 ? AfWijkingPersoon.Substring(0, 2) : AfWijkingPersoon;
-                        string dienst = AfWijkingPersoon.Length >= 4 ? AfWijkingPersoon.Substring(3, 1) : AfWijkingPersoon;
+                        string GaatDienstLopen = AfWijkingPersoon.Length >= 4 ? AfWijkingPersoon.Substring(3, 1) : AfWijkingPersoon;
 
 
-                        var dienst_rooster = GetDienst(ProgData.GekozenRooster(), datum, ProgData.GekozenKleur);
+                        var Dienst_Volgens_Rooster_Van_Die_Kleur = GetDienst
+                            (ProgData.GekozenRooster(), ProgData.ListLooptExtra[i]._datum, ProgData.GekozenKleur);
 
                         if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD"))
                         {
@@ -2110,7 +2118,7 @@ namespace Bezetting2
                         }
                         else
                         {
-                            if (dienst != dienst_rooster && dienst != "DD")
+                            if (GaatDienstLopen != Dienst_Volgens_Rooster_Van_Die_Kleur && GaatDienstLopen != "DD")
                             {
                                 ProgData.ListLooptExtra.RemoveAt(i);
                             }
@@ -2123,7 +2131,6 @@ namespace Bezetting2
 
             ProgData.GekozenKleur = kleur;
             ProgData.SaveLooptExtraLijst(dir, ProgData.GekozenKleur);
-            //ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -2363,8 +2370,6 @@ namespace Bezetting2
                 }
             }
         }
-
-       
 
         private void PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem_Click(object sender, EventArgs e)
         {

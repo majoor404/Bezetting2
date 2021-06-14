@@ -93,7 +93,7 @@ namespace Bezetting2
         private void OverzichtWachtForm_Shown(object sender, EventArgs e)
         {
             buttonOpmerking.Enabled = ProgData.RechtenHuidigeGebruiker > 24;
-            
+
             // als ToegangNivo hoog genoeg, vrijgave edit
             if (ProgData.RechtenHuidigeGebruiker > 100)
             {
@@ -238,14 +238,23 @@ namespace Bezetting2
             {
                 // voor elke persoon in lijst
                 string naam = box.Items[i].ToString();
-                
+
                 var nummer = ProgData.Get_Gebruiker_Nummer(naam);
                 DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
                 string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
                     nummer, datum);
+
                 broer.Items.Add(afwijking_);
                 if (!string.IsNullOrEmpty(afwijking_))
                     afwijking = true;
+
+                //// als ED VD of RD dan hoort hij niet thuis op eigen wacht
+                //if (afwijking_.ToUpper() == "ED-" || afwijking_.ToUpper() == "RD-" || afwijking_.ToUpper() == "VD-")
+                //{
+                //    box.Items.RemoveAt(i);
+                //    broer.Items.RemoveAt(i);
+                //    afwijking = false;
+                //}
             }
             broer.Visible = afwijking;
         }
@@ -300,14 +309,14 @@ namespace Bezetting2
         {
             if (CheckRechten())
             {
-                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur,ProgData.igekozenmaand,ProgData.igekozenjaar);
+                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
                 foreach (ListBox box in this.Controls.OfType<ListBox>())
                 {
                     if ((box.Tag != null))
                     {
                         int tag = int.Parse(box.Tag.ToString());
                         // staat er een naam in listbox ?
-                        if (tag < 22 && box.Items.Count > 0 && box != listBox1)
+                        if (tag < 22 && box.Items.Count > 0/* && box != listBox1*/)
                         {
                             for (int i = 0; i < box.Items.Count; i++)
                             {
@@ -378,11 +387,24 @@ namespace Bezetting2
                         }
                     }
                 }
+
+                DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
                 // orginele namen van die kleur in listbox1 zetten
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     try
                     {
+                        var nummer = ProgData.Get_Gebruiker_Nummer(man._achternaam);
+                        string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                            nummer, datum);
+
+                        afwijking_ = afwijking_.ToUpper();
+
+                        if (afwijking_.Length > 3)
+                            afwijking_ = afwijking_.Substring(0, 3);
+
+                        // als ED VD of RD dan hoort hij niet thuis op eigen wacht
+                        if (!(afwijking_ == "ED-" || afwijking_ == "RD-" || afwijking_ == "VD-"))
                             listBox1.Items.Add(man._achternaam);
                     }
                     catch { }
@@ -391,11 +413,11 @@ namespace Bezetting2
                 UpdateAfwijkingListBox(listBox1);
 
                 // haal uit WP de werkplekken, en verplaats als nodig
-                for (int i = listBox1.Items.Count-1; i > -1; i--)
+                for (int i = listBox1.Items.Count - 1; i > -1; i--)
                 {
                     string naam = listBox1.Items[i].ToString();
                     string werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
-                    if(werkplek != "" && werkplek != label1.Text)
+                    if (werkplek != "" && werkplek != label1.Text)
                     {
                         //move
                         listBox1.Items.RemoveAt(i);
@@ -530,9 +552,9 @@ namespace Bezetting2
                 //    {
                 //        buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
                 //    }
-                }
-                catch { }
             }
+            catch { }
+        }
 
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
