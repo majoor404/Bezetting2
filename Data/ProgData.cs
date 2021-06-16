@@ -35,7 +35,7 @@ namespace Bezetting2
 
         public static string _LooptExtra_Locatie;
         public static List<LooptExtraDienst> ListLooptExtra = new List<LooptExtraDienst>();
-        private static DateTime saveTimeExtra = DateTime.Now;
+        public static DateTime saveTimeExtra = DateTime.Now;
 
         //public static List<werkdag> LijstWerkdagPloeg = new List<werkdag>();
 
@@ -680,6 +680,7 @@ namespace Bezetting2
                 // los ik op door op dag 1 en laatste maand eea niet op te slaan.
 
                 ProgData.SaveDatum();
+                string kleur = ProgData.GekozenKleur;
 
                 backup = DateTime.Now;
                 ProgData.igekozenjaar = backup.Year;
@@ -715,6 +716,7 @@ namespace Bezetting2
                     ProgData.AlleMensen.BewaarPloegNamenOpKleurOpSchijf("DD", 15);
                 }
                 ProgData.ReturnDatum();
+                ProgData.GekozenKleur = kleur;
             }
             catch
             {

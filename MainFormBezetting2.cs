@@ -269,6 +269,9 @@ namespace Bezetting2
             //Refresh();
             LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
 
+            // zodat niet meteen melding
+            ProgData.saveTimeExtra = ProgData.saveTimeExtra.AddSeconds(-10);
+            
             VulViewScherm();
         }
 
@@ -2208,8 +2211,17 @@ namespace Bezetting2
 
         private void wachtoverzichtFormulier1DagToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            InstellingenProg._Wachtoverzicht2Dagen = !InstellingenProg._Wachtoverzicht2Dagen;
-            wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
+            InstellingenProg._Wachtoverzicht2Dagen = wachtoverzichtFormulier2DagenToolStripMenuItem.Checked;
+            if (InstellingenProg._Wachtoverzicht2Dagen)
+            {
+                InstellingenProg._Wachtoverzicht2Dagen = false;
+                wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                InstellingenProg._Wachtoverzicht2Dagen = true;
+                wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = true;
+            }
         }
 
         private void kleurEigenNaamToolStripMenuItem_Click(object sender, EventArgs e)

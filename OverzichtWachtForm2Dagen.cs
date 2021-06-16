@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using static Bezetting2.DatumVijfPloegUtils;
 
@@ -20,6 +21,7 @@ namespace Bezetting2
         private WerkPlek WP = new WerkPlek();
         private DateTime dat;
         private DateTime dat2;
+        private DateTime huidig;
 
         public class Invoerveld
         {
@@ -223,6 +225,7 @@ namespace Bezetting2
 
                     }
                 }
+                SaveData();
             }
         }
         private static bool CheckRechten()
@@ -357,6 +360,7 @@ namespace Bezetting2
             labelKleur.Text = ProgData.GekozenKleur;
             labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
+            huidig = dat;
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
             if (string.IsNullOrEmpty(labelDienst.Text))
@@ -426,7 +430,7 @@ namespace Bezetting2
         }
         private void ButtonNext_Click(object sender, EventArgs e)
         {
-            SaveData();
+            // met drag drop save SaveData();
             dat = dat.AddDays(1);
 
             string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
@@ -442,7 +446,7 @@ namespace Bezetting2
         }
         private void ButtonPrev_Click(object sender, EventArgs e)
         {
-            SaveData();
+            // met drag drop save SaveData();
             dat = dat.AddDays(-1);
 
             string dienst = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
@@ -689,102 +693,127 @@ namespace Bezetting2
         }
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
-            foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
+            // copy werkplek data 1 dag verder.
+            DateTime Volgende_werk_dag = huidig;
+            Volgende_werk_dag = Volgende_werk_dag.AddDays(1);
+            string dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
+            while (string.IsNullOrEmpty(dienst))
             {
-                box.Items.Clear();
+                Volgende_werk_dag = Volgende_werk_dag.AddDays(1);
+                dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
             }
 
-            for (int i = 0; i < listBox1.Items.Count; i++)
+
+            foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
             {
-                listBox83.Items.Add(listBox1.Items[i].ToString());
+                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, huidig.Month, huidig.Year);
+                string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
+
+                if (Volgende_werk_dag.Month != huidig.Month)
+                    WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
+
+                WerkPlek.SetWerkPlek(man._achternaam, Volgende_werk_dag.Day, plek);
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
             }
 
-            for (int i = 0; i < listBox2.Items.Count; i++)
-            {
-                listBox81.Items.Add(listBox2.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox3.Items.Count; i++)
-            {
-                listBox80.Items.Add(listBox3.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox4.Items.Count; i++)
-            {
-                listBox79.Items.Add(listBox4.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox5.Items.Count; i++)
-            {
-                listBox78.Items.Add(listBox5.Items[i].ToString());
-            }
+            ////SaveData();
+            //foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
+            //{
+            //    box.Items.Clear();
+            //}
 
-            for (int i = 0; i < listBox6.Items.Count; i++)
-            {
-                listBox73.Items.Add(listBox6.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox7.Items.Count; i++)
-            {
-                listBox72.Items.Add(listBox7.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox8.Items.Count; i++)
-            {
-                listBox71.Items.Add(listBox8.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox9.Items.Count; i++)
-            {
-                listBox70.Items.Add(listBox9.Items[i].ToString());
-            }
-            // regel 3
-            for (int i = 0; i < listBox10.Items.Count; i++)
-            {
-                listBox65.Items.Add(listBox10.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox11.Items.Count; i++)
-            {
-                listBox64.Items.Add(listBox11.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox12.Items.Count; i++)
-            {
-                listBox63.Items.Add(listBox12.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox13.Items.Count; i++)
-            {
-                listBox62.Items.Add(listBox13.Items[i].ToString());
-            }
-            // regel 4
-            for (int i = 0; i < listBox14.Items.Count; i++)
-            {
-                listBox61.Items.Add(listBox14.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox15.Items.Count; i++)
-            {
-                listBox60.Items.Add(listBox15.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox16.Items.Count; i++)
-            {
-                listBox59.Items.Add(listBox16.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox17.Items.Count; i++)
-            {
-                listBox58.Items.Add(listBox17.Items[i].ToString());
-            }
-            // regel 5
-            for (int i = 0; i < listBox18.Items.Count; i++)
-            {
-                listBox46.Items.Add(listBox18.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox19.Items.Count; i++)
-            {
-                listBox47.Items.Add(listBox19.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox20.Items.Count; i++)
-            {
-                listBox48.Items.Add(listBox20.Items[i].ToString());
-            }
-            for (int i = 0; i < listBox21.Items.Count; i++)
-            {
-                listBox49.Items.Add(listBox21.Items[i].ToString());
-            }
-            SaveData();
-            ViewUpdate();
+            //for (int i = 0; i < listBox1.Items.Count; i++)
+            //{
+            //    listBox83.Items.Add(listBox1.Items[i].ToString());
+            //}
+
+            //for (int i = 0; i < listBox2.Items.Count; i++)
+            //{
+            //    listBox81.Items.Add(listBox2.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox3.Items.Count; i++)
+            //{
+            //    listBox80.Items.Add(listBox3.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox4.Items.Count; i++)
+            //{
+            //    listBox79.Items.Add(listBox4.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox5.Items.Count; i++)
+            //{
+            //    listBox78.Items.Add(listBox5.Items[i].ToString());
+            //}
+
+            //for (int i = 0; i < listBox6.Items.Count; i++)
+            //{
+            //    listBox73.Items.Add(listBox6.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox7.Items.Count; i++)
+            //{
+            //    listBox72.Items.Add(listBox7.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox8.Items.Count; i++)
+            //{
+            //    listBox71.Items.Add(listBox8.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox9.Items.Count; i++)
+            //{
+            //    listBox70.Items.Add(listBox9.Items[i].ToString());
+            //}
+            //// regel 3
+            //for (int i = 0; i < listBox10.Items.Count; i++)
+            //{
+            //    listBox65.Items.Add(listBox10.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox11.Items.Count; i++)
+            //{
+            //    listBox64.Items.Add(listBox11.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox12.Items.Count; i++)
+            //{
+            //    listBox63.Items.Add(listBox12.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox13.Items.Count; i++)
+            //{
+            //    listBox62.Items.Add(listBox13.Items[i].ToString());
+            //}
+            //// regel 4
+            //for (int i = 0; i < listBox14.Items.Count; i++)
+            //{
+            //    listBox61.Items.Add(listBox14.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox15.Items.Count; i++)
+            //{
+            //    listBox60.Items.Add(listBox15.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox16.Items.Count; i++)
+            //{
+            //    listBox59.Items.Add(listBox16.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox17.Items.Count; i++)
+            //{
+            //    listBox58.Items.Add(listBox17.Items[i].ToString());
+            //}
+            //// regel 5
+            //for (int i = 0; i < listBox18.Items.Count; i++)
+            //{
+            //    listBox46.Items.Add(listBox18.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox19.Items.Count; i++)
+            //{
+            //    listBox47.Items.Add(listBox19.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox20.Items.Count; i++)
+            //{
+            //    listBox48.Items.Add(listBox20.Items[i].ToString());
+            //}
+            //for (int i = 0; i < listBox21.Items.Count; i++)
+            //{
+            //    listBox49.Items.Add(listBox21.Items[i].ToString());
+            //}
+            //SaveData();
+            //ViewUpdate();
+            ButtonNext_Click(this, null);
         }
         private void ButtonOpmerking_Click(object sender, EventArgs e)
         {
