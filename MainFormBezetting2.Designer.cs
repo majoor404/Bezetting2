@@ -126,6 +126,10 @@
             this.panel9 = new System.Windows.Forms.Panel();
             this.labelHulpText = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.panelPloegKleurKalender = new System.Windows.Forms.Panel();
+            this.panelND = new System.Windows.Forms.Panel();
+            this.panelMD = new System.Windows.Forms.Panel();
+            this.panelOD = new System.Windows.Forms.Panel();
             this.menuStrip.SuspendLayout();
             this.StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownJaar)).BeginInit();
@@ -135,6 +139,7 @@
             this.panelSelect.SuspendLayout();
             this.panelMoment.SuspendLayout();
             this.panel9.SuspendLayout();
+            this.panelPloegKleurKalender.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -1081,6 +1086,45 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Moment Netwerk Druk..";
             // 
+            // panelPloegKleurKalender
+            // 
+            this.panelPloegKleurKalender.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPloegKleurKalender.Controls.Add(this.panelND);
+            this.panelPloegKleurKalender.Controls.Add(this.panelMD);
+            this.panelPloegKleurKalender.Controls.Add(this.panelOD);
+            this.panelPloegKleurKalender.Location = new System.Drawing.Point(805, 132);
+            this.panelPloegKleurKalender.Name = "panelPloegKleurKalender";
+            this.panelPloegKleurKalender.Size = new System.Drawing.Size(27, 62);
+            this.panelPloegKleurKalender.TabIndex = 38;
+            this.panelPloegKleurKalender.Visible = false;
+            // 
+            // panelND
+            // 
+            this.panelND.BackColor = System.Drawing.Color.Blue;
+            this.panelND.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelND.Location = new System.Drawing.Point(4, 39);
+            this.panelND.Name = "panelND";
+            this.panelND.Size = new System.Drawing.Size(17, 17);
+            this.panelND.TabIndex = 1;
+            // 
+            // panelMD
+            // 
+            this.panelMD.BackColor = System.Drawing.Color.Yellow;
+            this.panelMD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMD.Location = new System.Drawing.Point(4, 21);
+            this.panelMD.Name = "panelMD";
+            this.panelMD.Size = new System.Drawing.Size(17, 17);
+            this.panelMD.TabIndex = 1;
+            // 
+            // panelOD
+            // 
+            this.panelOD.BackColor = System.Drawing.Color.Red;
+            this.panelOD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelOD.Location = new System.Drawing.Point(4, 3);
+            this.panelOD.Name = "panelOD";
+            this.panelOD.Size = new System.Drawing.Size(17, 17);
+            this.panelOD.TabIndex = 0;
+            // 
             // MainFormBezetting2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1088,6 +1132,7 @@
             this.AutoScroll = true;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1834, 961);
+            this.Controls.Add(this.panelPloegKleurKalender);
             this.Controls.Add(this.panelMoment);
             this.Controls.Add(this.panelSelect);
             this.Controls.Add(this.panelDebug);
@@ -1149,6 +1194,7 @@
             this.panelMoment.ResumeLayout(false);
             this.panel9.ResumeLayout(false);
             this.panel9.PerformLayout();
+            this.panelPloegKleurKalender.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1252,6 +1298,10 @@
         private System.Windows.Forms.ToolStripMenuItem wachtoverzichtFormulier2DagenToolStripMenuItem;
         public System.Windows.Forms.Label labelHulpText;
         public System.Windows.Forms.ToolStripMenuItem PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem;
+        private System.Windows.Forms.Panel panelPloegKleurKalender;
+        private System.Windows.Forms.Panel panelND;
+        private System.Windows.Forms.Panel panelMD;
+        private System.Windows.Forms.Panel panelOD;
     }
 }
 

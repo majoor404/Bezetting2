@@ -836,58 +836,7 @@ namespace Bezetting2
                 ProgData.SaveLooptExtraLijst(dir, gaat_lopen_op_kleur);
             }
         }
-        //public static void MaakNieuweCollegaInBezettingAan(string Naam, string Kleur, int jaar, int maand, int aantal_maanden)
-        //{
-        //    // als bij verhuizing er een persoon bij komt, moet in deze toevoegen aan ListWerkdagPloeg,
-        //    // echter alleen als deze nog niet bestaat.
-        //    // check of naam er in zit, en op die dag van de maand.
-
-        //    DateTime dumm = new DateTime(jaar, maand, 1);
-
-        //    int save_jaar = igekozenjaar;
-        //    int save_maand = igekozenmaand;
-
-        //    igekozenjaar = jaar;
-        //    igekozenmaand = maand;
-
-        //    for (int m = 0; m < aantal_maanden; m++)
-        //    {
-        //        if (m != 0)
-        //            dumm = dumm.AddMonths(1);
-
-        //        igekozenjaar = dumm.Year;
-        //        igekozenmaand = dumm.Month;
-
-        //        int aantal_dagen_dezemaand = DateTime.DaysInMonth(igekozenjaar, igekozenmaand);
-
-        //        ProgData.LaadLijstWerkdagPloeg(Kleur, 15);
-
-        //        for (int i = 1; i < aantal_dagen_dezemaand + 1; i++)
-        //        {
-        //            DateTime dat = new DateTime(igekozenjaar, igekozenmaand, i);
-
-        //            try
-        //            {
-        //                werkdag ver = LijstWerkdagPloeg.First(x => (x._naam == Naam && x._dagnummer == i));
-        //            }
-        //            catch
-        //            {
-        //                werkdag dag = new werkdag
-        //                {
-        //                    _naam = Naam,
-        //                    _standaarddienst = GetDienst(InstellingenProg._Rooster, dat, Kleur),
-        //                    _werkplek = "",
-        //                    _afwijkingdienst = "",
-        //                    _dagnummer = i
-        //                };
-        //                ProgData.LijstWerkdagPloeg.Add(dag);
-        //            }
-        //        }
-        //        ProgData.SaveLijstWerkdagPloeg(Kleur, 15);
-        //    }
-        //    igekozenjaar = save_jaar;
-        //    igekozenmaand = save_maand;
-        //}
+        
         public static string GetLaatsteAfwijkingPersoon(string loopt_op_kleur, string persnr, DateTime datum)
         {
             string ret = "";

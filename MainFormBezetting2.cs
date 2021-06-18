@@ -271,7 +271,7 @@ namespace Bezetting2
 
             // zodat niet meteen melding
             ProgData.saveTimeExtra = ProgData.saveTimeExtra.AddSeconds(-10);
-            
+
             VulViewScherm();
         }
 
@@ -652,10 +652,11 @@ namespace Bezetting2
                 // hier alleen kijken
                 // open oude ploeg bezetting
                 // open wijzegingen en laat deze zien
-                string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_bezetting.bin");
+                string Locatie = Path.GetFullPath(ProgData.GetDir() + "\\" + ProgData.GekozenKleur + "_Maand_Data.bin");
                 if (!File.Exists(Locatie))
                 {
-                    MessageBox.Show("bezetting deze maand bestaat niet, kan dus niks laten zien");
+                    DebugPanelShow("bezetting deze maand bestaat niet, kan dus niks laten zien");
+                    DebugPanelEnd();
                     ProgData.AlleMensen.LijstPersoonKleur.Clear();
                     ProgData.AlleMensen.LijstWerkgroepenPersoneel.Clear();
                 }
@@ -779,18 +780,6 @@ namespace Bezetting2
             if (waarintijd == 2 || waarintijd == 3)
             {
                 // huidig of toekomst
-
-                //ProgData.Laad_LijstNamen();            // lees alle mensen in sectie , personeel_lijst
-                //ProgData.MaakPloegNamenLijst(ProgData.GekozenKleur); // bepaal alle mensen in een kleur, kleur_personeel_lijst
-                //ProgData.SaveLijstPersoneelKleur(ProgData.GekozenKleur, 15);     // save ploegbezetting (de mensen)
-
-                // maak bezettingafwijking.bin voor kleur als die niet bestaat
-                // is lijst met werkdagen
-                //if (!File.Exists(ProgData.Ploeg_Bezetting_Locatie(ProgData.GekozenKleur)))
-                //if (!File.Exists(ProgData.Ploeg_Veranderingen_Locatie(ProgData.GekozenKleur)))
-                //{
-                //    ProgData.MaakLegeBezetting(ProgData.GekozenKleur, true); // in deze roetine wordt het ook opgeslagen
-                //}
 
                 ProgData.AlleMensen.Load();
                 CheckEnDealVerhuizing();
@@ -1022,7 +1011,7 @@ namespace Bezetting2
 
                         personeel persoon = ProgData.AlleMensen.LijstPersoonKleur.First(a => a._achternaam == gekozen_naam);
 
-                        if ((ProgData.RechtenHuidigeGebruiker != 26 && ProgData.RechtenHuidigeGebruiker != 27)||
+                        if ((ProgData.RechtenHuidigeGebruiker != 26 && ProgData.RechtenHuidigeGebruiker != 27) ||
                             (ProgData.RechtenHuidigeGebruiker == 26 && gekozen_naam == ProgData.Huidige_Gebruiker_Naam()) ||
                             (ProgData.RechtenHuidigeGebruiker == 27 && gekozen_naam != ProgData.Huidige_Gebruiker_Naam()))
                         {
@@ -1156,6 +1145,7 @@ namespace Bezetting2
 
                         toolStripStatusLabelInfo.Text = "";
                         toolStripStatusRedeAfwijking.Text = "";
+                        panelPloegKleurKalender.Visible = false;
                     }
                     else // er is wat in cell, zet opmerking
                     {
@@ -1183,6 +1173,7 @@ namespace Bezetting2
                             toolStripStatusLabelInfo.Text = "";
                             toolStripStatusRedeAfwijking.Text = "";
                         }
+                        panelPloegKleurKalender.Visible = false;
                     }
                 }
                 else
@@ -1190,6 +1181,8 @@ namespace Bezetting2
                     toolStripStatusLabelInfo.Text = "";
                     toolStripStatusRedeAfwijking.Text = "";
                     panelSelect.Visible = false;
+                    if(panelPloegKleurKalender.Visible)
+                        panelPloegKleurKalender.Visible = false;
                 }
 
                 if ((item != null) && (!string.IsNullOrEmpty(info?.SubItem?.Text)))
@@ -1267,9 +1260,27 @@ namespace Bezetting2
                             if (!string.IsNullOrEmpty(toolStripStatusRedeAfwijking.Text) && mLastPos != e.Location)
                                 mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
                         }
+                        else
+                        {
+                            // kleur kalender
+                            if (!panelPloegKleurKalender.Visible && row > 0 && row < 3)
+                            {
+                                //Point pos = new Point(0, 0);
+                                //pos.X = e.X;
+                                //pos.Y = e.Y;
+                                //panelPloegKleurKalender.Location = View.Location;
+                                panelPloegKleurKalender.Location = new Point(e.X + View.Columns[0].Width + 4,e.Y + 50);
+                                panelPloegKleurKalender.Visible = true;
+
+                                DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
+                                ZetPloegPopUpKleur(panelOD, GetKleurDieWerkt("5pl", dat, "O"));
+                                ZetPloegPopUpKleur(panelMD, GetKleurDieWerkt("5pl", dat, "M"));
+                                ZetPloegPopUpKleur(panelND, GetKleurDieWerkt("5pl", dat, "N"));
+                            }
+                        }
+
                     }
                 }
-
                 mLastPos = e.Location;
             }
             catch { }
@@ -2050,7 +2061,7 @@ namespace Bezetting2
 
                     string eerste_2 = afwijking.Length >= 2 ? afwijking.Substring(0, 2) : afwijking;
 
-                    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"/* || eerste_2 == "DD"*/)
+                    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
                     {
                         var dienst = afwijking.Substring(3, 1);
                         var gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), dat, dienst);
@@ -2060,6 +2071,10 @@ namespace Bezetting2
                             // DEBUG
                             //Thread.Sleep(300);
                         }
+                    }
+                    if (eerste_2 == "DD")
+                    {
+                        ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
                     }
                     dat = dat.AddDays(1);
                 }
@@ -2094,7 +2109,6 @@ namespace Bezetting2
             {
                 // ging fout door opslaan naam ipv personeel nummer,
                 // en we hebben bv 2 bakker's
-
                 string naam = ProgData.ListLooptExtra[i]._naam;
                 string persnr = ProgData.Get_Gebruiker_Nummer(naam);
                 string loopt_op_kleur = ProgData.Get_Gebruiker_Kleur(persnr);
@@ -2103,29 +2117,61 @@ namespace Bezetting2
                 {
                     try
                     {
-                        //DateTime datum = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, ProgData.ListLooptExtra[i]._datum.Day);
                         string AfWijkingPersoon = ProgData.GetLaatsteAfwijkingPersoon
                             (loopt_op_kleur, persnr, ProgData.ListLooptExtra[i]._datum);
-
 
                         string eerste_2 = AfWijkingPersoon.Length >= 2 ? AfWijkingPersoon.Substring(0, 2) : AfWijkingPersoon;
                         string GaatDienstLopen = AfWijkingPersoon.Length >= 4 ? AfWijkingPersoon.Substring(3, 1) : AfWijkingPersoon;
 
-
-                        var Dienst_Volgens_Rooster_Van_Die_Kleur = GetDienst
+                        var Dienst_Volgens_Rooster_Huidige_Kleur = "";
+                        if (kleur == "DD")
+                        {
+                            Dienst_Volgens_Rooster_Huidige_Kleur = GetDienst
+                            ("DD", ProgData.ListLooptExtra[i]._datum, ProgData.GekozenKleur);
+                        }
+                        else
+                        {
+                            Dienst_Volgens_Rooster_Huidige_Kleur = GetDienst
                             (ProgData.GekozenRooster(), ProgData.ListLooptExtra[i]._datum, ProgData.GekozenKleur);
+                        }
+
+
+                        // als vandaag vrij, is een extra dienst natuurlijk onzin.
+                        if (Dienst_Volgens_Rooster_Huidige_Kleur == "")
+                        {
+                            ProgData.ListLooptExtra.RemoveAt(i);
+                        }
+
+                        // als dienst die hij gaat lopen niet het rooster is dan verwijderen
+                        if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
+                        {
+                            if (GaatDienstLopen != Dienst_Volgens_Rooster_Huidige_Kleur)
+                                ProgData.ListLooptExtra.RemoveAt(i);
+                        }
+
+                        // als je DD gaat lopen maar gekozen kleur is geen DD dan verwijderen.
+                        if (eerste_2 == "DD")
+                        {
+                            if (kleur != "DD")
+                                ProgData.ListLooptExtra.RemoveAt(i);
+                        }
 
                         if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD"))
                         {
                             ProgData.ListLooptExtra.RemoveAt(i);
                         }
-                        else
-                        {
-                            if (GaatDienstLopen != Dienst_Volgens_Rooster_Van_Die_Kleur && GaatDienstLopen != "DD")
-                            {
-                                ProgData.ListLooptExtra.RemoveAt(i);
-                            }
-                        }
+
+                        //if (!(eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD"))
+                        //{
+                        //    ProgData.ListLooptExtra.RemoveAt(i);
+                        //}
+                        //else
+                        //{
+                        //    if (GaatDienstLopen != Dienst_Volgens_Rooster_Huidige_Kleur && GaatDienstLopen != "DD")
+                        //    {
+                        //        ProgData.ListLooptExtra.RemoveAt(i);
+                        //    }
+                        //}
 
                     }
                     catch { }
@@ -2144,7 +2190,7 @@ namespace Bezetting2
 
         private void helpToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Process.Start( $"{Directory.GetCurrentDirectory()}\\Help\\Bezetting.docx");
+            Process.Start($"{Directory.GetCurrentDirectory()}\\Help\\Bezetting.docx");
         }
 
         private void maakBackupToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2180,13 +2226,13 @@ namespace Bezetting2
         {
             buttonClose.Text = "Close (3)";
             buttonClose.Refresh();
-            Thread.Sleep(200);
+            Thread.Sleep(400);
             buttonClose.Text = "Close (2)";
             buttonClose.Refresh();
-            Thread.Sleep(200);
+            Thread.Sleep(400);
             buttonClose.Text = "Close (1)";
             buttonClose.Refresh();
-            Thread.Sleep(200);
+            Thread.Sleep(400);
             panelDebug.Visible = false;
         }
 
@@ -2388,6 +2434,28 @@ namespace Bezetting2
             InstellingenProg._SorteerOokWerkplek = !InstellingenProg._SorteerOokWerkplek;
             PrivesorteerOokWerkplekkenInMaandoverzichtToolStripMenuItem.Checked = InstellingenProg._SorteerOokWerkplek;
             ButtonRefresh_Click(this, null);
+        }
+
+        private void ZetPloegPopUpKleur(Panel pan, string kleur)
+        {
+            switch (kleur)
+            {
+                case "Blauw":
+                    pan.BackColor = Color.Blue;
+                    break;
+                case "Geel":
+                    pan.BackColor = Color.Yellow;
+                    break;
+                case "Groen":
+                    pan.BackColor = Color.Green;
+                    break;
+                case "Wit":
+                    pan.BackColor = Color.White;
+                    break;
+                case "Rood":
+                    pan.BackColor = Color.Red;
+                    break;
+            }
         }
     }
 }
