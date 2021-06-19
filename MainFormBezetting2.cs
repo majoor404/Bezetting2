@@ -2455,6 +2455,10 @@ namespace Bezetting2
                 case "Rood":
                     pan.BackColor = Color.Red;
                     break;
+                default:
+                    pan.BackColor = Color.Black;
+                    break;
+
             }
         }
     }

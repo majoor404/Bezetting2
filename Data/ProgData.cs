@@ -429,7 +429,7 @@ namespace Bezetting2
         {
             // als ik hier snel weer kom ( < 2 sec ?), dan even wachten ivm netwerk traagheid
             var diffInSeconds = (DateTime.Now - saveTimeExtra).TotalSeconds;
-            if (diffInSeconds < 1)
+            if (diffInSeconds < .8)
             {
                 Wacht(500, "SaveLooptExtraLijst");
             }
