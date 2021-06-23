@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bezetting2.Data
@@ -63,7 +64,18 @@ namespace Bezetting2.Data
         public static void SafeWerkPlek(string Kleur, int maand, int jaar)
         {
             string file = Path.GetFullPath($"{jaar}\\{maand}\\{Kleur}_WerkPlek.bin");
-            
+
+            //var diffInSeconds = (DateTime.Now - saveSaveTime).TotalSeconds;
+            //saveSaveTime = DateTime.Now;
+
+            //_ = diffInSeconds < 1 ? saveSaveTel++ : saveSaveTel = 0;
+
+            //if (saveSaveTel > 4)
+            //{
+            //    Thread.Sleep(600);
+            //    saveSaveTel = 0;
+            //}
+
             if (!string.IsNullOrEmpty(Kleur))
             {
                 try
@@ -97,7 +109,8 @@ namespace Bezetting2.Data
                 WerkPlek wp = LijstWerkPlekPloeg.First(a => a.naam_ == naam && a.dagnummer_ == Dag);
                 wp.werkplek_ = werkplek;
             }
-            catch {
+            catch 
+            {
                 AddWerkPlek(naam, werkplek, Dag);
             }
         }

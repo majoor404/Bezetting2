@@ -969,105 +969,7 @@ namespace Bezetting2
 
             return new DateTime(year, month, day);
         }
-
-        // Geklikt op view scherm, open invoer form
-        private void View_MouseClick(object sender, MouseEventArgs e)
-        {
-            // bij verhuizing en iemand heeft rechten 50, staat hij nog op oude kleur.
-            // check verhuizing
-            string nieuwe_kleur = "niet bekend";
-            if (ProgData.RechtenHuidigeGebruiker > 0 && ProgData.RechtenHuidigeGebruiker < 51)
-                nieuwe_kleur = ProgData.Get_Gebruiker_Naam_NieuweKleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
-
-
-            //Point point = new Point(e.X, e.Y);
-            ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
-            int row = info.Item.Index;
-            int col = info.Item.SubItems.IndexOf(info.SubItem);
-
-            if (((ProgData.RechtenHuidigeGebruiker > 24)
-                && (ProgData.RechtenHuidigeGebruiker < 51)
-                && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur))
-
-                || ProgData.RechtenHuidigeGebruiker > 51
-                || (ProgData.RechtenHuidigeGebruiker < 51) && ProgData.GekozenKleur == nieuwe_kleur)
-            {
-                try
-                {
-                    string value = info.Item.SubItems[col].Text;
-                    //MessageBox.Show(string.Format("R{0}:C{1} val '{2}'", row, col, value));
-
-                    if (col > 0 && row < 4)
-                    {
-                        HistoryForm his = new HistoryForm();
-                        his.comboBoxDag.Text = col.ToString();
-                        his.ShowDialog();
-                    }
-
-                    if (col != 0 && View.Items[row].SubItems[0].BackColor != Werkplek_)
-                    {
-                        string gekozen_naam = info.Item.SubItems[0].Text;
-                        string gekozen_datum = col.ToString();
-
-                        personeel persoon = ProgData.AlleMensen.LijstPersoonKleur.First(a => a._achternaam == gekozen_naam);
-
-                        if ((ProgData.RechtenHuidigeGebruiker != 26 && ProgData.RechtenHuidigeGebruiker != 27) ||
-                            (ProgData.RechtenHuidigeGebruiker == 26 && gekozen_naam == ProgData.Huidige_Gebruiker_Naam()) ||
-                            (ProgData.RechtenHuidigeGebruiker == 27 && gekozen_naam != ProgData.Huidige_Gebruiker_Naam()))
-                        {
-                            if (e.Button == MouseButtons.Right)
-                            {
-                                quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
-                                quick.ShowDialog();
-                                if (quick.listBox1.SelectedIndex > -1)
-                                {
-                                    string afwijking = quick.listBox1.SelectedItem.ToString();
-                                    switch (afwijking.ToUpper())
-                                    {
-                                        case "WIS":
-                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                            break;
-                                        default:
-                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
-                                            ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
-                                            break;
-                                    }
-                                    VulViewScherm();
-                                }
-                            }
-                            else
-                            {
-                                DagAfwijkingInvoerForm afw = new DagAfwijkingInvoerForm();
-                                afw.labelNaam.Text = gekozen_naam;
-                                afw.labelDatum.Text = gekozen_datum;
-                                afw.labelMaand.Text = ProgData.Sgekozenmaand();
-                                afw.labelPersoneelnr.Text = persoon._persnummer.ToString();
-                                afw.Text = ProgData.Huidige_Gebruiker_Personeel_nummer;
-                                // voor ed-o ed-m en ed-n
-                                afw._verzoekdag = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
-                                afw.ShowDialog();
-                                VulViewScherm();
-                            }
-                        }
-                        else
-                        {
-                            if (ProgData.RechtenHuidigeGebruiker == 26)
-                                MessageBox.Show("U mag alleen uw eigen afwijkingen invullen!");
-                            if (ProgData.RechtenHuidigeGebruiker == 27)
-                                MessageBox.Show("U mag niet uw eigen afwijkingen invullen!, alleen andere.");
-                        }
-                    }
-                }
-                catch { }
-            }
-            // geen rechten/ingelogt
-            else
-            {
-                MessageBox.Show("Even inloggen of juiste kleur/rooster kiezen");
-            }
-            //}
-        }
-
+ 
         private void ButtonNu_Click(object sender, EventArgs e)
         {
             //DateTime nu = DateTime.Now;
@@ -1117,175 +1019,7 @@ namespace Bezetting2
                 ButtonNu_Click(this, null);
             }
         }
-
-        private void View_MouseMove(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                ListViewItem item = View.GetItemAt(e.X, e.Y);
-                ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
-
-                // naam select als op juiste row
-                if ((item != null) && info.Item.Index > 0 && info.Item.Index > 3 && info.Item.Index < View.Items.Count - 1)
-                {
-                    int col = info.Item.SubItems.IndexOf(info.SubItem);
-                    if (info.SubItem.Text == "") // er niks in cell, zet naam
-                    {
-                        panelSelect.Visible = true;
-                        panelSelect.Width = View.Columns[0].Width - 4;
-                        panelSelect.Height = 20;
-
-                        positieGeselecteerdeNaam.X = e.X + View.Columns[0].Width + 5;// View.Location.X + 2;
-                        if (col > 28)
-                            positieGeselecteerdeNaam.X -= panelSelect.Width;
-                        positieGeselecteerdeNaam.Y = e.Y + 45;
-                        panelSelect.BackColor = View.BackColor;
-                        panelSelect.Location = positieGeselecteerdeNaam;
-                        labelNaamSelect.Text = View.Items[info.Item.Index].Text;
-
-                        toolStripStatusLabelInfo.Text = "";
-                        toolStripStatusRedeAfwijking.Text = "";
-                        panelPloegKleurKalender.Visible = false;
-                    }
-                    else // er is wat in cell, zet opmerking
-                    {
-                        toolStripStatusLabelInfo.Text = info.Item.Text + " " + info.SubItem.Text;
-                        toolStripStatusRedeAfwijking.Text = GetRedenAfwijking(info.Item.Text, info.Item.SubItems.IndexOf(info.SubItem));
-
-                        if (toolStripStatusRedeAfwijking.Text.Trim() != "")
-                        {
-                            panelSelect.Visible = true;
-
-                            panelSelect.Width = View.Columns[0].Width - 4;
-                            //panelSelect.Width = View.Columns[0].Width - 4;
-                            panelSelect.Height = 20;
-                            positieGeselecteerdeNaam.X = e.X + View.Columns[0].Width + 5;// View.Location.X + 2;
-                            if (col > 28)
-                                positieGeselecteerdeNaam.X -= panelSelect.Width;
-                            positieGeselecteerdeNaam.Y = e.Y + 45;
-                            panelSelect.BackColor = View.BackColor;
-                            panelSelect.Location = positieGeselecteerdeNaam;
-                            labelNaamSelect.Text = toolStripStatusRedeAfwijking.Text;
-                        }
-                        else
-                        {
-                            panelSelect.Visible = false;
-                            toolStripStatusLabelInfo.Text = "";
-                            toolStripStatusRedeAfwijking.Text = "";
-                        }
-                        panelPloegKleurKalender.Visible = false;
-                    }
-                }
-                else
-                {
-                    toolStripStatusLabelInfo.Text = "";
-                    toolStripStatusRedeAfwijking.Text = "";
-                    panelSelect.Visible = false;
-                    if(panelPloegKleurKalender.Visible)
-                        panelPloegKleurKalender.Visible = false;
-                }
-
-                if ((item != null) && (!string.IsNullOrEmpty(info?.SubItem?.Text)))
-                {
-                    int row = info.Item.Index;
-                    int col = info.Item.SubItems.IndexOf(info.SubItem);
-                    // extra dienst
-                    string aant = View.Items[View.Items.Count - 1].Text;
-                    if (row == View.Items.Count - 1 && aant == "Extra dienst")
-                    {
-                        if (info.SubItem.Text == "1") // 1 extra dienst
-                        {
-                            foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
-                            {
-                                if (col == ex._datum.Day)
-                                {
-                                    toolStripStatusLabelInfo.Text = ProgData.Get_Gebruiker_Naam(ex._naam);
-                                    if (!string.IsNullOrEmpty(toolStripStatusLabelInfo.Text) && mLastPos != e.Location)
-                                        mTooltip.Show(toolStripStatusLabelInfo.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            toolStripStatusLabelInfo.Text = "Meer dan 1 extra dienst";
-                            string namen = "";
-                            foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
-                            {
-                                if (col == ex._datum.Day)
-                                {
-                                    namen = $"{namen}{ProgData.Get_Gebruiker_Naam(ex._naam)}\n";
-
-                                }
-                            }
-                            if (!string.IsNullOrEmpty(toolStripStatusLabelInfo.Text) && mLastPos != e.Location)
-                                mTooltip.Show(namen, info.Item.ListView, e.X + 15, e.Y + 15, 3000);
-                        }
-                    }
-
-                    // personeel nummer bij naam
-                    if (col == 0 && row > 3 && row < View.Items.Count - 1)
-                    {
-                        string naam = View.Items[row].Text;
-                        //string persnummer = ProgData.Get_Gebruiker_Nummer(naam);
-                        if (View.Items[row].Tag != null)
-                        {
-                            string persnummer = View.Items[row].Tag.ToString();
-                            if (!string.IsNullOrEmpty(persnummer) && mLastPos != e.Location)
-                                mTooltip.Show(persnummer, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
-                        }
-                    }
-                    // feestdag
-                    if (col > 0 && row < 5) // feestdag info ?
-                    {
-                        if (View.Items[row].SubItems[col].BackColor == Feestdag_)
-                        {
-                            int maand = ProgData.igekozenmaand;
-                            DateTime pasen = EasterSunday((int)numericUpDownJaar.Value);
-                            DateTime pasen2 = pasen.AddDays(1);
-                            DateTime hemelsvaart = pasen.AddDays(39);
-                            DateTime pinksteren = hemelsvaart.AddDays(10); // 1ste pinsterdag
-                            DateTime pinksteren2 = pinksteren.AddDays(1); // 2ste pinsterdag
-                            int modulo = (int)numericUpDownJaar.Value % 5; // als vijf mei is 0, dan vrij
-                            if (maand == 1 && col == 1) toolStripStatusRedeAfwijking.Text = "Nieuwsjaar dag";
-                            if (maand == 4 && col == 27) toolStripStatusRedeAfwijking.Text = "Konings dag";
-                            if (maand == 12 && col == 25) toolStripStatusRedeAfwijking.Text = "Eerste Kerstdag";
-                            if (maand == 12 && col == 26) toolStripStatusRedeAfwijking.Text = "Tweede Kerstdag";
-                            if (maand == 5 && col == 5 && modulo == 0) toolStripStatusRedeAfwijking.Text = "Bevrijdings dag";
-                            if (maand == pasen.Month && col == pasen.Day) toolStripStatusRedeAfwijking.Text = "Eerste Paasdag";
-                            if (maand == pasen2.Month && col == pasen2.Day) toolStripStatusRedeAfwijking.Text = "Tweede Paasdag";
-                            if (maand == hemelsvaart.Month && col == hemelsvaart.Day) toolStripStatusRedeAfwijking.Text = "Hemelsvaart dag";
-                            if (maand == pinksteren.Month && col == pinksteren.Day) toolStripStatusRedeAfwijking.Text = "Eerste Pinsterdag";
-                            if (maand == pinksteren2.Month && col == pinksteren2.Day) toolStripStatusRedeAfwijking.Text = "Tweede Pinsterdag";
-
-                            if (!string.IsNullOrEmpty(toolStripStatusRedeAfwijking.Text) && mLastPos != e.Location)
-                                mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
-                        }
-                        else
-                        {
-                            // kleur kalender
-                            if (!panelPloegKleurKalender.Visible && row > 0 && row < 3)
-                            {
-                                //Point pos = new Point(0, 0);
-                                //pos.X = e.X;
-                                //pos.Y = e.Y;
-                                //panelPloegKleurKalender.Location = View.Location;
-                                panelPloegKleurKalender.Location = new Point(e.X + View.Columns[0].Width + 4,e.Y + 50);
-                                panelPloegKleurKalender.Visible = true;
-
-                                DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
-                                ZetPloegPopUpKleur(panelOD, GetKleurDieWerkt("5pl", dat, "O"));
-                                ZetPloegPopUpKleur(panelMD, GetKleurDieWerkt("5pl", dat, "M"));
-                                ZetPloegPopUpKleur(panelND, GetKleurDieWerkt("5pl", dat, "N"));
-                            }
-                        }
-
-                    }
-                }
-                mLastPos = e.Location;
-            }
-            catch { }
-        }
-
+ 
         private string GetRedenAfwijking(string naam, int dag)
         {
             ProgData.MaandData.Load(ProgData.GekozenKleur);
@@ -1971,6 +1705,11 @@ namespace Bezetting2
         {
             if (e.KeyCode == Keys.F5)
                 ButtonRefresh_Click(this, null);
+            if (e.KeyCode == Keys.Escape)
+            {
+                if (ProgData.Huidige_Gebruiker_Personeel_nummer != "Niemand Ingelogd")
+                UitloggenToolStripMenuItem_Click(this, null);
+            }
         }
 
         private void UpdateExtraDienstLijst(string kleur)
@@ -2251,6 +1990,8 @@ namespace Bezetting2
 
         public void DebugWrite(string regel)
         {
+            if(!panelDebug.Visible)
+                panelDebug.Visible = true;
             textBoxDebug.AppendText(regel + Environment.NewLine);
             textBoxDebug.Refresh();
         }
@@ -2460,6 +2201,282 @@ namespace Bezetting2
                     break;
 
             }
+        }
+
+        private void View_MouseLeave(object sender, EventArgs e)
+        {
+            if (panelPloegKleurKalender.Visible)
+                panelPloegKleurKalender.Visible = false;
+        }
+        private void View_MouseClick(object sender, MouseEventArgs e)
+        {
+            // bij verhuizing en iemand heeft rechten 50, staat hij nog op oude kleur.
+            // check verhuizing
+            string nieuwe_kleur = "niet bekend";
+            if (ProgData.RechtenHuidigeGebruiker > 0 && ProgData.RechtenHuidigeGebruiker < 51)
+                nieuwe_kleur = ProgData.Get_Gebruiker_Naam_NieuweKleur(ProgData.Huidige_Gebruiker_Personeel_nummer);
+
+
+            //Point point = new Point(e.X, e.Y);
+            ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
+            int row = info.Item.Index;
+            int col = info.Item.SubItems.IndexOf(info.SubItem);
+
+            if (((ProgData.RechtenHuidigeGebruiker > 24)
+                && (ProgData.RechtenHuidigeGebruiker < 51)
+                && (ProgData.Huidige_Gebruiker_Werkt_Op_Kleur() == ProgData.GekozenKleur))
+
+                || ProgData.RechtenHuidigeGebruiker > 51
+                || (ProgData.RechtenHuidigeGebruiker < 51) && ProgData.GekozenKleur == nieuwe_kleur)
+            {
+                try
+                {
+                    string value = info.Item.SubItems[col].Text;
+                    //MessageBox.Show(string.Format("R{0}:C{1} val '{2}'", row, col, value));
+
+                    if (col > 0 && row < 4)
+                    {
+                        HistoryForm his = new HistoryForm();
+                        his.comboBoxDag.Text = col.ToString();
+                        his.ShowDialog();
+                    }
+
+                    if (col != 0 && View.Items[row].SubItems[0].BackColor != Werkplek_)
+                    {
+                        string gekozen_naam = info.Item.SubItems[0].Text;
+                        string gekozen_datum = col.ToString();
+
+                        personeel persoon = ProgData.AlleMensen.LijstPersoonKleur.First(a => a._achternaam == gekozen_naam);
+
+                        if ((ProgData.RechtenHuidigeGebruiker != 26 && ProgData.RechtenHuidigeGebruiker != 27) ||
+                            (ProgData.RechtenHuidigeGebruiker == 26 && gekozen_naam == ProgData.Huidige_Gebruiker_Naam()) ||
+                            (ProgData.RechtenHuidigeGebruiker == 27 && gekozen_naam != ProgData.Huidige_Gebruiker_Naam()))
+                        {
+                            if (e.Button == MouseButtons.Right)
+                            {
+                                quick.Location = new System.Drawing.Point(e.Location.X + this.Location.X + 180, e.Location.Y + this.Location.Y + 60);
+                                quick.ShowDialog();
+                                if (quick.listBox1.SelectedIndex > -1)
+                                {
+                                    string afwijking = quick.listBox1.SelectedItem.ToString();
+                                    switch (afwijking.ToUpper())
+                                    {
+                                        case "WIS":
+                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, "", "Verwijderd", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                            break;
+                                        default:
+                                            ProgData.RegelAfwijking(ProgData.Get_Gebruiker_Nummer(gekozen_naam), gekozen_datum, afwijking, "", ProgData.Huidige_Gebruiker_Personeel_nummer, ProgData.GekozenKleur);
+                                            ProgData.NachtErVoorVrij(gekozen_naam, gekozen_datum, afwijking);
+                                            break;
+                                    }
+                                    VulViewScherm();
+                                }
+                            }
+                            else
+                            {
+                                DagAfwijkingInvoerForm afw = new DagAfwijkingInvoerForm();
+                                afw.labelNaam.Text = gekozen_naam;
+                                afw.labelDatum.Text = gekozen_datum;
+                                afw.labelMaand.Text = ProgData.Sgekozenmaand();
+                                afw.labelPersoneelnr.Text = persoon._persnummer.ToString();
+                                afw.Text = ProgData.Huidige_Gebruiker_Personeel_nummer;
+                                // voor ed-o ed-m en ed-n
+                                afw._verzoekdag = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
+                                afw.ShowDialog();
+                                VulViewScherm();
+                            }
+                        }
+                        else
+                        {
+                            if (ProgData.RechtenHuidigeGebruiker == 26)
+                                MessageBox.Show("U mag alleen uw eigen afwijkingen invullen!");
+                            if (ProgData.RechtenHuidigeGebruiker == 27)
+                                MessageBox.Show("U mag niet uw eigen afwijkingen invullen!, alleen andere.");
+                        }
+                    }
+                }
+                catch { }
+            }
+            // geen rechten/ingelogt
+            else
+            {
+                MessageBox.Show("Even inloggen of juiste kleur/rooster kiezen");
+            }
+            //}
+        }
+        private void View_MouseMove(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                ListViewItem item = View.GetItemAt(e.X, e.Y);
+                ListViewHitTestInfo info = View.HitTest(e.X, e.Y);
+
+                // naam select als op juiste row
+                if ((item != null) && info.Item.Index > 0 && info.Item.Index > 3 && info.Item.Index < View.Items.Count - 1)
+                {
+                    int col = info.Item.SubItems.IndexOf(info.SubItem);
+                    if (info.SubItem.Text == "") // er niks in cell, zet naam
+                    {
+                        panelSelect.Visible = true;
+                        panelSelect.Width = View.Columns[0].Width - 4;
+                        panelSelect.Height = 20;
+
+                        positieGeselecteerdeNaam.X = e.X + View.Columns[0].Width + 5;// View.Location.X + 2;
+                        if (col > 28)
+                            positieGeselecteerdeNaam.X -= panelSelect.Width;
+                        positieGeselecteerdeNaam.Y = e.Y + 45;
+                        panelSelect.BackColor = View.BackColor;
+                        panelSelect.Location = positieGeselecteerdeNaam;
+                        labelNaamSelect.Text = View.Items[info.Item.Index].Text;
+
+                        toolStripStatusLabelInfo.Text = "";
+                        toolStripStatusRedeAfwijking.Text = "";
+                        if (panelPloegKleurKalender.Visible)
+                            panelPloegKleurKalender.Visible = false;
+                    }
+                    else // er is wat in cell, zet opmerking
+                    {
+                        toolStripStatusLabelInfo.Text = info.Item.Text + " " + info.SubItem.Text;
+                        toolStripStatusRedeAfwijking.Text = GetRedenAfwijking(info.Item.Text, info.Item.SubItems.IndexOf(info.SubItem));
+
+                        if (toolStripStatusRedeAfwijking.Text.Trim() != "")
+                        {
+                            panelSelect.Visible = true;
+
+                            panelSelect.Width = View.Columns[0].Width - 4;
+                            //panelSelect.Width = View.Columns[0].Width - 4;
+                            panelSelect.Height = 20;
+                            positieGeselecteerdeNaam.X = e.X + View.Columns[0].Width + 5;// View.Location.X + 2;
+                            if (col > 28)
+                                positieGeselecteerdeNaam.X -= panelSelect.Width;
+                            positieGeselecteerdeNaam.Y = e.Y + 45;
+                            panelSelect.BackColor = View.BackColor;
+                            panelSelect.Location = positieGeselecteerdeNaam;
+                            labelNaamSelect.Text = toolStripStatusRedeAfwijking.Text;
+                            if (panelPloegKleurKalender.Visible)
+                                panelPloegKleurKalender.Visible = false;
+                        }
+                        else
+                        {
+                            panelSelect.Visible = false;
+                            toolStripStatusLabelInfo.Text = "";
+                            toolStripStatusRedeAfwijking.Text = "";
+                        }
+                        //panelPloegKleurKalender.Visible = false;
+                    }
+                }
+                else
+                {
+                    toolStripStatusLabelInfo.Text = "";
+                    toolStripStatusRedeAfwijking.Text = "";
+                    panelSelect.Visible = false;
+                    //if(panelPloegKleurKalender.Visible)
+                    //    panelPloegKleurKalender.Visible = false;
+                }
+
+                if ((item != null) && (!string.IsNullOrEmpty(info?.SubItem?.Text)))
+                {
+                    int row = info.Item.Index;
+                    int col = info.Item.SubItems.IndexOf(info.SubItem);
+                    // extra dienst
+                    string aant = View.Items[View.Items.Count - 1].Text;
+                    if (row == View.Items.Count - 1 && aant == "Extra dienst")
+                    {
+                        if (info.SubItem.Text == "1") // 1 extra dienst
+                        {
+                            foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
+                            {
+                                if (col == ex._datum.Day)
+                                {
+                                    toolStripStatusLabelInfo.Text = ProgData.Get_Gebruiker_Naam(ex._naam);
+                                    if (!string.IsNullOrEmpty(toolStripStatusLabelInfo.Text) && mLastPos != e.Location)
+                                        mTooltip.Show(toolStripStatusLabelInfo.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            toolStripStatusLabelInfo.Text = "Meer dan 1 extra dienst";
+                            string namen = "";
+                            foreach (LooptExtraDienst ex in ProgData.ListLooptExtra)
+                            {
+                                if (col == ex._datum.Day)
+                                {
+                                    namen = $"{namen}{ProgData.Get_Gebruiker_Naam(ex._naam)}\n";
+
+                                }
+                            }
+                            if (!string.IsNullOrEmpty(toolStripStatusLabelInfo.Text) && mLastPos != e.Location)
+                                mTooltip.Show(namen, info.Item.ListView, e.X + 15, e.Y + 15, 3000);
+                        }
+                    }
+
+                    // personeel nummer bij naam
+                    if (col == 0 && row > 3 && row < View.Items.Count - 1)
+                    {
+                        string naam = View.Items[row].Text;
+                        //string persnummer = ProgData.Get_Gebruiker_Nummer(naam);
+                        if (View.Items[row].Tag != null)
+                        {
+                            string persnummer = View.Items[row].Tag.ToString();
+                            if (!string.IsNullOrEmpty(persnummer) && mLastPos != e.Location)
+                                mTooltip.Show(persnummer, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                        }
+                    }
+                    // feestdag
+                    if (col > 0 && row < 5) // feestdag info ?
+                    {
+                        if (View.Items[row].SubItems[col].BackColor == Feestdag_)
+                        {
+                            int maand = ProgData.igekozenmaand;
+                            DateTime pasen = EasterSunday((int)numericUpDownJaar.Value);
+                            DateTime pasen2 = pasen.AddDays(1);
+                            DateTime hemelsvaart = pasen.AddDays(39);
+                            DateTime pinksteren = hemelsvaart.AddDays(10); // 1ste pinsterdag
+                            DateTime pinksteren2 = pinksteren.AddDays(1); // 2ste pinsterdag
+                            int modulo = (int)numericUpDownJaar.Value % 5; // als vijf mei is 0, dan vrij
+                            if (maand == 1 && col == 1) toolStripStatusRedeAfwijking.Text = "Nieuwsjaar dag";
+                            if (maand == 4 && col == 27) toolStripStatusRedeAfwijking.Text = "Konings dag";
+                            if (maand == 12 && col == 25) toolStripStatusRedeAfwijking.Text = "Eerste Kerstdag";
+                            if (maand == 12 && col == 26) toolStripStatusRedeAfwijking.Text = "Tweede Kerstdag";
+                            if (maand == 5 && col == 5 && modulo == 0) toolStripStatusRedeAfwijking.Text = "Bevrijdings dag";
+                            if (maand == pasen.Month && col == pasen.Day) toolStripStatusRedeAfwijking.Text = "Eerste Paasdag";
+                            if (maand == pasen2.Month && col == pasen2.Day) toolStripStatusRedeAfwijking.Text = "Tweede Paasdag";
+                            if (maand == hemelsvaart.Month && col == hemelsvaart.Day) toolStripStatusRedeAfwijking.Text = "Hemelsvaart dag";
+                            if (maand == pinksteren.Month && col == pinksteren.Day) toolStripStatusRedeAfwijking.Text = "Eerste Pinsterdag";
+                            if (maand == pinksteren2.Month && col == pinksteren2.Day) toolStripStatusRedeAfwijking.Text = "Tweede Pinsterdag";
+
+                            if (!string.IsNullOrEmpty(toolStripStatusRedeAfwijking.Text) && mLastPos != e.Location)
+                                mTooltip.Show(toolStripStatusRedeAfwijking.Text, info.Item.ListView, e.X + 15, e.Y + 15, 1000);
+                        }
+                        else
+                        {
+                            // kleur kalender
+                            if (/*!panelPloegKleurKalender.Visible &&*/ row > 0 && row < 3)
+                            {
+                                //Point pos = new Point(0, 0);
+                                //pos.X = e.X;
+                                //pos.Y = e.Y;
+                                //panelPloegKleurKalender.Location = View.Location;
+                                panelPloegKleurKalender.Location = new Point(e.X + View.Columns[0].Width + 4, e.Y + 50);
+                                panelPloegKleurKalender.Visible = true;
+
+                                DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, col);
+                                ZetPloegPopUpKleur(panelOD, GetKleurDieWerkt("5pl", dat, "O"));
+                                ZetPloegPopUpKleur(panelMD, GetKleurDieWerkt("5pl", dat, "M"));
+                                ZetPloegPopUpKleur(panelND, GetKleurDieWerkt("5pl", dat, "N"));
+                            }
+                            else
+                            {
+                                panelPloegKleurKalender.Visible = false;
+                            }
+                        }
+
+                    }
+                }
+                mLastPos = e.Location;
+            }
+            catch { }
         }
     }
 }

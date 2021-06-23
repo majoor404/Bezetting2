@@ -173,26 +173,26 @@
             // inloggenToolStripMenuItem1
             // 
             this.inloggenToolStripMenuItem1.Name = "inloggenToolStripMenuItem1";
-            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(133, 22);
+            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.inloggenToolStripMenuItem1.Text = "Inloggen";
             this.inloggenToolStripMenuItem1.Click += new System.EventHandler(this.InloggenToolStripMenuItem1_Click);
             // 
             // uitloggenToolStripMenuItem
             // 
             this.uitloggenToolStripMenuItem.Name = "uitloggenToolStripMenuItem";
-            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
-            this.uitloggenToolStripMenuItem.Text = "Uitloggen";
+            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uitloggenToolStripMenuItem.Text = "Uitloggen (Esc)";
             this.uitloggenToolStripMenuItem.Click += new System.EventHandler(this.UitloggenToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(130, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
             // 
             // closeExitStopToolStripMenuItem
             // 
             this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
-            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(133, 22);
+            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeExitStopToolStripMenuItem.Text = "Close / Exit";
             this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.CloseExitStopToolStripMenuItem_Click);
             // 
@@ -774,6 +774,7 @@
             this.View.UseCompatibleStateImageBehavior = false;
             this.View.View = System.Windows.Forms.View.Details;
             this.View.MouseClick += new System.Windows.Forms.MouseEventHandler(this.View_MouseClick);
+            this.View.MouseLeave += new System.EventHandler(this.View_MouseLeave);
             this.View.MouseMove += new System.Windows.Forms.MouseEventHandler(this.View_MouseMove);
             // 
             // buttonRefresh

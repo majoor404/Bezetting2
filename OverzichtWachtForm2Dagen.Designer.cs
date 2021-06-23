@@ -2308,7 +2308,6 @@ namespace Bezetting2
             this.Name = "OverzichtWachtForm2Dagen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "OverzichtWachtForm 2 Dagen";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OverzichtWachtForm2Dagen_FormClosed);
             this.Shown += new System.EventHandler(this.OverzichtWachtForm2_Shown);
             this.PanelDag1.ResumeLayout(false);
             this.PanelDag1.PerformLayout();

@@ -168,15 +168,6 @@ namespace Bezetting2.Data
 
             _ = diffInSeconds < 1 ? saveSaveTel++ : saveSaveTel = 0;
 
-            //if (diffInSeconds < 1)
-            //{
-            //    saveSaveTel++;
-            //}
-            //else
-            //{
-            //    saveSaveTel = 0;
-            //}
-
             if (saveSaveTel > 4)
             {
                 ProgData.Wacht(600, $"Save maand data {kleur}");

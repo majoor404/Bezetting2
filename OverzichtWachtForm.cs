@@ -90,6 +90,7 @@ namespace Bezetting2
                     UpdateAfwijkingListBox(sourse);
                 }
                 SaveData();
+                //WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
             }
         }
 
@@ -290,8 +291,6 @@ namespace Bezetting2
 
         private void OverzichtWachtForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SaveData();
-
             if (ProgData.RechtenHuidigeGebruiker == 101)
             {
                 SaveCheckboxStatus();
@@ -334,8 +333,8 @@ namespace Bezetting2
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
 
-            labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
             huidig = dat;
+            labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
             labelKleur.Text = ProgData.GekozenKleur;
 
@@ -384,7 +383,7 @@ namespace Bezetting2
                 }
 
                 DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
-                
+
                 // orginele namen van die kleur in listbox1 zetten
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
@@ -436,125 +435,12 @@ namespace Bezetting2
                 {
                     buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
                 }
-
-
-                //try
-                //{
-                //    // extra diensten regelen.
-                //    // als extra dienst dan ListPersoneelKleur uitbreiden met die naam, en afwijkingen
-                //    string dir = ProgData.GetDirectoryBezettingMaand(dat);
-                //    ProgData.LoadLooptExtraLijst(dir, ProgData.GekozenKleur);
-                //    if (ProgData.ListLooptExtra.Count > 0)
-                //    {
-                //        /////////////////////////////////////////////////////////////////////////////////////
-                //        // VD is bv veranderd in ED
-                //        // pas dus aan.
-                //        for (int i = ProgData.ListLooptExtra.Count - 1; i >= 0; i--)
-                //        {
-                //            try
-                //            {
-                //                werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == ProgData.ListLooptExtra[i]._naam)
-                //                                                                 && (aa._dagnummer == ProgData.ListLooptExtra[i]._datum.Day)
-                //                                                                 && (aa._afwijkingdienst != ProgData.ListLooptExtra[i]._metcode));
-                //                ver._afwijkingdienst = ProgData.ListLooptExtra[i]._metcode;
-                //                ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                //            }
-                //            catch { }
-                //        }
-                //        ///////////////////////////////////////////////////////////////////////////////////////
-
-                //        foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
-                //        {
-                //            if (naam._datum.ToShortDateString() == dat.ToShortDateString())
-                //            {
-                //                try
-                //                {
-                //                    personeel perso = ProgData.AlleMensen.LijstPersoonKleur.First(aa => (aa._achternaam == naam._naam));
-                //                }
-                //                catch
-                //                {
-                //                    personeel extra_man = new personeel
-                //                    {
-                //                        _achternaam = naam._naam
-                //                    };
-                //                    ProgData.AlleMensen.LijstPersoonKleur.Add(extra_man);
-                //                }
-
-                //                try
-                //                {
-                //                    werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == naam._naam) && (aa._dagnummer == dat.Day));
-                //                }
-                //                catch
-                //                {
-                //                    werkdag werkdag_extra_man = new werkdag
-                //                    {
-                //                        _dagnummer = dat.Day,
-                //                        _naam = naam._naam,
-                //                        _werkplek = "",
-                //                        _afwijkingdienst = naam._metcode
-                //                    };
-                //                    ProgData.LijstWerkdagPloeg.Add(werkdag_extra_man);
-                //                    ProgData.SaveLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
-                //                }
-                //            }
-                //        }
-                //    }
-
-                //    foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
-                //    {
-                //        try
-                //        {
-                //            // 
-                //            werkdag ver = ProgData.LijstWerkdagPloeg.First(aa => (aa._naam == man._achternaam) && (aa._dagnummer == dat.Day));
-
-                //            if (string.IsNullOrEmpty(ver._werkplek))
-                //            {
-                //                listBox1.Items.Add(man._achternaam);
-                //                UpdateAfwijkingListBox(listBox1);
-                //            }
-                //            else
-                //            {
-                //                Invoerveld veld = opbouw.First(a => (a._Label.Text == ver._werkplek));
-                //                veld._ListNaam.Items.Add(man._achternaam);
-                //                UpdateAfwijkingListBox(veld._ListNaam);
-                //            }
-                //        }
-                //        catch { }
-                //    }
-
-
-
-                //    foreach (ListBox box in this.Controls.OfType<ListBox>())
-                //    {
-                //        // als op werkplek geen personeel, dan invisible afwijking
-                //        int tag = int.Parse(box.Tag.ToString());
-                //        if (tag < 22)
-                //        {
-                //            if (box.Items.Count == 0)
-                //            {
-                //                Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
-                //                veld._ListAfw.Visible = false;
-                //            }
-                //        }
-                //    }
-
-                //    // als dag info, kleur button
-                //    string file = $"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
-                //    if (File.Exists(file))
-                //    {
-                //        buttonOpmerking.BackColor = Color.Yellow;
-                //    }
-                //    else
-                //    {
-                //        buttonOpmerking.BackColor = Color.FromArgb(255, 240, 240, 240);
-                //    }
             }
             catch { }
         }
 
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
-            // copy werkplek data 1 dag verder.
             DateTime Volgende_werk_dag = huidig;
             Volgende_werk_dag = Volgende_werk_dag.AddDays(1);
             string dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
@@ -564,219 +450,39 @@ namespace Bezetting2
                 dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
             }
 
-
-            foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
+            if (Volgende_werk_dag.Month == huidig.Month)
             {
-                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, huidig.Month, huidig.Year);
-                string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
-                
-                if(Volgende_werk_dag.Month != huidig.Month)
-                    WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
-                
-                WerkPlek.SetWerkPlek(man._achternaam, Volgende_werk_dag.Day, plek);
+                foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
+                {
+                    string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
+                    WerkPlek.SetWerkPlek(man._achternaam, Volgende_werk_dag.Day, plek);
+                }
+
                 WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
+                Thread.Sleep(500);
+                ButtonNext_Click(this, null);
             }
-
-            //List<string> temp1 = new List<string>();
-            //List<string> temp2 = new List<string>();
-            //List<string> temp3 = new List<string>();
-            //List<string> temp4 = new List<string>();
-            //List<string> temp5 = new List<string>();
-            //List<string> temp6 = new List<string>();
-            //List<string> temp7 = new List<string>();
-            //List<string> temp8 = new List<string>();
-            //List<string> temp9 = new List<string>();
-            //List<string> temp10 = new List<string>();
-            //List<string> temp11 = new List<string>();
-            //List<string> temp12 = new List<string>();
-            //List<string> temp13 = new List<string>();
-            //List<string> temp14 = new List<string>();
-            //List<string> temp15 = new List<string>();
-            //List<string> temp16 = new List<string>();
-            //List<string> temp17 = new List<string>();
-            //List<string> temp18 = new List<string>();
-            //List<string> temp19 = new List<string>();
-            //List<string> temp20 = new List<string>();
-            //List<string> temp21 = new List<string>();
-
-            //for (int i = 0; i < listBox1.Items.Count; i++)
-            //{
-            //    temp1.Add(listBox1.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox2.Items.Count; i++)
-            //{
-            //    temp2.Add(listBox2.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox3.Items.Count; i++)
-            //{
-            //    temp3.Add(listBox3.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox4.Items.Count; i++)
-            //{
-            //    temp4.Add(listBox4.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox5.Items.Count; i++)
-            //{
-            //    temp5.Add(listBox5.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox6.Items.Count; i++)
-            //{
-            //    temp6.Add(listBox6.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox7.Items.Count; i++)
-            //{
-            //    temp7.Add(listBox7.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox8.Items.Count; i++)
-            //{
-            //    temp8.Add(listBox8.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox9.Items.Count; i++)
-            //{
-            //    temp9.Add(listBox9.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox10.Items.Count; i++)
-            //{
-            //    temp10.Add(listBox10.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox11.Items.Count; i++)
-            //{
-            //    temp11.Add(listBox11.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox12.Items.Count; i++)
-            //{
-            //    temp12.Add(listBox12.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox13.Items.Count; i++)
-            //{
-            //    temp13.Add(listBox13.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox14.Items.Count; i++)
-            //{
-            //    temp14.Add(listBox14.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox15.Items.Count; i++)
-            //{
-            //    temp15.Add(listBox15.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox16.Items.Count; i++)
-            //{
-            //    temp16.Add(listBox16.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox17.Items.Count; i++)
-            //{
-            //    temp17.Add(listBox17.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox18.Items.Count; i++)
-            //{
-            //    temp18.Add(listBox18.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox19.Items.Count; i++)
-            //{
-            //    temp19.Add(listBox19.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox20.Items.Count; i++)
-            //{
-            //    temp20.Add(listBox20.Items[i].ToString());
-            //}
-            //for (int i = 0; i < listBox21.Items.Count; i++)
-            //{
-            //    temp21.Add(listBox21.Items[i].ToString());
-            //}
-
-            //// ga naar volgende dag
-            //ButtonNext_Click(this, null);
-            //foreach (ListBox box in this.Controls.OfType<ListBox>())
-            //{
-            //    box.Items.Clear();
-            //}
-
-            //for (int i = 0; i < temp1.Count; i++)
-            //{
-            //    listBox1.Items.Add(temp1[i]);
-            //}
-            //for (int i = 0; i < temp2.Count; i++)
-            //{
-            //    listBox2.Items.Add(temp2[i]);
-            //}
-            //for (int i = 0; i < temp3.Count; i++)
-            //{
-            //    listBox3.Items.Add(temp3[i]);
-            //}
-            //for (int i = 0; i < temp4.Count; i++)
-            //{
-            //    listBox4.Items.Add(temp4[i]);
-            //}
-            //for (int i = 0; i < temp5.Count; i++)
-            //{
-            //    listBox5.Items.Add(temp5[i]);
-            //}
-            //for (int i = 0; i < temp6.Count; i++)
-            //{
-            //    listBox6.Items.Add(temp6[i]);
-            //}
-            //for (int i = 0; i < temp7.Count; i++)
-            //{
-            //    listBox7.Items.Add(temp7[i]);
-            //}
-            //for (int i = 0; i < temp8.Count; i++)
-            //{
-            //    listBox8.Items.Add(temp8[i]);
-            //}
-            //for (int i = 0; i < temp9.Count; i++)
-            //{
-            //    listBox9.Items.Add(temp9[i]);
-            //}
-            //for (int i = 0; i < temp10.Count; i++)
-            //{
-            //    listBox10.Items.Add(temp10[i]);
-            //}
-            //for (int i = 0; i < temp11.Count; i++)
-            //{
-            //    listBox11.Items.Add(temp11[i]);
-            //}
-            //for (int i = 0; i < temp12.Count; i++)
-            //{
-            //    listBox12.Items.Add(temp12[i]);
-            //}
-            //for (int i = 0; i < temp13.Count; i++)
-            //{
-            //    listBox13.Items.Add(temp13[i]);
-            //}
-            //for (int i = 0; i < temp14.Count; i++)
-            //{
-            //    listBox14.Items.Add(temp14[i]);
-            //}
-            //for (int i = 0; i < temp15.Count; i++)
-            //{
-            //    listBox15.Items.Add(temp15[i]);
-            //}
-            //for (int i = 0; i < temp16.Count; i++)
-            //{
-            //    listBox16.Items.Add(temp16[i]);
-            //}
-            //for (int i = 0; i < temp17.Count; i++)
-            //{
-            //    listBox17.Items.Add(temp17[i]);
-            //}
-            //for (int i = 0; i < temp18.Count; i++)
-            //{
-            //    listBox18.Items.Add(temp18[i]);
-            //}
-            //for (int i = 0; i < temp19.Count; i++)
-            //{
-            //    listBox19.Items.Add(temp19[i]);
-            //}
-            //for (int i = 0; i < temp20.Count; i++)
-            //{
-            //    listBox20.Items.Add(temp20[i]);
-            //}
-            //for (int i = 0; i < temp21.Count; i++)
-            //{
-            //    listBox21.Items.Add(temp21[i]);
-            //}
-            //SaveData();
-            ButtonNext_Click(this, null);
+            else
+            {
+                // voor gebruik met copy knopje als nieuw maand, dus eerst tijdelijk opslaan
+                List<string> LijstWerkPlekPloegCopy = new List<string>();
+                
+                foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
+                {
+                    string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
+                    LijstWerkPlekPloegCopy.Add(man._achternaam);
+                    LijstWerkPlekPloegCopy.Add(plek);
+                }
+                
+                WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
+                for (int i = 0; i < LijstWerkPlekPloegCopy.Count; i+=2)
+                {
+                    WerkPlek.SetWerkPlek(LijstWerkPlekPloegCopy[i], Volgende_werk_dag.Day, LijstWerkPlekPloegCopy[i+1]);
+                }
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
+                Thread.Sleep(500);
+                ButtonNext_Click(this, null);
+            }
         }
 
         private static bool CheckRechten()
@@ -870,7 +576,7 @@ namespace Bezetting2
 
         private void ButtonNu_Click(object sender, EventArgs e)
         {
-            SaveData();
+            //SaveData();
             OverzichtWachtForm_Shown(this, null);
         }
 
@@ -975,7 +681,7 @@ namespace Bezetting2
 
         private void GaNaarDat_Click(object sender, EventArgs e)
         {
-            SaveData();
+            //SaveData();
             dat = dateTimePicker1.Value;
             ViewUpdate();
         }
