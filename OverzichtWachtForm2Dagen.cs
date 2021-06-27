@@ -257,7 +257,7 @@ namespace Bezetting2
                 {
                     var nummer = ProgData.Get_Gebruiker_Nummer(naam);
                     DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
-                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer,datum),
                         nummer, datum);
                     broer.Items.Add(afwijking_);
                     if (!string.IsNullOrEmpty(afwijking_))
@@ -267,7 +267,7 @@ namespace Bezetting2
                 {
                     var nummer = ProgData.Get_Gebruiker_Nummer(naam);
                     DateTime datum = new DateTime(dat2.Year, dat2.Month, dat2.Day);
-                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer, datum),
                         nummer, datum);
                     broer.Items.Add(afwijking_);
                     if (!string.IsNullOrEmpty(afwijking_))
@@ -360,6 +360,29 @@ namespace Bezetting2
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
             labelKleur.Text = ProgData.GekozenKleur;
+
+            switch (ProgData.GekozenKleur)
+            {
+                case "Blauw":
+                    buttonRefresh.BackColor = Color.Blue;
+                    break;
+                case "Geel":
+                    buttonRefresh.BackColor = Color.Yellow;
+                    break;
+                case "Groen":
+                    buttonRefresh.BackColor = Color.Green;
+                    break;
+                case "Wit":
+                    buttonRefresh.BackColor = Color.White;
+                    break;
+                case "Rood":
+                    buttonRefresh.BackColor = Color.Red;
+                    break;
+                default:
+                    buttonRefresh.BackColor = Color.White;
+                    break;
+            }
+
             labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
             huidig = dat;
@@ -521,7 +544,7 @@ namespace Bezetting2
                     catch { }
                 }
 
-                UpdateAfwijkingListBox(listBox1,dat.Day);
+                //26 - 6 - 21 UpdateAfwijkingListBox(listBox1,dat.Day);
 
                 // haal uit WP de werkplekken, en verplaats als nodig
                 for (int i = listBox1.Items.Count - 1; i > -1; i--)
@@ -532,7 +555,7 @@ namespace Bezetting2
                     {
                         //move
                         listBox1.Items.RemoveAt(i);
-                        UpdateAfwijkingListBox(listBox1,dat.Day);
+                        //26 - 6 - 21 UpdateAfwijkingListBox(listBox1,dat.Day);
 
                         Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek && a._Dag == 1));
                         veld._ListNaam.Items.Add(naam);
@@ -540,6 +563,8 @@ namespace Bezetting2
                     }
 
                 }
+
+                UpdateAfwijkingListBox(listBox1, dat.Day); //26 - 6 - 21 
             }
             catch { }
         }
@@ -595,7 +620,6 @@ namespace Bezetting2
                     catch { }
                 }
 
-                UpdateAfwijkingListBox(listBox83, dat.Day);
 
                 // haal uit WP de werkplekken, en verplaats als nodig
                 for (int i = listBox83.Items.Count - 1; i > -1; i--)
@@ -606,7 +630,7 @@ namespace Bezetting2
                     {
                         //move
                         listBox83.Items.RemoveAt(i);
-                        UpdateAfwijkingListBox(listBox83, dat.Day);
+                        //26 - 6 - 21 UpdateAfwijkingListBox(listBox83, dat.Day);
 
                         Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek && a._Dag == 2));
                         veld._ListNaam.Items.Add(naam);
@@ -614,7 +638,8 @@ namespace Bezetting2
                     }
 
                 }
-        }
+                UpdateAfwijkingListBox(listBox83, dat.Day);
+            }
             catch { }
         }
         private void SaveData()
@@ -765,6 +790,11 @@ namespace Bezetting2
         private void GaNaarDat_Click(object sender, EventArgs e)
         {
             dat = dateTimePicker1.Value;
+            ViewUpdate();
+        }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
             ViewUpdate();
         }
     }

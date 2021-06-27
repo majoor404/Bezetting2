@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.listBox3 = new System.Windows.Forms.ListBox();
@@ -122,6 +123,8 @@
             this.GaNaarDatumButton = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.GaNaarDat = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // listBox1
@@ -1071,7 +1074,8 @@
             this.buttonPrev.Name = "buttonPrev";
             this.buttonPrev.Size = new System.Drawing.Size(87, 24);
             this.buttonPrev.TabIndex = 66;
-            this.buttonPrev.Text = "Dag -";
+            this.buttonPrev.Text = "Wacht -";
+            this.toolTip1.SetToolTip(this.buttonPrev, "Vorige Wacht");
             this.buttonPrev.UseVisualStyleBackColor = true;
             this.buttonPrev.Click += new System.EventHandler(this.ButtonPrev_Click);
             // 
@@ -1082,7 +1086,8 @@
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(87, 24);
             this.buttonNext.TabIndex = 67;
-            this.buttonNext.Text = "Dag +";
+            this.buttonNext.Text = "Wacht +";
+            this.toolTip1.SetToolTip(this.buttonNext, "Volgende Wacht");
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.ButtonNext_Click);
             // 
@@ -1094,6 +1099,7 @@
             this.buttonCopy.Size = new System.Drawing.Size(230, 24);
             this.buttonCopy.TabIndex = 68;
             this.buttonCopy.Text = "Copy Bezetting 1 Wacht";
+            this.toolTip1.SetToolTip(this.buttonCopy, "Copy deze bezetting 1 wacht");
             this.buttonCopy.UseVisualStyleBackColor = true;
             this.buttonCopy.Click += new System.EventHandler(this.ButtonCopy_Click);
             // 
@@ -1399,6 +1405,7 @@
             this.buttonNu.Size = new System.Drawing.Size(87, 24);
             this.buttonNu.TabIndex = 90;
             this.buttonNu.Text = "Vandaag";
+            this.toolTip1.SetToolTip(this.buttonNu, "Huidige Wacht");
             this.buttonNu.UseVisualStyleBackColor = true;
             this.buttonNu.Click += new System.EventHandler(this.ButtonNu_Click);
             // 
@@ -1410,6 +1417,7 @@
             this.buttonOpmerking.Size = new System.Drawing.Size(230, 24);
             this.buttonOpmerking.TabIndex = 182;
             this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
+            this.toolTip1.SetToolTip(this.buttonOpmerking, "Opmerking deze wacht/dag");
             this.buttonOpmerking.UseVisualStyleBackColor = true;
             this.buttonOpmerking.Click += new System.EventHandler(this.ButtonOpmerking_Click);
             // 
@@ -1421,6 +1429,7 @@
             this.GaNaarDatumButton.Size = new System.Drawing.Size(97, 24);
             this.GaNaarDatumButton.TabIndex = 183;
             this.GaNaarDatumButton.Text = "Kalender";
+            this.toolTip1.SetToolTip(this.GaNaarDatumButton, "Ga naar datum");
             this.GaNaarDatumButton.UseVisualStyleBackColor = true;
             this.GaNaarDatumButton.Click += new System.EventHandler(this.GaNaarDatumButton_Click);
             // 
@@ -1443,11 +1452,23 @@
             this.GaNaarDat.Visible = false;
             this.GaNaarDat.Click += new System.EventHandler(this.GaNaarDat_Click);
             // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.BackColor = System.Drawing.Color.Green;
+            this.buttonRefresh.Location = new System.Drawing.Point(201, 31);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(25, 25);
+            this.buttonRefresh.TabIndex = 186;
+            this.toolTip1.SetToolTip(this.buttonRefresh, "Kleur / Refresh");
+            this.buttonRefresh.UseVisualStyleBackColor = false;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // OverzichtWachtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 625);
+            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.GaNaarDat);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.GaNaarDatumButton);
@@ -1651,5 +1672,7 @@
         private System.Windows.Forms.Button GaNaarDatumButton;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button GaNaarDat;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

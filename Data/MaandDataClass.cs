@@ -53,10 +53,20 @@ namespace Bezetting2.Data
             MaandDataLijst.Add(nieuw);
         }
 
-        public void Load(string kleur)
+        public void Load(string kleur, DateTime start = default)
         {
-            var maand = ProgData.igekozenmaand;
-            var jaar = ProgData.igekozenjaar;
+            int maand;
+            int jaar;
+            if (start == default)
+            {
+                maand = ProgData.igekozenmaand;
+                jaar = ProgData.igekozenjaar;
+            }
+            else
+            {
+                maand = start.Month;
+                jaar = start.Year;
+            }
 
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
@@ -83,15 +93,6 @@ namespace Bezetting2.Data
                     saveLoadTime = DateTime.Now;
 
                     _ = diffInSeconds > 2 ? saveLoadTel++ : saveLoadTel = 0;
-
-                    //if (diffInSeconds < 2)
-                    //{
-                    //    saveLoadTel++;
-                    //}
-                    //else
-                    //{
-                    //    saveLoadTel = 0;
-                    //}
 
                     if (saveLoadTel > 5) // >5
                     {

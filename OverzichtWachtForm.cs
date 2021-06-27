@@ -135,8 +135,6 @@ namespace Bezetting2
 
             LaadDataFormulier(); // zet juiste vakjes aan
 
-            // zet datum en kleur in beeld
-
             dat = DateTime.Now;
 
             //ProgData.GekozenKleur = ProgData.Main.comboBoxKleurKeuze.Text;
@@ -235,24 +233,31 @@ namespace Bezetting2
         {
             Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
             broer = veld._ListAfw;
-            broer.Items.Clear();
-
-            bool afwijking = false;
-            for (int i = 0; i < box.Items.Count; i++)
+            
+            if (box.Items.Count > 0)
             {
-                // voor elke persoon in lijst
-                string naam = box.Items[i].ToString();
+                bool afwijking = false;
+                broer.Items.Clear();
+                for (int i = 0; i < box.Items.Count; i++)
+                {
+                    // voor elke persoon in lijst
+                    string naam = box.Items[i].ToString();
 
-                var nummer = ProgData.Get_Gebruiker_Nummer(naam);
-                DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
-                string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
-                    nummer, datum);
+                    var nummer = ProgData.Get_Gebruiker_Nummer(naam);
+                    DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
+                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
+                        nummer, datum);
 
-                broer.Items.Add(afwijking_);
-                if (!string.IsNullOrEmpty(afwijking_))
-                    afwijking = true;
+                    broer.Items.Add(afwijking_);
+                    if (!string.IsNullOrEmpty(afwijking_))
+                        afwijking = true;
+                }
+                broer.Visible = afwijking;
             }
-            broer.Visible = afwijking;
+            else
+            {
+                broer.Visible = false;
+            }
         }
 
         private void ButtonPrev_Click(object sender, EventArgs e)
@@ -338,6 +343,28 @@ namespace Bezetting2
 
             labelKleur.Text = ProgData.GekozenKleur;
 
+            switch (ProgData.GekozenKleur)
+            {
+                case "Blauw":
+                    buttonRefresh.BackColor = Color.Blue;
+                    break;
+                case "Geel":
+                    buttonRefresh.BackColor = Color.Yellow;
+                    break;
+                case "Groen":
+                    buttonRefresh.BackColor = Color.Green;
+                    break;
+                case "Wit":
+                    buttonRefresh.BackColor = Color.White;
+                    break;
+                case "Rood":
+                    buttonRefresh.BackColor = Color.Red;
+                    break;
+                default:
+                    buttonRefresh.BackColor = Color.White;
+                    break;
+            }
+
             labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
@@ -356,7 +383,6 @@ namespace Bezetting2
 
             ProgData.igekozenjaar = dat.Year;
             ProgData.igekozenmaand = dat.Month;
-            //ProgData.LaadLijstWerkdagPloeg(ProgData.GekozenKleur, 15);
             WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
 
             foreach (ListBox box in this.Controls.OfType<ListBox>())
@@ -375,7 +401,7 @@ namespace Bezetting2
                 {
                     foreach (LooptExtraDienst naam in ProgData.ListLooptExtra)
                     {
-                        if (naam._datum.ToShortDateString() == dat.ToShortDateString())
+                        if (naam._datum.Date == dat.Date)
                         {
                             listBox1.Items.Add(naam._naam);
                         }
@@ -391,7 +417,8 @@ namespace Bezetting2
                     {
                         var nummer = ProgData.Get_Gebruiker_Nummer(man._achternaam);
                         string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer),
-                            nummer, datum);
+                                                                                nummer,
+                                                                                datum);
 
                         afwijking_ = afwijking_.ToUpper();
 
@@ -405,7 +432,7 @@ namespace Bezetting2
                     catch { }
                 }
 
-                UpdateAfwijkingListBox(listBox1);
+                //26-6-21 UpdateAfwijkingListBox(listBox1);
 
                 // haal uit WP de werkplekken, en verplaats als nodig
                 for (int i = listBox1.Items.Count - 1; i > -1; i--)
@@ -416,7 +443,7 @@ namespace Bezetting2
                     {
                         //move
                         listBox1.Items.RemoveAt(i);
-                        UpdateAfwijkingListBox(listBox1);
+                        //26-6-21 UpdateAfwijkingListBox(listBox1);
 
                         Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek));
                         veld._ListNaam.Items.Add(naam);
@@ -424,6 +451,8 @@ namespace Bezetting2
                     }
 
                 }
+                
+                UpdateAfwijkingListBox(listBox1); //26-6-21
 
                 //als dag info, kleur button
                 string file = $"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
@@ -683,6 +712,11 @@ namespace Bezetting2
         {
             //SaveData();
             dat = dateTimePicker1.Value;
+            ViewUpdate();
+        }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
             ViewUpdate();
         }
     }

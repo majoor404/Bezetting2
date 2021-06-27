@@ -840,7 +840,7 @@ namespace Bezetting2
         public static string GetLaatsteAfwijkingPersoon(string loopt_op_kleur, string persnr, DateTime datum)
         {
             string ret = "";
-            MaandData.Load(loopt_op_kleur);
+            MaandData.Load(loopt_op_kleur,datum);
             for (int i = MaandData.MaandDataLijst.Count - 1; i >= 0; i--)
             {
                 if (MaandData.MaandDataLijst[i].personeel_nr_ == persnr && MaandData.MaandDataLijst[i].datum_ == datum)

@@ -332,6 +332,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="repeat.png" />
     <None Include="2012-04-06 08.35.02.jpg" />
     <Content Include="bezetting2.ico" />
     <None Include="helm man.jpg" />

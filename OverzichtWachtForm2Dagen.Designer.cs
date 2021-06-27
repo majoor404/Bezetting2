@@ -29,6 +29,7 @@ namespace Bezetting2
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.PanelDag1 = new System.Windows.Forms.Panel();
             this.GaNaarDat = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -171,6 +172,8 @@ namespace Bezetting2
             this.label30 = new System.Windows.Forms.Label();
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -178,6 +181,7 @@ namespace Bezetting2
             // PanelDag1
             // 
             this.PanelDag1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag1.Controls.Add(this.buttonRefresh);
             this.PanelDag1.Controls.Add(this.GaNaarDat);
             this.PanelDag1.Controls.Add(this.dateTimePicker1);
             this.PanelDag1.Controls.Add(this.GaNaarDatumButton);
@@ -289,6 +293,7 @@ namespace Bezetting2
             this.GaNaarDatumButton.Size = new System.Drawing.Size(97, 24);
             this.GaNaarDatumButton.TabIndex = 182;
             this.GaNaarDatumButton.Text = "Kalender";
+            this.toolTip.SetToolTip(this.GaNaarDatumButton, "Kies een Datum");
             this.GaNaarDatumButton.UseVisualStyleBackColor = true;
             this.GaNaarDatumButton.Click += new System.EventHandler(this.GaNaarDatumButton_Click);
             // 
@@ -300,6 +305,7 @@ namespace Bezetting2
             this.buttonOpmerking.Size = new System.Drawing.Size(227, 24);
             this.buttonOpmerking.TabIndex = 181;
             this.buttonOpmerking.Text = "Opmerkingen deze dag/wacht";
+            this.toolTip.SetToolTip(this.buttonOpmerking, "Een opmering maken voor deze dag");
             this.buttonOpmerking.UseVisualStyleBackColor = true;
             this.buttonOpmerking.Click += new System.EventHandler(this.ButtonOpmerking_Click);
             // 
@@ -1005,6 +1011,7 @@ namespace Bezetting2
             this.buttonNu.Size = new System.Drawing.Size(108, 24);
             this.buttonNu.TabIndex = 97;
             this.buttonNu.Text = "Vandaag";
+            this.toolTip.SetToolTip(this.buttonNu, "Ga naar huidige datum");
             this.buttonNu.UseVisualStyleBackColor = true;
             this.buttonNu.Click += new System.EventHandler(this.ButtonNu_Click);
             // 
@@ -1016,6 +1023,7 @@ namespace Bezetting2
             this.buttonCopy.Size = new System.Drawing.Size(160, 24);
             this.buttonCopy.TabIndex = 96;
             this.buttonCopy.Text = "Copy Bezetting 1 Wacht";
+            this.toolTip.SetToolTip(this.buttonCopy, "Copy deze bezetting naar volgende dag");
             this.buttonCopy.UseVisualStyleBackColor = true;
             this.buttonCopy.Click += new System.EventHandler(this.ButtonCopy_Click);
             // 
@@ -1026,7 +1034,8 @@ namespace Bezetting2
             this.buttonNext.Name = "buttonNext";
             this.buttonNext.Size = new System.Drawing.Size(97, 24);
             this.buttonNext.TabIndex = 95;
-            this.buttonNext.Text = "Dag +";
+            this.buttonNext.Text = "Wacht +";
+            this.toolTip.SetToolTip(this.buttonNext, "1 Wacht Vooruit");
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.ButtonNext_Click);
             // 
@@ -1037,7 +1046,8 @@ namespace Bezetting2
             this.buttonPrev.Name = "buttonPrev";
             this.buttonPrev.Size = new System.Drawing.Size(97, 24);
             this.buttonPrev.TabIndex = 94;
-            this.buttonPrev.Text = "Dag -";
+            this.buttonPrev.Text = "Wacht -";
+            this.toolTip.SetToolTip(this.buttonPrev, "1 Wacht Terug");
             this.buttonPrev.UseVisualStyleBackColor = true;
             this.buttonPrev.Click += new System.EventHandler(this.ButtonPrev_Click);
             // 
@@ -1368,6 +1378,7 @@ namespace Bezetting2
             this.buttonOpmerking2.Size = new System.Drawing.Size(227, 24);
             this.buttonOpmerking2.TabIndex = 182;
             this.buttonOpmerking2.Text = "Opmerkingen deze dag/wacht";
+            this.toolTip.SetToolTip(this.buttonOpmerking2, "Een opmering maken voor deze dag");
             this.buttonOpmerking2.UseVisualStyleBackColor = true;
             this.buttonOpmerking2.Click += new System.EventHandler(this.buttonOpmerkingDag2_Click);
             // 
@@ -2295,6 +2306,17 @@ namespace Bezetting2
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
             // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.BackColor = System.Drawing.Color.Green;
+            this.buttonRefresh.Location = new System.Drawing.Point(84, 3);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(25, 25);
+            this.buttonRefresh.TabIndex = 187;
+            this.toolTip.SetToolTip(this.buttonRefresh, "Kleur/Refresh");
+            this.buttonRefresh.UseVisualStyleBackColor = false;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // OverzichtWachtForm2Dagen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2461,5 +2483,7 @@ namespace Bezetting2
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button GaNaarDatumButton;
         private System.Windows.Forms.Button GaNaarDat;
+        private System.Windows.Forms.Button buttonRefresh;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }

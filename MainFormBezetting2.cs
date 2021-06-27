@@ -1705,9 +1705,8 @@ namespace Bezetting2
         {
             if (e.KeyCode == Keys.F5)
                 ButtonRefresh_Click(this, null);
-            if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Escape && ProgData.Huidige_Gebruiker_Personeel_nummer != "Niemand Ingelogd")
             {
-                if (ProgData.Huidige_Gebruiker_Personeel_nummer != "Niemand Ingelogd")
                 UitloggenToolStripMenuItem_Click(this, null);
             }
         }
