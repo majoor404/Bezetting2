@@ -23,12 +23,15 @@ namespace Bezetting2
         private WerkPlek WP = new WerkPlek();
         private DateTime dat;
         private DateTime dat2;
-        private DateTime huidig;
+        //private DateTime huidig;
+
+        private string gekozen_naam1, gekozen_naam2;
+        private ListBox gekozen_listbox1, gekozen_listbox2;
 
         public class Invoerveld
         {
             //  public invoerveld() { }
-            public Invoerveld(Label lb, ListBox ln, ListBox la , int dag)
+            public Invoerveld(Label lb, ListBox ln, ListBox la, int dag)
             {
                 _Label = lb;
                 _ListNaam = ln;
@@ -176,23 +179,103 @@ namespace Bezetting2
                     e.Effect = DragDropEffects.None;
             }
         }
+
         private void ListBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (CheckRechten())
             {
-                try
+                // voor dubbel, check rechter muis
+                if (e.Button == MouseButtons.Right)
                 {
-                    sourse = (ListBox)sender;
-                    int index = sourse.IndexFromPoint(e.X, e.Y);
-                    sourse_index = index;
-                    if (index > -1)
+                    if (sender.GetType() == typeof(ListBox))
                     {
-                        string s = sourse.Items[index].ToString();
-                        //DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
-                        _ = DoDragDrop(s, DragDropEffects.Move);
+                        sourse = (ListBox)sender;
+                        int index = sourse.IndexFromPoint(e.X, e.Y);
+                        sourse_index = index;
+
+                        Point start = new Point(sourse.Location.X, sourse.Location.Y);
+                        start.X = start.X + e.Location.X;
+                        start.Y = start.Y + e.Location.Y;
+                        buttonSplitDag1.Location = start;
+                        // bewaar data voor als je op 2 maal invullen knop drukt
+                        if (index > -1)
+                        {
+                            buttonSplitDag1.Visible = true;
+                            gekozen_naam1 = sourse.Items[index].ToString();
+                            gekozen_listbox1 = sourse;
+                        }
+                        else
+                        {
+                            buttonSplitDag1.Visible = false;
+                            gekozen_naam1 = "";
+                        }
                     }
                 }
-                catch { }
+                else
+                {
+                    try
+                    {
+                        sourse = (ListBox)sender;
+                        int index = sourse.IndexFromPoint(e.X, e.Y);
+                        sourse_index = index;
+                        if (index > -1)
+                        {
+                            string s = sourse.Items[index].ToString();
+                            //DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
+                            _ = DoDragDrop(s, DragDropEffects.Move);
+                        }
+                    }
+                    catch { }
+                }
+            }
+        }
+        private void listBox81_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (CheckRechten())
+            {
+                // voor dubbel, check rechter muis
+                if (e.Button == MouseButtons.Right)
+                {
+                    if (sender.GetType() == typeof(ListBox))
+                    {
+                        sourse = (ListBox)sender;
+                        int index = sourse.IndexFromPoint(e.X, e.Y);
+                        sourse_index = index;
+
+                        Point start = new Point(sourse.Location.X, sourse.Location.Y);
+                        start.X = start.X + e.Location.X;
+                        start.Y = start.Y + e.Location.Y;
+                        buttonSplitDag2.Location = start;
+                        // bewaar data voor als je op 2 maal invullen knop drukt
+                        if (index > -1)
+                        {
+                            buttonSplitDag2.Visible = true;
+                            gekozen_naam2 = sourse.Items[index].ToString();
+                            gekozen_listbox2 = sourse;
+                        }
+                        else
+                        {
+                            buttonSplitDag2.Visible = false;
+                            gekozen_naam2 = "";
+                        }
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        sourse = (ListBox)sender;
+                        int index = sourse.IndexFromPoint(e.X, e.Y);
+                        sourse_index = index;
+                        if (index > -1)
+                        {
+                            string s = sourse.Items[index].ToString();
+                            //DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
+                            _ = DoDragDrop(s, DragDropEffects.Move);
+                        }
+                    }
+                    catch { }
+                }
             }
         }
         private void ListBox2_DragDrop(object sender, DragEventArgs e)
@@ -255,9 +338,13 @@ namespace Bezetting2
 
                 if (dag_ == dat.Day)
                 {
+                    var first = string.IsNullOrEmpty(naam) ? (char?)null : naam[0];
+                    if (first == '+')
+                        naam = naam.Substring(1, naam.Length - 1);
+
                     var nummer = ProgData.Get_Gebruiker_Nummer(naam);
                     DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
-                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer,datum),
+                    string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer, datum),
                         nummer, datum);
                     broer.Items.Add(afwijking_);
                     if (!string.IsNullOrEmpty(afwijking_))
@@ -265,6 +352,10 @@ namespace Bezetting2
                 }
                 else
                 {
+                    var first = string.IsNullOrEmpty(naam) ? (char?)null : naam[0];
+                    if (first == '+')
+                        naam = naam.Substring(1, naam.Length - 1);
+
                     var nummer = ProgData.Get_Gebruiker_Nummer(naam);
                     DateTime datum = new DateTime(dat2.Year, dat2.Month, dat2.Day);
                     string afwijking_ = ProgData.GetLaatsteAfwijkingPersoon(ProgData.Get_Gebruiker_Kleur(nummer, datum),
@@ -385,7 +476,7 @@ namespace Bezetting2
 
             labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dat, ProgData.GekozenKleur);
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
-            huidig = dat;
+            //huidig = dat;
 
             // als labeldienst is leeg, dan vrije dag, ga naar volgende
             if (string.IsNullOrEmpty(labelDienst.Text))
@@ -403,7 +494,7 @@ namespace Bezetting2
 
             ProgData.igekozenmaand = dat.Month;
             ProgData.igekozenjaar = dat.Year;
-            
+
             ViewDag1(dat);
 
             dat2 = dat.AddDays(1);
@@ -424,7 +515,7 @@ namespace Bezetting2
                 labelDatum2.Text = dat2.ToLongDateString();
             }
 
-            
+
 
             // als dag info, kleur button
             string file = $"{dat.Year}\\{dat.Month}\\{labelDatum.Text} - {labelDienst.Text}.txt";
@@ -559,7 +650,17 @@ namespace Bezetting2
 
                         Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek && a._Dag == 1));
                         veld._ListNaam.Items.Add(naam);
-                        UpdateAfwijkingListBox(veld._ListNaam,dat.Day);
+                        UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
+                    }
+
+                    // nu de dubbele, naam begind met +
+                    naam = "+" + naam;
+                    werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
+                    if (werkplek != "") // ook op plek namen
+                    {
+                        Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek));
+                        veld._ListNaam.Items.Add(naam);
+                        UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
                     }
 
                 }
@@ -637,6 +738,16 @@ namespace Bezetting2
                         UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
                     }
 
+                    // nu de dubbele, naam begind met +
+                    naam = "+" + naam;
+                    werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
+                    if (werkplek != "") // ook op plek namen
+                    {
+                        Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek && a._Dag == 2));
+                        veld._ListNaam.Items.Add(naam);
+                        UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
+                    }
+
                 }
                 UpdateAfwijkingListBox(listBox83, dat.Day);
             }
@@ -676,7 +787,7 @@ namespace Bezetting2
                 ProgData.igekozenmaand = dat2.Month;
                 ProgData.igekozenjaar = dat2.Year;
                 WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
-                
+
                 foreach (ListBox box in PanelDag2.Controls.OfType<ListBox>())
                 {
                     if ((box.Tag != null))
@@ -701,7 +812,6 @@ namespace Bezetting2
                 CaptureMyScreen();
             }
         }
-        
         private void CaptureMyScreen()
         {
             Rectangle bounds = this.Bounds;
@@ -717,7 +827,7 @@ namespace Bezetting2
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
             // copy werkplek data 1 dag verder.
-            DateTime Volgende_werk_dag = huidig;
+            DateTime Volgende_werk_dag = dat;// huidig;
             Volgende_werk_dag = Volgende_werk_dag.AddDays(1);
             string dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
@@ -726,13 +836,16 @@ namespace Bezetting2
                 dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
             }
 
-            if (Volgende_werk_dag.Month == huidig.Month)
+            if (Volgende_werk_dag.Month == dat.Month)
             {
 
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
-                    string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
+                    string plek = WerkPlek.GetWerkPlek(man._achternaam, dat.Day);
                     WerkPlek.SetWerkPlek(man._achternaam, Volgende_werk_dag.Day, plek);
+                    plek = WerkPlek.GetWerkPlek("+" + man._achternaam, dat.Day);
+                    if(plek !="")
+                        WerkPlek.SetWerkPlek("+" + man._achternaam, Volgende_werk_dag.Day, plek);
                 }
                 WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
                 Thread.Sleep(500);
@@ -745,9 +858,15 @@ namespace Bezetting2
 
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
-                    string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
+                    string plek = WerkPlek.GetWerkPlek(man._achternaam, dat.Day);
                     LijstWerkPlekPloegCopy.Add(man._achternaam);
                     LijstWerkPlekPloegCopy.Add(plek);
+                    plek = WerkPlek.GetWerkPlek("+" + man._achternaam, dat.Day);
+                    if (plek != "")
+                    {
+                        LijstWerkPlekPloegCopy.Add("+" + man._achternaam);
+                        LijstWerkPlekPloegCopy.Add(plek);
+                    }
                 }
 
                 WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
@@ -796,6 +915,44 @@ namespace Bezetting2
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             ViewUpdate();
+        }
+
+        private void buttonSplitDag1_MouseLeave(object sender, EventArgs e)
+        {
+            buttonSplitDag1.Visible = false;
+        }
+
+        private void buttonSplitDag2_MouseLeave(object sender, EventArgs e)
+        {
+            buttonSplitDag2.Visible = false;
+        }
+
+        private void buttonSplitDag1_Click(object sender, EventArgs e)
+        {
+            buttonSplitDag1.Visible = false;
+            var first = string.IsNullOrEmpty(gekozen_naam1) ? (char?)null : gekozen_naam1[0];
+            if (first != '+')
+            {
+                // test of +naam al bestaat
+                bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam1, dat.Day);
+                //gekozen_naam
+                if (!test)
+                    gekozen_listbox1.Items.Add("+" + gekozen_naam1);
+            }
+        }
+
+        private void buttonSplitDag2_Click(object sender, EventArgs e)
+        {
+            buttonSplitDag2.Visible = false;
+            var first = string.IsNullOrEmpty(gekozen_naam2) ? (char?)null : gekozen_naam2[0];
+            if (first != '+')
+            {
+                // test of +naam al bestaat
+                bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam2, dat2.Day);
+                //gekozen_naam
+                if (!test)
+                    gekozen_listbox2.Items.Add("+" + gekozen_naam2);
+            }
         }
     }
 }

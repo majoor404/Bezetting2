@@ -51,15 +51,21 @@ namespace Bezetting2
             if (!string.IsNullOrEmpty(textBoxAfwijking.Text))
             {
                 textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
-                ProgData.RegelAfwijking(labelPersoneelnr.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
-                ProgData.NachtErVoorVrij(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text);
-                //string eerste_2 = "";
 
                 string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
-
-                if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 =="DD")
+                if (textBoxAfwijking.Text.Length != 4 && (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"))
                 {
-                    ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, _verzoekdag, labelNaam.Text);
+                    MessageBox.Show("Bij een ED VD of RD moet er wel bij staan op welke wacht,\nDus bv ED-O of ED-M");
+                }
+                else
+                {
+                    ProgData.RegelAfwijking(labelPersoneelnr.Text, labelDatum.Text, textBoxAfwijking.Text, textBoxRede.Text, this.Text, ProgData.GekozenKleur);
+                    ProgData.NachtErVoorVrij(labelNaam.Text, labelDatum.Text, textBoxAfwijking.Text);
+
+                    if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD" || eerste_2 == "DD")
+                    {
+                        ProgData.VulInLooptExtraDienst(textBoxAfwijking.Text, _verzoekdag, labelNaam.Text);
+                    }
                 }
             }
             else

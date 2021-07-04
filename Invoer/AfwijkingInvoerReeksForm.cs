@@ -29,10 +29,17 @@ namespace Bezetting2.Invoer
                     okido = true;
             }
 
+            string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
+            if (textBoxAfwijking.Text.Length != 4 && (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD"))
+            {
+                MessageBox.Show("Bij een ED VD of RD moet er wel bij staan op welke wacht,\nDus bv ED-O of ED-M");
+                okido = false;
+            }
+
             if (okido)
             {
                 textBoxAfwijking.Text = textBoxAfwijking.Text.ToUpper();
-                string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
+                //string eerste_2 = textBoxAfwijking.Text.Length >= 2 ? textBoxAfwijking.Text.Substring(0, 2) : textBoxAfwijking.Text;
                 int maand = ProgData.igekozenmaand;
                 int jaar = ProgData.igekozenjaar;
                 DateTime start = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, int.Parse(labelDatum.Text));

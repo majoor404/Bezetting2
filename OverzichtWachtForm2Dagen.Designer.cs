@@ -31,6 +31,8 @@ namespace Bezetting2
         {
             this.components = new System.ComponentModel.Container();
             this.PanelDag1 = new System.Windows.Forms.Panel();
+            this.buttonSplitDag1 = new System.Windows.Forms.Button();
+            this.buttonRefresh = new System.Windows.Forms.Button();
             this.GaNaarDat = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.GaNaarDatumButton = new System.Windows.Forms.Button();
@@ -173,7 +175,7 @@ namespace Bezetting2
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonRefresh = new System.Windows.Forms.Button();
+            this.buttonSplitDag2 = new System.Windows.Forms.Button();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -181,6 +183,7 @@ namespace Bezetting2
             // PanelDag1
             // 
             this.PanelDag1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag1.Controls.Add(this.buttonSplitDag1);
             this.PanelDag1.Controls.Add(this.buttonRefresh);
             this.PanelDag1.Controls.Add(this.GaNaarDat);
             this.PanelDag1.Controls.Add(this.dateTimePicker1);
@@ -264,6 +267,30 @@ namespace Bezetting2
             this.PanelDag1.TabIndex = 0;
             this.PanelDag1.Tag = "0";
             this.PanelDag1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            // 
+            // buttonSplitDag1
+            // 
+            this.buttonSplitDag1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSplitDag1.Location = new System.Drawing.Point(432, 386);
+            this.buttonSplitDag1.Name = "buttonSplitDag1";
+            this.buttonSplitDag1.Size = new System.Drawing.Size(205, 24);
+            this.buttonSplitDag1.TabIndex = 188;
+            this.buttonSplitDag1.Text = "Persoon op 2 plekken invullen";
+            this.buttonSplitDag1.UseVisualStyleBackColor = true;
+            this.buttonSplitDag1.Visible = false;
+            this.buttonSplitDag1.Click += new System.EventHandler(this.buttonSplitDag1_Click);
+            this.buttonSplitDag1.MouseLeave += new System.EventHandler(this.buttonSplitDag1_MouseLeave);
+            // 
+            // buttonRefresh
+            // 
+            this.buttonRefresh.BackColor = System.Drawing.Color.Green;
+            this.buttonRefresh.Location = new System.Drawing.Point(84, 3);
+            this.buttonRefresh.Name = "buttonRefresh";
+            this.buttonRefresh.Size = new System.Drawing.Size(25, 25);
+            this.buttonRefresh.TabIndex = 187;
+            this.toolTip.SetToolTip(this.buttonRefresh, "Kleur/Refresh");
+            this.buttonRefresh.UseVisualStyleBackColor = false;
+            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // GaNaarDat
             // 
@@ -1294,6 +1321,7 @@ namespace Bezetting2
             // PanelDag2
             // 
             this.PanelDag2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag2.Controls.Add(this.buttonSplitDag2);
             this.PanelDag2.Controls.Add(this.buttonOpmerking2);
             this.PanelDag2.Controls.Add(this.labelDienst2);
             this.PanelDag2.Controls.Add(this.labelDatum2);
@@ -1416,7 +1444,7 @@ namespace Bezetting2
             this.listBox42.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox42.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox42.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox42.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox42.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox43
             // 
@@ -1432,7 +1460,7 @@ namespace Bezetting2
             this.listBox43.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox43.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox43.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox43.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox43.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox44
             // 
@@ -1448,7 +1476,7 @@ namespace Bezetting2
             this.listBox44.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox44.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox44.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox44.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox44.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox45
             // 
@@ -1464,7 +1492,7 @@ namespace Bezetting2
             this.listBox45.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox45.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox45.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox45.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox45.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox46
             // 
@@ -1481,7 +1509,7 @@ namespace Bezetting2
             this.listBox46.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox46.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox46.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox46.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox46.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox47
             // 
@@ -1498,7 +1526,7 @@ namespace Bezetting2
             this.listBox47.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox47.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox47.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox47.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox47.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox48
             // 
@@ -1515,7 +1543,7 @@ namespace Bezetting2
             this.listBox48.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox48.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox48.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox48.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox48.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox49
             // 
@@ -1532,7 +1560,7 @@ namespace Bezetting2
             this.listBox49.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox49.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox49.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox49.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox49.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox50
             // 
@@ -1548,7 +1576,7 @@ namespace Bezetting2
             this.listBox50.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox50.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox50.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox50.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox50.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox51
             // 
@@ -1564,7 +1592,7 @@ namespace Bezetting2
             this.listBox51.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox51.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox51.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox51.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox51.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox52
             // 
@@ -1580,7 +1608,7 @@ namespace Bezetting2
             this.listBox52.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox52.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox52.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox52.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox52.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox53
             // 
@@ -1596,7 +1624,7 @@ namespace Bezetting2
             this.listBox53.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox53.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox53.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox53.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox53.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox54
             // 
@@ -1612,7 +1640,7 @@ namespace Bezetting2
             this.listBox54.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox54.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox54.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox54.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox54.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox55
             // 
@@ -1628,7 +1656,7 @@ namespace Bezetting2
             this.listBox55.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox55.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox55.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox55.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox55.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox56
             // 
@@ -1644,7 +1672,7 @@ namespace Bezetting2
             this.listBox56.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox56.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox56.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox56.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox56.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox57
             // 
@@ -1660,7 +1688,7 @@ namespace Bezetting2
             this.listBox57.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox57.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox57.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox57.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox57.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox58
             // 
@@ -1677,7 +1705,7 @@ namespace Bezetting2
             this.listBox58.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox58.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox58.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox58.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox58.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox59
             // 
@@ -1694,7 +1722,7 @@ namespace Bezetting2
             this.listBox59.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox59.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox59.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox59.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox59.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox60
             // 
@@ -1711,7 +1739,7 @@ namespace Bezetting2
             this.listBox60.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox60.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox60.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox60.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox60.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox61
             // 
@@ -1728,7 +1756,7 @@ namespace Bezetting2
             this.listBox61.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox61.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox61.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox61.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox61.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox62
             // 
@@ -1745,7 +1773,7 @@ namespace Bezetting2
             this.listBox62.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox62.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox62.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox62.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox62.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox63
             // 
@@ -1762,7 +1790,7 @@ namespace Bezetting2
             this.listBox63.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox63.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox63.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox63.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox63.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox64
             // 
@@ -1779,7 +1807,7 @@ namespace Bezetting2
             this.listBox64.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox64.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox64.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox64.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox64.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox65
             // 
@@ -1796,7 +1824,7 @@ namespace Bezetting2
             this.listBox65.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox65.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox65.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox65.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox65.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox66
             // 
@@ -1812,7 +1840,7 @@ namespace Bezetting2
             this.listBox66.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox66.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox66.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox66.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox66.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox67
             // 
@@ -1828,7 +1856,7 @@ namespace Bezetting2
             this.listBox67.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox67.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox67.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox67.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox67.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox68
             // 
@@ -1844,7 +1872,7 @@ namespace Bezetting2
             this.listBox68.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox68.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox68.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox68.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox68.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox69
             // 
@@ -1860,7 +1888,7 @@ namespace Bezetting2
             this.listBox69.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox69.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox69.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox69.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox69.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox70
             // 
@@ -1877,7 +1905,7 @@ namespace Bezetting2
             this.listBox70.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox70.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox70.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox70.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox70.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox71
             // 
@@ -1894,7 +1922,7 @@ namespace Bezetting2
             this.listBox71.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox71.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox71.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox71.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox71.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox72
             // 
@@ -1911,7 +1939,7 @@ namespace Bezetting2
             this.listBox72.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox72.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox72.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox72.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox72.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox73
             // 
@@ -1928,7 +1956,7 @@ namespace Bezetting2
             this.listBox73.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox73.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox73.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox73.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox73.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox74
             // 
@@ -1944,7 +1972,7 @@ namespace Bezetting2
             this.listBox74.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox74.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox74.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox74.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox74.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox75
             // 
@@ -1960,7 +1988,7 @@ namespace Bezetting2
             this.listBox75.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox75.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox75.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox75.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox75.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox76
             // 
@@ -1976,7 +2004,7 @@ namespace Bezetting2
             this.listBox76.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox76.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox76.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox76.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox76.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox77
             // 
@@ -1992,7 +2020,7 @@ namespace Bezetting2
             this.listBox77.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox77.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox77.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox77.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox77.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox78
             // 
@@ -2009,7 +2037,7 @@ namespace Bezetting2
             this.listBox78.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox78.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox78.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox78.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox78.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox79
             // 
@@ -2026,7 +2054,7 @@ namespace Bezetting2
             this.listBox79.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox79.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox79.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox79.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox79.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox80
             // 
@@ -2043,7 +2071,7 @@ namespace Bezetting2
             this.listBox80.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox80.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox80.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox80.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox80.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBox81
             // 
@@ -2061,7 +2089,7 @@ namespace Bezetting2
             this.listBox81.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox81.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox81.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox81.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox81.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // listBoxAfw2
             // 
@@ -2077,7 +2105,7 @@ namespace Bezetting2
             this.listBoxAfw2.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBoxAfw2.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBoxAfw2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBoxAfw2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBoxAfw2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // label42
             // 
@@ -2104,7 +2132,7 @@ namespace Bezetting2
             this.listBox83.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.ListBox29_DrawItem);
             this.listBox83.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox83.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
-            this.listBox83.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox83.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
             // 
             // label22
             // 
@@ -2306,16 +2334,18 @@ namespace Bezetting2
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
             // 
-            // buttonRefresh
+            // buttonSplitDag2
             // 
-            this.buttonRefresh.BackColor = System.Drawing.Color.Green;
-            this.buttonRefresh.Location = new System.Drawing.Point(84, 3);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(25, 25);
-            this.buttonRefresh.TabIndex = 187;
-            this.toolTip.SetToolTip(this.buttonRefresh, "Kleur/Refresh");
-            this.buttonRefresh.UseVisualStyleBackColor = false;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
+            this.buttonSplitDag2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSplitDag2.Location = new System.Drawing.Point(432, 14);
+            this.buttonSplitDag2.Name = "buttonSplitDag2";
+            this.buttonSplitDag2.Size = new System.Drawing.Size(205, 24);
+            this.buttonSplitDag2.TabIndex = 244;
+            this.buttonSplitDag2.Text = "Persoon op 2 plekken invullen";
+            this.buttonSplitDag2.UseVisualStyleBackColor = true;
+            this.buttonSplitDag2.Visible = false;
+            this.buttonSplitDag2.Click += new System.EventHandler(this.buttonSplitDag2_Click);
+            this.buttonSplitDag2.MouseLeave += new System.EventHandler(this.buttonSplitDag2_MouseLeave);
             // 
             // OverzichtWachtForm2Dagen
             // 
@@ -2485,5 +2515,7 @@ namespace Bezetting2
         private System.Windows.Forms.Button GaNaarDat;
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button buttonSplitDag1;
+        private System.Windows.Forms.Button buttonSplitDag2;
     }
 }

@@ -22,7 +22,7 @@ namespace Bezetting2
         private int sourse_index;
         public List<Invoerveld> opbouw = new List<Invoerveld>();
         private WerkPlek WP = new WerkPlek();
-        private DateTime huidig;
+        //private DateTime huidig;
         private string gekozen_naam;
         private ListBox gekozen_listbox;
 
@@ -342,7 +342,7 @@ namespace Bezetting2
                     {
                         int tag = int.Parse(box.Tag.ToString());
                         // staat er een naam in listbox ?
-                        if (tag < 22 && box.Items.Count > 0/* && box != listBox1*/)
+                        if (tag < 22 && box.Items.Count > 0)
                         {
                             for (int i = 0; i < box.Items.Count; i++)
                             {
@@ -366,7 +366,7 @@ namespace Bezetting2
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
 
-            huidig = dat;
+            //huidig = dat;
             labelDatum.Text = dat.ToLongDateString(); // dat.ToShortDateString();
 
             labelKleur.Text = ProgData.GekozenKleur;
@@ -508,7 +508,7 @@ namespace Bezetting2
 
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
-            DateTime Volgende_werk_dag = huidig;
+            DateTime Volgende_werk_dag = dat;// huidig;
             Volgende_werk_dag = Volgende_werk_dag.AddDays(1);
             string dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
             while (string.IsNullOrEmpty(dienst))
@@ -517,12 +517,15 @@ namespace Bezetting2
                 dienst = GetDienstLong(ProgData.GekozenRooster(), Volgende_werk_dag, ProgData.GekozenKleur);
             }
 
-            if (Volgende_werk_dag.Month == huidig.Month)
+            if (Volgende_werk_dag.Month == dat.Month)
             {
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
-                    string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
+                    string plek = WerkPlek.GetWerkPlek(man._achternaam, dat.Day);
                     WerkPlek.SetWerkPlek(man._achternaam, Volgende_werk_dag.Day, plek);
+                    plek = WerkPlek.GetWerkPlek("+" + man._achternaam, dat.Day);
+                    if (plek != "")
+                        WerkPlek.SetWerkPlek("+" + man._achternaam, Volgende_werk_dag.Day, plek);
                 }
 
                 WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
@@ -536,9 +539,15 @@ namespace Bezetting2
 
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
-                    string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
+                    string plek = WerkPlek.GetWerkPlek(man._achternaam, dat.Day);
                     LijstWerkPlekPloegCopy.Add(man._achternaam);
                     LijstWerkPlekPloegCopy.Add(plek);
+                    plek = WerkPlek.GetWerkPlek("+" + man._achternaam, dat.Day);
+                    if (plek != "")
+                    {
+                        LijstWerkPlekPloegCopy.Add("+" + man._achternaam);
+                        LijstWerkPlekPloegCopy.Add(plek);
+                    }
                 }
 
                 WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
@@ -770,7 +779,7 @@ namespace Bezetting2
             if (first != '+')
             {
                 // test of +naam al bestaat
-                bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam, huidig.Day);
+                bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam, dat.Day);
                 //gekozen_naam
                 if (!test)
                 gekozen_listbox.Items.Add("+" + gekozen_naam);

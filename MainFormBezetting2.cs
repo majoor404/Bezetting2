@@ -263,14 +263,14 @@ namespace Bezetting2
             AutoInlog();
             autoInlogToolStripMenuItem.Click += autoInlogToolStripMenuItem_Click;
 
-
             panelSelect.Visible = true;
+
             //Refresh();
             LaadEnZetPriveData(ProgData.Huidige_Gebruiker_Personeel_nummer);
 
             // zodat niet meteen melding
             ProgData.saveTimeExtra = ProgData.saveTimeExtra.AddSeconds(-10);
-
+            
             VulViewScherm();
         }
 

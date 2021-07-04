@@ -1003,6 +1003,7 @@
             this.textBoxDebug.Location = new System.Drawing.Point(29, 290);
             this.textBoxDebug.Multiline = true;
             this.textBoxDebug.Name = "textBoxDebug";
+            this.textBoxDebug.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBoxDebug.Size = new System.Drawing.Size(505, 254);
             this.textBoxDebug.TabIndex = 3;
             // 
