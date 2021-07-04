@@ -173,26 +173,26 @@
             // inloggenToolStripMenuItem1
             // 
             this.inloggenToolStripMenuItem1.Name = "inloggenToolStripMenuItem1";
-            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.inloggenToolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.inloggenToolStripMenuItem1.Text = "Inloggen";
             this.inloggenToolStripMenuItem1.Click += new System.EventHandler(this.InloggenToolStripMenuItem1_Click);
             // 
             // uitloggenToolStripMenuItem
             // 
             this.uitloggenToolStripMenuItem.Name = "uitloggenToolStripMenuItem";
-            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.uitloggenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.uitloggenToolStripMenuItem.Text = "Uitloggen (Esc)";
             this.uitloggenToolStripMenuItem.Click += new System.EventHandler(this.UitloggenToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(151, 6);
             // 
             // closeExitStopToolStripMenuItem
             // 
             this.closeExitStopToolStripMenuItem.Name = "closeExitStopToolStripMenuItem";
-            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeExitStopToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.closeExitStopToolStripMenuItem.Text = "Close / Exit";
             this.closeExitStopToolStripMenuItem.Click += new System.EventHandler(this.CloseExitStopToolStripMenuItem_Click);
             // 
@@ -1051,6 +1051,7 @@
             // panelMoment
             // 
             this.panelMoment.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.panelMoment.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelMoment.Controls.Add(this.panel9);
             this.panelMoment.Location = new System.Drawing.Point(142, 662);
             this.panelMoment.Name = "panelMoment";

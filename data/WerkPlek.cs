@@ -115,6 +115,20 @@ namespace Bezetting2.Data
                 AddWerkPlek(naam, werkplek, Dag);
             }
         }
+
+        // voor +naam in overzicht
+        public static bool CheckWerkPlek(string naam, int Dag)
+        {
+            try
+            {
+                WerkPlek wp = LijstWerkPlekPloeg.First(a => a.naam_ == naam && a.dagnummer_ == Dag);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 
 

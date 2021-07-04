@@ -74,12 +74,17 @@ namespace Bezetting2
                     start.X = start.X + e.Location.X;
                     start.Y = start.Y + e.Location.Y;
                     buttonSplit.Location = start;
-                    buttonSplit.Visible = true;
                     // bewaar data voor als je op 2 maal invullen knop drukt
                     if (index > -1)
                     {
+                        buttonSplit.Visible = true;
                         gekozen_naam = sourse.Items[index].ToString();
                         gekozen_listbox = sourse;
+                    }
+                    else
+                    {
+                        buttonSplit.Visible = false;
+                        gekozen_naam = "";
                     }
                 }
                 else
@@ -472,17 +477,16 @@ namespace Bezetting2
                         veld._ListNaam.Items.Add(naam);
                         UpdateAfwijkingListBox(veld._ListNaam);
                     }
+                    
                     // nu de dubbele, naam begind met +
                     naam = "+" + naam;
                     werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
-                    if (werkplek != "" && werkplek != label1.Text)
+                    if (werkplek != "") // ook op plek namen
                     {
                         Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek));
                         veld._ListNaam.Items.Add(naam);
                         UpdateAfwijkingListBox(veld._ListNaam);
                     }
-
-
                 }
 
                 UpdateAfwijkingListBox(listBox1); //26-6-21
@@ -763,10 +767,12 @@ namespace Bezetting2
         {
             buttonSplit.Visible = false;
             var first = string.IsNullOrEmpty(gekozen_naam) ? (char?)null : gekozen_naam[0];
-
             if (first != '+')
             {
+                // test of +naam al bestaat
+                bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam, huidig.Day);
                 //gekozen_naam
+                if (!test)
                 gekozen_listbox.Items.Add("+" + gekozen_naam);
             }
         }

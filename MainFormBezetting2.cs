@@ -1784,7 +1784,7 @@ namespace Bezetting2
             foreach (personeel pers in ProgData.AlleMensen.LijstPersoonKleur)
             {
                 DebugWrite($"check {pers._achternaam}");
-
+                bool niet_meenemen = false;
                 dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
                 for (int i = 0; i < aantal_dagen - 1; i++)
                 {
@@ -1794,14 +1794,23 @@ namespace Bezetting2
 
                     if (eerste_2 == "ED" || eerste_2 == "VD" || eerste_2 == "RD")
                     {
-                        var dienst = afwijking.Substring(3, 1);
-                        var gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), dat, dienst);
-                        if (gaat_lopen_op_kleur == Gaat_lopen_op_kleur)
+                        if (afwijking.Length != 4)
                         {
-                            DebugWrite($"Vul in {pers._achternaam} gaat op {dat.ToShortDateString()} op kleur {gaat_lopen_op_kleur} lopen");
-                            ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
-                            // DEBUG
-                            ProgData.Wacht(400, "CheckExtraLopen");
+                            string mess = $"Bij {pers._achternaam} op {dat.ToShortDateString()} staat een vreemde code,\nniet bekend op welke wacht ED-VD of RD is.";
+                            MessageBox.Show(mess);
+                            niet_meenemen = true;
+                        }
+                        if (!niet_meenemen)
+                        {
+                            var dienst = afwijking.Substring(3, 1);
+                            var Opzijnde_Kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), dat, dienst);
+                            if (Opzijnde_Kleur == Gaat_lopen_op_kleur)
+                            {
+                                DebugWrite($"Vul in {pers._achternaam} gaat op {dat.ToShortDateString()} op kleur {Opzijnde_Kleur} lopen");
+                                ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
+                                // DEBUG
+                                ProgData.Wacht(400, "CheckExtraLopen");
+                            }
                         }
                     }
                     if (eerste_2 == "DD")

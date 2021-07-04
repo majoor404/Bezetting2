@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Media;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using System.Windows.Forms;
@@ -71,11 +70,11 @@ namespace Bezetting2.Data
             var path = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_Maand_Data.bin");
 
             //als kleur weg, en niet bestaat, mag ik altijd een nieuwe maken
-            if(kleur == "Weg")
+            if (kleur == "Weg")
             {
                 if (!File.Exists(path))
                 {
-                    if(ProgData.Main.WindowUpdateViewScreen)
+                    if (ProgData.Main.WindowUpdateViewScreen)
                         MessageBox.Show($"Omdat kleur weg is en path niet bestaat,\n" +
                         $" maak ik nieuwe aan. {path}");
                     SaveLeegPloeg(kleur, path);
@@ -96,10 +95,10 @@ namespace Bezetting2.Data
 
                     if (saveLoadTel > 5) // >5
                     {
-                        ProgData.Wacht(1000,$"Load maand Data {kleur}");
+                        ProgData.Wacht(1000, $"Load maand Data {kleur}");
                         saveLoadTel = 0;
                     }
-                    
+
                     // laden
                     try
                     {
@@ -230,7 +229,7 @@ namespace Bezetting2.Data
                     MessageBox.Show("Netwerk problemen, Exit!");
                     Process.GetCurrentProcess().Kill();
                 }
-                ProgData.Wacht(1000,$"{path} Niet aanwezig");
+                ProgData.Wacht(1000, $"{path} Niet aanwezig");
             }
             return false;
         }
@@ -256,11 +255,11 @@ namespace Bezetting2.Data
 
         public void SaveLeegPloeg(string kleur, string path)
         {
-            if(!path.Contains("_Maand_Data.bin"))
-            { 
+            if (!path.Contains("_Maand_Data.bin"))
+            {
                 path = $"{path}\\{kleur}_Maand_Data.bin";
             }
-            
+
             MaandDataLijst.Clear();
             try
             {
