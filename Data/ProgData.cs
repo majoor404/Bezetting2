@@ -860,6 +860,7 @@ namespace Bezetting2
             igekozenjaar = BewaarJaar;
             igekozenmaand = BewaarMaand;
         }
+ 
         //public static void MaakNieuwPloegBezettingAan(string kleur)
         //{
         //    string file = LijstWerkdagPloeg_Locatie(kleur);
@@ -900,6 +901,7 @@ namespace Bezetting2
         //        SaveLijstWerkdagPloeg(kleur, 15);
         //    }
         //}
+        
         public static void Zetom_naar_versie21(string kleur)
         {
             // zet oude file's om naar nieuwe ketting
@@ -955,12 +957,9 @@ namespace Bezetting2
             {
                 if (File.Exists(path_oud))
                 {
-                    MessageBox.Show($"Delete {path_oud}");                    
                     File.Delete(path_oud);
                 }
             }
-
-            
         }
         private static void SchijfLocatieVanBackup(string startPath, string filenaam)
         {

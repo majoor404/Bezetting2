@@ -23,6 +23,8 @@ namespace Bezetting2
         public List<Invoerveld> opbouw = new List<Invoerveld>();
         private WerkPlek WP = new WerkPlek();
         private DateTime huidig;
+        private string gekozen_naam;
+        private ListBox gekozen_listbox;
 
         public class Invoerveld
         {
@@ -64,11 +66,29 @@ namespace Bezetting2
                 sourse = (ListBox)sender;
                 int index = sourse.IndexFromPoint(e.X, e.Y);
                 sourse_index = index;
-                if (index > -1)
+
+                // voor dubbel, check rechter muis
+                if (e.Button == MouseButtons.Right)
                 {
-                    string s = sourse.Items[index].ToString();
-                    //DragDropEffects dde1 = DoDragDrop(s, DragDropEffects.Move);
-                    _ = DoDragDrop(s, DragDropEffects.Move);
+                    Point start = new Point(sourse.Location.X, sourse.Location.Y);
+                    start.X = start.X + e.Location.X;
+                    start.Y = start.Y + e.Location.Y;
+                    buttonSplit.Location = start;
+                    buttonSplit.Visible = true;
+                    // bewaar data voor als je op 2 maal invullen knop drukt
+                    if (index > -1)
+                    {
+                        gekozen_naam = sourse.Items[index].ToString();
+                        gekozen_listbox = sourse;
+                    }
+                }
+                else
+                {
+                    if (index > -1)
+                    {
+                        string s = sourse.Items[index].ToString();
+                        _ = DoDragDrop(s, DragDropEffects.Move);
+                    }
                 }
             }
         }
@@ -90,7 +110,6 @@ namespace Bezetting2
                     UpdateAfwijkingListBox(sourse);
                 }
                 SaveData();
-                //WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, ProgData.igekozenmaand, ProgData.igekozenjaar);
             }
         }
 
@@ -233,7 +252,7 @@ namespace Bezetting2
         {
             Invoerveld veld = opbouw.First(a => (a._ListNaam == box));
             broer = veld._ListAfw;
-            
+
             if (box.Items.Count > 0)
             {
                 bool afwijking = false;
@@ -242,6 +261,10 @@ namespace Bezetting2
                 {
                     // voor elke persoon in lijst
                     string naam = box.Items[i].ToString();
+
+                    var first = string.IsNullOrEmpty(naam) ? (char?)null : naam[0];
+                    if (first == '+')
+                        naam = naam.Substring(1, naam.Length-1);
 
                     var nummer = ProgData.Get_Gebruiker_Nummer(naam);
                     DateTime datum = new DateTime(dat.Year, dat.Month, dat.Day);
@@ -449,10 +472,21 @@ namespace Bezetting2
                         veld._ListNaam.Items.Add(naam);
                         UpdateAfwijkingListBox(veld._ListNaam);
                     }
+                    // nu de dubbele, naam begind met +
+                    naam = "+" + naam;
+                    werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
+                    if (werkplek != "" && werkplek != label1.Text)
+                    {
+                        Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek));
+                        veld._ListNaam.Items.Add(naam);
+                        UpdateAfwijkingListBox(veld._ListNaam);
+                    }
+
 
                 }
-                
+
                 UpdateAfwijkingListBox(listBox1); //26-6-21
+
 
                 //als dag info, kleur button
                 string file = $"{ProgData.igekozenjaar}\\{ProgData.igekozenmaand}\\{labelDatum.Text} - {labelDienst.Text}.txt";
@@ -495,18 +529,18 @@ namespace Bezetting2
             {
                 // voor gebruik met copy knopje als nieuw maand, dus eerst tijdelijk opslaan
                 List<string> LijstWerkPlekPloegCopy = new List<string>();
-                
+
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     string plek = WerkPlek.GetWerkPlek(man._achternaam, huidig.Day);
                     LijstWerkPlekPloegCopy.Add(man._achternaam);
                     LijstWerkPlekPloegCopy.Add(plek);
                 }
-                
+
                 WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
-                for (int i = 0; i < LijstWerkPlekPloegCopy.Count; i+=2)
+                for (int i = 0; i < LijstWerkPlekPloegCopy.Count; i += 2)
                 {
-                    WerkPlek.SetWerkPlek(LijstWerkPlekPloegCopy[i], Volgende_werk_dag.Day, LijstWerkPlekPloegCopy[i+1]);
+                    WerkPlek.SetWerkPlek(LijstWerkPlekPloegCopy[i], Volgende_werk_dag.Day, LijstWerkPlekPloegCopy[i + 1]);
                 }
                 WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
                 Thread.Sleep(500);
@@ -718,6 +752,23 @@ namespace Bezetting2
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             ViewUpdate();
+        }
+
+        private void buttonSplit_MouseLeave(object sender, EventArgs e)
+        {
+            buttonSplit.Visible = false;
+        }
+
+        private void buttonSplit_Click(object sender, EventArgs e)
+        {
+            buttonSplit.Visible = false;
+            var first = string.IsNullOrEmpty(gekozen_naam) ? (char?)null : gekozen_naam[0];
+
+            if (first != '+')
+            {
+                //gekozen_naam
+                gekozen_listbox.Items.Add("+" + gekozen_naam);
+            }
         }
     }
 }

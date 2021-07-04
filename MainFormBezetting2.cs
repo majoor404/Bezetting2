@@ -170,7 +170,6 @@ namespace Bezetting2
                 }
             }
 
-
             ruilOverwerkToolStripMenuItem.Visible = InstellingenProg._GebruikExtraRuil;
             snipperDagAanvraagToolStripMenuItem.Visible = InstellingenProg._GebruikSnipper;
             wachtoverzichtFormulier2DagenToolStripMenuItem.Checked = InstellingenProg._Wachtoverzicht2Dagen;
@@ -1520,7 +1519,7 @@ namespace Bezetting2
                     ProgData.AlleMensen.Save();
                 }
 
-                MessageBox.Show("Open nu bijbehorende Rechten en passwoorden, open Lock.mdb");
+                MessageBox.Show("Open nu bijbehorende Rechten en passwoorden, open Lock.mdb\nAls niet aanwezig, druk op cancel.");
 
                 openFileDialog.FileName = "Lock.mdb";
                 openFileDialog.Filter = "(*.mdb)|*.mdb";
@@ -1672,8 +1671,6 @@ namespace Bezetting2
                     ProgData.MaandData.SaveLeegPloeg("Wit", path);
                     ProgData.MaandData.SaveLeegPloeg("Rood", path);
                     ProgData.MaandData.SaveLeegPloeg("DD", path);
-
-
                 }
                 else
                 {
@@ -1690,13 +1687,6 @@ namespace Bezetting2
 
                     ProgData.igekozenjaar = start.Year;
                     ProgData.igekozenmaand = start.Month;
-                    //DebugWrite($"Bezetting lijst kleuren {start.Year} - {start.Month}");
-                    //ProgData.MaakNieuwPloegBezettingAan("Blauw");
-                    //ProgData.MaakNieuwPloegBezettingAan("Rood");
-                    //ProgData.MaakNieuwPloegBezettingAan("Wit");
-                    //ProgData.MaakNieuwPloegBezettingAan("Groen");
-                    //ProgData.MaakNieuwPloegBezettingAan("Geel");
-                    //ProgData.MaakNieuwPloegBezettingAan("DD");
                 }
             }
         }
@@ -1788,9 +1778,12 @@ namespace Bezetting2
             DateTime dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
             int aantal_dagen = DateTime.DaysInMonth(ProgData.igekozenjaar, ProgData.igekozenmaand);
 
+            if(!panelDebug.Visible)
+                DebugPanelShow("Tellen van extra/verschoven diensten");
+            
             foreach (personeel pers in ProgData.AlleMensen.LijstPersoonKleur)
             {
-                DebugWrite($"{pers._achternaam}");
+                DebugWrite($"check {pers._achternaam}");
 
                 dat = new DateTime(ProgData.igekozenjaar, ProgData.igekozenmaand, 1);
                 for (int i = 0; i < aantal_dagen - 1; i++)
@@ -1805,14 +1798,17 @@ namespace Bezetting2
                         var gaat_lopen_op_kleur = GetKleurDieWerkt(ProgData.GekozenRooster(), dat, dienst);
                         if (gaat_lopen_op_kleur == Gaat_lopen_op_kleur)
                         {
+                            DebugWrite($"Vul in {pers._achternaam} gaat op {dat.ToShortDateString()} op kleur {gaat_lopen_op_kleur} lopen");
                             ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
                             // DEBUG
-                            //Thread.Sleep(300);
+                            ProgData.Wacht(400, "CheckExtraLopen");
                         }
                     }
                     if (eerste_2 == "DD")
                     {
+                        DebugWrite($"Vul in {pers._achternaam} gaat op {dat.ToShortDateString()} DagDienst lopen");
                         ProgData.VulInLooptExtraDienst(afwijking, dat, pers._achternaam);
+                        ProgData.Wacht(400, "CheckExtraLopen");
                     }
                     dat = dat.AddDays(1);
                 }
@@ -1831,6 +1827,7 @@ namespace Bezetting2
             {
                 UpdateExtraDienstLijst(ProgData.GekozenKleur);
                 MessageBox.Show("Klaar");
+                DebugPanelEnd();
                 ButtonRefresh_Click(this, null);
             }
         }

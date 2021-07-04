@@ -125,6 +125,7 @@
             this.GaNaarDat = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonSplit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBox1
@@ -1463,11 +1464,25 @@
             this.buttonRefresh.UseVisualStyleBackColor = false;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // buttonSplit
+            // 
+            this.buttonSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSplit.Location = new System.Drawing.Point(915, 301);
+            this.buttonSplit.Name = "buttonSplit";
+            this.buttonSplit.Size = new System.Drawing.Size(205, 24);
+            this.buttonSplit.TabIndex = 187;
+            this.buttonSplit.Text = "Persoon op 2 plekken invullen";
+            this.buttonSplit.UseVisualStyleBackColor = true;
+            this.buttonSplit.Visible = false;
+            this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
+            this.buttonSplit.MouseLeave += new System.EventHandler(this.buttonSplit_MouseLeave);
+            // 
             // OverzichtWachtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 625);
+            this.Controls.Add(this.buttonSplit);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.GaNaarDat);
             this.Controls.Add(this.dateTimePicker1);
@@ -1674,5 +1689,6 @@
         private System.Windows.Forms.Button GaNaarDat;
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button buttonSplit;
     }
 }

@@ -21,6 +21,7 @@ namespace Bezetting2.Data
         public WerkPlek()
         {
         }
+       
         
         public static void AddWerkPlek(string naam,string werkplek, int dag)
         {
