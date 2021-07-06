@@ -197,17 +197,29 @@ namespace Bezetting2
                         start.X = start.X + e.Location.X;
                         start.Y = start.Y + e.Location.Y;
                         buttonSplitDag1.Location = start;
+
                         // bewaar data voor als je op 2 maal invullen knop drukt
                         if (index > -1)
                         {
                             buttonSplitDag1.Visible = true;
                             gekozen_naam1 = sourse.Items[index].ToString();
                             gekozen_listbox1 = sourse;
+
+                            // delete +naam
+                            //var first = string.IsNullOrEmpty(gekozen_naam1) ? (char?)null : gekozen_naam1[0];
+                            //if (first == '+')
+                            //{
+                            //    MessageBox.Show($"Verwijder {gekozen_naam1}");
+                            //    WerkPlek.SetWerkPlek(gekozen_naam1, dat.Day, "!@#$%$");
+                            //    WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
+                            //    gekozen_listbox1.Items.RemoveAt(sourse_index);
+                            //    UpdateAfwijkingListBox(gekozen_listbox1, dat.Day);
+                            //}
+                            /////////////////////
                         }
                         else
                         {
                             buttonSplitDag1.Visible = false;
-                            gekozen_naam1 = "";
                         }
                     }
                 }
@@ -925,6 +937,11 @@ namespace Bezetting2
         private void buttonSplitDag2_MouseLeave(object sender, EventArgs e)
         {
             buttonSplitDag2.Visible = false;
+        }
+
+        private void buttonSplitVerwijderDag1_MouseLeave(object sender, EventArgs e)
+        {
+            
         }
 
         private void buttonSplitDag1_Click(object sender, EventArgs e)

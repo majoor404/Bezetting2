@@ -108,6 +108,7 @@ namespace Bezetting2
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.PanelDag2 = new System.Windows.Forms.Panel();
+            this.buttonSplitDag2 = new System.Windows.Forms.Button();
             this.buttonOpmerking2 = new System.Windows.Forms.Button();
             this.labelDienst2 = new System.Windows.Forms.Label();
             this.labelDatum2 = new System.Windows.Forms.Label();
@@ -175,7 +176,6 @@ namespace Bezetting2
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonSplitDag2 = new System.Windows.Forms.Button();
             this.PanelDag1.SuspendLayout();
             this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
@@ -271,7 +271,7 @@ namespace Bezetting2
             // buttonSplitDag1
             // 
             this.buttonSplitDag1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSplitDag1.Location = new System.Drawing.Point(432, 386);
+            this.buttonSplitDag1.Location = new System.Drawing.Point(339, 258);
             this.buttonSplitDag1.Name = "buttonSplitDag1";
             this.buttonSplitDag1.Size = new System.Drawing.Size(205, 24);
             this.buttonSplitDag1.TabIndex = 188;
@@ -1398,6 +1398,19 @@ namespace Bezetting2
             this.PanelDag2.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
             this.PanelDag2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
             // 
+            // buttonSplitDag2
+            // 
+            this.buttonSplitDag2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSplitDag2.Location = new System.Drawing.Point(432, 14);
+            this.buttonSplitDag2.Name = "buttonSplitDag2";
+            this.buttonSplitDag2.Size = new System.Drawing.Size(205, 24);
+            this.buttonSplitDag2.TabIndex = 244;
+            this.buttonSplitDag2.Text = "Persoon op 2 plekken invullen";
+            this.buttonSplitDag2.UseVisualStyleBackColor = true;
+            this.buttonSplitDag2.Visible = false;
+            this.buttonSplitDag2.Click += new System.EventHandler(this.buttonSplitDag2_Click);
+            this.buttonSplitDag2.MouseLeave += new System.EventHandler(this.buttonSplitDag2_MouseLeave);
+            // 
             // buttonOpmerking2
             // 
             this.buttonOpmerking2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2333,19 +2346,6 @@ namespace Bezetting2
             this.label38.Size = new System.Drawing.Size(41, 13);
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
-            // 
-            // buttonSplitDag2
-            // 
-            this.buttonSplitDag2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSplitDag2.Location = new System.Drawing.Point(432, 14);
-            this.buttonSplitDag2.Name = "buttonSplitDag2";
-            this.buttonSplitDag2.Size = new System.Drawing.Size(205, 24);
-            this.buttonSplitDag2.TabIndex = 244;
-            this.buttonSplitDag2.Text = "Persoon op 2 plekken invullen";
-            this.buttonSplitDag2.UseVisualStyleBackColor = true;
-            this.buttonSplitDag2.Visible = false;
-            this.buttonSplitDag2.Click += new System.EventHandler(this.buttonSplitDag2_Click);
-            this.buttonSplitDag2.MouseLeave += new System.EventHandler(this.buttonSplitDag2_MouseLeave);
             // 
             // OverzichtWachtForm2Dagen
             // 
