@@ -178,7 +178,7 @@ namespace Bezetting2.Invoer
                         try
                         {
                             SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
-                            if (!string.IsNullOrEmpty(ver._rede_coordinator))
+                            if (string.IsNullOrEmpty(ver._rede_coordinator))
                             {
                                 ver._Coorcinator = labelNaamFull.Text;
                                 ver._rede_coordinator = "Zelf Gecanceld";
