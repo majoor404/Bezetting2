@@ -273,9 +273,9 @@ namespace Bezetting2
             this.buttonSplitDag1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSplitDag1.Location = new System.Drawing.Point(339, 258);
             this.buttonSplitDag1.Name = "buttonSplitDag1";
-            this.buttonSplitDag1.Size = new System.Drawing.Size(205, 24);
+            this.buttonSplitDag1.Size = new System.Drawing.Size(274, 24);
             this.buttonSplitDag1.TabIndex = 188;
-            this.buttonSplitDag1.Text = "Persoon op 2 plekken invullen";
+            this.buttonSplitDag1.Text = "Persoon op 2 plekken invullen / verwijderen";
             this.buttonSplitDag1.UseVisualStyleBackColor = true;
             this.buttonSplitDag1.Visible = false;
             this.buttonSplitDag1.Click += new System.EventHandler(this.buttonSplitDag1_Click);
@@ -1401,11 +1401,11 @@ namespace Bezetting2
             // buttonSplitDag2
             // 
             this.buttonSplitDag2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSplitDag2.Location = new System.Drawing.Point(432, 14);
+            this.buttonSplitDag2.Location = new System.Drawing.Point(339, 18);
             this.buttonSplitDag2.Name = "buttonSplitDag2";
-            this.buttonSplitDag2.Size = new System.Drawing.Size(205, 24);
+            this.buttonSplitDag2.Size = new System.Drawing.Size(274, 24);
             this.buttonSplitDag2.TabIndex = 244;
-            this.buttonSplitDag2.Text = "Persoon op 2 plekken invullen";
+            this.buttonSplitDag2.Text = "Persoon op 2 plekken invullen / verwijderen";
             this.buttonSplitDag2.UseVisualStyleBackColor = true;
             this.buttonSplitDag2.Visible = false;
             this.buttonSplitDag2.Click += new System.EventHandler(this.buttonSplitDag2_Click);

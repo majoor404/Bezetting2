@@ -782,7 +782,23 @@ namespace Bezetting2
                 bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam, dat.Day);
                 //gekozen_naam
                 if (!test)
-                gekozen_listbox.Items.Add("+" + gekozen_naam);
+                {
+                    gekozen_listbox.Items.Add("+" + gekozen_naam);
+                    SaveData();
+                }
+            }
+            else
+            {
+                // delete de naam met +
+                WerkPlek.DeleteWerkPlek(gekozen_naam, dat.Day);
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
+                for (int i = 0; i < gekozen_listbox.Items.Count; i++)
+                {
+                    if (gekozen_listbox.Items[i].ToString() == gekozen_naam)
+                        gekozen_listbox.Items.RemoveAt(i);
+                }
+                SaveData();
+                ViewUpdate();
             }
         }
     }

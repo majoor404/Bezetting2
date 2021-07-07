@@ -129,6 +129,18 @@ namespace Bezetting2.Data
                 return false;
             }
         }
+
+        public static void DeleteWerkPlek(string naam, int Dag)
+        {
+            for (int i = 0; i < LijstWerkPlekPloeg.Count; i++)
+            {
+                if (LijstWerkPlekPloeg[i].dagnummer_ == Dag && LijstWerkPlekPloeg[i].naam_ == naam)
+                {
+                    LijstWerkPlekPloeg.RemoveAt(i);
+                    break;
+                }
+            }
+        }
     }
 
 

@@ -209,6 +209,7 @@ namespace Bezetting2
                             //var first = string.IsNullOrEmpty(gekozen_naam1) ? (char?)null : gekozen_naam1[0];
                             //if (first == '+')
                             //{
+                            //    buttonSplitDag1.Visible = false;
                             //    MessageBox.Show($"Verwijder {gekozen_naam1}");
                             //    WerkPlek.SetWerkPlek(gekozen_naam1, dat.Day, "!@#$%$");
                             //    WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
@@ -668,11 +669,11 @@ namespace Bezetting2
                     // nu de dubbele, naam begind met +
                     naam = "+" + naam;
                     werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
-                    if (werkplek != "") // ook op plek namen
+                    if (werkplek != "" && werkplek != "!@#$%$") // ook op plek namen
                     {
-                        Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek));
-                        veld._ListNaam.Items.Add(naam);
-                        UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
+                            Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek));
+                            veld._ListNaam.Items.Add(naam);
+                            UpdateAfwijkingListBox(veld._ListNaam, dat.Day);
                     }
 
                 }
@@ -753,7 +754,7 @@ namespace Bezetting2
                     // nu de dubbele, naam begind met +
                     naam = "+" + naam;
                     werkplek = WerkPlek.GetWerkPlek(naam, dat.Day);
-                    if (werkplek != "") // ook op plek namen
+                    if (werkplek != "" && werkplek != "!@#$%$") // ook op plek namen
                     {
                         Invoerveld veld = opbouw.First(a => (a._Label.Text == werkplek && a._Dag == 2));
                         veld._ListNaam.Items.Add(naam);
@@ -939,11 +940,6 @@ namespace Bezetting2
             buttonSplitDag2.Visible = false;
         }
 
-        private void buttonSplitVerwijderDag1_MouseLeave(object sender, EventArgs e)
-        {
-            
-        }
-
         private void buttonSplitDag1_Click(object sender, EventArgs e)
         {
             buttonSplitDag1.Visible = false;
@@ -954,7 +950,23 @@ namespace Bezetting2
                 bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam1, dat.Day);
                 //gekozen_naam
                 if (!test)
+                {
                     gekozen_listbox1.Items.Add("+" + gekozen_naam1);
+                    SaveData();
+                }
+            }
+            else
+            {
+                // delete de naam met +
+                WerkPlek.DeleteWerkPlek(gekozen_naam1, dat.Day);
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat.Month, dat.Year);
+                for (int i = 0; i < gekozen_listbox1.Items.Count; i++)
+                {
+                    if (gekozen_listbox1.Items[i].ToString() == gekozen_naam1)
+                        gekozen_listbox1.Items.RemoveAt(i);
+                }
+                SaveData();
+                ViewUpdate();
             }
         }
 
@@ -968,7 +980,23 @@ namespace Bezetting2
                 bool test = WerkPlek.CheckWerkPlek("+" + gekozen_naam2, dat2.Day);
                 //gekozen_naam
                 if (!test)
+                {
                     gekozen_listbox2.Items.Add("+" + gekozen_naam2);
+                    SaveData();
+                }
+            }
+            else
+            {
+                // delete de naam met +
+                WerkPlek.DeleteWerkPlek(gekozen_naam2, dat2.Day);
+                WerkPlek.SafeWerkPlek(ProgData.GekozenKleur, dat2.Month, dat2.Year);
+                for (int i = 0; i < gekozen_listbox2.Items.Count; i++)
+                {
+                    if (gekozen_listbox2.Items[i].ToString() == gekozen_naam2)
+                        gekozen_listbox2.Items.RemoveAt(i);
+                }
+                SaveData();
+                ViewUpdate();
             }
         }
     }

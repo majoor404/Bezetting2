@@ -1467,11 +1467,11 @@
             // buttonSplit
             // 
             this.buttonSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSplit.Location = new System.Drawing.Point(915, 301);
+            this.buttonSplit.Location = new System.Drawing.Point(481, 339);
             this.buttonSplit.Name = "buttonSplit";
-            this.buttonSplit.Size = new System.Drawing.Size(205, 24);
+            this.buttonSplit.Size = new System.Drawing.Size(279, 24);
             this.buttonSplit.TabIndex = 187;
-            this.buttonSplit.Text = "Persoon op 2 plekken invullen";
+            this.buttonSplit.Text = "Persoon op 2 plekken invullen / verwijderen";
             this.buttonSplit.UseVisualStyleBackColor = true;
             this.buttonSplit.Visible = false;
             this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
