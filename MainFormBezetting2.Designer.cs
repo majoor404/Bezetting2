@@ -37,8 +37,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeExitStopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wachtOverzichtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ruilOverwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.snipperDagAanvraagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ruilOverwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.excelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vuilwerkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tellingWaarGewerktToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -203,19 +203,19 @@
             this.wachtOverzichtToolStripMenuItem.Text = "Wacht Overzicht";
             this.wachtOverzichtToolStripMenuItem.Click += new System.EventHandler(this.WachtOverzichtToolStripMenuItem_Click);
             // 
-            // ruilOverwerkToolStripMenuItem
-            // 
-            this.ruilOverwerkToolStripMenuItem.Name = "ruilOverwerkToolStripMenuItem";
-            this.ruilOverwerkToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.ruilOverwerkToolStripMenuItem.Text = "Ruil / Overwerk";
-            this.ruilOverwerkToolStripMenuItem.Click += new System.EventHandler(this.RuilOverwerkToolStripMenuItem_Click);
-            // 
             // snipperDagAanvraagToolStripMenuItem
             // 
             this.snipperDagAanvraagToolStripMenuItem.Name = "snipperDagAanvraagToolStripMenuItem";
             this.snipperDagAanvraagToolStripMenuItem.Size = new System.Drawing.Size(133, 20);
             this.snipperDagAanvraagToolStripMenuItem.Text = "SnipperDag Aanvraag";
             this.snipperDagAanvraagToolStripMenuItem.Click += new System.EventHandler(this.SnipperDagAanvraagToolStripMenuItem_Click);
+            // 
+            // ruilOverwerkToolStripMenuItem
+            // 
+            this.ruilOverwerkToolStripMenuItem.Name = "ruilOverwerkToolStripMenuItem";
+            this.ruilOverwerkToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.ruilOverwerkToolStripMenuItem.Text = "Ruil / Overwerk";
+            this.ruilOverwerkToolStripMenuItem.Click += new System.EventHandler(this.RuilOverwerkToolStripMenuItem_Click);
             // 
             // excelToolStripMenuItem
             // 
@@ -1032,7 +1032,7 @@
             // 
             this.panelSelect.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelSelect.Controls.Add(this.labelNaamSelect);
-            this.panelSelect.Location = new System.Drawing.Point(801, 70);
+            this.panelSelect.Location = new System.Drawing.Point(838, 170);
             this.panelSelect.Name = "panelSelect";
             this.panelSelect.Size = new System.Drawing.Size(318, 24);
             this.panelSelect.TabIndex = 36;
