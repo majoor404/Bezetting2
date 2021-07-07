@@ -95,8 +95,19 @@ namespace Bezetting2.Invoer
                 info[6] = a._Coorcinator;
                 info[7] = a._rede_coordinator;
 
-                ListViewItem item_info = new ListViewItem(info);
-                listViewSnipper.Items.Add(item_info);
+                if (!checkBoxVerbergIngevulde.Checked)
+                {
+                    ListViewItem item_info = new ListViewItem(info);
+                    listViewSnipper.Items.Add(item_info);
+                }
+                else
+                {
+                    if (info[7] == null)
+                    {
+                        ListViewItem item_info = new ListViewItem(info);
+                        listViewSnipper.Items.Add(item_info);
+                    }
+                }
             }
         }
 
@@ -226,6 +237,11 @@ namespace Bezetting2.Invoer
         private void DateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             labelDienst.Text = GetDienstLong(ProgData.GekozenRooster(), dateTimePicker1.Value, comboBoxKleur.Text);
+        }
+
+        private void checkBoxVerbergIngevulde_CheckedChanged(object sender, EventArgs e)
+        {
+            SnipperAanvraagForm_Shown(this, null);
         }
     }
 }

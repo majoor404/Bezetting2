@@ -53,6 +53,7 @@
             this.labelNaamFull = new System.Windows.Forms.Label();
             this.buttonKeurGoed = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.checkBoxVerbergIngevulde = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // labelNaam
@@ -246,7 +247,7 @@
             // columnHeader6
             // 
             this.columnHeader6.Text = "Rede vrij";
-            this.columnHeader6.Width = 230;
+            this.columnHeader6.Width = 207;
             // 
             // columnHeader7
             // 
@@ -256,7 +257,7 @@
             // columnHeader8
             // 
             this.columnHeader8.Text = "Rede coord.";
-            this.columnHeader8.Width = 100;
+            this.columnHeader8.Width = 115;
             // 
             // labelNaamFull
             // 
@@ -291,11 +292,27 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
+            // checkBoxVerbergIngevulde
+            // 
+            this.checkBoxVerbergIngevulde.AutoSize = true;
+            this.checkBoxVerbergIngevulde.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxVerbergIngevulde.Checked = true;
+            this.checkBoxVerbergIngevulde.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxVerbergIngevulde.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxVerbergIngevulde.Location = new System.Drawing.Point(219, 750);
+            this.checkBoxVerbergIngevulde.Name = "checkBoxVerbergIngevulde";
+            this.checkBoxVerbergIngevulde.Size = new System.Drawing.Size(297, 20);
+            this.checkBoxVerbergIngevulde.TabIndex = 17;
+            this.checkBoxVerbergIngevulde.Text = "Verberg ingevulde en ingetrokken aanvragen";
+            this.checkBoxVerbergIngevulde.UseVisualStyleBackColor = true;
+            this.checkBoxVerbergIngevulde.CheckedChanged += new System.EventHandler(this.checkBoxVerbergIngevulde_CheckedChanged);
+            // 
             // SnipperAanvraagForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 786);
+            this.Controls.Add(this.checkBoxVerbergIngevulde);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonKeurGoed);
             this.Controls.Add(this.labelNaamFull);
@@ -349,5 +366,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.CheckBox checkBoxVerbergIngevulde;
     }
 }
