@@ -147,8 +147,8 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.inloggenToolStripMenuItem,
             this.wachtOverzichtToolStripMenuItem,
-            this.ruilOverwerkToolStripMenuItem,
             this.snipperDagAanvraagToolStripMenuItem,
+            this.ruilOverwerkToolStripMenuItem,
             this.excelToolStripMenuItem,
             this.priveOptiesToolStripMenuItem,
             this.beheerToolStripMenuItem,

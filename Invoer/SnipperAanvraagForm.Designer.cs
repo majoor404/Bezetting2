@@ -212,10 +212,11 @@
             this.listViewSnipper.Location = new System.Drawing.Point(21, 179);
             this.listViewSnipper.MultiSelect = false;
             this.listViewSnipper.Name = "listViewSnipper";
-            this.listViewSnipper.Size = new System.Drawing.Size(917, 549);
+            this.listViewSnipper.Size = new System.Drawing.Size(1151, 549);
             this.listViewSnipper.TabIndex = 13;
             this.listViewSnipper.UseCompatibleStateImageBehavior = false;
             this.listViewSnipper.View = System.Windows.Forms.View.Details;
+            this.listViewSnipper.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSnipper_ColumnClick);
             // 
             // columnHeader2
             // 
@@ -227,7 +228,7 @@
             // 
             this.columnHeader1.DisplayIndex = 0;
             this.columnHeader1.Text = "Aanvraag Naam";
-            this.columnHeader1.Width = 100;
+            this.columnHeader1.Width = 137;
             // 
             // columnHeader3
             // 
@@ -237,7 +238,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Dienst";
-            this.columnHeader4.Width = 100;
+            this.columnHeader4.Width = 142;
             // 
             // columnHeader5
             // 
@@ -257,7 +258,7 @@
             // columnHeader8
             // 
             this.columnHeader8.Text = "Rede coord.";
-            this.columnHeader8.Width = 115;
+            this.columnHeader8.Width = 290;
             // 
             // labelNaamFull
             // 
@@ -273,7 +274,7 @@
             // 
             this.buttonKeurGoed.Enabled = false;
             this.buttonKeurGoed.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonKeurGoed.Location = new System.Drawing.Point(765, 744);
+            this.buttonKeurGoed.Location = new System.Drawing.Point(999, 744);
             this.buttonKeurGoed.Name = "buttonKeurGoed";
             this.buttonKeurGoed.Size = new System.Drawing.Size(173, 30);
             this.buttonKeurGoed.TabIndex = 15;
@@ -284,7 +285,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCancel.Location = new System.Drawing.Point(562, 744);
+            this.buttonCancel.Location = new System.Drawing.Point(796, 744);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(173, 30);
             this.buttonCancel.TabIndex = 16;
@@ -299,7 +300,7 @@
             this.checkBoxVerbergIngevulde.Checked = true;
             this.checkBoxVerbergIngevulde.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxVerbergIngevulde.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkBoxVerbergIngevulde.Location = new System.Drawing.Point(219, 750);
+            this.checkBoxVerbergIngevulde.Location = new System.Drawing.Point(453, 750);
             this.checkBoxVerbergIngevulde.Name = "checkBoxVerbergIngevulde";
             this.checkBoxVerbergIngevulde.Size = new System.Drawing.Size(297, 20);
             this.checkBoxVerbergIngevulde.TabIndex = 17;
@@ -311,7 +312,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 786);
+            this.ClientSize = new System.Drawing.Size(1198, 786);
             this.Controls.Add(this.checkBoxVerbergIngevulde);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonKeurGoed);
