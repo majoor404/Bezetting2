@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using static Bezetting2.DatumVijfPloegUtils;
@@ -25,6 +26,10 @@ namespace Bezetting2
         //private DateTime huidig;
         private string gekozen_naam;
         private ListBox gekozen_listbox;
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, Int32 wMsg, bool wParam, Int32 lParam);
+        private const int WM_SETREDRAW = 11;
 
         public class Invoerveld
         {
@@ -363,6 +368,8 @@ namespace Bezetting2
 
         private void ViewUpdate()
         {
+            SendMessage(this.Handle, WM_SETREDRAW, false, 0);
+
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
 
@@ -504,6 +511,9 @@ namespace Bezetting2
                 }
             }
             catch { }
+
+            SendMessage(this.Handle, WM_SETREDRAW, true, 0);
+            this.Refresh();
         }
 
         private void ButtonCopy_Click(object sender, EventArgs e)
@@ -694,6 +704,7 @@ namespace Bezetting2
                     case "EV":
                     case "GP":
                     case "X":
+                    case "BV":
                         e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
                         break;
                     case "ED-":

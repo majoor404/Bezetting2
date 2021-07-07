@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using static Bezetting2.DatumVijfPloegUtils;
@@ -16,6 +17,10 @@ namespace Bezetting2
 {
     public partial class OverzichtWachtForm2Dagen : Form
     {
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, Int32 wMsg, bool wParam, Int32 lParam);
+        private const int WM_SETREDRAW = 11;
+
         private ListBox sourse;
         private ListBox broer;
         private int sourse_index;
@@ -151,6 +156,7 @@ namespace Bezetting2
                     case "EV":
                     case "GP":
                     case "X":
+                    case "BV":
                         e.Graphics.FillRectangle(Brushes.Lavender, e.Bounds);
                         break;
                     case "ED-":
@@ -461,6 +467,8 @@ namespace Bezetting2
         }
         private void ViewUpdate()
         {
+            SendMessage(this.Handle, WM_SETREDRAW, false, 0);
+
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
             labelKleur.Text = ProgData.GekozenKleur;
@@ -556,6 +564,8 @@ namespace Bezetting2
                 buttonOpmerking2.BackColor = Color.FromArgb(255, 240, 240, 240);
             }
 
+            SendMessage(this.Handle, WM_SETREDRAW, true, 0);
+            this.Refresh();
         }
         private void ButtonNext_Click(object sender, EventArgs e)
         {
