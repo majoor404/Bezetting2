@@ -177,11 +177,6 @@ namespace Bezetting2.Invoer
                 {
                     // haal juiste data
                     string dat = listViewSnipper.Items[index].SubItems[0].Text;
-                    //string jaar = dat.Substring(6, 4);
-                    //string maand = dat.Substring(3, 2);
-                    //if (maand.Substring(0, 1) == "0")
-                    //    maand = maand.Substring(1, 1);
-                    //string dir = jaar + "\\" + maand;
                     string dir = ProgData.GetDirectoryBezettingMaand(dat);
                     ProgData.LoadSnipperLijst(dir);
 
@@ -213,24 +208,42 @@ namespace Bezetting2.Invoer
                     }
                     else
                     {
-                        // afgekeurd
+                        // afgekeurd 
                         string naam = listViewSnipper.Items[index].SubItems[1].Text;
                         string datum = listViewSnipper.Items[index].SubItems[0].Text;
                         //
-                        try
-                        {
-                            SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
-                            ver._Coorcinator = labelNaamFull.Text;
-                            ver._rede_coordinator = "Afgekeurd";
-                            ProgData.SaveSnipperLijst(dir);
 
-                            MessageBox.Show("Als hij eerst was goedgekeurd,\n" +
-                                "kan deze staan in maand overzicht,\n" +
-                                "even bekijken en anders daar verwijderen!");
-                        }
-                        catch
+                        if (ProgData.RechtenHuidigeGebruiker > 1)
                         {
-                            MessageBox.Show("afkeur niet gelukt");
+                            try
+                            {
+                                SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
+                                ver._Coorcinator = labelNaamFull.Text;
+                                ver._rede_coordinator = "Afgekeurd";
+                                ProgData.SaveSnipperLijst(dir);
+
+                                MessageBox.Show("Als hij eerst was goedgekeurd,\n" +
+                                    "kan deze staan in maand overzicht,\n" +
+                                    "even bekijken en anders daar verwijderen!");
+                            }
+                            catch
+                            {
+                                MessageBox.Show("afkeur niet gelukt");
+                            }
+                        }
+                        else // rechten is 1, dus alleen cancel als het je eigen naam is!
+                        {
+                            if(naam == ProgData.Huidige_Gebruiker_Naam())
+                            {
+                                SnipperAanvraag ver = ProgData.ListSnipperAanvraag.First(a => (a._naam == naam) && (a._datum.ToString("dd/MM/yyyy") == datum));
+                                ver._Coorcinator = labelNaamFull.Text;
+                                ver._rede_coordinator = "Zelf Gecanceld";
+                                ProgData.SaveSnipperLijst(dir);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Alleen je eigen aanvraag kan je verwijderen");
+                            }
                         }
                     }
                 }
