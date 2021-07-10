@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Bezetting2.Data
 {
     [Serializable]
     public class WerkPlek
     {
+        private static DateTime laaste_versie;
         public string naam_ { get; set; }
         public string werkplek_ { get; set; }
         public int dagnummer_ { get; set; }
@@ -21,9 +20,8 @@ namespace Bezetting2.Data
         public WerkPlek()
         {
         }
-       
-        
-        public static void AddWerkPlek(string naam,string werkplek, int dag)
+
+        public static void AddWerkPlek(string naam, string werkplek, int dag)
         {
             WerkPlek wp = new WerkPlek();
             wp.dagnummer_ = dag;
@@ -32,62 +30,44 @@ namespace Bezetting2.Data
             LijstWerkPlekPloeg.Add(wp);
         }
 
-        public static void LaadWerkPlek(string Kleur, int maand, int jaar)
+        public static void LaadWerkPlek(string kleur, int maand, int jaar)
         {
-            string file = Path.GetFullPath($"{jaar}\\{maand}\\{Kleur}_WerkPlek.bin");
-            LijstWerkPlekPloeg.Clear();
-            if (File.Exists(file))
+            string file = Path.GetFullPath($"{jaar}\\{maand}\\{kleur}_WerkPlek.bin");
+            var veranderd = File.GetLastWriteTime(file);
+            if (veranderd != laaste_versie)
             {
-                try
+                if (File.Exists(file))
                 {
-                    using (Stream stream = File.Open(file, FileMode.Open))
+                    try
                     {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        try
+                        using (Stream stream = File.Open(file, FileMode.Open))
                         {
-                            LijstWerkPlekPloeg = (List<WerkPlek>)bin.Deserialize(stream);
-                            stream.Dispose();
-                        }
-                        catch
-                        {
-                        }
-                        finally
-                        {
-                            if (stream != null)
+                            BinaryFormatter bin = new BinaryFormatter();
+                            try
+                            {
+                                //MessageBox.Show($"Laad nieuwe werkplek data.\n{maand}");
+                                LijstWerkPlekPloeg.Clear();
+                                LijstWerkPlekPloeg = (List<WerkPlek>)bin.Deserialize(stream);
                                 stream.Dispose();
+                                laaste_versie = veranderd;
+                            }
+                            catch
+                            {
+                            }
+                            finally
+                            {
+                                if (stream != null)
+                                    stream.Dispose();
+                            }
                         }
                     }
+                    catch { }
                 }
-                catch{}
-            }
-        }
-
-        public static void SafeWerkPlek(string Kleur, int maand, int jaar)
-        {
-            string file = Path.GetFullPath($"{jaar}\\{maand}\\{Kleur}_WerkPlek.bin");
-
-            //var diffInSeconds = (DateTime.Now - saveSaveTime).TotalSeconds;
-            //saveSaveTime = DateTime.Now;
-
-            //_ = diffInSeconds < 1 ? saveSaveTel++ : saveSaveTel = 0;
-
-            //if (saveSaveTel > 4)
-            //{
-            //    Thread.Sleep(600);
-            //    saveSaveTel = 0;
-            //}
-
-            if (!string.IsNullOrEmpty(Kleur))
-            {
-                try
+                else
                 {
-                    using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, LijstWerkPlekPloeg);
-                    }
+                    MessageBox.Show($"{file}\nbestond niet");
+                    LijstWerkPlekPloeg.Clear();
                 }
-                catch{}
             }
         }
 
@@ -103,17 +83,32 @@ namespace Bezetting2.Data
             return ret;
         }
 
-        public static void SetWerkPlek(string naam, int Dag, string werkplek)
+        public static void SetWerkPlek(string naam, DateTime Datum, string werkplek)
         {
+            LaadWerkPlek(ProgData.GekozenKleur, Datum.Month, Datum.Year);
             try
             {
-                WerkPlek wp = LijstWerkPlekPloeg.First(a => a.naam_ == naam && a.dagnummer_ == Dag);
+                WerkPlek wp = LijstWerkPlekPloeg.First(a => a.naam_ == naam && a.dagnummer_ == Datum.Day);
                 wp.werkplek_ = werkplek;
             }
-            catch 
+            catch
             {
-                AddWerkPlek(naam, werkplek, Dag);
+                AddWerkPlek(naam, werkplek, Datum.Day);
             }
+
+            string file = Path.GetFullPath($"{Datum.Year}\\{Datum.Month}\\{ProgData.GekozenKleur}_WerkPlek.bin");
+            
+                try
+                {
+                    using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
+                    {
+                        BinaryFormatter bin = new BinaryFormatter();
+                        bin.Serialize(stream, LijstWerkPlekPloeg);
+                        laaste_versie = File.GetLastWriteTime(file);
+                    }
+                }
+                catch { }
+            
         }
 
         // voor +naam in overzicht
@@ -130,18 +125,28 @@ namespace Bezetting2.Data
             }
         }
 
-        public static void DeleteWerkPlek(string naam, int Dag)
+        public static void DeleteWerkPlek(string naam, DateTime Datum)
         {
             for (int i = 0; i < LijstWerkPlekPloeg.Count; i++)
             {
-                if (LijstWerkPlekPloeg[i].dagnummer_ == Dag && LijstWerkPlekPloeg[i].naam_ == naam)
+                if (LijstWerkPlekPloeg[i].dagnummer_ == Datum.Day && LijstWerkPlekPloeg[i].naam_ == naam)
                 {
                     LijstWerkPlekPloeg.RemoveAt(i);
                     break;
                 }
             }
+
+            string file = Path.GetFullPath($"{Datum.Year}\\{Datum.Month}\\{ProgData.GekozenKleur}_WerkPlek.bin");
+            try
+            {
+                using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
+                {
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, LijstWerkPlekPloeg);
+                    laaste_versie = File.GetLastWriteTime(file);
+                }
+            }
+            catch { }
         }
     }
-
-
 }

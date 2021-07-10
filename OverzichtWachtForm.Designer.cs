@@ -126,6 +126,9 @@
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.buttonSplit = new System.Windows.Forms.Button();
+            this.panelMoment = new System.Windows.Forms.Panel();
+            this.label22 = new System.Windows.Forms.Label();
+            this.panelMoment.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBox1
@@ -1477,11 +1480,32 @@
             this.buttonSplit.Click += new System.EventHandler(this.buttonSplit_Click);
             this.buttonSplit.MouseLeave += new System.EventHandler(this.buttonSplit_MouseLeave);
             // 
+            // panelMoment
+            // 
+            this.panelMoment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMoment.Controls.Add(this.label22);
+            this.panelMoment.Location = new System.Drawing.Point(362, 118);
+            this.panelMoment.Name = "panelMoment";
+            this.panelMoment.Size = new System.Drawing.Size(368, 100);
+            this.panelMoment.TabIndex = 188;
+            this.panelMoment.Visible = false;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(132, 42);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(87, 20);
+            this.label22.TabIndex = 0;
+            this.label22.Text = "Moment.....";
+            // 
             // OverzichtWachtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 625);
+            this.Controls.Add(this.panelMoment);
             this.Controls.Add(this.buttonSplit);
             this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.GaNaarDat);
@@ -1586,6 +1610,8 @@
             this.Text = "Overzicht Wacht";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.OverzichtWachtForm_FormClosed);
             this.Shown += new System.EventHandler(this.OverzichtWachtForm_Shown);
+            this.panelMoment.ResumeLayout(false);
+            this.panelMoment.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1690,5 +1716,7 @@
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button buttonSplit;
+        private System.Windows.Forms.Panel panelMoment;
+        private System.Windows.Forms.Label label22;
     }
 }
