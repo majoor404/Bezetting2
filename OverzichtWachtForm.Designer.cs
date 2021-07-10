@@ -1484,7 +1484,7 @@
             // 
             this.panelMoment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelMoment.Controls.Add(this.label22);
-            this.panelMoment.Location = new System.Drawing.Point(362, 118);
+            this.panelMoment.Location = new System.Drawing.Point(355, 162);
             this.panelMoment.Name = "panelMoment";
             this.panelMoment.Size = new System.Drawing.Size(368, 100);
             this.panelMoment.TabIndex = 188;

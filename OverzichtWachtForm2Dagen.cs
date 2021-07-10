@@ -186,6 +186,7 @@ namespace Bezetting2
 
         private void ListBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            listBoxAfw.TopIndex = listBox1.TopIndex;
             if (CheckRechten())
             {
                 // voor dubbel, check rechter muis
@@ -812,7 +813,6 @@ namespace Bezetting2
 
             if (Volgende_werk_dag.Month == dat.Month)
             {
-
                 foreach (personeel man in ProgData.AlleMensen.LijstPersoonKleur)
                 {
                     string plek = WerkPlek.GetWerkPlek(man._achternaam, dat.Day);
@@ -820,9 +820,8 @@ namespace Bezetting2
                     plek = WerkPlek.GetWerkPlek("+" + man._achternaam, dat.Day);
                     if(plek !="")
                         WerkPlek.SetWerkPlek("+" + man._achternaam, Volgende_werk_dag, plek);
+                    Thread.Sleep(30);
                 }
-                //SaveWerkPlekDataNaarFile(Volgende_werk_dag);
-                //Thread.Sleep(500);
                 ButtonNext_Click(this, null);
             }
             else
@@ -841,6 +840,7 @@ namespace Bezetting2
                         LijstWerkPlekPloegCopy.Add("+" + man._achternaam);
                         LijstWerkPlekPloegCopy.Add(plek);
                     }
+                    Thread.Sleep(30);
                 }
 
                 WerkPlek.LaadWerkPlek(ProgData.GekozenKleur, Volgende_werk_dag.Month, Volgende_werk_dag.Year);
@@ -848,8 +848,6 @@ namespace Bezetting2
                 {
                     WerkPlek.SetWerkPlek(LijstWerkPlekPloegCopy[i], Volgende_werk_dag, LijstWerkPlekPloegCopy[i + 1]);
                 }
-                //SaveWerkPlekDataNaarFile(Volgende_werk_dag);
-                //Thread.Sleep(500);
                 ButtonNext_Click(this, null);
             }
         }
@@ -901,6 +899,18 @@ namespace Bezetting2
             buttonSplitDag2.Visible = false;
         }
 
+        private void listBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(listBoxAfw.TopIndex != listBox1.TopIndex)
+                listBoxAfw.TopIndex = listBox1.TopIndex;
+        }
+
+        private void listBox83_MouseHover(object sender, EventArgs e)
+        {
+            if (listBoxAfw2.TopIndex != listBox83.TopIndex)
+                listBoxAfw2.TopIndex = listBox83.TopIndex;
+        }
+
         private void buttonSplitDag1_Click(object sender, EventArgs e)
         {
             buttonSplitDag1.Visible = false;
@@ -912,8 +922,6 @@ namespace Bezetting2
                 //gekozen_naam
                 if (!test)
                 {
-                    gekozen_listbox1.Items.Add("+" + gekozen_naam1);
-
                     Invoerveld veld = opbouw.First(a => (a._ListNaam == gekozen_listbox1));
                     string plek = veld._Label.Text;
                     WerkPlek.SetWerkPlek("+" + gekozen_naam1, dat, plek);
@@ -923,14 +931,8 @@ namespace Bezetting2
             {
                 // delete de naam met +
                 WerkPlek.DeleteWerkPlek(gekozen_naam1, dat);
-                
-                for (int i = 0; i < gekozen_listbox1.Items.Count; i++)
-                {
-                    if (gekozen_listbox1.Items[i].ToString() == gekozen_naam1)
-                        gekozen_listbox1.Items.RemoveAt(i);
-                }
-                ViewUpdate();
             }
+            ViewUpdate();
         }
 
         private void buttonSplitDag2_Click(object sender, EventArgs e)
@@ -944,24 +946,17 @@ namespace Bezetting2
                 //gekozen_naam
                 if (!test)
                 {
-                    gekozen_listbox2.Items.Add("+" + gekozen_naam2);
-                    
-                    Invoerveld veld = opbouw.First(a => (a._ListNaam == gekozen_listbox1));
+                    Invoerveld veld = opbouw.First(a => (a._ListNaam == gekozen_listbox2));
                     string plek = veld._Label.Text;
-                    WerkPlek.SetWerkPlek("+" + gekozen_naam1, dat2, plek);
+                    WerkPlek.SetWerkPlek("+" + gekozen_naam2, dat2, plek);
                 }
             }
             else
             {
                 // delete de naam met +
                 WerkPlek.DeleteWerkPlek(gekozen_naam2, dat2);
-                for (int i = 0; i < gekozen_listbox2.Items.Count; i++)
-                {
-                    if (gekozen_listbox2.Items[i].ToString() == gekozen_naam2)
-                        gekozen_listbox2.Items.RemoveAt(i);
-                }
-                ViewUpdate();
             }
+            ViewUpdate();
         }
     }
 }

@@ -31,6 +31,8 @@ namespace Bezetting2
         {
             this.components = new System.ComponentModel.Container();
             this.PanelDag1 = new System.Windows.Forms.Panel();
+            this.panelMoment = new System.Windows.Forms.Panel();
+            this.label43 = new System.Windows.Forms.Label();
             this.buttonSplitDag1 = new System.Windows.Forms.Button();
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.GaNaarDat = new System.Windows.Forms.Button();
@@ -176,11 +178,9 @@ namespace Bezetting2
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.panelMoment = new System.Windows.Forms.Panel();
-            this.label43 = new System.Windows.Forms.Label();
             this.PanelDag1.SuspendLayout();
-            this.PanelDag2.SuspendLayout();
             this.panelMoment.SuspendLayout();
+            this.PanelDag2.SuspendLayout();
             this.SuspendLayout();
             // 
             // PanelDag1
@@ -271,6 +271,26 @@ namespace Bezetting2
             this.PanelDag1.TabIndex = 0;
             this.PanelDag1.Tag = "0";
             this.PanelDag1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            // 
+            // panelMoment
+            // 
+            this.panelMoment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMoment.Controls.Add(this.label43);
+            this.panelMoment.Location = new System.Drawing.Point(534, 109);
+            this.panelMoment.Name = "panelMoment";
+            this.panelMoment.Size = new System.Drawing.Size(368, 100);
+            this.panelMoment.TabIndex = 189;
+            this.panelMoment.Visible = false;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(118, 43);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(87, 20);
+            this.label43.TabIndex = 0;
+            this.label43.Text = "Moment.....";
             // 
             // buttonSplitDag1
             // 
@@ -1033,6 +1053,7 @@ namespace Bezetting2
             this.listBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
             this.listBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListBox1_MouseDown);
+            this.listBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.listBox1_MouseMove);
             // 
             // buttonNu
             // 
@@ -2150,6 +2171,7 @@ namespace Bezetting2
             this.listBox83.DragDrop += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragDrop);
             this.listBox83.DragEnter += new System.Windows.Forms.DragEventHandler(this.ListBox2_DragEnter);
             this.listBox83.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox81_MouseDown);
+            this.listBox83.MouseHover += new System.EventHandler(this.listBox83_MouseHover);
             // 
             // label22
             // 
@@ -2351,26 +2373,6 @@ namespace Bezetting2
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
             // 
-            // panelMoment
-            // 
-            this.panelMoment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMoment.Controls.Add(this.label43);
-            this.panelMoment.Location = new System.Drawing.Point(543, 110);
-            this.panelMoment.Name = "panelMoment";
-            this.panelMoment.Size = new System.Drawing.Size(368, 100);
-            this.panelMoment.TabIndex = 189;
-            this.panelMoment.Visible = false;
-            // 
-            // label43
-            // 
-            this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.Location = new System.Drawing.Point(136, 38);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(87, 20);
-            this.label43.TabIndex = 0;
-            this.label43.Text = "Moment.....";
-            // 
             // OverzichtWachtForm2Dagen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2387,10 +2389,10 @@ namespace Bezetting2
             this.Shown += new System.EventHandler(this.OverzichtWachtForm2_Shown);
             this.PanelDag1.ResumeLayout(false);
             this.PanelDag1.PerformLayout();
-            this.PanelDag2.ResumeLayout(false);
-            this.PanelDag2.PerformLayout();
             this.panelMoment.ResumeLayout(false);
             this.panelMoment.PerformLayout();
+            this.PanelDag2.ResumeLayout(false);
+            this.PanelDag2.PerformLayout();
             this.ResumeLayout(false);
 
         }
