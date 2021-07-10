@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Windows.Forms;
 
 namespace Bezetting2.Data
 {
@@ -65,7 +64,7 @@ namespace Bezetting2.Data
                 }
                 else
                 {
-                    MessageBox.Show($"{file}\nbestond niet");
+                    //MessageBox.Show($"{file}\nbestond niet");
                     LijstWerkPlekPloeg.Clear();
                 }
             }
@@ -97,18 +96,18 @@ namespace Bezetting2.Data
             }
 
             string file = Path.GetFullPath($"{Datum.Year}\\{Datum.Month}\\{ProgData.GekozenKleur}_WerkPlek.bin");
-            
-                try
+
+            try
+            {
+                using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
                 {
-                    using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
-                    {
-                        BinaryFormatter bin = new BinaryFormatter();
-                        bin.Serialize(stream, LijstWerkPlekPloeg);
-                        laaste_versie = File.GetLastWriteTime(file);
-                    }
+                    BinaryFormatter bin = new BinaryFormatter();
+                    bin.Serialize(stream, LijstWerkPlekPloeg);
+                    laaste_versie = File.GetLastWriteTime(file);
                 }
-                catch { }
-            
+            }
+            catch { }
+
         }
 
         // voor +naam in overzicht
