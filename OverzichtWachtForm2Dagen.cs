@@ -474,21 +474,27 @@ namespace Bezetting2
             {
                 case "Blauw":
                     buttonRefresh.BackColor = Color.Blue;
+                    buttonRefresh.ForeColor = Color.White;
                     break;
                 case "Geel":
                     buttonRefresh.BackColor = Color.Yellow;
+                    buttonRefresh.ForeColor = Color.Black;
                     break;
                 case "Groen":
                     buttonRefresh.BackColor = Color.Green;
+                    buttonRefresh.ForeColor = Color.White;
                     break;
                 case "Wit":
                     buttonRefresh.BackColor = Color.White;
+                    buttonRefresh.ForeColor = Color.Black;
                     break;
                 case "Rood":
-                    buttonRefresh.BackColor = Color.Red;
+                    buttonRefresh.BackColor = Color.IndianRed;
+                    buttonRefresh.ForeColor = Color.White;
                     break;
                 default:
                     buttonRefresh.BackColor = Color.White;
+                    buttonRefresh.ForeColor = Color.Black;
                     break;
             }
 
@@ -801,6 +807,8 @@ namespace Bezetting2
         }
         private void ButtonCopy_Click(object sender, EventArgs e)
         {
+            panelMoment.Visible = true;
+            panelMoment.Refresh();
             // copy werkplek data 1 dag verder.
             DateTime Volgende_werk_dag = dat;// huidig;
             Volgende_werk_dag = Volgende_werk_dag.AddDays(1);
@@ -848,6 +856,7 @@ namespace Bezetting2
                 {
                     WerkPlek.SetWerkPlek(LijstWerkPlekPloegCopy[i], Volgende_werk_dag, LijstWerkPlekPloegCopy[i + 1]);
                 }
+                panelMoment.Visible = false;
                 ButtonNext_Click(this, null);
             }
         }
@@ -887,6 +896,10 @@ namespace Bezetting2
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             ViewUpdate();
+            
+            SendMessage(this.Handle, WM_SETREDRAW, true, 0);
+            panelMoment.Visible = false;
+            this.Refresh();
         }
 
         private void buttonSplitDag1_MouseLeave(object sender, EventArgs e)

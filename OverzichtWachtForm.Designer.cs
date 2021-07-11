@@ -128,6 +128,7 @@
             this.buttonSplit = new System.Windows.Forms.Button();
             this.panelMoment = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelMoment.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1459,10 +1460,11 @@
             // buttonRefresh
             // 
             this.buttonRefresh.BackColor = System.Drawing.Color.Green;
-            this.buttonRefresh.Location = new System.Drawing.Point(201, 31);
+            this.buttonRefresh.Location = new System.Drawing.Point(233, 5);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(25, 25);
+            this.buttonRefresh.Size = new System.Drawing.Size(79, 24);
             this.buttonRefresh.TabIndex = 186;
+            this.buttonRefresh.Text = "Refresh";
             this.toolTip1.SetToolTip(this.buttonRefresh, "Kleur / Refresh");
             this.buttonRefresh.UseVisualStyleBackColor = false;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
@@ -1499,6 +1501,12 @@
             this.label22.Size = new System.Drawing.Size(87, 20);
             this.label22.TabIndex = 0;
             this.label22.Text = "Moment.....";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30000;
+            this.timer1.Tick += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // OverzichtWachtForm
             // 
@@ -1718,5 +1726,6 @@
         private System.Windows.Forms.Button buttonSplit;
         private System.Windows.Forms.Panel panelMoment;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Timer timer1;
     }
 }

@@ -178,6 +178,7 @@ namespace Bezetting2
             this.label34 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.PanelDag1.SuspendLayout();
             this.panelMoment.SuspendLayout();
             this.PanelDag2.SuspendLayout();
@@ -308,10 +309,11 @@ namespace Bezetting2
             // buttonRefresh
             // 
             this.buttonRefresh.BackColor = System.Drawing.Color.Green;
-            this.buttonRefresh.Location = new System.Drawing.Point(84, 3);
+            this.buttonRefresh.Location = new System.Drawing.Point(204, 9);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(25, 25);
+            this.buttonRefresh.Size = new System.Drawing.Size(79, 25);
             this.buttonRefresh.TabIndex = 187;
+            this.buttonRefresh.Text = "Refresh";
             this.toolTip.SetToolTip(this.buttonRefresh, "Kleur/Refresh");
             this.buttonRefresh.UseVisualStyleBackColor = false;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
@@ -1117,7 +1119,7 @@ namespace Bezetting2
             // 
             this.labelKleur.AutoSize = true;
             this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelKleur.Location = new System.Drawing.Point(6, 6);
+            this.labelKleur.Location = new System.Drawing.Point(7, 8);
             this.labelKleur.Name = "labelKleur";
             this.labelKleur.Size = new System.Drawing.Size(44, 16);
             this.labelKleur.TabIndex = 92;
@@ -2373,6 +2375,12 @@ namespace Bezetting2
             this.label38.TabIndex = 191;
             this.label38.Text = "label38";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 30000;
+            this.timer1.Tick += new System.EventHandler(this.buttonRefresh_Click);
+            // 
             // OverzichtWachtForm2Dagen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2547,5 +2555,6 @@ namespace Bezetting2
         private System.Windows.Forms.Button buttonSplitDag2;
         private System.Windows.Forms.Panel panelMoment;
         private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Timer timer1;
     }
 }
