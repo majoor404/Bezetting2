@@ -131,6 +131,8 @@ namespace Bezetting2
 
         public static string Huidige_Gebruiker_Naam()
         {
+            if (_inlognaam.Text == "000000")
+                return "000000";
             try
             {
                 int personeel_nr = int.Parse(_inlognaam.Text);
@@ -139,92 +141,10 @@ namespace Bezetting2
             }
             catch
             {
+                
                 return "";
             }
         }
-
-        //public static void SaveLijstWerkdagPloeg(string kleur, int try_again)
-        //{
-        //    if (try_again < 0 && !Disable_error_Meldingen)
-        //    {
-        //        MessageBox.Show($"SaveLijstWerkdagPloeg() error na 15 keer, \n{LijstWerkdagPloeg_Locatie(kleur)}");
-        //    }
-
-        //    if (!string.IsNullOrEmpty(kleur))
-        //    {
-        //        try
-        //        {
-        //            string file = LijstWerkdagPloeg_Locatie(kleur);
-        //            using (Stream stream = File.Open(file, FileMode.OpenOrCreate))
-        //            {
-        //                BinaryFormatter bin = new BinaryFormatter();
-        //                bin.Serialize(stream, LijstWerkdagPloeg);
-        //            }
-        //        }
-        //        catch
-        //        {
-        //            Wacht(300, "SaveLijstWerkdagPloeg");
-        //            //Thread.Sleep(300);
-        //            SaveLijstWerkdagPloeg(kleur, --try_again);
-        //        }
-        //    }
-        //}
-
-        //public static void LaadLijstWerkdagPloeg(string kleur, int try_again)
-        //{
-        //    // Als LijstWerkdagPloeg_Locatie(kleur) niet bestaat, zou ik nieuwe kunnen maken,
-        //    // maar wat als hij hem niet zou kunnen laden ?
-        //    string file = LijstWerkdagPloeg_Locatie(kleur);
-        //    if (!File.Exists(file))
-        //    {
-        //        if (TestNetwerkBeschikbaar(5) && ProgData.Main.WindowUpdateViewScreen)
-        //        {
-        //            MessageBox.Show($"Maak nieuwe werkdag maand voor kleur {kleur}\n" +
-        //                $"{file}");
-        //            MaakNieuwPloegBezettingAan(kleur);
-        //        }
-        //    }
-
-        //    if (try_again < 0)
-        //    {
-        //        MessageBox.Show($"Tevaak is load ploeg bezetting laden niet gelukt, netwerk probleem ?\n" +
-        //            $" {LijstWerkdagPloeg_Locatie(kleur)}");
-        //    }
-
-        //    try
-        //    {
-        //        using (Stream stream = File.Open(file, FileMode.Open))
-        //        {
-        //            BinaryFormatter bin = new BinaryFormatter();
-        //            try
-        //            {
-        //                LijstWerkdagPloeg.Clear();
-        //                LijstWerkdagPloeg = (List<werkdag>)bin.Deserialize(stream);
-        //                stream.Dispose();
-        //            }
-        //            catch
-        //            {
-        //                MessageBox.Show("Deserialize(stream) LaadLijstWerkdagPloeg error");
-        //            }
-        //            finally
-        //            {
-        //                if (stream != null)
-        //                    stream.Dispose();
-        //            }
-        //        }
-        //    }
-        //    catch (IOException)
-        //    {
-        //        Wacht(300, "LaadLijstWerkdagPloeg");
-        //        //Thread.Sleep(300);
-        //        LaadLijstWerkdagPloeg(kleur, --try_again);
-        //    }
-        //    catch
-        //    {
-        //        if (!Disable_error_Meldingen)
-        //            MessageBox.Show($"LoadPloegBezettingLijst() error\n{LijstWerkdagPloeg_Locatie(ProgData.GekozenKleur)}");
-        //    }
-        //}
 
         public static int WaarInTijd()
         {

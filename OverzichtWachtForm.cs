@@ -762,10 +762,8 @@ namespace Bezetting2
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            ViewUpdate();
-            SendMessage(this.Handle, WM_SETREDRAW, true, 0);
             panelMoment.Visible = false;
-            this.Refresh();
+            ViewUpdate();
         }
 
         private void buttonSplit_MouseLeave(object sender, EventArgs e)

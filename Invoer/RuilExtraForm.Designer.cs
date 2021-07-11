@@ -69,6 +69,7 @@
             this.radioButton4 = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.checkBoxVerbergIngevulde = new System.Windows.Forms.CheckBox();
+            this.checkBoxVerbergCancel = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBoxFilter.SuspendLayout();
             this.SuspendLayout();
@@ -84,7 +85,8 @@
             // 
             // monthCalendar1
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(96, 177);
+            this.monthCalendar1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthCalendar1.Location = new System.Drawing.Point(96, 180);
             this.monthCalendar1.Name = "monthCalendar1";
             this.monthCalendar1.TabIndex = 1;
             this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MonthCalendar1_DateChanged);
@@ -107,7 +109,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 177);
+            this.label2.Location = new System.Drawing.Point(19, 180);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 16);
             this.label2.TabIndex = 3;
@@ -488,17 +490,30 @@
             this.checkBoxVerbergIngevulde.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxVerbergIngevulde.Location = new System.Drawing.Point(333, 634);
             this.checkBoxVerbergIngevulde.Name = "checkBoxVerbergIngevulde";
-            this.checkBoxVerbergIngevulde.Size = new System.Drawing.Size(297, 20);
+            this.checkBoxVerbergIngevulde.Size = new System.Drawing.Size(138, 20);
             this.checkBoxVerbergIngevulde.TabIndex = 14;
-            this.checkBoxVerbergIngevulde.Text = "Verberg ingevulde en ingetrokken aanvragen";
+            this.checkBoxVerbergIngevulde.Text = "Verberg ingevulde";
             this.checkBoxVerbergIngevulde.UseVisualStyleBackColor = true;
             this.checkBoxVerbergIngevulde.CheckedChanged += new System.EventHandler(this.checkBoxVerbergIngevulde_CheckedChanged);
+            // 
+            // checkBoxVerbergCancel
+            // 
+            this.checkBoxVerbergCancel.AutoSize = true;
+            this.checkBoxVerbergCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxVerbergCancel.Location = new System.Drawing.Point(477, 634);
+            this.checkBoxVerbergCancel.Name = "checkBoxVerbergCancel";
+            this.checkBoxVerbergCancel.Size = new System.Drawing.Size(174, 20);
+            this.checkBoxVerbergCancel.TabIndex = 15;
+            this.checkBoxVerbergCancel.Text = "Verberg Zelf Ingetrokken";
+            this.checkBoxVerbergCancel.UseVisualStyleBackColor = true;
+            this.checkBoxVerbergCancel.CheckedChanged += new System.EventHandler(this.checkBoxVerbergCancel_CheckedChanged);
             // 
             // RuilExtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1421, 666);
+            this.Controls.Add(this.checkBoxVerbergCancel);
             this.Controls.Add(this.checkBoxVerbergIngevulde);
             this.Controls.Add(this.groupBoxFilter);
             this.Controls.Add(this.checkBoxVerbergOudeVragen);
@@ -562,5 +577,6 @@
         private System.Windows.Forms.RadioButton radioButton4;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.CheckBox checkBoxVerbergIngevulde;
+        private System.Windows.Forms.CheckBox checkBoxVerbergCancel;
     }
 }

@@ -158,8 +158,14 @@ namespace Bezetting2.Invoer
                     toevoegen = false;
                 if (radioButton5.Checked && info[2] != "Extra") // Extra
                     toevoegen = false;
-                if (checkBoxVerbergIngevulde.Checked && !string.IsNullOrEmpty(info[8]))
-                    toevoegen = false;
+                if (!string.IsNullOrEmpty(info[8]))     // ingevuld of gecanceld
+                {
+                    string dummy = info[8].Substring(0, 5);
+                    if (checkBoxVerbergIngevulde.Checked && dummy != "Zelf ")
+                        toevoegen = false;
+                    if (checkBoxVerbergCancel.Checked && dummy == "Zelf ")
+                        toevoegen = false;
+                }
 
                 if (toevoegen) // ruil
                 {
@@ -305,7 +311,14 @@ namespace Bezetting2.Invoer
                         {
                             ver = ProgData.ListAanvraagRuilExtra.First(a => (a._werkplek == listViewExtra.Items[index].SubItems[6].Text) && (a._ploeg == listViewExtra.Items[index].SubItems[3].Text) && (a._datum.ToString("dd/MM/yyyy") == dat));
                         }
-                        ver._persoonLoopt = $"Niet meer nodig, Ingetrokken door {listViewExtra.Items[index].SubItems[0].Text}";
+                        if (listViewExtra.Items[index].SubItems[0].Text == ProgData.Huidige_Gebruiker_Naam())
+                        {
+                            ver._persoonLoopt = $"Zelf ingetrokken, Niet meer nodig, Ingetrokken door {listViewExtra.Items[index].SubItems[0].Text}";
+                        }
+                        else
+                        {
+                            ver._persoonLoopt = $"Niet meer nodig, Ingetrokken door {listViewExtra.Items[index].SubItems[0].Text}";
+                        }
                         ProgData.SaveExtraRuilLijst(dir);
                     }
                     catch
@@ -338,6 +351,11 @@ namespace Bezetting2.Invoer
         }
 
         private void checkBoxVerbergIngevulde_CheckedChanged(object sender, EventArgs e)
+        {
+            RuilExtraForm_Shown(this, null);
+        }
+
+        private void checkBoxVerbergCancel_CheckedChanged(object sender, EventArgs e)
         {
             RuilExtraForm_Shown(this, null);
         }
