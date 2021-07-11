@@ -464,7 +464,7 @@ namespace Bezetting2
         {
             panelMoment.Visible = true;
             panelMoment.Refresh();
-            SendMessage(this.Handle, WM_SETREDRAW, false, 0);
+            //SendMessage(this.Handle, WM_SETREDRAW, false, 0);
 
             dateTimePicker1.Visible = false;
             GaNaarDat.Visible = false;
@@ -473,28 +473,22 @@ namespace Bezetting2
             switch (ProgData.GekozenKleur)
             {
                 case "Blauw":
-                    buttonRefresh.BackColor = Color.Blue;
-                    buttonRefresh.ForeColor = Color.White;
+                    panelKleur.BackColor = Color.Blue;
                     break;
                 case "Geel":
-                    buttonRefresh.BackColor = Color.Yellow;
-                    buttonRefresh.ForeColor = Color.Black;
+                    panelKleur.BackColor = Color.Yellow;
                     break;
                 case "Groen":
-                    buttonRefresh.BackColor = Color.Green;
-                    buttonRefresh.ForeColor = Color.White;
+                    panelKleur.BackColor = Color.Green;
                     break;
                 case "Wit":
-                    buttonRefresh.BackColor = Color.White;
-                    buttonRefresh.ForeColor = Color.Black;
+                    panelKleur.BackColor = Color.White;
                     break;
                 case "Rood":
-                    buttonRefresh.BackColor = Color.IndianRed;
-                    buttonRefresh.ForeColor = Color.White;
+                    panelKleur.BackColor = Color.Red;
                     break;
                 default:
-                    buttonRefresh.BackColor = Color.White;
-                    buttonRefresh.ForeColor = Color.Black;
+                    panelKleur.BackColor = Color.White;
                     break;
             }
 
@@ -567,7 +561,7 @@ namespace Bezetting2
                 buttonOpmerking2.BackColor = Color.FromArgb(255, 240, 240, 240);
             }
 
-            SendMessage(this.Handle, WM_SETREDRAW, true, 0);
+            //SendMessage(this.Handle, WM_SETREDRAW, true, 0);
             panelMoment.Visible = false;
             this.Refresh();
         }

@@ -92,7 +92,6 @@
             this.checkBox19 = new System.Windows.Forms.CheckBox();
             this.checkBox20 = new System.Windows.Forms.CheckBox();
             this.labelDatum = new System.Windows.Forms.Label();
-            this.labelKleur = new System.Windows.Forms.Label();
             this.labelDienst = new System.Windows.Forms.Label();
             this.buttonPrev = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
@@ -123,12 +122,14 @@
             this.GaNaarDatumButton = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.GaNaarDat = new System.Windows.Forms.Button();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.buttonSplit = new System.Windows.Forms.Button();
             this.panelMoment = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.buttonKleur = new System.Windows.Forms.Button();
+            this.panelKleur = new System.Windows.Forms.Panel();
+            this.labelKleur = new System.Windows.Forms.Label();
             this.panelMoment.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1052,16 +1053,6 @@
             this.labelDatum.TabIndex = 63;
             this.labelDatum.Text = "25-04-1965";
             // 
-            // labelKleur
-            // 
-            this.labelKleur.AutoSize = true;
-            this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelKleur.Location = new System.Drawing.Point(232, 35);
-            this.labelKleur.Name = "labelKleur";
-            this.labelKleur.Size = new System.Drawing.Size(44, 16);
-            this.labelKleur.TabIndex = 64;
-            this.labelKleur.Text = "Blauw";
-            // 
             // labelDienst
             // 
             this.labelDienst.AutoSize = true;
@@ -1457,18 +1448,6 @@
             this.GaNaarDat.Visible = false;
             this.GaNaarDat.Click += new System.EventHandler(this.GaNaarDat_Click);
             // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.BackColor = System.Drawing.Color.Green;
-            this.buttonRefresh.Location = new System.Drawing.Point(233, 5);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(79, 24);
-            this.buttonRefresh.TabIndex = 186;
-            this.buttonRefresh.Text = "Refresh";
-            this.toolTip1.SetToolTip(this.buttonRefresh, "Kleur / Refresh");
-            this.buttonRefresh.UseVisualStyleBackColor = false;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
-            // 
             // buttonSplit
             // 
             this.buttonSplit.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1508,14 +1487,46 @@
             this.timer1.Interval = 30000;
             this.timer1.Tick += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // buttonKleur
+            // 
+            this.buttonKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonKleur.Location = new System.Drawing.Point(355, 5);
+            this.buttonKleur.Name = "buttonKleur";
+            this.buttonKleur.Size = new System.Drawing.Size(87, 24);
+            this.buttonKleur.TabIndex = 189;
+            this.buttonKleur.Text = "Refresh";
+            this.toolTip1.SetToolTip(this.buttonKleur, "Refresh");
+            this.buttonKleur.UseVisualStyleBackColor = true;
+            this.buttonKleur.Click += new System.EventHandler(this.buttonRefresh_Click);
+            // 
+            // panelKleur
+            // 
+            this.panelKleur.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelKleur.Location = new System.Drawing.Point(233, 50);
+            this.panelKleur.Name = "panelKleur";
+            this.panelKleur.Size = new System.Drawing.Size(84, 5);
+            this.panelKleur.TabIndex = 190;
+            // 
+            // labelKleur
+            // 
+            this.labelKleur.AutoSize = true;
+            this.labelKleur.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelKleur.Location = new System.Drawing.Point(230, 31);
+            this.labelKleur.Name = "labelKleur";
+            this.labelKleur.Size = new System.Drawing.Size(38, 16);
+            this.labelKleur.TabIndex = 191;
+            this.labelKleur.Text = "Kleur";
+            // 
             // OverzichtWachtForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1149, 625);
+            this.Controls.Add(this.labelKleur);
+            this.Controls.Add(this.panelKleur);
+            this.Controls.Add(this.buttonKleur);
             this.Controls.Add(this.panelMoment);
             this.Controls.Add(this.buttonSplit);
-            this.Controls.Add(this.buttonRefresh);
             this.Controls.Add(this.GaNaarDat);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.GaNaarDatumButton);
@@ -1546,7 +1557,6 @@
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonPrev);
             this.Controls.Add(this.labelDienst);
-            this.Controls.Add(this.labelKleur);
             this.Controls.Add(this.labelDatum);
             this.Controls.Add(this.checkBox20);
             this.Controls.Add(this.checkBox19);
@@ -1695,7 +1705,6 @@
         private System.Windows.Forms.Button buttonNext;
         private System.Windows.Forms.Button buttonCopy;
         private System.Windows.Forms.ListBox listBoxAfw;
-        public System.Windows.Forms.Label labelKleur;
         private System.Windows.Forms.ListBox listBox22;
         private System.Windows.Forms.ListBox listBox23;
         private System.Windows.Forms.ListBox listBox24;
@@ -1721,11 +1730,13 @@
         private System.Windows.Forms.Button GaNaarDatumButton;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button GaNaarDat;
-        private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button buttonSplit;
         private System.Windows.Forms.Panel panelMoment;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button buttonKleur;
+        private System.Windows.Forms.Panel panelKleur;
+        private System.Windows.Forms.Label labelKleur;
     }
 }

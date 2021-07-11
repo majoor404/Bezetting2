@@ -179,6 +179,7 @@ namespace Bezetting2
             this.label38 = new System.Windows.Forms.Label();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panelKleur = new System.Windows.Forms.Panel();
             this.PanelDag1.SuspendLayout();
             this.panelMoment.SuspendLayout();
             this.PanelDag2.SuspendLayout();
@@ -187,6 +188,7 @@ namespace Bezetting2
             // PanelDag1
             // 
             this.PanelDag1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelDag1.Controls.Add(this.panelKleur);
             this.PanelDag1.Controls.Add(this.panelMoment);
             this.PanelDag1.Controls.Add(this.buttonSplitDag1);
             this.PanelDag1.Controls.Add(this.buttonRefresh);
@@ -308,14 +310,13 @@ namespace Bezetting2
             // 
             // buttonRefresh
             // 
-            this.buttonRefresh.BackColor = System.Drawing.Color.Green;
-            this.buttonRefresh.Location = new System.Drawing.Point(204, 9);
+            this.buttonRefresh.Location = new System.Drawing.Point(1167, 10);
             this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(79, 25);
+            this.buttonRefresh.Size = new System.Drawing.Size(97, 24);
             this.buttonRefresh.TabIndex = 187;
             this.buttonRefresh.Text = "Refresh";
             this.toolTip.SetToolTip(this.buttonRefresh, "Kleur/Refresh");
-            this.buttonRefresh.UseVisualStyleBackColor = false;
+            this.buttonRefresh.UseVisualStyleBackColor = true;
             this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // GaNaarDat
@@ -2381,6 +2382,14 @@ namespace Bezetting2
             this.timer1.Interval = 30000;
             this.timer1.Tick += new System.EventHandler(this.buttonRefresh_Click);
             // 
+            // panelKleur
+            // 
+            this.panelKleur.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelKleur.Location = new System.Drawing.Point(10, 23);
+            this.panelKleur.Name = "panelKleur";
+            this.panelKleur.Size = new System.Drawing.Size(84, 5);
+            this.panelKleur.TabIndex = 191;
+            // 
             // OverzichtWachtForm2Dagen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2556,5 +2565,6 @@ namespace Bezetting2
         private System.Windows.Forms.Panel panelMoment;
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Panel panelKleur;
     }
 }

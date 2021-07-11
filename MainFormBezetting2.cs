@@ -1013,7 +1013,7 @@ namespace Bezetting2
             {
                 OverzichtWachtForm wacht = new OverzichtWachtForm();
                 ProgData.GekozenKleur = comboBoxKleurKeuze.Text;
-                wacht.labelKleur.Text = ProgData.GekozenKleur;
+                //wacht.labelKleur.Text = ProgData.GekozenKleur;
                 wacht.ShowDialog();
                 ButtonNu_Click(this, null);
             }
