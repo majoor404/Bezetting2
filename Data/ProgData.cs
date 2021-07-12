@@ -136,6 +136,10 @@ namespace Bezetting2
             try
             {
                 int personeel_nr = int.Parse(_inlognaam.Text);
+                if (AlleMensen.LijstPersonen.Count == 0) // bij opstarten prog was lijst leeg, en naam nodig in titel balk
+                {
+                    ProgData.AlleMensen.Load();
+                }
                 personeel persoon = ProgData.AlleMensen.LijstPersonen.First(a => a._persnummer == personeel_nr);
                 return persoon._achternaam;
             }
