@@ -70,6 +70,7 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.checkBoxVerbergIngevulde = new System.Windows.Forms.CheckBox();
             this.checkBoxVerbergCancel = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBoxFilter.SuspendLayout();
             this.SuspendLayout();
@@ -508,11 +509,22 @@
             this.checkBoxVerbergCancel.UseVisualStyleBackColor = true;
             this.checkBoxVerbergCancel.CheckedChanged += new System.EventHandler(this.checkBoxVerbergCancel_CheckedChanged);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(704, 424);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(344, 129);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "test invoer";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // RuilExtraForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1421, 666);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBoxVerbergCancel);
             this.Controls.Add(this.checkBoxVerbergIngevulde);
             this.Controls.Add(this.groupBoxFilter);
@@ -578,5 +590,6 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.CheckBox checkBoxVerbergIngevulde;
         private System.Windows.Forms.CheckBox checkBoxVerbergCancel;
+        private System.Windows.Forms.Button button1;
     }
 }

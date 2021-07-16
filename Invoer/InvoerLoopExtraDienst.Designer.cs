@@ -36,6 +36,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonInvoer = new System.Windows.Forms.Button();
             this.labelKleur = new System.Windows.Forms.Label();
+            this.comboBoxNamen = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -76,7 +77,7 @@
             // 
             // textBoxLoopt
             // 
-            this.textBoxLoopt.Location = new System.Drawing.Point(15, 86);
+            this.textBoxLoopt.Location = new System.Drawing.Point(15, 73);
             this.textBoxLoopt.Name = "textBoxLoopt";
             this.textBoxLoopt.Size = new System.Drawing.Size(277, 20);
             this.textBoxLoopt.TabIndex = 5;
@@ -84,7 +85,7 @@
             // buttonCancel
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.Location = new System.Drawing.Point(12, 127);
+            this.buttonCancel.Location = new System.Drawing.Point(12, 133);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(125, 26);
             this.buttonCancel.TabIndex = 6;
@@ -94,7 +95,7 @@
             // buttonInvoer
             // 
             this.buttonInvoer.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonInvoer.Location = new System.Drawing.Point(167, 127);
+            this.buttonInvoer.Location = new System.Drawing.Point(227, 133);
             this.buttonInvoer.Name = "buttonInvoer";
             this.buttonInvoer.Size = new System.Drawing.Size(125, 26);
             this.buttonInvoer.TabIndex = 7;
@@ -110,11 +111,23 @@
             this.labelKleur.TabIndex = 8;
             this.labelKleur.Text = "Blauw";
             // 
+            // comboBoxNamen
+            // 
+            this.comboBoxNamen.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxNamen.FormattingEnabled = true;
+            this.comboBoxNamen.Location = new System.Drawing.Point(12, 99);
+            this.comboBoxNamen.Name = "comboBoxNamen";
+            this.comboBoxNamen.Size = new System.Drawing.Size(340, 23);
+            this.comboBoxNamen.Sorted = true;
+            this.comboBoxNamen.TabIndex = 9;
+            this.comboBoxNamen.SelectedIndexChanged += new System.EventHandler(this.comboBoxNamen_SelectedIndexChanged);
+            // 
             // InvoerLoopExtraDienst
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(318, 171);
+            this.ClientSize = new System.Drawing.Size(364, 171);
+            this.Controls.Add(this.comboBoxNamen);
             this.Controls.Add(this.labelKleur);
             this.Controls.Add(this.buttonInvoer);
             this.Controls.Add(this.buttonCancel);
@@ -129,6 +142,7 @@
             this.Name = "InvoerLoopExtraDienst";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Loop Extra/Ruil Dienst";
+            this.Shown += new System.EventHandler(this.InvoerLoopExtraDienst_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,5 +158,6 @@
         private System.Windows.Forms.Button buttonInvoer;
         public System.Windows.Forms.Label labelKleur;
         public System.Windows.Forms.TextBox textBoxLoopt;
+        private System.Windows.Forms.ComboBox comboBoxNamen;
     }
 }

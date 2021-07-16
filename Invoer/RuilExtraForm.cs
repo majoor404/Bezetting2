@@ -359,5 +359,11 @@ namespace Bezetting2.Invoer
         {
             RuilExtraForm_Shown(this, null);
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            InvoerLoopExtraDienst invl = new InvoerLoopExtraDienst();
+            DialogResult res = invl.ShowDialog();
+        }
     }
 }
